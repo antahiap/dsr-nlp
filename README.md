@@ -24,3 +24,10 @@
 
 
 <img src="img\02.png" style="width:400px;"/>
+
+
+## LSTM
+
+<img src="img\03.jpg" style="width:400px;"/>
+
+<img src="img\04.jpg" style="width:400px;"/>
