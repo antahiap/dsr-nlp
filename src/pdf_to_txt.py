@@ -23,4 +23,4 @@ if __name__ == "__main__":
     with open(f"data/lsdyna_{vol}_{ver}.txt", "w", encoding="utf-8") as output_file:
         output_file.write(extracted_text)
 
-    print("Text extracted and saved to output.txt")
+
