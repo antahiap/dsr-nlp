@@ -1,0 +1,77 @@
+ ..................... ................................................... ......... 2-504  TABLE OF CONTENTS   
+0-4 (TABLE OF CONTENTS) LS-DYNA R13 *.  [0,3c,8B] {56} 
+ *.  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+EQ.0.0: tensile stress remains at cut-oﬀ value. 
+EQ.1.0: tensile stress is reset to zero. 
+BVFLAG Bulk viscosity activation ﬂag (see remarks b elow): 
+EQ.0.0: no bulk viscosity (recommended) 
+EQ.1.0: bulk viscosity active 
+KCON Stiﬀness coeﬃcient for contact interface stiﬀness.  If undeﬁned, 
+the maximum slope in the stress as a function of st rain curve is 
+used.  When the maximum slope is taken for the cont act, the time 
+step size for this material is re duced for stability.  In some cases, 
+∆|u1D461 may be signiﬁcantly smaller, so deﬁning a reasonabl e stiﬀness 
+is recommended. 
+LCID2 Load curve ID of relaxation curve.  If LCID2 > 0, constants |u1D43A|u1D4J6Cst and 
+|u1D6FD|u1D4J6Cst are determined using a least squares ﬁt.  An examp le is shown 
+in Figure M76-1 .  This model ignores the constant stress. 
+BSTART Fit parameter.  In the ﬁt, |u1D6FD|oneCst is set to zero, |u1D6FD|twoCst  is set to BSTART, |u1D6FD|threeCst
+is 10 times |u1D6FD|twoCst, |u1D6FD|fourCst is 10 times greater than |u1D6FD|threeCst , and so on.  If zero, 
+BSTART = .01. 
+TRAMP Optional ramp time for loading 
+NV Number of terms in ﬁt.  Currently, the maximum numb er is 6.  
+Since each term used adds signiﬁcantly to the cost,  2 or 3 terms is 
+recommended.  Ca ution should be exercised when taking the 
+results from the ﬁt.  Preferably, all generated coe ﬃcients should 
+be positive because negative values may lead to uns table results.  
+Once a satisfactory ﬁt has been achieved, we recomm end using 
+the output coeﬃcients in future runs. 
+ 
+Relaxation Constant Cards.  If LCID2 = 0, then include this card.  Up to 6 cards may 
+be input.  The next keyword (“*”) card terminates t his input. 
+ Card 3a 1 2 3 4 5 6 7 8 
+Variable Gi BETA i REF      
+Type F F F      
+ *.   
+ Remarks: 
+1.  Material Formulation.   This viscoelastic foam material formulation model s 
+highly compressible viscous foams.  The hyperelasti c formulation of this model 
+follows that of Material 57.  
+2.  Rate Effects.   Rate eﬀects are accounted for through linear visc oelasticity by a 
+convolution integral of the form 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JFCst=/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F)∂|u1D7≠≠|u1D4J8Cst|u1D4J9Cst 
+∂/u1D̅0F|u1D4J1 /u1D̅0F |u1D461Cst
+|zeroCst  , 
+where |u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F) is the relaxation function.  The stress tensor, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JFCst, augments the 
+stresses determined from the foam, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst /u1D45:.st; consequently, the ﬁnal stress, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst , is 
+taken as the summation of the two contributions: 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst = |u1D7≠∆|u1D4J6Cst|u1D4J7Cst /u1D45:.st+ |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JFCst  . 
+Since we wish to include only simple rate eﬀects, t he relaxation function is 
+represented by up to six terms of the Prony series:  
+|u1D4J4(|u1D461) = |u1D6F+|zeroCst+ |summationCv1 |u1D6F+|u1D4JACst|u1D4J2−/u1D6FD.st/u1D45A.sts|u1D461Cst|u1D441Cst
+|u1D4JACst=|oneCst  . 
+This model is eﬀectively a Maxwell ﬂuid which consi sts of a dampers and 
+springs in series.  The formulation is performed in  the local system of principal 
+stretches where only the principal values of stress  are computed and triaxial 
+coupling is avoided.  Consequently, the one-dimensi onal nature of this foam 
+material is unaﬀected by this addition of rate eﬀec ts.  The addition of rate 
+eﬀects necessitates 42 additional history variables  per integration point.  The 
+cost and memory overhead of this model comes primar ily from the need to 
+“remember” the local system of principal stretches and the evaluation of the 
+viscous stress components. 
+Frequency data can be ﬁt to the Prony series.  Usin g Fourier transforms the 
+relationship between the relaxation function and th e frequency dependent data 
+is 
+|u1D43A|u1D46≠Cst(|u1D714) = |u1D6F+|zeroCst+ |summationCv1|u1D6F+|u1D4JACst(|u1D714/|u1D6FD|u1D4JACst)|twoCst
+1 + (|u1D714/|u1D6FD|u1D4JACst)|twoCst|u1D441Cst
+|u1D4JACst=|oneCst
+|u1D43Aℓ(|u1D714) = |summationCv1|u1D6F+|u1D4JACst|u1D714/|u1D6FD|u1D4JACst
+1 + |u1D714/|u1D6FD|u1D4JACst|u1D441Cst
+|u1D4JACst=|oneCst 
+where the storage modulus and loss modulus are deﬁn ed in terms of the fre- 
+quency dependent magnitude |u1D43A and phase angle /u1D̅1∫ given by load curves 
+LCID3 and LCID4 respectively, 
+|u1D43A|u1D46≠Cst(|u1D714) = |u1D43A(|u1D714) cos|<racketleftCv1/u1D̅1∫(|u1D714)|<racketriµhtCv1
+|u1D43A|u1D4J9Cst(|u1D714) = |u1D43A(|u1D714) sin[/u1D̅1∫(|u1D714)] *

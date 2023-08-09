@@ -1,0 +1,83 @@
+ ......................................... ................................................... .................................. 2-968  
+*.  [0,3c,5,8B] {23} 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+CV Speciﬁc heat at constant volume 
+ADRAG Drag intercept 
+BDRAG Drag coeﬃcient 
+DMTHTA Shear modulus temperature coeﬃcient 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable DMPHI DNTHTA DNPHI THETA0 THETAM BETA0 BTHETA DMR 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+DMPHI Shear modulus damage coeﬃcient 
+DNTHTA Bulk modulus temperature coeﬃcient 
+DNPHI Bulk modulus damage coeﬃcient 
+THETA0 Reference temperature 
+THETAM Melt temperature 
+BETA0 Coeﬃcient of thermal expansion at reference t emperature 
+BTHETA Thermal expansion temperature coeﬃcient 
+DMR Damage rate sensitivity parameter 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable DNUC1 DNUC2 DNUC3 DNUC4 DM1 DM2 DM3 DM4 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+DNUC1 Nucleation coeﬃcient 1 *.   
+  Card 6 1 2 3 4 5 6 7 8 
+Variable C2ND C3 C4 C5 C6 C7ND C8ND C9ND 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+C2ND Parameter, /u1D450|twoCst, for transition rate |u1D4J3 
+C3 Parameter, /u1D450|threeCst, for alpha dynamic recovery, |u1D4JF/u1D451.st 
+C4 Parameter, /u1D450|fourCst, for alpha hardening, ℎ 
+C5 Parameter, /u1D450|fiveCst, for kappa dynamic recovery, |u1D44J/u1D451.st 
+C6 Parameter, /u1D450|sixCst, for kappa hardening, /u1D4:B 
+C7ND Parameter, /u1D450|sevenCst, kappa static recovery, |u1D44J|u1D46≠Cst 
+C8ND Parameter, /u1D450/eight.st, for yield 
+C9ND Parameter, /u1D450/nine.st, for temperature dependence of ﬂow rule exponent, 
+|u1D4JB 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable C10 A1 A2 A3 A4 A_XX A_YY A_ZZ 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+C10 Parameter, /u1D450|oneCst|zeroCst , for static recovery (set to 1) 
+A1 Plastic anisotropy parameter 
+A2 Plastic anisotropy parameter 
+A3 Plastic anisotropy parameter 
+A4 Plastic anisotropy parameter 
+A_XX Initial structure tensor component *.   
+  VARIABLE   DESCRIPTION  
+PHICR Critical cutoﬀ porosity 
+DLBDAG Slip system geometry parameter 
+FACTOR Fraction of plastic work converted to heat, adiabatic 
+RSWTCH Rate sensitivity switch 
+DMGOPT Damage model option parameter: 
+EQ.1.0: Pressure independent Cocks/Ashby 1980 
+EQ.2.0: Pressure dependent Cocks/Ashby 1980 
+EQ.3.0: Pressure dependent Cocks 1989 
+ 
+ Card 10 1 2 3 4 5 6 7 8 
+Variable DELASO DIMPLO ATOL RTOL DINTER    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+DELASO Temperature option: 
+EQ.0.0: Driven externally 
+EQ.1.0: Adiabatic 
+DIMPLO Implementation option ﬂag: 
+EQ.1.0: Combined viscous drag and thermally activated 
+dislocation motion 
+EQ.2.0: Separate viscous drag and thermally activated 
+dislocation motion 
+ATOL Absolute error tolerance for local Newton iter ation 
+RTOL Relative error tolerance for local Newton iter ation 
+DNITER Maximum number of iterations for local Newto n iteration 
+ *

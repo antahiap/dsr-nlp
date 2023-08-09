@@ -1,0 +1,29 @@
+: *.  
+*.   *. .  This material is only used for the 
+implicit incompressible SPH formulation (FORM = 13 in *CONTROL_SPH) and should 
+be assigned to structures sampled with the *DEFINE_ SPH_MESH_SURFACE keyword.  
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BETA ROUGH     
+Type A F F F     
+Defaults none none 0.0 0.0     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density.  This should be set to the rest densi ty of the ﬂuid.  
+The actual mass of the structure will be calculated  from the parent 
+surfaces sampled with the *DEFINE_SPH_MESH_SUR FACE 
+keyword. 
+BETA Numerical surface adhesion coeﬃcient.  For wat er, a value of |u1D6FD=
+1000  m/s|twoCst is recommended. 
+ROUGH Surface roughness coeﬃcient.  A friction force betw een the 
+structure and the ﬂuid is generated based on the vi scosit y of the 
+ﬂuid scaled by this coeﬃcient.  A value between 1 a nd 10 is 
+usually recommended.  
+Remarks: 
+The surface adhesion coeﬃcient is purely numerical and is based on a normalized 
+version of the algorithm presented in [ 1].  
+References: 
+ [1]  Akinci, N., Akinci, G. & Teschner, M. (2013).   Versatile surface tension and adhesion for SPH ﬂu ids.  
+ACM Transactions on Graphics (TOG) 32.6 182. *

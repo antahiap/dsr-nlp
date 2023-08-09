@@ -1,0 +1,92 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density, |u1D7≠+ 
+E Young’s modulus, |u1D438 
+PR Poisson’s ratio, /u1D̅08 
+FLG Flag to choose between yield functions |u1D4J3 and |u1D4J3̂ (see Remarks): 
+EQ.0: Cap in tension and Drucker & Prager in compression 
+EQ.2: Cap in tension and von Mises in compression 
+JCFL Johnson & Cook constitutive failure criterion ﬂag (see Remarks): 
+EQ.0: use triaxiality factor only in tension, 
+EQ.1: use triaxiality factor in tension and compression. 
+DOPT Damage criterion ﬂag |u1D437/circum⨂lexcmb.h1 or |u1D437/c∙roncmb.h1 (see Remarks): 
+EQ.0: damage model uses damage plastic strain |u1D4JF, 
+EQ.1: damage model uses plastic arc length |u1D6F∆|vCst. 
+LCSS Curve ID or Table ID 
+Load Curve.  The curve speciﬁes yield stress /u1D̅0F/Y.st as a function of 
+plastic strain |u1D4JF. 
+Table Data.   If a 2D table is deﬁned, for each strain rate value  the 
+table speciﬁes a curve ID giving the yield stress a s a function of 
+plastic strain for that strain rate (see *DEFINE_TA BLE).  If a 3D 
+table is deﬁned, for each temperature value, a tabl e ID is speciﬁed 
+which, in turn, maps strain rates to curves giving the yield stress 
+as a function of plastic strain (see DEFINE_TABLE_3 D). 
+The yield stress as a function of plastic strain cu rve for the lowest 
+value of strain rate or temperature is used when th e strain rate or 
+temperature falls below the minimum value.  Likewis e, 
+maximum values cannot be exceeded.  Hardening varia bles are 
+ignored with this option (TAU0, Q, B, H, C, GAM0, a nd GAMM).  
+TAU0 Initial shear yield stress, /u1D̅0F|zeroCst 
+Q Isotropic nonlinear hardening modulus, /u1D45E *.   
+ |u1D4J3≔/u1D4:D|twoCst
+(1 − |u1D437)|twoCst+1
+/radical.v13|u1D44∆|oneCst/u1D̅0F|zeroCst/u1D4:C|oneCst
+1 − |u1D437+|u1D44∆|twoCst
+3/uni2ℜE8.β4/u1D4:C|oneCst
+1 − |u1D437/uni2ℜE9.β4|twoCst
+−/u1D̅0F/Y.st|twoCst= 0 
+with the Macauley  bracket 〈∙〉,  the ﬁrst invariant of the stress tensor /u1D4:C|oneCst=  tr /u1D6D4, 
+and the second invariant of the stress deviator /u1D4:D|twoCst= (1 2 ⁄ )tr(/u1D42C)|twoCst (see Fig- 
+ure M252-1 ).  
+2.  FLG = 2 is used for the yield criterion |u1D4J3̂ which is changed at the vertex into the 
+deviatoric  von Mises  yield function (see Figure M252-2 ) and is used for con- 
+servative calculation in case of missing uniaxial c ompression or combined 
+compression and shear experiments: 
+|u1D4J3̂≔/u1D4:D|twoCst
+(1 − |u1D437)|twoCst+|u1D44∆|twoCst
+3/uni2ℜE8.β⃡/u1D4:C|oneCst
+1 − |u1D437+/radical.v13|u1D44∆|oneCst/u1D̅0F|zeroCst
+2|u1D44∆|twoCst/uni2ℜE9.β⃡|twoCst
+− |parenleftCv6/u1D̅0F/Y.st|twoCst+|u1D44∆|oneCst|twoCst/u1D̅0F|zeroCst|twoCst
+4|u1D44∆|twoCst|parenriµhtCv6 = 0  . 
+ 
+The yield functions |u1D4J3 and |u1D4J3̂ are formulated in terms of the eﬀective stress ten sor 
+/u1D6D4/tilℂecomb.h1=/u1D6D4(1 − |u1D437) ⁄  
+and the isotropic material damage |u1D437 according to the continuum damage mechanics in 
+Lemaitre [1992].  The stress tensor /u1D6D4 is deﬁned in terms of the elastic strain  /u1D6C6|eCst and the 
+isotropic damage |u1D437:  Figure M252-1.   Yield function |u1D4J3 and plastic ﬂow potential |u1D4J3∗ 
+ Figure M252-2.   Yield function |u1D4J3̂ and plastic ﬂow potential |u1D4J3∗ *.   
+ |u1D44J =/u1D45E|<racketleftCv11 − exp(−|u1D44F|u1D4JF)|<racketriµhtCv1 +/u1D4:B |u1D4JF  . 
+The second factor […] in /u1D̅0F/Y.st describes the rate dependency of the yield strengt h by a 
+modiﬁed Johnson & Cook approach with the reference strain rates |u1D6F∆̇|zeroCst and |u1D6F∆̇|mCst which 
+limit the shear strength /u1D̅0F/Y.st (see Figure M252-4 ).  
+ 
+The second representation of the yield strength /u1D̅0F/Y.st is the table deﬁnition LCSS, where 
+hardening can be deﬁned as a function of plastic st rain, strain rate, and temperature. 
+ 
+Toughened structural adhesives show distortional ha rdening under plastic ﬂow, that is, 
+the yield surface changes its shape.  This formativ e hardening can be phenomenological 
+described by simple evolution equations of paramete rs |u1D44∆|oneCst= |u1D44∆̂|oneCst(|u1D4JF)  ∧  |u1D44∆|twoCst= |u1D44∆̂|twoCst(|u1D4JF) in the 
+yield criterions |u1D4J3 with the initial values |u1D44∆|oneCst|zeroCst  and |u1D44∆|twoCst|zeroCst : 
+|u1D44∆|oneCst= |u1D44∆̂|oneCst(|u1D4JF)∧|u1D44∆̇|oneCst= |u1D44∆|oneCst/H.st|u1D4JḞ
+|u1D44∆|twoCst= |u1D44∆̂|twoCst(|u1D4JF)∧|u1D44∆|twoCst≥ 0∧|u1D44∆̇|twoCst= |u1D44∆|twoCst/H.st|u1D4JḞ 
+The parameters |u1D44∆|oneCst/H.st and |u1D44∆|twoCst/H.st can take positive or negative values as long as th e inequality 
+|u1D44∆|twoCst≥ 0 is satisﬁed.  The criterion |u1D44∆|twoCst≥ 0 ensures an elliptic yield surface.  The yield 
+criterion |u1D4J3̂ uses only the initial values |u1D44∆|oneCst= |u1D44∆|oneCst|zeroCst  and |u1D44∆|twoCst= |u1D44∆|twoCst|zeroCst  without the distortional 
+hardening. 
+ 
+The empirical isotropic damage model |u1D437 is based on the approach in Lemaitre [1985].  
+Two diﬀerent evolution equations |u1D437/circum⨂lexcmb.h1̇(|u1D4JF, |u1D4JḞ) and |u1D437/c∙roncmb.h1̇(|u1D6F∆|vCst, |u1D6F∆̇|vCst) are available (see Fig- 
+ure M252-5 ). The damage variable |u1D437 is formulated in terms of the damage plastic strai n 
+rate |u1D4JḞ (DOPT = 0) 
+|u1D437̇= |u1D437/circum⨂lexcmb.h1̇(|u1D4JF, |u1D4JḞ) = |u1D4JB/uni2ℜE8.β4|u1D4JF − |u1D6F∆/c.st
+|u1D6F∆/f.st− |u1D6F∆/c.st/uni2ℜE9.β4|u1D4JBCst−|oneCst|u1D4JḞ
+|u1D6F∆/f.st− |u1D6F∆/c.st 
+or of the plastic arc length |u1D6F∆̇|vCst (DOPT = 1) 
+|u1D437̇= |u1D437/c∙roncmb.h1̇(|u1D6F∆|vCst, |u1D6F∆̇|vCst) = |u1D4JB/uni2ℜE8.β4|u1D6F∆|vCst− |u1D6F∆/c.st
+|u1D6F∆/f.st− |u1D6F∆/c.st/uni2ℜE9.β4|u1D4JBCst−|oneCst|u1D6F∆̇|vCst
+|u1D6F∆/f.st− |u1D6F∆/c.st  , Figure M252-4.   Rate-dependent tensile strength /u1D̅0F/Y.st as a function of eﬀective 
+strain rate |u1D6F∆̇ (left) and eﬀective damage plastic strain |u1D4JF (right) *

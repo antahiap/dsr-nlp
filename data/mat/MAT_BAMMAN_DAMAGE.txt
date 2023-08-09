@@ -1,0 +1,50 @@
+ ................................ ................................................... ................... 2-391  
+*.  [0,2,3a,3c,5,8B] {10}  
+ *.   *.   *.   
+This is  Material Type 52.  This is an extension of model 51  which includes the modeling 
+of damage.  See Bamman et al.  [1990]. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR T HC   
+Type A F F F F F   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 C5 C6 C7 C8 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C9 C10 C11 C12 C13 C14 C15 C16 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable C17 C18 A1 A2 A3 A4 A5 A6 
+Type F F F F F F F F 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable N D0 FS      
+Type F F F      
+ *.   
+2-392 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus (psi) 
+PR Poisson’s ratio 
+T Initial temperature (°R, degrees Rankine) 
+HC Heat generation coeﬃcient (°R D≥◦}"ä•—⁄A}×äpsi ) 
+C1 Psi 
+C2 °R 
+C3 Psi  
+C4 °R 
+C5 1 /s  
+C6 °R  
+C7 1 /psi 
+C8 °R  
+C9 Psi  
+C10 oR 
+C11 1 /psi-s 
+C12 °R  
+C13 1 /psi 
+C14 °R  
+C15 psi  
+C16 °R *

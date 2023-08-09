@@ -1,0 +1,49 @@
+-KO_RUBBER .............................. ................................................... .................... 2-161  
+*. -KO_FOAM ................................ ................................................... ....................... 2-370  
+*. -KO_RUBBER [0,2,3ac,8B] {9} 
+ *. -KO_FOAM [0,2,3c,8B] {9} 
+ *. -KO_FOAM  *. -KO_RUBBER  *. -KO_RUBBER  *. -KO_RUBBER  
+This is  Material Type 7.  This one parameter material allow s the modeling of nearly 
+incompressible continuum rubber.  The Poisson’s rat io is ﬁxed to 0.463. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO G REF     
+Type A F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G Shear modulus 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword: *INITI AL_-
+FOAM_REFERENCE_GEOMETRY (see there for more details ). 
+EQ.0.0: oﬀ 
+EQ.1.0: on 
+Remarks: 
+1.  Stress-Strain Relationship.   The strain energy density potential for the Blatz -
+Ko rubber is 
+/u1D44A(/u1D402) =|u1D43A
+2|<racketleftCvJ/u1D4:C|oneCst− 3 +1
+|u1D6FD|parenleftCv3/u1D4:C|threeCst−/u1D6FD.st− 1|parenriµhtCv3|<racketriµhtCvJ 
+where |u1D43A is the shear modulus, /u1D4:C|oneCst and /u1D4:C|threeCst are the ﬁrst and third invariants of the 
+right Cauchy-Green tensor  /u1D402=/u1D405/ε.st/u1D405, and 
+|u1D6FD =|u1D463
+1 − 2|u1D463  . 
+The second Piola-Kirchhoﬀ stress is computed as 
+/u1D412= 2|u1D71J /u1D44A 
+|u1D71J/u1D402= |u1D43A/˙racketleft.v:/u1D408−/u1D4:C|threeCst−/u1D6FD.st/u1D402−|oneCst/˙racketright.v: *. -KO_RUBBER  
+2-162 (MAT) LS-DYNA R13 from which the Cauchy stress is obtained by a push- forward from the refer- 
+ence to current conﬁguration divided by the relativ e volume /u1D4:D= det(/u1D405), 
+/u1D6D4=1
+/u1D4:D/u1D405/u1D412/u1D405/ε.st=|u1D43A
+/u1D4:D/˙racketleft.v:/u1D401−/u1D4:C|threeCst−/u1D6FD.st/u1D408/˙racketright.v:. 
+Here we use /u1D401=/u1D405/u1D405/ε.st to denote the left Cauchy-Green tensor, and Poisso n’s 
+ratio, |u1D463, above is set internally to |u1D463 = 0.463 ; also see Blatz and Ko [1962]. 
+2.  History Variables.   For solids, the 9 history variables store the def ormation 
+gradient, whereas for shells, the gradient is store d in the slot for eﬀective plas- 
+tic strain along with the ﬁrst 8 history variables (the 9 th  stores in internal ﬂag).  
+If a dynain  ﬁle is created using INTERFACE_SPRINGBACK_LSDYNA, then 
+NSHV should be set to 9 so that the *INITIAL_STRESS _SHELL cards have the 
+correct deformation gradient from which the stresse s are to be calculated. *. -KO_FOAM  
+2-370 (MAT) LS-DYNA R13 *. -KO_FOAM  *

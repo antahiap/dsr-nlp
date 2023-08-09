@@ -1,0 +1,38 @@
+ ............................... ................................................... .................... 2-452  
+*.  [0,3c,5,8B] {8} 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+SRCRT Critical stretch ratio for high compression r egime (MODEL = 1).  
+A value of 0.1 for SR CRT, for instance, means at 10% residual 
+length an elastic stiﬀness is added to avoid excess ive 
+compression.  
+ESCAL Scale factor for high compression stiﬀness as a multiple of the 
+Young’s modulus (MODEL = 1). 
+Remarks: 
+1.  Volumetric Strain.   The volumetric strain is deﬁned in terms of the r elative 
+volume, |u1D449, as: 
+|u1D6F∆ = 1 − |u1D449 
+The relative volume is deﬁned as the ratio of the c urrent to the initial volume.  
+In place of the eﬀective plastic strain in the d3plot  database, the integrated 
+volumetric strain (natural logarithm of the relativ e volume) is output. Stressincreasesat
+higherstrainratesNominal Yield Stress
+Volumetric Strain
+Figure M63-1.   Behavior of strain rate sensitive crushable foam.  Unloadi ng is 
+elastic to the tension cutoﬀ.  Subsequent reloading fol lows the unloading 
+curve. *.   
+ For lateral straining, individual Poisson’s ratios can be deﬁned for the elastic 
+(PR) and the plastic (PRP) regime.  The associated ﬂow potential is given by 
+|u1D43A =/radical.v2/u1D45E|twoCst+ |u1D6FD|twoCst|u1D4JD|twoCst− |u1D43J|parenleftCv1|u1D7≠∆|u1D466Cst|parenriµhtCv1 = 0 , 
+where 
+|u1D6FD =3
+/radical.v12/radical.v61 − 2/u1D̅08pl 
+1 +/u1D̅08pl  
+with plastic Possion’s ratio /u1D̅08pl  (PRP).  Hardening is deﬁned with yield curve or 
+table LCID.  If LCID is a yield curve, it relates u niaxial yield stress as a function 
+of equivalent plastic strain.  If LCID refers to a table, then rate dependence is 
+taken into account.  The deﬁnition of parameter RFI LTF determines if plastic 
+strain rates (RFILT = 0) or ﬁltered total strain ra tes (RFILTF > 0) are used.  In 
+the latter case, exponential smoothing is used 
+|u1D7≠≠̇a v g = RFILTF × |u1D7≠≠̇|u1D4JBCst−|oneCsta v g + (1 − RFILTF) × |u1D7≠≠ ̇|u1D4JBCstcur   ,  
+Thus, as RFILTF increases, more ﬁltering is done. *

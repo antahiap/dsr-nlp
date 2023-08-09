@@ -1,0 +1,47 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+plastic strain for that temperature. 
+LCF Load curve ID or table ID. The load curve speciﬁes plastic failure 
+strain as a function of triaxiality.  The table spe ciﬁes for each Lode 
+parameter a load curve ID giving the plastic failur e strain versus 
+triaxiality for that Lode parameter.  (Table opti on not yet 
+generally supported). 
+LCG Load curve ID for specifying plastic failure strain  as a function of 
+plastic strain rate. 
+LCH Load curve ID for specifying plastic failure strain  as a function of 
+temperature 
+LCI Load curve ID or table ID. The load c urve ID deﬁnes plastic 
+failure strain as a function of element size.  The table ID deﬁnes 
+for each triaxiality a load curve ID giving the pla stic failure strain 
+versus element size for that triaxiality. 
+LCCR Table ID. The curves in this table deﬁne com pressive yield stress 
+as a function of plastic strain or eﬀective plastic  strain (see 
+IFLAG).  The table ID deﬁnes for each plastic strai n rate value or 
+eﬀective plastic strain rate value a load curve ID giving the 
+(isothermal) compressive yield stress as a function of plastic 
+strain or eﬀective plastic strain for that rate. 
+LCCT Table ID deﬁning for each temperature value a load curve ID 
+giving the (quasi- static) compressive yield stress as a function of 
+strain for that temperature.  The curves in th is table deﬁne 
+compressive yield stress as a function of plastic s train or eﬀective 
+plastic strain (see IFLAG). 
+LCSR Table ID. The load curves deﬁne shear yield stress in function of 
+plastic strain or eﬀective plastic strain (see IFLA G).  The table ID 
+deﬁnes for each plastic strain rate value or eﬀecti ve plastic strain 
+rate value a load curve ID giving the (isothermal) shear yield 
+stress as a function of plastic strain or eﬀective plastic strain for 
+that rate. 
+LCST Table ID deﬁning for each temperature value a load curve ID 
+giving the (quasi- static) shear yield stress as a function of strain 
+for that temperature.  The load curves deﬁne shear yield stress as 
+a function of plastic strain or eﬀective plastic st rain (see IFLAG). *.   
+ History 
+Variable # Description 
+11 Plastic work 
+12 Damage 
+13 Element size 
+14 Temperature 
+16 Plastic strain in compression 
+17 Plastic strain in shear *

@@ -1,0 +1,40 @@
+ ............. ................................................... ... 2-210  
+*.  [0 ,2,3a,3c,5,8B] {6} 
+ *.  *.   
+2-210 (MAT) LS-DYNA R13 *.   *.   
+2-212 (MAT) LS-DYNA R13 |u1D438|u1D4JDCst=|u1D438|u1D438|u1D461Cst
+|u1D438 − |u1D438|u1D461Cst  . 
+Both the Young's modulus and the tangent modulus ma y optionally be made 
+functions of strain rate by specifying a load curve  ID giving their values as a 
+function of strain rate.  If these load curve IDs a re input as 0, then the constant 
+values speciﬁed in the input are used. 
+2.  Load Curves.   Note that all load curves used to deﬁne quantitie s as a function 
+of strain rate must have the same number of points at the same strain rate val- 
+ues.  This requirement is used to allow vectorized interpolation to enhance the 
+execution speed of this constitutive model. 
+3.  Material Failure.   This model also contains a simple mechanism for m odeling 
+material failure.  This option is activated by spec ifying a load curve ID deﬁning 
+the eﬀective stress at failure as a function of str ain rate.  For solid elements, 
+once the eﬀective stress exceeds the failure stress  the element is deemed to 
+have failed and is removed from the solution.  For shell elements the entire 
+shell element is deemed to have failed if all integ ration points through the 
+thickness have an eﬀective stress that exceeds the failure stress.  After failure 
+the shell element is removed from the solution. 
+In addition to the above failure criterion, this ma terial model also supports a 
+shell element deletion criterion based on the maxim um stable time step size for 
+the element, ∆|u1D461|mCst|aCst|xCst .  Generally, ∆|u1D461|mCst|aCst|xCst  goes down as the element becomes more 
+distorted.  To assure stability of time integration , the global LS-DYNA time 
+step is the minimum of the ∆|u1D461|mCst|aCst|xCst  values calculated for all elements in the mod- 
+el.  Using this option allows the selective deletio n of elements whose time step 
+∆|u1D461|mCst|aCst|xCst  has fallen below the speciﬁed minimum time step, ∆|u1D461crit .  Elements 
+which are severely distorted often indicate that ma terial has failed and sup- 
+ports little load, but these same elements may have  very small time steps and 
+therefore control the cost of the analysis.  This o ption allows these highly dis- 
+torted elements to be deleted from the calculation,  and, therefore, the analysis 
+can proceed at a larger time step, and, thus, at a reduced cost.  Deleted ele- 
+ments do not carry any load and are deleted from al l applicable slide surface 
+deﬁnitions.  Clearly, this option must be judicious ly used to obtain accurate 
+results at a minimum cost. 
+4.  Viscoplastic Formulation.   A fully viscoplastic formulation is optional whic h 
+incorporates the rate formulation within the yield surface.  An additional cost 
+is incurred but the improvement is results can be d ramatic. *

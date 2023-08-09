@@ -1,0 +1,86 @@
+ ........................ ................................................... ............ 2-1081  
+*.  [2,3a] {67} 
+ *.  *.   *.   
+This is  Material Type 170.  This model is available for the  Belytschko-Tsay and the C0 
+triangular shell elements.  It is based on a result ant stress formulation.  In-plane 
+behavior is treated separately from bending for mod eling perforated materials, such as 
+television shadow masks.  The plastic behavior of e ach resultant is speciﬁed with a load 
+curve and is completely uncoupled from the other re sultants.  If other shell 
+formulations are speciﬁed, the formulation will be automatically switched to 
+Belytschko-Tsay.  As implemented, this material mod el cannot be used with user 
+deﬁned integration rules. 
+NOTE:  This material does not support speciﬁcation of a m a- 
+terial angle, |u1D6FD|u1D4J6Cst, for each through-thickness integra- 
+tion point of a shell. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO       
+Type A F       
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable E11P E22P V12P V21P G12P G23P G31P  
+Type F F F F F F F  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable E11B E22B V12B V21B G12B AOPT   
+Type F F F F F F   
+ *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable LN11 LN22 LN12 LQ1 LQ2 LM11 LM22 LM12 
+Type F F F F F F F F 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed. 
+RO Mass density 
+E11P |u1D438|oneCst|oneCst |u1D4JDCst, for in-plane behavior 
+E22P |u1D438|twoCst|twoCst |u1D4JDCst, for in-plane behavior 
+V12P /u1D̅08|oneCst|twoCst |u1D4JDCst, for in-plane behavior 
+V11P /u1D̅08|oneCst|oneCst |u1D4JDCst, for in-plane behavior  
+G12P |u1D43A|oneCst|twoCst |u1D4JDCst, for in-plane behavior  
+G23P |u1D43A|twoCst|threeCst |u1D4JDCst, for in-plane behavior 
+G31P |u1D43A|threeCst|oneCst |u1D4JDCst, for in-plane behavior 
+E11B |u1D438|oneCst|oneCst |u1D44FCst, for bending behavior *.   
+  VARIABLE   DESCRIPTION  
+A1, A2, A3 (|u1D44∆|oneCst,|u1D44∆|twoCst,|u1D44∆|threeCst), components of vector /u1D41A for AOPT = 2 
+V1, V2, V3 (|u1D463|oneCst,|u1D463|twoCst,|u1D463|threeCst), components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 (|u1D4J1|oneCst,|u1D4J1|twoCst,|u1D4J1|threeCst), components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3. It may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+Remarks: 
+The in-plane elastic matrix for in-plane, plane str ess behavior is given by: 
+/u1D402in plane =
+⎣⎢⎢⎢⎢⎢⎡|u1D444|oneCst|oneCst|u1D4JDCst        |u1D444|oneCst|twoCst|u1D4JDCst      0        0        0
+|u1D444|oneCst|twoCst|u1D4JDCst        |u1D444|twoCst|twoCst|u1D4JDCst      0        0        0
+    0          0        |u1D444|fourCst|fourCst|u1D4JDCst      0        0
+    0          0        0        |u1D444|fiveCst|fiveCst|u1D4JDCst      0
+    0          0        0        0        |u1D444|sixCst|sixCst|u1D4JDCst⎦⎥⎥⎥⎥⎥⎤
+   
+ 
+The terms |u1D444|u1D4J6Cst|u1D4J7Cst|u1D4JDCst are deﬁned as: 
+|u1D444|oneCst|oneCst|u1D4JDCst=|u1D438|oneCst|oneCst|u1D4JDCst
+1 −/u1D̅08|oneCst|twoCst|u1D4JDCst/u1D̅08|twoCst|oneCst|u1D4JDCst 
+|u1D444|twoCst|twoCst|u1D4JDCst=|u1D438|twoCst|twoCst|u1D4JDCst
+1 −/u1D̅08|oneCst|twoCst|u1D4JDCst/u1D̅08|twoCst|oneCst|u1D4JDCst 
+|u1D444|oneCst|twoCst|u1D4JDCst=/u1D̅08|oneCst|twoCst|u1D4JDCst|u1D438|oneCst|oneCst|u1D4JDCst
+1 −/u1D̅08|oneCst|twoCst|u1D4JDCst/u1D̅08|twoCst|oneCst|u1D4JDCst 
+|u1D444|fourCst|fourCst|u1D4JDCst= |u1D43A|oneCst|twoCst|u1D4JDCst 
+|u1D444|fiveCst|fiveCst|u1D4JDCst= |u1D43A|twoCst|threeCst|u1D4JDCst 
+|u1D444|sixCst|sixCst|u1D4JDCst= |u1D43A|threeCst|oneCst|u1D4JDCst 
+ 
+The elastic matrix for bending behavior is given by : 
+/u1D402b ending =
+⎣⎢⎡|u1D444|oneCst|oneCst|u1D44FCst        |u1D444|oneCst|twoCst|u1D44FCst      0
+|u1D444|oneCst|twoCst|u1D44FCst        |u1D444|twoCst|twoCst|u1D44FCst      0
+    0          0        |u1D444|fourCst|fourCst|u1D44FCst⎦⎥⎤ 
+The terms |u1D444|u1D4J6Cst|u1D4J7Cst|u1D4JDCst  are similarly deﬁned. 
+ *

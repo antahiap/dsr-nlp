@@ -1,0 +1,13 @@
+ ...................... ................................................... ........ 2-117  
+*.  2 
+ *.   *MAT  
+LS-DYNA R13 2-117 (MAT) *.   
+2-118 (MAT) LS-DYNA R13 will be issued if a dependence curve is deﬁned on a  property of a material, 
+which has no frequency or time dependence. 
+3.  Initial Property Values.   The original property value deﬁned in a material card 
+will be overridden by the property values deﬁned at  frequency or time 0 in this 
+keyword.  If the starting frequency or time of LCID  in this keyword is larger 
+than 0, then the original property value deﬁned in the material card is used 
+until the starting frequency or time of LCID is rea ched. 
+4.  Supported Material Models and Properties.   So far, only the Young’s 
+modulus (E) of *

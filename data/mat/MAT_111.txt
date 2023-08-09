@@ -1,0 +1,8 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+C Strain rate coeﬃcient 
+N Pressure hardening exponent 
+FC Quasi-static uniaxial compressive strength 
+T Maximum tensile hydrostatic pressure 
+EPS0 Quasi-static threshold strain rate.  See *.   *

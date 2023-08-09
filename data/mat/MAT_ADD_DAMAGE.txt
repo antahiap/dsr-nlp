@@ -1,0 +1,435 @@
+_DIEM .............................. ................................................... ..................... 2-47  
+*. _DIEM 2 [0,2] 
+ *. _DIEM   ALPHABETIZED MATERIALS LIST  
+LS-DYNA R13 2-23 (MAT) Material Keyword Number 
+*. _DIEM  *MAT  
+LS-DYNA R13 2-47 (MAT) *. _DIEM commands in a 
+model can be disabled by using *CONTROL_MAT. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID NDIEMC DINIT DEPS NUMFIP    
+Type A F F F F    
+Default none 0.0 0.0 0.0 1.0    
+ 
+Data Card Pairs. Include NDIEMC pairs of Cards 2 and 3. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable DITYP P1 P2 P3 P4 P5   
+Type F F F F F F   
+Default 0.0 0.0 0.0 0.0 0.0 0.0   
+ *MAT  *. _DIEM  *MAT  
+LS-DYNA R13 2-49 (MAT)  VARIABLE   DESCRIPTION  
+EQ.3.0:  FLD 
+EQ.4.0: Ductile based on normalized principal stress 
+P1 Damage initiation parameter: 
+DITYP.EQ.0.0: Load curve/table ID representing plastic strain 
+at the onset of damage as a function of stress 
+triaxiality ( |u1D7≠2) and optionally plastic strain rate, 
+represented by |u1D7≠≠/u1D4:̅.st|u1D4JDCst in the theory below.  If the 
+ﬁrst strain rate val ue in the table is negative, it is 
+assumed to be given with respect to logarithmic 
+strain rate. 
+DITYP.EQ.1.0: Load curve/table ID representing plastic strain 
+at onset of damage as a function of shear inﬂu- 
+ence ( /u1D̅0:) and optionally plastic strain rate, repre- 
+sented by |u1D7≠≠/u1D4:̅.st|u1D4JDCst in the theory below.  If the ﬁrst 
+strain rate value in the table is negative, it is a s- 
+sumed to be given with respect to logarithmic 
+strain rate. 
+DITYP.EQ.2.0: Load curve/table ID representing plastic strain 
+at onset of damage as a function of ratio of prin- 
+cipal plastic strain rates ( |u1D6F+) and optionally plas- 
+tic strain rate, represented by |u1D7≠≠/u1D4:̅.st|u1D4JDCst in the theory 
+below.  If the ﬁrst strain rate value in the table is 
+negative, it is assumed to be given with respect 
+to logarithmic strain rate. 
+DITYP.EQ.3.0: Load curve/table ID representing plastic strain 
+at onset of damage as a function of ratio of prin- 
+cipal plastic strain rates ( |u1D6F+) and optionally plas- 
+tic strain rate, represented by |u1D7≠≠/u1D4:̅.st|u1D4JDCst in the theory 
+below.  If the ﬁrst strain rate value in t he table is 
+negative, it is assumed to be given with respect 
+to logarithmic strain rate. 
+DITYP.EQ.4.0: Load curve/table ID representing plastic strain 
+at onset of damage as a function of stress state 
+parameter ( |u1D6FD) and optionally plastic strain rate, 
+represented by |u1D7≠≠/u1D4:̅.st|u1D4JDCst in the theory below.  If the 
+ﬁrst strain rate value in the table is negative, it  is 
+assumed to be given with respect to logarithmic 
+strain rate. *MAT  *. _DIEM  *MAT  
+LS-DYNA R13 2-51 (MAT)  VARIABLE   DESCRIPTION  
+abscissa v alue of the criterion used (table).  This factor sc ales the 
+plastic strain at the onset of damage deﬁned with P 1. 
+DETYP Damage evolution type: 
+EQ.0.0: Linear softening.  Evolution of damage is a functio n of 
+the plastic displacement after the initiation of da mage.  
+EQ.1.0: Linear softening, Evolution of damage is a function  of 
+the fracture energy after the initiation of damage.  
+DCTYP Damage composition option for multiple criter ia: 
+EQ.-1.0: Damage not coupled to stress 
+EQ.0.0: Maximum 
+EQ.1.0: Multiplicative 
+Q1 Damage evolution parameter: 
+DETYP.EQ.0.0: Plastic displacement at failure,  |u1D462/u1D45:.st|u1D4JDCst. A negative 
+value corresponds to a table  ID for |u1D462/u1D45:.st|u1D4JDCst as a func- 
+tion of triaxiality and damage.  
+DETYP.EQ.1.0: Fracture energy at failure,  |u1D43A/u1D45:.st 
+Q2 Set to 1.0 to output information to log ﬁles ( messag  and d3hsp ) 
+when an integration point fails. 
+Q3 Damage evolution parameter: 
+DETYP.EQ.0.0: Exponent,  |u1D6F+, in nonlinear damage evolution 
+law, activated when |u1D462/u1D45:.st|u1D4JDCst> 0 and |u1D6F+ > 0 . 
+DETYP.EQ.1.0: Not used.  
+Remarks: 
+1.  DEPS.   In DIEM, you may invoke up to 5 damage initiation  and evolution 
+criteria.  For the sake of eﬃciency, the parameter DEPS can be used to only 
+check these criteria in quantiﬁed increments of pla stic strain.  In other words, 
+the criteria are only checked when the eﬀective pla stic strain goes beyond 
+DEPS , 2 × DEPS , 3 × DEPS , etc.  For DEPS = 0 the checks are performed in ea ch 
+step there is plastic ﬂow.  A reasonable value of D EPS could, for instance, be 
+DEPS = 0.0001. *MAT  *. _DIEM  *MAT  
+LS-DYNA R13 2-53 (MAT) The damage variable relates the macroscopic (damage d) to microscopic (true) 
+stress by 
+|u1D7≠∆ = (1 − |u1D437)|u1D7≠∆̃  . 
+Once the damage has reached the level of |u1D437|eCst /r.st/o.st/d.st |eCst  (=0.99 by default) the stress is 
+set to zero and the integration point is assumed fa iled and not processed there- 
+after.  For NUMFIP > 0, a shell element is eroded a nd removed from the ﬁnite 
+element model when NUMFIP integration points have f ailed.  For NUM-
+FIP < 0, a shell element is eroded and removed from  the ﬁnite element model 
+when -NUMFIP percent of the layers have failed. 
+Damage Initiation, /u1D̅4E/u1D46B: 
+For each evolution type  |u1D4J6, |u1D714/u1D4:̅.st|u1D4J6Cst governs the onset of damage.  For |u1D4J6 ≠/u1D45̅, the evolution of 
+|u1D714/u1D4:̅.st|u1D4J6Cst is independent from the evolution of  |u1D714/u1D4:̅.st|u1D4J7Cst.  The following list enumerates the 
+algorithms for modelling damage initiation. 
+ 
+In this subsection we suppress the superscripted |u1D4J6 indexing the evolution type. 
+1.  Ductility Based on Stress Triaxiality (DITYP = 0).  For the ductile initiation 
+option, a function |u1D7≠≠/u1D4:̅.st|u1D4JDCst= |u1D7≠≠/u1D4:̅.st|u1D4JDCst(|u1D7≠2, |u1D7≠≠̇|u1D4JDCst) represents the plastic strain at onset of dam- 
+age (P1).  This is a function of stress triaxiality  deﬁned as 
+|u1D7≠2 = −|u1D4JD
+/u1D45E  , 
+with |u1D4JD being the pressure and /u1D45E the von Mises equivalent stress.  Optionally 
+this can be deﬁned as a table with the second depen dency being on the eﬀec- 
+tive plastic strain rate |u1D7≠≠̇|u1D4JDCst, where a negative sign of the ﬁrst strain rate in the 
+table means that it is in logarithmic scale. The da mage initiation history varia- 
+ble evolves according to 
+|u1D714/u1D4:̅.st=/integral.v:|u1D4J1|u1D7≠≠|u1D4JDCst
+|u1D7≠≠/u1D4:̅.st|u1D4JDCst|u1D7≠≠Cst|u1D4JDCsts
+|zeroCst  . 
+2.  Shear (DITYP = 1).  For the shear initiation option, a function |u1D7≠≠/u1D4:̅.st|u1D4JDCst= |u1D7≠≠/u1D4:̅.st|u1D4JDCst(/u1D̅0:, |u1D7≠≠̇|u1D4JDCst) 
+represents the plastic strain at onset of damage (P 1).  This is a function of a 
+shear stress function deﬁned as 
+/u1D̅0:=/u1D45E+/u1D458/u1D446.st|u1D4JD
+/u1D̅0F  . 
+Here |u1D4JD is the pressure, /u1D45E is the von Mises equivalent stress and /u1D̅0F is the maxi- 
+mum shear stress deﬁned as a function of the princi pal stress values: 
+/u1D̅0F=|parenleftCv2|u1D7≠∆|mCst|aCst /∗.st/o.st/r.st− |u1D7≠∆|mCst|iCst|nCst /o.st/r.st|parenriµhtCv2
+2  . *MAT  *. _DIEM  *MAT  
+LS-DYNA R13 2-55 (MAT) |u1D714/u1D4:̅.st=/integral.v:|u1D4J1|u1D7≠≠|u1D4JDCst
+|u1D7≠≠/u1D4:̅.st|u1D4JDCst|u1D7≠≠Cst|u1D4JDCsts
+|zeroCst  . 
+For this initiation option with shells, P2 is used to determine the layer in the 
+shell where the criterion is evaluated.  If P2 = 0,  the criterion is evaluated in the 
+mid-layer only, whereas if P2 = 1, it is evaluated in the outer layers only (bot- 
+tom and top).  This can be used to distinguish betw een a membrane instability 
+typically used for FLD evaluations (P2 = 0) and a b ending instability (P2 = 1).  
+For shells, as soon as |u1D714/u1D4:̅.st reaches 1 in any of the integration points of inte rest, 
+all  integration points in the shell goes over in damag e mode, meaning subse- 
+quent damage is applied to the entire element.  For  solids/tshells, only P2 = 0 
+is currently supported, and when |u1D714/u1D4:̅.st reaches 1 in the center of the section then 
+all elements in the section goes into damage mode.  Again, more details for 
+solids or thick shells are provided in the section titled MSFLD and FLD with 
+solid and thick shell elements . 
+4.  FLD (DITYP = 3).  The FLD initiation criterion is identical to MSFLD  with one 
+subtle diﬀerence: the plastic strain used to evalua te the criteria does not ac- 
+count for the sign of the hydrostatic stress but is  instead identical to the eﬀec- 
+tive plastic strain directly from the underlying ma terial model.  In other words, 
+it is not the modiﬁed plastic strain used in the MS FLD criterion, but apart from 
+that it is an identical criterion. 
+5.  Ductile based on normalized principal stress (DITYP  = 4).  For the ductile 
+initiation option the plastic strain at the onset o f damage (P1) is taken as a func- 
+tion of |u1D6FD and |u1D7≠≠̇|u1D4JDCst, that is |u1D7≠≠/u1D4:̅.st|u1D4JDCst= |u1D7≠≠/u1D4:̅.st|u1D4JDCst(|u1D6FD, |u1D7≠≠̇|u1D4JDCst). Here |u1D6FD is the normalized principal stress 
+|u1D6FD =/u1D45E+/u1D458/u1D451.st|u1D4JD
+|u1D7≠∆|mCst|aCst /∗.st/o.st/r.st   , 
+where |u1D4JD is the pressure, /u1D45E is the von Mises equivalent stress, |u1D7≠∆|mCst|aCst /∗.st/o.st/r.st is the major 
+principal stress, and /u1D458/u1D451.st is the pressure inﬂuence parameter speciﬁed in the  P2 
+ﬁeld.  Optionally, this can be deﬁned as a table wi th the second dependency 
+being on the eﬀective plastic strain rate |u1D7≠≠̇|u1D4JDCst, where a negative sign of the ﬁrst 
+strain rate in the table means that it is in logari thmic scale. The damage initia- 
+tion history variable evolves according to 
+|u1D714/u1D4:̅.st=/integral.v:|u1D4J1|u1D7≠≠|u1D4JDCst
+|u1D7≠≠/u1D4:̅.st|u1D4JDCst|u1D7≠≠Cst|u1D4JDCsts
+|zeroCst  . 
+ 
+MSFLD and FLD with solid and thick shell elements 
+ 
+When using MSFLD or FLD with solid or thick shell e lements, the following restrictions 
+apply: *MAT  *. _DIEM  *MAT  
+LS-DYNA R13 2-57 (MAT) |u1D462̇|u1D4JDCst= |<raceleftCvJ0 |u1D714/u1D4:̅.st< 1
+/u1D45∫|u1D7≠≠̇|u1D4JDCst|u1D714/u1D4:̅.st≥ 1 
+Here /u1D45∫ is a characteristic length of the element.  Fractu re energy is related to plastic 
+displacement as follows 
+|u1D43A/u1D45:.st=/integral.v:|u1D7≠∆|u1D466Cst|u1D4J1|u1D462|u1D4JDCst|u1D462Cst/u1D45:.sts|u1D4JDCsts
+|zeroCst  , 
+where |u1D7≠∆|u1D466Cst is the yield stress.  The following list enumerate s the algorithms available for 
+modelling damage. 
+1.  Linear (DETYP = 0).  With this option, if |u1D6F+ = 0  (Q3) and Q1 is positive, the 
+damage variable evolves linearly with the plastic d isplacement after onset of 
+damage: 
+|u1D437̇=|u1D462̇|u1D4JDCst
+|u1D462/u1D45:.st|u1D4JDCst  .  
+Here |u1D462/u1D45:.st|u1D4JDCst is the plastic displacement at failure (Q1).  
+If Q1 is negative, then –Q1 refers to a table that deﬁnes |u1D462/u1D45:.st|u1D4JDCst as a function of triax- 
+iality and damage, that is, |u1D462/u1D45:.st|u1D4JDCst= |u1D462/u1D45:.st|u1D4JDCst(|u1D7≠2, |u1D437) . In this case with |u1D6F+ = 0 , the damage 
+evolution law generalizes to:  
+|u1D437̇=|u1D462̇|u1D4JDCst
+∂|u1D462/u1D45:.st|u1D4JDCst
+∂|u1D437 . 
+For a ﬁxed triaxiality, |u1D7≠2, |u1D462̅/u1D45:.st|u1D4JDCst:= |u1D462/u1D45:.st|u1D4JDCst(|u1D7≠2, 1)  deﬁnes the plastic displacement at fail- 
+ure, and the shape of |u1D462/u1D45:.st|u1D4JDCst(|u1D7≠2, |u1D437)  as a function of |u1D437 determines the post-instability 
+characteristics.  
+A linear curve, as illustrated by the solid line in  Figure 2-2 , corresponds exactly 
+to a constant plastic displacement to failure equal  to |u1D462̅/u1D45:.st|u1D4JDCst and can be seen as a 
+reference curve for this discussion.  For simplicit y assume uniaxial tension ( |u1D7≠2 =
+1/3). A curve with positive curvature, represented by the dash-dots in Fig- 
+ure 2-2 , means that damage evolves quickly right after ons et of instability and 
+more slowly when approaching failure.  In contrast,  damage evolves slowly 
+early and more quickly later on for a curve with ne gative curvature, represent- 
+ed by the dashes.  The qualitative eﬀect these curv es have in a uniaxial tension 
+test is also illustrated.  The correlation between a damage curve and the actual 
+behavior in tests is not straightforward, thus thes e curves need to be estab- 
+lished on a trial-and-error basis. 
+For |u1D6F+ > 0  and |u1D462/u1D45:.st|u1D4JDCst> 0, the damage evolution follows an exponential law g iven 
+by *MAT  *. _DIEM  *MAT  
+LS-DYNA R13 2-59 (MAT) |u1D437̇=|u1D462̇|u1D4JDCst
+|u1D462/u1D45:.st|u1D4JDCst   , 
+where |u1D462/u1D45:.st|u1D4JDCst= 2|u1D43A/u1D45:.st/|u1D7≠∆|u1D466Cst|zeroCsts and |u1D7≠∆|u1D466Cst|zeroCsts is the yield stress when failure criterion is reac hed. *MAT  *. _GISSMO _{OPTION}  
+Available options include: 
+<BLANK> 
+STOCHASTIC 
+Many of the constitutive models in LS-DYNA do not a llow failure and erosion.  The 
+ADD_DAMAGE_GISSMO option provides a way of includin g damage and failure in 
+these models. GISSMO is the “generalized incrementa l stress-state dependent damage 
+model.” See remarks for details. 
+ 
+This keyword originates from a split out of *. _GISSMO commands in 
+a model can be disabled by using *CONTROL_MAT. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID  DTYP REFSZ NUMFIP    
+Type A  F F F    
+Default none  0.0 0.0 1.0    
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCSDG ECRIT DMGEXP DCRIT FADEXP LCREGD   
+Type F F F F F F   
+Default 0.0 0.0 1.0 0.0 1.0 0.0   *. _GISSMO  
+2-62 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+damage, just with the given reference element size.  
+LT.0: The reference element size is |REFS Z |. In addition to the 
+reference size related damage values, a correspondi ng 
+plastic strain is computed and written to history v ariable 
+ND + 17. See remarks for details.   
+NUMFIP Number or percentage of failed integration points prior to 
+element deletion (default value is 1).  When the ma terial is a 
+composite with diﬀerent through-the- thickness material types 
+deﬁned using *PART_COMPOS ITE, then values other than 1 will 
+not work correctly; use *DEFINE_ELEMENT_EROSION ins tead. 
+GT.0.0: Number of integration points which must fail before  
+element is deleted.  
+LT.0.0: Applies only to shells. |N U MFIP|  is the percentage of 
+layers which must fail before an element is deleted .  
+For shell formulations with 4 integration points p er 
+layer, the layer is considered failed if any of the  inte- 
+gration points in the layer fails. 
+LCSDG Failure strain curve/table or function: 
+GT.0.0: Load curve ID or table ID. As a load curve, it deﬁn es 
+equivalent plastic strain to failure as a function of triax- 
+iality.  As a table, it deﬁnes for each Lode parame ter 
+value (between - 1 and 1) a load curve ID giving the 
+equivalent plastic strain to failure as a function of triax- 
+iality for that Lode parameter value.  With HISVN ≠  0, 
+a 3D table can be used, where failure strain is a f unc- 
+tion of the history variable (TABLE_3D), Lode param e- 
+ter (TA BLE), and triaxiality (CURVE).  With 
+HISVN = 0, a 3D table i ntroduces thermal eﬀects, that 
+is, failure strain is a function of temperature (TA BLE_-
+3D), Lode parameter (TA BLE), and triaxiality 
+(CURVE).  
+LT.0.0: |LCSDG|  is the ID of a function (*DEFINE_FUNC TION) 
+with the arguments triaxiality and Lode parameter: 
+|u1D4J3(|u1D7≠2,/u1D4:F). 
+ECRIT Critical plastic strain (material instability ); see below. 
+LT.0.0: |ECRIT|  is either a load curve ID deﬁning critical 
+equivalent plastic strain versus triaxiality or a t able ID 
+deﬁning critical equivalent plastic strain as a fun ction *. _GISSMO  
+2-64 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+function of strain rate (TABLE) and triaxility (CUR VE). 
+GT.0: Scale ECRIT. 
+LT.0: Do not scale ECRIT. 
+SHRF Reduction factor for regularization for shear stres s states.  This 
+parameter can be deﬁned between - 1.0 and +1.0. See remarks 
+below. 
+BIAXF Reduction factor for regularization for biaxial str ess states.  This 
+parameter can be deﬁned between -1.0 and +1.0 . See remarks 
+below. 
+LCDLIM Load curve ID deﬁning damage limit values as a func tion of 
+triaxiality.  Damage can be restricted to values le ss than 1.0 to 
+prevent further stress reduction and failure for ce rtain 
+triaxialities. 
+MIDFAIL Mid-plane failure op tion for shell elements.  If active, then critical 
+strain is only checked at the mid- plane integration point (IP), 
+meaning an odd number for NIP should be used.  The other 
+integration points compute their damage, but no cou pling to the 
+stresses is done ﬁrst.  As soon as the mid- plane IP reaches 
+ECRIT/DCRIT, then all the other IPs are also checke d.  
+EQ.0.0: Inactive. 
+EQ.1.0: Active.  Those of the non-mid- plane IPs that are 
+already above their critical value immediately star t to 
+reduce the stresses.  Those still below the critica l value 
+still do not couple, only if they reach their crite rion.  
+EQ.2.0: Active.  All of the non-mid- plane IPs immediately start 
+to reduce the stresses.  NUMFIP is active. 
+EQ.3.0: Active.  Same as 2 but when D = 1 is reached in the 
+middle integration point, the element is eroded ins tan- 
+taneously.  NUMFIP is disregarded.  
+EQ.4.0: Active.  Damage and fai lure are applied only to the 
+midpoint.  When D = 1 at the midpoint, the element is 
+eroded.  NUM FIP is disregarded.  Integration points 
+away from the midplane see no stress reduction and no 
+failure. 
+HISVN History variable used to evaluate the 3D tabl e LCS DG (and 
+optionally 3D table ECRIT < 0): *. _GISSMO  
+2-66 (MAT) LS-DYNA R13 The model is based on an incremental formulation of  damage accumulation: 
+∆|u1D437 =DMGEXP×|u1D437|parenleftCv4|oneCst−|oneCst
+DMGEXP |parenriµhtCv4
+|u1D7≠≠/u1D45:.st∆|u1D7≠≠|u1D4JDCst 
+where, 
+|u1D437 Damage value  (0 ≤ |u1D437 ≤ 1).  For numerical reasons, |u1D437 is initialized to a 
+value of 10 -20  for all damage types in the ﬁrst time step. 
+|u1D7≠≠/u1D45:.st Equivalent plastic strain to failure, determined f rom LCSDG as a function 
+of the current triaxiality value |u1D7≠2 (and Lode parameter /u1D4:F as an option). 
+A typical failure curve LCSDG for metal sheet, mode lled with shell ele- 
+ments is shown in Figure 2-3 . Triaxiality should be monotonically increas- 
+ing in this curve.  A reasonable range for triaxial ity is -2/3 to 2/3 if shell 
+elements are used (plane stress). 
+For 3-dimensional stress states (solid elements), t he possible range of tri- 
+axiality goes from −∞ to +∞, but to get a good resolution in the internal 
+load curve discretization (depending on parameter L CINT of *CON-
+TROL_SOLUTION) you should deﬁne lower limits, such as -1 to 1 if 
+LCINT = 100 (default). 
+ ∆|u1D7≠≠|u1D4JDCst Equivalent plastic strain increment 
+ 
+For constant values of failure strain, this damage rate can be integrated to get a relation 
+of damage and actual equivalent plastic strain: 
+|u1D437 = |parenleftCv6|u1D7≠≠|u1D4JDCst
+|u1D7≠≠/u1D45:.st|parenriµhtCv6DMGEXP 
+, for  |u1D7≠≠/u1D45:.st= constant plastic
+failure
+strain
+compression tension
+triaxiality
+σh/σvm-2/3 -1/3 1/3 2/3
+Figure 2-3.  Typical failure curve for metal sheet, modeled with shell elemen ts.  *. _GISSMO  
+2-68 (MAT) LS-DYNA R13 using the following relation, which is similar to t he accumulation of damage |u1D437 
+except for the instability curve is used as an inpu t: 
+∆|u1D439 =DMGEXP 
+|u1D7≠≠|u1D4JDCst/co⋯⋯a.st|u1D4J9Cst /u1D45C.st|u1D4J≠Cst |u1D439|parenleftCv4|oneCst−|oneCst
+DMGEXP |parenriµhtCv4∆|u1D7≠≠|u1D4JDCst 
+with, 
+ |u1D439 Instability measure ( 0 ≤ |u1D439 ≤ 1 ).  
+ |u1D7≠≠p,loc  Equivalent plastic strain to instability, determin ed from ECRIT 
+ ∆|u1D7≠≠|u1D4JDCst Equivalent plastic strain increment 
+As soon as the instability measure |u1D439 reaches unity, the current value of damage 
+|u1D437 in the respective element is stored.  Damage will from this point on be cou- 
+pled to the ﬂow stress using the relation described  above. 
+3.  If no input for ECRIT is made, parameter DCRIT wil l be considered.  Coupling 
+of damage to the stress tensor starts if this value  (damage threshold) is exceeded 
+(0 ≤ DCRIT ≤ 1).  Coupling of damage to stress is d one using the relation de- 
+scribed above. 
+This input allows for the use of extreme values als o – for example, DCRIT = 1.0 
+would lead to no coupling at all, and element delet ion under full load (brittle 
+fracture). 
+ 
+The values of SHRF and BIAXF generally lie between 0.0 and 1.0 where 0.0 means full 
+regularization and 1.0 means no regularization unde r shear (triaxiality = 0.0 for 
+SHRF = 1.0) or biaxial tension (triaxiality = 2/3 f or BIAXF = 1.0).  Any other 
+intermediate triaxiality follows a linear interpola tion between triaxiality 0.0 and 1/3 and 
+also between triaxiality 1/3 and 2/3. Notice that a  full regularization is always 
+undertaken for a one-dimensional tensile stress sta te (triaxiality = 1/3) according to the 
+factors deﬁned under LCREGD. For the sake of genera lization, both SHRF and BIAXF 
+can also assume negative values (e.g., SHRF = -1.0 and BIAXF = -1.0).  In this case, 
+regularization is aﬀected not at triaxialities 0.0 and 2/3 but rather at the triaxialities 
+where the failure curve (LCSDG) crosses the instabi lity curve (-ECRIT).  The use of a 
+triaxiality-dependent regularization approach may b e necessary because simple 
+regularization only depending on the element size c an be unrealistic for certain stress 
+states. 
+If the results of a ﬁrst simulation should be trans ferred to a second computation with 
+potentially modiﬁed mesh size, such as mapping from  forming to crash, it might be 
+necessary to alter damage values (and maybe plastic  strain) as well.  For that purpose, 
+reference element size REFSZ can be deﬁned.  With R EFSZ  >  0, corresponding damage 
+is computed in the same fashion as the actual damag e, just with the given reference 
+element size instead, and written to history variab le ND + 9. An alternative approach is *. _GISSMO  
+2-70 (MAT) LS-DYNA R13 History Variable # Description 
+ND + 8 Instability measure |u1D439 
+ND + 9 Resultant damage parameter |u1D437 for element size 
+REFSZ 
+ND + 10 Resultant damage threshold DCRIT for element 
+size REFSZ 
+ND + 11 Averaged triaxiality:  
+|u1D7≠2|u1D4JBCst+|oneCsta v g =1
+|u1D437|u1D4JBCst+|oneCst|parenleftCv2|u1D437|u1D4JBCst×|u1D7≠2|u1D4JBCsta v g +|parenleftCv1|u1D437|u1D4JBCst+|oneCst−|u1D437|u1D4JBCst|parenriµhtCv1×|u1D7≠2|u1D4JBCst+|oneCst|parenriµhtCv2 
+ND + 12 Lode parameter value /u1D4:F (only calculated if LCSDG 
+refers to a table) 
+ND + 13 Alternative damage value: |u1D437|oneCst/DMGEXP  
+ND + 14 Averaged Lode parameter: 
+/u1D4:F|u1D4JBCst+|oneCsta v g =1
+|u1D437|u1D4JBCst+|oneCst|parenleftCv2|u1D437|u1D4JBCst×/u1D4:F|u1D4JBCsta v g +|parenleftCv1|u1D437|u1D4JBCst+|oneCst−|u1D437|u1D4JBCst|parenriµhtCv1×/u1D4:F|u1D4JBCst+|oneCst|parenriµhtCv2 
+ND + 15 MIDFAIL control ﬂag (set to -1 in case mid-plane IP  
+reaches ECRIT/DCRIT) 
+ND + 16 Number of IPs/layers (NUMFIP > 0/< 0) that must 
+fail before an element gets deleted 
+ND + 17 Plastic strain value related to reference element s ize 
+(only if REFSZ < 0) 
+ND + 18 Eﬀective damage value (stress scaling factor) 
+ND + 19 History variable for 3D table LCSDG (only if 
+HISVN ≠ 0) 
+ND + 20 Random scale factor on failure strain (only if STO-
+CHASTIC option is used) *. _-
+DIEM/GISSMO is possible as long as IDAM = 0 is used . 
+NOTE:  All *. _-
+DIEM/GISSMO as of R11).  
+LCREGD Load curve ID deﬁning element size dependent regula rization 
+factors .  This feature can be used with the standard failu re criteria 
+of Cards 1 (MXPRES, MNEPS, EFFEPS, VOLEPS), 2 (MN PRES, 
+SIGP1, SIGVM, MXEPS, EPSSH, IMPULSE) and 4 (LCFLD, EP-
+STHIN). 
+ 
+Additional Failure Criteria Card.  This card is optional.  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable LCFLD NSFF EPSTHIN ENGCRT RADCRT LCEPS12  LCEPS13  LCEPSMX  
+Type F F F F F I I I 
+Default 0.0 0.0 0.0 0.0 0.0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LCFLD Load curve ID or table ID. Load curve deﬁnes the Fo rming Limit 
+Diagram, where minor engineering strains in percent  are deﬁned 
+as abscissa values and major engineering strains in  percent are 
+deﬁned as ordinate values.  Table deﬁnes for each s train rate *MAT  *.  can be included  for damage and 
+failure.  But as in the original model, a viscoelas tic extension can be activated.  
+This model is based on a complete re-coding of the plasticity algorithm.  The eﬃciency 
+was improved to the extent that the computing times  should be shorter.  As compared 
+to *. _ DIEM for a description of 
+ductile damage initialization (DITYP = 0) based on stress 
+triaxiality and a linear damage evolution (DETYP = 0) type.  Also 
+see ﬁelds LCDI and UPF on Card 9. 
+LT.0.0: |FAILM|  is eﬀective plastic matrix strain at failure.  
+When the matrix plastic strain reaches this value, the 
+element is deleted from the calculation.  
+EQ.0.0: Only visualization (triaxiality of matrix stresses)  
+EQ.1.0: Active DIEM (triaxiality of matrix stresses) 
+EQ.10.0: Only visualization (triaxiality of composite stress es) 
+EQ.11.0: Active DIEM (triaxiality of composite stresses) 
+FAILF Option for ﬁber failure: 
+EQ.0.0: Only visualization (equivalent ﬁber stresses) 
+EQ.1.0: Active (equivalent ﬁber stresses)  *

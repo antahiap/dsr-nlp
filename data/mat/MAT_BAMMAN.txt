@@ -1,0 +1,108 @@
+ ....................................... ................................................... .............................. 2-386  
+*.  [0,2,3a,3c,5,8B] {8} 
+ *. _DAMAGE [0,2,3a,3c,5,8B] {10}  
+ *.   *. _DAMAGE  *.   
+2-386 (MAT) LS-DYNA R13 *.   *.   
+2-388 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+A5 |u1D6F+|fiveCst, initial value of internal state variable 4 
+A6 α6, initial value of internal state variable 5 
+KAPPA /u1D̅05, initial value of internal state variable 6 
+ 
+Unit Conversion Table 
+ sec × psi × oR sec × MPa × oR sec × MPA × oK 
+ C 1 × 1⁄145  × 1⁄145  
+ C 2  — × 5⁄9 
+ C 3 × 1⁄145  × 1⁄145  
+ C 4  — × 5⁄9 
+ C 5  —  — 
+ C 6  — × 5/9 
+ C 7 × 145 × 145 
+ C 8  — × 5⁄9 
+ C 9 × 1⁄145  × 1⁄145  
+ C 10  — × 5⁄9 
+ C 11 × 145 × 145 
+ C 12  — × 5⁄9 
+ C 13 × 145 × 145 
+ C 14  — × 5⁄9 
+ C 15 × 1⁄145  × 1⁄145  
+ C 16  — × 5⁄9 
+ C 17 × 145 × 145 
+ C 18  — × 5⁄9 
+ C0 = HC × 145 × (145)( 5⁄9) 
+ E × 1⁄145  × 1⁄145  
+   —  — 
+ T  — × 5⁄9 
+Remarks: 
+The kinematics associated with the model are discus sed in references [Hill 1948, 
+Bammann and Aifantis 1987, Bammann 1989].  The desc ription below is taken nearly 
+verbatim from Bammann [1989]. 
+ *.   
+2-390 (MAT) LS-DYNA R13 employing this rate allows a reasonable prediction of directional softening for some 
+materials, but in general under-predicts the soften ing and does not accurately predict 
+the axial stresses which occur in the torsion of th e thin walled tube. 
+ 
+The ﬁnal equation necessary to complete our descrip tion of high strain rate deformation 
+is one which allows us to compute the temperature c hange during the deformation.  In 
+the absence of a coupled thermo-mechanical ﬁnite el ement code we assume adiabatic 
+temperature change and follow the empirical assumpt ion that 90 - 95% of the plastic 
+work is dissipated as heat.  Hence, 
+|u1D447̇=.9
+|u1D7≠+|u1D436|u1D463Cst|parenleftCv1/u1D6D4⋅/u1D40:|u1D4JDCst|parenriµhtCv1, 
+where |u1D7≠+ is the density of the material and |u1D436|u1D463Cst is the speciﬁc heat. 
+ 
+In terms of the input parameters, the functions deﬁ ned above become: 
+|u1D449(|u1D447) = C1 exp(− C2 |u1D447 ⁄ )                     |u1D4JF|u1D46≠Cst(|u1D447) = C11 exp(− C12 |u1D447 ⁄ )
+/u1D44C(|u1D447) = C3 exp(C4 |u1D447 ⁄ )  |u1D44J/u1D451.st(|u1D447) = C13 exp(− C14 |u1D447 ⁄ ) 
+|u1D4J3 (|u1D447) = C5 exp(− C6 |u1D447 ⁄ )       /u1D4:B(|u1D447) = C15 exp(C16 |u1D447 ⁄ )
+|u1D4JF/u1D451.st(|u1D447) = C 7exp(− C 8|u1D447 ⁄ ) |u1D44J|u1D46≠Cst(|u1D447) = C1 7exp(− C1 8|u1D447 ⁄ )
+ℎ(|u1D447) = C 9exp(C10 |u1D447 ⁄ ) 
+and the heat generation coeﬃcient is 
+H C =0.9
+|u1D7≠+|u1D436|u1D463Cst.*. _DAMAGE  
+This is  Material Type 52.  This is an extension of model 51  which includes the modeling 
+of damage.  See Bamman et al.  [1990]. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR T HC   
+Type A F F F F F   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 C5 C6 C7 C8 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C9 C10 C11 C12 C13 C14 C15 C16 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable C17 C18 A1 A2 A3 A4 A5 A6 
+Type F F F F F F F F 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable N D0 FS      
+Type F F F      
+ *. _DAMAGE  
+2-392 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus (psi) 
+PR Poisson’s ratio 
+T Initial temperature (°R, degrees Rankine) 
+HC Heat generation coeﬃcient (°R D≥◦}"ä•—⁄A}×äpsi ) 
+C1 Psi 
+C2 °R 
+C3 Psi  
+C4 °R 
+C5 1 /s  
+C6 °R  
+C7 1 /psi 
+C8 °R  
+C9 Psi  
+C10 oR 
+C11 1 /psi-s 
+C12 °R  
+C13 1 /psi 
+C14 °R  
+C15 psi  
+C16 °R *

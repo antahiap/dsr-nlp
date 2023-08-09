@@ -1,0 +1,24 @@
+ *. _N: *.  
+*. _N 
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+AHYP Coeﬃcient A for modiﬁed Drucker-Prager Surface  
+COH Cohesion |u1D4JB̃ shear strength at zero conﬁnement (overburden) 
+ECCEN Eccentricity parameter for third invariant eﬀ ects 
+AN Strain hardening percent of PHIMAX where non- linear eﬀects 
+start 
+ET Strain hardening amount of non-linear eﬀects 
+MCONT Moisture content of soil.  It determines the amount  of air voids 
+and should be a value between 0.0 and 1.0.  
+PWD1 Parameter for pore water eﬀects on bulk modulu s 
+PWKSK Skeleton bulk modulus.  Pore water parameter,  |u1D4JB̃, set to zero to 
+eliminate eﬀects. 
+PWD2 Parameter for pore water eﬀects on the eﬀective pre ssure 
+(conﬁnement) 
+PHIRES The minimum internal friction angle in radians (res idual shear 
+strength) 
+DINT Volumetric strain at initial damage threshold 
+VDFM Void formation energy (like fracture energy) 
+DAMLEV Level of damage that will cause element dele tion (0.0 - 1.00)   
+EPSMAX Maximum principle failure strain *

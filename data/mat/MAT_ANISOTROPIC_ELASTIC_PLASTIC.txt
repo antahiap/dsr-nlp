@@ -1,0 +1,262 @@
+ .................. ................................................... ........ 2-1001  
+*.  [0,2,3a ] {5} 
+ *.   *.   *.   
+This is Material Type 157. This material model is a  combination of the anisotropic elastic 
+material model (*.   
+ Card 8.   This card is included if and only if EXTRA = 1 or  2. 
+XT XC YT YC SXY FF12  NCFAIL 
+Card 9.   This card is included if and only if EXTRA = 1 or  2. 
+ZT ZC SYZ SZX FF23 FF31   
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO SIGY LCSS QR1 CR1 QR2 CR2 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+SIGY Initial yield stress 
+LCSS Load curve ID or Table ID: 
+Load Curve.   When LC SS is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  If 
+deﬁned QR1, CR1, QR2, and CR2 are ignored. 
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function of eﬀective plastic 
+strain for that rate, See Figure M24-1 .  When the strain rate falls 
+below the minimum value, the stress as a function o f eﬀective 
+plastic strain curve for the lowes t value of strain rate is used.  
+Likewise, when the strain rate exceeds the maximum value the 
+stress as a function of eﬀective plastic strain cur ve for the highest 
+value of strain rate is used.  
+Logarithmically Deﬁned Tables.   An alternative way to invok e 
+logarithmic interpolation between discrete strain r ates is 
+described as follows.  If the ﬁrst  value in the table is negative, LS-
+DY NA assumes that all the table values represent the natural 
+logarithm of a strain rate.  Since the tables are i nternally *.   
+ Anisotropic Constants Card for Shells.   This card is included if the element type is 
+shells. 
+ Card 4a 1 2 3 4 5 6 7 8 
+Variable C45 C46 C55 C56 C66 R00 R45 R90 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+Cij  The ij th  term in the 6 × 6 anisotropic constitutive matrix.  Note that 
+1 corresponds to the |u1D44∆ material direction, 2 to the |u1D44F material 
+direction, and 3 to the /u1D450 material direction. 
+R00 |u1D44J|zeroCst|zeroCst  for shell (default = 1.0) 
+R45 |u1D44J|fourCst|fiveCst  for shell (default = 1.0) 
+R90 |u1D44J/nine.st |zeroCst  for shell (default = 1.0) 
+ 
+Anisotropic Constants Card for Solids.   This card is included if the element type is 
+solids. 
+ Card 4b 1 2 3 4 5 6 7 8 
+Variable C45 C46 C55 C56 C66 F G H 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+Cij  The ij th  term in the 6 × 6 anisotropic constitutive matrix.  Note that 
+1 corresponds to the |u1D44∆ material direction, 2 to the |u1D44F material 
+direction, and 3 to the /u1D450 material direction. 
+F |u1D439 for solid (default = 12⁄) 
+G |u1D43A for solid (default = 12⁄) 
+H /u1D4:B for solid (default = 12⁄) 
+ *.   
+  VARIABLE   DESCRIPTION  
+EQ.1.0:  Viscoplastic formulation 
+MACF Material axes change ﬂag for solid elements: 
+EQ.1: No change, default 
+EQ.2: Switch material axes |u1D44∆ and |u1D44F. 
+EQ.3: Switch material axes |u1D44∆ and /u1D450. 
+EQ.4: Switch material axes |u1D44F and /u1D450. 
+ 
+Anisotropic Constants Card for Solids.  This card is included if the element type is 
+solids. 
+ Card 5b 1 2 3 4 5 6 7 8 
+Variable L M N  AOPT VP  MACF 
+Type F F F  F F  F 
+ 
+ VARIABLE   DESCRIPTION  
+L /u1D4:F for solid (default = 32⁄) 
+M |u1D44≠ for solid (default = 32⁄) 
+N /u1D441 for solid (default = 32⁄) 
+AOPT Material axes option (see .   *.   
+  VARIABLE   DESCRIPTION  
+EQ.2.0:  Tsai-Hill failure criterion parameters (Cards 8 an d 9) 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA IHIS 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3.   BE TA may be overridden on the element card; see 
+*ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO. 
+IHIS Flag for material properties initialization: 
+EQ.0: Material properties deﬁned in Cards 1 - 5 are used 
+GE.1: Use *INITIAL_STRESS_SOL ID/SHELL to initialize 
+material properties on an element-by- element basis for 
+solid or shell elements, respectively (see Remarks 1  and 2
+below). 
+ 
+Two additional cards for EXTRA = 1 or 2. 
+ Card 8 1 2 3 4 5 6 7 8 
+Variable XT XC YT YC SXY FF12  NCFAIL 
+Type F F F F F F  F 
+ 
+ VARIABLE   DESCRIPTION  
+XT Longitudinal tensile strength, |u1D44∆-axis: 
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- XT) which deﬁnes the longitudinal 
+tensile strength as a function of strain rate.  If the ﬁrst *.   
+  VARIABLE   DESCRIPTION  
+NCFAIL Number of timesteps to reduce stresses until elemen t deletion.  
+The default is 10. 
+ 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable ZT ZC SYZ SZX FF23 FF31   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+ZT Transverse tensile strength, /u1D450-axis ( solid elements only ): 
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- ZT) which deﬁnes the transverse 
+tensile strength as a function of strain rate.  If the ﬁrst 
+strain rate value in the curve is negative, it is a ssumed 
+that all strain rate values are given as a natural loga- 
+rithm of the strain rate. 
+ZC Transverse compressive strength, /u1D450-axis (positive value, solid 
+elements only ):  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- ZC) which deﬁnes the transverse 
+compressive strength as a function of strain rate.  If the 
+ﬁrst strain rate value in the curve is negative, it  is as- 
+sumed that all strain rate values are given as a na tural 
+logarithm of the strain rate. 
+SYZ Shear strength, |u1D44F /u1D450-plane ( solid elements only ):  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- SYZ) which deﬁnes the shear 
+strength as a function of strain rate.  If the ﬁrst  strain 
+rate value in the curve is negative, it is assumed that all 
+strain rate values are given as a natural logarithm  of 
+the strain rate. 
+SZX Shear strength, /u1D450|u1D44∆ -plane ( solid elements only ):  
+GT.0.0: Constant value  *.   
+ c)  6 anisotropic constants when |u1D44∆|twoCst= 1 
+d)  1 parameter when |u1D44∆|threeCst= 1 
+e)  9 strength parameters when |u1D44∆|fourCst= 1 
+The /u1D45E|u1D4J6Cst|u1D4J7Cst  terms are the ﬁrst and third rows of a rotation ma trix for the rotation 
+from a co-rotational element’s system and the |u1D44∆-|u1D44F-/u1D450 material directions.  The /u1D450|u1D4J6Cst|u1D4J7Cst  
+terms are the upper triangular terms of the symmetr ic stiﬀness matrix, /u1D450|oneCst|oneCst , /u1D450|oneCst|twoCst , 
+/u1D450|oneCst|threeCst , /u1D450|oneCst|fourCst , /u1D450|oneCst|fiveCst , /u1D450|oneCst|sixCst , /u1D450|twoCst|twoCst , /u1D450|twoCst|threeCst , /u1D450|twoCst|fourCst , /u1D450|twoCst|fiveCst , /u1D450|twoCst|sixCst , /u1D450|threeCst|threeCst , /u1D450|threeCst|fourCst , /u1D450|threeCst|fiveCst , /u1D450|threeCst|sixCst , /u1D450|fourCst|fourCst , /u1D450|fourCst|fiveCst , /u1D450|fourCst|sixCst , /u1D450|fiveCst|fiveCst , /u1D450|fiveCst|sixCst , and /u1D450|sixCst|sixCst . 
+2.  Description of IHIS (Shell Elements).   Several of this material’s parameters 
+may be overwritten on an element-by-element basis t hrough history variables 
+using the *INITIAL_STRESS_SHELL keyword.  Bitwise ( binary) expansion of 
+IHIS determines which material properties are to be  read: 
+I H IS = |u1D44∆|fourCst× 16 + |u1D44∆|threeCst×8+ |u1D44∆|twoCst× 4 + |u1D44∆|oneCst× 2 + |u1D44∆|zeroCst, 
+where each |u1D44∆|u1D4J6Cst is a binary ﬂag set to either 1 or 0.  The |u1D44∆|u1D4J6Cst are interpreted accord- 
+ing to the following table. 
+ 
+Flag Description Variables # 
+|u1D44∆|zeroCst Material directions /u1D45E|oneCst, /u1D45E|twoCst 2 
+|u1D44∆|oneCst Anisotropic stiﬀness Cij  21 
+|u1D44∆|twoCst Anisotropic constants |u1D4JF|zeroCst|zeroCst , |u1D4JF|fourCst|fiveCst , |u1D4JF/nine.st |zeroCst  3 
+|u1D44∆|threeCst Stress-strain curve LCSS 1 
+|u1D44∆|fourCst Strength limits XT, XC, YT, YC, SXY 5 
+The NHISV ﬁeld on *INITIAL_STRESS_SHELL must be set  equal to the sum of 
+the number of variables to be read in, which depend s on IHIS (and the |u1D44∆|u1D4J6Cst): 
+N H IS V = 2|u1D44∆|zeroCst+ 21|u1D44∆|oneCst+ 3|u1D44∆|twoCst+ |u1D44∆|threeCst+ 5|u1D44∆|fourCst. 
+Then, in the following order, *INITIAL_STRESS_SHELL  processes the history 
+variables, HISV i, as: 
+a)  2 material direction parameters when |u1D44∆|zeroCst= 1 
+b)  21 anisotropic stiﬀness parameters when |u1D44∆|oneCst= 1 
+c)  3 anisotropic constants when |u1D44∆|twoCst= 1 
+d)  1 parameter when |u1D44∆|threeCst= 1 
+e)  5 strength parameters when |u1D44∆|fourCst= 1 *.   
+ (FF12, FF23 and FF31 are not used in this model).  The model is based on the 
+HILL criterion which can be written as 
+(|u1D43A +/u1D4:B)|u1D7≠∆|u1D44∆Cst|u1D44∆Cst |twoCst+ (|u1D439 +/u1D4:B)|u1D7≠∆|u1D44FCst|u1D44FCst |twoCst+ (|u1D439 + |u1D43A)|u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |twoCst− 2/u1D4:B|u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D7≠∆|u1D44FCst|u1D44FCst 
+−2|u1D439|u1D7≠∆|u1D44FCst|u1D44FCst |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst − 2|u1D43A|u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |u1D7≠∆|u1D44∆Cst|u1D44∆Cst 2/u1D441|u1D7≠∆|u1D44∆Cst|u1D44FCst |twoCst+ 2/u1D4:F|u1D7≠∆|u1D44FCst|u1D4J≠Cst |twoCst+ 2|u1D44≠|u1D7≠∆|u1D4J≠Cst|u1D44∆Cst |twoCst< 1 
+for the 3-dimensional case.  The constants /u1D4:B, |u1D439, |u1D43A, /u1D441, /u1D4:F, and |u1D44≠ can be ex- 
+pressed in terms of the strength limits (which then  becomes the TSAI-HILL 
+criterion) as 
+|u1D43A +/u1D4:B=1
+/u1D44B|u1D4J6Cst|twoCst2/u1D441=1
+SX Y |twoCst/u1D4:B= 0.5 × |parenleftCv61
+/u1D44B|u1D4J6Cst|twoCst+1
+/u1D44C|u1D4J6Cst|twoCst−1
+|u1D44D|u1D4J6Cst|twoCst|parenriµhtCv6
+|u1D439 +/u1D4:B=1
+/u1D44C|u1D4J6Cst|twoCst2/u1D4:F=1
+S YZ |twoCst|u1D439 = 0.5 × |parenleftCv61
+/u1D44C|u1D4J6Cst|twoCst+1
+|u1D44D|u1D4J6Cst|twoCst−1
+/u1D44B|u1D4J6Cst|twoCst|parenriµhtCv6
+|u1D439 + |u1D43A =1
+|u1D44D|u1D4J6Cst|twoCst2|u1D44≠ =1
+S Z X |twoCst|u1D43A = 0.5 × |parenleftCv61
+/u1D44B|u1D4J6Cst|twoCst+1
+|u1D44D|u1D4J6Cst|twoCst−1
+/u1D44C|u1D4J6Cst|twoCst|parenriµhtCv6 
+where the current stress state deﬁnes whether the c ompressive or the tensile 
+strength limit will enter into the equation: 
+/u1D44B|u1D4J6Cst= |<raceleftCvJXT    if   |u1D7≠∆|u1D44∆Cst|u1D44∆Cst > 0
+XC    if   |u1D7≠∆|u1D44∆Cst|u1D44∆Cst < 0
+/u1D44C|u1D4J6Cst= |<raceleftCvJY T    if   |u1D7≠∆|u1D44FCst|u1D44FCst > 0
+Y C    if   |u1D7≠∆|u1D44FCst|u1D44FCst < 0
+|u1D44D|u1D4J6Cst= |<raceleftCvJZ T    if   |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst > 0
+Z C    if   |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst < 0 
+For the 2-dimensional case of plane stress (shell e lements) the TSAI-HILL crite- 
+rion reduces to: 
+(|u1D43A +/u1D4:B)|u1D7≠∆|u1D44∆Cst|u1D44∆Cst |twoCst+ (|u1D439 +/u1D4:B)|u1D7≠∆|u1D44FCst|u1D44FCst |twoCst− 2/u1D4:B|u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D7≠∆|u1D44FCst|u1D44FCst + 2/u1D441|u1D7≠∆|u1D44∆Cst|u1D44FCst |twoCst< 1 
+with 
+|u1D43A +/u1D4:B=1
+/u1D44B|u1D4J6Cst|twoCst
+|u1D439 +/u1D4:B=1
+/u1D44C|u1D4J6Cst|twoCst
+/u1D4:B= 0.5 ×1
+/u1D44B|u1D4J6Cst|twoCst
+2/u1D441=1
+SX Y |twoCst 
+If these conditions are violated, then the stress t ensor will be reduced to zero 
+over NCFAIL time steps and the element will be erod ed.  A small value for 
+NCFAIL (< 50) is recommended to avoid unphysical be havior; the default is 
+10. The default values for the strengths XT, XC, YT , YC, ZT, ZC, SXY, SYZ, and 
+SZX are 10 20 , meaning basically no limits. *.   
+ and matrix, the ﬁber volume fraction, and the ﬁber aspect ratio.  Two diﬀerent methods 
+may be used for this process: the Halpin-Tsai and M ori-Tanaka [ 2,3].  Next, an 
+orientation averaging is carried out to get the /u1D450|u1D4J6Cst|u1D4J7Cst  for the non-aligned short ﬁber 
+reinforced composite from the Moldﬂow simulation re sults and the user-deﬁned (UD) 
+composite elastic properties computed in the ﬁrst s tep [ 1].  Two methods, linear and 
+quadratic, are implemented for the orientation aver aging process as well as two hybrid 
+methods based on the linear and quadratic methods.  The anisotropic elasticity tensor is 
+calculated at each integration point for the LS-DYN A structural analysis mesh and is 
+written out in an *INITIAL_STRESS_SHELL card.   
+ 
+The procedure for creating the LS-DYNA keyword ﬁle from the Moldﬂow results are as 
+follows: 
+1.  Click on Misc.  → Moldﬂow  in the top toolbar to open the Moldﬂow conversion 
+window.  Figure M157-1  shows this window. 
+2.  Click the Browse  button under Dyna Mesh File  to import the part that requires 
+the Moldﬂow results. 
+3.  Import the udm  and xml  ﬁles under the Moldﬂow Result Files . 
+4.  Change the Material Properties  as needed.  The meaning of each material 
+property listed in LS-PrePost is described in the f ollowing table. 
+ 
+Name Description 
+Ef Young’s modulus of ﬁber 
+Nuf Poisson ratio of ﬁber 
+Em Young’s Modulus of matrix 
+Num Poisson ratio of matrix 
+Vf volume fraction of ﬁber 
+Ratio aspect ratio of short ﬁber 
+ 
+5.  Select the method for calculating the elastic prop erties from the methods 
+shown in the UD composite  dropdown menu. 
+6.  Select the averaging method from the Averaging  dropdown menu.  
+7.  Input the number of through-thickness integration points per element in the 
+Target IPs .  The results will be output for each integration point.  LS-PrePost 
+will automatically select the location of the integ ration points based on the 
+number input. *

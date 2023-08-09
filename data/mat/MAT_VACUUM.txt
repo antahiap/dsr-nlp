@@ -1,0 +1,19 @@
+ ....................................... ................................................... .............................. 2-925  TABLE OF CONTENTS   
+0-6 (TABLE OF CONTENTS) LS-DYNA R13 *.  [0,8A] {0} 
+ *.  *.   *.   
+This is Material Type 140.  This model is a dummy m aterial representing a vacuum in a 
+multi-material Euler/ALE model.  Instead of using E LFORM = 12 (under *SECTION_-
+SOLID), it is better to use ELFORM = 11 with the vo id material deﬁned as the vacuum 
+material. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RHO       
+Type A F       
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RHO Estimated material density.  This is used only as a stability check.  
+Remarks: 
+The vacuum density is estimated.  It should be smal l relative compared to air in the 
+model (possibly at least order of magnitude 10 3 to 10 6 lighter than air). *.  or *

@@ -1,0 +1,112 @@
+: *. _LUND: *.  
+*. _LUND 
+*.   *.   
+LS-DYNA R13 2-175 (MAT)  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G0 Basic shear modulus.  See Remark 2 . 
+SIGO |u1D7≠∆/u1D45C.st; see Remark 3  below.  
+BETA |u1D6FD; see Remark 3  below. 
+N |u1D4JB; see Remark 3  below. 
+GAMA |u1D6F∆|u1D4J6Cst, initial plastic strain;  see Remark 3  below. 
+SIGM |u1D7≠∆|u1D4JACst; see Remark 3 . 
+B |u1D44F; see Remark 2 . 
+BP |u1D44F|minuteCst; see Remark 3 .  
+H ℎ; see Remarks 2  and 3. 
+F |u1D4J3; see Remark 3 . 
+A Atomic weight (if = 0.0, RP must be deﬁned).  See  Remark 2 . 
+TMO |u1D447mo ; see Remark 2 . 
+GAMO |u1D6F∆/u1D45C.st; see Remark 2 . 
+SA |u1D44∆; see Remark 2 . 
+PC Pressure cutoﬀ (default = -10 30 ).  See Remark 5 . 
+SPALL Spall type (see Remark 5 ): 
+EQ.0.0: Default, set to “2.0” 
+EQ.1.0: |u1D4JD ≥ PC 
+EQ.2.0: If |u1D7≠∆max  ≥ -PC, element spalls, and tension, |u1D4JD < 0, is 
+never allowed. 
+EQ.3.0: If |u1D4JD < PC element spalls, and tension, |u1D4JD < 0, is never 
+allowed. 
+RP |u1D44J|minuteCst.  If |u1D44J|minuteCst≠0.0, |u1D434 is not deﬁned.  See Remark 2 . *.   
+LS-DYNA R13 2-177 (MAT) |u1D44J|minuteCst=|u1D44J|u1D7≠+ 
+|u1D434 , 
+where |u1D44J is the gas constant and |u1D434 is the atomic weight.  If |u1D44J|minuteCst is not deﬁned, LS-
+DYNA computes it with |u1D44J in the cm-gram-microsecond system of units. 
+3.  Yield Strength.   The yield strength, |u1D7≠∆|u1D466Cst, is given by: 
+|u1D7≠∆|u1D466Cst= |u1D7≠∆/u1D45C.st|minuteCst|<racketleftCvJ1 + |u1D44F′|u1D4JD|u1D449|oneCst|threeCst/fraction.v2−ℎ|parenleftCvJ|u1D438|u1D4J6Cst− |u1D438|u1D4J≠Cst
+3|u1D44J′− 300|parenriµhtCvJ |<racketriµhtCvJ|u1D4J2−/u1D45:.st|u1D438Cst|u1D4J6Csts
+|u1D438Cst/u1D45A.sts−|u1D438Cst |u1D4J6Csts 
+if |u1D438|u1D4JA exceeds |u1D438|u1D4J6 (see Remark 2).  Here, |u1D7≠∆/u1D45C.st|minuteCst is: 
+|u1D7≠∆/u1D45C.st|minuteCst= |u1D7≠∆/u1D45C.st|<racketleftCv11 + |u1D6FD|parenleftCv1|u1D6F∆|u1D4J6Cst+ |u1D7≠≠̅|u1D4JDCst|parenriµhtCv1|<racketriµhtCv1|u1D4JBCst 
+where |u1D7≠∆/u1D45C.st is the initial yield stress and  |u1D6F∆|u1D4J6Cst is the initial plastic strain.  If the work-
+hardened yield stress |u1D7≠∆/u1D45C.st|minuteCst exceeds |u1D4JA, |u1D7≠∆/u1D45C.st|minuteCst
+ is set equal to |u1D4JA.  After the materials 
+melt, |u1D7≠∆|u1D466 and |u1D43A are set to one half their initial value. 
+4.  Cold Compression Energy.   If the coeﬃcients EC0, …, EC9 are not deﬁned 
+above, LS-DYNA will ﬁt the cold compression energy to a ten term polynomial 
+expansion either as a function of |u1D7≠7 or |u1D7≠2 depending on ﬁeld FLAG as: 
+|u1D438|u1D4J≠Cst|parenleftCv2|u1D7≠2|u1D4J6Cst|parenriµhtCv2 = |summationCv1 EC |u1D4J6Cst|u1D7≠2|u1D4J6Cst/nine.st
+|u1D4J6Cst=|zeroCst
+|u1D438|u1D4J≠Cst|parenleftCv2|u1D7≠7|u1D4J6Cst|parenriµhtCv2 = |summationCv1 EC |u1D4J6Cst|u1D7≠7|u1D4J6Cst/nine.st
+|u1D4J6Cst=|zeroCst 
+where EC |u1D4J6Cst is the ith  coeﬃcient and: 
+|u1D7≠2 =|u1D7≠+
+|u1D7≠+/u1D45C.st
+|u1D7≠7 =|u1D7≠+
+|u1D7≠+/u1D45C.st− 1 
+A linear least squares method is used to perform th e ﬁt. 
+5.  Spall Models.   A choice of three spall models is oﬀered to repre sent material 
+splitting, cracking, and failure under tensile load s.   
+a)  Pressure Limit Model.   The pressure limit model, SPALL = 1, limits the h y- 
+drostatic tension to the speciﬁed value, |u1D4JDcut .  If a pressure more tensile 
+than this limit is calculated, the pressure is rese t to |u1D4JDcut .  This option is not 
+strictly a spall model, since the deviatoric stress es are unaﬀected by the 
+pressure reaching the tensile cutoﬀ, and the pressu re cutoﬀ value, |u1D4JDcut , 
+remains unchanged throughout the analysis.   
+b)  Maximum Principal Stress Spall Model.   The maximum principal stress spall 
+model, SPALL = 2, detects spall if the maximum prin cipal stress, |u1D7≠∆max , ex- 
+ceeds the limiting value - |u1D4JDcut .  Note that the negative sign is required be- *. _LUND  
+LS-DYNA R13 2-179 (MAT) *. _LUND 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO G0 SIGO BETA N GAMA SIGM 
+Card 2.   This card is required. 
+B BP H F A TMO GAMO SA 
+Card 3.   This card is required. 
+PC SPALL RP FLAG MMN MMX ECO EC1 
+Card 4.   This card is required. 
+EC2 EC3 EC4 EC5 EC6 EC7 EC8 EC9 
+Card 5.   This card is required. 
+UK C1 C2 YP YA YM   
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO G0 SIGO BETA N GAMA SIGM 
+Type A F F F F F F F 
+ *. . 
+BETA |u1D6FD; see Remark 3  of *. . 
+GAMA |u1D6F∆|u1D4J6Cst, initial plastic strain;  see Remark 3  of *. .  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable B BP H F A TMO GAMO SA 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+B |u1D44F; see Remark 2  of *. . 
+H ℎ; see Remarks 2  and 3 of *. . 
+A Atomic weight (if = 0.0, RP must be deﬁned).  See  Remark 2  of 
+*. . 
+GAMO |u1D6F∆/u1D45C.st; see Remark 2  of *. . 
+ *. _LUND  
+LS-DYNA R13 2-181 (MAT)  Card 3 1 2 3 4 5 6 7 8 
+Variable PC SPALL RP FLAG MMN MMX ECO EC1 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable EC2 EC3 EC4 EC5 EC6 EC7 EC8 EC9 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+PC Pressure cutoﬀ ( |u1D4JDcut ) or - |u1D7≠∆/u1D45:.st (default = -10 30 ) 
+SPALL Spall type (see Remark 5  of *. . 
+FLAG Flag for cold compression energy ﬁt (see Remarks 2  and 4 of 
+*. . *.  material model (see Remark 3  of *

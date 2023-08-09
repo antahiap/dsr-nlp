@@ -1,0 +1,38 @@
+: *.  *MAT  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+K /u1D458 equals half the exponent |u1D4JA for the yield criterion 
+A1 Yld2003 parameter, |u1D44∆|oneCst 
+A2 Yld2003 parameter, |u1D44∆|twoCst 
+A3 Yld2003 parameter, |u1D44∆|threeCst 
+A4 Yld2003 parameter, |u1D44∆|fourCst 
+A5 Yld2003 parameter, |u1D44∆|fiveCst 
+A6 Yld2003 parameter, |u1D44∆|sixCst 
+A7 Yld2003 parameter, |u1D44∆|sevenCst 
+A8 Yld2003 parameter, |u1D44∆/eight.st 
+S Dynamic strain aging parameter, |u1D446 
+H Dynamic strain aging parameter, /u1D4:B 
+OMEGA Dynamic strain aging parameter, Ω 
+TD Dynamic strain aging parameter, |u1D461/u1D451.st 
+ALPHA Dynamic strain aging parameter, |u1D6F+ 
+EPS0 Dynamic strain aging parameter, |u1D7≠≠̇|zeroCst 
+AOPT Material axes option (see *.   *.   
+ |u1D7≠∆|u1D463Cst= |parenleftCv1|u1D7≠≠̇|u1D4JDCst|parenriµhtCv1 = |u1D46≠ ln |parenleftCv61 +|u1D7≠≠̇|u1D4JDCst
+|u1D7≠≠̇|zeroCst|parenriµhtCv6  , 
+where |u1D46≠ represents the instantaneous strain rate sensitivi ty (SRS) and |u1D7≠≠̇|zeroCst is a reference 
+strain rate.  In this model the yield strength, inc luding the contribution from dynamic 
+strain aging (DSA) is deﬁned as 
+|u1D7≠∆/u1D44C.st(|u1D461|u1D44∆Cst) = |u1D7≠∆|zeroCst+ S H |<racketleftCv61 − exp /˙raceleft.v6− |parenleftCvJ|u1D461|u1D44∆Cst
+|u1D461/u1D451.st|parenriµhtCvJ/u1D6FC.st
+/˙raceright.v6|<racketriµhtCv6 
+where |u1D7≠∆|zeroCstis the yield strength for vanishing average waiting  time, |u1D461|u1D44∆Cst (meaning at high 
+strain rates). /u1D4:B, |u1D6F+, and |u1D461/u1D451.st are material constants linked to dynamic strain ag ing.  It is 
+noteworthy that |u1D7≠∆/u1D44C.st is an increasing function of |u1D461|u1D44∆Cst. The average waiting time is deﬁned 
+by the evolution equation 
+|u1D461̇|u1D44∆Cst= 1 −|u1D461|u1D44∆Cst
+|u1D461|u1D44∆Cst/co⋯⋯a.st|u1D46≠Cst|u1D46≠Cst   , 
+where the quasi-steady waiting time |u1D461|u1D44∆Cst/co⋯⋯a.st|u1D46≠Cst|u1D46≠Cst  is given as 
+|u1D461|u1D44∆Cst/co⋯⋯a.st|u1D46≠Cst|u1D46≠Cst =Ω
+|u1D7≠≠̇|u1D4JDCst  . 
+Here Ω is the strain produced by all mobile dislocations moving to the next obstacle on 
+their path. *

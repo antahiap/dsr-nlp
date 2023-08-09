@@ -1,0 +1,97 @@
+: *.  
+*.   
+LS-DYNA R13 2-213 (MAT) *.   *.   
+LS-DYNA R13 2-215 (MAT)  VARIABLE   DESCRIPTION  
+corresponds to the global system for MADY MO 5.4 / 
+CAL3D. 
+EQ.2: generate a mesh for the ellipsoids and planes int ernally 
+in LS-DYNA. 
+M MADYMO3D 5.4 coupling ﬂag, |u1D4JA: 
+EQ.0: use normal LS-DYNA rigid body updates, 
+EQ.m: this rigid body corresponds to the MADY MO rigid body 
+number, |u1D4JA.  Rigid body updates are performed by 
+MADYMO. 
+ALIAS VDA surface alias name; see Appendix L. 
+RE MADYMO 6.0.1 External Reference Number 
+ 
+Global Constraints Card.  This card is included if CMO = 1.0. 
+ Card 2a 1 2 3 4 5 6 7 8 
+Variable CMO CON1 CON2      
+Type F I I      
+Default 0.0 0 0      
+ 
+ VARIABLE   DESCRIPTION  
+CMO Center of mass constraint option, CMO: 
+EQ.+1.0: constraints applied in global directions 
+EQ.0.0: no constraints 
+EQ.-1.0: constraints applied in local directions (SPC 
+constraint) 
+CON1 Global translational constraint: 
+EQ.0: no constraints 
+EQ.1: constrained |u1D46J displacement 
+EQ.2: constrained |u1D466 displacement *.   
+LS-DYNA R13 2-217 (MAT) Local Constraints Card.   This card is included when CMO = -1.0. 
+ Card 2c 1 2 3 4 5 6 7 8 
+Variable CMO CON1 CON2      
+Type F I I      
+Default 0.0 0 0      
+ 
+ VARIABLE   DESCRIPTION  
+CMO Center of mass constraint option, CMO: 
+EQ.+1.0: constraints applied in global directions 
+EQ.0.0: no constraints 
+EQ.-1.0: constraints applied in local directions (SPC 
+constraint) 
+CON1 Local coordinate system ID.  See *DEFINE_COORD I-
+NATE_ OPTION .  This coordinate system is ﬁxed in time. 
+CON2 Local (SPC) constraint: 
+EQ.000000: no constraint 
+EQ.100000: constrained |u1D46J translation 
+EQ.010000: constrained |u1D466 translation 
+EQ.001000: constrained /u1D46̅ translation 
+EQ.000100: constrained |u1D46J rotation 
+EQ.000010: constrained |u1D466 rotation 
+EQ.000001: constrained /u1D46̅ rotation 
+Any combination of local constraints can be speciﬁ ed by adding 
+the number 1 into the corresponding column. 
+ *.   
+LS-DYNA R13 2-219 (MAT) All elements which reference a given part ID corres ponding to the rigid mate- 
+rial should be contiguous, but this is not a requir ement.  If two disjoint groups 
+of elements on opposite sides of a model are modele d as rigid, separate part 
+IDs should be created for each of the contiguous el ement groups if each group 
+is to move independently.  This requirement arises from the fact that LS-DYNA 
+internally computes the six rigid body degrees-of-f reedom for each rigid body 
+(rigid material or set of merged materials), and if  disjoint groups of rigid ele- 
+ments use the same part ID, the disjoint groups wil l move together as one rigid 
+body. 
+3.  Inertial Properties.   Inertial properties for rigid materials may be de ﬁned in 
+either of two ways.  By default, the inertial prope rties are calculated from the 
+geometry of the constituent elements of the rigid m aterial and the density spec- 
+iﬁed for the part ID.  Alternatively, the inertial properties and initial velocities 
+for a rigid body may be directly deﬁned, and this o verrides data calculated 
+from the material property deﬁnition and nodal init ial velocity deﬁnitions. 
+4.  Contact and Material Constants.  Young's modulus, E, and Poisson's ratio, υ, 
+are used for determining sliding interface paramete rs if the rigid body interacts 
+in a contact deﬁnition.  Realistic values for these  constants should be deﬁned 
+since unrealistic values may contribute to numerica l problems with contact. 
+5.  Constraints.   Constraint directions for rigid materials (CMO eq ual to +1 or -1) 
+are ﬁxed, that is, not updated, with time.  To impo se a constraint on a rigid 
+body such that the constraint direction is updated as the rigid body rotates, use 
+*BOUNDARY_PRESCRIBED_MOTION_RIGID_LOCAL. 
+We strongly advise you not to apply nodal constrain ts, for instance, by 
+*BOUNDARY_SPC_ OPTION , to nodes of a rigid body as doing so may com- 
+promise the intended constraints in the case of an explicit simulation.  Such 
+SPCs will be skipped in an implicit simulation and a warning issued.   
+If the intended constraints are not with respect to  the calculated center-of-mass 
+of the rigid body, *CONSTRAINED_JOINT_ OPTION  may often be used to 
+obtain the desired eﬀect.  This approach typically entails deﬁning a second 
+rigid body which is fully constrained and then deﬁn ing a joint between the two 
+rigid bodies.  Another alternative for deﬁning rigi d body constraints that are 
+not with respect to the calculated center-of-mass o f the rigid body is to manual- 
+ly specify the initial center-of-mass location usin g *PART_INERTIA.  When 
+using *PART_INERTIA, a full set of mass properties must be speciﬁed.  Note 
+that the dynamic behavior of the rigid body, howeve r, is aﬀected by its mass 
+properties. 
+6.  Coupling with MADYMO.   Only basic coupling is available for coupling wit h 
+MADYMO 5.4.1. The coupling ﬂags (N and M) must matc h with SYSTEM and *. , a 
+*

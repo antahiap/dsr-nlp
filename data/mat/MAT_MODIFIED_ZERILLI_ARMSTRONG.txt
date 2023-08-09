@@ -1,0 +1,21 @@
+ ................... ................................................... ......... 2-460  
+*.  [0,2,3a, 3c,5,8B] {6} 
+ *.  *.   
+ *.   *.   
+ where |u1D7≠≠|u1D4JDCst is the eﬀective plastic strain and |u1D7≠≠̇∗ is the eﬀective plastic strain 
+rate deﬁned as 
+|u1D7≠≠̇∗=|u1D7≠≠̇
+|u1D7≠≠̇|zeroCst  . 
+|u1D7≠≠̇|zeroCst = 1, 10 -3, 10 -6 for time units of seconds, milliseconds, and micro seconds, 
+respectively. 
+b)  For BCC metals ( |u1D4JB > 0), 
+|u1D7≠∆ = |u1D436|oneCst+ |u1D436|twoCst|u1D4J2|<racketleftCv1−/u1D4:6.st|threeCsts+/u1D4:6.st/four.sts/l.st|nCst|parenleftCv1|u1D7≠≠Csṫ∗|parenriµhtCv1|<racketriµhtCv1|u1D447Cst+ [|u1D436|fiveCst|parenleftCv1|u1D7≠≠|u1D4JDCst|parenriµhtCv1|u1D4JBCst+ |u1D436|sixCst]|<racketleftCvJ|u1D7≠7(|u1D447)
+|u1D7≠7(2 93)|<racketriµhtCvJ  , 
+where 
+|u1D7≠7(|u1D447)
+|u1D7≠7(2 93)= |u1D43J|oneCst+ |u1D43J|twoCst|u1D447 + |u1D43J|threeCst|u1D447|twoCst  . 
+2.  Heat Capacity.  The relationship between heat capacity (speciﬁc hea t) and 
+temperature may be characterized by a cubic polynom ial equation as follows: 
+|u1D436|u1D4JDCst= |u1D43A|oneCst+ |u1D43A|twoCst|u1D447 + |u1D43A|threeCst|u1D447|twoCst+ |u1D43A|fourCst|u1D447|threeCst 
+3.  Viscoplastic Formulation.   A fully viscoplastic formulation is optional.  An  
+additional cost is incurred but the improvement is results can be dramatic. *

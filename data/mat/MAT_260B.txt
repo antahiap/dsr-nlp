@@ -1,0 +1,180 @@
+: *.  
+*.   
+ *.   *.   
+  
+ VARIABLE   DESCRIPTION  
+G22, G33 Plastic ﬂow potential parameters, deﬁned by Lankfor d 
+parameters in rolling ( 0°), diagonal ( 45 °) and transverse ( 90 °) 
+directions; see Remark 1 . 
+LCIDS Load curve ID deﬁning stress as a function of  strain hardening 
+from a uniaxial tension test; it must be along the rolling direction.  
+Also see Remark 2 . 
+LCIDV Load curve ID deﬁning stress scale factors as  a function of strain 
+rates (see Figure M260B-1  middle) as determined from 
+experiments.  Strain rates are stored in history va riable #5.  Strain 
+rate scale factors are stored in history variable # 6.  To output these 
+history variables to d3plot , set NEIPS to at least “6” in *DATA-
+BASE_EXTENT_BINARY.  Also see Remark 2  
+LCIDT Load curve ID deﬁning stress scale factors as a fun ction of 
+temperature in Kelvin (see Figure M260B-1  bottom) as 
+determine d from experiments.  Temperatures are stored in 
+history variable #4.  Temperature scale factors are  stored in 
+history variable #7.  To output these history varia bles to d3plot , 
+set NEIPS to at least “7” in *DATABASE_EXTENT_BINA RY.  
+Also see Remark 2 . 
+LFLD Load curve ID deﬁning a traditional Forming Limit D iagram for 
+linear strain paths 
+LFRAC Load curve ID deﬁning a fracture limit curve.  Leav e this ﬁeld 
+empty if ﬁelds A, B0, GAM MA, C, and N are deﬁned.  However, 
+if this ﬁeld is deﬁned, ﬁelds A, B0, GAM MA, C, and N will be 
+ignored even if they are deﬁned. 
+W0 Neck (FLD failure) width which typically is the blank thickness 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable A B0 GAMMA C N SCALE SIZE0  
+Type F F F F F F F  
+Default none none none none none 1.0 none  *.   
+  VARIABLE   DESCRIPTION  
+ETA Taylor-Quinney coeﬃcient, |u1D7≠2|u1D4J8Cst; see Remark 2 . 
+CP Heat capacity, |u1D436|u1D4JDCst; see Remark 2 . 
+TINI Initial temperature; see Remark 2 . 
+DEPS0 |u1D7≠≠̇|u1D4J6Cst|u1D461Cst /|u1D7≠≠̇|zeroCst; see Remark 2 . 
+DEPSAD |u1D7≠≠̇|u1D44∆Cst; see Remark 2 . 
+ 
+XUE Card.   This card is included if the XUE keyword option i s used. 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable EF0 PLIM Q GAMA M    
+Type F F F F F    
+Default none none none none none    
+ 
+ VARIABLE   DESCRIPTION  
+EF0, PLIM, 
+Q, GAMA, 
+M Material parameters for the option XUE.  The parame ter /u1D458 in the 
+original paper is assumed to be 1.0.  For details, refer to Xue, L. 
+and Wierzbicki, T.’s 2009 paper “ Numerical simulation of fracture 
+mode transition in ductile plates” in the International J ournal of 
+Solids and Structures [4]. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable AOPT        
+Type F        
+Default none        
+ *.   
+ Remarks: 
+1.  Non-associated Flow Rule.  Referring to [ 1] and [ 2], Hill’s 1948 quadratic 
+yield function is written as: 
+|u1D4J3 (/u1D6D4,/u1D458) = |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt−/u1D458= 0  , 
+where /u1D6D4 is the Cauchy stress tensor and |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is the equivalent stress, deﬁned by: 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt=/radical.v1(/u1D40F /u1D6D4 )∙/u1D6D4  . 
+/u1D40F is a symmetric positive-deﬁnite matrix deﬁned thro ugh three independent 
+parameters, |u1D443|oneCst|twoCst , |u1D443|twoCst|twoCst , and |u1D443|threeCst|threeCst : 
+/u1D40F=
+⎣⎢⎡1 P|oneCst|twoCst 0
+P|oneCst|twoCst P|twoCst|twoCst 0
+0 0 P|threeCst|threeCst ⎦⎥⎤  . 
+The ﬂow rule, which deﬁnes the incremental plastic strain tensor, is written as 
+follows: 
+|u1D4J1/u1D6C6|u1D4JDCst= |u1D4J1|u1D6FF |u1D71J|u1D4J4(/u1D6D4)
+|u1D71J/u1D6D4  , 
+where |u1D4J1|u1D6FF  is a scalar plastic multiplier.  The plastic poten tial function |u1D4J4(/u1D6D4) can 
+be deﬁned as a quadratic function in stress space: 
+|u1D4J4(/u1D6D4) =/radical.v1(/u1D406 /u1D6D4 )∙/u1D6D4 
+with, 
+/u1D406=
+⎣⎢⎡1 |u1D43A|oneCst|twoCst 0
+G|oneCst|twoCst G|twoCst|twoCst 0
+0 0 G|threeCst|threeCst ⎦⎥⎤  . 
+When /u1D40F/u1D406, the ﬂow rule is non-associated.  The associated ﬂo w rule is recov- 
+ered if  /u1D40F=/u1D406. For example, /u1D40F can represent an isotropic von-Mises yield sur- 
+face by setting |u1D443|oneCst|oneCst = |u1D443|twoCst|twoCst = 1.0 , |u1D443|oneCst|twoCst = −0.5 , and |u1D443|threeCst|threeCst = 3.0 .  /u1D406 can represent an 
+orthotropic plastic ﬂow potential by setting: 
+|u1D43A|oneCst|twoCst  = −|u1D4JF|zeroCst
+1 + |u1D4JF|zeroCst  ,
+|u1D43A|twoCst|twoCst  =|u1D4JF|zeroCst(1 + |u1D4JF/nine.st |zeroCst )
+|u1D4JF/nine.st |zeroCst (1 + |u1D4JF|zeroCst)  ,
+|u1D43A|threeCst|threeCst  =(1 + 2|u1D4JF|fourCst|fiveCst )(|u1D4JF|zeroCst+ |u1D4JF/nine.st |zeroCst )
+|u1D4JF/nine.st |zeroCst (1 + |u1D4JF|zeroCst)  . 
+Here |u1D4JF|zeroCst, |u1D4JF|fourCst|fiveCst , and |u1D4JF/nine.st |zeroCst  are the Lankford coeﬃcients in the rolling, diagon al and 
+transverse directions, respectively.  Experiments h ave shown on the stress lev- 
+el, some AHSS (Advanced High Strength Steel), e.g.,  DP590, and TRIP780 show 
+strong directional dependency for the |u1D4JF-values, while nearly the same stress-
+strain curves have been measured in all directions.   The directional dependen- 
+cy of |u1D4JF-values suggests planar anisotropy while the materi al response for the *.   
+ |u1D4J1|u1D447 = |u1D714/˙racketleft.v2|u1D7≠≠̇|u1D4JDCst|u1D4J9Cst /˙racketright.v2|u1D7≠2|u1D4J8Cst
+|u1D7≠+|u1D436|u1D4JDCst|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4J1|u1D7≠≠̅|u1D4JDCst|u1D4J9Cst   . 
+where |u1D7≠2|u1D4J8Cst (ETA) is the Taylor-Quinney coeﬃcient; |u1D7≠+ (R0) is the mass density; |u1D436|u1D4JDCst 
+(CP) is the heat capacity; and 
+|u1D714/˙racketleft.v2|u1D7≠≠̇|u1D4JDCst|u1D4J9Cst /˙racketright.v2=
+⎩|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎧ 0
+|parenleftCv2|u1D7≠≠̇|u1D4JDCst|u1D4J9Cst − |u1D7≠≠̇|u1D4J6Cst|u1D461Cst |parenriµhtCv2|twoCst|parenleftCv23|u1D7≠≠̇|u1D44∆Cst− 2|u1D7≠≠̇|u1D4JDCst|u1D4J9Cst − |u1D7≠≠̇|u1D4J6Cst|u1D461Cst |parenriµhtCv2
+(|u1D7≠≠̇|u1D44∆Cst− |u1D7≠≠̇|u1D4J6Cst|u1D461Cst )|threeCst
+1|u1D4J3 /u1D45C|u1D4JF |u1D7≠≠̇|u1D4JDCst|u1D4J9Cst < |u1D7≠≠̇|u1D4J6Cst|u1D461Cst 
+|u1D4J3 /u1D45C|u1D4JF |u1D7≠≠̇|u1D4J6Cst|u1D461Cst ≤  |u1D7≠≠̇|u1D4JDCst|u1D4J9Cst ≤ |u1D7≠≠̇|u1D44∆Cst
+|u1D4J3 /u1D45C|u1D4JF |u1D7≠≠̇|u1D44∆Cst< |u1D7≠≠̇|u1D4JDCst|u1D4J9Cst  
+Here |u1D7≠≠̇|u1D4J6Cst|u1D461Cst > 0 and |u1D7≠≠̇|u1D44∆Cst> |u1D7≠≠̇|u1D4J6Cst|u1D461Cst  deﬁne the limits of the respective domains of isot her- 
+mal and adiabatic conditions ( |u1D7≠≠̇|u1D44∆Cst = DEPSAD).  For simplicity, |u1D7≠≠̇|u1D4J6Cst|u1D461Cst = |u1D7≠≠̇|zeroCst×DEPS0. 
+As shown in a single shell element undergoing uniax ial stretching (see Fig- 
+ure M260B-1 ), the general eﬀect of LCIDV is to elevate the str ain hardening 
+behavior as the strain rate increases (curve “D” in  Figure M260B-2  top), while 
+the eﬀect of LCIDT is strain softening as the tempe rature rises (curve “C” in 
+Figure M260B-2  top).  Initially, due to the combined eﬀect of bot h LCIDV and 
+LCIDT strain hardening may occur before the tempera ture rises enough to 
+cause strain softening in the model (curve “E” in Figure M260B-2  top).  The 
+temperature and strain rates calculated for each el ement can be viewed with 
+history variables #4 and #5 (curves “C” and “D” in Figure M260B-2  bottom), 
+respectively, while the strain rate scale factors a nd temperature scale factors 
+can be viewed with history variable #6 and #7, resp ectively. 
+3.  Rate-dependent Hosford-Coulomb Fracture Initiation Model.   An 
+extension of the Hosford-Coulomb fracture initiatio n model is used to account 
+for the eﬀect of strain rate on ductile fracture.  The damage accumulation is 
+calculated through history variable #3.  When this history variable reaches 1.0, 
+fracture occurs at an equivalent plastic strain, |u1D7≠≠̅/u1D45:.st, that is, 
+/integral.v:|u1D4J1|u1D7≠≠̅|u1D4JDCst|u1D4J9Cst 
+|u1D7≠≠̅/u1D45:.st|u1D4JDCst|u1D4JFCst |<racketleftCv1|u1D7≠2,/u1D̅0:̅|<racketriµhtCv1|u1D7≠≠Cst/u1D45:.sts
+|zeroCst = 1  . 
+Here |u1D7≠≠̅/u1D45:.st|u1D4JDCst|u1D4JFCst , |u1D7≠2, and /u1D̅0:̅ are strain to fracture, stress triaxiality, and th e Lode parame- 
+ter, respectively. 
+The fracture parameters, A, B0, GAMMA, C, and N, ar e used in the following 
+equations as ( |u1D44∆,  |u1D44F|zeroCst, |u1D6F∆, /u1D450, |u1D4JB), respectively.  Strain to fracture for a proporti onal 
+load is given as: *.   
+ The following table lists variable names used in th is material model and corre- 
+sponding symbols in Xue’s 2009 paper [ 4], for the option XUE: 
+ 
+Variable  EF0 P22 P33 G12 G22    
+Symbol  |u1D7≠≠/u1D45:.st|zeroCst |u1D443lim  /u1D45E |u1D6F∆ |u1D4JA    
+5.  Additional History Variables.  The table below lists the extra history variables 
+associated with this material.  See NEIPS on the ma nual page for *DATA-
+BASE_EXTENT_BINARY. 
+History 
+Variable # Description 
+3 Damage accumulation.  Elements will be deleted if t his 
+variable reaches 1.0 for more than half of the thro ugh-
+thickness integration points. 
+4 Temperatures 
+5 Strain rates 
+6 Strain rate scale factors 
+7 Temperature scale factor 
+Keyword Example Input: 
+A sample material input card can be found below, wi th parameters from Mohr, D., et al. 
+(2010) and Roth, C.C. and Mohr, D. (2014). 
+ 
+*.   *.   
+  
+ Stress scale factor
+Strain rate (x103)0.5 1.0 1.51.2
+1.15
+1.1
+1.05
+1.0
+0.0 2.0 Stress scale factor
+Temperature (x103 kelvin)0.6 1.0 1.41.0
+0.8
+0.6
+0.2
+0.00.4
+0.4 0.8 1.2LCIDTLCIDVUnstrained
+ shellFy0=Fy0=
+Uni-axial stressXYZ
+Figure M260B-1.   Uniaxial stretching on a single shell element; Input cu rves 
+LCIDV and LCIDT. *

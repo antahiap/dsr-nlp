@@ -1,0 +1,35 @@
+: *.  
+*.   
+LS-DYNA R13 2-205 (MAT) *.   *.   
+LS-DYNA R13 2-207 (MAT) the ringing that may otherwise be introduced into t he system by the sudden fracture. 
+The number of steps for stress reduction is 20 by d efault (CVELO = 0.0) or it is 
+internally computed if CVELO > 0.0 is given, that i s: 
+|u1D4JBsteps = int |<racketleftCvJ/u1D4:F|u1D4J2Cst
+C V ELO × ∆|u1D461|<racketriµhtCvJ  , 
+where /u1D4:F|u1D4J2Cst is the characteristic element length and ∆|u1D461 is the time step size. 
+ 
+After a tensile fracture, the element will not supp ort tensile stress on the fracture plane, 
+but in compression will support both normal and she ar stresses.  The orientation of this 
+fracture surface is tracked throughout the deformat ion and is updated to properly 
+model ﬁnite deformation eﬀects.  If the maximum pri ncipal stress subsequently exceeds 
+the fracture stress in another direction, the eleme nt fails isotropically.  In this case the 
+element completely loses its ability to support any  shear stress or hydrostatic tension, 
+and only compressive hydrostatic stress states are possible.  Thus, once isotropic failure 
+has occurred, the material behaves like a ﬂuid. 
+ 
+This model is applicable to elastic or elastoplasti c materials under signiﬁcant tensile or 
+shear loading when fracture is expected.  Potential  applications include brittle materials 
+such as ceramics as well as porous materials such a s concrete in cases where pressure 
+hardening eﬀects are not signiﬁcant. 
+ 
+Crack propagation behavior to adjacent elements can  be controlled using parameter 
+SOFT for thin, shell-like structures (for example, only 2 or 3 solids over thickness).  
+Additionally, LS-DYNA must know where the plane or solid element midplane is at 
+each integration point for projection of crack plan e on this element midplane.  
+Therefore, element numbering must be as shown in Figure M17-1 . Currently, only solid 
+element type 1 is supported with that option. 8
+1
+2345
+67
+Figure M17-1.   Thin structure (2 elements over thickness) with crack s and 
+necessary element numbering. *

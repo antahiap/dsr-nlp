@@ -1,0 +1,76 @@
+ ............................... ................................................... ...................... 2-615  
+*.  [0,8B] {51} 
+ *.   *.   *.   
+This is  Material Type 96.  It is an anisotropic brittle dam age model designed primarily 
+for concrete though it can be applied to a wide var iety of brittle materials.   
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR TLIMIT SLIMIT FTOUGH SRETEN 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable VISC FRA_RF E_RF YS_RF EH_RF FS_RF SIGY  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young's modulus, |u1D438 
+PR Poisson's ratio, /u1D̅08 
+TLIMIT Tensile limit, |u1D4J3|u1D4JBCst 
+SLIMIT Shear limit, |u1D4J3|u1D46≠Cst 
+FTOUGH Fracture toughness, |u1D4J4|u1D4J≠Cst 
+SRETEN Shear retention, |u1D6FD 
+VISC Viscosity, |u1D7≠2 
+FRA_RF Fraction of reinforcement in section 
+E_RF Young's modulus of reinforcement 
+YS_RF Yield stress of reinforcement *.   
+  VARIABLE   DESCRIPTION  
+EH_RF Hardening modulus of reinforcement 
+FS_RF Failure strain (true) of reinforcement 
+SIGY Compressive yield stress, |u1D7≠∆|u1D466Cst 
+EQ.0: No compressive yield 
+Remarks: 
+A full description of the tensile and shear damage parts of this material model is given 
+in Govindjee, Kay and Simo [1994,1995].  This model  admits progressive degradation of 
+tensile and shear strengths across smeared cracks t hat are initiated under tensile 
+loadings.  Compressive failure is governed by a sim plistic J2 ﬂow correction that can be 
+disabled if not desired.  Damage is handled by trea ting the rank 4 elastic stiﬀness tensor 
+as an evolving internal variable for the material.  Softening induced mesh dependencies 
+are handled by a characteristic length method [Oliv er 1989]. 
+ 
+Description of properties: 
+1.  |u1D438 is the Young's modulus of the undamaged material a lso known as the virgin 
+modulus. 
+2.  /u1D̅08 is the Poisson's ratio of the undamaged material a lso known as the virgin 
+Poisson's ratio. 
+3.  |u1D4J3|u1D4JBCst is the initial principal tensile strength (stress)  of the material.  Once this 
+stress has been reached at a point in the body a sm eared crack is initiated there 
+with a normal that is co-linear with the 1 st  principal direction.  Once initiated, 
+the crack is ﬁxed at that location, though it will convect with the motion of the 
+body.  As the loading progresses the allowed tensil e traction normal to the 
+crack plane is progressively degraded to a small ma chine dependent constant.  
+The degradation is implemented by reducing the mate rial's modulus normal to 
+the smeared crack plane according to a maximum diss ipation law that incorpo- 
+rates exponential softening.  The restriction on th e normal tractions is given by 
+/u1D̅1∫|u1D461Cst= (/u1D42ℜ⊗/u1D42ℜ ):σ− |u1D4J3|u1D4JBCst+ (1 − |u1D7≠≠)|u1D4J3|u1D4JBCst|parenleftCv11 − exp[−/u1D4:B |u1D6F+]|parenriµhtCv1 ≤ 0 
+where /u1D42ℜ is the smeared crack normal, |u1D7≠≠ is the small constant, /u1D4:B is the softening 
+modulus, and |u1D6F+ is an internal variable.  /u1D4:B is set automatically by the program; 
+see |u1D4J4|u1D4J≠Cst below.  |u1D6F+ measures the crack ﬁeld intensity and is output in  the equiva- 
+lent plastic strain ﬁeld, |u1D7≠≠̅|u1D4JDCst, in a normalized fashion. *.   
+ Property Value 
+|u1D4J3|u1D4JBCst 450 psi 
+|u1D4J3|u1D46≠Cst 2100 psi 
+/u1D̅08 0.2 
+|u1D4J4|u1D4J≠Cst 0.8 lbs/in 
+|u1D6FD 0.03 
+|u1D7≠2 0.0 psi-sec 
+|u1D7≠∆|u1D466Cst 4200 psi 
+ 
+For stability, values of |u1D7≠2 between 104 to 106 psi/sec are recommended.  Our l imited 
+experience thus far has shown that many problems re quire nonzero values of |u1D7≠2 to run to 
+avoid error terminations. 
+ 
+Various other internal variables such as crack orie ntations and degraded stiﬀness 
+tensors are internally calculated but currently not  available for output. *

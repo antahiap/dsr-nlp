@@ -1,0 +1,258 @@
+ ................................ ................................................... .................... 2-1433  
+*.  [2,3a] 
+ *.   *.   *.   
+This is  Material Type 233.  This material model is for Hexa gonal Closed Packet (HCP) 
+metals and is based on the work by Cazacu et al.  ( 2006).  This model is capable of 
+describing the yielding asymmetry between tension a nd compression for such 
+materials.  Moreover, a parameter ﬁt is optional an d can be used to ﬁnd the material 
+parameters that describe the experimental yield str esses.  The experimental data that 
+you should supply consists of yield stresses for te nsion and compression in the 00 
+direction, tension in the 45 and the 90 directions,  and a biaxial tension test. 
+ 
+Available options include: 
+<BLANK> 
+MAGNESIUM 
+Including MAGNESIUM invokes a material model develo ped by the USAMP 
+consortium to simulate cast Magnesium under impact loading.  The model includes rate 
+eﬀects having a tabulated failure model including e quivalent plastic strain to failure as 
+a function of stress triaxiality and eﬀective plast ic strain rate.  Element erosion will 
+occur when the number of integration points where t he damage variable has reached 
+unity reaches some speciﬁed threshold (NUMINT).  Al ternatively, a Gurson type failure 
+model can be activated, which requires less experim ental data. 
+ 
+You must provide the evolution of the Cazacu-Barlat  eﬀective stress as a function of the 
+energy conjugate plastic strain in the input for th e hardening curve for .   
+ Card 2.   This card is required. 
+A C11 C22 C33 LCID E0 K P3 
+Card 3.   This card is required. 
+AOPT    C12 C13 C23 C44 
+Card 4.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 5.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA FIT 
+Card 6.   This card is included if and only if the MAGNESIU M keyword option is used. 
+LC1ID LC2ID NUMINT LCCID ICFLAG IDFLAG LC3ID EPSFG 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR HR P1 P2 ITER 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label must be us ed 
+(see *PART). 
+RO Constant mass density 
+E Young’s modulus: 
+GT.0.0: constant value 
+LT.0.0: |E| is a load curve ID which deﬁnes the Young’s 
+modulus as a function of plastic strain. 
+PR Poisson’s ratio *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable A C11 C22 C33 LCID E0 K P3 
+Type F F F F I F F F 
+ 
+ VARIABLE   DESCRIPTION  
+A Exponent in Cazacu-Barlat’s orthotropic yield surfa ce (A  >  1) 
+C11 Material parameter (see Card 5 pos.  8): 
+FIT.EQ.1.0 or EQ.2.0: yield stress for tension in the 00 direction  
+FIT.EQ.0.0: material parameter /u1D450|oneCst|oneCst  
+C22 Material parameter (see Card 5 pos.8): 
+FIT.EQ.1.0 or EQ.2.0: yield stress for tension in the 45 direction  
+FIT.EQ.0.0: material parameter /u1D450|twoCst|twoCst  
+C33 Material parameter (see Card 5 pos.8): 
+FIT.EQ.1.0 or EQ.2.0: yield stress for tension in the 90 direction  
+FIT.EQ.0.0:  material parameter /u1D450|threeCst|threeCst  
+LCID Load curve ID for the hardening law (HR = 3.0), 2D Table ID for 
+rate dependent hardening or 3D Table ID for rate-an d-
+temperature-dependent hardening if the MAGNE SIUM option is 
+active.  For the 3D table case, *.   *.   
+  VARIABLE   DESCRIPTION  
+with the material axes determined by a vector /u1D42F, and an 
+originating point, |u1D4JD, which deﬁne the c enterline axis.  
+This option is for solid elements only. 
+LT.0.0: the absolute value of AOPT is a coordinate system ID 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM, or *DEFINE_CO-
+ORDINATE_VECTOR). 
+C12 Material parameter, /u1D450|oneCst|twoCst . If parameter identiﬁcation (FIT  =  1.0) is 
+turned on, C12 is not used. 
+C13 Material parameter, /u1D450|oneCst|threeCst . If parameter identiﬁcation (FIT  =  1.0) is 
+turned on, C13  =  0.0 
+C23 Material parameter.  If parameter identiﬁcation (FI T  =  1.0) is 
+turned on, C23  =  0.0 
+C44 Material parameter (see Card 5 pos.8) 
+FIT.EQ.1.0 or EQ.2.0: yield stress for the balanced biaxial 
+tension test. 
+FIT.EQ.0.0: material parameter, /u1D450|fourCst|fourCst  
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP - ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1 - A3 Components of vector /u1D41A for AOPT = 2.0 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA FIT 
+Type F F F F F F F I *.   
+  VARIABLE   DESCRIPTION  
+LC2ID Load curve ID giving equivalent plastic strain to failur e as a 
+function of equivalent plastic strain rate. T he failure strain will be 
+computed as the product of the values on LC1ID and LC2ID. 
+NUMINT Number of through thickness integration points whic h must fai l 
+before the element is deleted (inactive for solid e lements) 
+LCCID Load curve ID giving eﬀective stress as a function of plastic strain 
+obtained from a compression stress. This load curve will activate 
+distortional hardening. It is not  compatible with the use of strain 
+rate eﬀects. 
+ICFLAG Automated input conversion ﬂag: 
+EQ.0: load curves provided under LCID and LC CID contain 
+Cazacu- Barlat eﬀective stress as a function of energy 
+conjugate plastic strain. 
+EQ.1: both load curves are given in terms of von Mises stress as 
+a function of equivalent plastic strain 
+IDFLAG Damage ﬂag: 
+EQ.0: failure model is of the Johnson Cook type and requi res 
+LC1ID and LC2ID as additional input.  
+EQ.1: failure model is of the Gurson type and requires LC3ID 
+and EPSFG as additional input. 
+LC3ID Load curve giving the critical void fraction of the  Gurson model 
+as a function of the plastic strain to failure meas ured in the 
+uniaxial tensile test 
+EPSFG Plastic strain to failure measured in the uniaxial tensile test. T his 
+value is used by the Gurson type failure model only . 
+Remarks: 
+This material model (*.   *.   
+ To simplify the equations it is preferable to make the following deﬁnitions: 
+Φ|oneCst=1
+3(2/u1D450|oneCst|oneCst −/u1D450|oneCst|twoCst −/u1D450|oneCst|threeCst ) 
+Φ|twoCst=1
+3(2/u1D450|oneCst|twoCst −/u1D450|twoCst|twoCst −/u1D450|twoCst|threeCst ) 
+Φ|threeCst=1
+3(2/u1D450|oneCst|threeCst −/u1D450|twoCst|threeCst −/u1D450|threeCst|threeCst ) and Ψ|oneCst=1
+3(−/u1D450|oneCst|oneCst +2/u1D450|oneCst|twoCst −/u1D450|oneCst|threeCst ) 
+Ψ|twoCst=1
+3(−/u1D450|oneCst|twoCst + 2/u1D450|twoCst|twoCst −/u1D450|twoCst|threeCst ) 
+Ψ|threeCst=1
+3(−/u1D450|oneCst|threeCst +2/u1D450|twoCst|threeCst −/u1D450|threeCst|threeCst ) 
+ 
+The yield stresses can now be written as: 
+1.  In the 00 degree direction: 
+|u1D7≠∆|zeroCst|zeroCst |u1D447Cst= |<racketleftCv6(|u1D7≠∆eff )|u1D44∆Cst
+(|Φ|oneCst| −/u1D458Φ|oneCst)|u1D44∆Cst+ (|Φ|twoCst| −/u1D458Φ|twoCst)|u1D44∆Cst+ (|dividesCv1Φ|threeCst|dividesCv1 −/u1D458Φ|threeCst)|u1D44∆Cst|<racketriµhtCv6|oneCst|u1D44∆Cst/fraction.v1
+, 
+|u1D7≠∆|zeroCst|zeroCst /u1D4:6.st=|<racketleftCv6(|u1D7≠∆eff )|u1D44∆Cst
+(|Φ|oneCst|+/u1D458Φ|oneCst)|u1D44∆Cst+(|Φ|twoCst|+/u1D458Φ|twoCst)|u1D44∆Cst+(|dividesCv1Φ|threeCst|dividesCv1+/u1D458Φ|threeCst)|u1D44∆Cst|<racketriµhtCv6|oneCst|u1D44∆Cst/fraction.v1
+ (233.4) 
+2.  In the 45 degree direction: 
+|u1D7≠∆|fourCst|fiveCst |u1D447Cst=|<racketleftCv6(|u1D7≠∆eff )|u1D44∆Cst
+(|Λ|oneCst|−/u1D458Λ|oneCst)|u1D44∆Cst+(|Λ|twoCst|−/u1D458Λ|twoCst)|u1D44∆Cst+(|dividesCv1Λ|threeCst|dividesCv1−/u1D458Λ|threeCst)|u1D44∆Cst|<racketriµhtCv6|oneCst|u1D44∆Cst/fraction.v1
+ (233.5) 
+where 
+Λ|oneCst=1
+4|<racketleftCv4Φ|oneCst+Φ|twoCst+Ψ|oneCst+Ψ|twoCst+/radical.v2(Φ|oneCst+Ψ|oneCst−Φ|twoCst−Ψ|twoCst)|twoCst+ 4/u1D450|fourCst|fourCst |twoCst|<racketriµhtCv4 , 
+Λ|twoCst=1
+4|<racketleftCv4Φ|oneCst+Φ|twoCst+Ψ|oneCst+Ψ|twoCst−/radical.v2(Φ|oneCst+Ψ|oneCst−Φ|twoCst−Ψ|twoCst)|twoCst+ 4/u1D450|fourCst|fourCst |twoCst|<racketriµhtCv4 , 
+Λ|threeCst=1
+2[Φ|threeCst+Ψ|threeCst]. 
+3.  In the 90 degree direction: 
+|u1D7≠∆/nine.st |zeroCst |u1D447Cst=|<racketleftCv6(|u1D7≠∆eff )|u1D44∆Cst
+(|Ψ|oneCst|−/u1D458Ψ|oneCst)|u1D44∆Cst+(|Ψ|twoCst|−/u1D458Ψ|twoCst)|u1D44∆Cst+(|dividesCv1Ψ|threeCst|dividesCv1−/u1D458Ψ|threeCst)|u1D44∆Cst|<racketriµhtCv6|oneCst|u1D44∆Cst/fraction.v1
+ (233.6) 
+4.  In the balanced biaxial yield occurs when both |u1D7≠∆|u1D46JCst|u1D46JCst  and |u1D7≠∆|u1D466Cst|u1D466Cst are equal to: 
+|u1D7≠∆|u1D43JCst|u1D447Cst=|<racketleftCv6(|u1D7≠∆eff )|u1D44∆Cst
+(|Ω|oneCst|−/u1D458Ω|oneCst)|u1D44∆Cst+(|Ω|twoCst|−/u1D458Ω|twoCst)|u1D44∆Cst+(|dividesCv1Ω|threeCst|dividesCv1−/u1D458Ω|threeCst)|u1D44∆Cst|<racketriµhtCv6|oneCst|u1D44∆Cst/fraction.v1
+ (233.7) 
+where 
+Ω|oneCst=1
+3(/u1D450|oneCst|oneCst +/u1D450|oneCst|twoCst − 2/u1D450|oneCst|threeCst ) 
+Ω|twoCst=1
+3(/u1D450|oneCst|twoCst +/u1D450|twoCst|twoCst − 2/u1D450|twoCst|threeCst ) *.   
+ /u1D6D4̇=/u1D40:|parenleftCv2/u1D̅:Ȧ−/u1D̅:Ȧ|u1D4JDCst|parenriµhtCv2  , (233.9)  
+where 
+/u1D40:=|u1D438
+1 −/u1D̅08|twoCst
+⎝⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎛1
+|u1D463|u1D463
+11 − |u1D463
+21 − |u1D463
+21 − |u1D463
+2⎠⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎞
+ and |parenleftCv2ε̇−ε̇|u1D4JDCst|parenriµhtCv2 =
+⎝⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎜⎛|u1D7≠≠̇|oneCst|oneCst − |parenleftCv2|u1D7≠≠̇|u1D4JDCst|parenriµhtCv2|oneCst|oneCst 
+|u1D7≠≠̇|twoCst|twoCst − |parenleftCv2|u1D7≠≠̇|u1D4JDCst|parenriµhtCv2|twoCst|twoCst 
+2/˙racketleft.v:|u1D7≠≠̇|oneCst|twoCst − |parenleftCv2|u1D7≠≠̇|u1D4JDCst|parenriµhtCv2|oneCst|twoCst /˙racketright.v:
+2/˙racketleft.v:|u1D7≠≠̇|oneCst|threeCst − |parenleftCv2|u1D7≠≠̇|u1D4JDCst|parenriµhtCv2|oneCst|threeCst /˙racketright.v:
+2/˙racketleft.v:|u1D7≠≠̇|twoCst|threeCst − |parenleftCv2|u1D7≠≠̇|u1D4JDCst|parenriµhtCv2|twoCst|threeCst /˙racketright.v:⎠⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎟⎞
+  . 
+The parameters |u1D438and |u1D463 are the Young’s modulus and Poisson’s ratio, respe ctively.  
+The material stiﬀness /u1D40:|u1D4JDCst that is needed for implicit analysis can be calcul ated from 
+Equation (233.9)  as 
+/u1D40:|u1D4JDCst=∂/u1D6D4̇
+∂ε̇  . 
+The associative ﬂow rule for the plastic strain is usually written as 
+ε̇|u1D4JDCst=|u1D7≠6̇∂|u1D4J3
+∂/u1D6D4  , (233.10) 
+and the consistency condition reads as 
+d|u1D4J3
+d/u1D6D4/u1D6D4̇+d|u1D4J3
+dεep ε̇ep =0  . (233.11) 
+Note that the centralized “dot” means scalar produc t between two vectors.  Using 
+standard calculus one easily derives from Equations (233.9) , (233.10)  and (233.11)  an 
+expression for the stress rate 
+/u1D6D4̇=
+⎣⎢⎢⎢⎢⎡
+/u1D40:−|parenleftCvJ/u1D40:d|u1D4J3
+d/u1D6D4|parenriµhtCvJ⋅|parenleftCvJ/u1D40:d|u1D4J3
+d/u1D̅48|parenriµhtCvJ
+|u1D4J1|u1D4J3 
+|u1D4J1/u1D6D4⋅|parenleftCvJ/u1D40:d|u1D4J3
+d/u1D6D4|parenriµhtCvJ−d|u1D4J3
+dε|u1D4J2Cst|u1D4JDCst ⎦⎥⎥⎥⎥⎤
+ε̇ (233.12) 
+That means that the material stiﬀness used for impl icit analysis is given by 
+/u1D40:|u1D4JDCst=/u1D40:−|parenleftCvJ/u1D40:d|u1D4J3
+d/u1D6D4|parenriµhtCvJ⋅|parenleftCvJ/u1D40:d|u1D4J3
+d/u1D6D4|parenriµhtCvJ
+d|u1D4J3
+d/u1D6D4⋅|parenleftCvJ/u1D40:d|u1D4J3
+d/u1D6D4|parenriµhtCvJ−d|u1D4J3
+d|u1D7≠≠ep . (233.13) 
+To be able to do a stress update we need to calcula te the tangent stiﬀness and the 
+derivative with respect to the corresponding harden ing law. 
+When a suitable hardening law has been chosen the c orresponding derivative is simple 
+and will be left out from this document.  However, the stress gradient of the yield 
+surface is more complicated and will be outlined he re. *.   
+ 2.  Determine the plastic multiplier as 
+∆|u1D7≠6 =|u1D4J3|parenleftCv2/u1D6D4(|u1D4JACst)|u1D4JBCst+|oneCst,|u1D7≠≠ep(|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv2
+d|u1D4J3
+d/u1D6D4|parenleftCv2σ(|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv2⋅/u1D40:d|u1D4J3
+d/u1D6D4|parenleftCv2σ(|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv2−d|u1D4J3
+d|u1D7≠≠ep |parenleftCv3|u1D7≠≠ep (|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv3 (233.22) 
+3.  Perform a plastic corrector step: /u1D6D4(|u1D4JACst+|oneCst)|u1D4JBCst+|oneCst=/u1D6D4(|u1D4JACst)|u1D4JBCst+|oneCst− ∆|u1D7≠6/u1D40:/d.st/u1D45:.st
+/d.st/u1D6D4.st|parenleftCv2/u1D6D4(|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv2 and ﬁnd the 
+increments in plastic strain according to 
+|u1D7≠≠ep(|u1D4JACst+|oneCst)|u1D4JBCst+|oneCst=|u1D7≠≠ep(|u1D4JACst)|u1D4JBCst+|oneCst+∆|u1D7≠6 
+∆|u1D7≠≠|oneCst|oneCst |u1D4JDCst(|u1D4JBCst+|oneCst)= ∆|u1D7≠≠|oneCst|oneCst |u1D4JDCst(|u1D4JBCst)+ ∆|u1D7≠6∂|u1D4J3
+|u1D71J|u1D7≠∆|oneCst|oneCst |parenleftCv2|u1D7≠∆(|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv2 
+∆|u1D7≠≠|twoCst|twoCst |u1D4JDCst(|u1D4JBCst+|oneCst)=∆|u1D7≠≠|twoCst|twoCst |u1D4JDCst(|u1D4JBCst)+∆|u1D7≠6|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|twoCst|twoCst |parenleftCv2|u1D7≠∆(|u1D4JACst)|u1D4JBCst+|oneCst|parenriµhtCv2 (233.23) 
+4.  If |dividesCv2|u1D4J3 |parenleftCv2σ(|u1D4JACst+|oneCst)|u1D4JBCst+|oneCst, |u1D7≠≠ep |u1D4JBCst|parenriµhtCv2|dividesCv2< tol  or |u1D4JA = |u1D4JA|mCst|aCst|xCst ; stop and set  
+/u1D6D4|u1D4JBCst+|oneCst=/u1D6D4(|u1D4JACst+|oneCst)|u1D4JBCst+|oneCst, 
+|u1D7≠≠ep |u1D4JBCst+|oneCst= |u1D7≠≠ep(|u1D4JACst+|oneCst)|u1D4JBCst+|oneCst, 
+∆|u1D7≠≠|oneCst|oneCst |u1D4JDCst= ∆|u1D7≠≠|oneCst|oneCst |u1D4JDCst(|u1D4JACst+|oneCst), 
+ ∆|u1D7≠≠|twoCst|twoCst |u1D4JDCst=∆|u1D7≠≠|twoCst|twoCst |u1D4JDCst(|u1D4JACst+|oneCst). (233.24) 
+Otherwise set |u1D4JA = |u1D4JA + 1 and return to 2. 
+The thickness strain increment for plastic yield is  calculated as 
+∆|u1D7≠≠|threeCst|threeCst =−1
+1−|u1D463(∆|u1D7≠≠|oneCst|oneCst +∆|u1D7≠≠|twoCst|twoCst )−|parenleftCv41−|u1D463
+1−|u1D463|parenriµhtCv4|parenleftCv2∆|u1D7≠≠|oneCst|oneCst |u1D4JDCst+∆|u1D7≠≠|twoCst|twoCst |u1D4JDCst|parenriµhtCv2 (233.25) 
+History Variables for the MAGNESIUM keyword option:  
+The following history variables will be stored for the MAGNESIUM option: 
+ 
+History Variable # Description 
+10 Gurson damage 
+11 Void fraction 
+12 Void fraction star 
+14 Damage 
+15 Plastic strain to failure *

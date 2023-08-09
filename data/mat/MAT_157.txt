@@ -1,0 +1,224 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+discretized to equally space the table values, it ma kes good sense 
+from an accuracy standpoint that the table values r epresent the 
+natural log of strain rate when the lowest strain r ate and highest 
+strain rate diﬀer by several orders of magnitude.  There i s some 
+additional computational cost associated with invok ing 
+logarithmic interpolation. 
+QR1 Isotropic hardening parameter 
+CR1 Isotropic hardening parameter 
+QR2 Isotropic hardening parameter 
+CR2 Isotropic hardening parameter 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C11 C12 C13 C14 C15 C16 C22 C23 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C24 C25 C26 C33 C34 C35 C36 C44 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+Cij  The ij th  term in the 6 × 6 anisotropic constitutive matrix.  Note that 
+1 corresponds to the |u1D44∆ material direction, 2 to the |u1D44F material 
+direction, and 3 to the /u1D450 material direction. 
+ *.   
+ Shell Yield Stress Card.   This card is included if and only if the element type is shells. 
+ Card 5a 1 2 3 4 5 6 7 8 
+Variable S11 S22 S33 S12 AOPT VP  MACF 
+Type F F F F F F  F 
+ 
+ VARIABLE   DESCRIPTION  
+S11 Yield stress in local- |u1D46J direction (shells only).  This input is ignored 
+when R00, R45, and R90 are greater than 0. 
+S22 Yield stress in local- |u1D466 direction (shells only).  This input is ignored 
+when R00, R45, and R90 are greater than 0. 
+S33 Yield stress in local- /u1D46̅ direction (shells only).  This input is ignored 
+when R00, R45, and R90 are greater than 0. 
+S12 Yield stress in local |u1D46J|u1D466 -direction ( shells only).  This input is 
+ignored when R00, R45, and R90 are greater than 0. 
+AOPT Material axes option (see .   *.   
+  VARIABLE   DESCRIPTION  
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal. 
+EQ.4.0: Locally orthotropic in cylindrical coordinate syste m 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, |u1D4JD, which deﬁne the centerline axis.  
+This option is for solid elements only. 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR).   
+VP Formulation for rate eﬀects:  
+EQ.0.0: Scale yield stress (default) 
+EQ.1.0: Viscoplastic formulation 
+MACF Material axes change ﬂag for solid elements: 
+EQ.1: No change, default 
+EQ.2: Switch material axes |u1D44∆ and |u1D44F. 
+EQ.3: Switch material axes |u1D44∆ and /u1D450. 
+EQ.4: Switch material axes |u1D44F and /u1D450. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3  EXTRA 
+Type F F F F F F  F 
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+EXTRA Flag to input further data (see Remarks 3  and 4 below): 
+EQ.1.0: Tsai-Wu failure criterion parameters (Cards 8 and 9 ) *.   
+  VARIABLE   DESCRIPTION  
+strain rate value in the curve is negative, it is a ssumed 
+that all strain rate values are given as a natural loga- 
+rithm of the strain rate. 
+XC Longitudinal compressive strength, |u1D44∆-axis (positive value):  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- XC) which deﬁnes the longitudinal 
+compressive strength as a function o f strain rate.  If the 
+ﬁrst strain rate value in the curve is negative, it  is as- 
+sumed that all strain rate values are given as a na tural 
+logarithm of the strain rate. 
+YT Transverse tensile strength, |u1D44F-axis: 
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- YT) which deﬁnes the transverse 
+tensile strength as a function of strain rate.  If the ﬁrst 
+strain rate value in the curve is negative, it is a ssumed 
+that all strain rate values are given as a natural loga- 
+rithm of the strain rate. 
+YC Transverse compressive strength, |u1D44F-axis (positive value): 
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- YC) which deﬁnes the transverse 
+compressive strength as a function of strain rate.  If the 
+ﬁrst strain rate value in the curve is negative, it  is as- 
+sumed that all strain rate values are given as a na tural 
+logarithm of the strain rate. 
+SXY Shear strength, |u1D44∆|u1D44F -plane: 
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- SXY) which deﬁnes the shear 
+strength as a function of strain rate.  If the ﬁrst  strain 
+rate value in the curve is negative, it is assumed that all 
+strain rate values are given as a natural logarithm  of 
+the strain rate. 
+FF12 Scale factor between - 1 and +1 for interaction term F12, see 
+Remark 3 . *.   
+  VARIABLE   DESCRIPTION  
+LT.0.0:  Load curve ID = (- SZX) which deﬁnes the shear 
+strength as a function of strain rate.  If the ﬁrst  strain 
+rate value in the curve is negative, it is assumed that all 
+strain rate values are given as a natural logarithm of 
+the strain rate. 
+FF23 Scale factor between - 1 and +1 for interaction term F23; see 
+Remark 3  (solid elements only ). 
+FF31 Scale factor between - 1 and +1 for interaction term F31; see 
+Remark 3  (solid elements only ). 
+Remarks: 
+1.  Description of IHIS (Solid Elements).   Several of this material’s parameters 
+may be overwritten on an element-by-element basis t hrough history variables 
+using the *INITIAL_STRESS_SOLID keyword.  Bitwise ( binary) expansion of 
+IHIS determines which material properties are to be  read: 
+I H IS = |u1D44∆|fourCst× 16 + |u1D44∆|threeCst×8+ |u1D44∆|twoCst× 4 + |u1D44∆|oneCst× 2 + |u1D44∆|zeroCst, 
+where each |u1D44∆|u1D4J6Cst is a binary ﬂag set to either 1 or 0.  The |u1D44∆|u1D4J6Cst are interpreted accord- 
+ing to the following table. 
+ 
+Flag Description Variables # 
+|u1D44∆|zeroCst Material directions /u1D45E|oneCst|oneCst , /u1D45E|oneCst|twoCst , /u1D45E|oneCst|threeCst , /u1D45E|threeCst|oneCst , /u1D45E|threeCst|twoCst , /u1D45E|threeCst|threeCst  6 
+|u1D44∆|oneCst Anisotropic stiﬀness Cij  21 
+|u1D44∆|twoCst Anisotropic constants F, G, H, L, M, N 6 
+|u1D44∆|threeCst Stress-strain Curve LCSS 1 
+|u1D44∆|fourCst Strength limits XT, XC, YT, YC, ZT, ZC, SXY, SYZ, SZX 9 
+The NHISV ﬁeld on *INITIAL_STRESS_SOLID must be set  equal to the sum of 
+the number of variables to be read in, which depend s on IHIS (and the |u1D44∆|u1D4J6Cst): 
+N H IS V = 6|u1D44∆|zeroCst+ 21|u1D44∆|oneCst+ 6|u1D44∆|twoCst+ |u1D44∆|threeCst+9|u1D44∆|fourCst. 
+Then, in the following order, *INITIAL_STRESS_SOLID  processes the history 
+variables, HISV i, as: 
+a)  6 material direction parameters when |u1D44∆|zeroCst= 1 
+b)  21 anisotropic stiﬀness parameters when |u1D44∆|oneCst= 1 *.   
+ The /u1D45E|u1D4J6Cst terms are the material direction cosine and sine f or the rotation from a 
+co-rotational element’s system to the |u1D44∆-|u1D44F-/u1D450 material directions.  The /u1D450|u1D4J6Cst|u1D4J7Cst  terms are 
+the upper triangular terms of the symmetric stiﬀnes s matrix, /u1D450|oneCst|oneCst , /u1D450|oneCst|twoCst , /u1D450|oneCst|threeCst , /u1D450|oneCst|fourCst , 
+/u1D450|oneCst|fiveCst , /u1D450|oneCst|sixCst , /u1D450|twoCst|twoCst , /u1D450|twoCst|threeCst , /u1D450|twoCst|fourCst , /u1D450|twoCst|fiveCst , /u1D450|twoCst|sixCst , /u1D450|threeCst|threeCst , /u1D450|threeCst|fourCst , /u1D450|threeCst|fiveCst , /u1D450|threeCst|sixCst , /u1D450|fourCst|fourCst , /u1D450|fourCst|fiveCst , /u1D450|fourCst|sixCst , /u1D450|fiveCst|fiveCst , /u1D450|fiveCst|sixCst , and /u1D450|sixCst|sixCst . 
+3.  Tsai-Wu failure criterion (EXTRA = 1).   Brittle failure with diﬀerent strengths 
+in tension and compression in all main material dir ections can be invoked with 
+EXTRA = 1 and the deﬁnition of corresponding parame ters on Cards 8 and 9. 
+The model used is the phenomenological Tsai-Wu fail ure criterion which re- 
+quires that  
+|parenleftCvJ1
+XT −1
+XC |parenriµhtCvJ |u1D7≠∆|u1D44∆Cst|u1D44∆Cst + |parenleftCvJ1
+Y T −1
+Y C |parenriµhtCvJ |u1D7≠∆|u1D44FCst|u1D44FCst + |parenleftCvJ1
+Z T −1
+Z C |parenriµhtCvJ |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst +1
+XT × XC |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |twoCst
++1
+Y T ×Y C |u1D7≠∆|u1D44FCst|u1D44FCst |twoCst+1
+Z T ×Z C |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |twoCst+1
+SX Y |twoCst|u1D7≠∆|u1D44∆Cst|u1D44FCst |twoCst+1
+S YZ |twoCst|u1D7≠∆|u1D44FCst|u1D4J≠Cst |twoCst+1
+S Z X |twoCst|u1D7≠∆|u1D4J≠Cst|u1D44∆Cst|twoCst
++2 × |u1D439|oneCst|twoCst × |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D7≠∆|u1D44FCst|u1D44FCst + 2 × |u1D439|twoCst|threeCst × |u1D7≠∆|u1D44FCst|u1D44FCst |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst + 2 × |u1D439|threeCst|oneCst × |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |u1D7≠∆|u1D44∆Cst|u1D44∆Cst < 1 
+for the 3-dimensional case (solid elements) with th ree planes of symmetry with 
+respect to the material coordinate system.  The int eraction terms |u1D439|oneCst|twoCst , |u1D439|twoCst|threeCst , and 
+|u1D439|threeCst|oneCst  are given by 
+|u1D439|oneCst|twoCst = FF12 ×/radical.v51
+XT × XC ×Y T ×Y C 
+|u1D439|twoCst|threeCst = FF23 ×/radical.v51
+Y T ×Y C ×Z T ×Z C 
+|u1D439|threeCst|oneCst = FF31 ×/radical.v51
+Z T ×Z C × XT × XC  
+For the 2-dimensional case of plane stress (shell e lements), this expression re- 
+duces to: 
+|parenleftCvJ1
+XT −1
+XC |parenriµhtCvJ |u1D7≠∆|u1D44∆Cst|u1D44∆Cst + |parenleftCvJ1
+Y T −1
+Y C |parenriµhtCvJ |u1D7≠∆|u1D44FCst|u1D44FCst +1
+XT × XC |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |twoCst+1
+Y T ×Y C |u1D7≠∆|u1D44FCst|u1D44FCst |twoCst
++1
+SX Y |twoCst|u1D7≠∆|u1D44∆Cst|u1D44FCst |twoCst+ 2 × |u1D439|oneCst|twoCst × |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D7≠∆|u1D44FCst|u1D44FCst < 1 
+If these conditions are violated, then the stress t ensor will be reduced to zero 
+over NCFAIL time steps and then the element gets er oded.  A small value for 
+NCFAIL (< 50) is recommended to avoid unphysical be havior; the default is 
+10. The default values for the strengths XT, XC, YT , YC, ZT, ZC, SXY, SYZ, and 
+SZX are 10 20 , that is, basically no limits.  The scale factors FF12, FF23, and FF31 
+for the interaction terms are zero by default.  
+4.  Tsai-Hill failure criterion (EXTRA = 2).   Brittle failure with diﬀerent strengths 
+in tension and compression in all main material dir ections can be invoked with 
+EXTRA = 2 and the deﬁnition of corresponding parame ters on Cards 8 and 9 *.   
+ Converting Moldﬂow Results into LS-Dyna Keyword For mat: 
+Starting in LS-PrePost 4.6, a feature has been adde d to map Moldﬂow results for short 
+ﬁber reinforced composite injection molding to the LS-DYNA keyword format.  This 
+feature reads in the results from Moldﬂow, maps the  results to the LS-DYNA mesh, and 
+calculates the anisotropic elasticity tensor /u1D450|u1D4J6Cst|u1D4J7Cst  for structure analysis using this keyword 
+with *INITIAL_STRESS_SHELL keyword card.  This feat ure can only be used with shell 
+LS-DYNA elements.   
+ 
+To convert the Moldﬂow results, the udm  format of the Moldﬂow solid mesh and the 
+xml  format of the ﬁber orientation result from the mol ding simulation are required.  
+These ﬁles are mapped onto the LS-DYNA shell mesh. 
+ 
+LS-PrePost obtains the spatially varying /u1D450|u1D4J6Cst|u1D4J7Cst  for this keyword using a two-step process.  
+First, the elastic properties of the homogenized un idirectional ﬁber reinforced 
+composite are calculated from the Young’s modulus a nd the Poisson ratio of the ﬁber 
+ Figure M157-1.   Moldﬂow conversion dialog box. *.   
+ 8.  The Pick Parts  section is used to select which parts of the Moldﬂ ow mesh is 
+being mapped to the LS-Dyna parts.  When selecting the From , select the ap- 
+propriate Moldﬂow part.  For the To , select the appropriate LS-DYNA part. 
+9.  The Pick Segments  provides an orientation for the mapping onto the L S-DYNA 
+part.  Just select two diﬀerent sides for Side1  and Side2  of the LS-DYNA part. 
+10.  Then select Map  to make the conversion based on the above inputs. 
+11.  After mapping.  the results can be output using th e Save *INITIAL to  section 
+which saves the results so that they can be used fo r LS-DYNA calculations.  
+References: 
+ [1]  Advani, S. G., Tucker, C. L., The Use of Tens ors to Describe and Predict Fiber Orientation in Sh ort 
+Fiber Composites, Journal of Rheology, Vol.31 (8), pp.  751-784, (1987). 
+ [2]  Halpin, J. C., Kardos, J. L., The Halpin-Tsai  Equations: A Review, Polym.  Eng.  Sci., Vol.16, p p.  
+344-352, (1978). 
+ [3]  Mori, T., Tanaka, K., Average Stress in Matri x and Average elastic Energy of Materials with 
+misfitting Inclusions, Acta Metallurgica, Vol.21, p p.571-574, (1973). *

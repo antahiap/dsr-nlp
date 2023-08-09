@@ -1,0 +1,153 @@
+: *.  
+*. , 
+would be more appropriate. *.   
+ *MAT _OPTION TROPIC_ ELASTIC_PHASE_CHANGE  
+This is  Material Type 217 a generalization of Material Type  2 for which material 
+properties change on an element-by-element basis up on crossing a plane in space. 
+ 
+This material is valid only  for shells.  The stress update is incremental and the elastic 
+constants are formulated in terms of Cauchy stress and true strain. 
+ 
+Available options include: 
+ORTHO 
+ANISO 
+such that the keyword cards appear: 
+*.  (9  cards follow) 
+*. _AN IS (11 cards follow) 
+Orthotropic Card 1 (phase 1).  Card 1 for ORTHO keyword option for phase 1.  
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO1 EA EB EC PRBA PRCA PRCB 
+Type A8 F F F F F F F 
+ 
+Orthotropic Card 2 (phase 1).  Card 2 for ORTHO keyword option for phase 1.  
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GAB GBC GCA AOPT1 G SIGF   
+Type F F F F F F   
+ *.   
+  
+Orthotropic Card 3 (phase 2).  Card 1 for ORTHO keyword option phase 2.  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable   EA2 EB2 EC2 PRBA2 PRCA2 PRCB2 
+Type   F F F F F F 
+ 
+Orthotropic Card 4 (phase 2).  Card 2 for ORTHO keyword option phase 2.  
+ Card 7 1 2 3 4 5 6 7 8 
+Variable GAB2 GBC2 GCA2      
+Type F F F      
+ 
+Anisotropic Card 4 (phase 2).  Card 1 for ANISO keyword option for phase 2.  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable   C112 C122 C222 C132 C232 C332 
+Type   F F F F F F 
+ 
+Anisotropic Card 5 (phase 2).  Card 2 for ANISO keyword option for phase 2.  
+ Card 7 1 2 3 4 5 6 7 8 
+Variable C142 C242 C342 C442 C152 C252 C352 C452 
+Type F F F F F F F F 
+ *.   
+ RO i Mass density for phase i. 
+Deﬁne for the ORTHO option only: 
+EA i |u1D438|u1D44∆Cst, Young’s modulus in |u1D44∆-direction for phase i. 
+EB i |u1D438|u1D44FCst, Young’s modulus in |u1D44F-direction for phase i. 
+EC i |u1D438|u1D4J≠Cst, Young’s modulus in /u1D450-direction phase i (nonzero value 
+required but not used for shells). 
+PRBA i /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio in the |u1D44F|u1D44∆  direction for phase i. 
+PRCA i /u1D̅08|u1D4J≠Cst|u1D44∆Cst , Poisson’s ratio in the ca  direction for phase i. 
+PRCB i /u1D̅08|u1D4J≠Cst|u1D44FCst , Poisson’s ratio in  the /u1D450|u1D44F  direction for phase i. 
+GAB i |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus in  the ab  direction for phase i. 
+GBC i |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus in the |u1D44F /u1D450 direction for phase i. 
+GCA i |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus in the /u1D450|u1D44∆  direction for phase i. 
+Due to symmetry deﬁne the upper triangular Cij’s fo r the ANISO option only: 
+C11 i The 1,1 term in the 6 × 6 anisotropic constitutive matrix for phase 
+i. Note that 1 corresponds to the |u1D44∆ material direction  
+C12 i The 1,2 term in the 6 × 6 anisotropic constitutive matrix for phase 
+i. Note that 2 corresponds to the |u1D44F material direction 
+⋮ ⋮ 
+C66 i The 6,6 term in the 6 × 6 anisotropic constitutive matrix for phase 
+i. 
+Deﬁne AOPT for both options: 
+AOPT i Material axes option for phase i, see Figure M2-1 . 
+EQ.0.0: locally orthotropic with material axes determined b y 
+element nodes as shown in part (a) of Figure M2-1 .  
+The a- direction is from node 1 to node 2 of the element.  
+The b-direction is orthogonal to the a- direction and is 
+in the plane formed by nodes 1, 2, and 4. When this  op- 
+tion is used in two-dimensional planar and axisymme t- 
+ric anal ysis, it is critical that the nodes in the element 
+deﬁnition be numbered counterclockwise for this op-*.   
+ EQ.3:  switch material axes |u1D44∆ and /u1D450, 
+EQ.4: switch material axes |u1D44F and /u1D450. 
+IHIS Flag for anisotropic stiﬀness terms initialization (for solid 
+elements only). 
+EQ.0: C11, C12, … from Cards 1, 2, and 3 are used. 
+EQ.1: C11, C12, … are initialized by *INITIAL_STRESS_SOL-
+ID’s history data. 
+V1 i, V2 i, V3 i Deﬁne components of the ith  phase’s vector /u1D42F for AOPT = 3 and 4.  
+D1 i, D2 i, D3 i Deﬁne components of the ith  phase’s vector /u1D41D for AOPT = 2. 
+BETA i Material angle of ith  phase in degrees for AOPT = 3, may be 
+overridden on the element card, see *ELEMENT_SHELL_ BE TA 
+or *ELEMENT_SOLID_ORTHO. 
+REF i Use reference geometry to initialize the stress te nsor for the ith 
+phase.  The reference geometry is deﬁned by the key word: *INI-
+TIAL_FOAM_REFERENCE_GEOME TRY (see there for more 
+details). 
+EQ.0.0: oﬀ, 
+EQ.1.0: on. 
+X1, Y1, Z1 Coordinates of a point on the phase tran sition page. 
+X2, Y2, Z2 Coordinates of a point that deﬁnes the exterior nor mal with the 
+ﬁrst point. 
+THKFAC Scale factor applied to the shell thickness after t he phase 
+transformation. 
+Phases: 
+The material properties for each element are initia lized using the data for the ﬁrst 
+phase.  After the center of the element passes thro ugh the transition plane deﬁned by 
+the two points, the material properties are irrever sibly changed to the second phase. 
+ 
+The plane is deﬁned by two points.  The ﬁrst point,  deﬁned by the coordinates X1, Y1, 
+and Z1, lies on the plane.  The second point, deﬁne d by the coordinates X2, Y2, and Z2, 
+deﬁne the exterior normal as a unit vector in the d irection from the ﬁrst point to the 
+second point. *.   
+ Alternatively, a BETA angle can be deﬁned for indiv idual solid elements as described in 
+remark 5 for *ELEMENT_SOLID_ORTHO.  The beta angle by the ORTHO option is 
+available for all values of AOPT, and it overrides the BETA angle on the *MAT card for 
+AOPT = 3. 
+ 
+The directions determined by the material AOPT opti ons may be overridden for 
+individual elements as described in remark 3 for *E LEMENT_SOLID_ORTHO.  
+However, be aware that for materials with AOPT = 3,  the ﬁnal {/u1D41A,/u1D41B,/u1D41C} system will be 
+the system deﬁned on the element card rotated about  /u1D41C-axis by the BETA angle speciﬁed 
+on the *MAT card. 
+ 
+There are two fundamental diﬀerences between shell and solid element orthotropic 
+materials.  First, the /u1D41C-direction is always normal to a shell element such  that the /u1D41A-
+direction and /u1D41B-directions are within the plane of the element.  S econd, for some 
+anisotropic materials, shell elements may have uniq ue ﬁber directions within each layer 
+through the thickness of the element so that a laye red composite can be modeled with a 
+single element. 
+ 
+When AOPT = 0 is used in two-dimensional planar and  axisymmetric analysis, it is 
+critical that the nodes in the element deﬁnition be  numbered counterclockwise for this 
+option to work correctly. 
+ 
+Because shell elements have their /u1D41C-axes deﬁned by the element normal, AOPT = 1 and 
+AOPT = 4 are not available for shells.  Also, AOPT = 2 requires only the vector /u1D41A be 
+deﬁned since /u1D41D is not used.  The shell procedure projects the inp utted /u1D41A-direction onto 
+each element surface. 
+ 
+Similar to solid elements, the {/u1D41A,/u1D41B,/u1D41C} coordinate system determined by AOPT is then 
+modiﬁed by a rotation about the /u1D41C-axis which we will call /u1D̅1∫.  For those materials that 
+allow a unique rotation angle for each integration point through the element thickness, 
+the rotation angle is calculated by 
+/u1D̅1∫|u1D4J6Cst= |u1D6FD + |u1D6FD|u1D4J6Cst 
+where |u1D6FD is a rotation for the element, and |u1D6FD|u1D4J6Cst is the rotation for the i’th layer of the 
+element.  The |u1D6FD angle can be input using the BETA parameter on the  *MAT data, or will 
+be overridden for individual elements if the BETA k eyword option for *ELEMENT_-
+SHELL is used.  The |u1D6FD|u1D4J6Cst angles are input using the ICOMP = 1 option of *SE CTION_-
+SHELL or with *PART_COMPOSITE.  If |u1D6FD or |u1D6FD|u1D4J6Cst is omitted, they are assumed to be zero. 
+ 
+All anisotropic shell materials have the BETA optio n on the *MAT card available for 
+both AOPT = 0 and AOPT = 3, except for materials 91  and 92 which have it available for 
+all values of AOPT, 0, 2, and 3. 
+ 
+All anisotropic shell materials allow an angle for each integration point through the 
+thickness, |u1D6FD|u1D4J6Cst, except for materials 2, 86, 91, 92, 117, 130, 170,  172, and 194.   *

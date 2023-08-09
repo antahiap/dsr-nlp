@@ -1,0 +1,23 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-285 (MAT) VARIABLE DESCRIPTION 
+EFG Plastic strain at failure for glass 
+EP Young’s modulus for polymer 
+PRP Poisson’s ratio for polymer 
+SYP Yield stress for polymer 
+ETP Plastic hardening modulus for polymer 
+F1, …, FN Integration point material: 
+EQ.0.0:  glass (default) 
+EQ.1.0:  polymer 
+A user-deﬁned integration rule must be speciﬁed; se e *INTEGRA-
+TION_SHELL.  See Remarks below. 
+Remarks: 
+Isotropic hardening for both materials is assumed.  The material to which the glass is 
+bonded is assumed to stretch plastically without fa ilure.  A user deﬁned integration rule 
+speciﬁes the thickness of the layers making up the glass.  F i deﬁnes whether the 
+integration point is glass (0.0) or polymer (1.0).  The material deﬁnition, F i, must be 
+given for the same number of integration points (NI PTS) as speciﬁed in the rule.  A 
+maximum of 32 layers is allowed. 
+If the recommended user deﬁned rule is not deﬁned, the default integration rules are 
+used.  The location of the integration points in th e default rules are deﬁned in the *SEC-
+TION_SHELL keyword description. *

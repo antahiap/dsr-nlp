@@ -1,0 +1,24 @@
+: *.  
+*.   
+LS-DYNA R13 2-391 (MAT) *.   *.   
+LS-DYNA R13 2-393 (MAT)  VARIABLE   DESCRIPTION  
+C17 1 /psi-s 
+C18 °R  
+A1 |u1D6F+|oneCst, initial value of internal state variable 1  
+A2 |u1D6F+|twoCst, initial value of internal state variable 2 
+A3 |u1D6F+|threeCst, initial value of internal state variable 3 
+A4 |u1D6F+|fourCst, initial value of internal state variable 4 
+A5 |u1D6F+|fiveCst, initial value of internal state variable 5 
+A6 |u1D6F+|sixCst, initial value of internal state variable 6 
+N Exponent in damage evolution 
+D0 Initial damage (porosity) 
+FS Failure strain for erosion 
+Remarks: 
+The evolution of the damage parameter, /u1D̅1∫ is deﬁned by Bammann et al.  [1990] 
+/u1D̅1∫̇= |u1D6FD |<racketleftCv61
+|parenleftCv11 −/u1D̅1∫|parenriµhtCv1|u1D441Cst− |parenleftCv11 −/u1D̅1∫|parenriµhtCv1|<racketriµhtCv6|dividesCv1/u1D46B|u1D4JDCsts|dividesCv1
+ 
+in which 
+|u1D6FD = sinh |<racketleftCvJ2(2/u1D441− 1)|u1D4JD
+(2/u1D441− 1)|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|<racketriµhtCvJ  , 
+where |u1D4JD is the pressure and |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is the eﬀective stress. *

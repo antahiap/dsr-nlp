@@ -1,0 +1,146 @@
+: *.  
+*.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO K MU N MULL VISPL VISEL 
+Type I F F F I I I I 
+Default none none 0.0 0.0 0 none 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number must b e speciﬁed. 
+RO Mass density 
+K Bulk modulus.  To get almost incompressible behavio r set K one 
+or two orders of magnitude higher than MU. Note tha t the 
+poisons ratio should be kept at a realistic value.  
+|u1D71≠=3|u1D43∆ − 2M U 
+2(3|u1D43∆+M U ). 
+MU Shear modulus.  MU is the product of the number of molecular 
+chains per unit volume ( |u1D4JB), Boltzmann’s constant ( /u1D458) and the 
+absolute temperature ( |u1D447). Thus M U =|u1D4JB /u1D458|u1D447 . 
+N Number of rigid links between crosslinks of the sof t domain 
+region.  See Remark 0 . 
+MULL Parameter describing which softening algorithm that  shall be 
+used (see Remarks 0  and 0). 
+EQ.1: strain based Mullins eﬀect from Qi and Boyce 
+EQ.2: energy based Mullins, a modiﬁed version of Roxburgh 
+and Ogden model.  M1, M2, and M3 must be set.   
+VISPL Parameter describing which viscoplastic formu l ation that should 
+be used; see the theory section for details (see Remark 3 ). 
+EQ.0: no viscoplasticity 
+EQ.1: 2 parameter standard model; K1 and S1 must be set. 
+EQ.2: 6 parameter G’Sells model; K1, K2, K3, S1, S2 and S3 
+must be set. *.   
+  Card 3 1 2 3 4 5 6 7 8 
+Variable M1 M2 M3 M4 M5 TIME VCON  
+Type F F F F F F F  
+Default none none none none none 0.0 9.0  
+ 
+ VARIABLE   DESCRIPTION  
+M1 Mullins constant (see Remarks 0  and 0): 
+MULL.EQ.1:  constant |u1D434.  For the case of a dilute solution the 
+Mullins parameter |u1D434 should be equal to 3.5.  See 
+Qi and Boyce [2004]. 
+MULL.EQ.2: constant M1 in the Mullins equations.  M1 > 0.0 
+must be set.   
+M2 Mullins constant (see Remarks 0  and 0): 
+MULL.EQ.1:  constant |u1D43J.  For a system with well dispersed 
+particles B should somewhere around 18.  See Qi 
+and Boyce [2004]. 
+MULL.EQ.2: constant M2 in the Mullins equations.  M2 > 0.0 
+must be set.   
+M3 Mullins constant (see Remarks 0  and ): 
+MULL.EQ.1: constant |u1D44D.  Qi recommends 0.7. 
+MULL.EQ.2: constant M3 in the Mullins equations.  M3 > 0.0 
+must be set.   
+M4 Mullins parameter (see Remarks 0  and 0): 
+MULL.EQ.1: initial value of |u1D463|u1D46≠Cst.  |u1D463|u1D46≠Cst must be between 0 and 1 and 
+must be less than |u1D463|u1D46≠Cst|u1D46≠Cst  (see M5). 
+MULL.EQ.2: not used 
+M5 Mullins parameter (see Remarks 0  and 0): 
+MULL.EQ.1: |u1D463|u1D46≠Cst|u1D46≠Cst , saturation value of |u1D463|u1D46≠Cst.  |u1D463|u1D46≠Cst|u1D46≠Cst  must be between 0 
+and 1 and must be greater than |u1D463|u1D46≠Cst (see M4). 
+MULL.EQ.2: not used *.   
+  Card 6 1 2 3 4 5 6 7 8 
+Variable AOPT MACF XP YP ZP A1 A2 A3 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see *.   *.   
+  VARIABLE   DESCRIPTION  
+TAU i Relaxation time.  A maximum of 6 values can be used .  See 
+Remark 2 . 
+GAMMA i Gamma factors (see Simo).  See Remark 2 . 
+Remarks:   
+Basic Theory.   This model is based on the work done by Arruda an d Boyce [1993], 
+in particular Arruda’s thesis [1992].  The eight ch ain rubber model is based on 
+hyper-elasticity, and it is formulated by using ela stic strain invariants.  Strain 
+softening is accounted for by the parameter from |u1D463|u1D46≠Cst following the work done by Qi 
+and Boyce [2004]. 
+ 
+The strain energy is deﬁned in terms of the elastic  deformation gradient /u1D46D|u1D4J2Cst through 
+the right Cauchy-Green tensor /u1D46A|u1D4J2Cst=/u1D46D|u1D4J2Cst|u1D447Cst/u1D46D|u1D4J2Cst and its determinant /u1D4:D|u1D4J2Cst= det /u1D46D|u1D4J2Cst as /u1D6F∫=/u1D6F∫|oneCst+
+/u1D6F∫|twoCst where 
+ 
+/u1D6F∫|oneCst= |u1D463|u1D46≠Cst|u1D7≠7|<racketleftCvJ/radical.v1/u1D441/u1D6EC|u1D4J≠Cst|u1D6FD +/u1D441ln |parenleftCvJ|u1D6FD
+sinh|u1D6FD|parenriµhtCvJ|<racketriµhtCvJ 
+is the deviatoric contribution and 
+/u1D6F∫|twoCst=/u1D̅05
+/u1D̅08con |twoCst|parenleftCv6/u1D̅08con ln /u1D4:D|u1D4J2Cst+1
+/u1D4:D|u1D4J2Cst/u1D̅08.stcon − 1|parenriµhtCv6  
+is the volumetric contribution.  Here 
+ 
+|u1D6FD =ℒ−|oneCst
+⎝⎜⎛Λ|u1D4J≠Cst
+/radical.v1/u1D441⎠⎟⎞ 
+with ℒ−|oneCst denoting the inverse of the Langevin function ℒ(|u1D46J) = coth|u1D46J − 1/|u1D46J  and the 
+ampliﬁed chain stretch is given by  
+Λ|u1D4J≠Cst=/radical.v2/u1D44B(|u1D463|u1D46≠Cst)|parenleftCv2|u1D7≠6/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|twoCst− 1|parenriµhtCv2 + 1 , 
+where |u1D7≠6/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|twoCst= Tr|parenleftCv1/u1D46A̅|u1D4J2Cst|parenriµhtCv1 3 ⁄ and /u1D46A̅|u1D4J2Cst=/u1D4:D|u1D4J2Cst−|twoCst/|threeCst/u1D46A|u1D4J2Cst. 
+ 
+Among the constant parameters we have |u1D7≠7 is the initial modulus of the soft domain, 
+/u1D̅05 the bulk modulus, /u1D̅08con  a pressure inﬂuential exponent and  /u1D441 is the number of 
+rigid links between crosslinks of the soft domain r egion. /u1D44B is a general polynomial 
+describing the interaction between the soft and har d phases (Qi and Boyce [2004] 
+and Tobin and Mullins [1957]).  It is given by 
+/u1D44B(|u1D463|u1D46≠Cst) = 1 + |u1D434(1 − |u1D463|u1D46≠Cst) + |u1D43J(1 − |u1D463|u1D46≠Cst)|twoCst *.   
+ b)  VISEL = 2.   With this option the evolution is based on work d one by Simo 
+and Hughes (2000). 
+/u1D410̇/u1D6FC.st+/u1D410/u1D6FC.st
+/u1D̅0F/u1D6FC.st= 2|u1D6F∆|u1D44∆Cst
+/u1D̅0F|u1D44∆Cst|u1D4J1
+|u1D4J1|u1D461 ∂Ψ|oneCst
+∂/u1D402|u1D4J2Cst=|u1D6F∆|u1D44∆Cst
+/u1D̅0F|u1D44∆Cst/u1D412/u1D̅CF 
+The number of Prony terms is restricted to a maximu m of 6.  Also /u1D̅0F/u1D6FC.st and 
+|u1D6F∆/u1D6FC.st must be greater than 0.  The Cauchy stress is obta ined by a push for- 
+ward operation on the total second Piola-Kirchhoﬀ s tress. 
+σ=1
+/u1D4:D/u1D405|u1D4J2Cst/u1D412/u1D405|u1D4J2Cst|u1D447Cst. 
+3.  Viscoplasticity.   Plasticity is based on the general Hills’ yield s urface 
+|u1D7≠∆eff |twoCst= |u1D439(|u1D7≠∆|twoCst|twoCst − |u1D7≠∆|threeCst|threeCst )|twoCst+ |u1D43A(|u1D7≠∆|threeCst|threeCst − |u1D7≠∆|oneCst|oneCst )|twoCst+/u1D4:B(|u1D7≠∆|oneCst|oneCst − |u1D7≠∆|twoCst|twoCst )|twoCst+ 2/u1D4:F|u1D7≠∆|oneCst|twoCst |twoCst+ 2|u1D44≠|u1D7≠∆|twoCst|threeCst |twoCst+ 2/u1D441|u1D7≠∆|oneCst|threeCst |twoCst 
+and the hardening is either based on a load curve I D (-YLD0) or an extended Voce 
+hardening 
+|u1D7≠∆yld = |u1D7≠∆yld0+ |u1D444|oneCst|parenleftCv21 − |u1D4J2|u1D43JCst|oneCsts|u1D7≠≠Cst̅|parenriµhtCv2 + |u1D444|twoCst|parenleftCv21 − |u1D4J2|u1D43JCst|twoCsts|u1D7≠≠Cst̅|parenriµhtCv2 + |u1D444|threeCst|parenleftCv21 − |u1D4J2|u1D43JCst|threeCsts|u1D7≠≠Cst̅|parenriµhtCv2 + |u1D444|fourCst|parenleftCv21 − |u1D4J2|u1D43JCst/four.sts|u1D7≠≠Cst̅|parenriµhtCv2  . 
+The evolution of the elastic deformation gradient /u1D46D|u1D4J2Cst is written as 
+ 
+/u1D46Ḋ|u1D4J2Cst= (/u1D4̅:−/u1D4̅:|u1D4JDCst)/u1D46D|u1D4J2Cst 
+ 
+where /u1D4̅: is the spatial velocity gradient and /u1D4̅:|u1D4JDCst is the spatial (Eulerian) plastic 
+velocity gradient which is given by the associative  ﬂow rule 
+/u1D4̅:|u1D4JDCst= |u1D7≠≠̅̇|u1D71J|u1D4J3 
+|u1D71J/u1D̅48 
+ 
+with |u1D4J3 being the rate independent yield surface 
+|u1D4J3 = |u1D7≠∆eff − |u1D7≠∆yld . 
+For rate independent plasticity ( VISPL = 0 ) the evolution of plastic strain |u1D7≠≠̅ follows 
+from the consistency conditions |u1D4J3 ≤ 0 , |u1D7≠≠̅̇≥ 0 and |u1D4J3 |u1D7≠≠̅̇= 0. For viscoplasticity these 
+conditions are abandoned, but we instead invoke a c onstitutive equation for the 
+eﬀective plastic strain rate.  This is the Perzyna (1966) overstress model, and three 
+diﬀerent formulations are available. 
+a)  VISPL = 1 .  The evolution equation is 
+|u1D7≠≠̅̇= |parenleftCvJmax (|u1D4J3 , 0)
+|u1D43∆|oneCst|parenriµhtCvJ/u1D446.st|oneCsts
+  , 
+where |u1D43∆|oneCst and |u1D446|oneCst are viscoplastic material parameters. 
+b)  VISPL = 2 .  The evolution equation is *

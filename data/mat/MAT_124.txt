@@ -1,0 +1,73 @@
+: *.  
+*.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR C P FAIL TDEL 
+Type A F F F F F F F 
+Default none none none none 0.0 0.0 10 20  0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+C Strain rate parameter,  |u1D436.  See Remark 1 . 
+P Strain rate parameter,  |u1D443.  See Remark 1 . 
+FAIL Failure ﬂag: 
+LT.0.0: User deﬁned failure subroutine, matusr_24  in 
+dyn21.F , is called to determine failure. 
+EQ.0.0: Failure is not considered.  This option is recommen ded 
+if fail ure is not of interest since many calculations will  
+be saved. 
+GT.0.0: Plastic strain to failure.  When the plastic strain  reaches 
+this value, the element is deleted from the calcula tion. 
+TDEL Minimum time step size for automatic deletion of shell elements 
+ *.   
+  
+ Card 3 1 2 3 4 5 6 7 8 
+Variable PC PT PCUTC PCUTT PCUTF   SRFILT 
+Type F F F F F   F 
+Default 0.0 0.0 0.0 0.0 0.0   0.0 
+ 
+ VARIABLE   DESCRIPTION  
+PC Compressive mean stress (pressure) at which the yie ld stress 
+follows load curve ID, LCIDC.  If the pressure fall s between PC 
+and PT, a weighted average of the two load curves i s used.  Both 
+PC and PT should be entered as positive values. 
+PT Tensile mean s tress at which the yield stress follows load curve 
+ID, LCIDT 
+PCUTC Pressure cut- oﬀ in compression (PCUTC must be greater than or 
+equal to zero).  PCUTC (and PCUTT) apply only to el ement types 
+that use a 3D stress update, such as solids, tshell  formulatio ns 3 
+and 5, and SPH.  When the pressure cut- oﬀ is reached the 
+deviatoric stress tensor is set to zero and the pre ssure remains at 
+its compressive value.  Like the yield stress, PCUT C is scaled to 
+account for rate eﬀects. 
+PCUTT Pressure cut-oﬀ in tensio n (PCUTT must be less than or equal to 
+zero).  When the pressure cut- oﬀ is reached, the deviatoric stress 
+tensor and tensile pressure is set to zero.  Like t he yield stress, 
+PCUTT is scaled to account for rate eﬀects. 
+PCUTF Pressure cut-oﬀ ﬂag activation: 
+EQ.0.0: Inactive 
+EQ.1.0: Active 
+SRFILT Strain rate ﬁltering parameter in exponential movin g average 
+with admissible values ranging from 0 to 1 (availab le for LC-
+SRC ≠ 0 or LCSRT ≠ 0 with SRFLAG = 0 or 1): 
+|u1D7≠≠̇|u1D4JBCstavg =SRFILT ×|u1D7≠≠̇|u1D4JBCst−|oneCstavg +(1−SRFILT )×|u1D7≠≠̇|u1D4JBCst 
+ *.   
+ plied that PC is a compressive mean stress value an d PT is tensile mean stress 
+value. 
+Strain rate may be accounted for using the Cowper a nd Symonds model which 
+scales the yield stress with the factor: 
+1 +|<racketleftCvJ|u1D7≠≠̇
+|u1D436|<racketriµhtCvJ|oneCst|u1D4JDCst/fraction.v2
+  . 
+If SRFLAG = 0, |u1D7≠≠̇ is the total strain rate, 
+|u1D7≠≠̇=/radical.v2|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst . 
+2.  LCFAIL.   The LCFAIL ﬁeld is only applicable when at least one of the 
+following four conditions are met: 
+a)  SRFLAG = 2 
+b)  LCSRC is nonzero 
+c)  LCSRT is nonzero 
+d)  Gi and BETA i values are provided. *

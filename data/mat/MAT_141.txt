@@ -1,0 +1,19 @@
+: *.  
+*.   *.   
+ Remarks: 
+The inelastic strain rate is deﬁned as:  
+|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst /u1D4:C.st= |u1D437/u1D45C.stexp 
+⎣⎢⎡−0.5 |parenleftCv6|u1D44D/u1D45C.st|twoCst
+3|u1D43∆|twoCst|parenriµhtCv6/N.st
+⎦⎥⎤
+⎝⎜⎛|u1D446|u1D4J6Cst|u1D4J7Cst −Ω|u1D4J6Cst|u1D4J7Cst 
+/radical.v1|u1D43∆|twoCst⎠⎟⎞ 
+where the |u1D43∆|twoCst term is given as: 
+|u1D43∆|twoCst= 0.5(|u1D446|u1D4J6Cst|u1D4J7Cst −Ω|u1D4J6Cst|u1D4J7Cst )(|u1D446|u1D4J6Cst|u1D4J7Cst −Ω|u1D4J6Cst|u1D4J7Cst ) 
+and represents the second invariant of the overstre ss tensor.  The elastic components of 
+the strain are added to the inelastic strain to obt ain the total strain.  The following 
+relationship deﬁnes the back stress variable rate: 
+Ω|u1D4J6Cst|u1D4J7Cst =2
+3/u1D45EΩ|u1D4JACst|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst /u1D4:C.st−/u1D45EΩ|u1D4J6Cst|u1D4J7Cst |u1D7≠≠̇|u1D4J2Cst/u1D4:C.st 
+where /u1D45E is a material constant, Ω|u1D4JACst is a material constant that represents the maximum  
+value of the internal stress, and |u1D7≠≠̇|u1D4J2Cst/u1D4:C.st is the eﬀective inelastic strain rate. *

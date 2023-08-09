@@ -1,0 +1,64 @@
+: *.  
+*.   
+ *.   *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable SYS SIP SHS SHL ESH E0 ALPHA LCID2 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+SYS Static yield stress, |u1D7≠∆|zeroCst 
+SIP Stress increment parameter, ∆|u1D7≠∆|u1D4JACst 
+SHS Strain hardening parameter for small strain, |u1D6FD 
+SHL Strain hardening parameter for larger strain, Ω 
+ESH Exponent for strain hardening, |u1D4JB 
+E0 Initial plastic strain, |u1D7≠≠|zeroCst 
+ALPHA Distribution of hardening used in the curve-ﬁ tting, |u1D6F+.  |u1D6F+=0 is 
+pure kinematic hardening while |u1D6F+ = 1  provides pure isotropic 
+hardening. 
+LCID2 Curve ID. The curve deﬁnes Young’s modulus scaling factor with 
+respect to th e plastic strain.  By default, the Young’s modulus is 
+assumed to remain constant.  Eﬀective value is betw een 0 and 1.  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT  DYS RATEN SRN0 EXSR   
+Type F  F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES and then rotated about the shell ele- 
+ment normal by the angle BETA *.   
+  VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  BE TA may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA. 
+ 
+Experimental Data Cards.  The next N+1 cards (see N on Card 1) contain experimental 
+data obtained from four mechanical tests for a group of equidistantly placed directions 
+/u1D̅0:|u1D4J6Cst=|u1D4J6 /u1D̅0B (2/u1D441) ⁄ , |u1D4J6=0,1,2,…,/u1D441.  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable FUN-i RUN-i FPS1-i ALPS-i FSH-i    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+FUN- i Normalized yield stress |u1D7≠∆un  for uniaxial test for the ith  direction 
+RUN- i Strain ratio (R-value) for uniaxial test for the ith  direction 
+FPS1- i First normalized yield stress |u1D7≠∆ps1  for plain strain test for the ith 
+direction 
+ALPS- i Normalized distance |u1D6F+ps  of second component of p lain stress 
+point between the hinge points on both sides for th e ith  direction.  
+See Remarks for details.  
+FSH- i First normalized yield stress |u1D7≠∆sh  for pure shear test for the ith 
+direction 
+Remarks: 
+1.  Yield Locus.   The yield locus description of this material is t he same as for 
+*.   *.   
+ |u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst, |u1D7≠≠̅̇|u1D4JDCst|parenriµhtCv1 = |u1D7≠∆|zeroCst+ ∆|u1D7≠∆|u1D4JACst/˙racketleft.v:|u1D6FD|parenleftCv1|u1D7≠≠̅|u1D4JDCst+ |u1D7≠≠|zeroCst|parenriµhtCv1 +|parenleftCv31 − |u1D4J2−/Ome∧∙.st|parenleftCv1|u1D7≠≠Cst̅|u1D4JDCsts+|u1D7≠≠Cst|zeroCsts|parenriµhtCv1|parenriµhtCv3|u1D4JBCst/˙racketright.v:
+                                         +|u1D7≠∆|zeroCst∗|<racketleftCv61 + |u1D4JF|eCst|nCst|tCst /h.st ln |parenleftCv6|u1D7≠≠̅̇|u1D4JDCst
+|u1D7≠≠|zeroCsṫ|parenriµhtCv6 |<racketriµhtCv6|u1D4JACst 
+In the case of kinematic hardening (ALPHA < 1), the  standard stress tensor is 
+replaced by a relative stress tensor, deﬁned as the  diﬀerence between the stress 
+tensor and a back stress tensor. *

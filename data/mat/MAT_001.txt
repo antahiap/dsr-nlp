@@ -1,0 +1,46 @@
+, and is 
+equivalent to a corresponding descriptive designati on, e.g., *. : *. _FLUID: *.  
+*. _FLUID 
+*.   
+LS-DYNA R13 2-131 (MAT) *.  
+*. _FLUID 
+The ﬂuid option is valid for solid elements only. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR DA DB K  
+Type A F F F F F F  
+Default none none none 0.0 0.0 0.0 0.0  
+ 
+Additional card for FLUID keyword option. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable VC CP       
+Type F F       
+Default none 10 20        
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). *.   
+LS-DYNA R13 2-133 (MAT) 5.  FLUID Keyword Option.   For the FLUID keyword option, the bulk modulus 
+ﬁeld, |u1D43∆, must be deﬁned, and both the Young’s modulus and Poisson’s ratio 
+ﬁelds are ignored.  Fluid-like behavior is obtained  where the bulk modulus, |u1D43∆, 
+and pressure rate, |u1D4JD, are given by: 
+|u1D43∆ =|u1D438
+3(1 − 2/u1D̅08)
+|u1D4JḊ= − |u1D43∆|u1D7≠≠̇|u1D4J6Cst|u1D4J6Cst  
+and the shear modulus is set to zero.  A tensor vis cosity is used which acts only 
+the deviatoric stresses, |u1D446|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst, given in terms of the damping coeﬃcient as: 
+|u1D446|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst=V C × ∆/u1D4:F× |u1D44∆ × |u1D7≠+|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst 
+where ∆/u1D4:F is a characteristic element length, |u1D44∆ is the ﬂuid bulk sound speed, |u1D7≠+ is 
+the ﬂuid density, and |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst is the deviatoric strain rate. *. _FLUID) for fu rther details. 
+ 
+ Card 1 2 3 4 5 6 7 8 
+Variable MID RO K VC     
+Type A8 F F F     
+Default none none none none     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+K Bulk modulus 
+VC Tensor viscosity coeﬃcient *

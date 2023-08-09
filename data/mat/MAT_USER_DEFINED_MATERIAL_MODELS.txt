@@ -1,0 +1,116 @@
+ ................. ................................................... ..... 2-379  
+*.  [0 ,1H,1T,1D,2,3a,3c,5,8B] {0} 
+ *.  *.   *.   
+These are  Material Types 41 - 50. The user must provide a mat erial subroutine.  See also 
+Appendix A. This keyword input is used to deﬁne mat erial properties for the 
+subroutine.  Isotopic, anisotropic, thermal, and hy perelastic material models with 
+failure can be handled. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO MT LMC NHV IORTHO IBULK IG 
+Card 2.   This card is required. 
+IVECT IFAIL ITHERM IHYPER IEOS LMCA   
+Card 3.   This card is included if and only if IORTHO = 1 o r 3. 
+AOPT MACF XP YP ZP A1 A2 A3 
+Card 4.   This card is included if and only if IORTHO = 1 o r 3. 
+V1 V2 V3 D1 D2 D3 BETA IEVTS 
+Card 5.   Include as many of this card as required to deﬁne  LMC ﬁelds. 
+P1 P2 P3 P4 P5 P6 P7 P8 
+Card 6.   Include as many of this card as required to deﬁne  LMCA ﬁelds. 
+P1 P2 P3 P4 P5 P6 P7 P8 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO MT LMC NHV IORTHO IBULK IG 
+Type A F I I I I I I 
+ *.   
+2-380 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+MT User material type (41 - 50 inclusive).  A number between 41 and 
+50 must be chosen.  If MT < 0, subroutine rwumat  in dyn21.f  is 
+called, where the material parameter reading can be  modiﬁed. 
+WARNING : If two or more materials in an input 
+deck share the same MT value, those materials must 
+have the same values of other variables on Cards 1 
+and 2 except for  MID and RO.   
+LMC Length of material constant array which is equal to the number of 
+material constants to be input.  See Remark 2 . 
+NHV Number of history variables to be stored; see Appen dix A. When 
+the model is to be used with an equation of state, NHV must be 
+increase d by 4 to allocate the storage required by the equa tion of 
+state. 
+IORTHO/ 
+ISPOT Orthotropic/spot weld thinning ﬂag: 
+EQ.0:  If the material is not orthotropic and is not used w ith 
+spot weld thinning 
+EQ.1: If the material is orthotropic 
+EQ.2: If material is used with spot weld thinning 
+EQ.3: If material is orthotropic and used with spot weld 
+thinning 
+IBULK Address of bulk modulus in material constants array ; see 
+Appendix A. 
+IG Address of shear modulus in material constants arra y; see 
+Appendix A. 
+ *.   
+2-382 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+nodal coordinates in the global coordinate system. 
+IEOS Equation of state ﬂag: 
+EQ.0:  Oﬀ 
+EQ.1:  On 
+LMCA Length of additional material constant array 
+ 
+Orthotropic Card 1.  Additional card for IORTHO = 1 or 3. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT MACF XP YP ZP A1 A2 A3 
+Type F I F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see *MAT _002 for a more complete 
+description): 
+EQ.0.0: Locally orthotropic with material axes determined by 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES, and then, for shells only, rotated about 
+the shell element normal by an angle BETA 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction.  This option is for solid 
+elements only. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR. 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal. 
+EQ.4.0: Locall y orthotropic in cylindrical coordinate system 
+with the material axes determined by a vector  /u1D42F, and 
+an originating point, |u1D4JD, which deﬁne the centerline axis.  *.   
+2-384 (MAT) LS-DYNA R13 Deﬁne LMC material parameters using 8 parameters pe r card.  See Remark 2 . 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable P1 P2 P3 P4 P5 P6 P7 P8 
+Type F F F F F F F F 
+ 
+Deﬁne LMCA material parameters using 8 parameters p er card.  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable P1 P2 P3 P4 P5 P6 P7 P8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+P1 First material parameter. 
+P2 Second material parameter. 
+P3 Third material parameter. 
+P4 Fourth material parameter. 
+⋮  ⋮ 
+PLMC LMC th  material parameter. 
+Remarks: 
+1.  Cohesive Elements.   Material models for the cohesive element (solid e lement 
+type 19) uses the ﬁrst two material param eters to set ﬂags in the element formula- 
+tion . 
+a)  P1.   The P1 ﬁeld controls how the density is used to c alculate the mass 
+when determining the tractions at mid-surface (trac tions are calculated on 
+a surface midway between the surfaces deﬁned by nod es 1-2-3-4 and 5-6-
+7-8).  If P1 is set to 1.0, then the density is per  unit area of the mid-surface 
+instead of per unit volume.  Note that the cohesive  element formulation 
+permits the element to have zero or negative volume . *

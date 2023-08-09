@@ -1,0 +1,132 @@
+ ...................................... ................................................... ............................ 2-1121  
+*.  [1H] {22} 
+ *.  *.   *.   
+This is Material Type 174, for Hughes-Liu beam elem ents only.  The material model can 
+represent plain concrete only, reinforcing steel on ly, or a smeared combination of 
+concrete and reinforcement.  The main emphasis of t his material model is the cyclic 
+behavior – it is intended primarily for seismic ana lysis. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EUNL PR FC EC1 EC50 RESID 
+Type A8 F F F F F F F 
+Default none none See 
+Remarks 0.0 none 0.0022 See 
+Remarks 0.2 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FT UNITC (blank) (blank) (blank) ESOFT LCHAR OUTPUT 
+Type F F F F F F F F 
+Default See 
+Remarks 1.0 none none none See 
+Remarks none 0 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable FRACR YMREIN PRREIN SYREIN SUREIN ESHR EUR RREINF 
+Type F F F F F F F F 
+Default 0.0 none 0.0 0.0 SYREIN  0.03 0.2 4.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. *.   
+  VARIABLE   DESCRIPTION  
+RO Mass density 
+EUNL Initial unloading elastic modulus (See Remarks ). 
+PR Poisson’s ratio. 
+FC Cylinder strength (stress units) 
+EC1 Strain at which stress FC is reached. 
+EC50 Strain at which the stress has dropped to 50% FC 
+RESID Residual strength factor 
+FT Maximum tensile stress 
+UNITC Factor to convert stress units to MPa (See Re marks) 
+ESOFT Slope of stress-strain curve post-cracking in  tension 
+LCHAR Characteristic length for strain-softening be havior 
+OUTPUT Output ﬂag controlling what is written as “p lastic strain” 
+EQ.0.0: Curvature 
+EQ.1.0: “High-tide” plastic strain in reinforcement 
+FRACR Fraction of reinforcement (e.g. for 1% reinforcemen t 
+FRACR = 0.01) 
+YMREIN Young’s Modulus of reinforcement 
+PRREIN Poisson’s Ratio of reinforcement 
+SYREIN Yield stress of reinforcement 
+SUREIN Ultimate stress of reinforcement 
+ESHR Strain at which reinforcement begins to harden  
+EUR Strain at which reinforcement reaches ultimate stress 
+R_REINF Dimensionless Ramberg- Osgood parameter r. If zero, a default 
+value r = 4.0 will be used.  If set to - 1, parameters will be 
+calculated from Kent & Park formulae.  (See Remarks ) *. , one with FRAC R = 0, the other with 
+FRACR = 1. Then, by assigning one or other of these  Part IDs to each integration point 
+the reinforcement can be applied to the correct loc ations within the section of the beam. 
+Concrete: 
+In monotonic compression, the approach of Park and Kent, as described in Park & 
+Paulay [1975] is used.  The material follows a para bolic stress-strain curve up to a 
+maximum stress equal to the cylinder strength FC; t herafter the strength decays linearly 
+with strain until the residual strength is reached.   Default values for some material 
+parameters will be calculated automatically as foll ows: 
+EC50 =(3 + 0.2 9|u1D439|u1D436)
+145|u1D439|u1D436 − 1000  
+where FC is in MPa as per Park and Kent test data. 
+E U NL =  initial tangent slope =2FC 
+EC1  
+User-deﬁned values for EUNL lower than this are not  permitted, but higher values may 
+be deﬁned  if desired. 
+FT = 1.4 |parenleftCvJFC 
+10 |parenriµhtCvJ|twoCst
+|threeCst 
+where FC is in MPa as per Park and Kent test data. 
+ESOFT = E U NL 
+User-deﬁned values higher than EUNL are not permitt ed. 
+ 
+UNITC is used only to calculate default values for the above parameters from FC. 
+ 
+Strain-softening behavior tends to lead to deformat ions being concentrated in one 
+element, and hence the overall force-deﬂection beha vior of the structure can be mesh-
+size-dependent if the softening is characterized by  strain.  To avoid this, a characteristic 
+length (LCHAR) may be deﬁned.  This is the length o f specimen (or element) that 
+would exhibit the deﬁned monotonic stress-strain re lationship.  LS-DYNA adjusts the 
+stress-strain relationship after ultimate load for each element, such that all elements 
+irrespective of their length will show the same deﬂ ection during strain softening (i.e. *.   
+ between ultimate load and residual load).  Therefor e, although deformation will still be 
+concentrated in one element, the load-deﬂection beh avior should be the same 
+irrespective of element size.  For tensile behavior , ESOFT is similarly scaled. 
+ 
+ 
+ 
+Cyclic behavior is broadly suggested by Blakeley an d Park [1973] as described in Park & 
+Paulay [1975]; the stress-strain response lies with in the Park-Kent envelope, and is 
+characterized by stiﬀ initial unloading response at  slope EUNL followed by a less stiﬀ 
+response if it unloads to less than half the curren t strength.  Reloading stiﬀness 
+degrades with increasing strain. 
+ 
+In tension, the stress rises linearly with strain u ntil a tensile limit FT is reached.  
+Thereafter the stiﬀness and strength decays with in creasing strain at a rate ESOFT. The 
+stiﬀness also decays such that unloading always ret urns to strain at which the stress 
+most recently changed to tensile. 
+ Figure M174-1  
+1 
+2 3,14 4 5,12 
+7 7,9 
+13  10 11 
+16  .   *.  – reinforcement – RRE-
+INF = 4.0 *.   
+ where |u1D7≠≠ and |u1D7≠∆ are strain and stress, |u1D7≠≠|u1D46≠Cst is the strain at zero stress, E is Young’s Modulus, 
+and r and |u1D7≠∆/u1D4:6.st |u1D43BCst  are as deﬁned below  
+ 
+Two options are given for calculation r and |u1D7≠∆/u1D4:6.st |u1D43BCst , which is performed at each stress 
+reversal: 
+1.  If RREINF is input as -1, r and σCH  are calculated internally from formulae 
+given in Kent and Park.  Parameter r depends on the  number of stress rever- 
+sals.  Parameter |u1D7≠∆/u1D4:6.st |u1D43BCst  depends on the plastic strain that occurred betwee n the 
+previous two stress reversals.  The formulae were s tatistically derived from 
+experiments, but may not ﬁt all circumstances.  In particular, large diﬀerences 
+in behavior may be caused by the presence or absenc e of small stress reversals 
+such as could be caused by high frequency oscillati ons.  Therefore, results 
+might sometimes be unduly sensitive to small change s in the input data. 
+2.  If RREINF is entered by the user or left blank, r is held constant while |u1D7≠∆/u1D4:6.st |u1D43BCst  is 
+calculated on each reversal such that the Ramberg-O sgood curve meets the 
+monotonic stress-strain curve at the point from whi ch it last unloaded, e.g. 
+points 6 and 8 are coincident in the graph below.  The default setting RRE-
+INF = 4.0 gives similar hysteresis behavior to that  described by Kent & Park 
+but is unlikely to be so sensitive to small changes  of input data. 
+Output: 
+It is recommended to use BEAMIP on *DATABASE_EXTENT _BINARY to request stress 
+and strain output at the individual integration poi nts.  If this is done, for 

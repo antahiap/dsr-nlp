@@ -1,0 +1,61 @@
+ ......................... ................................................... ................... 3-6  
+*. _LC ...................... ................................................... .............. 3-36  
+*.  
+ *. _LC 
+ *.  *. _LC *.  
+*. _LC 
+*.   
+3-6 (.   
+This is Thermal Material Type 3.  Temperature depen dent isotropic properties can be 
+deﬁned.  The temperature dependency is deﬁned by sp ecifying a minimum of two and 
+a maximum of eight data points.  The properties mus t be deﬁned for the temperature 
+range that the material will see in the analysis. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT TLAT HLAT   
+Type A8 F F F F F   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable T1 T2 T3 T4 T5 T6 T7 T8 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 C5 C6 C7 C8 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable K1 K2 K3 K4 K5 K6 K7 K8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label not 
+exceeding 8 characters must be speciﬁed. *. _LC  
+3-36 (. _LC  
+This is Thermal Material Type 10.  With this model,  isotropic thermal properties that are 
+dependent on temperature (and/or mechanical history  variables) can be speciﬁed with 
+load curves.  The properties must be deﬁned for the  temperature (and/or history 
+variable) range that the material will see in the a nalysis. 
+Card Summary: 
+Card 1a.   This card is included if TGHSV = 0. 
+TMID TRO TGRLC TGMULT TLAT HLAT   
+Card 1b.   This card is included if TGHSV ≠ 0. 
+TMID TRO TGRLC TGMULT TLAT HLAT   
+Card 2.   This card is required. 
+HCLC TCLC HCHSV TCHSV TGHSV    
+Data Card Deﬁnitions: 
+This card is included if TGHSV = 0 (see Card 2). 
+ Card 1a 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT TLAT HLAT   
+Type A F I F F F   
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label must 
+be speciﬁed (see *PART). 
+TRO Thermal density. 
+EQ.0.0: Default to structural density 
+TGRLC Thermal generation rate curve ID (see *DEFINE _CURVE): 
+GT.0: Function of time 
+EQ.0: Use constant multiplier value, TGMULT. *. _LC  
+3-38 (. _LC  *. _LC  
+3-40 (. _LC  *. _LC  
+3-42 (. _LC  *

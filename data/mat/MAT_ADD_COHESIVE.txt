@@ -1,0 +1,28 @@
+ ................................. ................................................... ........................... 2-44  
+*.  2 [7] {see associated material model} 
+ *.   
+*.   
+2-44 (MAT) LS-DYNA R13 *.   *MAT  
+LS-DYNA R13 2-45 (MAT) Remarks: 
+Cohesive elements possess 3 kinematic variables, na mely, two relative displacements |u1D6FF|oneCst, 
+|u1D6FF|twoCst in tangential directions and one relative displace ment |u1D6FF|threeCst in normal direction.  In a 
+corresponding constitutive model, they are used to compute 3 associated traction 
+stresses |u1D461|oneCst, |u1D461|twoCst, and |u1D461|threeCst.  For example, in the elastic case (*.   
+2-46 (MAT) LS-DYNA R13 elements; see for example *. . 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR FLG JCFL DOPT  
+Type A8 F F F I I I  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCSS TAU0 Q B H C GAM0 GAMM 
+Type I F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable A10 A20 A1H A2H A2S POW   
+Type F F F F F F   
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable   D1 D2 D3 D4 D1C D2C 
+Type   F F F F F F 
+ *

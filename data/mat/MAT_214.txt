@@ -1,0 +1,111 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus in |u1D44F /u1D450 direction 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus in /u1D450|u1D44∆  direction 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT  XP YP ZP A1 A2 A3 
+Type F  F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option.  See *MAT _OPTION TROPIC_ELASTIC for a 
+more complete description: 
+EQ.0.0: locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES, and then rotated about the element 
+normal by an angle BETA 
+EQ.2.0: globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: locally orthotr opic material axes determined by rotating 
+the material axes about the element normal by an an gle, 
+BE TA, from a line in the plane of the element deﬁned by 
+the cross product of the vector /u1D42F with the element nor- E[A/B]CRF
+E[A/B]C
+RPThese strains values
+depend on the particular
+unloading path.
+E[A/B]MAXE[A/B]S F
+E[A/B]
+SIGPOST
+E[A/B]FAIL
+ECOMPFEUNLF
+StrainStress
+StrainStress
+Post-peak
+non-linear
+behaviorPost-peak 
+linear 
+behaviorPre-peak 
+linear 
+behavior
+Unloading & 
+Reloading
+FailureCrimp
+Figure M214-1.   Stress – Strain curve for *.   *.   
+  VARIABLE   DESCRIPTION  
+EBCRF Factor for crimp region modulus of elasticity  in transverse 
+direction (see Figure M214-1 ): 
+|u1D438|u1D44FCst/co⋯⋯a.stcrimp =|u1D438|u1D44FCst/co⋯⋯a.stcrimpfac |u1D438, |u1D438|u1D44FCst/co⋯⋯a.stcrimpfac =EBCRF  
+EACRP Crimp strain in longitudinal direction (see Figure M214-1 ): 
+|u1D7≠≠|u1D44∆Cst/co⋯⋯a.stcrimp  
+EBCRP Crimp strain in transverse direction (see Figure M214-1 ): 
+|u1D7≠≠|u1D44FCst/co⋯⋯a.stcrimp  
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable EASF EBSF EUNLF ECOMF EAMAX EBMAX SIGPOST  
+Type F F F F F F F  
+Remarks 2 2 2 2     
+ 
+ VARIABLE   DESCRIPTION  
+EASF Factor for post- peak region modulus of elasticity in longitudinal 
+direction (see Figure M214-1 ): 
+|u1D438|u1D44∆Cst/co⋯⋯a.stsoft =|u1D438|u1D44∆Cst/co⋯⋯a.stsoftfac |u1D438, |u1D438|u1D44∆Cst/co⋯⋯a.stsoftfac =EASF  
+EBSF Factor for post- peak region modulus of elasticity in transverse 
+direction (see Figure M214-1 ): 
+|u1D438|u1D44FCst/co⋯⋯a.stsoft =|u1D438|u1D44FCst/co⋯⋯a.stsoftfac |u1D438, |u1D438|u1D44FCst/co⋯⋯a.stsoftfac =EBSF  
+EUNLF Factor for unloading modulus of elasticity (s ee Figure M214-1 ): 
+|u1D438unload =|u1D438unloadfac |u1D438, |u1D438unloadfac =E U NLF  
+ECOMPF Factor for compression zone modulus of elast icity (see Figure 
+M214-1 ): 
+|u1D438comp =|u1D438compfac |u1D438, |u1D438compfac =ECOMPF  *.   
+  VARIABLE   DESCRIPTION  
+EAFAIL Erosion strain in longitudinal direction (se e Figure M214-1 ): 
+|u1D7≠≠|u1D44∆Cst/co⋯⋯a.stfail  
+EBFAIL Erosion strain in transverse direction (see Figure M214-1 ): 
+|u1D7≠≠|u1D44FCst/co⋯⋯a.stfail  
+Remarks: 
+1.  Strain Rate Effects.   Strain rate eﬀects are accounted for using a Cowp er-
+Symonds model which scales the stress according to the strain rate: 
+/u1D6D4ad j=/u1D6D4|parenleftCvJ1 +|u1D7≠≠̇
+|u1D436|parenriµhtCvJ|oneCst
+|u1D443Cst  . 
+In the above equation /u1D6D4 is the quasi-static stress, /u1D6D4ad j is the adjusted stress ac- 
+counting for strain rate |u1D7≠≠̇, and |u1D436 (CCE) and |u1D443 (PCE) are the Cowper-Symonds 
+factors which must be determined experimentally for  each material. 
+The model captures the non-linear strain rate eﬀect s in many materials.  With 
+its less than unity exponent, 1/|u1D4JD, this model captures the rapid increase in ma- 
+terial properties at low strain rate, while increas ing less rapidly at very high 
+strain rates.  Because stress is a function of stra in rate the elastic stiﬀness also 
+is: 
+/u1D404ad j=/u1D404|parenleftCvJ1 +|u1D7≠≠̇
+|u1D436|parenriµhtCvJ|oneCst
+|u1D443Cst 
+where /u1D404ad j is the adjusted elastic stiﬀness.  Additionally, t he strains to peak and 
+strains to failure are assumed to follow a Cowper-S ymonds model with, possi- 
+bly diﬀerent , constants 
+|u1D7≠≠ad j=ε|parenleftCvJ1 +|u1D7≠≠̇
+|u1D436|u1D46≠Cst|parenriµhtCvJ|oneCst
+|u1D443Cst/u1D460.sts  , 
+where, |u1D7≠≠ad j is the adjusted eﬀective strain to peak stress or strain to failure, and 
+|u1D436|u1D46≠Cst and |u1D443|u1D46≠Cst are CSE and PSE respectively. 
+2.  Stress-Strain beyond Peak Stress.   When strained beyond the peak stress, 
+the stress decreases linearly until it attains a va lue equal to SIGPOST, at which 
+point the stress-strain relation becomes nonlinear.   In the non-linear region the 
+stress is given by 
+|u1D7≠∆ =  |u1D7≠∆post 
+⎣⎢⎡1 − |parenleftCv6|u1D7≠≠ − |u1D7≠≠[|u1D44∆Cst/|u1D44FCst],post 
+|u1D7≠≠[|u1D44∆Cst/|u1D44FCst],fail − |u1D7≠≠[|u1D44∆Cst/|u1D44FCst],post |parenriµhtCv6/u1D451.stfac 
+⎦⎥⎤  ,  *

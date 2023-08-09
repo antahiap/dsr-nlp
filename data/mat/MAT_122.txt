@@ -1,0 +1,188 @@
+: *. _3D: *. _TAB: *.  
+*. _3D 
+*. _TAB 
+*.   *.   
+  VARIABLE   DESCRIPTION  
+PR Poisson’s ratio, /u1D̅08 
+HR Hardening rule: 
+EQ.1.0: Linear (default) 
+EQ.2.0: Exponential 
+EQ.3.0: Load curve 
+P1 Material parameter: 
+HR.EQ.1.0: Tangent modulus 
+HR.EQ.2.0: /u1D458, strength coeﬃcient for exponential hardening 
+P2 Material parameter: 
+HR.EQ.1.0: Yield stress 
+HR.EQ.2.0: |u1D4JB, exponent 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable R00 R45 R90 LCID E0    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+R00 |u1D44J|zeroCst|zeroCst , Lankford parameter determined from experiments 
+R45 |u1D44J|fourCst|fiveCst , Lankford parameter determined from experiments 
+R90 |u1D44J/nine.st |zeroCst , Lankford parameter determined from experiments 
+LCID Load curve ID for the load curve hardening rul e 
+E0 |u1D7≠≠|zeroCst for determining initial yield stress for exponentia l hardening.  
+(default = 0.0) 
+ *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1 V2 V3 Components of vector /u1D42F for AOPT = 3 
+D1 D2 D3 Components of vector /u1D41D for AOPT = 2 
+BETA Μaterial angle in degrees for AOPT = 0 and 3.  It may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+Remarks: 
+The calculated eﬀective stress is stored in history  variable #4. *. _3D. 
+Card Summary:  
+Card 1.   This card is required.  
+MID RO EX EY EZ PRXY PRYZ PRXZ 
+Card 2.   This card is required. 
+GXY GYZ GXZ F G H L M 
+Card 3.   This card is required. 
+N HR P1 P2     
+Card 4.   This card is required. 
+AOPT        
+Card 5.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 6.   This card is required. 
+V1 V2 V3 D1 D2 D3   
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EX EY EZ PRXY PRYZ PRXZ 
+Type A F F F F F F F 
+ *. _3D  
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EX |u1D438|u1D46JCst, Young’s modulus in the |u1D46J-direction 
+LT.0.0: |EX| is a load curve ID deﬁning |u1D438|u1D46JCst as a function of 
+temperature.  
+EY |u1D438|u1D466Cst, Young’s modulus in the |u1D466-direction 
+LT.0.0: |E Y | is a load curve ID deﬁning |u1D438|u1D466Cst as a function of 
+temperature. 
+EZ |u1D438|u1D467Cst, Young’s modulus in the /u1D46̅-direction 
+LT.0.0: |E Z | is a load curve ID deﬁning |u1D438|u1D467Cst as a function of 
+temperature. 
+PRXY /u1D̅08|u1D46JCst|u1D466Cst , Poisson’s ratio |u1D46J|u1D466   
+LT.0.0: |PRX Y | is a load curve ID deﬁning /u1D̅08|u1D46JCst|u1D466Cst  as a function of 
+temperature.   
+PRYZ /u1D̅08|u1D466Cst|u1D467Cst , Poisson’s ratio |u1D466 /u1D46̅  
+LT.0.0: |PR YZ | is a load curve ID deﬁning /u1D̅08|u1D466Cst|u1D467Cst  as a function of 
+temperature.   
+PRXZ /u1D̅08|u1D46JCst|u1D467Cst , Poisson’s ratio |u1D46J /u1D46̅  
+LT.0.0: |PRX Z | is a load curve ID deﬁning /u1D̅08|u1D46JCst|u1D467Cst  as a function of 
+temperature.   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GXY GYZ GXZ F G H L M 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+GXY |u1D43A|u1D46JCst|u1D466Cst , shear modulus |u1D46J|u1D466    *. _3D  
+  VARIABLE   DESCRIPTION  
+N Material constant in Hill’s 1948 yield criterion (see Remark 1 ).  
+LT.0.0: |N| is a load curve ID deﬁning /u1D441 as a function of 
+temperature. 
+HR Hardening rule: 
+EQ.1: stress- strain relationship is deﬁned by load curve or 2D 
+table ID, P1.  P2 is ignored. 
+EQ.2: stress- strain relationship is deﬁned by strength 
+coeﬃcient /u1D458 (P1) and strain hardening coeﬃcient |u1D4JB (P2), 
+as in Swift’s exponential hardening equation: 
+|u1D7≠∆yield =/u1D458(|u1D7≠≠+0.01 )|u1D4JBCst  . 
+P1 Material parameter: 
+HR.EQ.1: load curve or 2D table ID deﬁning stress- strain curve.  
+If P1 is a 2D table ID, the table gives stress- strain 
+curves for diﬀerent temperatures. 
+HR.EQ.2: /u1D458, strength coeﬃcient in |u1D7≠∆yield =/u1D458(|u1D7≠≠+0.01 )|u1D4JBCst 
+P2 Material parameter: 
+HR.EQ.1: not used 
+HR.EQ.2.0: |u1D4JB, the exponent in |u1D7≠∆|u1D466Cst|u1D4J6Cst|u1D4J2Cst|u1D4J9Cst /u1D451.st =/u1D458(|u1D7≠≠+0.01 )|u1D4JBCst 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT        
+Type I        
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: locally orthotropic with material axes determined by 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES 
+EQ.1.0: locally orthotropic with material axes determined b y a *. _3D  
+  VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 3.  It may be overridden on 
+the element card; see *ELEMENT_SOLID_ORTHO. 
+Remarks: 
+1.  Hill’s 1948 Yield Criterion.  Hill’s yield criterion is based on the assumptions 
+that the material is orthotropic, that hydrostatic stress does not aﬀect yielding, 
+and that there is no Bauschinger eﬀect.  According to Hill, when the principal 
+axes of anisotropy are the axes of reference, the y ield surface has the form 
+|u1D4J3 = |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt(/u1D̅48) − |u1D7≠∆yield |parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2 = 0, 
+where the eﬀective stress |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt (stored as history variable #2) is given by 
+(|u1D439 + |u1D43A)|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|twoCst= |u1D439|parenleftCv2|u1D7≠∆|u1D466Cst− |u1D7≠∆|u1D467Cst|parenriµhtCv2|twoCst+ |u1D43A(|u1D7≠∆|u1D467Cst− |u1D7≠∆|u1D46JCst)|twoCst
++/u1D4:B|parenleftCv2|u1D7≠∆|u1D46JCst− |u1D7≠∆|u1D466Cst|parenriµhtCv2|twoCst+ 2/u1D4:F/u1D̅0F|u1D466Cst|u1D467Cst |twoCst+ 2|u1D44≠/u1D̅0F|u1D467Cst|u1D46JCst |twoCst+ 2/u1D441/u1D̅0F|u1D46JCst|u1D466Cst |twoCst  , 
+and where |u1D439, |u1D43A, /u1D4:B, /u1D4:F, |u1D44≠, and /u1D441 are material parameters of the current state of 
+anisotropy, assuming three mutually orthogonal plan es of symmetry at every 
+point.  The material /u1D46̅-direction is the reference direction. 
+Let /u1D44B, /u1D44C, |u1D44D be the tensile yield stresses in the principal dir ections of anisotropy, 
+then 
+|u1D7≠∆y0 |twoCst
+/u1D44B|twoCst=|u1D43A +/u1D4:B
+|u1D439 + |u1D43A  ,|u1D7≠∆y0 |twoCst
+/u1D44C|twoCst=/u1D4:B+ |u1D439
+|u1D439 + |u1D43A  ,|u1D7≠∆y0 |twoCst
+|u1D44D|twoCst= 1  , 
+where |u1D7≠∆y0 = |u1D7≠∆yield (0).  |u1D439, |u1D43A, and /u1D4:B are not uniquely determined, but the choice 
+of |u1D439 + |u1D43A = 1  gives 
+|u1D439 =|u1D44D|twoCst
+2|parenleftCvJ1
+/u1D44C|twoCst+1
+|u1D44D|twoCst−1
+/u1D44B|twoCst|parenriµhtCvJ
+  |u1D43A =|u1D44D|twoCst
+2|parenleftCvJ1
+/u1D44B|twoCst+1
+|u1D44D|twoCst−1
+/u1D44C|twoCst|parenriµhtCvJ
+/u1D4:B=|u1D44D|twoCst
+2|parenleftCvJ1
+/u1D44B|twoCst+1
+/u1D44C|twoCst−1
+|u1D44D|twoCst|parenriµhtCvJ 
+If |u1D44J|u1D46JCst|u1D466Cst , |u1D446|u1D467Cst|u1D46JCst , and |u1D447|u1D46JCst|u1D466Cst  are the yield stresses in shear with respect to th e principal 
+axes of anisotropy, then 
+/u1D4:F=|u1D44D|twoCst
+2|u1D44J|u1D46JCst|u1D466Cst |twoCst  , |u1D44≠ =|u1D44D|twoCst
+2|u1D446|u1D467Cst|u1D46JCst |twoCst  ,/u1D441=|u1D44D|twoCst
+2|u1D447|u1D46JCst|u1D466Cst |twoCst  . *. _TABULATED  
+ *. _TABULATED  *. _TABULATED  
+  VARIABLE   DESCRIPTION  
+about the shell element normal by an angle BETA 
+EQ.2.0: globally orthotropic with material axes determined by 
+the vector /u1D41A deﬁned below, as with *DE-
+FINE_COORDINATE_VECTOR 
+EQ.3.0: locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+LT.0.0: the absolute value of AOPT is a coordinate system 
+ID number (CID on *DEFINE_COORDINATE_NODES, *DE-
+FINE_COORDINATE_SYSTEM or *DE-
+FINE_COORDINATE_ VECTOR).  Available in R3 version of 971 
+and later. 
+XP YP ZP Coordinates of point |u1D4JD for AOPT = 1 
+A1 A2 A3 Components of vector /u1D41A for AOPT = 2 
+V1 V2 V3 Components of vector /u1D42F for AOPT = 3 
+D1 D2 D3 Components of vector /u1D41D for AOPT = 2 
+BETA Μaterial angle in degrees for AOPT = 0 and 3.  It may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. *

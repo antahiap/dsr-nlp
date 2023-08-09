@@ -1,0 +1,188 @@
+ .......................... ................................................... ................ 2-521  
+*.  [0,2,3c,5,8B]  {54} 
+ *.   *.   *.   
+This is Material Type 77.  This material model prov ides a general hyperelastic rubber 
+model combined optionally with linear viscoelastici ty as outlined by Christensen [1980]. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO PR N NV G SIGF REF 
+Card 2.   This card is included if and only if PR < 0. 
+TBHYS        
+Card 3a.   This card is included if and only if N > 0. 
+SGL SW ST LCID1 DATA LCID2 BSTART TRAMP 
+Card 3b.   This card is included if and only if N = 0. 
+C10 C01 C11 C20 C02 C30 THERML  
+Card 4.   Include up to 12 of this card.  The next keyword (“ *”) card terminates this 
+input.  Note that VFLAG is only included in the ﬁrs t card of this set. 
+Gi BETA i Gj SIGF j VFLAG    
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PR N NV G SIGF REF 
+Type A F F I I F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density *.   
+  VARIABLE   DESCRIPTION  
+PR Poisson’s ratio (> .49 is recommended, smaller valu es may not 
+work and should not be used).  If this is set to a negative number, 
+then the absolute value is used and an extra card is read for the 
+Mullins eﬀect. 
+N Number of hyperelastic constants to solve for fro m LCID1: 
+EQ.0:  set hyperelastic constants directly. 
+EQ.1: solve for C10 and C01. 
+EQ.2: solve for C10, C01, C11, C20, and C02. 
+EQ.3: solve for C10, C01, C11, C20, C02, and C30. 
+NV Number of Prony series terms used in ﬁtting curve L CID2.  If 
+zero, the default is 6.  Currently, the maximum num ber is set to 
+12.  Values less than 12, possibly 3 - 5 are recommended, since 
+each term used adds signiﬁ cantly to the cost.  Caution should be 
+exercised when taking the results from the ﬁt.  Pre ferably, all 
+generated coeﬃcients should be positive.  Negative values may 
+lead to unstable results.  Once a satisfactory ﬁt h as been achieved 
+it is recommended t hat the coeﬃcients which are written into the 
+output ﬁle be input in future runs. 
+G Shear modulus for frequency independent damping.  F requency 
+independent damping is based on a spring and slider  in series.  
+The critical stress for the slider mechanism is SIGF deﬁned below.  
+For the best results, the value of G should be 250 - 1000 times 
+greater than SIGF. 
+SIGF Limit stress for frequency independent frictio nal damping 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword: *INITI AL_-
+FOAM_REFERENCE_GEOMETRY. 
+EQ.0.0: oﬀ 
+EQ.1.0: on 
+ *.   
+  VARIABLE   DESCRIPTION  
+the constant value of deviatoric strain where the s tress and strain 
+are in the direction of the prescribed strain, or i n non- directional 
+terms, the eﬀective stress divided by 3 times the e ﬀective strain. 
+BSTART In the ﬁt, |u1D6FD|oneCst is set to zero, |u1D6FD|twoCst is set to BSTART, |u1D6FD|threeCst is 10 times |u1D6FD|twoCst, 
+|u1D6FD|fourCst is 10 times |u1D6FD|threeCst, and so on.  If zero, BSTART is determined by an 
+iterative trial and error scheme. 
+TRAMP Optional ramp time for loading 
+ 
+Card 3 for N = 0.   Set the hyperelastic material parameters directly . 
+ Card 3b 1 2 3 4 5 6 7 8 
+Variable C10 C01 C11 C20 C02 C30 THERML  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+C10 |u1D436|oneCst|zeroCst   
+C01 |u1D436|zeroCst|oneCst   
+C11 |u1D436|oneCst|oneCst   
+C20 |u1D436|twoCst|zeroCst   
+C02 |u1D436|zeroCst|twoCst   
+C30 |u1D436|threeCst|zeroCst   
+THERML Flag for the thermal option.  If THERML > 0.0, then G, SIGF, C10 
+and C01 must all specify curve IDs (zero is not permitted) that 
+deﬁne the values as functions of temperature.  If T HERML < 0.0, 
+then G, SIGF, C10 and C01, C11, C20, C02, and C30 m ust all 
+specify curve IDs (zero is not permitted) that deﬁn e the values as 
+functions of temp erature.  A ‘ﬂat’ curve may be used to deﬁne a 
+constant value that does not change with temperatur e.  This 
+thermal option is available only for solid elements . 
+ *.   
+ In order to prevent volumetric work from contributi ng to the hydrostatic work the ﬁrst 
+and second invariants are modiﬁed as shown.  This p rocedure is described in more 
+detail by Sussman and Bathe [1987].  The second Pio la-Kirchhoﬀ and Cauchy stress 
+tensors are obtained from the strain energy functio nal as 
+/u1D4̅A=|u1D71J /u1D44A 
+|u1D71J/u1D46C,        /u1D̅48/u1D44A.st=1
+/u1D4:D/u1D46D/u1D4̅A/u1D46D|u1D447Cst, 
+where /u1D46C is the Green strain tensor and /u1D46D is the deformation gradient.  We use the 
+subscript /u1D44A here to denote the contribution from the strain en ergy potential, and with 
+no other contributions the resulting Cauchy stress is simply 
+/u1D̅48=/u1D̅48/u1D44A.st. 
+ 
+Rate eﬀects are taken into account through linear v iscoelasticity by adding a sequence 
+of stress contributions 
+/u1D̅48|u1D449Cst= |summationCv1/u1D̅48|u1D449Cst|u1D4J6Cst|u1D4JBCst
+|u1D4J6Cst=|oneCst 
+where each term is known as a Prony  term.  Each such stress component /u1D̅48|u1D449Cst|u1D4J6Cst evolves 
+with deformation and time as 
+|parenleftCv2/u1D̅48|u1D449Cst|u1D4J6Cst|parenriµhtCv2/u1D6FB.st= 2|u1D43A|u1D4J6Cst|parenleftCv2/u1D46B− |u1D4J2−/u1D6FD.st|u1D4J6Csts(|u1D461Cst−|u1D461Cst |zeroCsts)|u1D6FD|u1D4J6Cst/u1D̅:A|u1D449Cst|u1D4J6Cst|parenriµhtCv2,        |parenleftCv2/u1D̅:A|u1D449Cst|u1D4J6Cst|parenriµhtCv2/na˙la.st= |u1D4J2/u1D6FD.st|u1D4J6Csts(|u1D461Cst−|u1D461Cst |zeroCsts)/u1D46B. 
+Here ∇ denotes the Jaumann rate. /u1D46B is  the rate-of-deformation tensor, |u1D461 is time and |u1D461|zeroCst is 
+an arbitrary time point.  Each term has an internal  strain /u1D̅:A|u1D449Cst|u1D4J6Cst associated with itself, which 
+incorporates the memory properties a viscoelastic m aterial typically possesses.  This 
+stress is added to the stress tensor determined fro m the strain energy functional, so that 
+/u1D̅48=/u1D̅48/u1D44A.st+/u1D̅48|u1D449Cst. 
+ 
+This model is eﬀectively a Maxwell ﬂuid which consi sts of dampers and springs in 
+series. An arbitrary number of such Prony terms can  be input, each characterized by the 
+shear modulus, |u1D43A|u1D4J6Cst, and relaxation coeﬃcient, |u1D6FD|u1D4J6Cst. To avoid a constant shear modulus 
+from this viscoelastic formulation, a term in the s eries is included only when  |u1D6FD|u1D4J6Cst> 0. 
+ 
+For the sake of understanding the inﬂuence these te rms have on the rate eﬀects of 
+viscoelasticity, let’s investigate the model in a s ituation with no spin and constant rate-
+of-deformation with /u1D46B≠/u1D̅CE. This means that the Jaumann rate is simply diﬀere ntiation 
+with time, and we can look at the implications a sp eciﬁc term has.  To make some 
+physical sense of things, we deal with both the no hyperelastic material present and the 
+hyperelastic material present cases.  For the latte r we assume an elastic shear modulus, 
+|u1D43A, for the hyperelastic material.  
+1.  Constant strain rate, /u1D46B. For the special case of constant strain rate, /u1D46B, we 
+have the following expression for the stress rate 
+/u1D̅48̇|u1D449Cst|u1D4J6Cst= 2|u1D43A|u1D4J6Cst|u1D4J2−/u1D6FD.st|u1D4J6Csts|u1D461Cst/u1D46B, *.   
+ shape of the relaxation curve.  This can also be us ed as a basis for estimating 
+material parameters. 
+ 
+ 
+3.  Creep.  For creep, we assume the same situation but instea d of prescribing the 
+strain rate, /u1D46B, we enforce the stress, /u1D̅48, to be constant after time |u1D461|zeroCst. The expres- 
+sion for the creep strain, /u1D̅:A|u1D4J≠Cst, in the non-presence of a hyperelastic material be - 
+comes 
+/u1D̅:A|u1D4J≠Cst=|u1D6FD|u1D4J6Cst
+2|u1D43A|u1D4J6Cst(|u1D461 − |u1D461|zeroCst)/u1D̅48|zeroCst|u1D4J6Cst, 
+which indicates that the creep strain evolves linea rly with time (see Fig- 
+ure M77-3 ). This is a rather non-physical behavior, but in t he presence of a 
+hyperelastic material the creep evolves as 
+/u1D̅:A|u1D4J≠Cst=1
+2|u1D43A|u1D4J6Cstln /˙raceleft.v6|u1D43A + |u1D43A|u1D4J6Cst
+|u1D43A + |u1D43A|u1D4J6Cst|u1D4J2−/u1D6FD.st|u1D4J6Csts(|u1D461Cst−|u1D461Cst |zeroCsts)/˙raceright.v6/u1D̅48|zeroCst|u1D4J6Cst 
+and saturates as one would expect to a constant val ue.  With many such terms, 
+the creep evolves in a quantitatively diﬀerent mann er, but the qualitative be- 
+havior is to be understood as described. 
+ 
+The Mooney-Rivlin rubber model (model 27) is obtain ed by specifying /u1D441= 1.  Despite 
+the diﬀerences in formulations, we ﬁnd that the res ults obtained with this model are 
+nearly identical with those of material 27 as long as large values of Poisson’s ratio are 
+used. 
+ 
+Frequency independent damping is obtained by having  a spring and slider in series as 
+shown in the following sketch: 
+ G
+σfriction(t0,0)i0i 
+~5it
+~5i t0t2G0
+without hyperelastic material with hyperelastic material
+ Figure M77-2.   Stress relaxation curves *.   
+ b)  Unload the specimen again measuring the force as a  function of displace- 
+ment, |u1D4J3unload (|u1D4J1). 
+c)  The strain energy density is, then, given as a fun ction of the loaded dis- 
+placement as 
+/u1D44A/d.st |eCst|vCst (|u1D4J1) =1
+|u1D449/integral.v:|u1D4J3load (|u1D46≠)|u1D4J1|u1D46≠ /u1D451.st
+|zeroCst  . 
+i)  The peak energy, which is used to index the data s et, is given by 
+/u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt/d.st |eCst|vCst =/u1D44A/d.st |eCst|vCst |parenleftCv2|u1D4J1̅|parenriµhtCv2  . 
+ii)  From this energy curve we can also determine the i nverse, 
+|u1D4J1(/u1D44A/d.st |eCst|vCst ).  Using this inverse the load curve for LS-DYNA is then 
+given by: 
+|u1D437|parenleftCv1/u1D44A/d.st |eCst|vCst ,/u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt/d.st |eCst|vCst |parenriµhtCv1 =|u1D4J3unload [|u1D4J1(/u1D44A/d.st |eCst|vCst )]
+|u1D4J3load [|u1D4J1(/u1D44A/d.st |eCst|vCst )]  . 
+d)  This procedure is repeated for diﬀerent values of |u1D4J1̅ (or equivalently /u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rtde v ). fload
+Wdev(d)V
+d dWdevV
+d
+funload
+d da) b)
+c)
+Figure M77-4.   Illustration of curves needed from experiments to ob tain 
+|u1D437|parenleftCv1/u1D44Ade v ,/u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rtde v |parenriµhtCv1.  a) indicates the response during a uniaxia l quasistatic 
+compression test from which you can ﬁnd /u1D44Ade v (|u1D4J1) (area under the curve).  
+Each test is associated with a maximum displacement and th us a peak strain 
+energy, /u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rtde v  (area under the curve in b)).  c) indicates the unloadin g curve 
+during the test.  Inverting /u1D44Ade v (|u1D4J1) allows you to ﬁnd  |u1D437(/u1D44Ade v ,/u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rtde v ) from the 
+loading and unloading curves for a value of /u1D44A/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rtde v . *

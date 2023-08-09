@@ -1,0 +1,216 @@
+-055: *. -055 
+*. -055  
+LS-DYNA R13 2-397 (MAT) *.   and DFAILT ≠ 0.0. 
+V1 V2 V3 D1 D2 D3 DFAILM DFAILS 
+Card 4b.   This card is included if Card 4a is not included, m eaning, the material is 
+*.  with DFAILT =  0.0. 
+V1 V2 V3 D1 D2 D3   *.  . 
+TFAIL ALPH SOFT FBRT YCFAC DFAILT DFAILC EFS 
+Card 5b.   This card is included if the material is *.  (CRIT = 5 4). 
+PFL EPSF EPSR TSMD SOFT2    
+Card 8a.   This card is only included for *.  (CRIT = 5 4) and 2WAY = 1. 
+SLIMT1 SLIMC1 SLIMT2 SLIMC2 SLIMS NCYRED SOFTG  
+Card 9.   This card is only included for *. -055  
+LS-DYNA R13 2-399 (MAT)  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EA |u1D438|u1D44∆Cst, Young’s modulus - longitudinal direction 
+EB |u1D438|u1D44FCst, Young’s modulus - transverse direction 
+EC |u1D438|u1D4J≠Cst, Young’s modulus - normal direction 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio |u1D44F|u1D44∆  
+PRCA /u1D̅08|u1D4J≠Cst|u1D44∆Cst , Poisson’s ratio /u1D450|u1D44∆  
+PRCB /u1D̅08|u1D4J≠Cst|u1D44FCst , Poisson’s ratio /u1D450|u1D44F  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GAB GBC GCA (KF) AOPT 2WAY TI  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus |u1D44∆|u1D44F  
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus |u1D44F /u1D450 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus /u1D450|u1D44∆  
+(KF) Bulk modulus of failed material (not used) 
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined by 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES, and then, for shells only, rotated about 
+the shell element normal by an angle MANGLE. 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and the gl obal location of the element 
+center; this is the |u1D44∆-direction.  This option is for solid *. -055  
+LS-DYNA R13 2-401 (MAT)  VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+MANGLE Material angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3.   MAN GLE may be overridden on the element card; 
+see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO.  
+ 
+This card is included if the material is *.  and only if DFAILT > 0).  The layer in 
+the element is completely removed after the maximum  strain in 
+the matrix direction is reached.  The input value i s always 
+positive. 
+DFAILS Maximum tensorial shear strain (active only for *. -055  *. . 
+ Card 5a 1 2 3 4 5 6 7 8 
+Variable TFAIL ALPH SOFT FBRT YCFAC DFAILT DFAILC EFS 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+TFAIL Time step size criteria for element deletion:  
+LE.0.0: No element deletion by time step size.  The 
+crashfront algorithm only works if TFAIL is 
+set to a value greater than zero. 
+GT.0.0.and.LE.0.1: Element is deleted when its time step is 
+smaller than the given value. 
+GT.0.1: Element is deleted when the quotient of the 
+actual time step and the original time step 
+drops below the given value. 
+ALPH Shear stress parameter for the nonlinear term;  see *. -055  
+LS-DYNA R13 2-403 (MAT)  VARIABLE   DESCRIPTION  
+DFAILT Maximum strain for ﬁber tension (*. -055  *. -055  
+LS-DYNA R13 2-405 (MAT)  VARIABLE   DESCRIPTION  
+BETA Weighting factor for shear term in tensile ﬁbe r mode.  0.0 ≤ BE TA 
+≤ 1.0. 
+ 
+This card is included if 2WAY = 1 (CRIT must be 54 in this case). 
+ Card 6b 1 2 3 4 5 6 7 8 
+Variable XC XT YC YT SC CRIT BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+XC Longitudinal compressive strength (absolute valu e is used): 
+GE.0.0: Poisson eﬀect (PRBA) after failure is active. 
+LT.0.0: Poisson eﬀect after failure is not active, meaning PR-
+BA = 0. 
+XT Longitudinal tensile strength; see Material Formulation  below. 
+YC Fiber compressive failure stress in the |u1D44F-direction.  See Material 
+Formulation  below. 
+YT Fiber tensile failure stress in the |u1D44F-direction.  See Material 
+Formulation  below. 
+SC Shear strength, |u1D44∆|u1D44F -plane.  See the Material Formulation  below. 
+CRIT Failure criterion (material number): 
+EQ.54.0: Chang-Change criterion for matrix failure (as *. -055  *.  only. 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable PFL EPSF EPSR TSMD SOFT2    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+PFL Percentage of layers which must fail before crashfr ont is initiated 
+(thin and thick shells only).  For example, if |PFL| =80.0, then 80% 
+of the layers must fail before strengths are reduce d in neighboring 
+elements.  Default: all layers must fail.  The sign  of PFL 
+determines how many in- plane integration points must fail for a 
+single layer to fail: 
+GT.0.0:  A single layer fails if 1 in-plane IP fail. 
+LT.0.0:  A single layer fails if 4 in-plane IPs fail. 
+EPSF Damage initiation transverse shear strain 
+EPSR Final rupture transverse shear strain 
+TSMD Transverse shear maximum damage (default = 0.9 0) 
+SOFT2 Optional “orthogonal” softening reduction factor fo r material 
+strength in crashfront elements (default = 1.0).  S ee Remark 2
+(thin and thick shells only). 
+ 
+Optional Card 8 (only for CRIT = 54). This card is included for *. -055  
+LS-DYNA R13 2-407 (MAT)  VARIABLE   DESCRIPTION  
+SLIMC1 Factor to determine the minimum stress limit after stress 
+maximum (ﬁber compression).  Similar to *. -055  *.  only.  
+ Card 9 1 2 3 4 5 6 7 8 
+Variable LCXC LCXT LCYC LCYT LCSC DT   
+Type I I I I I F   
+ 
+ VARIABLE   DESCRIPTION  
+LCXC Load curve ID for XC as a function of strain rate ( XC is ignored 
+with this option) 
+LCXT Load curve ID for XT as a function strain rate (XT is ignored with 
+this option) 
+LCYC Load curve ID for YC as a function of strain rate ( YC is ignored 
+with this option) 
+LCYT Load curve ID for YT as a function of strain rate ( YT is ignored 
+with this option) 
+LCSC Load curve ID for SC as a function of strain rate (SC is ignored 
+with this option) 
+DT Strain rate averaging option: 
+EQ.0.0: Strain rate is evaluated using a running average. 
+LT.0.0: Strain rate is evaluated using an average of the la st 11 
+time steps. 
+GT.0.0: Strain rate is averaged over the last DT time units . *. -055  
+LS-DYNA R13 2-409 (MAT) Material Formulation: 
+*. ) criteria is given as fol lows: 
+1.  For the tensile ﬁber mode, 
+|u1D7≠∆|u1D44∆Cst|u1D44∆Cst > 0⇒|u1D4J2/u1D45:.st|twoCst= |parenleftCvJ|u1D7≠∆|u1D44∆Cst|u1D44∆Cst 
+/u1D44B|u1D461Cst|parenriµhtCvJ|twoCst
++ |u1D6FD |parenleftCvJ|u1D7≠∆|u1D44∆Cst|u1D44FCst
+|u1D446|u1D4J≠Cst|parenriµhtCvJ|twoCst
+− 1,|u1D4J2/u1D45:.st|twoCst≥ 0⇒failed 
+|u1D4J2/u1D45:.st|twoCst< 0⇒elastic  
+|u1D438|u1D44∆Cst= |u1D438|u1D44FCst= |u1D43A|u1D44∆Cst|u1D44FCst =/u1D̅08|u1D44FCst|u1D44∆Cst =/u1D̅08|u1D44∆Cst|u1D44FCst = 0 
+2.  For the compressive ﬁber mode, 
+|u1D7≠∆|u1D44∆Cst|u1D44∆Cst < 0⇒|u1D4J2|u1D4J≠Cst|twoCst= |parenleftCvJ|u1D7≠∆|u1D44∆Cst|u1D44∆Cst 
+/u1D44B|u1D4J≠Cst|parenriµhtCvJ|twoCst
+− 1,|u1D4J2|u1D4J≠Cst|twoCst≥ 0⇒failed 
+|u1D4J2|u1D4J≠Cst|twoCst< 0⇒elastic  
+|u1D438|u1D44∆Cst=/u1D̅08|u1D44FCst|u1D44∆Cst =/u1D̅08|u1D44∆Cst|u1D44FCst = 0 
+3.  For the tensile matrix mode, 
+|u1D7≠∆|u1D44FCst|u1D44FCst > 0⇒|u1D4J2|u1D4JACst|twoCst= |parenleftCvJ|u1D7≠∆|u1D44FCst|u1D44FCst 
+/u1D44C|u1D461Cst|parenriµhtCvJ|twoCst
++ |parenleftCvJ|u1D7≠∆|u1D44∆Cst|u1D44FCst 
+|u1D446|u1D4J≠Cst|parenriµhtCvJ|twoCst
+− 1,|u1D4J2|u1D4JACst|twoCst≥ 0⇒failed 
+|u1D4J2|u1D4JACst|twoCst< 0⇒elastic  
+|u1D438|u1D44FCst=/u1D̅08|u1D44FCst|u1D44∆Cst = 0⇒|u1D43A|u1D44∆Cst|u1D44FCst = 0 
+4.  For the compressive matrix mode, 
+|u1D7≠∆|u1D44FCst|u1D44FCst < 0⇒|u1D4J2/u1D451.st|twoCst= |parenleftCvJ|u1D7≠∆|u1D44FCst|u1D44FCst 
+2|u1D446|u1D4J≠Cst|parenriµhtCvJ|twoCst
++
+⎣⎢⎡|parenleftCvJ/u1D44C|u1D4J≠Cst
+2|u1D446|u1D4J≠Cst|parenriµhtCvJ|twoCst
+− 1
+⎦⎥⎤|u1D7≠∆|u1D44FCst|u1D44FCst 
+/u1D44C|u1D4J≠Cst+ |parenleftCvJ|u1D7≠∆|u1D44∆Cst|u1D44FCst 
+|u1D446|u1D4J≠Cst|parenriµhtCvJ|twoCst
+− 1,|u1D4J2/u1D451.st|twoCst≥ 0⇒failed 
+|u1D4J2/u1D451.st|twoCst< 0⇒elastic  
+|u1D438|u1D44FCst=/u1D̅08|u1D44FCst|u1D44∆Cst =/u1D̅08|u1D44∆Cst|u1D44FCst = 0⇒|u1D43A|u1D44∆Cst|u1D44FCst = 0 
+/u1D44B|u1D4J≠Cst= 2/u1D44C|u1D4J≠Cst, for 50 %  fi b er v olume 
+ 
+For |u1D6FD = 1  we get the original criterion of Hashin [1980] in the tensile ﬁber mode.  For 
+|u1D6FD = 0  we get the maximum stress criterion which is found  to compare better to 
+experiments. 
+ 
+*. -055  *. , failure can occur in any of four 
+diﬀerent ways: 
+• If DFAILT is zero, failure occurs if the Chang-Ch ang failure criterion is 
+satisﬁed in the tensile ﬁber mode. 
+• If DFAILT is greater than zero, failure occurs if : 
+◦ the ﬁber strain is greater than DFAILT or less th an DFAILC 
+◦ if absolute value of matrix strain is greater tha n DFAILM 
+◦ if absolute value of tensorial shear strain is gr eater than DFAILS 
+• If EFS is greater than zero, failure occurs if th e eﬀective strain is greater 
+than EFS. 
+• If TFAIL is greater than zero, failure occurs acc ording to the element 
+timestep as described in the deﬁnition of TFAIL abo ve.   Reduction by  
+SOFT2  
+(orthogonal)  Reduction by 
+0.5(SOFT+SOFT2) 
+ 
+Reduction by 
+SOFT (parallel) 
+ Figure M54-1.   Direction dependent softening *. -055  
+LS-DYNA R13 2-411 (MAT) In *. -055  *.  
+solid elements.  The behavior in the |u1D44F /u1D450-plane is assumed to be isotropic, thus 
+the elastic constants EC, PRCA and GCA are ignored and set according to the 
+given values EA, EB, PRAB, and GAB. Damage in trans verse shear (EPSF, EP-*. -055  
+LS-DYNA R13 2-413 (MAT) SR, TSMD, SOFTG) is ignored.  The failure criterion  is evaluated by replacing  
+|u1D7≠∆/˙.st/˙.st  and |u1D7≠∆|aCst /˙.st  with the corresponding stresses  |u1D7≠∆|oneCst|oneCst  and |u1D7≠∆|aCst|oneCst   in a principal stress 
+frame rotated around the local a-axis.  The princip al axes 1 and 2 in the b-c 
+plane are chosen such that ||u1D7≠∆|oneCst|oneCst | ≥ ||u1D7≠∆|twoCst|twoCst | is fulﬁlled. 
+6.  Material Parameters.   PRBA is the minor Poisson's ratio if EA>EB, and t he 
+major Poisson's ratio will be equal to PRBA*(EA/EB) .  If EB > EA, then PRBA 
+is the major Poisson's ratio.  PRCA and PRCB are si milarly deﬁned.  They are 
+the minor Poisson’s ratio if EA>EC or EB>EC, and th e major Poisson’s ratio if 
+the EC>EA or EC>EB. 
+Care should be taken when using material parameters  from third party prod- 
+ucts regarding the directional indices |u1D44∆, |u1D44F and  /u1D450, as they may diﬀer from the 
+deﬁnition used in LS-DYNA. For the direction indice s used in LS-DYNA see 
+section ‘Remarks’ in 

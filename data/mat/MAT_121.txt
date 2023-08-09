@@ -1,0 +1,11 @@
+: *. : *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+UTFAIL Optional, translational displacement at failure in tension.  If zero, 
+failure in tension is not considered. 
+UCFAIL Optional, translational displacement at failure in compression.  If 
+zero, failure in compression is not considered. 
+IU Initial translational displacement along axis 
+Remarks: 
+Rotational displacement is measured in radians. *

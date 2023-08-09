@@ -1,0 +1,42 @@
+: *.  
+*.   *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable ES1 ES2 ES3 ES4 ES5 ES6 ES7 ES8 
+Type F F F F F F F F 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+FAIL Failure ﬂag: 
+LT.0.0: User deﬁned failure subroutine, matusr_24  in 
+dyn21.F , is called to determine failure 
+EQ.0.0: Failure is not considered.  This option is recommen ded 
+if failure is not of interest since many calculatio ns will 
+be saved. 
+GT.0.0: Eﬀective plastic strain to failure.  When the plast ic 
+strain reaches this value, the element is deleted f ro m 
+the calculation. 
+TDEL Minimum time step size for automatic element d eletion 
+LCSS Load curve ID or Table ID 
+Load Curve.   When LC SS is a load curve ID, it is taken as 
+deﬁning stress as a function of eﬀective plastic st rain.  If deﬁned, 
+EPS1 - EPS8 and ES1 - ES8 are ignored.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function eﬀect ive plastic strain 
+for that rate; see Figure M24-1 .  When the strain rate falls below 
+the minimum value, the stress as a function of eﬀec tive plastic 
+strain curve for the lowest value of strain rate is  used.  Likewise, 
+when the strain rate exceeds the maximum value the stress as a 
+function of eﬀective pl astic strain curve for the highest value of *.   
+ Remarks: 
+If the 3D or 4D table is used for LCSS, interpolati on is used to ﬁnd the corresponding 
+stress value for the current plastic strain, strain  rate, and history variable(s).  In 
+addition, extrapolation is used for the history var iable evaluation, which means that 
+some upper and lower “limit curves” have to be used , if extrapolation is not desired. 
+ 
+If material history is written to the dynain  ﬁle using *INTERFACE_SPRINGBACK_LS-
+DYNA, the history variables of *.  is used  in combination with *

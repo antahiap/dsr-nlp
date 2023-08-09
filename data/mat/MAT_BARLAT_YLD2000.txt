@@ -1,0 +1,198 @@
+ ............................... ................................................... ....................... 2-850  
+*.  [2,3a,3c] {9} 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+BETA Hardening parameter.  Any value ranging from 0 (iso tropic 
+hardening) to 1 (kinematic hardening) may be input.   This ﬁeld is 
+ignored if the ﬂow potential exponent A is input as  a negative 
+number.  
+ITER Plastic iteration ﬂag: 
+EQ.0.0: Plane stress algorithm for stress return 
+EQ.1.0: Secant iteration algorithm for stress return 
+ITER provides an option of using three secant itera tions for 
+determining the thickness strain increment as exper iments have 
+shown  that this leads to a more accurate prediction of s he ll 
+thickness changes for rapid processes.  A significa nt increase in 
+computation time is incurred with this option so it  should be used 
+only for applications associated with high rates of  loading and/or 
+for implicit analysis. 
+ISCALE Yield locus scaling ﬂag: 
+EQ.0.0: Scaling on - reference direction is the rolling direction 
+(default) 
+EQ.1.0: Scaling oﬀ – reference direction arbitrary 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable K E0 N C P HARD A  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+K Material parameter: 
+HARD.EQ.1.0: /u1D458, strength coeﬃcient for exponential hardening  
+HARD.EQ.2.0: |u1D44∆ in Voce hardening law 
+HARD.EQ.4.0: /u1D458, strength coeﬃcient for Gosh hardening 
+HARD.EQ.5.0: |u1D44∆ in Hocket-Sherby hardening law *.   
+  VARIABLE   DESCRIPTION  
+A Flow potential exponent.  For face centered cubic ( FCC) materials 
+A = 8 is recommended and for body centered cubic (BCC) 
+materials A = 6 may be used.  If the input is negat ive, then a n 
+extra card for Chaboche- Roussilier kinematic hardening is read, 
+the ﬂow potential exponent is taken as the absolute  value of what 
+is input, and BETA above is ignored. 
+ 
+Chaboche-Roussilier Card.   Additional Card for A < 0. 
+ Card 2.1 1 2 3 4 5 6 7 8 
+Variable CRC1 CRA1 CRC2 CRA2 CRC3 CRA3 CRC4 CRA4 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+CRC n Chaboche- Rousselier kinematic hardening parameters; see 
+Remark 3 . 
+CRA n Chaboche- Rousselier kinematic hardening parameters; see 
+Remark 3 . 
+ 
+Direct Material Parameter Card.   Additional card for FIT = 0. 
+ Card 3a 1 2 3 4 5 6 7 8 
+Variable ALPHA1 ALPHA2 ALPHA3 ALPHA4 ALPHA5 ALPHA6 ALPHA7 ALPHA8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+ALPHA i |u1D6F+|u1D4J6Cst, see Remark 2 . If AL PHA1 is input as a negative number, then 
+the absolute value is the ID of a load curve giving  |u1D6F+|oneCst as a function 
+of temperature.  With this choice, all  AL PHAi must be negative 
+and given by curves. 
+ *.   
+  VARIABLE   DESCRIPTION  
+R90 |u1D44J-value in 90 direction 
+LT.0.0: -R90 is load curve ID, deﬁning this value as a funct ion 
+of temperature. 
+SIGXX |u1D46J|u1D46J -component of stress on yield surface (see Remark 2 ). 
+SIGYY |u1D466|u1D466 -component of stress on yield surface (see Remark 2 ). 
+SIGXY |u1D46J|u1D466 -component of stress on yield surface (see Remark 2 ). 
+DXX |u1D46J|u1D46J -component of tangent to yield surface (see Remark 2 ). 
+DYY |u1D466|u1D466 -component of tangent to yield surface (see Remark 2 ). 
+DXY |u1D46J|u1D466 -component of tangent to yield surface (see Remark 2 ). 
+ 
+Hansel Hardening Card 1.   Additional card for HARD = 3. 
+ Card 4.1 1 2 3 4 5 6 7 8 
+Variable CP T0 TREF TA0     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+CP Adiabatic temperature calculation option: 
+EQ.0.0: Adiabatic temperature calculation is disabled. 
+GT.0.0: CP is the speciﬁc heat |u1D436|u1D4JDCst. Adiabatic temperature 
+calculation is enabled. 
+T0 Initial temperature |u1D447|zeroCst of the material if adiabatic temperature 
+calculation is enabled 
+TREF Reference temperature for output of the yield stres s as history 
+variable 
+TA0 Reference temperature |u1D447|u1D434Cst|zeroCst, the absolute zero for the used 
+temperature scale, such as - 273.15 if the Celsius scale is used and 
+0.0 if the Kelvin scale is used. 
+ *.   
+  VARIABLE   DESCRIPTION  
+AHS Hardening law parameter |u1D434H S , see Remark 4 . 
+BHS Hardening law parameter |u1D43JH S , see Remark 4 . 
+M Hardening law parameter |u1D4JA, see Remark 4 . 
+N Hardening law parameter |u1D4JB, see Remark 4 . 
+EPS0 Hardening law parameter |u1D7≠≠|zeroCst, see Remark 4 . 
+HMART Hardening law parameter ∆/u1D4:B/u1D6FE.st→/u1D6FC.st’, see Remark 4 . 
+K1 Hardening law parameter |u1D43∆|oneCst, see Remark 4 . 
+K2 Hardening law parameter |u1D43∆|twoCst, see Remark 4 . 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable AOPT OFFANG P4 HTFLAG HTA HTB HTC HTD 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see *.   *.   
+  VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+USRFAIL User deﬁned failure ﬂag: 
+EQ.0: No user subroutine is called. 
+EQ.1: User subroutine matusr_24  in dyn21. f is called. 
+Remarks: 
+1.  Cowper - Symonds Strain Rate.  Strain rate is accounted for using the 
+Cowper and Symonds model which scales the yield str ess with the factor 
+1 + |parenleftCvJ|u1D7≠≠̇
+|u1D436|parenriµhtCvJ|oneCst|u1D4JDCst/fraction.v2
+  , 
+where |u1D7≠≠̇ is the strain rate.   To ignore strain rate eﬀects  set both C and P to zero. 
+2.  Yield Condition.   The yield condition for this material can be writ ten as 
+|u1D4J3 |parenleftCv2/u1D6D4,/u1D6C2, |u1D7≠≠|u1D4JDCst|parenriµhtCv2 = |u1D7≠∆eff |parenleftCv2|u1D7≠∆|u1D46JCst|u1D46JCst − 2|u1D6F+|u1D46JCst|u1D46JCst − |u1D6F+|u1D466Cst|u1D466Cst , |u1D7≠∆|u1D466Cst|u1D466Cst − 2|u1D6F+|u1D466Cst|u1D466Cst − |u1D6F+|u1D46JCst|u1D46JCst , |u1D7≠∆|u1D46JCst|u1D466Cst − |u1D6F+|u1D46JCst|u1D466Cst |parenriµhtCv2
+−|u1D7≠∆/u1D44C.st|u1D461Cst|parenleftCv2|u1D7≠≠|u1D4JDCst, |u1D7≠≠̇|u1D4JDCst, |u1D6FD|parenriµhtCv2 ≤ 0 
+where 
+|u1D7≠∆|eCst /f.st/f.st|parenleftCv2|u1D46≠|u1D46JCst|u1D46JCst , |u1D46≠|u1D466Cst|u1D466Cst , |u1D46≠|u1D46JCst|u1D466Cst |parenriµhtCv2 =|<racketleftCvJ1
+2(/u1Dℜ11′+/u1Dℜ11′′)|<racketriµhtCvJ|oneCst/|u1D44∆Cst
+/u1Dℜ11|minuteCst= |dividesCv1/u1D44B′|oneCst−/u1D44B′|twoCst|dividesCv1|u1D44∆Cst
+/u1Dℜ11|minuteCst|minuteCst = |dividesCv12/u1D44B|oneCst|minuteCst|minuteCst + X|twoCst|minuteCst|minuteCst |dividesCv1|u1D44∆Cst+ |dividesCv1X|oneCst|minuteCst|minuteCst + 2X |twoCst|minuteCst|minuteCst |dividesCv1|u1D44∆Cst 
+The /u1D44B′|u1D4J6Cst and /u1D44B′′|u1D4J6Cst are eigenvalues of /u1D44B′|u1D4J6Cst|u1D4J7Cst   and /u1D44B′′|u1D4J6Cst|u1D4J7Cst  and are given by  
+/u1D44B|oneCst|minuteCst=1
+2|parenleftCvJ/u1D44B|oneCst|oneCst |minuteCst+/u1D44B|twoCst|twoCst |minuteCst+/radical.v2(/u1D44B|oneCst|oneCst |minuteCst−/u1D44B|twoCst|twoCst |minuteCst)|twoCst+ 4/u1D44B|oneCst|twoCst |minuteCst|twoCst|parenriµhtCvJ
+/u1D44B|twoCst|minuteCst=1
+2|parenleftCvJ/u1D44B|oneCst|oneCst |minuteCst+/u1D44B|twoCst|twoCst |minuteCst−/radical.v2(/u1D44B|oneCst|oneCst |minuteCst−/u1D44B|twoCst|twoCst |minuteCst)|twoCst+ 4/u1D44B|oneCst|twoCst |minuteCst|twoCst|parenriµhtCvJ 
+and 
+/u1D44B|oneCst|minuteCst|minuteCst =1
+2|parenleftCvJ/u1D44B|oneCst|oneCst |minuteCst|minuteCst +/u1D44B|twoCst|twoCst |minuteCst|minuteCst +/radical.v2(/u1D44B|oneCst|oneCst |minuteCst|minuteCst −/u1D44B|twoCst|twoCst |minuteCst|minuteCst )|twoCst+ 4/u1D44B|oneCst|twoCst |minuteCst|minuteCst |twoCst|parenriµhtCvJ
+/u1D44B|twoCst|minuteCst=  1
+2|parenleftCvJ/u1D44B|oneCst|oneCst |minuteCst|minuteCst +/u1D44B|twoCst|twoCst |minuteCst|minuteCst −/radical.v2(/u1D44B|oneCst|oneCst |minuteCst|minuteCst −/u1D44B|twoCst|twoCst |minuteCst|minuteCst )|twoCst+ 4/u1D44B|oneCst|twoCst |minuteCst|minuteCst |twoCst|parenriµhtCvJ 
+respectively.  The /u1D44B′|u1D4J6Cst|u1D4J7Cst   and /u1D44B′′|u1D4J6Cst|u1D4J7Cst  are given by *.   
+ *DEFINE_MATERIAL_HISTORIES Properties  
+ Label Attributes Description  
+Eﬀective Stress - - - - Eﬀective stress  |u1D7≠∆|eCst /f.st/f.st(|u1D7≠∆|u1D46JCst|u1D46JCst ,|u1D7≠∆|u1D466Cst|u1D466Cst ,|u1D7≠∆|u1D46JCst|u1D466Cst ), see 
+above 
+ 
+3.  Kinematic Hardening Model.   A kinematic hardening model is implemented 
+following the works of Chaboche and Roussilier.  A back stress, /u1D6C2, is intro- 
+duced such that the eﬀective stress is computed as 
+|u1D7≠∆|eCst /f.st/f.st= |u1D7≠∆|eCst /f.st/f.st(|u1D7≠∆|oneCst|oneCst − 2|u1D6F+|oneCst|oneCst − |u1D6F+|twoCst|twoCst , |u1D7≠∆|twoCst|twoCst − 2|u1D6F+|twoCst|twoCst − |u1D6F+|oneCst|oneCst , |u1D7≠∆|oneCst|twoCst − |u1D6F+|oneCst|twoCst ) . 
+The back stress is the sum of up to four terms acco rding to 
+|u1D6F+|u1D4J6Cst|u1D4J7Cst = |summationCv1 |u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst|fourCst
+|u1D4J8Cst=|oneCst  , 
+and the evolution of each back stress component is as follows 
+|u1D6FF|u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst= |u1D436|u1D4J8Cst|parenleftCvJ|u1D44∆|u1D4J8Cst|u1D46≠|u1D4J6Cst|u1D4J7Cst − |u1D6F+|u1D4J6Cst|u1D4J7Cst 
+|u1D7≠∆|eCst /f.st/f.st− |u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst|parenriµhtCvJ |u1D6FF|u1D7≠≠|u1D4JDCst  , 
+where |u1D436|u1D4J8Cst and |u1D44∆|u1D4J8Cst are material parameters, |u1D46≠|u1D4J6Cst|u1D4J7Cst  is the deviatoric stress tensor, |u1D7≠∆|eCst /f.st/f.st 
+is the eﬀective stress and |u1D7≠≠|u1D4JDCst is the eﬀective plastic strain.  The yield conditi on 
+for this case is modiﬁed according to 
+|u1D4J3 |parenleftCv2/u1D6D4,/u1D6C2, |u1D7≠≠|u1D4JDCst|parenriµhtCv2 = |u1D7≠∆|eCst /f.st/f.st|parenleftCv2|u1D7≠∆|u1D46JCst|u1D46JCst − 2|u1D6F+|u1D46JCst|u1D46JCst − |u1D6F+|u1D466Cst|u1D466Cst , |u1D7≠∆|u1D466Cst|u1D466Cst − 2|u1D6F+|u1D466Cst|u1D466Cst − |u1D6F+|u1D46JCst|u1D46JCst , |u1D7≠∆|u1D46JCst|u1D466Cst − |u1D6F+|u1D46JCst|u1D466Cst |parenriµhtCv2
+− /˙raceleft.v6|u1D7≠∆/u1D44C.st|u1D461Cst(|u1D7≠≠|u1D4JDCst, |u1D7≠≠̇|u1D4JDCst, 0) − |summationCv1 |u1D44∆|u1D4J8Cst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4J8Cst|u1D7≠≠|u1D4JDCst|parenriµhtCv2 /˙racketright.v2|fourCst
+|u1D4J8Cst=|oneCst/˙raceright.v6≤ 0 
+in order to get the expected stress strain response  for uniaxial stress. 
+4.  Hansel Hardening Law.   The Hansel hardening law is the same as in materi al 
+113 but is repeated here for the sake of convenienc e.  
+The hardening is temperature dependent and therefor e this material model 
+must be run either in a coupled thermo-mechanical s olution, using prescribed 
+temperatures or using the adiabatic temperature cal culation option.  Setting the 
+parameter CP to the speciﬁc heat Cp of the material activates the adiabatic tem- 
+perature calculation that calculates the temperatur e rate from the equation  
+|u1D447̇= |summationCv1|u1D7≠∆/u1D422/u1D423|u1D437|u1D4J6Cst|u1D4J7Cst /p.st
+|u1D7≠+|u1D436|u1D4JDCst |u1D4J6Cst/co⋯⋯a.st|u1D4J7Cst  , 
+where /u1D6D4:/u1D40:|u1D4JDCst (the numerator) is the plastically dissipated heat .  Using the Kelvin 
+scale is recommended, even though other scales may be used without prob- 
+lems. *.   
+ 5.  Heat Treatment.   Heat treatment for increasing the formability of prestrained 
+aluminum sheets can be simulated through the use of  HTFLAG, where the 
+intention is to run a forming simulation in steps i nvolving preforming, spring- 
+back, heat treatment, and postforming.  In each ste p the history is transferred 
+to the next using a dynain  ﬁle (see *INTERFACE_SPRINGBACK).  The ﬁrst two 
+steps are performed with HTFLAG = 0 according to st andard procedures, re- 
+sulting in a plastic strain ﬁeld |u1D7≠≠|u1D4JDCst|zeroCst corresponding to the prestrain.  The heat 
+treatment step is performed using HTFLAG = 1 in a c oupled thermomechani- 
+cal simulation, where the blank is heated.  The cou pling between thermal and 
+mechanical processes is only through the maximum te mperature |u1D447|zeroCst being 
+stored as a history variable in the material model,  corresponding to the heat 
+treatment temperature.  Here it is important to exp ort all history variables to 
+the dynain  ﬁle for the postforming step.  In the ﬁnal postfor ming step, HT-
+FLAG = 2, the yield stress is then augmented by the  Hocket-Sherby like term 
+∆|u1D7≠∆ = |u1D44F − (|u1D44F − |u1D44∆)exp |<racketleftCv4− /u1D450|parenleftCv2|u1D7≠≠|u1D4JDCst− |u1D7≠≠|u1D4JDCst|zeroCst|parenriµhtCv2/u1D451.st|<racketriµhtCv4 , 
+where |u1D44∆, |u1D44F, /u1D450, and |u1D4J1 are given as tables as functions of the heat treatm ent tem- 
+perature |u1D447|zeroCst and prestrain |u1D7≠≠|u1D4JDCst|zeroCst. That is, in the table deﬁnitions each load curve 
+corresponds to a given prestrain and the load curve  value is with respect to the 
+heat treatment temperature, 
+|u1D44∆ = |u1D44∆|parenleftCv2|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst|parenriµhtCv2  , |u1D44F = |u1D44F|parenleftCv2|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst|parenriµhtCv2  ,/u1D450=/u1D450|parenleftCv2|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst|parenriµhtCv2  , |u1D4J1 = |u1D4J1(|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst)     
+The eﬀect of heat treatment is that the material st rength decreases but harden- 
+ing increases, thus typically, 
+|u1D44∆ ≤ 0  , |u1D44F ≥ |u1D44∆  , /u1D450> 0  , |u1D4J1 > 0  .*

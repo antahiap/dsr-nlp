@@ -1,0 +1,71 @@
+ ........................ ................................................... ............ 2-1611  
+*.  [2] 
+ *.  *.   *.   
+This is Material Type 258. This is an elastic-(visc o)plastic material with a non-quadratic 
+yield surface where isotropic work hardening is inc luded.  A ductile failure model is 
+included in the form of a damage indicator model.  The extended Cockcroft-Latham 
+criterion is used to represent the dependence of th e failure strain on stress state; see 
+Gruben et.  al. [2012].  Mesh dependency of the fai lure strain is damped out using a 
+regularization scheme based on the deformation mode  of the shell element.  A more 
+detailed description of this model can be found in the paper by Costas et al.  [2018].  The 
+material is available for shell elements only. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY A KSI  
+Type A8 F F F F F F  
+Default none none none none none none none  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable THETA1 Q1 THETA2 Q2 THETA3 Q3   
+Type F F F F F F   
+Default none none none none none none   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable CS PDOTS       
+Type F F       
+Default none none       *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable DCRIT WCB WCL WCS CC PHI GAMMA THICK 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Initial yield stress 
+A Exponent of Hershey yield criterion 
+KSI Coeﬃcient governing critical strain increment f or substepping 
+THETA i Initial hardening modulus of |u1D44J|u1D4J6Cst 
+Qi Saturation value of |u1D44J|u1D4J6Cst 
+CS Rate sensitivity of ﬂow stress 
+PDOTS Reference strain rate 
+DCRIT Critical damage 
+WCB Constant deﬁning the damage evolution 
+WCL Constant deﬁning the damage evolution 
+WCS Constant deﬁning the damage evolution 
+CC Constant deﬁning the damage evolution 
+PHI Constant deﬁning the damage evolution *.   
+ |u1D437̇=〈|u1D7≠∆|oneCst〉
+/u1D44A|u1D4J≠Cst|u1D4JḊ 
+where /u1D44A|u1D4J≠Cst is the Cockcroft-Latham (CL) fracture parameter. 
+ 
+In simulations with shell elements, the CL fracture  parameter /u1D44A|u1D4J≠Cst is deﬁned by 
+/u1D44A|u1D4J≠Cst=Ω/u1D44A|u1D4J≠Cst|u1D44FCst+ (1 −Ω)/u1D44A|u1D4J≠Cst|u1D4JACst 
+where /u1D44A|u1D4J≠Cst|u1D44FCst is the CL parameter in pure bending,  /u1D44A|u1D4J≠Cst|u1D4JACst  is a mesh-dependent CL parameter 
+in membrane loading, and Ω  is a bending indicator given as 
+Ω=1
+2|dividesCv2|u1D7≠≠̇|threeCst|u1D4JDCst+− |u1D7≠≠̇|threeCst|u1D4JDCst−|dividesCv2
+max |parenleftCv3/divides.v:|u1D7≠≠̇|threeCst|u1D4JDCst+/divides.v:,/divides.v:|u1D7≠≠̇|threeCst|u1D4JDCst−/divides.v:|parenriµhtCv3 
+where |u1D7≠≠̇|threeCst|u1D4JDCst+ and |u1D7≠≠̇|threeCst|u1D4JDCst− are the plastic thickness strain rates on the two sides of the shell 
+element.  Thus, the bending indicator is Ω= 1 for pure bending ( |u1D7≠≠̇|threeCst|u1D4JDCst−= −|u1D7≠≠̇|threeCst|u1D4JDCst+) and Ω= 0 
+(|u1D7≠≠̇|threeCst|u1D4JDCst−= |u1D7≠≠̇|threeCst|u1D4JDCst+) for pure membrane loading.  The mesh-dependent CL  parameter for 
+membrane loading is deﬁned by 
+/u1D44A|u1D4J≠Cst|u1D4JACst=/u1D44A|u1D4J≠Cst|u1D4J9Cst+ |parenleftCv2/u1D44A|u1D4J≠Cst|u1D46≠Cst−/u1D44A|u1D4J≠Cst|u1D4J9Cst|parenriµhtCv2 exp 
+⎝⎜⎛−/u1D450|parenleftCvJ/u1D45∫|u1D4J2Cst
+|u1D461|u1D4J2Cst− 1|parenriµhtCvJ
+⎠⎟⎞ 
+where /u1D44A|u1D4J≠Cst|u1D4J9Cst, /u1D44A|u1D4J≠Cst|u1D46≠Cst, and /u1D450 are parameters, /u1D45∫|u1D4J2Cst is the characteristic size of the shell element, a nd 
+|u1D461|u1D4J2Cst is the thickness of the shell element. *

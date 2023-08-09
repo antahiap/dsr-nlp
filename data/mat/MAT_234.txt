@@ -1,0 +1,67 @@
+: *.  
+*.   *.   
+  Card 3 1 2 3 4 5 6 7 8 
+Variable VMB C G23 EKB AOPT    
+Type F F F F F    
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+E1 |u1D438|oneCst, Young’s modulus in the yarn axial-direction. 
+E2 |u1D438|twoCst, Young’s modulus in the yarn transverse-direction 
+G12 |u1D43A|oneCst|twoCst , shear modulus of the yarns 
+EU Ultimate strain at failure 
+THL Yarn locking angle 
+THI Initial braid angle 
+TA Transition angle to locking 
+W Fiber width *.   
+ Remarks: 
+The parameters of the Representative Volume Cell (R VC) are: the yarn span, |u1D46≠, the 
+fabric thickness, |u1D461, the yarn width, |u1D464, and the yarn cross-sectional area, |u1D434. The initially 
+orthogonal yarns (see Figure M234-2 a) are free to rotate (see Figure M234-2 b) up to 
+some angle and after that the lateral contact betwe en the yarns causes the locking of the 
+trellis mechanism and the packing of the yarns (see  Figure M234-2 c).The minimum 
+braid angle, /u1D̅0:min , can be calculated from the geometry and the archi tecture of the fabric 
+material having the yarn width, |u1D464, and the span between the yarns, |u1D46≠: 
+sin(2/u1D̅0:|mCst|iCst|nCst ) =|u1D464
+|u1D46≠  . 
+The range angle, /u1D̅0:loc k , and the maximum braid angle, /u1D̅0:max , are then easily determined 
+as: 
+/u1D̅0:loc k = 45 °−/u1D̅0:|mCst|iCst|nCst   ,      /u1D̅0:|mCst|aCst|xCst = 45 °+/u1D̅0:loc k    
+ 
+The material behavior of the yarn can be simply des cribed by a combination of one 
+Maxwell element without the dashpot and one Kelvin- Voigt element.  The 1-D model of 
+viscoelasticity is shown in Figure M234-3 . The diﬀerential equation of viscoelasticity of 
+the yarns can be derived from the model equilibrium  as in the following equation: 
+(|u1D43∆|u1D44∆Cst+ |u1D43∆|u1D44FCst)|u1D7≠∆ + |u1D7≠7|u1D44FCst|u1D7≠∆̇= |u1D43∆|u1D44∆Cst|u1D43∆|u1D44FCst|u1D7≠≠ + |u1D7≠7|u1D44FCst|u1D43∆|u1D44∆Cst|u1D7≠≠̇ 
+The input parameters for the viscoelasticity model of the material are only the static 
+Young’s modulus  |u1D438|oneCst, the Hookian spring coeﬃcient (EKA) |u1D43∆|u1D44∆Cst, the viscosity coeﬃcient θ
+θ45 o
+45 ow s
+a) 
+c) b) 
+θmin
+θmins
+w
+Figure  M234-2.   Plain woven fabric as trellis mechanism: a) initial state; b ) 
+slightly stretched in bias direction; c) stretched to locking . *.   
+ where |u1D438|twoCst is the transverse Young’s modulus of the yarns, |u1D43A|oneCst|twoCst  is the longitudinal shear 
+modulus, and |u1D6F+ is the lateral contact factor.  The lateral contac t factor is zero when the 
+trellis mechanism is open and unity if the mechanis m is locked with full lateral contact 
+between the yarns.  There is a transition range, ∆/u1D̅0:× TA , of the average braid angle, /u1D̅0:, in 
+which the lateral contact factor, |u1D6F+, is a linear function of the average braid angle.  The 
+graph of the function |u1D6F+(/u1D̅0:) is shown in Figure M234-4 .θα
+1
+045 oθmax θmin∆θ ∆θ θlock θlock
+Figure  M234-4.   The lateral contact factor as a function of average braid 
+angle, /u1D̅0:. *.  provides the reorientation  and locking phenomenon of 
+ﬁbers while 

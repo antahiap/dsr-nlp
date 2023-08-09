@@ -1,0 +1,180 @@
+ ......................................... ................................................... ................................ 2-933  
+*. _{OPTION} [0,3c,5] {37} 
+ *. _{OPTION} *.   *.  _{OPTION}  
+This is Material Type 143.  This is a transversely isotropic material and is available for 
+solid elements.  You have the option of inputting y our own material properties 
+(<BLANK>) or requesting default material properties  for Southern yellow pine (PINE) 
+or Douglas ﬁr (FIR).  This model was developed by M urray [2002] under a contract 
+from the FHWA. 
+Available options include: 
+<BLANK> 
+PINE 
+FIR 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO NPLOT ITERS IRATE GHARD IFAIL IVOL 
+Card 2a.   This card is included if the keyword option is se t to FIR or PINE. 
+MOIS TEMP QUAL_T QUAL_C UNITS IQUAL   
+Card 2b.1.   This card is included if the keyword option is un set (<BLANK>). 
+EL ET GLT GTR PR    
+Card 2b.2.   This card is included if the keyword option is un set (<BLANK>). 
+XT XC YT YC SXY SYZ   
+Card 2b.3.   This card is included if the keyword option is un set (<BLANK>). 
+GF1|| GF2|| BFIT DMAX|| GF1 ┴ GF2 ┴ DFIT DMAX ┴ 
+Card 2b.4.   This card is included if the keyword option is un set (<BLANK>). 
+FLPAR FLPARC POWPAR FLPER FLPERC POWPER   
+Card 2b.5.   This card is included if the keyword option is un set (<BLANK>). 
+NPAR CPAR NPER CPER     *.   
+ Card 3.   This card is required. 
+AOPT MACF BETA      
+Card 4.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 5.   This card is required. 
+D1 D2 D3 V1 V2 V3   
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO NPLOT ITERS IRATE GHARD IFAIL IVOL 
+Type A F I I I F I I 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see*PART). 
+RO Mass density 
+NPLOT Controls what is written as component 7 to the d3plot  database.  
+LS-PrePost always blindly labels this component as eﬀe ctive 
+plastic strain. 
+EQ.1: Parallel damage (default) 
+EQ.2: Perpendicular damage 
+ITERS Number of plasticity algorithm iterations.  T he default is one 
+iteration.  
+GE.0: Original plasticity iteration developed by Murray [ 2002]  
+LT.0: Plasticity iteration (return mapping) with non- associated 
+ﬂow direction for perpendicular yielding.  The abso lute 
+value of ITERS is used as number of plasticit y algorithm 
+iterations. *.   
+  VARIABLE   DESCRIPTION  
+QUAL_T Quality factor options (see Remark 1 ). These quality factors 
+reduce the clear wood tension, shear, and compressi on s trengths 
+as a function of grade. 
+EQ.0.0: Grade 1, 1D, 2, 2D: Predeﬁned strength reduction 
+factors are: 
+Wood Type Tension/Shear 
+Factor Compression 
+Factor 
+Pine 0.47 0.63 
+Fir 0.40 0.73 
+EQ.-1.0: DS-65 or SEl STR (pine and ﬁr).  Predeﬁned strength 
+reduction factors are 0.80 in tension/shear and 0.9 3 in 
+compression. 
+EQ.-2.0: Clear wood.  No strength reduction factors are 
+applied, that is, the reduction factors are 1.0 in ten- 
+sion, shear, and compression. 
+GT.0.0: User deﬁned quality factor in tension/shear.  Value s 
+between 0 and 1 are expected.  Values greater than 
+one are allowed but may not be realistic. 
+QUAL_C User deﬁned quality factor in compression (s ee Remark 1 ).  This 
+input value is used if QUAL_T > 0.  Values between 0 and 1 are 
+expected.  Values greater than one are allowed but may not be 
+realistic.  If left blank, a default value of QUAL_ C = QUAL_ T is 
+used. 
+UNITS Units options: 
+EQ.0: GPa, mm, msec, Kg/mm3, kN. 
+EQ.1: MPa, mm, msec, g/mm3, Nt. 
+EQ.2: MPa, mm, sec, Mg/mm3, Nt. 
+EQ.3: Psi, inch, sec, lb-s2/inch4, lb 
+IQUAL Apply quality factors perpendicular to the gr ain: 
+EQ.0: Yes (default) 
+EQ.1: No 
+ *.   
+ This card is included if the keyword option is unse t (<BLANK>). 
+Card 2b.3  1 2 3 4 5 6 7 8 
+Variable GF1|| GF2|| BFIT DMAX|| GF1 ┴ GF2 ┴ DFIT DMAX ┴ 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+XT Parallel tensile strength 
+GF1|| Parallel fracture energy in tension 
+GF2|| Parallel fracture energy in shear 
+BFIT Parallel softening parameter 
+DMAX|| Parallel maximum damage 
+GF1 ┴ Perpendicular fracture energy in tension 
+GF2 ┴ Perpendicular fracture energy in shear 
+DFIT Perpendicular softening parameter 
+ 
+This card is included if the keyword option is unse t (<BLANK>). 
+Card 2b.4  1 2 3 4 5 6 7 8 
+Variable FLPAR FLPARC POWPAR FLPER FLPERC POWPER   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+FLPAR Rate eﬀects parameter: 
+IRATE.EQ.0: Ignored 
+IRATE.EQ.1: Parallel ﬂuidity parameter for tension and shear 
+IRATE.EQ.2: Dimensionless parallel strain rate parameter for 
+tension and shear (see Remark 2 ) *.   
+ This card is included if the keyword option is unse t (<BLANK>). 
+Card 2b.5  1 2 3 4 5 6 7 8 
+Variable NPAR CPAR NPER CPER     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+NPAR Parallel hardening initiation 
+CPAR Parallel hardening rate 
+NPER Perpendicular hardening initiation 
+CPER Perpendicular hardening rate 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT MACF BETA      
+Type F I F      
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes as shown in Figure M2-1 .  Nodes 1, 2, 
+and 4 of an element are identical to the nodes used  for 
+the deﬁnition of a coordinate system as by *DEFINE_ -
+COORDINATE_NODES. 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction.   
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR. 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable D1 D2 D3 V1 V2 V3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+D1 D2 D3 Components of vector /u1D41D for AOPT = 2 
+V1 V2 V3 Deﬁne components of vector /u1D42F for AOPT = 3 and 4 
+Remarks: 
+1.  Quality Factors.   Material property data is for clear wood (small s amples 
+without defects like knots), whereas real structure s are composed of graded 
+wood.  Clear wood is stronger than graded wood.  Qu ality factors (strength 
+reduction factors) are applied to the clear wood st rengths to account for reduc- 
+tions in strength as a function of grade.  One qual ity factor (QUAL_T) is ap- 
+plied to the tensile and shear strengths.  A second  quality factor (QUAL_C) is 
+applied to the compressive strengths.  As an option , predeﬁned quality factors 
+are provided based on correlations between LS-DYNA calculations and test 
+data for pine and ﬁr posts impacted by bogie vehicl es.  By default, quality fac- 
+tors are applied to both the parallel and perpendic ular to the grain strengths.  
+An option is available (IQUAL) to eliminate applica tion perpendicular to the 
+grain. 
+2.  Johnson-Cook Like Logarithmic Rate Dependence.  A Johnson-Cook like 
+logarithmic rate dependence can be invoked by IRATE  = 2 when the keyword 
+option is unset and ITERS < 0. In that case, the st rength parameters are: 
+/u1D44B̂|u1D447Cst=/u1D44B|u1D447Cst|parenleftCv61 + FLPAR × ln |parenleftCv61 +|u1D7≠≠̅̇
+POWPAR |parenriµhtCv6|parenriµhtCv6 
+/u1D44B̂/u1D4:6.st=/u1D44B/u1D4:6.st|parenleftCv61 + FLPARC × ln |parenleftCv61 +|u1D7≠≠̅̇
+POWPAR |parenriµhtCv6|parenriµhtCv6 
+/u1D44Ĉ|u1D447Cst=/u1D44C|u1D447Cst|parenleftCv61 + FLPER × ln |parenleftCv61 +|u1D7≠≠̅̇
+POWPER |parenriµhtCv6|parenriµhtCv6 
+/u1D44Ĉ/u1D4:6.st=/u1D44C/u1D4:6.st|parenleftCv61 + FLPERC × ln |parenleftCv61 +|u1D7≠≠̅̇
+POWPER |parenriµhtCv6|parenriµhtCv6 
+|u1D446̂/u1D44B.st/u1D44C.st = |u1D446/u1D44B.st/u1D44C.st |parenleftCv61 + FLPAR × ln |parenleftCv61 +|u1D7≠≠̅̇
+POWPAR |parenriµhtCv6|parenriµhtCv6 
+|u1D446̂/u1D44C.st /u1D44D.st = |u1D446/u1D44C.st /u1D44D.st |parenleftCv61 + FLPER × ln |parenleftCv61 +|u1D7≠≠̅̇
+POWPER |parenriµhtCv6|parenriµhtCv6 *

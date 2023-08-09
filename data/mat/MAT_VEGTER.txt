@@ -1,0 +1,199 @@
+ ....................................... ................................................... ................................ 2-886  
+*. _2017 .................................. ................................................... ........................... 2-900  
+*.  [2,3a] {5} 
+ *. _STANDARD [2,3a] {5} 
+ *. _2017 [2,3a] {5} 
+ *.  *. _ STANDARD  *. _ 2017  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+There is some additional computational cost associa ted with 
+invoking logarithmic interpolation. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SYS SIP SHS SHL ESH E0 ALPHA LCID2 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+SYS Static yield stress, |u1D7≠∆|zeroCst 
+SIP Stress increment parameter, ∆|u1D7≠∆|u1D4JACst 
+SHS Strain hardening parameter for small strain, |u1D6FD 
+SHL Strain hardening parameter for larger strain, Ω 
+ESH Exponent for strain hardening, |u1D4JB 
+E0 Initial plastic strain, |u1D7≠≠|zeroCst 
+ALPHA Distribution of hardening used in the curve-ﬁ tting, |u1D6F+.  |u1D6F+=0 is 
+pure kinematic hardening while |u1D6F+ = 1  provides pure isotropic 
+hardening. 
+LCID2 Curve ID. The curve deﬁnes Young’s modulus scaling factor with 
+respect to the plastic strain.  By default, the You ng’s modulus is 
+assumed to remain constant.  Eﬀective value is betw een 0 and 1.  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT        
+Type F        
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): *.   
+  VARIABLE   DESCRIPTION  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  BE TA may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA. 
+ 
+Experimental Data Cards.  The next N+1 cards (see N on Card 1) contain experimental 
+data obtained from four mechanical tests for a grou p of equidistantly placed directions 
+/u1D̅0:|u1D4J6Cst=|u1D4J6Cst /u1Dℜ0B.st 
+|twoCst|u1D441Cst,|u1D4J6=0,1,2,…,/u1D441.  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable FUN-i RUN-i FPS1-i FPS2-i FSH-i    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+FUN- i Normalized yield stress |u1D7≠∆un  for uniaxial test for the ith  direction 
+RUN- i Strain ratio (R-value) for uniaxial test for the ith  direction 
+FPS1- i First normalized yield stress |u1D7≠∆ps1  for plain strain test for the ith 
+direction  Figure M136-1.   Bézier interpolation curve. *.   
+ Four characteristic  stress states are selected as reference points: the equi-biaxial point 
+(|u1D7≠∆|u1D44FCst|u1D4J6Cst , |u1D7≠∆|u1D44FCst|u1D4J6Cst ), the plane strain point |parenleftCv2|u1D7≠∆|u1D4JDCst|u1D46≠Cst|oneCst, |u1D7≠∆|u1D4JDCst|u1D46≠Cst|twoCst|parenriµhtCv2, the uniaxial point (|u1D7≠∆|u1D462Cst|u1D4JBCst , 0) and the pure 
+shear point (|u1D7≠∆|u1D46≠Cst/uni210E.st, −|u1D7≠∆|u1D46≠Cst/uni210E.st); see Figure M136-2 . Between the 4 stress points, 3 Bézier curves 
+are used to interpolate the yield locus.  Symmetry conditions are used to construct the 
+complete surface.  The yield locus in Figure M136-2  shows the reference points of 
+experiments for one speciﬁc direction.  The referen ce points can also be determined for 
+other angles to the rolling direction (planar angle  /u1D̅0:). For example, if N = 2 is chosen, 
+normalized yield stresses for directions 0°, 45°, a nd 90° should be deﬁned.  A Fourier 
+series is used to interpolate intermediate angles b etween the measured points. 
+The Vegter yield function with isotropic hardening (ALPHA = 1) is given as: 
+/u1D̅1∫= |u1D7≠∆|u1D4J2Cst /u1D45E.st(|u1D7≠∆|oneCst, |u1D7≠∆|twoCst,/u1D̅0:) − |u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst|parenriµhtCv1 
+with the equivalent stress |u1D7≠∆|u1D4J2Cst /u1D45E.st obtained from the appropriate Bézier function rela ted to 
+the current stress state.  The uniaxial yield stres s |u1D7≠∆|u1D466Cst can be deﬁned as stress-strain curve 
+LCID or alternatively as a functional expression: 
+|u1D7≠∆|u1D466Cst= |u1D7≠∆|zeroCst+ ∆|u1D7≠∆|u1D4JACst/˙racketleft.v:|u1D6FD(|u1D7≠≠̅|u1D4JDCst+ |u1D7≠≠|zeroCst) +|parenleftCv31 − |u1D4J2−/Ome∧∙.st(|u1D7≠≠Cst̅|u1D4JDCsts+|u1D7≠≠Cst|zeroCsts)|parenriµhtCv3|u1D4JBCst/˙racketright.v: 
+In case of kinematic hardening (ALPHA < 1), the sta ndard stress tensor is replaced by a 
+relative stress tensor, deﬁned as the diﬀerence bet ween the stress tensor and a back 
+stress tensor. 
+ 
+To determine the yield stress or reference points o f the Vegter yield locus, four 
+mechanical tests have to be performed for diﬀerent directions.  A good description 
+about the material characterization procedure can b e found in Vegter et al.  (2003). *. _STANDARD  
+This is Material Type 136_STD, a plane stress ortho tropic material model for metal 
+forming.  Yield surface construction is based on th e interpolation by second-order 
+Bezier curves, and model parameters are determined directly from a set of mechanical 
+tests conducted for a number of directions.  For ea ch direction, four mechanical tests are 
+carried out: a uniaxial, an equi-biaxial, a plane s train tensile test and a shear test.  The 
+material formulation is equivalent to . _STANDARD  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR N FBI RBI0 LCID 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see*PART). 
+RO Material density 
+E Elastic Young’s modulus 
+PR Poisson’s ratio 
+N Order of the Fourier series (meaning number of test  groups minus 
+one).  The minimum number for N is 2, and the maxim um is 10.  
+FBI Normalized yield stress |u1D7≠∆/˙.st |iCst  for equi-biaxial test 
+RBI0 Strain ratio |u1D7≠∆/˙.st |iCst (0 °)=|u1D7≠≠̇|twoCst(0 °)/|u1D7≠≠̇|oneCst(0 °) for equi- biaxial test in the 
+rolling direction 
+LCID Load curve ID or table ID.  If deﬁned, SYS, SIP, SH S, SHL, ESH, 
+E0, DYS, RATEN, SRN0, and EXSR are ignored. 
+Load Curve.   When LCID is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function eﬀect ive plastic strain 
+for that strain rate.    Linear interpolation betwe en the discrete 
+strain rates is used by default. 
+Logarithmically Deﬁned Tables.   A way to invoke logarithmic 
+interpolation between discrete strain rates is desc ribed as follows.  
+If the ﬁrst  value in the table is negative, LS-DY NA assumes that 
+all the table values represent the natural logarithm of a strain rate.  
+There is some additional computational cost associa ted with 
+invoking logarithmic interpolation. 
+ *. _STANDARD  
+  VARIABLE   DESCRIPTION  
+EQ.2.0:  Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR). 
+DYS Limit dynamic ﬂow stress |u1D7≠∆|zeroCst∗ 
+RATEN Ratio |u1D4JF|eCst|nCst|tCst /h.st  of Boltzman constant /u1D458 (8.617E- 5 eV/K) and maximum 
+activation enthalpy ∆G|zeroCst (in eV): |u1D4JF|eCst|nCst|tCst /h.st =|u1D4J8Csts
+/Delt∙.sts/u1D43∅.sts|zeroCsts 
+SRN0 Limit strain rate |u1D7≠≠|zeroCsṫ 
+EXSR Exponent |u1D4JA for strain rate behavior 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ *. .  The materials share the same Bézier i nterpolation for the 
+section-wise deﬁnition of the yield locus and also use the same four character- 
+istic stress states as reference points.  They only  diﬀer in the plane-strain point 
+deﬁnition in the input.  This material . _STANDARD  
+ between the hinge points on both sides.  This dista nce is deﬁned by fac- 
+tor  |u1D6F+ps = |u1D6F+|oneCst|u1D6F+|twoCst⁄, as shown in Figure M136-1 .  This approach is favored in most 
+publications and has for example been discussed in the PhD-thesis of Pijlman, 
+H. H. (2001). 
+To determine the yield stress or reference points o f the Vegter yield locus, four 
+mechanical tests must be performed for diﬀerent dir ections.  A good descrip- 
+tion about the material characterization procedure can be found in Vegter et al.  
+(2003). 
+2.  Strain Hardening.   The Vegter yield function with isotropic hardenin g (AL-
+PHA = 1) is given as: 
+/u1D̅1∫= |u1D7≠∆e q (|u1D7≠∆|oneCst, |u1D7≠∆|twoCst,/u1D̅0:) − |u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst, |u1D7≠≠̅̇|u1D4JDCst, |u1D7≠≠̇|parenriµhtCv1 
+with the equivalent stress |u1D7≠∆e q  obtained from the appropriate Bézier function 
+related to the current stress state.  The uniaxial yield stress |u1D7≠∆|u1D466Cst can be deﬁned as 
+a yield stress curve, |u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst|parenriµhtCv1, or a yield stress surface, |u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst, |u1D7≠≠̇|parenriµhtCv1, with LCID. In 
+contrast to *. _STANDARD  *. _2017  
+This is Material Type 136_2017, a plane stress orth otropic material model for metal 
+forming.  It features the advanced Vegter yield loc us based on the interpolation by 
+second-order Bezier curves.  Model parameters are d etermined from uniaxial test data 
+at 0°, 45° and 90° to the rolling direction.  There fore, the same mechanical tests must be 
+carried out as for Hill’s 1948 planar anisotropic m aterial model.  For a more detailed 
+description of the yield locus, please see Vegter a nd Boogaard [2006].  The relationships 
+between the results of uniaxial testing and the adv anced yield locus are introduced and 
+discussed in Abspoel et al [2017]. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR  FBI RBI0 LCID 
+Card 2.   This card is required. 
+SYS SIP SHS SHL ESH E0 ALPHA LCID2 
+Card 3.   This card is required. 
+AOPT  DYS RATEN SRN0 EXSR   
+Card 4.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 5.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA  
+Card 6.   This card is required. 
+RM-0 RM-45 RM-90 AG-0 AG-45 AG90   
+Card 7.   This card is required. 
+R00 R45 R90      *. .  The materials share the same Bézier i nterpolation for the 
+section-wise deﬁnition of the yield locus.  
+The four characteristics stress states are predicte d based on standard parame- 
+ters from uniaxial tensile tests.  This approach ha s been presented by Abspoel 
+et al.  (2017).  Test data for 0°, 45°, and 90° to rolling direction must be given to 
+account for anisotropic behavior of the material.  The resulting formulation is 
+then equivalent with *. , this material also provides the Ber gström-Van Liempt 
+equation as third alternative: 
+|u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst, |u1D7≠≠̅̇|u1D4JDCst|parenriµhtCv1 = |u1D7≠∆|zeroCst+ ∆|u1D7≠∆|u1D4JACst/˙racketleft.v:|u1D6FD|parenleftCv1|u1D7≠≠̅|u1D4JDCst+ |u1D7≠≠|zeroCst|parenriµhtCv1 +|parenleftCv31 − |u1D4J2−/Ome∧∙.st|parenleftCv1|u1D7≠≠Cst̅|u1D4JDCsts+|u1D7≠≠Cst|zeroCsts|parenriµhtCv1|parenriµhtCv3|u1D4JBCst/˙racketright.v:
+                                        +|u1D7≠∆|zeroCst∗|<racketleftCv61 + |u1D4JF|eCst|nCst|tCst /h.st ln |parenleftCv6|u1D7≠≠̅̇|u1D4JDCst
+|u1D7≠≠|zeroCsṫ|parenriµhtCv6 |<racketriµhtCv6|u1D4JACst 
+In case of kinematic hardening (ALPHA < 1), the sta ndard stress tensor is re- 
+placed by a relative stress tensor, deﬁned as the d iﬀerence between the stress 
+tensor and a back stress tensor. *

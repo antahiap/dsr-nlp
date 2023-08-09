@@ -1,0 +1,72 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-275 (MAT)  
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+LCSS The absolute value of LC SS is a load curve ID for eﬀective stress 
+as a function of eﬀective plastic strain (this load  curve is optional).  
+The ﬁrst data point, at zero plastic strain, indica tes the initial yield 
+stress. 
+For a negative value of LCSS, negative values of SI G_ASS, SIG_-
+ASF, SIG_SAS, SIG_ SAF will indicate dependence on plastic 
+strain; see below. σ
+ǫσAX
+f
+σAS
+s
+σSA
+s
+σSA
+f
+ǫL
+Figure M30-1.   Superelastic Behavior for a Shape Memory Material *.   
+LS-DYNA R13 2-277 (MAT)  VARIABLE   DESCRIPTION  
+ALPHA Parameter measuring the diﬀerence between material responses 
+in tension and compression (set alpha = 0 for no diﬀerence).  Also, 
+see the following remarks. 
+YMRT Young’s modulus for the martensite if it is diﬀeren t from the 
+modulus for the austeni te.  Defaults to the austenite modulus if it 
+is set to zero. 
+LCID_AS Load curve ID or table ID for the forward  phase change 
+(conversion of austenite into martensite). 
+1.  When LCID_AS is a load curve ID  the curve is t aken to be 
+eﬀective stress as a function of martensite fractio n (rang- 
+ing from 0 to 1). 
+2.  When LCID_AS is a table ID  the table deﬁnes for each 
+phase transition rate (derivative of martensite fra ction) a 
+load curve ID specifying the stress as a function o f mar- 
+tensite fraction for that phase transition rate.   
+The stress as a function of martensite fraction cur ve for 
+the lowest value of the phase transition rate is us ed if the 
+phase transition rate falls below the minimum value .  
+Likewise, the stress as a fu nction of martensite fraction 
+curve for the highest value of phase transition rat e is 
+used if the phase transition rate exceeds the maxim um 
+value. 
+3.  The values of SIG_ASS and SIG_ ASF are overwritten 
+when this option is used. 
+LCID_SA Load curve ID or table ID for reverse  phase change (conversion of 
+martensite into austenite). 
+1.  When LCID_SA is a load curve ID , the curve is taken to be 
+eﬀective stress as a function of martensite fractio n (rang- 
+ing from 0 to 1). 
+2.  When LCID_SA is a table ID , the table deﬁnes for each 
+phase transition rate (derivative of martensite fra ction) a 
+load curve ID specifying the stress as a function o f mar- 
+tensite fraction for that phase transition rate. 
+The stress as a function of martensite fraction cur ve for 
+the lowest value of the phase transition rate is us ed if the *.   
+LS-DYNA R13 2-279 (MAT) The investigated problem is the complete loading-un loading test in tension and 
+compression.  The uniaxial Cauchy stress versus the  logarithmic strain is plotted in 
+Figure M30-2 .
+Cauchy Stress
+-1000
+0.050
+-0.05-0.1500
+0-5001000
+True Strain
+ Figure M30-2.  Complete loading-unloading test in tension and compression . *

@@ -1,0 +1,58 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+PR Poisson’s ratio 
+SIGY Yield stress 
+LAMDA Slenderness ratio, |u1D7≠6 (optional – see remarks) 
+FBUCK Initial buckling load (optional – see remarks.  If used, should be 
+positive) 
+FBUCK2 Optional extra term in initial buckling load  – see remarks 
+CCBRF Reduction factor on initial buckling load for  cyclic behavior 
+BCUR Optional load curve giving compressive bucklin g load ( |u1D466-axis) as 
+a function of compressive strain ( |u1D46J-axis - both positive) 
+TS1 - TS4 Tensile axial strain thresholds 1 to 4 (s ee Output ) 
+CS1 - CS4 Compressive axial strain thresholds 1 to 4 (see Output ) 
+Remarks: 
+The brace element is intended to represent the buck ling, yielding and cyclic behavior of 
+steel elements, such as tubes or I-sections, that c arry only axial loads.  A single beam 
+element should be used to represent each structural  element.  Empirical relationships 
+are used to determine the buckling and cyclic load- deﬂection behavior.  The cyclic 
+behavior is shown in Figure M171-1  (compression shown as negative force and 
+displacement).   
+ 
+The initial buckling load (point 2) is: 
+|u1D439|u1D44FCst/co⋯⋯a.st initial = FB U CK +FB U CK2 
+/u1D4:F|twoCst  , 
+where FBUCK and FBUCK2 are input parameters, and /u1D4:F is the length of the beam 
+element.  If neither FBUCK nor FBUCK2 are deﬁned, t he default is that the initial 
+buckling load is  
+SIG Y × A, 
+where |u1D434 is the cross sectional area.  The buckling curve ( shown dashed) has the form: 
+|u1D439(|u1D4J1) =|u1D439b, initial 
+/radical.v1|u1D434|u1D6FF + |u1D43J 
+where |u1D6FF is |dividesCv1strain yield strain ⁄ |dividesCv1 , and |u1D434 and |u1D43J are internally calculated functions of 
+slenderness ratio ( |u1D7≠6) and loading history. *.   
+ reduction factor is typically in the range 0.6 to 1 .0 (smaller values for more slender 
+members).  By default, CCBRF is calculated using SE AOC 1990: 
+CCBRF =1
+⎝⎜⎜⎜⎛1 +0.5|u1D7≠6
+/u1D̅0B/radical.v5|u1D438
+0.5|u1D7≠∆|u1D466Cst⎠⎟⎟⎟⎞ 
+When tensile loading is applied after buckling, the  member must ﬁrst be straightened 
+before the full tensile yield force can be develope d.  This is represented by a reduced 
+unloading stiﬀness (such as segment 14-15) and the tensile reloading curve (segments 8-
+9 and 15-16).  Further details can be found in Brun eau, Uang, and Whittaker [1998] and 
+Structural Engineers Association of California [197 4, 1990, 1996]. 
+ 
+ 
+The response of stocky (low  |u1D7≠6) and slender (high  |u1D7≠6) braces are compared in the graph.  
+These diﬀerences are achieved by altering the input  value LAMDA (or the section 
+properties of the beam) and FBUCK. 
+Output: 
+Axial Strain and Internal Energy may be plotted fro m the INTEGRATED beam results 
+menus in Oasys Ltd.  Post processors: D3PLOT  and T/HIS . 
+ Figure M171-2.  Comparing the Stress- Strain Response for Two Values of 
+|u1D7≠6 -1-0.8-0.6-0.4-0.200.20.40.60.81
+-0.06 -0.04 -0.02 0 0.02 0.04 0.06Force / Y ield Force
+Strain  = 120 (slender)
+  = 25 (stocky)*

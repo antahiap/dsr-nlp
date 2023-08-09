@@ -1,0 +1,53 @@
+ .................................... ................................................... ............................ 2-957  
+*.  [0,3c,5,8B] {15} 
+ *. _NEBRASKA [0,3c,5,8B] {1 5} 
+ *.   *. _NEBRASKA  *.   *.   
+This is  Material Type 147.  This is an isotropic material w ith damage and is available for 
+solid elements.  The model has a modiﬁed Mohr-Coulo mb surface to determine the 
+pressure dependent peak shear strength.  It was dev eloped for applications involving 
+roadbase soils by Lewis [1999] for the FHWA, who ex tended the work of Abbo and 
+Sloan [1995] to include excess pore water eﬀects. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO NPLOT SPGRAV RHOWAT VN GAMMAR  ITERMX 
+Type A F I F F F F I 
+Default none none 1 none 1.0 0.0 0.0 1 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable K G PHIMAX AHYP COH ECCEN AN ET 
+Type F F F F F F   
+Default none none none none none none none none 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable MCONT PWD1 PWKSK PWD2 PHIRES DINT VDFM DAMLEV 
+Type F F F F F F F F 
+Default none none none none 0.0 none none none 
+ *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable EPSMAX        
+Type F        
+Default none        
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+NPLOT Controls what is written as component 7 to the d3plot  database.  
+LS-PrePost always blindly labels this component as eﬀe ctive 
+plastic strain. 
+EQ.1:  Eﬀective strain 
+EQ.2:  Damage criterion threshold 
+EQ.3:  Damage (diso) 
+EQ.4:  Current damage criterion 
+EQ.5:  Pore water pressure 
+EQ.6:  Current friction angle (phi) 
+SPGRAV Speciﬁc gravity of soil used to get porosity . 
+RHOWAT Density of water in model units - used to determine air void 
+strain (saturation) 
+VN Viscoplasticity parameter (strain-rate enhanced strength) 
+GAMMAR Viscoplasticity parameter (strain-rate enhan ced strength) 
+ITERMX Maximum number of plasticity iterations (def ault 1) 
+K Bulk modulus (non-zero) 
+G Shear modulus (non-zero) 
+PHIMAX Peak shear strength angle (friction angle in  radians) *. _NEBRASKA  
+ *

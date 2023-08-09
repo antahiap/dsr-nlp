@@ -1,0 +1,85 @@
+: *.  
+*.   
+ *.   *.   
+ where /u1D40: is the rate-of-deformation and /u1D6E4̇ governs the inelastic deformation.  The 
+functional form of /u1D6E4̇ is summarized in the following set of equations 
+/u1D6E4̇=/u1D6E4̇|zeroCst+/uni2ℜE8.β1|u1D4J4/uni2ℜE9.β1/u1D6E4̇|oneCst
+/u1D6E4̇|u1D4J6Cst= |u1D44∆|u1D4J6Cst+ |u1D44F|u1D4J6Cst|u1D7≠≠̇,       |u1D4J6 = 0,1
+|u1D4J4 = 1 −/u1D̅05
+|u1D6F∆̃ 
+where 
+/uni2ℜE8.β1|u1D4J4/uni2ℜE9.β1= max|parenleftCv10, |u1D4J4|parenriµhtCv1
+|u1D7≠≠̇=/radical.v52
+3/u1D40:̃:/u1D40:̃
+|u1D437/tilℂecomb.h1= |u1D437 −1
+3tr(/u1D40:)/u1D408
+|u1D6F∆̃=/radical.v53
+8/u1D401/tilℂecomb.h1∶/u1D401/tilℂecomb.h1
+/u1D̅05̇= |u1D4JA/u1D6E4̇|oneCst/uni2ℜE8.β1|u1D4J4/uni2ℜE9.β1(/u1D̅05|u1D46≠Cst−/u1D̅05) 
+A hyperelastic law with a strain energy potential f or the distortional deformation given 
+by 
+/u1D̅1:(|u1D6F+) =|u1D43A
+2(|u1D6F+ − 3) 
+yields a contribution to the deviatoric Cauchy stre ss of 
+/u1D42C= |u1D43A/u1D4:D−|oneCst/u1D401/tilℂecomb.h1  . 0.00.20.40.60.81.01.2
+0.0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0Stress
+Timea0 = 0.0
+a0 = 0.5
+a0 = 1.0
+a0 = 2.0
+ Figure M275-1.   Inﬂuence of parameter |u1D44∆|zeroCst on stress relaxation *.   
+ in tension ( +) and compression ( −), followed by application of ( M275.1 ) above, 
+assuming that 
+|u1D44F|zeroCst+ |u1D44F|oneCst+|u1D44∆|zeroCst+ |u1D44∆|oneCst
+|u1D7≠≠̇> 2 
+in tension and 
+|u1D44F|zeroCst+ |u1D44F|oneCst+|u1D44∆|zeroCst+ |u1D44∆|oneCst
+|u1D7≠≠̇> 1 
+in compression.  This expression will be used in sp ecial cases below when examining 
+each inelastic material parameter individually; the  material parameters above are input 
+on the HJR element cards as A0, B0, A1, B1 and KAPA S. 
+ 
+A Maxwell material is obtained by providing an elem ent with a nonzero |u1D44∆|zeroCst (A0) and 
+with other parameters set to zero.  This parameter should be interpreted as the 
+viscoelastic relaxation coeﬃcient determining the r ate at which the stress relaxes to zero 
+(see parameter BETA in *.   *.   
+ polynomial equation.  This is exempliﬁed in Figure M275-3  using one HJR element with 
+|u1D43∆ = 1 , |u1D43A = 1.5 , /u1D̅05|zeroCst=/u1D̅05|u1D46≠Cst= 0.01  and |u1D4JA = 0 . The engineering strain is ramped up to 5 %  
+and down to 0 and |u1D44F|oneCst is varied with all other parameters zero; the resp onse tends to an 
+elastic-perfectly plastic as |u1D44F|oneCst increases.  The saturated stress value for |u1D44F|oneCst→∞  can be 
+calculated as 
+|u1D44F̅=
+⎣⎢⎢⎡
+⎝⎜⎜⎛1
+2+/radical.v51
+4∓8/u1D̅05|u1D46≠Cst|threeCst
+2 7⎠⎟⎟⎞|oneCst/|threeCst
++
+⎝⎜⎜⎛1
+2−/radical.v51
+4∓8/u1D̅05|u1D46≠Cst|threeCst
+2 7⎠⎟⎟⎞|oneCst/|threeCst
+⎦⎥⎥⎤|twoCst
+ (M275.3)  
+employing ( M275.1 ). 
+ 
+Isotropic strain hardening ( /u1D̅05|u1D46≠Cst>/u1D̅05|zeroCst) or softening ( /u1D̅05|u1D46≠Cst</u1D̅05|zeroCst) is obtained with |u1D4JA > 0 ; /u1D̅05 
+tends exponentially towards /u1D̅05|u1D46≠Cst at a rate determined by |u1D4JA. Using |u1D44F|oneCst= 1000  (meaning 
+very little overstress), /u1D̅05|zeroCst= 0.02 , and /u1D̅05|u1D46≠Cst= 0.01  while varying |u1D4JA, the softening response 
+in Figure M275-4  is obtained.  The rate at which the element harden s is diﬃcult to 
+quantitatively estimate, but presumably it depends not only on |u1D4JA but also on |u1D44F|oneCst. It is 
+important to note however that for small to moderat e |u1D44F|oneCst the model appears to harden 
+with |u1D4JA = 0 , which is due to larger overstress.  The hardening  determined by |u1D4JA can be 
+determined from a loading, unloading and reloading cycle to detect how the the yield 
+strain /u1D̅05 changes; see Hollenstein et.al.  [2013]. 
+ 
+Finally, |u1D44∆|oneCst (A1) is the viscoplastic parameter determining how  stress responds to change 
+in strain rate.  Its interpretation is very similar  to that of |u1D44∆|zeroCst; stress increases with 
+increasing loading rate and relaxes to the saturate d stress value given by ( M275.1 ) and 
+(M275.2 ). In Figure M275-5  a rate dependency is illustrated for |u1D43∆ = 1 , |u1D43A = 1.5 , /u1D̅05|zeroCst=/u1D̅05|u1D46≠Cst=-0.075-0.050-0.0250.0000.0250.0500.0750.1000.125
+0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0Stress
+Strain %de/dt = 0.2
+de/dt = 4.0
+de/dt = 10.0
+de/dt = 20.0
+ Figure M275-5.   Strain rate dependence for |u1D44∆|oneCst=1000  and |u1D44F|oneCst=10  *

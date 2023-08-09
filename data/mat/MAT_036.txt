@@ -1,0 +1,367 @@
+: *. E: *.  
+*. E 
+*. . 
+P5 Load curve or table ID representing regularization factor as a 
+function of the characteristic element size (curve)  or regulariza- 
+tion factor as a function of the characteristic ele ment size and *.   
+LS-DYNA R13 2-337 (MAT) *.   *.   
+LS-DYNA R13 2-339 (MAT)  VARIABLE   DESCRIPTION  
+EQ.6.0:  exponential (Hocket-Sherby) 
+EQ.7.0: load curves in three directions 
+EQ.8.0: table with temperature dependence 
+EQ.9.0: three- dimensional table with temperature and strain 
+rate dependence 
+EQ.10.0: table with pre-strain dependence. See Remarks . 
+P1 Material parameter: 
+HR.EQ.1.0: tangent modulus 
+HR.EQ.2.0: /u1D458, strength coeﬃcient for Swift exponential hard-
+ening 
+HR.EQ.4.0: |u1D44∆, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: /u1D458, strength coeﬃcient for Gosh exponential hard-
+ening 
+HR.EQ.6.0: |u1D44∆, coeﬃcient for Hocket-Sherby exponential hard-
+ening 
+HR.EQ.7.0: load curve ID for hardening in the 45 °-direction.  
+See Remarks . 
+P2 Material parameter: 
+HR.EQ.1.0: yield stress 
+HR.EQ.2.0: |u1D4JB, exponent for Swift exponential hardening 
+HR.EQ.4.0: /u1D450, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: |u1D4JB, exponent for Gosh exponential hardening 
+HR.EQ.6.0: /u1D450, coeﬃcient for Hocket-Sherby exponential hard-
+ening 
+HR.EQ.7.0: load curve ID for hardening in the 90 °-direction.  
+See Remarks . 
+ITER Iteration ﬂag for speed: 
+EQ.0.0: fully iterative 
+EQ.1.0: ﬁxed at three iterations 
+Generally, ITER = 0 is recommended.  ITER = 1, howe ver, is 
+somewhat faster and may give acceptable results in most 
+problems. *.   
+LS-DYNA R13 2-341 (MAT)  VARIABLE   DESCRIPTION  
+exponential hardening (default  =  0.0) 
+HR.EQ.6.0: |u1D44F, coeﬃcient for Hocket- Sherby exponential 
+hardening 
+SPI Case I: If HR = 2.0 and E0 is zero, then |u1D7≠≠|zeroCst is determined by: 
+EQ.0.0: |u1D7≠≠|zeroCst= |parenleftCv2|u1D438Cst
+|u1D4J8Cst|parenriµhtCv2|<racketleftCv4|oneCst(|u1D4JBCst−|oneCst)/fraction.v2 |<racketriµhtCv4, default 
+LE.0.02: |u1D7≠≠|zeroCst= SPI  
+GT.0.02: |u1D7≠≠|zeroCst=|parenleftCv3SPI 
+|u1D4J8Cst|parenriµhtCv3/˙racketleft.v2|oneCst|u1D4JBCst/fraction.v1/˙racketright.v2 
+Case II: If HR = 5.0, then t he strain at plastic yield is determined 
+by an iterative procedure based on the same princip les as for 
+HR = 2.0. 
+P3 Material parameter: 
+HR.EQ.5.0: |u1D4JD, parameter for Gosh exponential hardening 
+HR.EQ.6.0: |u1D4JB, exponent for Hocket- Sherby exponential 
+hardening 
+ 
+BARLAT89 Parameters Card.   This card is included if PB > 0 (see Card 4a/4b).  
+ Card 2b 1 2 3 4 5 6 7 8 
+Variable M AB CB HB LCID E0 SPI P3 
+Type F F F F I F F F 
+ 
+ VARIABLE   DESCRIPTION  
+M |u1D4JA, exponent in Barlat’s yield surface. If negative, the absolute 
+value is used. 
+AB |u1D44∆, Barlat89 parameter 
+CB /u1D450, Barlat89 parameter 
+HB ℎ, Barlat89 parameter 
+LCID Load curve/table ID for hardening in the 0°- direction.  See 
+Remarks . *.   
+LS-DYNA R13 2-343 (MAT) This card is included if the keyword option is not used (<BLANK>) 
+ Card 4a 1 2 3 4 5 6 7 8 
+Variable AOPT C P VLCID  PB HTA HTB 
+Type F F F I  F F F 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see .   *.   
+LS-DYNA R13 2-345 (MAT)  VARIABLE   DESCRIPTION  
+VLCID Volume correction curve ID deﬁning the relative vol ume change 
+(change in volume relative to the initial volume) a s a function of 
+the eﬀective plastic strain.  This is only used whe n nonzero.  See 
+Remarks . 
+PB Barlat89 parameter, |u1D4JD. If PB  >  0, parameters AB, CB, and HB are 
+read instead of R00, R45, and R90. See Remarks  below. 
+NLP ID of a load curve of the Forming Limit Diagram (FL D) under 
+linear strain paths.  In the load curve, abscissas repres ent minor 
+strains while ordinates represent major strains.  D eﬁne only when 
+option NLP is used.  See Remarks . 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3 HTC HTD 
+Type    F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+HTC Load curve/table ID for postforming parameter /u1D450 in heat 
+treatment 
+HTD Load curve/table ID for postforming parameter |u1D4J1 in heat 
+treatment 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA HTFLAG 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 *.   
+LS-DYNA R13 2-347 (MAT) rolling direction, VLCID curve should give the rela tive volume change as function of 
+strain for uniaxial tension in the rolling directio n and load curve given by −E should 
+give the Young’s modulus as function of strain for uniaxial tension in the rolling 
+direction.  Optionally, the curve can be substitute d for a table deﬁning hardening as 
+function of plastic strain rate (HR = 3), temperatu re (HR = 8), or pre-strain (HR = 10).  
+ 
+Exceptions from the rule above are curves deﬁned as  functions of plastic strain in the 
+45 ° and 90 ° directions, i.e.,  |u1D4431 and |u1D4432 for HR = 7 and negative R45  or R 90 , see Fleischer 
+et.al.  [2007].  The hardening curves are here deﬁn ed as measured stress as function of 
+measured plastic strain for uniaxial tension in the  direction of interest, i.e., as 
+determined from experimental testing using a standa rd procedure.  The optional biaxial 
+and shear hardening curves require some further ela boration, as we assume that a 
+biaxial or shear test reveals that the true stress tensor in the material system expressed 
+as 
+ 
+/u1D̅48= |parenleftCv4|u1D7≠∆ 0
+0±|u1D7≠∆|parenriµhtCv4 , |u1D7≠∆ ≥ 0, 
+is a function of the (plastic) strain tensor 
+/u1D̅:A= |parenleftCvJ|u1D7≠≠|oneCst 0
+0±|u1D7≠≠|twoCst|parenriµhtCvJ , |u1D7≠≠|oneCst≥ 0, |u1D7≠≠|twoCst≥ 0, 
+The input hardening curves are |u1D7≠∆ as function of |u1D7≠≠|oneCst+|u1D7≠≠|twoCst. The ± sign above distinguishes 
+between the biaxial ( +) and the shear ( −) cases.  Moreover, the curves deﬁning the |u1D44J-
+values are as function of the measured plastic stra in for uniaxial tension in the direction 
+of interest.  These curves are transformed internal ly to be used with the eﬀective stress 
+and strain properties in the actual model.  The eﬀe ctive plastic strain does not coincide 
+with the plastic strain components in other directi ons than the rolling direction and may 
+be somewhat confusing to the user.  Therefore the v on Mises work equivalent plastic 
+strain is output as history variable #2 if HR = 7 o r if any of the R-values is deﬁned as 
+function of the plastic strain. 
+ 
+The |u1D44J-values in curves are deﬁned as the ratio of instan taneous width change to 
+instantaneous thickness change.  That is, assume th at the width /u1D44A and thickness |u1D447 are 
+measured as function of strain.  Then the correspon ding |u1D44J-values is given by: 
+|u1D44J =|u1D4J1 /u1D44A 
+|u1D4J1|u1D7≠≠ //u1D44A
+|u1D4J1|u1D447 
+|u1D4J1|u1D7≠≠ /|u1D447 
+The anisotropic yield criterion Φ for plane stress is deﬁned as: 
+Φ= |u1D44∆||u1D43∆|oneCst+ |u1D43∆|twoCst||u1D4JACst+ |u1D44∆||u1D43∆|oneCst− |u1D43∆|twoCst||u1D4JACst+/u1D450|2|u1D43∆|twoCst||u1D4JACst= 2|u1D7≠∆/u1D44C.st|u1D4JACst 
+where |u1D7≠∆/u1D44C.st is the yield stress and |u1D43∆|u1D4J6Cst=|oneCst/co⋯⋯a.st|twoCst are given by: 
+|u1D43∆|oneCst=|u1D7≠∆|u1D46JCst+ℎ|u1D7≠∆|u1D466Cst
+2 *.   
+LS-DYNA R13 2-349 (MAT) where |u1D7≠≠|u1D466Cst|u1D4JDCst  is the elastic strain to yield and  |u1D7≠≠̅|u1D4JDCstis the eﬀective plastic strain (logarithmic).  If 
+SIGY is set to zero, the strain to yield if found b y solving for the intersection of the 
+linearly elastic loading equation with the strain h ardening equation: 
+|u1D7≠∆ = |u1D438|u1D7≠≠ 
+|u1D7≠∆ =/u1D458|u1D7≠≠|u1D4JBCst 
+which gives the elastic strain at yield as: 
+|u1D7≠≠|u1D466Cst|u1D4JDCst = |parenleftCvJ|u1D438
+/u1D458|parenriµhtCvJ|oneCst
+|u1D4JBCst−|oneCst 
+If SIGY yield is nonzero and greater than 0.02 then : 
+|u1D7≠≠|u1D466Cst|u1D4JDCst = |parenleftCvJ|u1D7≠∆|u1D466Cst
+/u1D458|parenriµhtCvJ|oneCst
+|u1D4JBCst
+ 
+The other available hardening models include the Vo ce equation given by: 
+|u1D7≠∆/Y.st(|u1D7≠≠|u1D4JDCst) = |u1D44∆ − |u1D44F|u1D4J2−|u1D4J≠Cst|u1D7≠≠Cst |u1D4JDCsts, 
+the Gosh equation given by: 
+|u1D7≠∆/Y.st(|u1D7≠≠|u1D4JDCst) =/u1D458(|u1D7≠≠|zeroCst+ |u1D7≠≠|u1D4JDCst)|u1D4JBCst− |u1D4JD, 
+and ﬁnally the Hocket-Sherby equation given by: 
+|u1D7≠∆/Y.st(|u1D7≠≠|u1D4JDCst) = |u1D44∆ − |u1D44F|u1D4J2−|u1D4J≠Cst|u1D7≠≠Cst |u1D4JDCsts/u1D45B.sts
+. 
+For the Gosh hardening law, the interpretation of t he variable SPI is the same, i.e., if set 
+to zero the strain at yield is determined implicitl y from the intersection of the strain 
+hardening equation with the linear elastic equation . 
+ 
+To include strain rate eﬀects in the model we multi ply the yield stress by a factor 
+depending on the eﬀective plastic strain rate.  We use the Cowper-Symonds’ model; 
+hence the yield stress can be written as: 
+|u1D7≠∆/Y.st(|u1D7≠≠|u1D4JDCst, |u1D7≠≠̇|u1D4JDCst) = |u1D7≠∆/Y.st|u1D46≠Cst(|u1D7≠≠|u1D4JDCst)
+⎩|<raceleftCex⎨|<raceleftCex⎧
+1 + |parenleftCv6|u1D7≠≠̇|u1D4JDCst
+|u1D436|parenriµhtCv6|oneCst/|u1D4JDCst
+⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+ 
+where |u1D7≠∆/Y.st|u1D46≠Cst denotes the static yield stress, |u1D436 and |u1D4JD are material parameters, and |u1D7≠≠̇|u1D4JDCst is the 
+eﬀective plastic strain rate.  With HR.EQ.3 strain rate eﬀects can be deﬁned using a 
+table, in which each load curve in the table deﬁnes  the yield stress as function of plastic 
+strain for a given strain rate.  In contrast to mat erial 24, when the strain rate is larger 
+than that of any curve in the table, the table is e xtrapolated in the strain rate direction to 
+ﬁnd the appropriate yield stress.  
+ 
+A kinematic hardening model is implemented followin g the works of Chaboche and 
+Roussilier.  A back stress /u1D̅:6 is introduced such that the eﬀective stress is com puted as: 
+|u1D7≠∆|eCst /f.st/f.st= |u1D7≠∆|eCst /f.st/f.st(|u1D7≠∆|oneCst|oneCst − 2|u1D6F+|oneCst|oneCst − |u1D6F+|twoCst|twoCst , |u1D7≠∆|twoCst|twoCst − 2|u1D6F+|twoCst|twoCst − |u1D6F+|oneCst|oneCst , |u1D7≠∆|oneCst|twoCst − |u1D6F+|oneCst|twoCst ) *.   
+LS-DYNA R13 2-351 (MAT) To enable the output of these history variables to the d3plot  ﬁles, NEIPS on the *DATA-
+BASE_EXTENT_BINARY card must be set to at least 3.  The history variables can also 
+be plotted on the formed sheet blank as a color con tour map, accessible from 
+Post/FriComp/Misc  menu.  The index value starts from 0.0, with the o nset of necking 
+failure when it reaches 1.0.  The F.I. is calculate d based on critical eﬀect strain method, 
+as explained in manual pages in *.   *.   
+LS-DYNA R13 2-353 (MAT) thermomechanical simulation, where the blank is hea ted.  The coupling between 
+thermal and mechanical is only that the maximum tem perature |u1D447|zeroCst is stored as a history 
+variable in the material model, this corresponding to the heat treatment temperature.  
+Here it is important to export all history variable s to the dynein ﬁle for the postforming 
+step.  In the ﬁnal postforming step, HTFLAG = 2, th e yield stress is then augmented by 
+the Hocket-Sherby like term: 
+∆|u1D7≠∆ = |u1D44F − (|u1D44F − |u1D44∆)exp |<racketleftCv4− /u1D450|parenleftCv2|u1D7≠≠|u1D4JDCst− |u1D7≠≠|u1D4JDCst|zeroCst|parenriµhtCv2/u1D451.st|<racketriµhtCv4 
+where |u1D44∆, |u1D44F,/u1D450 |u1D44∆|u1D4JB|u1D4J1 |u1D4J1  are given as tables as functions of the heat treatm ent temperature |u1D447|zeroCst 
+and prestrain |u1D7≠≠|u1D4JDCst|zeroCst. That is, in the table deﬁnitions each load curve c orresponds to a given 
+prestrain and the load curve value is with respect to the heat treatment temperature, 
+|u1D44∆ = |u1D44∆(|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst)    |u1D44F = |u1D44F(|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst)    /u1D450=/u1D450(|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst)    |u1D4J1 = |u1D4J1(|u1D447|zeroCst, |u1D7≠≠|u1D4JDCst|zeroCst)     
+The eﬀect of heat treatment is that the material st rength decreases but hardening 
+increases, thus typically: 
+|u1D44∆ ≤ 0    |u1D44F ≥ |u1D44∆    /u1D450> 0    |u1D4J1 > 0     
+Revision information: 
+The option NLP is available starting in Dev 95576 i n explicit dynamic analysis, and in 
+SMP and MPP.   
+1.  Smoothing of |u1D6FD is available starting in Revision 109781. 
+2.  Dev139482: non-integer value of the exponent |u1D4JA is supported for the option 
+NLP. 
+ 
+  *.   
+LS-DYNA R13 2-355 (MAT)  
+ 
+ 
+ 
+ 
+ 
+ 
+  FLC- linear strain pathFLC- nonlinear strain path
+Minor true strainMajor true strain
+-0.2 0.2 -0.1 0.1 000.35
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05U.A. E.B.
+P.S.P.S.Unstrained shellEqui-biaxial XYZ
+uy
+uxuy=uy
+Fx0=Fx0=
+uy
+Plane strainUni-axial stressuy
+Plane strain
+ Figure M36-2.   Nonlinear FLD prediction with plane strain pre-straining. *.   
+LS-DYNA R13 2-357 (MAT) 
+Strain Ratio  (history variable #2)
+F.I. (history variable #1)Effective Strain  (history variable #3) Time, seconds (E-03)2 4 6 81.0
+0.8
+0.6
+0.4
+0.2
+0.01.2
+Uniaxial
+Equi-biaxial
+Time, seconds (E-03)2 4 6 81.0
+0.8
+0.6
+0.4
+0.2
+-0.2
+-0.40.0Uniaxial
+Equi-biaxial
+Time, seconds (E-03)2 4 6 80.5
+0.4
+0.3
+0.2
+0.1
+0.00.6
+Uniaxial
+Equi-biaxial
+ Figure M36-4.   Time-history plots of the three history variables. *. E 
+LS-DYNA R13 2-359 (MAT)  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density. 
+E Young’s modulus, |u1D438. 
+PR Poisson’s ratio, ν. 
+LCH XX  Load curve/table deﬁning uniaxial stress vs.  uniax ial strain and 
+strain rate in the given direction ( XX  is either 00, 45,90 ). The exact 
+deﬁnition is discussed in the Remarks below.  LCH00  must be 
+deﬁned, the other defaults to LCH00 if not deﬁned. 
+LCHBI Load curve/table deﬁning biaxial stress vs.  biaxia l strain and 
+strain rate, see discussion in the Remarks below fo r a deﬁnition.  
+If not deﬁned this is determined from LCH00 and the  initial R-
+values to yield a response close to the standard 3- param eter 
+Barlat model. 
+LCHSH Load curve/table deﬁning shear stress vs.  shear st rain and strain 
+rate, see discussion in the Remarks below for a deﬁ nition.  If not 
+deﬁned this is ignored to yield a response close to  the standard 3-
+parameter Barlat model. 
+HOSF Hosford option for enhancing convexity of yield sur face, set to 1 
+to activate. 
+LCR XX  Load curve deﬁning standard R- value vs.  uniaxial strain in the 
+given direction ( XX  is either 00, 45, 90).  The exact deﬁnition is 
+discussed in the Remarks below.  Default is a const ant R- value of 
+1.0, a negative input will result in a constant R-v alue of –LCRXX. *. E 
+LS-DYNA R13 2-361 (MAT) Formulation: 
+The standard 3-parameter Barlat model incorporates plastic anisotropy in a fairly 
+moderate sense, allowing for the speciﬁcation of R- values in three diﬀerent directions, 
+together with a stress level in the reference direc tion (termed rolling  or 0 degree  
+direction), but not more than that.  To allow for a  more accurate representation of a 
+more severe anisotropic material, like in rolled al uminium sheet components, one could 
+migrate to the Barlat YLD2000 model (material 133 i n LS-DYNA) which also allows for 
+specifying stress levels in the two remaining direc tions as well as stress and strain data 
+at an arbitrary point on the yield surface.  The pr operties of extruded aluminium 
+however, are such that neither of these two materia l models are suﬃcient to describe its 
+extreme anisotropy.  One particular observation fro m experiments is that anisotropy 
+evolves with deformation, a feature that is not cap tured in any of the material models 
+discussed so far.  The present extended version of material 36 was therefore developed 
+in an attempt to ﬁll this void in the LS-DYNA mater ial library.  In short, this material 
+allows for R-values and stress levels in the three directions, together with similar data in 
+biaxial and shear directions. And , these properties are functions of the eﬀective pl astic 
+strain so as to allow for deformation induced aniso tropy.  The following is an 
+explanation of its parameters. 
+ 
+The hardening curves or tables LCH00, LCH45 and LCH 90 are here deﬁned as 
+measured stress as function of measured plastic str ain (and potentially rate) for uniaxial 
+tension in the direction of interest, i.e., as dete rmined from experimental testing using a 
+standard procedure.  The optional biaxial and shear  hardening curves LCHBI and 
+LCHSH require some further elaboration, as we assum e that a biaxial or shear test 
+reveals that the true stress tensor in the material  system expressed as 
+/u1D̅48= |parenleftCv4|u1D7≠∆ 0
+0±|u1D7≠∆|parenriµhtCv4 , |u1D7≠∆ ≥ 0, 
+is a function of the (plastic) strain tensor 
+/u1D̅:A= |parenleftCvJ|u1D7≠≠|oneCst 0
+0±|u1D7≠≠|twoCst|parenriµhtCvJ , |u1D7≠≠|oneCst≥ 0, |u1D7≠≠|twoCst≥ 0, 
+The input hardening curves are |u1D7≠∆ as function of |u1D7≠≠|oneCst+|u1D7≠≠|twoCst. The ± sign above distinguishes 
+between the biaxial ( +) and the shear ( −) cases. 
+ 
+Moreover, the curves LCR00, LCR45 and LCR90 deﬁning  the R values are as function of 
+the measured plastic strain for uniaxial tension in  the direction of interest.  The R-values 
+in themselves are deﬁned as the ratio of instantane ous width change to instantaneous 
+thickness change.  That is, assume that the width W  and thickness T are measured as 
+function of strain.  Then the corresponding R-value  is given by: 
+|u1D44J/u1D̅11.st=|u1D4J1 /u1D44A 
+|u1D4J1|u1D7≠≠ //u1D44A
+|u1D4J1|u1D447 
+|u1D4J1|u1D7≠≠ /|u1D447. *. , *.  and *. , *.  manual pages. 
+2.  Yoshida & Uemori Nonliner Kinematic Hardening Model .   See manual pages 
+for *.  and *. , only the yield c ondition and associated ﬂow rules 
+are replaced by the Hill90 equations. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR HR P1 P2 ITER 
+Type A8 F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable M R00 / AH R45 / BH R90 / CH LCID E0 SPI P3 
+Type F F F F I F F F 
+ 
+Hardening Card.   Additional Card for M < 0. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable CRC1 CRA1 CRC2 CRA2 CRC3 CRA3 CRC4 CRA4 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT C P VLCID  FLAG   
+Type F F F I  F   
+ *

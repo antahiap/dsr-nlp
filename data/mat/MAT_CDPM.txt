@@ -1,0 +1,28 @@
+  
+This is material type 273. CDPM is a damage plastic  concrete model based on work 
+published in Grassl et al.  (2011, 2013) and Grassl  and Jirásek (2006).  This model is 
+aimed to simulations where failure of concrete stru ctures subjected to dynamic loadings 
+is sought.  It describes the characterization of th e failure process subjected to multi-axial 
+and rate-dependent loading.  The model is based on eﬀective stress plasticity and with a 
+damage model based on both plastic and elastic stra in measures.  This material model is 
+available only for solids. 
+ 
+There are a lot of parameters for the advanced user  but note that most of them have 
+default values that are based on experimental tests .  They might not be useful for all 
+types of concrete and all types of load paths but t hey are values that can be used as a 
+good starting point.  If the default values are not  good enough the theory chapter at the 
+end of the parameter description can be of use.  
+ 
+History variables of interest are:  
+1 – kappa, /u1D̅05, see equations below 
+15 – damage in tension, |u1D714|u1D461Cst, see equations below 
+16 – damage in compression, |u1D714|u1D4J≠Cst, see equations below 
+ 
+More details on this material can be found on: 
+http://petergrassl.com/Research/DamagePlasticity/CD PMLSDYNA/index.html 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR ECC QH0 FT FC 
+Type A8 F F F F F F F 
+Default none none none 0.2 AUTO 0.3 none none 
+ *

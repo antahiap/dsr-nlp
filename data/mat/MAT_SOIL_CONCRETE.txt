@@ -1,0 +1,34 @@
+ ................................ ................................................... ....................... 2-538  
+*.  [0,3c,5,8B] {3} 
+ *.  *.   
+ *.   *.   
+ order of increasing compression.  If the pressure d rops below the cutoﬀ value speciﬁed, 
+it is reset to that value and the deviatoric stress  state is eliminated. 
+ 
+If the load curve ID (LCYP) is provided as a positi ve number, the deviatoric, perfectly 
+plastic, pressure dependent, yield function, /u1D̅1∫, is given as 
+/u1D̅1∫=/radical.v13/u1D4:D|twoCst− |u1D439|parenleftCv1|u1D4JD|parenriµhtCv1 = |u1D7≠∆|u1D466Cst− |u1D439|parenleftCv1|u1D4JD|parenriµhtCv1 
+where,  |u1D439|parenleftCv1|u1D4JD|parenriµhtCv1  is a tabulated function of yield stress as a funct ion of pressure, and the 
+second invariant, /u1D4:D|twoCst, is deﬁned in terms of the deviatoric stress tenso r as: 
+/u1D4:D|twoCst=1
+2|u1D446|u1D4J6Cst|u1D4J7Cst |u1D446|u1D4J6Cst|u1D4J7Cst   . 
+If LCYP is negative, then the yield function become s: 
+/u1D̅1∫=/u1D4:D|twoCst− |u1D439|parenleftCv1|u1D4JD|parenriµhtCv1  . 
+ 
+If cracking is invoked by setting the residual stre ngth factor, B, on Card 2 to a value 
+between 0.0 and 1.0, the yield stress is multiplied  by a factor |u1D4J3 which reduces with 
+plastic strain according to a trilinear law as show n in Figure M78-1 . 
+|u1D44F = residual strength factor 
+|u1D7≠≠|oneCst= plastic stain at which crac k ing b egins 
+|u1D7≠≠|twoCst= plastic stain at which residual strength is reache d 
+|u1D7≠≠|oneCst and |u1D7≠≠|twoCst are tabulated functions of pressure that are deﬁne d by load curves, see Figure 
+M78-2 .  The values on the curves are strain as a functio n of pressure and should be 
+entered in order of increasing pressure.  The strai n values should always increase 
+monotonically with pressure. 
+ 
+By properly deﬁning the load curves, it is possible  to obtain the desired strength and 
+ductility over a range of pressures; see Figure M78-3 . 
+ Pε
+ε2
+ε1
+ Figure M78-2.   Cracking strain versus pressure. *

@@ -1,0 +1,28 @@
+ ..................... ................................................... .......... 2-480  
+*.  [1D] {13} 
+ *.  
+ *.  *.   
+ *.   *.   
+ Oriﬁce Cards.   Include one card per oriﬁce.  Read in up to 15 oriﬁ ce locations.  The 
+next keyword (“*”) card terminates this input.  On the ﬁrst card below the optional 
+input parameters SF and DF may be speciﬁed.  
+ Cards 3 1 2 3 4 5 6 7 8 
+Variable ORFLOC ORFRAD SF DC     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+ORFLOC |u1D4J1|u1D4J6Cst, oriﬁce location of ith  oriﬁce relative to the ﬁxed end 
+ORFRAD |u1D4JF|u1D4J6Cst, oriﬁce radius of ith  oriﬁce 
+EQ.0.0: R on Card 1 is used. 
+SF Scale factor on calculated force.  The default i s set to 1.0. 
+DC /u1D450, linear viscous damping coeﬃcient used after dampe r bottoms 
+out either in tension or compression ith Piston Orifice
+Orifice Opening Controller
+2Ri - hd1d2d3d4
+VpPiston
+Figure M69-1.   Mathematical model for the Side Impact Dummy damper. *.   
+ force as a function of displacement curve at consta nt relative velocity is shown in Figure 
+M69-2 . 
+ 
+The factor, SF, which scales the force defaults to 1.0 and is analogous to the adjusting 
+ring on the damper. *

@@ -1,0 +1,69 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+E Young’s modulus used in tension.  For implicit prob lems E is set 
+to the initial slope of load curve LCID. 
+LCID Load curve ID (see *DEFINE_ CURVE) for nominal stress as a 
+function of strain 
+TC Tension cut-oﬀ stress 
+HU Hysteretic unloading factor between 0 and 1 (def ault = 1, that is, 
+no energy dissipation); see Figure M57-1  and Remark 3 .   
+BETA |u1D6FD, decay constant to model creep in unloading (see Remark 3 ) 
+EQ.0.0: no relaxation 
+DAMP Viscous coeﬃcient (.05 < recommended value <.50) to model 
+damping eﬀects. 
+LT.0.0: |DAMP|  is the load curve ID which deﬁnes the damping 
+constant as a function of the maximum strain in com - 
+pression deﬁned as:  
+|u1D7≠≠|mCst|aCst|xCst = max(1 − |u1D7≠6|oneCst, 1 − |u1D7≠6|twoCst, 1. −|u1D7≠6|threeCst)  . 
+In tension, the damping constant is set to the valu e cor- 
+responding to the strain at 0. The abscissa sh ould be 
+deﬁned from 0 to 1. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SHAPE FAIL BVFLAG KCON LCID2 BSTART TRAMP NV 
+Type F F F F I F F I 
+Default 1.0 0.0 0.0 0.0 0 0.0 0.0 6 
+ 
+ VARIABLE   DESCRIPTION  
+SHAPE Shape factor for unloading which is active for nonz ero values of 
+HU.  SHAPE less than one reduces the energy dissipa tion and 
+greater than one increases dissipation; see Figure M57-1 . 
+FAIL Failure option after cutoﬀ stress is reached: *.   
+  VARIABLE   DESCRIPTION  
+Gi Optional shear relaxation modulus for the ith  term 
+BETA i Optional decay constant if ith  term 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword: *INITI AL_-
+FOAM_REFERENCE_GEOMETRY. 
+EQ.0.0: oﬀ 
+EQ.1.0: on 
+ 
+Frequency Dependence Card. If LCID2 = -1 then include this card. 
+ Card 3b 1 2 3 4 5 6 7 8 
+Variable LCID3 LCID4 SCALEW SCALEA     
+Type I I I I     
+ 
+ VARIABLE   DESCRIPTION  
+LCID3 Load curve ID giving the magnitude of the shear mod ulus as a 
+function of the frequency.  LCID3 must use the same  frequencies 
+as LCID4. 
+LCID4 Load curve ID giving the phase angle of the shear m odulus as a 
+function of the frequency.  LCID4 must use the same  frequencies 
+as LCID3. 
+SCALEW Flag for the form of the frequency data: 
+EQ.0: frequency is in cycles per unit time. 
+EQ.1: circular frequency 
+SCALEA Flag for the units of the phase angle: 
+EQ.0: degrees 
+EQ.1: radians *.   
+ 3.  Hysteretic Unloading.   When hysteretic unloading is used, the reloading will 
+follow the unloading curve if the decay constant, |u1D6FD, is set to zero.  If |u1D6FD is non- 
+zero, the decay to the original loading curve is go verned by the expression: 
+1 − |u1D4J2−/u1D6FD.st |u1D461Cst  
+The bulk viscosity, which generates a rate dependen t pressure, may cause an 
+unexpected volumetric response and, consequently, i t is optional with this 
+model. 
+The hysteretic unloading factor results in the unlo ading curve to lie beneath 
+the loading curve as shown in Figure M57-1 .  This unloading provides energy 
+dissipation which is reasonable in certain kinds of  foam. *

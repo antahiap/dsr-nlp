@@ -1,0 +1,409 @@
+-PARAMETER_BARLAT ........................... ................................................... ................. 2-337  
+*. -PARAMETER_BARLAT [2,3a,3c] {7} 
+ *. 19:  *. 26:  *. -PARAMETER_BARLAT  *. 26 
+*. 19 
+*. -PARAMETER_BARLAT  *. -PARAMETER_BARLAT _{OPTION}  
+This is  Material Type 36.  This model was developed by Barl at and Lian [1989] for 
+modeling sheets with anisotropic materials under pl ane stress conditions.  Lankford 
+parameters may be used to deﬁne the anisotropy. Thi s particular development is due to 
+Barlat and Lian [1989].  *. -PARAMETER_BARLAT  
+2-338 (MAT) LS-DYNA R13 Card 5.   This card is required. 
+   A1 A2 A3 HTC HTD 
+Card 6.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA HTFLAG 
+Card 7.   This card is optional. 
+USRFAIL LCBI LCSH      
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR HR P1 P2 ITER 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus, |u1D438 
+GT.0.0: constant value 
+LT.0.0: load curve ID = |E|,  which deﬁnes Young’s Modulus as 
+a function of plastic strain.  See Remarks . 
+PR Poisson’s ratio, /u1D̅08 
+HR Hardening rule: 
+EQ.1.0: linear (default) 
+EQ.2.0: exponential (Swift) 
+EQ.3.0: load curve or table with strain rate eﬀects 
+EQ.4.0: exponential (Voce) 
+EQ.5.0: exponential (Gosh) *. -PARAMETER_BARLAT  
+2-340 (MAT) LS-DYNA R13  
+Lankford Parameters Card. This card is included if PB = 0 (see Card 4a/4b). 
+ Card 2a 1 2 3 4 5 6 7 8 
+Variable M R00 R45 R90 LCID E0 SPI P3 
+Type F F F F I F F F 
+ 
+ VARIABLE   DESCRIPTION  
+M |u1D4JA, exponent in Barlat’s yield surface. If negative, the absolute 
+value is used. 
+R00 |u1D44J|zeroCst|zeroCst , Lankford parameter in 0°-direction: 
+GT.0.0: constant value 
+LT.0.0: load curve or table ID = |R00|  which deﬁnes |u1D44J|zeroCst|zeroCst  as a 
+function of plastic strain (c urve) or as a function of 
+temperature and plastic strain (table).  See Remarks . 
+R45 |u1D44J|fourCst|fiveCst , Lankford parameter in 45 °-direction: 
+GT.0.0: constant value 
+LT.0.0: load curve or table ID = |R45|  which deﬁnes |u1D44J|fourCst|fiveCst  as a 
+function of plastic strain (c urve) or as a function of 
+temperature and plastic strain (table).  See Remarks . 
+R90 |u1D44J/nine.st |zeroCst , Lankford parameter in 90 °-direction: 
+GT.0.0: constant value 
+LT.0.0: load curve or table ID = |R 90| which deﬁnes |u1D44J/nine.st |zeroCst  as a 
+function of plastic strain (c urve) or as a function of 
+temperature and plastic strain (table).  See Remarks . 
+LCID Load curve/table ID for hardening in the 0°-dire ction.  See 
+Remarks . 
+E0 Material parameter: 
+HR.EQ.2.0: |u1D7≠≠|zeroCst for determining initial yield st ress for Swift 
+exponential hardening (default  =  0.0) 
+HR.EQ.4.0: |u1D44F, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: |u1D7≠≠|zeroCst for determining initial yield s tress for Gosh *. -PARAMETER_BARLAT  
+2-342 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+E0 Material parameter: 
+HR.EQ.2.0: |u1D7≠≠|zeroCst for determining initial yield st ress for Swift 
+exponential hardening (default  =  0.0) 
+HR.EQ.4.0: |u1D44F, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: |u1D7≠≠|zeroCst for determining initial yield s tress for Gosh 
+exponential hardening (default  =  0.0) 
+HR.EQ.6.0: |u1D44F, coeﬃcient for Hocket- Sherby exponential 
+hardening 
+SPI Case I: If HR = 2.0 and E0 is zero, then |u1D7≠≠|zeroCst is determined by: 
+EQ.0.0: |u1D7≠≠|zeroCst= |parenleftCv2|u1D438Cst
+|u1D4J8Cst|parenriµhtCv2|<racketleftCv4|oneCst(|u1D4JBCst−|oneCst)/fraction.v2 |<racketriµhtCv4, default 
+LE.0.02: |u1D7≠≠|zeroCst= SPI  
+GT.0.02: |u1D7≠≠|zeroCst=|parenleftCv3SPI 
+|u1D4J8Cst|parenriµhtCv3/˙racketleft.v2|oneCst|u1D4JBCst/fraction.v1/˙racketright.v2 
+Case II: If HR = 5.0, then t he strain at plastic yield is determined 
+by an iterative procedure based on the same princip les as for 
+HR = 2.0. 
+P3 Material parameter: 
+HR.EQ.5.0: |u1D4JD, parameter for Gosh exponential hardening 
+HR.EQ.6.0: |u1D4JB, exponent for Hocket- Sherby exponential 
+hardening 
+ 
+Deﬁne the following card if and only if M < 0 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable CRC1 CRA1 CRC2 CRA2 CRC3 CRA3 CRC4 CRA4 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+CRC n Chaboche-Rousselier hardening parameters; see Remarks . 
+CRA n Chaboche-Rousselier hardening parameters; see Remarks . 
+ *. -PARAMETER_BARLAT  
+2-344 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+HTA Load curve/Table ID for postforming parameter |u1D44∆ in heat 
+treatment 
+HTB Load curve/Table ID for postforming parameter |u1D44F in heat 
+treatment 
+ 
+This card is included if the keyword option is NLP.  
+ Card 4b 1 2 3 4 5 6 7 8 
+Variable AOPT C P VLCID  PB NLP  
+Type F F F I  F I  
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see . -PARAMETER_BARLAT  *. -PARAMETER_BARLAT  
+2-346 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+BETA Material angle in degrees for AOPT = 0 and 3. It may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+HTFLAG Heat treatment ﬂag (see  Remarks ): 
+EQ.0: preforming stage 
+EQ.1: heat treatment stage 
+EQ.2: postforming stage 
+ 
+Optional card. 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable USRFAIL LCBI LCSH      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+USRFAIL User deﬁned failure ﬂag: 
+EQ.0: no user subroutine is called. 
+EQ.1: user subroutine matusr_24  in dyn21.f  is called. 
+LCBI HR.EQ.7: load curve deﬁning biaxial stress as a function of 
+biaxial strain for hardening rule; see discussion in the 
+formulation section below for a deﬁnition. 
+HR.NE.7:  ignored 
+LCSH HR.EQ.7: load curve deﬁning shear stress as a function of shear 
+strain for hardening; see discussion in the formula - 
+tion section below for a deﬁnition. 
+HR.NE.7: ignored 
+Formulation: 
+The eﬀective plastic strain used in this model is d eﬁned to be plastic work equivalent.  
+A consequence of this is that for parameters deﬁned  as functions of eﬀective plastic 
+strain, the rolling (00) direction should be used a s reference direction.  For instance, the 
+hardening curve for HR = 3 is the stress as functio n of strain for uniaxial tension in the *. -PARAMETER_BARLAT  
+2-348 (MAT) LS-DYNA R13 |u1D43∆|twoCst=
+⎷/radical.ex/radical.ex/radical.tp
+|parenleftCv6|u1D7≠∆|u1D46JCst−ℎ|u1D7≠∆|u1D466Cst
+2|parenriµhtCv6|twoCst
++ |u1D4JD|twoCst/u1D̅0F|u1D46JCst|u1D466Cst |twoCst 
+If PB = 0, the anisotropic material constants |u1D44∆,/u1D450,ℎ |u1D44∆|u1D4JB|u1D4J1 |u1D4JD  are obtained through 
+|u1D44J|zeroCst|zeroCst , |u1D44J|fourCst|fiveCst  |u1D44∆|u1D4JB|u1D4J1 |u1D44J/nine.st |zeroCst : 
+|u1D44∆ = 2 − 2/radical.v5|parenleftCvJ|u1D44J|zeroCst|zeroCst 
+1 + |u1D44J|zeroCst|zeroCst |parenriµhtCvJ |parenleftCvJ|u1D44J/nine.st |zeroCst 
+1 + |u1D44J/nine.st |zeroCst |parenriµhtCvJ 
+/u1D450= 2 − |u1D44∆ 
+ℎ=/radical.v5|parenleftCvJ|u1D44J|zeroCst|zeroCst 
+1 + |u1D44J|zeroCst|zeroCst |parenriµhtCvJ |parenleftCvJ1 + |u1D44J/nine.st |zeroCst 
+|u1D44J/nine.st |zeroCst |parenriµhtCvJ 
+The anisotropy parameter |u1D4JD is calculated implicitly.  According to Barlat and  Lian the |u1D44J-
+value, width to thickness strain ratio, for any ang le /u1D̅1∫ can be calculated from: 
+|u1D44J/u1D̅1∫.st=2|u1D4JA|u1D7≠∆/u1D44C.st|u1D4JACst
+|parenleftCv6∂Φ
+∂|u1D7≠∆|u1D46JCst+∂Φ
+∂|u1D7≠∆|u1D466Cst|parenriµhtCv6 |u1D7≠∆/u1D̅1∫.st− 1 
+where |u1D7≠∆/u1D̅1∫.st is the uniaxial tension in the /u1D̅1∫ direction.  This expression can be used to 
+iteratively calculate the value of |u1D4JD.  Let /u1D̅1∫= 45  and deﬁne a function |u1D4J4 as: 
+|u1D4J4|parenleftCv1|u1D4JD|parenriµhtCv1 =2|u1D4JA|u1D7≠∆/u1D44C.st|u1D4JACst
+|parenleftCv6∂Φ
+∂|u1D7≠∆|u1D46JCst+∂Φ
+∂|u1D7≠∆|u1D466Cst|parenriµhtCv6 |u1D7≠∆/u1D̅1∫.st− 1 − |u1D44J|fourCst|fiveCst  
+An iterative search is used to ﬁnd the value of |u1D4JD.  If PB > 0, material parameters |u1D44∆(AB), 
+/u1D450(CB), ℎ(HB), and |u1D4JD(PB) are used directly. 
+ 
+The eﬀective stress, given as 
+ 
+|u1D7≠∆|eCst /f.st/f.st= |<raceleftCvJ1
+2|parenleftCv1|u1D44∆||u1D43∆|oneCst+ |u1D43∆|twoCst||u1D4JACst+ |u1D44∆||u1D43∆|oneCst− |u1D43∆|twoCst||u1D4JACst+/u1D450|2|u1D43∆|twoCst||u1D4JACst|parenriµhtCv1|<raceriµhtCvJ|oneCst/|u1D4JACst
+ 
+can be output to the D3plot  database through *DEFINE_MATERIAL_HISTORIES. 
+ 
+*DEFINE_MATERIAL_HISTORIES Properties  
+ Label Attributes Description  
+Eﬀective Stress - - - - Eﬀective stress  |u1D7≠∆|eCst /f.st/f.st, see above 
+ 
+For face centered cubic (FCC) materials  |u1D4JA =8 is recommended and for body centered 
+cubic (BCC) materials |u1D4JA = 6  may be used.  The yield strength of the material c an be 
+expressed in terms of /u1D458 and |u1D4JB: 
+|u1D7≠∆|u1D466Cst=/u1D458|u1D7≠≠|u1D4JBCst=/u1D458|parenleftCv2|u1D7≠≠|u1D466Cst|u1D4JDCst + |u1D7≠≠̅|u1D4JDCst|parenriµhtCv2|u1D4JBCst *. -PARAMETER_BARLAT  
+2-350 (MAT) LS-DYNA R13 The back stress is the sum of up to four terms acco rding to: 
+|u1D6F+|u1D4J6Cst|u1D4J7Cst = |summationCv1 |u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst|fourCst
+|u1D4J8Cst=|oneCst 
+and the evolution of each back stress component is as follows: 
+|u1D6FF|u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst= |u1D436|u1D4J8Cst|parenleftCvJ|u1D44∆|u1D4J8Cst|u1D46≠|u1D4J6Cst|u1D4J7Cst 
+|u1D7≠∆|eCst /f.st/f.st− |u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst|parenriµhtCvJ |u1D6FF|u1D7≠≠|u1D4JDCst 
+where |u1D436|u1D4J8Cst and |u1D44∆|u1D4J8Cst are material parameters, |u1D46≠|u1D4J6Cst|u1D4J7Cst  is the deviatoric stress tensor, |u1D7≠∆|eCst /f.st/f.st is the 
+eﬀective stress and |u1D7≠≠|u1D4JDCst is the eﬀective plastic strain.  The yield conditi on is for this case 
+modiﬁed according to 
+|u1D4J3 |parenleftCv2σ,α, |u1D7≠≠|u1D4JDCst|parenriµhtCv2 = |u1D7≠∆|eCst /f.st/f.st(|u1D7≠∆|oneCst|oneCst − 2|u1D6F+|oneCst|oneCst − |u1D6F+|twoCst|twoCst , |u1D7≠∆|twoCst|twoCst − 2|u1D6F+|twoCst|twoCst − |u1D6F+|oneCst|oneCst , |u1D7≠∆|oneCst|twoCst − |u1D6F+|oneCst|twoCst )
+−/˙raceleft.v6|u1D7≠∆/u1D44C.st|u1D461Cst(|u1D7≠≠|u1D4JDCst, |u1D7≠≠̇|u1D4JDCst, 0) − |summationCv1 |u1D44∆|u1D4J8Cst/˙racketleft.v21 − exp(−|u1D436|u1D4J8Cst|u1D7≠≠|u1D4JDCst /˙racketright.v2|fourCst
+|u1D4J8Cst=|oneCst/˙raceright.v6≤ 0 
+in order to get the expected stress strain response  for uniaxial stress.  The calculated 
+eﬀective stress is stored in history variable #7. 
+ 
+With hardening rule HR = 10, the ﬂow curves in a ta ble deﬁnition can be based on 
+diﬀerent pre-strain values.  Hence ﬂow curves can h ave varying shapes as deﬁned in 
+the corresponding table.  For example, the plastic strain distribution as obtained in a 
+ﬁrst step of a two-stage procedure is initialized i n the next stage with *INITIAL_-
+STRESS_SHELL and corresponding values for EPS. With  HR = 10 this pre-strain is 
+initially transferred to history variable #9 and al l stresses and other history variables are 
+set to zero assuming that the part was subjected to  an annealing phase.  With EPS now 
+stored on history variable #9 the table lookup for the actual yield value may now be 
+used to interpolate on diﬀerently shaped ﬂow curves .  
+A failure criterion for nonlinear strain paths (NLP ) in sheet metal forming: 
+When the option NLP is used, a necking failure crit erion is activated to account for the 
+non-linear strain path eﬀect in sheet metal forming .  Based on the traditional Forming 
+Limit Diagram (FLD) for the linear strain path, the  Formability Index (F.I.) is calculated 
+for every element in the model throughout the simul ation duration.  The entire F.I. time 
+history for every element is stored in history vari able #1 in d3plot  ﬁles, accessible from 
+Post/History  menu in LS-PrePost  v4.0.  In addition to the F.I. output, other usefu l 
+information stored in other history variables can b e found as follows, 
+1.  Formability Index: #1 
+2.  Strain ratio (in-plane minor strain increment/majo r strain increment): #2 
+3.  Eﬀective strain from the planar isotropic assumptio n : #3 
+ *. -PARAMETER_BARLAT_NLP 
+$---+----1----+----2----+----3----+----4----+----5- ---+----6----+----7----+----8 
+$      MID        RO         E        PR        HR        P1        P2      ITER 
+         1 2.890E-09  6.900E04     0.330     3.000                     
+$        M       R00       R45       R90      LCID        E0       SPI        P3 
+     8.000     0.800     0.600     0.550        99 
+$     AOPT         C         P     VLCID                           NLP 
+     2.000                                                         211 
+$                                     A1        A2        A3 
+                                   0.000     1.000     0.000 
+$       V1        V2        V3        D1        D2        D3      BETA 
+    
+$---+----1----+----2----+----3----+----4----+----5- ---+----6----+----7----+----8 
+$ Hardening Curve 
+*DEFINE_CURVE 
+        99 
+               0.000             130.000 
+               0.002             134.400 
+               0.006             143.000 
+               0.010             151.300 
+               0.014             159.300 
+                 ⋮                   ⋮ 
+               0.900             365.000 
+               1.000             365.000 
+$ FLD Definition 
+*DEFINE_CURVE 
+211 
+                -0.2               0.325 
+             -0.1054              0.2955 
+             -0.0513              0.2585 
+              0.0000              0.2054 
+              0.0488              0.2240 
+              0.0953              0.2396 
+              0.1398              0.2523 *. -PARAMETER_BARLAT  
+2-352 (MAT) LS-DYNA R13               0.1823              0.2622 
+                 ⋮                    ⋮ 
+ 
+Shown in Figures M36-1 , M36-2  and M36-3 , predictions and validations of forming limit 
+curves (FLC) of various nonlinear strain paths on a  single shell element was done using 
+this new option, for an Aluminum alloy with |u1D44J|zeroCst|zeroCst = 0.8, |u1D44J|fourCst|fiveCst = 0.6 |u1D44∆|u1D4JB|u1D4J1 |u1D44J/nine.st |zeroCst = 0.55  and the 
+yield at 130.0 MPa.  In each case, the element is f urther strained in three diﬀerent paths 
+(uniaxial stress – U.A., plane strain – P.S., and e qui-biaxial strain – E.B.) separately, 
+following a pre-straining in uniaxial, plane strain  and equi-biaxial strain state, 
+respectively.  The forming limits are determined at  the end of the secondary straining 
+for each path, when the F.I. has reached the value of 1.0.  It is seen that the predicted 
+FLCs (dashed curves) in case of the nonlinear strai n paths are totally diﬀerent from the 
+FLCs under the linear strain paths.  It is noted th at the current predicted FLCs under 
+nonlinear strain path are obtained by connecting th e ends of the three distinctive strain 
+paths.  More detailed FLCs can be obtained by strai ning the elements in more paths 
+between U.A. and P.S. and between P.S. and E.B.  In  Figure M36-4 , time-history plots of 
+F.I., strain ratio and eﬀective strain are shown fo r uniaxial pre-strain followed by equi-
+biaxial strain path on the same single element. 
+ 
+Typically, to assess sheet formability, F.I. contou r of the entire part should be plotted.  
+Based on the contour plot, non-linear strain path a nd the F.I. time history of a few 
+elements in the area of concern can be plotted for further study.  These plots are similar 
+to those shown in manual pages of *. -PARAMETER_BARLAT  *. -PARAMETER_BARLAT  
+2-354 (MAT) LS-DYNA R13  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  FLC- linear strain pathFLC- nonlinear strain path
+Minor true strainMajor true strain
+-0.2 0.2 -0.1 0.1 000.35
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05U.A.U.A. E.B. P.S.Unstrained shellEqui-biaxial XYZ
+uxuy
+uy=uyuy
+uy
+Fx0=Fx0=Fx0=Fx0=
+Plane strainUni-axial stress
+Uni-axial stress
+ Figure M36-1.   Nonlinear FLD prediction with uniaxial pre-straining. *. -PARAMETER_BARLAT  
+2-356 (MAT) LS-DYNA R13  
+ 
+ 
+ 
+ 
+ 
+ 
+  FLC- linear strain pathFLC- nonlinear strain path
+Minor true strainMajor true strain
+-0.2 0.2 -0.1 0.1 000.35
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05U.A. E.B.
+P.S.
+E.B.Unstrained shellEqui-biaxialXYZ
+uy
+uxuy=uy
+Fx0=Fx0=
+Uni-axial stressuy
+Plane strain
+Equi-biaxialuy
+uxuy=
+ Figure M36-3.   Nonlinear FLD prediction with equi-biaxial pre-straining. *. -
+PARAMETER_BARLAT. The HOSF = 1 allows for a “Hosfor d-based” eﬀective stress in 
+the yield function instead of using the Barlat-base d eﬀective stress. If the material and 
+principal axes are coincident, the plastic potentia l Φ for HOSF = 1 can be written as 
+ 
+Φ(|u1D7≠∆) =1
+2|parenleftCv1||u1D7≠∆|oneCst||u1D4JACst+ ||u1D7≠∆|twoCst||u1D4JACst+ ||u1D7≠∆|oneCst− |u1D7≠∆|twoCst||u1D4JACst|parenriµhtCv1 − |u1D7≠∆|u1D466Cst|u1D4JACst 
+  
+The main diﬀerence is that the Barlat-based eﬀectiv e stress contains the orthotropic 
+parameters |u1D44∆,/u1D450,ℎ and |u1D4JD in the yield function meanwhile the Hosford-based eﬀective 
+stress does not contain any information about the a nisotropy.  For HOSF = 1, the 
+information about direction dependent yielding is d irectly obtained from the hardening 
+curves LCH00, LCH45 and LCH90. For materials exhibi ting very dissimilar |u1D44J −values 
+in the diﬀerent material directions (e.g. typical a luminum extrusion), HOSF = 0 might 
+(but does not necessarily) lead to concave yield su rfaces which, in turn, might lead to 
+numerical instabilities under certain circumstances .  HOSF = 1 tends to reduce this 
+eﬀect. 
+ 
+More information on the theoretical and numerical f oundations of HOSF = 1 can be 
+found on the paper by Andrade, Borrvall, DuBois and  Feucht, A Hosford-based 
+orthotropic plasticity model in LS-DYNA  (2019). *. 6) to model metal sheets und er cyclic plasticity loading with 
+anisotropy in plane stress condition.  Lankford par ameters are used for the deﬁnition of 
+the anisotropy.  Yoshida’s theory describes the har dening rule with a “two surfaces” 
+method: the yield surface and the bounding surface.   In the forming process, the yield 
+surface does not change in size, but its center mov es with deformation; the bounding 
+surface changes both in size and location. 
+ 
+Available options include: 
+<BLANK> 
+NLP 
+The NLP option estimates necking failure using the Formability Index (F.I.), which 
+accounts for the non-linear strain paths seen in me tal forming applications (see Remark 
+4).  When using this option, specify IFLD in Card 3.   Since the NLP option also works 
+with a linear strain path, it is recommended to be used as the default failure criterion in 
+metal forming.  The NLP option is also available fo r *. 19  *. 19 keyword name cannot be used in the 
+input deck in R13. For R13, you must use *. 19 can be used in the input deck. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO MU GAMMA     
+Type A F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation. A unique number or label must be 
+speciﬁed (see *PART).  
+RO Fluid density 
+MU Dynamic viscosity of the ﬂuid 
+GAMMA Surface tension coeﬃcient of the ﬂuid 
+References: 
+Pan, X., Wu, C.T., and Hu, W. “Incompressible Smoot hed Particle Galerkin (ISPG) 
+Method for an Efﬁcient Simulation of Surface Tensio n and Wall Adhesion Effects in the 
+3D Reﬂow Soldering Process,” 16 th International LS-DYNA Users Conference  (2020). *. 26  
+ *. 26  *. 26  
+ The cohesive gasket material model is comprised of the following three un- 
+coupled material models:  
+a)  Isotropic linear elastic membrane stress: 
+⎣⎢⎡|u1D7≠∆|oneCst|oneCst 
+|u1D7≠∆|twoCst|twoCst 
+|u1D7≠∆|oneCst|twoCst ⎦⎥⎤= |u1D437
+⎣⎢⎡|u1D7≠≠|oneCst|oneCst 
+|u1D7≠≠|twoCst|twoCst 
+2|u1D7≠≠|oneCst|twoCst ⎦⎥⎤ 
+with |u1D437 as the constitutive matrix for either plane strain  or stress. 
+b)  Isotropic linear elastic transverse stress: 
+|u1D7≠∆|u1D4J6Cst|threeCst= |u1D438|u1D447Cst /u1D446.st |u1D44JCst |u1D6FF|u1D4J6Cst, |u1D4J6 = 1,2 
+c)  A user deﬁned pressure-closure relation of the for m (see Remark 3 ): 
+−|u1D7≠∆|threeCst|threeCst ≡|u1D4JD = |u1D4J3 (/u1D450),        /u1D450> 0
+|u1D7≠∆|threeCst|threeCst = 0, otherwise  
+3.  Pressure-Closure Relation.  The pressure-closure relation, |u1D4J3, is an important 
+feature of the material model.  It can be used to i nclude mechanical eﬀects that 
+are typical for gaskets, such as hysteresis.  It co nsists of a main loading curve 
+and one or more unloading curves.  
+Figure M326-1  gives a schematic of a pressure-closure response.  As the gasket 
+is compressed the closure, /u1D450, increases and the pressure, |u1D4JD, follows the main 
+loading curve from A to, say, B. Now, if the gasket  for some reason is unloaded 
+at B, /u1D450 will then decrease and |u1D4JD follows the unloading curve BCA back to the 
+initial conﬁguration A. If the gasket is then reloa ded it will follow the path 
+ACB back to B. Then, when /u1D450 exceeds the closure value at point B, it will con-
+main loading curve
+unload ing/reloading curvesAB
+Closure, cPressure, p
+CD
+E
+ Figure M326-1.   Schematic pressure-closure response *

@@ -1,0 +1,25 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-153 (MAT)  Card 5 1 2 3 4 5 6 7 8 
+Variable ALPHA1 ALPHA2 ALPHA3 ALPHA4 ALPHA5 ALPHA6 ALPHA7 ALPHA8 
+Type F F F F F F F F 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable SIGY1 SIGY2 SIGY3 SIGY4 SIGY5 SIGY6 SIGY7 SIGY8 
+Type F F F F F F F F 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable ETAN1 ETAN2 ETAN3 ETAN4 ETAN5 ETAN6 ETAN7 ETAN8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+Ti Temperatures.  The minimum required is 2 while the maximum 
+allowed is 8. 
+Ei Corresponding Young’s modulus at temperature T i 
+PR i Corresponding Poisson’s ratio at temperature T i 
+ALPHA i Corresponding coeﬃcient of thermal expansion at te mperature T i 
+SIGY i Corresponding yield stress at temperature T i 
+ETAN i Corresponding plastic hardening modulus at temperat ure T i *

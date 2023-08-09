@@ -1,0 +1,89 @@
+ED_ROCK ................................. ................................................... ....................... 2-1253  
+*. ED_ROCK [0] {31} 
+ *. ED_ROCK *. -
+ED_ROCK. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO GMOD RNU  PHI CVAL PSI 
+Card 2.   This card is required. 
+NOVOID NPLANES EXTRA LCCPDR LCCPT LCCJDR LCCJT LCSFAC 
+Card 3.   This card is required. 
+GMODDP GMODGR LCGMEP LCPHIEP LCPSIEP LCGMST CVALGR ANISO 
+Card 4.   Include this card if EXTRA > 0. 
+LCGMT LCCVT LCPHT EPDAM1 EPDAM2    
+Card 5.   Include if NPLANES > 0. Repeat this card for each  plane (maximum of 6  
+planes). 
+DIP DIPANG CPLANE FRPLANE TPLANE SHRMAX LOCAL  
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO GMOD RNU (blank) PHI CVAL PSI 
+Type A F F F  F F F 
+Default none none none none  none none 0.0 
+ *. ED_ROCK  *. ED_ROCK  
+This is Material Type 198. Joints (planes of weakne ss) are assumed to exist throughout 
+the material at a spacing small enough to be consid ered ubiquitous.  The planes are 
+assumed to lie at constant orientations deﬁned on t his material card.  Up to three planes 
+can be deﬁned for each material.  See *. ED_ROCK  
+ Repeat Card 4 for each plane (maximum 3 planes):  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable DIP STRIKE CPLANE FRPLANE  TPLANE SHRMAX LOCAL  
+Type F F F F F F F  
+Default 0.0 0.0 0.0 0.0 0.0 1.e20 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+GMOD Elastic shear modulus 
+RNU Poisson’s ratio 
+RKF Failure surface shape parameter 
+PHI Angle of friction (radians) 
+CVAL Cohesion value 
+PSI Dilation angle (radians) 
+STR_LIM Minimum shear strength of material is given  by STR_LIM*CVAL  
+NPLANES Number of joint planes (maximum 3) 
+ELASTIC Flag = 1 for elastic behavior only 
+LCCPDR Load curve for extra cohesion for parent mat erial (dyn amic 
+relaxation) 
+LCCPT Load curve for extra cohesion for parent mate rial (transient) 
+LCCJDR Load curve for extra cohesion for joints (dy namic relaxation) 
+LCCJT Load curve for extra cohesion for joints (tra nsient) 
+LCSFAC Load curve giving factor on strength vs time  *. ED_ROCK  
+ will not be considered and only RO, GMOD, RNU, GMOD DP, GMODGR and 
+the joint planes will be used. 
+4.  This material type requires that the model is orie nted such that the z-axis is 
+deﬁned in the upward direction.  The key parameters  are deﬁned such that 
+may vary with depth (i.e. the z-axis) 
+5.  The shape factor for a typical soil would be 0.8, but should not be pushed 
+further than 0.75. 
+6.  If STR_LIM is set to less than 0.005, the value is  reset to 0.005. 
+7.  A correction has been introduced into the Drucker Prager model, such that the 
+yield surface never infringes the Mohr-Coulomb crit erion.  This means that the 
+model does not give the same results as a “pure” Dr ucker Prager model. 
+8.  The load curves LCCPDR, LCCPT, LCCJDR, LCCJT allow  additional cohesion 
+to be speciﬁed as a function of time.  The cohesion  is additional to that speci- 
+ﬁed in the material parameters.  This is intended f or use during the initial stag- 
+es of an analysis to allow application of gravity o r other loads without cracking 
+or yielding, and for the cracking or yielding then to be introduced in a con- 
+trolled manner.  This is done by specifying extra c ohesion that exceeds the 
+expected stresses initially, then declining to zero .  If no curves are speciﬁed, no 
+extra cohesion is applied. 
+9.  The load curve for factor on strength applies simu ltaneously to the cohesion 
+and tan (friction angle) of parent material and all  joints.  This feature is intend- 
+ed for reducing the strength of the material gradua lly, to explore factors of 
+safety.  If no curve is present, a constant factor of 1 is assumed.  Values much 
+greater than 1.0 may cause problems with stability.  
+10.  Extra variables for plotting.  By setting NEIPH on  *DATABASE_EXTENT_BI-
+NARY to 15, the following variables can be plotted in D3PLOT and T/HIS: 
+ Extra Variable 1: mobilized strength fraction for base material 
+ Extra Variable 2: rk0 for base material 
+ Extra Variable 3: rlamda for base material 
+ Extra Variable 4:  crack opening strain for plane 1 
+ Extra Variable 5: crack opening strain for plane 2  
+ Extra Variable 6: crack opening strain for plane 3  
+ Extra Variable 7: crack accumulated engineering sh ear strain for plane 1 
+ Extra Variable 8: crack accumulated engineering sh ear strain for plane 2 
+ Extra Variable 9: crack accumulated engineering sh ear strain for plane 3 
+ Extra Variable 10: current shear utilization for p lane 1 
+ Extra Variable 11: current shear utilization for p lane 2 
+ Extra Variable 12: current shear utilization for p lane 3 *

@@ -1,0 +1,75 @@
+: *.  
+*.   *.  
+LS-DYNA R13 2-359 (MAT)  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density. 
+E Young’s modulus, |u1D438. 
+PR Poisson’s ratio, ν. 
+LCH XX  Load curve/table deﬁning uniaxial stress vs.  uniax ial strain and 
+strain rate in the given direction ( XX  is either 00, 45,90 ). The exact 
+deﬁnition is discussed in the Remarks below.  LCH00  must be 
+deﬁned, the other defaults to LCH00 if not deﬁned. 
+LCHBI Load curve/table deﬁning biaxial stress vs.  biaxia l strain and 
+strain rate, see discussion in the Remarks below fo r a deﬁnition.  
+If not deﬁned this is determined from LCH00 and the  initial R-
+values to yield a response close to the standard 3- param eter 
+Barlat model. 
+LCHSH Load curve/table deﬁning shear stress vs.  shear st rain and strain 
+rate, see discussion in the Remarks below for a deﬁ nition.  If not 
+deﬁned this is ignored to yield a response close to  the standard 3-
+parameter Barlat model. 
+HOSF Hosford option for enhancing convexity of yield sur face, set to 1 
+to activate. 
+LCR XX  Load curve deﬁning standard R- value vs.  uniaxial strain in the 
+given direction ( XX  is either 00, 45, 90).  The exact deﬁnition is 
+discussed in the Remarks below.  Default is a const ant R- value of 
+1.0, a negative input will result in a constant R-v alue of –LCRXX. *.  
+LS-DYNA R13 2-361 (MAT) Formulation: 
+The standard 3-parameter Barlat model incorporates plastic anisotropy in a fairly 
+moderate sense, allowing for the speciﬁcation of R- values in three diﬀerent directions, 
+together with a stress level in the reference direc tion (termed rolling  or 0 degree  
+direction), but not more than that.  To allow for a  more accurate representation of a 
+more severe anisotropic material, like in rolled al uminium sheet components, one could 
+migrate to the Barlat YLD2000 model (material 133 i n LS-DYNA) which also allows for 
+specifying stress levels in the two remaining direc tions as well as stress and strain data 
+at an arbitrary point on the yield surface.  The pr operties of extruded aluminium 
+however, are such that neither of these two materia l models are suﬃcient to describe its 
+extreme anisotropy.  One particular observation fro m experiments is that anisotropy 
+evolves with deformation, a feature that is not cap tured in any of the material models 
+discussed so far.  The present extended version of material 36 was therefore developed 
+in an attempt to ﬁll this void in the LS-DYNA mater ial library.  In short, this material 
+allows for R-values and stress levels in the three directions, together with similar data in 
+biaxial and shear directions. And , these properties are functions of the eﬀective pl astic 
+strain so as to allow for deformation induced aniso tropy.  The following is an 
+explanation of its parameters. 
+ 
+The hardening curves or tables LCH00, LCH45 and LCH 90 are here deﬁned as 
+measured stress as function of measured plastic str ain (and potentially rate) for uniaxial 
+tension in the direction of interest, i.e., as dete rmined from experimental testing using a 
+standard procedure.  The optional biaxial and shear  hardening curves LCHBI and 
+LCHSH require some further elaboration, as we assum e that a biaxial or shear test 
+reveals that the true stress tensor in the material  system expressed as 
+/u1D̅48= |parenleftCv4|u1D7≠∆ 0
+0±|u1D7≠∆|parenriµhtCv4 , |u1D7≠∆ ≥ 0, 
+is a function of the (plastic) strain tensor 
+/u1D̅:A= |parenleftCvJ|u1D7≠≠|oneCst 0
+0±|u1D7≠≠|twoCst|parenriµhtCvJ , |u1D7≠≠|oneCst≥ 0, |u1D7≠≠|twoCst≥ 0, 
+The input hardening curves are |u1D7≠∆ as function of |u1D7≠≠|oneCst+|u1D7≠≠|twoCst. The ± sign above distinguishes 
+between the biaxial ( +) and the shear ( −) cases. 
+ 
+Moreover, the curves LCR00, LCR45 and LCR90 deﬁning  the R values are as function of 
+the measured plastic strain for uniaxial tension in  the direction of interest.  The R-values 
+in themselves are deﬁned as the ratio of instantane ous width change to instantaneous 
+thickness change.  That is, assume that the width W  and thickness T are measured as 
+function of strain.  Then the corresponding R-value  is given by: 
+|u1D44J/u1D̅11.st=|u1D4J1 /u1D44A 
+|u1D4J1|u1D7≠≠ //u1D44A
+|u1D4J1|u1D447 
+|u1D4J1|u1D7≠≠ /|u1D447. *

@@ -1,0 +1,104 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+INTFAIL The number of integration points required for the c ohesive 
+element to be deleted.  If it is zero, the element won’t be deleted 
+even if it satisﬁes the failure criterion.  The val ue of INT FAIL may 
+range from 1 to 4, with 1 the recommended value. 
+SIGMAX Peak traction. 
+NLS Length scale (maximum separation) in the normal  direction. 
+TLS Length scale (maximum separation) in the tangen tial direction. 
+LAMDA1 Scaled distance to peak traction ( Λ1). 
+LAMDA2 Scaled distance to beginning of softening ( Λ2). 
+LAMDAF Scaled distance for failure ( Λfail ). 
+STFSF Penetration stiﬀness multiplier.  The penetration s tiﬀness, PS , in 
+terms of input parameters becomes: 
+PS =STFSF × SIGMAX 
+NLS ×|parenleftCv4LAMDA1 
+LAMDAF |parenriµhtCv4 
+Following parameters are used only in XFEM shell: 
+TLS2 Length scale (maximum separation) in the tear direction. 
+ISW EQ. -1: initially rigid cohesive law (type I) 
+EQ. -2: initially rigid cohesive law (type II) 
+ALPHA1 Ratio of maximum mode II shear traction to n ormal traction 
+ALPHA2 Ratio of maximum mode III shear traction to normal traction 
+(available in shell) 
+DR Critical rotation scale (available in shell) 
+ALPHA3  Ratio of maximum bending moment  to normal traction  (available 
+in shell) 
+ *.   
+ which in matrix notation is 
+⎣⎢⎡|u1D461|oneCst
+|u1D461|twoCst
+|u1D461|threeCst⎦⎥⎤=|u1D461(|u1D7≠6)
+|u1D7≠6
+⎣⎢⎢⎢⎢⎢⎢⎡NLS 
+TLS |twoCst0 0
+0NLS 
+TLS |twoCst0
+0 01
+NLS ⎦⎥⎥⎥⎥⎥⎥⎤
+⎣⎢⎡|u1D6FF|oneCst
+|u1D6FF|twoCst
+|u1D6FF|threeCst⎦⎥⎤ 
+In case of compression ( |u1D6FF|threeCst< 0), penetration is avoided by: 
+|u1D461|threeCst=STFSF × |u1D7≠∆|mCst|aCst|xCst 
+NLS ×Λ|oneCst/Λfail |u1D6FF|threeCst 
+Loading and unloading follows the same path, i.e. t his model is completely reversible. 
+ 
+This cohesive material model outputs three traction s having units of force per unit area 
+into the D3PLOT database rather than the usual six stress components.  The in plane 
+shear traction t1 along the 1-2 edge replaces the x-stress, the orth ogonal in plane shear 
+traction t2 replaces the y-stress, and the traction in the nor mal direction t3  replaces the z-
+stress. 
+ 
+ 
+Used in XFEM, TLS corresponding to |u1D6FF|twoCst |u1D4J6|u1D4JB  above equations is replaced with TLS2. Since 
+the initially rigid cohesive law is used, element f ails only when the stress level reaches 
+the SIGMAX and Λ|oneCst is only used to deﬁne the penetration stiﬀness in case of crack 
+closing (compression). *. ). 
+GIC Fracture toughness / energy release rate |u1D43A/u1D4:C.st|u1D4J≠Cst for mode I 
+GIIC Fracture toughness / energy release rate |u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst for mode II 
+XMU Exponent that appears in the power failure crit erion (TES = 0.0) or 
+the Benzeggagh-Kenane failure criterion (TES = 1.0) . 
+Recommended values for XMU are between 1.0 and 2.0.  
+T Peak traction in normal direction (mode I) 1.0 1.0 Possible shape of TSLC 
+|u1D434TSLC  
+|u1D7≠6=|u1D6FF
+|u1D6FFF |u1D461̅=|u1D461|u1D461max /fraction.v2
+ Mode I Mode II  
+|u1D461max  |u1D447 |u1D446 
+|u1D6FFF |u1D43AIC
+|u1D434TSLC |u1D447 |u1D43AII C
+|u1D434TSLC |u1D446 
+|u1D43AC |u1D43AIC |u1D43AII C 
+ |u1D7≠6|zeroCst 
+ Figure M186-1.   Normalized traction-separation law *. ) , but with the arbitrary 
+traction-separation law and a damage formulation (i .e. irreversible conditions are 
+enforced with loading/unloading paths coming from/p ointing to the orig *.   but considers eﬀects of plasticity and 
+rate-dependency.  Since the entire separation at fa ilure is plastic, no brittle fracture 
+behavior can be modeled with this material type. 
+ 
+The following description of the model is for two d eformation/fracture modes (I and II) 
+only, meaning without the option 3MODES. This is a natural choice for cohesive solid 
+elements, where no speciﬁc distinction between in-p lane and out-of-plane shear can be 
+made.  On the other hand, if this material model is  used with the cohesive shell element 
+type ±29, shear deformation can clearly be separate d into in-plane shear (Mode II) and 
+out-of-plane shear (Mode III).  This can be taken i nto account by adding 3MODES to the 
+keyword and deﬁning additional Cards 4 and 5. Corre sponding equations including 
+Mode III are not explicitly given here (for the sak e of brevity), but derivation of them is 
+straightforward.  
+ 
+The separations, ∆|u1D4JBCst and ∆|u1D461Cst, in the normal (peel) and tangential (shear) direc tions, 
+respectively, are calculated from the element’s sep arations in the integration points, 
+∆|u1D4JBCst= max (|u1D462|u1D4JBCst, 0) 
+and 
+∆|u1D461Cst=/radical.v2|u1D462|u1D461Cst|oneCst|twoCst+ |u1D462|u1D461Cst|twoCst|twoCst  . 
+|u1D462|u1D4JBCst is the separation in the normal direction while |u1D462|u1D461Cst|oneCst and |u1D462|u1D461Cst|twoCst is the separation in both 
+tangential directions of the element coordinate sys tem.  The total (mixed-mode) 
+separation ∆|u1D4JACst is determined by 
+∆|u1D4JACst=/radical.v2∆|u1D4JBCst|twoCst+ ∆|u1D461Cst|twoCst  . 
+The initial stiﬀnesses in both modes are calculated  from the elastic Young’s and shear 
+moduli and are respectively, 
+|u1D438|u1D4JBCst=EMOD 
+T H ICK   *

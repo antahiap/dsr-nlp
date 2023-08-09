@@ -1,0 +1,26 @@
+ ...................... ................................................... .......... 2-842  
+*.  [0,5,8B] {1 5} 
+ *.   *.   
+ *.   *.   
+ |u1D437=|u1D437(|u1D7≠≠/u1D451.st)=1−|u1D7≠≠ini (|u1D7≠≠ult −|u1D7≠≠/u1D451.st)
+|u1D7≠≠/u1D451.st(|u1D7≠≠ult −|u1D7≠≠ini )  ,  (131.7)  
+where 
+|u1D7≠≠/u1D451.st=/u1D458−1
+2/u1D458(1−2|u1D463)/u1D4:D|oneCst+1
+2/u1D458/radical.v6|parenleftCvJ/u1D458−1
+1−2|u1D463/u1D4:D|oneCst|parenriµhtCvJ|twoCst
++6/u1D458
+(1+|u1D463)|twoCst/u1D4:D|twoCst  . (131.8)  
+Here the constant /u1D458 represents the ratio of the strength in tension ov er the strength in 
+compression 
+/u1D458=|u1D7≠∆ult ,tension  
+|u1D7≠∆ult , compression   , (131.9)  
+/u1D4:D|oneCst and /u1D4:D|twoCst are the ﬁrst and second invariant of the strain te nsor representing the 
+volumetric and the deviatoric straining, respective ly 
+/u1D4:D|oneCst=tr (|u1D7≠≠) 
+/u1D4:D|twoCst=tr (|u1D7≠≠⋅|u1D7≠≠)−1
+3[|u1D461|u1D4JF (|u1D7≠≠)]|twoCst (131.10) 
+If the compression and tension strength are equal, the dependency on the volumetric 
+strain vanishes in ( 131.8 ) and failure is shear dominated.  If the compressi ve strength is 
+much larger than the strength in tension, /u1D458 becomes small and the /u1D4:D|oneCst terms in ( 131.8 ) 
+dominate the behavior. *

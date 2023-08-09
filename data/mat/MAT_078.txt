@@ -1,0 +1,28 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+function of pressure.  LCFP must be deﬁned if B > 0 .0. 
+LCRP Load curve ID for plastic strain at which residual strength is 
+reached as a function of pressure.  LCRP must be de ﬁned if 
+B > 0.0. 
+PC Pressure cutoﬀ for tensile fracture 
+OUT Output option for plastic strain in database: 
+EQ.0:  Volumetric plastic strain 
+EQ.1:  Deviatoric plastic strain 
+B Residual strength factor after cracking; see Figure M78-1 . 
+FAIL Flag for failure: 
+EQ.0:  No failure 
+EQ.1:  When pressure reaches failure, pressure element is 
+eroded. 
+EQ.2:  When pressure reaches failure, pressure element los es its 
+ability to carry tension. 
+Remarks: 
+Pressure is positive in compression.  Volumetric st rain is deﬁned as the natural log of 
+the relative volume and is positive in compression where the relative volume, |u1D449, is the 
+ratio of the current volume to the initial volume.  The tabulated data should be given in ε1ε2 εp1.0
+bf
+Figure M78-1.   Strength reduction factor. *.   
+ Yield
+stress
+Plastic strainp1p2p3
+ Figure M78-3.  Yield stress as a function of plastic strain. *

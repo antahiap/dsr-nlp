@@ -1,0 +1,74 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+G Shear modulus 
+G_SCL Shear modulus multiplier (default = 1.0) 
+TSL Tensile limit stress 
+EPS_TAN Strain at which E = tangent to the polynomi al curve 
+Remarks: 
+This model for the silicon carbide coating on RCC i s based upon a quasi-orthotropic, 
+linear-elastic, plane-stress model, given by: 
+⎩|<raceleftCex⎨|<raceleftCex⎧|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst
+/u1D̅0F|oneCst|twoCst ⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+=
+⎣⎢⎢⎢⎢⎡|u1D438
+1 −/u1D̅08|twoCst/u1D̅08|u1D438 
+1 −/u1D̅08|twoCst  0 
+/u1D̅08|u1D438 
+1 −/u1D̅08|twoCst|u1D438
+1 −/u1D̅08|twoCst  0
+     0      0 |u1D43A|oneCst|twoCst ⎦⎥⎥⎥⎥⎤
+⎩|<raceleftCex⎨|<raceleftCex⎧|u1D7≠≠|oneCst
+|u1D7≠≠|twoCst
+|u1D6F∆|oneCst|twoCst ⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+ 
+Additional constitutive model requirements include a simple (meaning non-damage 
+model based) option that can model the tension crac k requirement: a “stress-cutoﬀ” in 
+tension.  This option satisﬁes the tension crack re quirements by limiting the stress in 
+tension but not compression and having the tensile “yielding” (that is, the stress-cutoﬀ) 
+be fully recoverable – not plasticity or damage bas ed. 
+ 
+The tension stress-cutoﬀ separately resets the stre ss to a limit value when it is exceeded 
+in each of the two principal directions.  There is also a strain-based memory criterion 
+that ensures unloading follows the same path as loa ding: the “memory criterion” is the 
+tension stress assuming that no stress cutoﬀs were in eﬀect.  In this way, when the 
+memory criterion exceeds the user-speciﬁed cutoﬀ st ress, the actual stress will be set to 
+that value.  When the element unloads and the memor y criterion falls back below the 
+stress cutoﬀ, normal behavior resumes.  Using this criterion is a simple way to ensure 
+that unloading does not result in any hysteresis.  The cutoﬀ criterion cannot be based on 
+an eﬀective stress value because eﬀective stress do es not discriminate between tension 
+and compression while also including shear.  This m eans that the in plane, 1- and 2- 
+directions must be modeled as independent to use th e stress cutoﬀ.  Because the 
+Poisson’s ratio is not zero, this assumption is not  true for cracks that may arbitrarily lie 
+along any direction.  However, careful examination of damaged RCC shows that the 
+surface cracks do, generally, tend to lie in the fa bric directions, meaning that cracks tend 
+to open in the 1- or the 2- direction independently .  So the assumption of directional 
+independence for tension cracks may be appropriate for the coating because of this 
+observed orthotropy. 
+ *.   
+ to be the tangent of the polynomial curve.  As a re sult, the stress/strain response has a 
+continuous derivative, which aids in avoiding numer ical instabilities.  The test data 
+does not clearly deﬁne the failure strain of the co ating, but in the impact test it appears 
+that the coating has a higher compressive failure s train in bending than the laminate 
+failure strain. 
+ 
+The two dominant modes of loading which cause coati ng loss on the impact side of the 
+RCC (the front-side) are in-plane compression and t ransverse shear.  The in-plane 
+compression is measured by the peak out of plane te nsile strain,  |u1D7≠≠|threeCst.  As there is no 
+direct loading of a shell element in this direction , |u1D7≠≠|threeCst is computed through Poisson’s 
+relation:  
+|u1D7≠≠|threeCst=−|u1D463
+1 − |u1D463(|u1D7≠≠|oneCst+ |u1D7≠≠|twoCst)  . 
+When |u1D7≠≠|threeCst is tensile, it implies that the average of |u1D7≠≠|oneCst and |u1D7≠≠|twoCst is compressive.  This failure 
+mode will likely dominate when the RCC undergoes la rge bending, putting the front-
+side coating in high compressive strains.  A transv erse shear failure mode is expected to 
+dominate when the debris source is very hard or ver y fast.  By deﬁnition, the shell 
+element cannot give a precise account of the transv erse shear throughout the RCC’s 
+thickness.  However, the Belytschko-Tsay shell elem ent formulation in LS-DYNA has a 
+ﬁrst-order approximation of transverse shear that i s based on the out-of-plane nodal 
+displacements and rotations that should suﬃce to gi ve a qualitative evaluation of the 
+transverse shear.  By this formulation, the transve rse shear is constant through the 
+entire shell thickness and thus violates surface-tr action conditions.  The constitutive 
+model implementation records the peak value of the tensile out-of-plane strain ( |u1D7≠≠|threeCst) and 
+peak root-mean-sum transverse-shear: /radical.v2|u1D7≠≠|oneCst|threeCst |twoCst+ |u1D7≠≠|twoCst|threeCst |twoCst.*

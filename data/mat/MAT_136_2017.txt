@@ -1,0 +1,66 @@
+: *.  
+*.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR  FBI RBI0 LCID 
+Type A F F F  F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Material density 
+E Elastic Young’s modulus 
+PR Poisson’s ratio 
+FBI Normalized yield stress |u1D7≠∆/˙.st |iCst  for equi- biaxial test.  If this value is 
+not deﬁned in the input, it wi ll be approximated based on the 
+uniaxial test result. 
+RBI0 Strain ratio |u1D7≠∆/˙.st |iCst (0 °)=|u1D7≠≠̇|twoCst(0 °)/|u1D7≠≠̇|oneCst(0 °) for equi- biaxial test in the 
+rolling direction.  If this value is not deﬁned in the input, it will be 
+approximated based on the uniaxial test result. 
+LCID Load curve ID or Table ID.  If deﬁned, SYS, SIP, SH S, SHL, ESH, 
+E0, DYS, RATEN, SRN0, and EXSR are ignored. 
+Load Curve.   When LCID is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function eﬀect ive plastic strain 
+for that strain rate.    Linear interpolation betwe en the discrete 
+strain rates is used by default. 
+Logarithmically Deﬁned Tables.   A way to invoke logarithmic 
+interpolation between discrete strain rates is desc ribed as follows.  
+If the ﬁrst  value in the table is negative, LS-DY NA assumes that 
+all the table values represent the natural logarith m of a strain rate.  
+There is some addit ional computational cost associated with 
+invoking logarithmic interpolation. 
+ *.   
+  VARIABLE   DESCRIPTION  
+EQ.2.0:  Globa lly orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BETA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR). 
+DYS Limit dynamic ﬂow stress, |u1D7≠∆|zeroCst∗ 
+RATEN Ratio, |u1D4JF|eCst|nCst|tCst /h.st , of the Boltzmann constant, /u1D458, (8.617E- 5 eV/K) and 
+maximum activation enthalpy, ∆G|zeroCst, (in eV):  
+|u1D4JF|eCst|nCst|tCst /h.st =/u1D458
+∆|u1D43A|zeroCst 
+SRN0 Limit strain rate, |u1D7≠≠|zeroCsṫ 
+EXSR Exponent, |u1D4JA, for strain rate behavior 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ *.   
+ Remarks: 
+1.  Yield Locus.   The yield locus description of this material is t he same as for 
+*

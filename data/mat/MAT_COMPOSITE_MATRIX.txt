@@ -1,0 +1,43 @@
+ ............................. ................................................... ................... 2-733  
+*.  [2] {30} 
+ *.   *.   *.   
+This is  Material Type 117.  This material is used for model ing the elastic responses of 
+composites where a pre-integration is used to compu te the extensional, bending, and 
+coupling stiﬀness coeﬃcients for use with the Belyt schko-Tsay resultant shell 
+formulation.  Since the stresses are not computed i n the resultant formulation, the 
+stresses output to the binary databases for the res ultant elements are zero. 
+NOTE:  This material does not support speciﬁcation of a m a- 
+terial angle, |u1D6FD|u1D4J6Cst, for each through-thickness integra- 
+tion point of a shell. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO       
+Type A F       
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C11 C12 C22 C13 C23 C33 C14 C24 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C34 C44 C15 C25 C35 C45 C55 C16 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable C26 C36 C46 C56 C66 AOPT   
+Type F F F F F F   
+ *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+CIJ |u1D436|u1D4J6Cst|u1D4J7Cst , coeﬃcients of stiﬀness matrix in the material coo rdinate 
+system 
+AOPT Material axes option (see .   *

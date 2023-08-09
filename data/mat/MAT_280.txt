@@ -1,0 +1,101 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density, |u1D7≠+ 
+E Young’s modulus, |u1D438 
+PR Poisson’s ratio, /u1D̅08 
+IMOD Flag to choose degradation procedure when critical stress is 
+reached: 
+EQ.0.0: softening in NCYCR load steps.  Deﬁne SFSTI, SF STR, 
+and NCYCR (default). 
+EQ.1.0: damage model for softening.  Deﬁne ILAW, AT, BT, 
+AC, and BC. 
+ILAW Flag to choose damage evolution law if IMOD = 1.0 (see 
+Remark 5 ): 
+EQ.0.0: same damage evolution for tensile and compressive 
+failure (default) 
+EQ.1.0: diﬀerent damage evolution for tensile failure and 
+compressive failure. 
+FMOD Flag to choose between failure criteria (see Remark 1 ): 
+EQ.0.0: Rankine maximum stress (default) 
+EQ.1.0: Mohr-Coulomb  
+EQ.2.0: Drucker-Prager  
+EQ.10.0: Rankine with modiﬁed compressive failure 
+EQ.11.0: Mohr-Coulomb with modiﬁed compressive failure 
+EQ.12.0: Drucker-Prager with modiﬁed compressive failure 
+FT Tensile strength, |u1D4J3|u1D461Cst. 
+GT.0.0: constant value 
+LT.0.0: load curve ID = |FT|, which deﬁnes tensile strength as 
+a function of eﬀective strain rate (RFILTF is recom - 
+mended). FTSCL and RATENL are ignored with that 
+option. 
+FC Compressive strength, |u1D4J3|u1D4J≠Cst. *.   
+  VARIABLE   DESCRIPTION  
+EPSCR Critical value to trigger element deletion.  This c an be useful to 
+get rid of highly distorted elements.  
+GT.0.0: EPSCR is eﬀective critical strain. 
+LT.0.0: |EPSCR | is critical crack opening displacement. 
+ENGCRT Critical energy for nonlocal failure criteri on; see Remark 6 . 
+RADCRT Critical radius for nonlocal failure criteri on; see Remark 6 . 
+RATENL Quasi- static strain rate threshold variable which activat es a 
+nonlocal, strain rate dependent tensile strength adaption; se e 
+Remark 7 . 
+RFILTF Smoothing factor on the eﬀective strain rate for th e evaluation of 
+the current tensile strength if RATENL > 0.0; see Remark 7 . 
+|u1D7≠≠̇|u1D4JBCsta v g =RFILTF × |u1D7≠≠̇|u1D4JBCst−|oneCsta v g +(1−RFILTF )×|u1D7≠≠̇|u1D4JBCst 
+Remarks: 
+1.  Plane Stress Failure Criteria.  The underlying material behavior before 
+failure is isotropic, small strain linear elasticit y with Young’s modulus, |u1D438, and 
+Poisson’s ratio, /u1D̅08. Asymmetric (tension-compression dependent) failur e hap- 
+pens as soon as one of the following plane stress f ailure criteria is violated. 
+a)  Rankine Maximum Stress.   For FMOD = 0, a maximum stress criterion 
+(Rankine) is used where principal stresses, |u1D7≠∆|oneCst and |u1D7≠∆|twoCst, are bound by tensile 
+strength, |u1D4J3|u1D461Cst, and compressive strength, |u1D4J3|u1D4J≠Cst, as follows: 
+−|u1D4J3|u1D4J≠Cst<{|u1D7≠∆|oneCst, |u1D7≠∆|twoCst}< |u1D4J3|u1D461Cst 
+b)  Mohr-Coulomb.   With FMOD = 1, the Mohr-Coulomb criterion with ex - 
+pressions in four diﬀerent categories is used: 
+|u1D7≠∆|oneCst> 0 and |u1D7≠∆|twoCst> 0:  max |parenleftCvJ|u1D7≠∆|oneCst
+|u1D4J3|u1D461Cst,|u1D7≠∆|twoCst
+|u1D4J3|u1D461Cst|parenriµhtCvJ < 1
+|u1D7≠∆|oneCst< 0 and |u1D7≠∆|twoCst< 0:             max |parenleftCvJ−|u1D7≠∆|oneCst
+|u1D4J3|u1D4J≠Cst, −|u1D7≠∆|twoCst
+|u1D4J3|u1D4J≠Cst|parenriµhtCvJ < 1
+|u1D7≠∆|oneCst> 0 and |u1D7≠∆|twoCst< 0:  |u1D7≠∆|oneCst
+|u1D4J3|u1D461Cst−|u1D7≠∆|twoCst
+|u1D4J3|u1D4J≠Cst< 1
+|u1D7≠∆|oneCst< 0 and |u1D7≠∆|twoCst> 0: −|u1D7≠∆|oneCst
+|u1D4J3|u1D4J≠Cst+|u1D7≠∆|twoCst
+|u1D4J3|u1D461Cst< 1 
+c)  Drucker-Prager.   For FMOD = 2, the plane stress Drucker-Prager cri terion 
+is given by: *.   
+ 4.  Number of Failed Integration Points.   If the critical number of failed 
+integration points (NIPF) in one element is reached , all integration points over 
+the element thickness fail as well.  The default va lue of NIPF=1 resembles the 
+fact, that a crack in a glass plate immediately run s through the thickness. 
+5.  Damage Model.   Starting with the release of LS-DYNA version R10,  a damage 
+model for stress and stiﬀness softening can be acti vated with IMOD = 1. The 
+corresponding evolution law for ILAW = 0 is given b y: 
+|u1D437 =
+⎩|<raceleftCex⎨|<raceleftCex⎧ 0 for /u1D̅05≤/u1D̅05|zeroCst
+1 −/u1D̅05|zeroCst
+/u1D̅05|parenleftCv31 − |u1D6F+|u1D461Cst/co⋯⋯a.st|u1D4J≠Cst+ |u1D6F+|u1D461Cst/co⋯⋯a.st|u1D4J≠Cst|u1D4J2−/u1D6FD.st/u1D461.sts/comm∙.sts/u1D4⃡0.sts|parenleftCv2/u1Dℜ0⃡.st−/u1Dℜ0⃡.st|zeroCsts|parenriµhtCv2|parenriµhtCv3otherwise  
+meaning tensile and compressive failure are treated  in the same fashion.  
+However, with ILAW = 1 the damage evolution for ten sile failure is given by: 
+|u1D437 =
+⎩|<raceleftCex⎨|<raceleftCex⎧ 0 for /u1D̅05≤/u1D̅05|zeroCst
+1 −/u1D̅05|zeroCst
+/u1D̅05|parenleftCv31 − |u1D6F+|u1D461Cst+ |u1D6F+|u1D461Cst|u1D4J2−/u1D6FD.st/u1D461.sts|parenleftCv2/u1Dℜ0⃡.st−/u1Dℜ0⃡.st|zeroCsts|parenriµhtCv2|parenriµhtCv3otherwise  
+while damage for compressive failure evolves as (mo re delayed stress reduc- 
+tion): 
+|u1D437 =
+⎩|<raceleftCex⎨|<raceleftCex⎧ 0 for /u1D̅05≤/u1D̅05|zeroCst
+1 −/u1D̅05|zeroCst
+/u1D̅05(1 − |u1D6F+|u1D4J≠Cst) − |u1D6F+|u1D4J≠Cst|u1D4J2−/u1D6FD.st/u1D4⃡0.sts|parenleftCv2/u1Dℜ0⃡.st−/u1Dℜ0⃡.st|zeroCsts|parenriµhtCv2otherwise  
+6.  Nonlocal Failure.   A nonlocal failure criterion which is mainly inte nded for 
+windshield impact can be deﬁned using ENGCRT and RA DCRT. The same 
+procedure is used as in *.   *.   
+ History 
+Variable # Description 
+7 Current tensile strength value *

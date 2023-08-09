@@ -1,0 +1,50 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+TES Type of eﬀective separation parameter (ESP). 
+EQ.0.0 or 1.0: a dimensional separation measure is used.  For 
+the interaction between mode I and II, a mixed-
+mode propagation criterion is used.  For 
+TES = 0.0 this is a power-law, and for TES = 1.0 
+this is the Benzeggagh- Kenane law [1996].  See 
+remarks below. 
+EQ.2.0: a dimensionless separation measure is used, 
+which grasps for the interaction between mode I 
+displacements and mode II displacements (simi- 
+lar to .   *.   
+ First and second formulation (TES = 0.0 and TES = 1 .0): 
+For mixed-mode behavior, three diﬀerent formulation s are possible (where default 
+TES = 0.0 with XMU = 1.0 is recommended as a ﬁrst t ry).  Here, the total mixed-mode 
+relative displacement |u1D6FF|u1D4JACst is deﬁned as  |u1D6FF|u1D4JACst=/radical.v2|u1D6FF/u1D4:C.st|twoCst+ |u1D6FF/u1D4:C.st/u1D4:C.st|twoCst, where |u1D6FF/u1D4:C.st= |u1D6FF|threeCst is the separation in 
+normal direction (mode I) and |u1D6FF/u1D4:C.st/u1D4:C.st=/radical.v2|u1D6FF|oneCst|twoCst+ |u1D6FF|twoCst|twoCst is the separation in tangential direction 
+(mode II).  See Figure M186-2 . The ultimate mixed-mode displacement |u1D6FF|u1D439Cst (total failure) 
+for the power law (TES = 0.0) is: 
+|u1D6FF|u1D439Cst=1 + |u1D6FD|twoCst
+|u1D434TSLC ⎣⎢⎡|parenleftCvJT
+|u1D43A/u1D4:C.st|u1D4J≠Cst|parenriµhtCvJXM U 
++ |parenleftCv6S × |u1D6FD|twoCst
+|u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst|parenriµhtCv6XM U 
+⎦⎥⎤−  |oneCst
+XM U 
+ 
+If TSLC2 is defined this changes to : 
+|u1D6FF|u1D439Cst= |parenleftCv21 + |u1D6FD|twoCst|parenriµhtCv2
+⎣⎢⎡|parenleftCvJ|u1D434TSLC × T
+|u1D43A/u1D4:C.st|u1D4J≠Cst|parenriµhtCvJXM U 
++ |parenleftCv6|u1D434TSLC2 × S × |u1D6FD|twoCst
+|u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst|parenriµhtCv6XM U 
+⎦⎥⎤−  |oneCst
+XM U 
+ 
+ 
+and alternatively for the Benzeggagh-Kenane law [19 96]  (TES = 1.0): 
+|u1D6FF|u1D439Cst=1 + |u1D6FD|twoCst
+|u1D434TSLC |parenleftCv1T + S × |u1D6FD|twoCst|parenriµhtCv1⎣⎢⎡|u1D43A/u1D4:C.st|u1D4J≠Cst+ |parenleftCv1|u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst− |u1D43A/u1D4:C.st|u1D4J≠Cst|parenriµhtCv1 |parenleftCv6S × |u1D6FD|twoCst
+|u1D447 + S × |u1D6FD|twoCst|parenriµhtCv6XM U 
+⎦⎥⎤ Iδ
+mδ II δST
+1βFδtraction 
+F
+II δF
+Iδ1 2 3 δ
+ Figure M186-2.   Mixed mode traction-separation law *

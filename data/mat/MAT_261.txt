@@ -1,0 +1,210 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+AOPT Material axes option (see *MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES.  For shells only, the material axes are 
+then rotated about the shell element normal by an a n- 
+gle MANGLE. 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction.  This option is for solid 
+elements only. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle (MANGLE) from a line in the plane of the e l- 
+ement deﬁned by the cross product of the vector /u1D42F with 
+the element normal. 
+EQ.4.0: Locally orthotropic in cylindrical coordinate syste m 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, |u1D4JD, which deﬁne the centerline ax- 
+is.  This option is for solid elements only. 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+DAF Flag to control failure of an integration point based on 
+longitudinal (ﬁber) tensile failure: 
+EQ.0.0: Integration point fails if any damage variable reac hes 
+1.0. 
+EQ.1.0: No failure of integration point due to ﬁber tensile  
+failure.  This condition corresponds to history var iable 
+“da( i)” reaching 1.0. 
+DKF Flag to control failure of an integration point bas ed on 
+longitudinal (ﬁber) compressive failure: *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 MANGLE  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+MANGLE Material angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3.   MAN GLE may be overridden on the element card; 
+see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO.  
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable ENKINK ENA ENB ENT ENL    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+ENKINK Fracture toughness for longitudinal (ﬁber) compress ive failure 
+mode. 
+GT.0.0: The given value will be regularized with the 
+characteristic element length. 
+LT.0.0: Load curve ID = (- ENKINK) which deﬁnes the fracture 
+toughness for ﬁber compressive failure mode as a fu nc- 
+tion of characteristic element length.  No further regu- 
+larization. 
+ 
+Table ID = (-ENKINK) which deﬁnes for each strain 
+rate value a load curve that deﬁnes the fracture to ugh- 
+ness for ﬁber compressive failure mode as a functio n of 
+characteristic element length.  No further regulari za- 
+tion.  
+ENA Fracture toughness for longitudinal (ﬁber) tens ile failure mode. 
+GT.0.0: The given value will be regularized with the *.   
+  VARIABLE   DESCRIPTION  
+ENL Fracture toughness for intralaminar matrix longitud inal shear 
+failure. 
+GT.0.0: The given value will be regularized with the 
+characteristic element length.  
+LT.0.0: Load curve ID = (- ENL) which deﬁnes the fracture 
+toughness for intralaminar matrix longitudinal shea r 
+failure as a function of characteristic element len gth.  
+No further regularization. 
+ 
+Table ID = (-ENL) which deﬁnes for each strain rate 
+value a load cu rve that deﬁnes the fracture toughness 
+for intralaminar matrix longitudinal shear failure as a 
+function of characteristic element length.  No furt her 
+regularization. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable XC XT YC YT SL    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+XC Longitudinal compressive strength, |u1D44∆-axis (positive value).  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- XC) which deﬁnes the longitudinal 
+compressive strength as a function of longitudinal 
+strain rate ( /u1D̅16̇|u1D44∆Cst|u1D44∆Cst ) 
+XT Longitudinal tensile strength, |u1D44∆-axis.  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- XT) which deﬁnes the longitudinal 
+tensile strength as a function of longitudinal stra in rate 
+(/u1D̅16̇|u1D44∆Cst|u1D44∆Cst ) 
+YC Transverse compressive strength, |u1D44F-axis (positive value).  
+GT.0.0: Constant value 
+LT.0.0: Load curve ID = (- YC) which deﬁnes the transverse *.   
+  VARIABLE   DESCRIPTION  
+described as follows.  If the ﬁrst  value in the table is negative, LS-
+DY NA assumes that all the table values represent the natural 
+logarithm of a strain rate.  Since the tables are i nternally 
+discretized to equally space the table values, it m akes good sense 
+from an accuracy standpoint that the table values represent the 
+natural log of strain rate when the lowest strain r ate and highest 
+strain rate diﬀer by several orders of magnitude.  There is some 
+additional computational cost associated with invok ing 
+logarithmic interpolation. 
+BETA Hardening parameter for in- plane shear plasticity 
+(0.0 ≤ BETA ≤ 1.0). 
+EQ.0.0: Pure kinematic hardening 
+EQ.1.0: Pure isotropic hardening 
+0.0 < BETA < 1.0: Mixed hardening 
+PFL Percentage of shell or tshell layers which must fai l until 
+crashfront is initiated.  For example, if |PFL|  = 80.0, then 80% of 
+layers must fail until strengths are reduced in nei ghboring 
+elements.  Default: all layers must fail.  A single  layer fails if 1 in-
+plane integration point fails (PFL > 0) or if 4 in- plane integration 
+points fail (PFL < 0). 
+PUCK Flag for evaluation and post-processing of Puc k’s inter-ﬁber-
+failure criterion (IFF); see Puck, Kopp and Knops [ 2002]. 
+EQ.0.0: No evaluation of Puck’s IFF-criterion. 
+EQ.1.0: Puck’s IFF-criterion will be evaluated. 
+SOFT Softening reduction factor for material strength in  crashfront 
+elements (default = 1.0) 
+DT Strain rate averaging option: 
+EQ.0.0: Strain rate is evaluated using a running average. 
+LT.0.0: Strain rate is evaluated using an average of the la st 11 
+time steps. 
+GT.0.0: Strain rate is averaged over the last DT time units . *.   
+ d)  transverse (matrix) failure: transverse compressio n/shear, 
+|u1D4J3|u1D4JACst|u1D44∆Cst|u1D461Cst = |parenleftCvJ/u1D̅0F|u1D447Cst
+|u1D446|u1D447Cst− |u1D7≠7|u1D447Cst|u1D7≠∆|u1D4JBCst|parenriµhtCvJ|twoCst
++ |parenleftCvJ/u1D̅0F|u1D43FCst
+|u1D446|u1D43FCst− |u1D7≠7|u1D43FCst|u1D7≠∆|u1D4JBCst|parenriµhtCvJ|twoCst
+= 1     if      |u1D7≠∆|u1D4JBCst< 0 
+2.  Damage Evolution.   As long as the stress state is located within the  failure 
+surface, the model behaves in an orthotropic elasti c manner.  When reaching 
+the failure criteria, the eﬀective (undamaged) stre sses will be reduced by a 
+factor of (1 − |u1D4J1) , where the damage variable |u1D4J1 represents one of the damage 
+variables deﬁned for the diﬀerent failure mechanism s ( |u1D4J1da , |u1D4J1k in k , |u1D4J1mat ). The 
+growth of these damage variables is driven by a lin ear damage evolution law 
+based on fracture toughnesses ( /u1D6E4 → ENKINK, ENA, ENB, ENT, ENL) and a 
+characteristic internal element length, /u1D4:F, to account for objectivity.  See Figure 
+M261-2 . −σbbcτ
+bcτ−σb−σc
+−σccbτcbτ bψ cψ−σbψ
+−σbψ
+−σcψ−σcψ
+bψma
+mbθa
+mbcψc
+ψ ψ
+bc
+bφMatrix fracture planecψbψbmama
+bcθ
+ψa
+bc
+ Figure M261-1.   Deﬁnition of angles and stresses in fracture plane 
+ Figure M261-2.   Damage evolution law *.   
+ History 
+Variable  Description Value History 
+Variable #  
+da( i) damage ﬁber tension  0: elastic 
+ 1: fully damaged 5 
+dkink( i) damage ﬁber compression  6 
+dmat( i) damage transverse 7 
+dam( i) crashfront  -1: element intact 
+ 10 -8: element in crashfront 
+ +1: element failed 9 
+fmt_p( i) tensile matrix mode 
+(Puck criteria)  0 → 1: elastic 
+ 1: failure criterion reached 10 
+fmc_p( i) compressive matrix mode  
+(Puck criteria) 11 
+theta_p( i) angle of fracture plane 
+(radians, Puck criteria)  12 
+d1tot( i) Total strain in material 11-
+direction  31 
+d2tot( i) Total strain in material 22-
+direction  32 
+d3tot( i) Total strain in material 33-
+direction  33 
+d4tot( i) Total strain in material 12-
+direction  34 
+d5tot( i) Total strain in material 23-
+direction  35 
+d6tot( i) Total strain in material 31-
+direction  36 
+theta Angle /u1D̅0: in Figure M261-1   49 
+psi Angle ѱ in Figure M261-1   50 
+e1dot( i) Averaged strain rate in 
+longitudinal direction  54 
+e2dot( i) Averaged strain rate in 
+transverse direction  55 
+e4dot( i) Averaged engineering 
+shear strain rate in in-
+plane direction  56 
+References: 
+More detailed information about this material model  can be found in Pinho, Iannucci 
+and Robinson [2006]. *

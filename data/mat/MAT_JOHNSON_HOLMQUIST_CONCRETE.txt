@@ -1,0 +1,29 @@
+ ................... ................................................... .... 2-710  
+*.  [0,3c,5]  {25} 
+ *.   *.   
+ *.   *.   
+ where |u1D7≠∆ is the actual equivalent stress, and |u1D4J3/c.st|minuteCst is the quasi-static uniaxial compressive 
+strength.  The expression is deﬁned as: 
+|u1D7≠∆∗=/˙racketleft.v:|u1D434(1 − |u1D437) + |u1D43J|u1D443∗|u1D441Cst/˙racketright.v:[1 + |u1D436ln(|u1D7≠≠̇∗)]  . 
+where |u1D437 is the damage parameter, |u1D443∗= |u1D443 |u1D4J3/c.st|minuteCst⁄ is the normalized pressure and |u1D7≠≠̇∗= |u1D7≠≠̇|u1D7≠≠̇|zeroCst⁄ is 
+the dimensionless strain rate.  The model increment ally accumulates damage, |u1D437, both 
+from equivalent plastic strain and plastic volumetr ic strain, and is expressed as 
+|u1D437 = |summationCv1∆|u1D7≠≠|u1D4JDCst+ ∆|u1D7≠7|u1D4JDCst
+|u1D437|oneCst(|u1D443∗+ |u1D447∗)/u1D4:̅.st|twoCsts  . 
+Here, ∆|u1D7≠≠|u1D4JDCst and ∆|u1D7≠7|u1D4JDCst are the equivalent plastic strain and plastic volu metric strain, |u1D437|oneCstand 
+|u1D437|twoCst are material constants and |u1D447∗= |u1D447 |u1D4J3/c.st|minuteCst⁄ is the normalized maximum tensile hydrostatic 
+pressure. 
+ 
+The damage strength, DS , is deﬁned in compression when |u1D443∗ > 0 as 
+DS = |u1D4J3|u1D4J≠Cst|minuteCstmin /˙racketleft.v:SFMAX, |u1D434(1 − |u1D437) + |u1D43J|u1D443∗|u1D441Csts/˙racketright.v:[1 + |u1D436∗ln(|u1D7≠≠̇∗)] 
+or in tension if |u1D443∗ < 0, as 
+DS = |u1D4J3|u1D4J≠Cst|minuteCstmax |<racketleftCvJ0, |u1D434(1 − |u1D437) − |u1D434 |parenleftCvJ|u1D443∗
+|u1D447|parenriµhtCvJ|<racketriµhtCvJ[1 + |u1D436∗ln(|u1D7≠≠̇∗)]  . 
+ 
+The pressure for fully dense material is expressed as 
+|u1D443 = |u1D43∆|oneCst|u1D7≠7/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt+ |u1D43∆|twoCst|u1D7≠7/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|twoCst+ |u1D43∆|threeCst|u1D7≠7/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|threeCst  , 
+where |u1D43∆|oneCst , |u1D43∆|twoCst and |u1D43∆|threeCst are material constants and the modiﬁed volumetric strain is 
+deﬁned as 
+|u1D7≠7/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt=|u1D7≠7 − |u1D7≠7loc k 
+1 + |u1D7≠7loc k   , 
+where |u1D7≠7loc k  is the locking volumetric strain. *

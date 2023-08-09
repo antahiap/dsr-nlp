@@ -1,0 +1,97 @@
+: *. : *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density; see also volume in *SECTION_BEAM. 
+LCIDTR Load curve ID deﬁning translational force re sultant along local |u1D4JF-
+axis as a function of relative translational displacement; see 
+Remarks 1  and 3 and Figure M67-1 . 
+LCIDTS Load curve ID deﬁning translational force re sultant along local |u1D46≠-
+axis as a function of relative translational displa cement. 
+LCIDTT Load curve ID deﬁning translational force re sultant along local |u1D461-
+axis as a function of relative translational displa cement. 
+LCIDRR Load curve ID deﬁning rotational moment resu ltant about local |u1D4JF-
+axis as a function of relative rotational displacem ent. 
+LCIDRS Load curve ID deﬁning rotational moment resu ltant about local |u1D46≠-
+axis as a function of relative rotational displacem ent. 
+LCIDRT Load curve ID deﬁning rotational moment resu ltant about local |u1D461-
+axis as a function of relative rotational displacem ent. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCIDTDR LCIDTDS LCIDTDT LCIDRDR LCIDRDS LCIDRDT   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+LCIDTDR Load curve ID deﬁning translational damping force r esultant 
+along local |u1D4JF-axis as a function of relative translational veloc ity. 
+LCIDTDS Load curve ID deﬁning translational damping force r esultant 
+along local |u1D46≠-axis as a function of relative translational veloc ity. 
+LCIDTDT Load curve ID deﬁning translational damping force r esultant 
+along local |u1D461-axis as a function of relative translational veloc ity. 
+LCIDRDR Load curve ID deﬁning rotational damping moment res ultant 
+about local |u1D4JF-axis as a function of relative rotational velocity . *.   
+  VARIABLE   DESCRIPTION  
+FFAILS Optional failure parameter.  If zero, the co rresponding force, |u1D439|u1D46≠Cst, is 
+not considered in the failure calculation. 
+FFAILT Optional failure parameter.  If zero, the co rresponding force, |u1D439|u1D461Cst, is 
+not considered in the failure calculation. 
+MFAILR Optional failure parameter.  If zero, the correspon ding moment, 
+|u1D44≠|u1D4JFCst, is not considered in the failure calculation. 
+MFAILS Optional failure parameter.  If zero, the correspon ding moment, 
+|u1D44≠|u1D46≠Cst, is not considered in the failure calculation. 
+MFAILT Optional failure parameter.  If zero, the correspon ding moment, 
+|u1D44≠|u1D461Cst, is not considered in the failure calculation. 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable UFAILR UFAILS UFAILT TFAILR TFAILS TFAILT   
+Type F F F F F F   
+Default 0.0 0.0 0.0 0.0 0.0 0.0   
+ 
+ VARIABLE   DESCRIPTION  
+UFAILR Optional failure parameter.  If zero, the correspon ding 
+displacement, |u1D462|u1D4JFCst, is not considered in the failure calculation.  Se e 
+Remark 4 . 
+UFAILS Optional failure parameter.  If zero, the correspon ding 
+displacement, |u1D462|u1D46≠Cst, is not considered in the failure calculation. 
+UFAILT Optional failure parameter.  If zero, the correspon ding 
+displacement, |u1D462|u1D461Cst, is not considered in the failure calculation. 
+TFAILR Optional failure parameter.  If zero, the correspon ding rotation, 
+/u1D̅0:|u1D4JFCst, is not considered in the failure calculation. 
+TFAILS Optional failure parameter.  If zero, the correspon ding rotation, 
+/u1D̅0:|u1D46≠Cst, is not considered in the failure calculation. *.   
+ only the positive quadrant values are considered, t hat is, start the load curve at 
+the origin [0,0] . 
+4.  Failure.  Catastrophic failure based on force resultants occu rs if the following 
+inequality is satisﬁed. 
+|parenleftCv6|u1D439|u1D4JFCst
+|u1D439|u1D4JFCstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D439|u1D46≠Cst
+|u1D439|u1D46≠Cstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D439|u1D461Cst
+|u1D439|u1D461Cstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D44≠|u1D4JFCst
+|u1D44≠|u1D4JFCstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D44≠|u1D46≠Cst
+|u1D44≠|u1D46≠Cstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D44≠|u1D461Cst
+|u1D44≠|u1D461Cstfail |parenriµhtCv6|twoCst
+− 1. ≥ 0  . 
+After failure the discrete element is deleted.  Lik ewise, catastrophic failure 
+based on displacement resultants occurs if the foll owing inequality is satisﬁed: 
+|parenleftCv6|u1D462|u1D4JFCst
+|u1D462|u1D4JFCstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D462|u1D46≠Cst
+|u1D462|u1D46≠Cstfail |parenriµhtCv6|twoCst
++ |parenleftCv6|u1D462|u1D461Cst
+|u1D462|u1D461Cstfail |parenriµhtCv6|twoCst
++ |parenleftCv6/u1D̅0:|u1D4JFCst
+/u1D̅0:|u1D4JFCstfail |parenriµhtCv6|twoCst
++ |parenleftCv6/u1D̅0:|u1D46≠Cst
+/u1D̅0:|u1D46≠Cstfail |parenriµhtCv6|twoCst
++ |parenleftCv6/u1D̅0:|u1D461Cst
+/u1D̅0:|u1D461Cstfail |parenriµhtCv6|twoCst
+− 1. ≥ 0  . 
+After failure, the discrete element is deleted.  If  failure is included, either or 
+both of the criteria may be used. 
+5.  Rotational Displacement.   Rotational displacement is measured in radians. *

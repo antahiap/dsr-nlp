@@ -1,0 +1,22 @@
+: *.  
+*.   *.  part can be  discretized into multiple dis joint pieces and have each piece 
+behave as an independent rigid body.  The inertia p roperties for the disjoint pieces are 
+determined directly from the ﬁnite element discreti zation.   
+Nodes of a *.  part 
+may share nodes with deformable structural and soli d elements.   
+This material option can be used to model granular material where the grains interact 
+through an automatic single surface contact deﬁniti on.  Another possible use includes 
+modeling bolts as rigid bodies where the bolts belo ng to the same part ID.  This model 
+eliminates the need to represent each rigid piece w ith a unique part ID. 
+ 
+ Card 1 2 3 4 5 6 7 8 
+Variable MID RO E PR     
+Type A8 F F F     
+Default none none none none     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density. 
+E Young’s modulus. 
+PR Poisson’s ratio. *

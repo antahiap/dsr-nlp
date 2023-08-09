@@ -1,0 +1,73 @@
+ .................................... ................................................... ............................. 2-174  
+*.  [0,3c,5,8B] {5} 
+ *. _LUND [0,3c,5,8B] {5}  
+ *.  *. _LUND *.   
+2-174 (MAT) LS-DYNA R13 *.   *.   
+2-176 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+FLAG Flag for cold compression energy ﬁt (see Remarks 2  and 4): 
+EQ.0.0:  |u1D7≠2 coeﬃcients (default) 
+EQ.1.0:  |u1D7≠7 coeﬃcients 
+MMN Optional |u1D7≠7 or |u1D7≠2 minimum value ( |u1D7≠7min  or |u1D7≠2min ), depending on 
+FLAG.   
+MMX Optional |u1D7≠7 or |u1D7≠2 maximum value ( |u1D7≠7max  or |u1D7≠2max ), depending on 
+FLAG.   
+EC0, …, EC9 Cold compression energy coeﬃcients (opt ional).  See Remark 2 . 
+Remarks: 
+1.  References.   Users who have an interest in this model are enco uraged to 
+study the paper by Steinberg and Guinan which provi des the theoretical basis.  
+Another useful reference is the KOVEC user’s manual . 
+2.  Shear Modulus.   In terms of the foregoing input parameters, we de ﬁne the 
+shear modulus, |u1D43A, before the material melts as: 
+|u1D43A = |u1D43A|zeroCst|<racketleftCvJ1 + |u1D44F|u1D4JD|u1D449|oneCst|threeCst/fraction.v2−ℎ|parenleftCvJ|u1D438|u1D4J6Cst− |u1D438|u1D4J≠Cst
+3|u1D44J′− 300|parenriµhtCvJ |<racketriµhtCvJ|u1D4J2−/u1D45:.st|u1D438Cst|u1D4J6Csts
+|u1D438Cst/u1D45A.sts−|u1D438Cst |u1D4J6Csts  , 
+where |u1D4JD is the pressure, |u1D449 is the relative volume, |u1D438/u1D450 (see Remark 4 ) is the cold 
+compression energy, and |u1D438|u1D4JACst is the melting energy.  |u1D438|u1D4J≠Cst is given by: 
+|u1D438|u1D4J≠Cst(|u1D46J) =/integral.v:|u1D4JD(/u1D44B)|u1D4J1 /u1D44B |u1D46JCst
+|zeroCst−900|u1D44J|minuteCstexp(|u1D44∆|u1D46J)
+(1 − |u1D46J)(/u1D6FE.st/o.sts−|u1D44∆Cst)   
+with 
+|u1D46J = 1 − |u1D449  . 
+|u1D438|u1D4JA is deﬁned as: 
+|u1D438|u1D4JACst(|u1D46J) = |u1D438|u1D4J≠Cst(|u1D46J) + 3|u1D44J|minuteCst|u1D447Cst/u1D45A.sts(|u1D46JCst) . 
+|u1D438|u1D4JACst is in terms of the melting temperature |u1D447|u1D4JACst(|u1D46J): 
+|u1D447|u1D4JACst(|u1D46J) =|u1D447mo exp(2|u1D44∆|u1D46J)
+|u1D449|twoCst|parenleftCv3/u1D6FE.st/u1D45C.sts−|u1D44∆Cst− |oneCst|threeCst/fraction.v2|parenriµhtCv3 
+and the melting temperature at |u1D7≠+ = |u1D7≠+/u1D45C.st, |u1D447mo . 
+In the above equations |u1D44J′ is deﬁned by  *.   
+2-178 (MAT) LS-DYNA R13 cause |u1D4JDcut  is measured positive in compression, while |u1D7≠∆max  is positive in 
+tension.  Once spall is detected with this model, t he deviatoric stresses are 
+reset to zero, and no hydrostatic tension ( |u1D4JD < 0 ) is permitted.  If tensile 
+pressures are calculated, they are reset to 0 in th e spalled material.  Thus, 
+the spalled material behaves as a rubble or incohes ive material. 
+c)  Hydrostatic Tension Spall Model.   The hydrostatic tension spall model, 
+SPALL = 3, detects spall if the pressure becomes mo re tensile than the 
+speciﬁed limit, |u1D4JDcut .  Once spall is detected the deviatoric stresses a re reset 
+to zero, and nonzero values of pressure are require d to be compressive 
+(positive).  If hydrostatic tension ( |u1D4JD < 0 ) is subsequently calculated, the 
+pressure is reset to 0 for that element. *. _LUND  
+This is  Material Type 11.  This material is a modiﬁcation o f the Steinberg model above 
+to include the rate model of Steinberg and Lund [19 89].  An equation of state 
+determines the pressure. 
+The keyword cards can appear in two ways: 
+*. _LUND  
+2-180 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G0 Basic shear modulus 
+SIGO |u1D7≠∆/u1D45C.st; see Remark 3  of *. _LUND  *. _LUND  
+2-182 (MAT) LS-DYNA R13  
+ Card 5 1 2 3 4 5 6 7 8 
+Variable UK C1 C2 YP YA YM   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+UK Activation energy for rate dependent model 
+C1 Exponent pre-factor in rate dependent model 
+C2 Coeﬃcient of drag term in rate dependent model 
+YP Peierls stress for rate dependent model 
+YA A thermal yield stress for rate dependent model 
+YMAX Work hardening maximum for rate model 
+Remarks: 
+This model is similar in theory to the *

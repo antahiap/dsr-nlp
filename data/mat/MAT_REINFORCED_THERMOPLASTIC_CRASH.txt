@@ -1,0 +1,260 @@
+ ............... .................................................. 2-1555  
+*.  [2] 
+ *.   *.   
+This is Material Type 249. This material model desc ribes a reinforced thermoplastic 
+composite material with its damage and failure beha vior.  The reinforcement is 
+modeled as an anisotropic hyper-elastic material wi th up to three distinguished ﬁber 
+directions.  It can be used to model unidirectional  layers as well as woven and non-
+crimped fabrics.  The matrix is modeled with a simp le elastic plastic material 
+formulation.  For a composite, the overall stress i s found by adding the ﬁber and matrix 
+stresses.  
+Card Summary: 
+Card 1.   This card is required. 
+MID RO EM PRM LCSIGY BETA PFL VISC 
+Card 2.   This card is required. 
+NFIB AOPT    A1 A2 A3 
+Card 3.   This card is required. 
+V1 V2 V3 D1 D2 D3 MANGL THICK 
+Card 4.   This card is included if VISC > 0. 
+VG1 VB1 VG2 VB2 VG3 VB3 VG4 VB4 
+Card 5.   This card is required. 
+IDF1 ALPH1 EF1 LCEF1 G23_1 G31_1 DAF1 DAM1 
+Card 6.   This card is required. 
+G12 LCG12 ALOC12 GLOC12 METH12 DAM12   
+Card 7.   This card is required. 
+IDF2 ALPH2 EF2 LCEF2 G23_2 G31_2 DAF2 DAM2 
+Card 8.   This card is required. 
+G23 LCG23 ALOC23 GLOC23 METH23 DAM23   
+Card 9.   This card is required. 
+IDF3 ALPH3 EF3 LCEF3 G23_3 G31_3 DAF3 DAM3 *.   
+ Card 10.   This card is optional. 
+POSTV VISCS IHIS      
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EM PRM LCSIGY BETA PFL VISC 
+Type A F F F I F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density, |u1D7≠+ 
+N Number of phases 
+EM Young’s modulus of matrix material 
+PRM Poisson’s ratio for matrix material 
+LCSIGY Load curve or table ID for strain hardening of the matrix.  If a 
+curve, then it speciﬁes yield stress as a function of eﬀective plastic 
+strain.  If a table, then temperatures are the tabl e values indexing 
+curves giving yield stress as a function of eﬀec tive plastic strain 
+(see *DEFINE_TABLE). 
+BETA Parameter for mixed hardening, 0.0 ≤ |u1D6FD ≤ 1.0. Set |u1D6FD=0.0 for pure 
+kinematic hardening and |u1D6FD=1.0 for pure isotropic hardening. 
+PFL Percentage of layers that must fail to initiate fai lure of the element 
+(default is 100) 
+VISC Viscous formulation for ﬁbers: 
+EQ.0.0: Elastic behavior 
+GE.1.0: Viscoelastic behavior modeled with a Prony series.  See 
+Remark 3 . 
+ *.   
+  VARIABLE   DESCRIPTION  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+MANGL Material angle in degrees for AOPT = 0 and 3. It may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA. 
+THICK Balance thickness changes of the material due to th e matrix 
+response when calculating the ﬁber stresses.  Stres ses can be 
+scaled to account for the fact that ﬁber cross- sectional usually 
+does not change. 
+EQ.0: No scaling  
+EQ.1: Scaling  
+ 
+Fiber Viscosity Card.   Additional card for VISC > 0 only.  See Remark 3 . 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable VG1 VB1 VG2 VB2 VG3 VB3 VG4 VB4 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+VG k Relaxation modulus |u1D43A|u1D4J8Cst for the kth  term of the Prony series for 
+viscoelastic ﬁbers  
+VB k Decay constant |u1D6FD|u1D4J8Cst for the kth  term of the Prony series for 
+viscoelastic ﬁbers 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable IDF1 ALPH1 EF1 LCEF1 G23_1 G31_1 DAF1 DAM1 
+Type I F F I F F I I 
+ 
+ VARIABLE   DESCRIPTION  
+IDF1 ID for 1 st  ﬁber family for post-processing 
+ALPH1 Orientation angle |u1D6F+|oneCst for 1 st  ﬁber with respect to overall material 
+direction *.   
+  Card 6 1 2 3 4 5 6 7 8 
+Variable G12 LCG12 ALOC12 GLOC12 METH12 DAM12   
+Type F I F F I I   
+ 
+ VARIABLE   DESCRIPTION  
+G12 Linear shear modulus for shearing between ﬁber fami lies 1 and 2 
+LCG12 Curve ID for shear stress as a function of shearing  type as 
+speciﬁed with METH12 between the 1 st  and 2 nd  ﬁbers.  See 
+Remark 1 . 
+ALOC12 Locking angle (in radians) for shear between  ﬁber families 1 and 2  
+GLOC12 Linear shear modulus for shear angles larger  than ALOC12 
+METH12 Option for shear response between ﬁber 1 and  2 (see Remark 1 ): 
+EQ.0: Elastic shear response.  Curve LCG12 speciﬁes shear  
+stress as a function of the scalar product of the ﬁ ber di- 
+rections.  
+EQ.1:  Elasto- plastic shear response.  Curve LCG12 speciﬁes 
+yield shear stress as a function of the normalized scalar 
+product of the ﬁber directions. 
+EQ.2: Elastic shear response.  Curve LCG12 speciﬁes shear  
+stress as a function of shear angle (radians) betwe en the 
+ﬁbers. 
+EQ.3: Elasto- plastic shear response.  Curve LCG12 deﬁnes 
+yield shear stress as a function of normalized shea r an- 
+gle between the ﬁbers.  
+EQ.4: Elastic shear response.  Curve LCG12 speciﬁes shear  
+stress as a function of shear angle (radians) betwe en the 
+ﬁbers.  This option is a special implementation for  non-
+crimped fabrics, where one of the ﬁber families cor re- 
+sponds to a stitching. 
+EQ.5: Elasto- plastic shear response.  Curve LCG12 speciﬁes 
+yield shear stress as a function of normalized shea r an- 
+gle between the ﬁbers.  This option is a special im ple- 
+mentation for non- crimped fabrics, where one of the 
+ﬁber families corresponds to a stitching.  *.   
+  VARIABLE   DESCRIPTION  
+ﬁber strain (for compression and elongation).  If D AF2 refers to a 
+table, then two diﬀerent damage functions for tensi le and 
+compressive stresses are input.  The values in the table are 
+arbitrary and exist only to index the two curves.  The ﬁrst indexed 
+curve is assumed to specify tensile damage as a fun ction of ﬁber 
+strains while second curve speciﬁes compressive dam age as a 
+function of ﬁber strains.  i nput different damage functions for 
+tensile and compressive stresses.  Any other curves  input with the 
+table definition are ignored.  
+The damager parameter |u1D4J1|twoCst/u1D45:.st ranges from 0.0 for an undamaged 
+ﬁber to 1.0 for a failed ﬁber family.  If all famil ies have failed, 
+material failure at the integration point is initia ted.  
+DAM2 Load curve or table ID for damage parameter |u1D4J1|twoCst|u1D4JACstfor matrix 
+material based on the current deformation status of  the 2 nd  ﬁber 
+(see Remark 2 ). If a curve, it speciﬁes damage as a function of 
+ﬁber strain (for compression and elongation).  If a  table, then the 
+values are ﬁber strain rates which index damage as a function of 
+ﬁber strain curves. 
+The damager parameter |u1D4J1|twoCst|u1D4JACst ranges from 0.0 to 1.5. A value of 0.0 
+indicates an undamaged matrix, whereas 1.0 refers t o a 
+completely damaged matrix.  To initiate failure of the composite 
+at the integration point, a matrix damage |u1D4J1|twoCst|u1D4JACst of 1.5 must be 
+reached.  Naturally, the mechanic al behavior of the matrix does 
+not change for damage values between 1.0 and 1.5.  
+ 
+ Card 8 1 2 3 4 5 6 7 8 
+Variable G23 LCG23 ALOC23 GLOC23 METH23 DAM23   
+Type F I F F I F   
+ 
+ VARIABLE   DESCRIPTION  
+G23 Linear shear modulus for shearing between ﬁber fami lies 2 and 3 
+LCG23 Curve ID for shear stress as a function of shearing  type as 
+speciﬁes with METH23 between the 2 nd  and 3 rd  ﬁbers.  See 
+Remark 1 . 
+ALOC23 Locking angle (in radians) for shear between  ﬁber families 2 and 3  *.   
+  VARIABLE   DESCRIPTION  
+curve is assumed to specify tensile damage as a fun ction of ﬁber 
+strains while second curve speciﬁes compressive dam age as a 
+function of ﬁber strains.  i nput different damage functions for 
+tensile and compressive stresses.  Any other curves  input with the 
+table definition are ignored.  
+The damager parameter |u1D4J1|threeCst/u1D45:.st ranges from 0.0 for an undamaged 
+ﬁber to 1.0 for a failed ﬁber family.  If all famil ies have failed, 
+material failure at the integration point is initia ted.  
+DAM3 Load curve or table ID for damage parameter |u1D4J1|threeCst|u1D4JACstfor matrix 
+material based on the current deformation status of  the 3 rd  ﬁber 
+(see Remark 2 ). If a curve, it speciﬁes damage as a function of 
+ﬁber strain (for compression and elongation).  If a  table, then the 
+values are ﬁber strain rates which index damage as a function of 
+ﬁber strain curves. 
+The damager parameter |u1D4J1|threeCst|u1D4JACst ranges from 0.0 to 1.5. A value of 0.0 
+indicates an undamaged matrix, whereas 1.0 refers t o a 
+completely damaged matrix.  To initiate failure of the composite 
+at the integration point, a matrix damage |u1D4J1|threeCst|u1D4JACst of 1.5 must be 
+reached.  Naturally, the mechanical behavior of the  matrix does 
+not change for damage values between 1.0 and 1.5.  
+ 
+The following card is optional. 
+ Card 10 1 2 3 4 5 6 7 8 
+Variable POSTV VISCS IHIS      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+POSTV Parameter for outputting additional history variabl es that might 
+be useful for post-processing.  See Remark 4 . 
+VISCS Portion of viscous relaxation moduli VG k that is accounted for in 
+time step 
+size calculation 
+IHIS Flag for material properties initialization: 
+EQ.0: Material properties deﬁned in Cards 1 - 9 are used *.   
+ For even values of METH ij,  an elastic shear response is assumed.  If deﬁned, 
+the load curve LCG ij corresponds to function |u1D4J4|u1D4J6Cst/co⋯⋯a.st|u1D4J7Cst. In this case the values of G ij, 
+ALOC ij  and GLOC ij are ignored. 
+For odd values of METH ij  on the other hand, an elasto-plastic shear behavio r is 
+assumed and the load curve LCG ij deﬁnes the yield stress value as function of 
+a normalized shear parameter.  This implies that th e load curve needs to be 
+deﬁned for abscissa values between 0.0 and 1.0. A ﬁ rst elastic regime, which is 
+controlled by the linear shear stiﬀness G ij , is assumed until the yield stress 
+given in the load curve for normalized shear value 0.0 is reached.  A second 
+linear elastic regime is deﬁned for shear angles ( /u1D̅0∫|u1D4J6Cst|u1D4J7Cst )/ ﬁber angles ( |u1D7≠2|u1D4J6Cst|u1D4J7Cst ) larger 
+than the locking angle ALOC ij . The corresponding stiﬀness in that regime is 
+GLOC ij.  At the transition point to the second elastic regi me, the shear stress 
+corresponds to the load curve value for a normalize d shear of 1.0. 
+2.  Damage and Failure.   This material features a phenomenological descripti on 
+of damage and failure.  User-deﬁned load curves spe cify several damage vari- 
+ables as functions of the ﬁber strain values  |u1D7≠6|u1D4J6Cst or shear /u1D̅05|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst. Here, damage 
+parameters are always accumulated and cannot decrea se during the simula- 
+tion. 
+If input parameter DAF i refers to a load curve, it speciﬁes the damage par ame- 
+ter |u1D4J1|u1D4J6Cst/u1D45:.st as function of the ﬁber strain |u1D7≠6|u1D4J6Cst. If DAF i refers to a table, the material 
+distinguishes between tensile and compressive damag e.  In that case, two pa- 
+rameters |u1D4J1|u1D4J6Cst/u1D45:.st/co⋯⋯a.st|u1D461Cst and |u1D4J1|u1D4J6Cst/u1D45:.st/co⋯⋯a.st|u1D4J≠Cst are introduced as functions of the ﬁber strain |u1D7≠6|u1D4J6Cst (given by 
+two load curves referred to by the table deﬁnition)  and are both evaluated in 
+every time step.  The eﬀective damager parameter |u1D4J1|u1D4J6Cst/u1D45:.st is then deﬁned as  
+|u1D4J1|u1D4J6Cst/u1D45:.st(|u1D7≠6|u1D4J6Cst) =
+⎩|<raceleftCex⎨|<raceleftCex⎧|u1D4J1|u1D4J6Cst/u1D45:.st/co⋯⋯a.st|u1D4J≠Cst(|u1D7≠6|u1D4J6Cst), |u1D7≠6|u1D4J6Cst< 0
+|u1D4J1|u1D4J6Cst/u1D45:.st/co⋯⋯a.st|u1D461Cst(|u1D7≠6|u1D4J6Cst), |u1D7≠6|u1D4J6Cst≥ 0 
+The damage parameter |u1D4J1|u1D4J6Cst/u1D45:.st degrades the ﬁber stress contribution /u1D̅48|u1D447Cst/co⋯⋯a.st|u1D4J6Cst/u1D45:.st: 
+/u1D̅48/circum⨂lexcmb.h1|u1D447Cst/u1D45:.st= |summationCv1 |parenleftCvJ/u1D̅CF− |u1D4J1|u1D4J6Cst/u1D45:.st(|u1D7≠6|u1D4J6Cst)|parenriµhtCvJ/u1D̅48|u1D447Cst/co⋯⋯a.st|u1D4J6Cst/u1D45:.st(|u1D7≠6|u1D4J6Cst)|u1D4JBCst
+|u1D4J6Cst=|oneCst  . 
+Failure of the composite material at the integratio n point is initiated as soon as 
+all ﬁbers have failed: min 
+|u1D4J6Cst|u1D4J1|u1D4J6Cst/u1D45:.st= 1.0 . 
+We assume matrix damage to result from the ﬁber str aining and reorientating.  
+Consequently, the input includes load curves DAM i and DAM ij  to specify 
+damage parameters |u1D4J1|u1D4J6Cst|u1D4JACst(|u1D7≠6|u1D4J6Cst) and |u1D4J1|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst|u1D4JACst|parenleftCv1/u1D̅05|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst|parenriµhtCv1, respectively.  The overall matrix 
+damage parameter |u1D4J1|u1D4JACst is given by 
+|u1D4J1|u1D4JACst= max |parenleftCv4max 
+|u1D4J6Cst≤|u1D4JBCst|u1D4J1|u1D4J6Cst|u1D4JACst(|u1D7≠6|u1D4J6Cst), max 
+|u1D4J6Cst<|u1D4JBCst|u1D4J1|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst|u1D4JACst|parenleftCv1/u1D̅05|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst|parenriµhtCv1|parenriµhtCv4  . *.   
+ Flag Description Variables # History Var 
+|u1D44∆|sixCst Fiber stress tensor |u1D7≠∆|oneCst|oneCst /u1D45:.st, |u1D7≠∆|twoCst|twoCst /u1D45:.st, |u1D7≠∆|threeCst|threeCst /u1D45:.st, |u1D7≠∆|oneCst|twoCst /u1D45:.st, |u1D7≠∆|twoCst|threeCst /u1D45:.st, |u1D7≠∆|threeCst|oneCst /u1D45:.st 6 
+|u1D44∆|sevenCst Fiber direction 
+(in material coordinates) /u1D426|oneCst|mCst, /u1D426|twoCst|mCst, /u1D426|threeCst|mCst 6 
+The above table also shows the order of output as w ell as the number of extra 
+history variables associated with the particular ﬂa g.  In total NXH extra varia- 
+bles are required depending on the choice of parame ter POSTV. For example, 
+the maximum number of additional variables is NXH =  32 for POSTV = 127. 
+As mentioned in Remark 1  ﬁber orientation is represented in the material su b- 
+routine as vector /u1D426|iCst deﬁned in the element coordinate system.  Prior to  writing 
+to the list of histories the vector is transformed into the global coordinate sys- 
+tem with three vector components for |u1D44∆|fourCst= 1 and/or into the overall  material 
+coordinate system with two vector components for  |u1D44∆|sevenCst= 1. 
+A more complete list of potentially helpful history  variables is given in the 
+following table.  The variable NEIPS in *DATABASE_E XTENT_BINARY must 
+be set to output these history variables. 
+ 
+History Variable # Description 
+3 Number of ﬁbers 
+4 NXH 
+5 → NXH + 4  Variables as described in preceding table 
+NXH + 5  POSTV 
+NXH + 6, NXH + 7  Shear angles /u1D̅0∫|oneCst|twoCst and /u1D̅0∫|twoCst|threeCst  
+NXH + 8  Matrix damage parameter |u1D4J1|u1D4JACst 
+NXH + 9 → NXH + 11  Fiber tensile damage parameter |u1D4J1|u1D4J6Cst/u1D45:.st/co⋯⋯a.st|u1D461Cst 
+NXH + 12 → NXH + 14  Fiber compressive damage param. |u1D4J1|u1D4J6Cst/u1D45:.st/co⋯⋯a.st|u1D4J≠Cst 
+NXH + 15 → NXH + 20  Matrix stress tensor in element coordinate system 
+NXH+21 → NXH + 26  Deformation gradient *

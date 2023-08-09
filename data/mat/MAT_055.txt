@@ -1,0 +1,48 @@
+, or the material is *.  . 
+TFAIL ALPH SOFT FBRT     
+Card 6a.   This card is included if the 2WAY ﬂag is 0. 
+XC XT YC YT SC CRIT BETA  
+Card 6b.   This card is included if the 2WAY ﬂag is 1. 
+XC XT YC YT SC CRIT BETA  
+Card 7.   This card is only included for *. . 
+ Card 5b 1 2 3 4 5 6 7 8 
+Variable TFAIL ALPH SOFT FBRT     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+TFAIL Time step size criteria for element deletion:  
+LE.0.0: No element deletion by time step size.  The 
+crashfront algorithm only works if TFAIL is 
+set to a value greater than zero. 
+GT.0.0.and.LE.0.1: Element is deleted when its time step is 
+smaller than the given value. 
+GT.0.1: Element is deleted when the quotient of the 
+actual time step and the original time step 
+drops below the given value. 
+ALPH Shear stress parameter for the nonlinear term;  see *.  Failure Criteria 
+For the Tsai-Wu (*. , an integration point is deleted (all s tresses go to zero) only if the 
+tensile stress at that point reaches XT. Other stre ngths, XC, YT, YC, SC serve to 
+cap stresses but do not delete the integration poin t. 
+When failure has occurred in all the composite laye rs (through-thickness inte- 
+gration points), the element is deleted.  For brick s, the element is deleted after 
+one integration point has met the failure criteria.   
+2.  Crashfront Elements and Strength Reduction.   Elements which share nodes 
+with a deleted element become “crashfront” elements  and can have their 
+strengths reduced by using the SOFT parameter with TFAIL greater than zero.  
+An earlier initiation of crashfront elements is pos sible by using parameter PFL.  
+An optional direction dependent strength reduction can be invoked by setting 
+0 < SOFT2 < 1. Then, SOFT equals a strength reducti on factor for ﬁber parallel 
+failure and SOFT2 equals a strength reduction facto r for ﬁber orthogonal fail- 
+ure.  Linear interpolation is used for angles in be tween.  See Figure M54-1 . 
+3.  Transverse Shear Strain Damage Model.  In an optional damage model for 
+transverse shear strain, out-of-plane stiﬀness (GBC  and GCA) can linearly de- 
+crease to model interlaminar shear failure.  Damage  starts when eﬀective 
+transverse shear strain 
+|u1D7≠≠|fiveCst|sixCst eﬀ =/radical.v2|u1D7≠≠|u1D466Cst|u1D467Cst |twoCst+ |u1D7≠≠|u1D467Cst|u1D46JCst |twoCst 
+reaches EPSF. Final rupture occurs when eﬀective tr ansverse shear strain 
+reaches EPSR. A maximum damage of TSMD (0.0 < TSMD < 0.99) cannot be 
+exceeded.  See Figure M54-2 . transverse shear stiﬀness  
+transverse shear D = TSM D = 0 
+EPSF  EPSR  GBC, 
+GCA  
+Figure M54-2.   Linear Damage for transverse shear behavior *

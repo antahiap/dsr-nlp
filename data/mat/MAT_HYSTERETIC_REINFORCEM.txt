@@ -1,0 +1,9 @@
+ENT...................... ................................................... ....... 2-1266  
+*. ENT [1H,2] {64 } 
+ *. ENT *. E NT can be used 
+for the reinforcement layers instead of *. ENT  
+This is Material Type 203 in LS-DYNA. It is intende d as an alternative reinforcement 
+model for layered reinforced concrete shell or beam  elements, for use in seismic analysis 
+where the nonlinear hysteretic behaviour of the rei nforcement is important.  *PART_-
+COMPOSITE or *INTEGRATION_BEAM should be used to de ﬁne some integration 
+points as a part made of *. ENT*

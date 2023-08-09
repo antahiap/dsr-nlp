@@ -1,0 +1,203 @@
+: *.  
+*. . 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR DF IAFLC YTFLAG ASOFT 
+Type A F F F F I F F 
+Default none none none none 0.0 0 0.0 0.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable M1 M2 M3 M4 M5 M6 M7 M8 
+Type F F F F F F F F 
+Default none 0 0 0 0 0 0 0 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LC1 LC2 LC3 LC4 LC5 LC6 LC7 LC8 
+Type F F F F F F F F 
+Default none 0 0 0 0 0 0 0 
+ *.   
+ *.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR DF IAFLC YTFLAG ASOFT 
+Type A F F F F I F F 
+Default none none none none 0.0 0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed. 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+DF Damping factor; see Remark 2 . A proper control for the timestep 
+must be maintained by the user.  
+IAFLC Axial load curve option: 
+EQ.0: Axial load curves are force as a function of strain . 
+EQ.1: Axial load curves are force as a function of change in 
+length. 
+YTFLAG Flag to allow beam to yield in tension: 
+EQ.0.0: Beam does not yield in tension. 
+EQ.1.0: Beam can yield in tension. 
+ASOFT Axial elastic softening factor applied once hinge h as formed.  
+When a hinge has forme d, the stiﬀness is reduced by this factor.  
+If zero, this factor is ignored. 
+ *.   
+  VARIABLE   DESCRIPTION  
+LPS1 Load curve ID for plastic moment as a function of r otation about 
+the |u1D46≠-axis at node 1.  If zero, this load curve is ignor ed. 
+SFS1 Scale factor for plastic moment as a function of ro tation curve 
+about the |u1D46≠-axis at node 1.   
+LPS2 Load curve ID for plast ic moment as a function of rotation about 
+the s-axis at node 2.  The default is LPS1. 
+SFS2 Scale factor for plastic moment as a function of ro tation curve 
+about the |u1D46≠-axis at node 2.  Default: SFS1. 
+YMS1 Yield moment about the |u1D46≠-axis at node 1 for in teraction 
+calculations (default set to 10 20  to prevent interaction) 
+YMS2 Yield moment about the  |u1D46≠-axis at node 2 for interaction 
+calculations (default set to YMS1) 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable LPT1 SFT1 LPT2 SFT2 YMT1 YMT2   
+Type I F I F F F   
+Default 0 1.0 LPT1 1.0 10 20  YMT1   
+ 
+ VARIABLE   DESCRIPTION  
+LPT1 Load curve ID for plastic moment as a function of r otation about 
+the |u1D461-axis at node 1.  If zero, this load curve is ignor ed. 
+SFT1 Scale factor for plastic moment as a function of ro tation curve 
+about the |u1D461-axis at node 1.  Default = 1.0. 
+LPT2 Load curve ID for plastic moment as a function of r otation about 
+the |u1D461-axis at node 2.   Default: LPT1. 
+SFT2 Scale factor for plastic momen t as a function of rotation curve 
+about the |u1D461-axis at node 2.  Default: SFT1. 
+YMT1 Yield moment about the |u1D461-axis at node 1 for interaction 
+calculations (default set to 10 20  to prevent interactions) *.   
+  VARIABLE   DESCRIPTION  
+SYS2 Scale factor applied to load curve LYS2 
+LYT1 ID of curve deﬁning yield moment as a function of a xial force for 
+the |u1D461-axis at node 1 
+SYT1 Scale factor applied to load curve LYT1 
+LYT2 ID of curve deﬁning yield moment as a function of a xial force for 
+the |u1D461-axis at node 2 
+SYT2 Scale factor applied to load curve LYT2 
+ 
+ Card 8 1 2 3 4 5 6 7 8 
+Variable LYR SYR       
+Type I F       
+Default 0 1.0       
+ 
+ VARIABLE   DESCRIPTION  
+LYR ID of curve deﬁning yield moment as a function of a xial force for 
+the torsional axis. 
+SYR Scale factor applied to load curve LYR. 
+ 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable HMS1_1 HMS1_2 HMS1_3 HMS1_4 HMS1_5 HMS1_6 HMS1_7 HMS1_8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+HMS1_ n Hinge moment for the |u1D46≠-axis at node 1 
+ *.   
+  Card 13 1 2 3 4 5 6 7 8 
+Variable HMT1_1 HMT1_2 HMT1_3 HMT1_4 HMT1_5 HMT1_6 HMT1_7 HMT1_8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+HMT1_ n Hinge moment for the |u1D461-axis at node 1 
+ 
+ Card 14 1 2 3 4 5 6 7 8 
+Variable LPMT1_1  LPMT1_2  LPMT1_3  LPMT1_4  LPMT1_5  LPMT1_6  LPMT1_7  LPMT1_8  
+Type I I I I I I I I 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LPMT1_ n ID of curve deﬁning plastic moment as a function of  plastic 
+rotation for the |u1D461-axis at node 1 for hinge moment HMT1_ n 
+ 
+ Card 15 1 2 3 4 5 6 7 8 
+Variable HMT2_1 HMT2_2 HMT2_3 HMT2_4 HMT2_5 HMT2_6 HMT2_7 HMT2_8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+HMT2_ n Hinge moment for the |u1D461-axis at node 2 
+ *.   
+ Remarks: 
+1.  Load Curves.   This material model is available for the Belytsch ko resultant 
+beam element only.  Plastic hinges form at the ends  of the beam when the mo- 
+ment reaches the plastic moment.  The plastic momen t as a function of rotation 
+relationship is speciﬁed by the user in the form of  a load curve and scale factor.  
+The points of the load curve are (plastic rotation in radians, plastic moment).  
+Both quantities should be positive for all points, with the ﬁrst point being (ze- 
+ro, initial plastic moment).  Within this constrain t any form of characteristic 
+may be used, including ﬂat or falling curves.  Diﬀe rent load curves and scale 
+factors may be speciﬁed at each node and about each  of the local |u1D46≠ and |u1D461 axes. 
+Axial collapse occurs when the compressive axial lo ad reaches the collapse 
+load.  Collapse load as a function of collapse deﬂe ction is speciﬁed in the form 
+of a load curve.  The points of the load curve are either 
+|parenleftCv1true strain, collapse force|parenriµhtCv1  or |parenleftCv1change in length, collapse force|parenriµhtCv1 .  Both quanti- 
+ties should be entered as positive for all points a nd will be interpreted as com- 
+pressive.  The ﬁrst point should be |parenleftCv1zero, initial collapse load|parenriµhtCv1 . 
+The collapse load may vary with end moment as well as with deﬂections.  In 
+this case several load-deﬂection curves are deﬁned,  each corresponding to a 
+diﬀerent end moment.  Each load curve should have t he same number of 
+points and the same deﬂection values.  The end mome nt is deﬁned as the aver- 
+age of the absolute moments at each end of the beam  and is always positive. 
+2.  Damping.   Stiﬀness-proportional damping may be added using the damping 
+factor |u1D7≠6.  This is deﬁned as follows: 
+|u1D7≠6 =2 ×/u1D̅0∫
+|u1D714 
+where /u1D̅0∫ is the damping factor at the reference frequency |u1D714 (in radians per sec- 
+ond).  For example, if 1% damping at 2Hz is require d 
+|u1D7≠6 =2 × 0.01 
+2/u1D̅0B× 2= 0.0015 92 
+If damping is used, a small time step may be requir ed.  LS-DYNA does not 
+check this so to avoid instability it may be necess ary to control the time step 
+using a load curve.  As a guide, the time step requ ired for any given element is 
+multiplied by 0.3/u1D4:F/u1D450|u1D7≠6 ⁄ when damping is present ( /u1D4:F = element length, /u1D450 = sound 
+speed). 
+3.  Moment Interaction.   Plastic hinges can form due to the combined actio n of 
+moments about the three axes.  This facility is act ivated only when yield mo- 
+ments are deﬁned in the material input.  A hinge fo rms when the following 
+condition is ﬁrst satisﬁed. *.   
+ On forming a hinge, upper limit moments are set.  T hese are given by  
+|u1D44≠|u1D4JFCstupper = max 
+⎝⎜⎛|u1D44≠|u1D4JFCst,|u1D44≠|u1D4JFCstyield 
+2⎠⎟⎞ 
+with similar conditions holding for |u1D44≠|u1D46≠Cst|u1D462Csts|u1D4JDCsts|u1D4JDCsts|u1D4J2Csts /u1D45F.stsand |u1D44≠|u1D461Cst|u1D462Csts|u1D4JDCsts|u1D4JDCsts|u1D4J2Csts /u1D45F.sts.  Thereafter the plastic 
+moments will be given by 
+|u1D44≠|u1D4JFCst|u1D4JDCst= min(|u1D44≠|u1D4JFCstupper , |u1D44≠|u1D4JFCstcur v e )  , 
+where |u1D44≠|u1D4JFCst|u1D4JDCsts is the current plastic moment and |u1D44≠|u1D4JFCstcur v e  is the moment from the 
+load curve at the current rotation scaled by the sc ale factor.  |u1D44≠|u1D46≠Cst|u1D4JDCstand |u1D44≠|u1D461Cst|u1D4JDCst satisfy 
+similar conditions.  |u1D44≠|u1D46≠Cst|u1D4JDCstand |u1D44≠|u1D461Cst|u1D4JDCst satisfy similar conditions. 
+This provides an upper limit to the moment that can  be generated; it represents 
+the softening eﬀect of local buckling at a hinge si te.  Thus, if a member is bent 
+about the local |u1D46≠-axis, it will then be weaker in torsion and about its local |u1D461-axis.  
+For moments-softening curves, the eﬀect is to trim oﬀ the initial peak (although 
+if the curves subsequently harden, the ﬁnal hardeni ng will also be trimmed 
+oﬀ). 
+It is not possible to make the plastic moment vary with the current axial load, 
+but it is possible to make hinge formation a functi on of axial load and subse- 
+quent plastic moment a function of the moment at th e time the hinge formed.  
+This is discussed in Remark 4 . 
+4.  Independent Plastic Hinge Formation.   In addition to the moment interac- 
+tion equation, Cards 7 through 18 allow plastic hin ges to form independently 
+for the |u1D46≠-axis and |u1D461-axis at each end of the beam as well as for the to rsional axis.  
+A plastic hinge is assumed to form if any component  of the current moment 
+exceeds the yield moment as deﬁned by the yield mom ent as a function axial 
+force curves input on cards 7 and 8.  If any of the  5 curves is omitted, a hinge 
+will not form for that component.  The curves can b e deﬁned for both compres- 
+sive and tensile axial forces.  If the axial force falls outside the range of the 
+curve, the ﬁrst or last point in the curve will be used.  A hinge forming for one 
+component of moment does not aﬀect the other compon ents. 
+Upon forming a hinge, the magnitude of that compone nt of moment will not 
+be permitted to exceed the current plastic moment.  The current plastic mo- 
+ment is obtained by interpolating between the plast ic moment as a function of 
+plastic rotation curves input on cards 10, 12, 14, 16, or 18.  Curves may be input 
+for up to 8 hinge moments, where the hinge moment i s deﬁned as the yield 
+moment at the time that the hinge formed.  Curves m ust be input in order of 
+increasing hinge moment and each curve should have the same plastic rotation 
+values.  The ﬁrst or last curve will be used if the  hinge moment falls outside the 
+range of the curves.  If no curves are deﬁned, the plastic moment is obtained *

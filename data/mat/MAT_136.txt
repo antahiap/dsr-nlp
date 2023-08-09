@@ -1,0 +1,220 @@
+: *. _STD: *. _2017: *.  
+*. _STD 
+*. _2017 
+*.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR N FBI RBI0 LCID 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Material density 
+E Elastic Young’s modulus 
+PR Poisson’s ratio 
+N |N| is the order of the Fourier series (meaning number of test 
+groups minus one).  The minimum number for |N| is 2, and the 
+maximum is 10.  
+GE.0.0: Explicit cutting-plane return mapping algorithm 
+LT.0.0: Fully implicit return mapping algorithm (more robus t)  
+FBI Normalized yield stress |u1D7≠∆/˙.st |iCst  for equi-biaxial test 
+RBI0 Strain ratio |u1D7≠∆/˙.st |iCst (0 °)=|u1D7≠≠̇|twoCst(0 °)/|u1D7≠≠̇|oneCst(0 °) for equi- biaxial test in the 
+rolling direction 
+LCID Load curve ID or Table ID.  If deﬁned, SYS, SIP, SH S, SHL, ESH, 
+and E0 are ignored.  
+Load Curve.   When LCID is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function eﬀect ive plastic strain 
+for that strain rate.    Linear interpolation between t he discrete 
+strain rates is used by default. 
+Logarithmically Deﬁned Tables.   A way to invoke logarithmic 
+interpolation between discrete strain rates is desc ribed as follows.  
+If the ﬁrst  value in the table is negative, LS-DY NA assumes that 
+all the table values represent the natural logarith m of a strain rate.  *.   
+  VARIABLE   DESCRIPTION  
+EQ.0.0: Locally orthotropic with material axes determined by 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES and then rotated about the shell ele- 
+ment normal by the angle BETA 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR). 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 *.   
+  VARIABLE   DESCRIPTION  
+FPS2- i Second normalized yield stress |u1D7≠∆ps2  for plain strain test for the ith 
+direction 
+FSH- i First normalized yield stress |u1D7≠∆sh  for pure shear test for the ith 
+direction 
+Remarks: 
+The Vegter yield locus is section-wise deﬁned by qu adratic Bézier interpolation 
+functions.  Each individual curve uses 2 reference points and a hinge point in the 
+principal plane stress space; see Figure M136-1 . 
+The mathematical description of the Bézier interpol ation is given by: 
+|parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4 = |parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4
+|zeroCst+ 2|u1D7≠7 |<racketleftCvJ|parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4
+|oneCst− |parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4
+|zeroCst|<racketriµhtCvJ+ |u1D7≠7|twoCst|<racketleftCvJ|parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4
+|twoCst+ |parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4
+|zeroCst− 2|parenleftCv4|u1D7≠∆|oneCst
+|u1D7≠∆|twoCst|parenriµhtCv4
+|oneCst|<racketriµhtCvJ  , 
+where (|u1D7≠∆|oneCst, |u1D7≠∆|twoCst)|zeroCst is the ﬁrst reference point, (|u1D7≠∆|oneCst, |u1D7≠∆|twoCst)|oneCst is the hinge point, and (|u1D7≠∆|oneCst, |u1D7≠∆|twoCst)|twoCst is 
+the second reference point. |u1D7≠7 is a parameter which determines the location on th e curve 
+(0 ≤ |u1D7≠7 ≤ 1 ).   Figure M136-2.   Vegter yield surface. *. _STD  
+ *. _STD  *. _STD  
+  Card 2 1 2 3 4 5 6 7 8 
+Variable SYS SIP SHS SHL ESH E0 ALPHA LCID2 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+SYS Static yield stress, |u1D7≠∆|zeroCst 
+SIP Stress increment parameter, ∆|u1D7≠∆|u1D4JACst 
+SHS Strain hardening parameter for small strain, |u1D6FD 
+SHL Strain hardening parameter for larger strain, Ω 
+ESH Exponent for strain hardening, |u1D4JB 
+E0 Initial plastic strain, |u1D7≠≠|zeroCst 
+ALPHA Distribution of hardening used in the curve-ﬁ tting, |u1D6F+.  |u1D6F+=0 is 
+pure kinematic hardening while |u1D6F+ = 1  provides pure isotropic 
+hardening. 
+LCID2 Curve ID. The curve deﬁnes Young’s modulus scaling factor with 
+respect to th e plastic strain.  By default, the Young’s modulus is 
+assumed to remain constant.  Eﬀective value is betw een 0 and 1.  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT  DYS RATEN SRN0 EXSR   
+Type F  F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES and then rotated about the shell ele- 
+ment normal by the angle BETA *. _STD  
+  VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  BE TA may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA. 
+ 
+Experimental Data Cards.  The next N+1 cards (see N on Card 1) contain experimental 
+data obtained from four mechanical tests for a group of equidistantly placed directions 
+/u1D̅0:|u1D4J6Cst=|u1D4J6 /u1D̅0B (2/u1D441) ⁄ , |u1D4J6=0,1,2,…,/u1D441.  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable FUN-i RUN-i FPS1-i ALPS-i FSH-i    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+FUN- i Normalized yield stress |u1D7≠∆un  for uniaxial test for the ith  direction 
+RUN- i Strain ratio (R-value) for uniaxial test for the ith  direction 
+FPS1- i First normalized yield stress |u1D7≠∆ps1  for plain strain test for the ith 
+direction 
+ALPS- i Normalized distance |u1D6F+ps  of second component of p lain stress 
+point between the hinge points on both sides for th e ith  direction.  
+See Remarks for details.  
+FSH- i First normalized yield stress |u1D7≠∆sh  for pure shear test for the ith 
+direction 
+Remarks: 
+1.  Yield Locus.   The yield locus description of this material is t he same as for 
+*. _STD  *. _STD  
+ |u1D7≠∆|u1D466Cst|parenleftCv1|u1D7≠≠̅|u1D4JDCst, |u1D7≠≠̅̇|u1D4JDCst|parenriµhtCv1 = |u1D7≠∆|zeroCst+ ∆|u1D7≠∆|u1D4JACst/˙racketleft.v:|u1D6FD|parenleftCv1|u1D7≠≠̅|u1D4JDCst+ |u1D7≠≠|zeroCst|parenriµhtCv1 +|parenleftCv31 − |u1D4J2−/Ome∧∙.st|parenleftCv1|u1D7≠≠Cst̅|u1D4JDCsts+|u1D7≠≠Cst|zeroCsts|parenriµhtCv1|parenriµhtCv3|u1D4JBCst/˙racketright.v:
+                                         +|u1D7≠∆|zeroCst∗|<racketleftCv61 + |u1D4JF|eCst|nCst|tCst /h.st ln |parenleftCv6|u1D7≠≠̅̇|u1D4JDCst
+|u1D7≠≠|zeroCsṫ|parenriµhtCv6 |<racketriµhtCv6|u1D4JACst 
+In the case of kinematic hardening (ALPHA < 1), the  standard stress tensor is 
+replaced by a relative stress tensor, deﬁned as the  diﬀerence between the stress 
+tensor and a back stress tensor. *. _2017  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR  FBI RBI0 LCID 
+Type A F F F  F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Material density 
+E Elastic Young’s modulus 
+PR Poisson’s ratio 
+FBI Normalized yield stress |u1D7≠∆/˙.st |iCst  for equi- biaxial test.  If this value is 
+not deﬁned in the input, it wi ll be approximated based on the 
+uniaxial test result. 
+RBI0 Strain ratio |u1D7≠∆/˙.st |iCst (0 °)=|u1D7≠≠̇|twoCst(0 °)/|u1D7≠≠̇|oneCst(0 °) for equi- biaxial test in the 
+rolling direction.  If this value is not deﬁned in the input, it will be 
+approximated based on the uniaxial test result. 
+LCID Load curve ID or Table ID.  If deﬁned, SYS, SIP, SH S, SHL, ESH, 
+E0, DYS, RATEN, SRN0, and EXSR are ignored. 
+Load Curve.   When LCID is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function eﬀect ive plastic strain 
+for that strain rate.    Linear interpolation betwe en the discrete 
+strain rates is used by default. 
+Logarithmically Deﬁned Tables.   A way to invoke logarithmic 
+interpolation between discrete strain rates is desc ribed as follows.  
+If the ﬁrst  value in the table is negative, LS-DY NA assumes that 
+all the table values represent the natural logarith m of a strain rate.  
+There is some addit ional computational cost associated with 
+invoking logarithmic interpolation. 
+ *. _2017  
+  VARIABLE   DESCRIPTION  
+EQ.2.0:  Globa lly orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BETA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR). 
+DYS Limit dynamic ﬂow stress, |u1D7≠∆|zeroCst∗ 
+RATEN Ratio, |u1D4JF|eCst|nCst|tCst /h.st , of the Boltzmann constant, /u1D458, (8.617E- 5 eV/K) and 
+maximum activation enthalpy, ∆G|zeroCst, (in eV):  
+|u1D4JF|eCst|nCst|tCst /h.st =/u1D458
+∆|u1D43A|zeroCst 
+SRN0 Limit strain rate, |u1D7≠≠|zeroCsṫ 
+EXSR Exponent, |u1D4JA, for strain rate behavior 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ *. _2017  
+ Remarks: 
+1.  Yield Locus.   The yield locus description of this material is t he same as for 
+*

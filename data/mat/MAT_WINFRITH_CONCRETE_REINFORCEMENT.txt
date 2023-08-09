@@ -1,0 +1,32 @@
+ .............. ...................................................  2-579  
+*.  *.   *.   
+This is *.   
+  VARIABLE   DESCRIPTION  
+ZR /u1D46̅-reinforcement quantity (for bars running parallel to global /u1D46̅-
+axis) 
+ 
+Option 2.   Two dimensional layers by part ID.  Option 2 is act ive when ﬁrst entry is left 
+blank. 
+ Card 1b 1 2 3 4 5 6 7 8 
+Variable  PID AXIS COOR RQA RQB   
+Type blank I I F F F   
+ 
+ VARIABLE   DESCRIPTION  
+PID Part ID of reinforced elements.  If PID = 0, the reinforcement is 
+applied to all parts which use the Winfrith concret e model. 
+AXIS Axis normal to layer: 
+EQ.1: A and B are parallel to global |u1D466 and /u1D46̅, respectively. 
+EQ.2: A and B are parallel to global |u1D46J and /u1D46̅, respectively. 
+EQ.3: A and B are parallel to global |u1D46J and |u1D466, respectively. 
+COOR Coordinate location of layer: 
+AXIS.EQ.1: |u1D46J-coordinate 
+AXIS.EQ.2: |u1D466-coordinate 
+AXIS.EQ.3: /u1D46̅-coordinate 
+RQA Reinforcement quantity (A). 
+RQB Reinforcement quantity (B). 
+Remarks: 
+1.  Reinforcement Quantity.   Reinforcement quantity is the ratio of area of 
+reinforcement in an element to the element's total cross-sectional area in a giv- 
+en direction.  This deﬁnition is true for both Opti ons 1 and 2.  Where the op- 
+tions diﬀer is in the manner in which it is decided  which elements are 
+reinforced.  In Option 1, the reinforced element ID s are spelled out.  In Option *

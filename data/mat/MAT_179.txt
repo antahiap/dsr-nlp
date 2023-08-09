@@ -1,0 +1,52 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+constant as a function of the maximum strain in com - 
+pression deﬁned as: 
+|u1D7≠≠|mCst|aCst|xCst = max(1 − |u1D7≠6|oneCst, 1 − |u1D7≠6|twoCst, 1. −|u1D7≠6|threeCst)  . 
+In tension, the damping constant is set to the valu e cor- 
+responding to the strain at 0.0.  The abscissa shou ld be 
+deﬁned from 0.0 to 1.0. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SHAPE FAIL BVFLAG ED BETA1 KCON REF TC 
+Type F F F F F F F F 
+Default 1.0 0.0 0.0 0.0 0.0 0.0 0.0 10 20  
+ 
+ VARIABLE   DESCRIPTION  
+SHAPE Shape factor for unloading.  Active for nonzero val ues of the 
+hysteretic unloading factor.  Values less than one reduce the 
+energy dissipation and greater than one increase di ssipation; see 
+also Figure M179-1  and Remarks 1  and 2. 
+FAIL Failure option after cutoﬀ stress is reached: 
+EQ.0.0: tensile stress remains at cut-oﬀ value, 
+EQ.1.0: tensile stress is reset to zero. 
+BVFLAG Bulk viscosity activation ﬂag: 
+EQ.0.0: no bulk viscosity (recommended), 
+EQ.1.0: bulk viscosity active. 
+ED Optional Young's relaxation modulus, |u1D438/u1D451.st, for rate eﬀects.  
+BETA1 Optional decay constant, |u1D6FD|oneCst. 
+KCON Stiﬀness coeﬃcient for contact interface stiﬀness.  If undeﬁned, 
+the maximum slope in the stress as a function of st rain curve is 
+used.  When the maximum slope is used for the conta ct, the time 
+step size for this material is reduced for stabilit y.  In some cases, 
+∆|u1D461 may be signiﬁcantly smaller, so deﬁning a reasonabl e stiﬀness *.   
+ Additional card for WITH_FAILURE keyword option.  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable K GAMA1 GAMA2 EH     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+K Material failure parameter that controls the volume enclosed by 
+the failure surface. 
+LE.0.0: ignore failure criterion; 
+GT.0.0: use actual K value for failure criterions. 
+GAMA1 Material failure parameter; see Figure M181-1 . 
+GAMA2 Material failure parameter 
+EH Damage parameter Loading curve
+for first cycle
+Loading curve for second
+and subsequent cycles
+Strainσ
+ Figure M179-1.   Loading and reloading curves. *

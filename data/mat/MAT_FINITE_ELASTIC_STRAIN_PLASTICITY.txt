@@ -1,0 +1,54 @@
+ ............. ................................................... ........ 2-713  
+*.  [0 ,3c,5] {22} 
+ *.   *.   *.   
+This is  Material Type 112.  An elasto-plastic material with  an arbitrary stress versus 
+strain curve and arbitrary strain rate dependency c an be deﬁned.  The elastic response 
+of this model uses a ﬁnite strain formulation so th at large elastic strains can develop 
+before yielding occurs.  This model is available fo r solid elements only.  See Remarks 
+below. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY ETAN   
+Type A F F F F F   
+Default none none none none none 0.0   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C P LCSS LCSR     
+Type F F I I     
+Default 0.0 0.0 0 0     
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable ES1 ES2 ES3 ES4 ES5 ES6 ES7 ES8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Yield stress 
+ETAN Tangent modulus; ignored if LCSS > 0  
+C Strain rate parameter, |u1D436; see Remarks below.  
+P Strain rate parameter, |u1D4JD; see Remarks below. 
+LCSS Load curve ID or table ID.   
+Load Curve ID.   The load curve deﬁnes eﬀective stress as a 
+function of eﬀective plastic strain.  If deﬁned, EP S1 - EPS8 and 
+ES1 - ES8 are ignored.   
+Table ID. The table deﬁnes for each strain rate value a load curve 
+ID giving the stress as a function of eﬀective plas tic strain for that 
+rate; see Figure M24-1 .  Th e stress as a function of eﬀective plastic 
+strain curve for the lowest value of strain rate is  used if the strain 
+rate falls below the minimum value.  Likewise, the stress as a 
+function of eﬀective plastic strain curve for the h ighest value of 
+strain rat e is used if the strain rate exceeds the maximum va lue.  
+The strain rate parameters, |u1D436 and |u1D4JD; the curve ID LCSR; EPS1 -
+ EPS8; and ES1 - ES8 are ignored if a table ID is d eﬁned. 
+LCSR Load curve ID deﬁning strain rate scaling eﬀec t on yield stress 
+EPS1 - EPS8 Eﬀective plastic strain values (optional if SIGY is  deﬁned).  At *

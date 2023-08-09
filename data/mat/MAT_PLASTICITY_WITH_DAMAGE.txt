@@ -1,0 +1,139 @@
+ ....................... ................................................... .............. 2-553  
+*.  [0,2,3a,3c] {5} 
+ *. _ORTHO (_RCDC) [0,2,3a,3c] {22} 
+ *.  *. _ORTHO(_RCDC) *.   *.  _{OPTION}  
+This manual entry applies to both types 81 and 82.  Materials 81 and 82 model an elas to-
+visco-plastic material with user-deﬁned isotropic stress versus strain curves, which, 
+themselves, may be strain-rate dependent.  This mod el accounts for the eﬀects of 
+damage prior to rupture based on an eﬀective plasti c-strain measure.  Additionally, 
+failure can be triggered when the time step drops b elow some speciﬁed value.  Adding 
+an orthotropic damage option will invoke material t ype 82.  Since type 82 must track 
+directional strains it is, computationally, more ex pensive. 
+Available options include: 
+<BLANK> 
+ORTHO 
+ORTHO_RCDC 
+ORTHO_RCDC1980 
+STOCHASTIC 
+The keyword card can appear in the following ways: 
+*. _ORTHO or *. _ORTHO_RCDC or *. _ORTHO_RCDC1980 or *. _STOCHASTIC or *.   
+  Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY ETAN EPPF TDEL 
+Type A F F F F F F F 
+Default none none none none none 0.0 10 12  0.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C P LCSS LCSR EPPFR VP LCDM NUMINT 
+Type F F F F F F F I 
+Default 0 0 0 0 10 14 0 0 0 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Type F F F F F F F F 
+Default 0 0 0 0 0 0 0 0 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable ES1 ES2 ES3 ES4 ES5 ES6 ES7 ES8 
+Type F F F F F F F F 
+Default 0 0 0 0 0 0 0 0 
+ *.   
+  VARIABLE   DESCRIPTION  
+strain rate is used.  C, P, LCSR, EPS1 - EPS8, and ES1 - ES8 are 
+ignored if a table ID is deﬁned. 
+Logarithmically Deﬁned Tables.   If the ﬁrst  value in the table is 
+negative, LS-DY NA assumes that all the table values represent 
+the natural logarith m of a strain rate.  Since the tables are 
+internally discretized to equally space the table v alues, it makes 
+good sense from an accuracy standpoint that the tab le values 
+represent the natural log of strain rate when the l owest strain rate 
+and highest strain rate diﬀer by several orders of magnitude.  
+LCSR Load curve ID deﬁning strain rate scaling eﬀec t on yield stress 
+EPPFR |u1D7≠≠/r.st/u.st/p.st |tCst /u.st/r.st|eCst |u1D4JDCst, eﬀective plastic strain at which material rupture s 
+VP Formulation for rate eﬀects: 
+EQ.0.0:  Scale yield stress (default) 
+EQ.1.0:  Viscoplastic formulation 
+LCDM Optional curve ID deﬁning nonlinear damage curve.  If this curve 
+is speciﬁed, either EPPF or EPPFR must also be inpu t.  If LCDM, 
+EPPF, and EPPFR are all nonzero, then EPPFR is igno red. 
+NUMINT Numbe r of through thickness integration points which mus t fail 
+before a shell element is deleted.  (If zero, all p oints must fail.)  
+The default of all integration points is not recomm ended since 
+shells undergoing large strain are often not delete d due to nodal 
+ﬁber rotations which limit strains at active integr ation points after 
+most points have failed.  Better results are obtain ed if NU MINT is 
+set to 1 or a number less than one half of the numb er of through 
+thickness points.  For example, if four through thi ckness points 
+are used, NU MINT should not exceed 2, even for fully integrated  
+shells which have 16 integration points. 
+EPS1 - EPS8 Eﬀective plastic strain values (optional if SIGY is  deﬁned).  At 
+least 2 points should be deﬁned. 
+ES1 - ES8 Corresponding yield stress values to EPS1  - EPS8 
+ALPHA Parameter |u1D6F+ for the Rc-Dc model 
+BETA Parameter  |u1D6FD for the Rc-Dc model 
+GAMMA Parameter  |u1D6F∆ for the Rc-Dc model *.   
+ used instead where the static stress, |u1D7≠∆|u1D466Cst|u1D46≠Cst|parenleftCv2|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2, must be deﬁned by a load 
+curve: 
+|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠eff |u1D4JDCst, |u1D7≠≠̇eff |u1D4JDCst|parenriµhtCv2 = |u1D7≠∆|u1D466Cst|u1D46≠Cst|parenleftCv2|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2
+⎣⎢⎢⎡1 + |parenleftCv6|u1D7≠≠̇eff |u1D4JDCst
+|u1D436|parenriµhtCv6|oneCst|u1D4JDCst/fraction.v2
+⎦⎥⎥⎤ 
+This latter equation is always used if the viscopla stic option is oﬀ. 
+b)  For complete generality a load curve (LCSR) to sca le the yield stress may 
+be input instead.  In this curve the scale factor a s a function of strain rate is 
+deﬁned. 
+c)  If diﬀerent stress as a function of strain curves can be provided for various 
+strain rates, a table (LCSS) can be used.  Then the  table input in 
+*DEFINE_TABLE is expected; see Figure M24-1 . 
+2.  Damage.  The constitutive properties for the damaged materi al are obtained 
+from the undamaged material properties.  The amount  of damage is represent- 
+ed |u1D714 which varies from zero if no damage has occurred t o unity for complete 
+rupture.  For uniaxial loading, the nominal stress in the damaged material is 
+given by  
+|u1D7≠∆nominal =|u1D443
+|u1D434 damage, ω, increases
+linearly with plastic
+strain after failureyield stress versus
+effective plastic strain
+for undamaged material
+nominal stress
+after failurefailure begins
+rupture
+0
+ Figure M81-1.   Stress strain behavior when damage is included *.   
+ is an asymmetric strain weighting term.  In the abo ve |u1D7≠∆|u1D4JACst is the mean stress.  
+For |u1D434/u1D4:̅.st we use  
+|u1D434/u1D4:̅.st= min |parenleftCvJ |dividesCvJ|u1D7≠∆|twoCst
+|u1D7≠∆|threeCst|dividesCvJ,|dividesCvJ|u1D7≠∆|threeCst
+|u1D7≠∆|twoCst|dividesCvJ|parenriµhtCvJ  , 
+where |u1D7≠∆|u1D4J6Cst are the principal stresses and |u1D7≠∆|oneCst> |u1D7≠∆|twoCst> |u1D7≠∆|threeCst.  Fracture is initiated when 
+the accumulation of damage is 
+|u1D437
+|u1D437|u1D4J≠Cst> 1  , 
+where |u1D437|u1D4J≠Cst is the critical damage given by 
+|u1D437|u1D4J≠Cst= |u1D437|zeroCst|parenleftCv21 + |u1D44F|∇|u1D437||u1D7≠6Cst|parenriµhtCv2  . 
+A fracture fraction,  
+|u1D439 =|u1D437 − |u1D437|u1D4J≠Cst
+|u1D437|u1D46≠Cst  , 
+deﬁnes the degradations of the material by the Rc-D c model. 
+For the Rc-Dc model the gradient of damage needs to  be estimated.  The dam- 
+age is connected to the integration points, and, th us, the computation of the 
+gradient requires some manipulation of the LS-DYNA source code.  Provided 
+that the damage is connected to nodes, it can be se en as a standard bilinear 
+ﬁeld and the gradient is easily obtained.  To enabl e this, the damage at the in- 
+tegration points are transferred to the nodes as fo llows.  Let |u1D438|u1D4JBCst be the set of 
+elements sharing node |u1D4JB, ||u1D438|u1D4JBCst| be the number of elements in that set, |u1D443|u1D4J2Cst be the 
+set of integration points in element |u1D4J2 and |dividesCv1|u1D443|u1D4J2Cst|dividesCv1 be the number of points in that 
+set.  The average damage |u1D437/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4J2Cst in element |u1D4J2 is computed as  
+|u1D437/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4J2Cst=∑ |u1D437|u1D4JDCst |u1D4JDCst∈|u1D443Cst|u1D4J2Csts
+|dividesCv1|u1D443|u1D4J2Cst|dividesCv1 
+where |u1D437|u1D4JDCst is the damage in integration point |u1D4JD. Finally, the damage value in 
+node |u1D4JB is estimated as 
+|u1D437|u1D4JBCst=∑ |u1D437/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4J2Cst |u1D4J2Cst∈|u1D438Cst/u1D45B.sts
+||u1D438|u1D4JBCst|. 
+This computation is performed in each time step and  requires additional stor- 
+age.  Currently we use three times the total number  of nodes in the model for 
+this calculation, but this could be reduced by a co nsiderable factor if necessary.   
+ 
+There is an Rc-Dc option for the Gurson dilatationa l-plastic model.  In the im- 
+plementation of this model, the norm of the gradien t is computed diﬀerently.  
+Let |u1D438/u1D45:.st|u1D4J9Cst be the set of elements from within a distance /u1D45∫ of element, |u1D4J3, not includ- *

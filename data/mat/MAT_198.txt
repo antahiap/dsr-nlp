@@ -1,0 +1,38 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+GMODDP Depth at which shear modulus (GMOD) is corre ct 
+PHIDP Depth at which angle of friction (PHI) is cor rect 
+CVALDP Depth at which cohesion value (CVAL) is corr ect 
+PSIDP Depth at which dilation angle (PSI) is correc t 
+GMODGR Gradient at which shear modulus (GMOD) incre ases with depth 
+PHIGR Gradient at which friction angle (PHI) increa ses with depth 
+CVALGR Gradient at which cohesion value (CVAL) incr eases with depth 
+PSIGR Gradient at which dilation angle (PSI) increa ses with depth 
+DIP Angle of the plane in degrees below the horizon tal 
+DIPANG Plan view angle (degrees) of downhill vector  drawn on the plane 
+CPLANE Cohesion for shear behavior on plane 
+PHPLANE Friction angle for shear behavior on plane (degrees) 
+TPLANE Tensile strength across plane (generally zer o or very small) 
+SHRMAX Max shear stress on plane (upper limit, independent  of 
+compression) 
+LOCAL EQ.0:  DIP and DIPANG are with respect to the global axes  
+Remarks: 
+1.  The joint plane orientations are deﬁned by the ang le of a “downhill vector” 
+drawn on the plane, i.e. the vector is oriented wit hin the plane to obtain the 
+maximum possible downhill angle.  DIP is the angle of this line below the hor- 
+izontal.  DIPANG is the plan-view angle of the line  (pointing down hill) meas- 
+ured clockwise from the global Y-axis about the glo bal Z-axis. 
+2.  The joint planes rotate with the rigid body motion  of the elements, irrespective 
+of whether their initial deﬁnitions are in the glob al or local axis system. 
+3.  The full facilities of the modiﬁed Drucker Prager model for the matrix material 
+can be used – see description of Material type 193.  Alternatively, to speed up 
+the calculation, the ELASTIC ﬂag can be set to 1, i n which case the yield surface *.   
+  Extra Variable 13: maximum shear utilization to da te for plane 1 
+ Extra Variable 14: maximum shear utilization to da te for plane 2 
+ Extra Variable 15: maximum shear utilization to da te for plane 3 
+11.  Joint planes would generally be deﬁned in the glob al axis system if they are 
+taken from survey data.  However, the material mode l can also be used to rep- 
+resent masonry, in which case the weak planes repre sent the cement and lie 
+parallel to the local element axes. *

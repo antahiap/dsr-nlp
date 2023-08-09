@@ -1,0 +1,80 @@
+ ............................ ................................................... ............... 2-1770  
+*.  [0,2]  
+ *.  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+EUA Ultimate strain of element “a” 
+VMB Damping coeﬃcient of element “b” 
+EKB Elastic constant of element “b” 
+THL Yarn locking angle 
+TA Transition angle of locking 
+THI1 Initial braid angle 1 
+THI2 Initial braid angle 2 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable W SPAN THICK H AREA E3 PR13 PR23 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+W Fiber width 
+SPAN Span between the ﬁbers 
+THICK Real ﬁber thickness 
+H Eﬀective ﬁber thickness 
+AREA Fiber cross-sectional area 
+E3 Young’s modulus |u1D438|threeCst in “thickness” direction as deﬁned by the 3 rd 
+axis of the material coordinate system (solids only )   
+PR13 Transverse Poisson’s ratio /u1D̅08|oneCst|threeCst  (solids only) 
+PR23 Transverse Poisson’s ratio /u1D̅08|twoCst|threeCst   (solids only) 
+ *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3.0 and 4.0  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2.0  
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable VYARN        
+Type F        
+ 
+ VARIABLE   DESCRIPTION  
+VYARN Volume fraction of yarn 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable K1 K2 C1 C2 M N   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+K1 Parameter /u1D458|oneCst for Kamal model 
+K2 Parameter /u1D458|twoCst for Kamal model 
+C1 Parameter /u1D450|oneCst for Kamal model 
+C2 Parameter /u1D450|twoCst for Kamal model 
+M Exponent |u1D4JA for Kamal model 
+N Exponent |u1D4JB for Kamal model *.   
+  VARIABLE   DESCRIPTION  
+WLFB Parameter |u1D43J for WLF shift function 
+LCG0 Load curve ID deﬁning the instantaneous shear modulus |u1D43A|zeroCst as a 
+function of state of cure 
+LCK0 Load curve ID deﬁning the instantaneous bulk m odulus |u1D43∆|zeroCst as a 
+function of state of cure 
+IDOC Initial degree of cure 
+INCR Flag for stress formulation: 
+EQ.0:  total formulation (default) 
+EQ.1:  incremental formulation (recommended) 
+QCURE Heat generation factor, relating the heat generated  in one time 
+step with the increment of the degree of cure in th at step 
+ 
+Viscoelastic Constant Cards.   Up to 14 cards may be input.  A keyword (“*”) card 
+terminates this input if fewer than 14 cards are us ed.  The number of terms for the shear 
+behavior may diﬀer from that for the bulk behavior:  simply insert zero if a term is not 
+included.   
+ Card 10 1 2 3 4 5 6 7 8 
+Variable Gi BETAG i Ki BETAK i     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+Gi Shear relaxation modulus for the ith  term for fully cured material 
+BETAG i Shear decay constant for the ith  term for fully cured material 
+Ki Bulk relaxation modulus for the ith  term for fully cured material 
+BETAK i Bulk decay constant for the ith  term for fully cured material *

@@ -1,0 +1,44 @@
+: *. : *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+HOLSHR Flag for hole enlargement due to shear (see Remark 5 ): 
+EQ.0: Hole does not enlarge due to shear deformation. 
+NE.0: Shear deformation after bolt contacts the inner dia meter 
+of the hole enlarges the hole.   
+Remarks: 
+1.  Bolted Joint Geometry.   The element represents a bolted joint. The nodes of 
+the beam should be thought of as representing the p oints at the centers of the 
+holes in the plates that are joined by the bolt.  W e recommend using 
+SCOOR = -13 or +13 on *SECTION_BEAM. 
+The axial direction is initially the line connectin g node 1 to node 2. The axial 
+response is tensile only.  Instead of generating a compressive axial load, a gap 
+is assumed to develop between the bolt head (or nut ) and the surface of the 
+plate.  Contact between the bolted surfaces must be  modelled separately using 
+*CONTACT. 
+2.  Yield Force Curves.  Curves LCAX and LCSHR give yield force as a functi on 
+of plastic displacement for the axial and shear dir ections, respectively.  The 
+force increments are calculated from the elastic st iﬀnesses, subject to the yield 
+force limits given by the curves. 
+3.  Sliding Shear Displacement.   CLEAR allows the bolt to slide in shear, 
+resisted by friction between bolt head/nut and the surfaces of the plates, from 
+the initial position at the center of the hole.  CL EAR is the total sliding shear 
+displacement before contact occurs between the bolt  shank and the inside sur- 
+face of the hole.  Sliding shear displacement is no t included in the displace- 
+ment used for LCSHR; LCSHR is intended to represent  the behavior after the 
+bolt shank contacts the edge of the hole. 
+4.  Shear Deformation and Axial Tension.   If KSHR and LCSHR represent 
+deformation and rotation of the bolt itself, the de fault setting AXSHFL = 0 is 
+recommended.  On the other hand, if KSHR and LCSHR represent deformation 
+of the bearing surfaces, AXSHFL = 1 is recommended.   
+The explanation is as follows.  Consider the case w here a shear displacement is 
+applied to the bolted joint, while the plates are c onstrained to remain the same 
+distance apart.  Mechanisms by which a bolted joint  can displace in the shear 
+direction include: 
+a)  the bolt sliding within a clearance gap;  *.   
+ Integration 
+Point Post-Processing Data 
+Component Actual Meaning 
+2 ZX Shear stress Not used 
+2 Plastic strain Not used 
+2 Axial strain Not used *

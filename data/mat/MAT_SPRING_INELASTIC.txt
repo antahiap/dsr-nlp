@@ -1,0 +1,27 @@
+ ............................. ................................................... .................... 2-1863  
+*.  
+ *.  *.   *.   
+This is  Material Type 8 for discrete elements (*ELEMENT_DIS CRETE).  This material 
+provides an inelastic tension or compression only, translational or rotational spring.  
+Optionally, a user-speciﬁed unloading stiﬀness can be taken instead of the maximum 
+loading stiﬀness. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID LCFD KU CTF     
+Type A8 I F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+LCFD Load curve ID describing arbitrary force/torque as a function of 
+displacement/rotation relationship.  This curve mus t be deﬁned 
+in the positive force-di splacement quadrant regardless of whether 
+the spring acts in tension or compression. 
+KU Unloading stiﬀness (optional).  The maximum of KU a nd the 
+maximum loading stiﬀness in the force/displacement or the 
+moment/rotation curve is used for unloading. 
+CTF Flag for compression/tension: 
+EQ.-1.0: tension only 
+EQ.1.0: compression only (default) 
+Remarks: 
+Rotational displacement is measured in radians. *

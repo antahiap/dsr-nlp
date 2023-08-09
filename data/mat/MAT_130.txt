@@ -1,0 +1,45 @@
+: *.  
+*.   *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+YS Yield stress.  This parameter is optional and appro ximates the 
+yield condition.  Set to zero if the behavior is el astic.   
+EP Plastic hardening modulus 
+E11P |u1D438|oneCst|oneCst |u1D4JDCst, for in plane behavior 
+E22P |u1D438|twoCst|twoCst |u1D4JDCst, for in plane behavior 
+V12P /u1D̅08|oneCst|twoCst |u1D4JDCst, for in plane behavior. 
+V11P /u1D̅08|oneCst|oneCst |u1D4JDCst, for in plane behavior  
+G12P |u1D43A|oneCst|twoCst |u1D4JDCst, for in plane behavior  
+G23P |u1D43A|twoCst|threeCst |u1D4JDCst, for in plane behavior 
+G31P |u1D43A|threeCst|oneCst |u1D4JDCst, for in plane behavior 
+E11B |u1D438|oneCst|oneCst |u1D44FCst, for bending behavior 
+E22B |u1D438|twoCst|twoCst |u1D44FCst, for bending behavior 
+V12B /u1D̅08|oneCst|twoCst |u1D44FCst, for bending behavior 
+V21B /u1D̅08|twoCst|oneCst |u1D44FCst, for bending behavior  
+G12B |u1D43A|oneCst|twoCst |u1D44FCst, for bending behavior  *.   
+ |u1D444|oneCst|oneCst|u1D4JDCst=|u1D438|oneCst|oneCst|u1D4JDCst
+1 −/u1D̅08|oneCst|twoCst|u1D4JDCst/u1D̅08|twoCst|oneCst|u1D4JDCst
+|u1D444|twoCst|twoCst|u1D4JDCst=|u1D438|twoCst|twoCst|u1D4JDCst
+1 −/u1D̅08|oneCst|twoCst|u1D4JDCst/u1D̅08|twoCst|oneCst|u1D4JDCst
+|u1D444|oneCst|twoCst|u1D4JDCst=/u1D̅08|twoCst|oneCst|u1D4JDCst|u1D438|oneCst|oneCst|u1D4JDCst
+1 −/u1D̅08|oneCst|twoCst|u1D4JDCst/u1D̅08|twoCst|oneCst|u1D4JDCst
+|u1D444|fourCst|fourCst|u1D4JDCst= |u1D43A|oneCst|twoCst|u1D4JDCst
+|u1D444|fiveCst|fiveCst|u1D4JDCst= |u1D43A|twoCst|threeCst|u1D4JDCst
+|u1D444|sixCst|sixCst|u1D4JDCst= |u1D43A|threeCst|oneCst|u1D4JDCst 
+The elastic matrix for bending behavior is given by : 
+/u1D402b ending =
+⎣⎢⎡|u1D444|oneCst|oneCst|u1D44FCst        |u1D444|oneCst|twoCst|u1D44FCst      0
+|u1D444|oneCst|twoCst|u1D44FCst        |u1D444|twoCst|twoCst|u1D44FCst      0
+    0          0        |u1D444|fourCst|fourCst|u1D44FCst⎦⎥⎤ 
+The terms |u1D444|u1D4J6Cst|u1D4J7Cst|u1D44FCst  are similarly deﬁned. 
+ 
+Because this is a resultant formulation, nothing is  written to the six stress slots of d3plot .  
+Resultant forces and moments may be written to elout  and to dynain  in place of the six 
+stresses.   The ﬁrst two extra history variables ma y be used to complete output of the 
+eight resultants to elout  and dynain .*

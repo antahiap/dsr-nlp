@@ -1,0 +1,93 @@
+: *.  
+*. /*.   *MAY_HYSTERETIC_REINFORCEMENT  
+ *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable EPDAM1 EPDAM2 DRESID      
+Type F F F      
+Default 0.0 0.0 0.0      
+ 
+Additional Card for AOPT ≠ 0. 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+Default 0.0 0.0 0.0 0.0 0.0 0.0   
+ 
+Additional Card for AOPT ≠ 0. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number has to  be chosen. 
+RO Mass density. 
+YM Young’s Modulus 
+PR Poisson’s Ratio 
+SIGY Yield stress *.   
+  VARIABLE   DESCRIPTION  
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 (see MAT 2 ) 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 (see MAT 2 ) 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 (see MAT 2 ) 
+BETA Angle for AOPT = 3 (see MAT 2 ) 
+Remarks: 
+Reinforcement is treated as bars, acting independen tly in the local material |u1D46J and |u1D466 
+directions.  By default, the local material |u1D46J-axis is the element |u1D46J-axis (parallel to the line 
+from Node 1 to Node 2), but this may be overridden using AOPT or Element Beta 
+angles.  
+ 
+For shell elements, the reinforced concrete section  should be deﬁned using *PART_-
+COMPOSITE with some integration points being reinfo rcement (referencing a Material 
+ID using this material model) and others being conc rete (using for example *.   *MAY_HYSTERETIC_REINFORCEMENT  
+ /u1D458/u1D4:F 
+|u1D4JF, 
+Where, /u1D458 depends on end conditions, and 
+/u1D4:F= unsupported length of reinforcement b ars 
+|u1D4JF = radius of gyration which for round b ars is e q ual to ( b ar radius)/2. 
+It is expected that users will determine LAMDA acco unting for the expected crack 
+spacing. 
+ 
+The alternative buckling behaviour deﬁned by EBU an d DOWNSL is shown below. 
+ 
+ 
+Reloading after change of load direction follows a Bauschinger-type curve, leading to 
+the hysteresis response shown below:  
+ Compressive 
+strain Compressive 
+stress 
+-DOWNSL * YM 
+-0.005 * YM 
+EBU EBU + 0.01 Yield *MAY_HYSTERETIC_REINFORCEMENT  *.   *MAY_HYSTERETIC_REINFORCEMENT  
+ /u1D̅0F|u1D466Cst= 1.62 /radical.v2|u1D439|u1D4J≠Cst|u1D446|u1D466Cst 
+where, 
+|u1D438 = steel Y oungs Modulus in MPa 
+|u1D439|u1D4J≠Cst=/u1D450ompressi v e strength of concrete in MPa 
+/u1D4:Fchar =/u1D450haracteristic length of shear deformation in mm 
+|u1D437|u1D44FCst=b ar diameter in mm 
+|u1D446|u1D466Cst= steel yield stress in MPa. 
+The input parameters should be given in model units , e.g. DBAR and LCHAR are in 
+model length units, FCDOW is in model stress units.   These will be converted internally 
+using UNITL and UNITC.  
+Element erosion: 
+By default, no erosion occurs.  Elements will be de leted only if EPDAM1 and EPDAM2 
+are non-zero, and DRESID is zero, and the accumulat ed plastic strain reaches EPDAM2. 
+If FRACX and FRACY are both non-zero, i.e. if there  is reinforcement in both local 
+directions, then elements are eroded only when the condition above has been reached in 
+both local directions. 
+Output: 
+The output stresses, as for all other LS-DYNA mater ial models, are by default in the 
+global coordinate system.  They are scaled by the r einforcement fractions FRACX, FRA-
+CY. The plastic strain output is the accumulated pl astic strain (increments always 
+treated as positive), and is the greater such value  of the two local directions.  Extra 
+history variables are available as follows: 
+ 
+Extra variable 1:  Reinforcement stress in local |u1D46J direction (not scaled by FRACX) 
+Extra variable 2:  Reinforcement stress in local |u1D466 direction (not scaled by FRACY) 
+Extra variable 3:  Total strain in local |u1D46J direction 
+Extra variable 4:  Total strain in local |u1D466 direction 
+Extra variable 5:  Accumulated plastic strain in lo cal |u1D46J direction 
+Extra variable 6:  Accumulated plastic strain in lo cal |u1D466 direction 
+Extra variable 7:  Shear stress (dowel action) in l ocal |u1D46J|u1D466  
+Extra variable 8:  Shear stress (dowel action) in l ocal |u1D46J /u1D46̅ 
+Extra variable 9:  Shear stress (dowel action) in l ocal |u1D466 /u1D46̅ 
+Extra variable 10:  Maximum (high-tide) total strai n in local |u1D46J direction 
+Extra variable 11:  Maximum (high-tide) total strai n in local |u1D466 direction *

@@ -1,0 +1,57 @@
+  
+ *.   *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable SYS SIP SHS SHL ESH E0 ALPHA LCID2 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+SYS Static yield stress, |u1D7≠∆|zeroCst 
+SIP Stress increment parameter, ∆|u1D7≠∆|u1D4JACst 
+SHS Strain hardening parameter for small strain, |u1D6FD 
+SHL Strain hardening parameter for larger strain, Ω 
+ESH Exponent for strain hardening, |u1D4JB 
+E0 Initial plastic strain, |u1D7≠≠|zeroCst 
+ALPHA Distribution of hardening used in the curve-ﬁ tting, |u1D6F+.  |u1D6F+=0 is 
+pure kinematic hardening while |u1D6F+ = 1  provides pure isotropic 
+hardening. 
+LCID2 Curve ID. The curve deﬁnes Young’s modulus scaling factor with 
+respect to the plastic strain.  By default, the Young’s modulus is 
+assumed to remain constant.  Eﬀective value is betw een 0 and 1.  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT  DYS RATEN SRN0 EXSR   
+Type F  F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES and then rotated about the shell ele- 
+ment normal by the angle BETA *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  BE TA may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable RM-0 RM-45 RM-90 AG-0 AG-45  AG90   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+RM- i Tensile strength for uniaxial testing at i° to rolling direction 
+AG-i Uniform elongation for uniaxial testing at i° to rolling direction 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable R00 R45 R90      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+R00 Lankford parameter |u1D44J|zeroCst|zeroCst  
+R45 Lankford parameter |u1D44J|fourCst|fiveCst  
+R90 Lankford parameter |u1D44J/nine.st |zeroCst  *

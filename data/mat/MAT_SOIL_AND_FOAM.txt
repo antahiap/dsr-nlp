@@ -1,0 +1,78 @@
+ ................................ ................................................... ....................... 2-155  
+*. _FAILURE ........................ ................................................... ............... 2-186  
+*.  [0,5,3c,8A] {0} 
+ *. _FAILURE [0,3c,5,8B] { 1} 
+ *.  *. _FAILURE *.   *.   
+This is Material Type 5.  It is a relatively simple  material model for representing soil, 
+concrete, or crushable foam.  A table can be deﬁned  if thermal eﬀects are considered in 
+the pressure as a function of volumetric strain beh avior.   
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO G KUN A0 A1 A2 PC 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable VCR REF LCID      
+Type F F F      
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable EPS9 EPS10       
+Type F F       
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable P1 P2 P3 P4 P5 P6 P7 P8 
+Type F F F F F F F F 
+ *.   
+2-156 (MAT) LS-DYNA R13  Card 6 1 2 3 4 5 6 7 8 
+Variable P9 P10       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G Shear modulus 
+KUN Bulk modulus for unloading used for VCR = 0.0 
+A0 Yield function constant for plastic yield functi on below 
+A1 Yield function constant for plastic yield functi on below 
+A2 Yield function constant for plastic yield functi on below 
+PC Pressure cutoﬀ for tensile fracture (< 0) 
+VCR Volumetric crushing option: 
+EQ.0.0: on 
+EQ.1.0: loading and unloading paths are the same 
+REF Use refe rence geometry to initialize the pressure.  The ref erence 
+geometry is deﬁned by the keyword: *INITIAL_FOAM_RE FER-
+ENCE_GEOME TRY.  This option does not initialize the 
+deviatoric stress state. 
+EQ.0.0: oﬀ 
+EQ.1.0: on 
+LCID Load curve ID for compressive pressure (ordinate) a s a function 
+of volumetric strain (abscissa).  If LCID is deﬁned , then the curve 
+is used instead of the input for EPS i and P i.  It makes no 
+diﬀerence whether the values of volumetric strain i n the curve 
+are input as positive or negative since internally,  a negative sign 
+is applied to the absolute value of each abscissa e ntry.  If LCID 
+refers to a table, the response is extended to bein g temperature *.   
+2-158 (MAT) LS-DYNA R13 2.  Yield Strength.   The deviatoric perfectly plastic yield function, /u1D̅1∫, is described 
+in terms of the second invariant /u1D4:D|twoCst, 
+/u1D4:D|twoCst  =   1
+2 |u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D46≠|u1D4J6Cst|u1D4J7Cst   , 
+pressure, |u1D4JD, and constants |u1D44∆|zeroCst, |u1D44∆|oneCst, and |u1D44∆|twoCst as: 
+/u1D̅1∫=/u1D4:D|twoCst−/˙racketleft.v2|u1D44∆|zeroCst+ |u1D44∆|oneCst|u1D4JD + |u1D44∆|twoCst|u1D4JD|twoCst/˙racketright.v2  . 
+On the yield surface /u1D4:D|twoCst=|oneCst
+|threeCst|u1D7≠∆|u1D466Cst|twoCst where |u1D7≠∆|u1D466Cst is the uniaxial yield stress, that is, 
+|u1D7≠∆|u1D466Cst=/˙racketleft.v23|parenleftCv2|u1D44∆|zeroCst+ |u1D44∆|oneCst|u1D4JD + |u1D44∆|twoCst|u1D4JD|twoCst|parenriµhtCv2/˙racketright.v2|oneCst|twoCst/fraction.v2  . 
+There is no strain hardening on this surface.   
+To eliminate the pressure dependence of the yield s trength, set: 
+|u1D44∆|oneCst= |u1D44∆|twoCst= 0   and   |u1D44∆|zeroCst=1
+3|u1D7≠∆|u1D466Cst|twoCst  . 
+This approach is useful when a von Mises type elast ic-plastic model is desired 
+for use with the tabulated volumetric data. 
+3.  Equivalent Plastic Strain.   The history variable labeled as “plastic strain” by 
+LS-PrePost is actually plastic volumetric strain.  Note that when VCR = 1.0, 
+plastic volumetric strain is zero. *. _FAILURE  
+2-186 (MAT) LS-DYNA R13 *

@@ -1,0 +1,271 @@
+BEAM ...................................... ................................................... ............................ 2-1121  
+*. SHEAR_WALL ................................ ................................................... .................... 2-1225  
+*. BEAM [1H] {22} 
+ *. SHEAR_WALL [2,3a] {36} 
+ *. BEAM *. SHEAR_WALL  *. BEAM  *. BEAM  
+This is Material Type 174, for Hughes-Liu beam elem ents only.  The material model can 
+represent plain concrete only, reinforcing steel on ly, or a smeared combination of 
+concrete and reinforcement.  The main emphasis of t his material model is the cyclic 
+behavior – it is intended primarily for seismic ana lysis. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EUNL PR FC EC1 EC50 RESID 
+Type A8 F F F F F F F 
+Default none none See 
+Remarks 0.0 none 0.0022 See 
+Remarks 0.2 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FT UNITC (blank) (blank) (blank) ESOFT LCHAR OUTPUT 
+Type F F F F F F F F 
+Default See 
+Remarks 1.0 none none none See 
+Remarks none 0 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable FRACR YMREIN PRREIN SYREIN SUREIN ESHR EUR RREINF 
+Type F F F F F F F F 
+Default 0.0 none 0.0 0.0 SYREIN  0.03 0.2 4.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. *. BEAM  
+  VARIABLE   DESCRIPTION  
+RO Mass density 
+EUNL Initial unloading elastic modulus (See Remarks ). 
+PR Poisson’s ratio. 
+FC Cylinder strength (stress units) 
+EC1 Strain at which stress FC is reached. 
+EC50 Strain at which the stress has dropped to 50% FC 
+RESID Residual strength factor 
+FT Maximum tensile stress 
+UNITC Factor to convert stress units to MPa (See Re marks) 
+ESOFT Slope of stress-strain curve post-cracking in  tension 
+LCHAR Characteristic length for strain-softening be havior 
+OUTPUT Output ﬂag controlling what is written as “p lastic strain” 
+EQ.0.0: Curvature 
+EQ.1.0: “High-tide” plastic strain in reinforcement 
+FRACR Fraction of reinforcement (e.g. for 1% reinforcemen t 
+FRACR = 0.01) 
+YMREIN Young’s Modulus of reinforcement 
+PRREIN Poisson’s Ratio of reinforcement 
+SYREIN Yield stress of reinforcement 
+SUREIN Ultimate stress of reinforcement 
+ESHR Strain at which reinforcement begins to harden  
+EUR Strain at which reinforcement reaches ultimate stress 
+R_REINF Dimensionless Ramberg- Osgood parameter r. If zero, a default 
+value r = 4.0 will be used.  If set to - 1, parameters will be 
+calculated from Kent & Park formulae.  (See Remarks ) *. BEAM, one with FRAC R = 0, the other with 
+FRACR = 1. Then, by assigning one or other of these  Part IDs to each integration point 
+the reinforcement can be applied to the correct loc ations within the section of the beam. 
+Concrete: 
+In monotonic compression, the approach of Park and Kent, as described in Park & 
+Paulay [1975] is used.  The material follows a para bolic stress-strain curve up to a 
+maximum stress equal to the cylinder strength FC; t herafter the strength decays linearly 
+with strain until the residual strength is reached.   Default values for some material 
+parameters will be calculated automatically as foll ows: 
+EC50 =(3 + 0.2 9|u1D439|u1D436)
+145|u1D439|u1D436 − 1000  
+where FC is in MPa as per Park and Kent test data. 
+E U NL =  initial tangent slope =2FC 
+EC1  
+User-deﬁned values for EUNL lower than this are not  permitted, but higher values may 
+be deﬁned  if desired. 
+FT = 1.4 |parenleftCvJFC 
+10 |parenriµhtCvJ|twoCst
+|threeCst 
+where FC is in MPa as per Park and Kent test data. 
+ESOFT = E U NL 
+User-deﬁned values higher than EUNL are not permitt ed. 
+ 
+UNITC is used only to calculate default values for the above parameters from FC. 
+ 
+Strain-softening behavior tends to lead to deformat ions being concentrated in one 
+element, and hence the overall force-deﬂection beha vior of the structure can be mesh-
+size-dependent if the softening is characterized by  strain.  To avoid this, a characteristic 
+length (LCHAR) may be deﬁned.  This is the length o f specimen (or element) that 
+would exhibit the deﬁned monotonic stress-strain re lationship.  LS-DYNA adjusts the 
+stress-strain relationship after ultimate load for each element, such that all elements 
+irrespective of their length will show the same deﬂ ection during strain softening (i.e. *. BEAM  
+ between ultimate load and residual load).  Therefor e, although deformation will still be 
+concentrated in one element, the load-deﬂection beh avior should be the same 
+irrespective of element size.  For tensile behavior , ESOFT is similarly scaled. 
+ 
+ 
+ 
+Cyclic behavior is broadly suggested by Blakeley an d Park [1973] as described in Park & 
+Paulay [1975]; the stress-strain response lies with in the Park-Kent envelope, and is 
+characterized by stiﬀ initial unloading response at  slope EUNL followed by a less stiﬀ 
+response if it unloads to less than half the curren t strength.  Reloading stiﬀness 
+degrades with increasing strain. 
+ 
+In tension, the stress rises linearly with strain u ntil a tensile limit FT is reached.  
+Thereafter the stiﬀness and strength decays with in creasing strain at a rate ESOFT. The 
+stiﬀness also decays such that unloading always ret urns to strain at which the stress 
+most recently changed to tensile. 
+ Figure M174-1  
+1 
+2 3,14 4 5,12 
+7 7,9 
+13  10 11 
+16  . BEAM  *. BEAM – reinforcement – RRE-
+INF = 4.0 *. BEAM  
+ where |u1D7≠≠ and |u1D7≠∆ are strain and stress, |u1D7≠≠|u1D46≠Cst is the strain at zero stress, E is Young’s Modulus, 
+and r and |u1D7≠∆/u1D4:6.st |u1D43BCst  are as deﬁned below  
+ 
+Two options are given for calculation r and |u1D7≠∆/u1D4:6.st |u1D43BCst , which is performed at each stress 
+reversal: 
+1.  If RREINF is input as -1, r and σCH  are calculated internally from formulae 
+given in Kent and Park.  Parameter r depends on the  number of stress rever- 
+sals.  Parameter |u1D7≠∆/u1D4:6.st |u1D43BCst  depends on the plastic strain that occurred betwee n the 
+previous two stress reversals.  The formulae were s tatistically derived from 
+experiments, but may not ﬁt all circumstances.  In particular, large diﬀerences 
+in behavior may be caused by the presence or absenc e of small stress reversals 
+such as could be caused by high frequency oscillati ons.  Therefore, results 
+might sometimes be unduly sensitive to small change s in the input data. 
+2.  If RREINF is entered by the user or left blank, r is held constant while |u1D7≠∆/u1D4:6.st |u1D43BCst  is 
+calculated on each reversal such that the Ramberg-O sgood curve meets the 
+monotonic stress-strain curve at the point from whi ch it last unloaded, e.g. 
+points 6 and 8 are coincident in the graph below.  The default setting RRE-
+INF = 4.0 gives similar hysteresis behavior to that  described by Kent & Park 
+but is unlikely to be so sensitive to small changes  of input data. 
+Output: 
+It is recommended to use BEAMIP on *DATABASE_EXTENT _BINARY to request stress 
+and strain output at the individual integration poi nts.  If this is done, for . SHEAR_WALL  *. SHEAR_WALL  
+Purpose:  This is Material Type 194. It is for shel l elements only.  It uses empirically-
+derived algorithms to model the eﬀect of cyclic she ar loading on reinforced concrete 
+walls.  It is primarily intended for modeling squat  shear walls, but can also be used for 
+slabs.  Because the combined eﬀect of concrete and reinforcement is included in the 
+empirical data, crude meshes can be used.  The mode l has been designed such that the 
+minimum amount of input is needed: generally, only the variables on the ﬁrst card need 
+to be deﬁned. 
+NOTE:  This material does not support speciﬁcation of a m a- 
+terial angle, |u1D6FD|u1D4J6Cst, for each through-thickness integra- 
+tion point of a shell. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR TMAX   I 
+Type A8 F F F F    
+Default none none none 0.0 0.0    
+ 
+Include the following data if “Uniform Building Cod e” formula for maximum shear 
+strength or tensile cracking are required – otherwi se leave blank.  
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FC PREF FYIELD SIG0 UNCONV ALPHA FT ERIENF 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ *. SHEAR_WALL  
+  Card 3 1 2 3 4 5 6 7 8 
+Variable A B C D E F   
+Type F F F F F F   
+Default 0.05 0.55 0.125 0.66 0.25 1.0   
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable Y1 Y2 Y3 Y4 Y5    
+Type F F F F F    
+Default 0.0 0.0 0.0 0.0 0.0    
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable T1 T2 T3 T4 T5    
+Type F F F F F    
+Default 0.0 0.0 0.0 0.0 0.0    
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable AOPT        
+Type F        
+Default 0.0        
+ *. SHEAR_WALL  
+  VARIABLE   DESCRIPTION  
+UCONV Unit conversion factor.  UCONV is expected to  be set such that, 
+U CON V =/radical.v11.0 PSI  in the model 's stress units . 
+This used to convert the ultimate tensile stress of  concrete which 
+is expressed as /radical.v1FC  where FC is given in PSI. Therefore a unit 
+conversion factor of /radical.v1PSI Stress U nit ⁄ is required.  Examples: 
+UCONV = 83.3 = /radical.v16 894  if stress unit is N/m|twoCst 
+UCONV = 0.083 if stress unit is MN /m|twoCst or N/mm |twoCst  
+ALPHA Shear span factor - see below. 
+FT Cracking stress in direct tension - see notes below.  Default is 8% 
+of the cylinder strength. 
+ERIENF Young’s Modulus of reinforcement.  Used in c alculation of post-
+cracked stiﬀness - see notes below. 
+A Hysteresis constants determining the shape of the h ysteresis 
+loops. 
+B Hysteresis constants determining the shape of the h ysteresis 
+loops. 
+C Hysteresis constants determining the shape of the h ysteresis 
+loops. 
+D Hysteresis constants determining the shape of the hysteresis 
+loops. 
+E Hysteresis constants determining the shape of the h ysteresis 
+loops. 
+F Strength degradation factor.  After the ultimate sh ear stress has 
+been achieved, F multiplies the maximum shear stres s from t he 
+curve for subsequent reloading.  F = 1.0 implies no strength 
+degradation (default).  F = 0.5 implies that the strength is halved 
+for subsequent reloading. 
+Y1, Y2, …, Y5 Engineering shear strain points on st ress- strain curve.  By default 
+these are calcu lated from the values on card 1. See below for more  
+guidance. *. SHEAR_WALL  
+ plane shear stress component.  It is not recommende d that this model be used where 
+nonlinear response to direct compressive or loads i s important. 
+ 
+Note that the in-plane shear stress |u1D461|u1D46JCst|u1D466Cst  is deﬁned as the shear stress in the element’s loc al 
+|u1D46J-|u1D466 plane.  This is not necessarily equal to the maxim um shear stress in the plane: for 
+example, if the principal stresses are at 45 degree s to the local axes, |u1D461|u1D46JCst|u1D466Cst  is zero.  
+Therefore it is important to ensure that the local axes are appropriate - for a shear wall 
+the local axes should be vertical or horizontal.  B y default, local |u1D46J points from node 1 to 
+node 2 of the element.  It is possible to change th e local axes by using AOPT > 0. 
+ 
+If TMAX is set to zero, the ultimate shear stress i s calculated using a formula in the 
+Uniform Building Code 1997, section 1921.6.5: 
+TMAX U BC =U CON V × ALP H A ×/radical.v1FC + RO × F Y  
+where, 
+U CON V = unit con v ersion factor, see v arria b le list 
+ALP H A = aspect ratio 
+= 2.0 for ℎ/u1D45∫⁄∈(2.0,∞) increases linearly to 3.0 for ℎ/u1D45∫⁄∈(2.0,1.5) 
+FC = unconfined compressi v e strength of concrete 
+RO = fraction of reinforcement 
+= |parenleftCv1percent reinforcement|parenriµhtCv1 100 ⁄
+F Y = yield stress of reinforcement   
+To this we add shear stress due to the overburden t o obtain the ultimate shear stress: 
+TMAX U BC = TMAX U BC + SIG0 
+where 
+SIG0 = in plane compressi v e stress under static e q uili b rium conditions 
+ 
+The UBC formula for ultimate shear stress is genera lly conservative (predicts that the 
+wall is weaker than shown in test), sometimes by 50 % or more.  A less conservative 
+formula is that of Fukuzawa: 
+TMAX = max |<racketleftCvJ|parenleftCvJ0.4 +|u1D434|u1D4J≠Cst
+|u1D434|u1D464Cst|parenriµhtCvJ , 1|<racketriµhtCvJ× 2.7× |parenleftCvJ1.9+|u1D44≠
+/u1D4:F|u1D463Cst|parenriµhtCvJ ×U CON V + /radical.v1FC + 0.5
+× RO × F Y + SIG0 
+where 
+|u1D434/u1D4:6.st= Cross-sectional area of stiffening features such a s columns or flanges 
+|u1D434|u1D464Cst= Cross-sectional area of wall 
+|u1D44≠/u1D4:F|u1D463Cst⁄ = Aspect ratio of wall height length ⁄  *. SHEAR_WALL  
+ 1.  Pre-cracking, linear elastic response is assumed u sing the overall Young’s 
+Modulus on Card 1. 
+2.  Cracking occurs in the local x or y directions when  the tensile stress in that 
+direction exceeds the concrete tensile strength FT (if not input on Card 2, this 
+defaults to 8% of the compressive strength FC).  Po st-cracking, a linear stress-
+strain response is assumed up to reinforcement yiel d at a strain deﬁned by 
+reinforcement yield stress divided by reinforcement  Young’s Modulus. 
+3.  Post-yield, a constant stress is assumed (no work hardening). 
+Unloading returns to the origin of the stress-strai n curve.  
+For compressive strains the response is always line ar elastic using the overall 
+Young’s Modulus on Card 1. 
+If insuﬃcient data is entered, no cracking occurs i n the model.  As a minimum, 
+FC and FY are needed. 
+Extra variables are available for post-processing a s follows: 
+Extra variable 1: Current engineering shear strain 
+Extra variable 2: Shear status:  0, 1, 2, 3, 4, or 5– see below 
+Extra variable 3: Maximum direct strain so far in l ocal |u1D46J direction (for ten- 
+sile cracking) 
+Extra variable 4: Maximum direct strain so far in l ocal |u1D466 direction (for ten- 
+sile cracking)  
+Extra variable 5: Tensile status: 0, 1 or 2 = elast ic, cracked, or yielded re- 
+spectively. 
+The shear status shows how far along the shear stre ss-strain curve each element 
+has progressed, e.g. status 2 means that the elemen t has passed the second 
+point on the curve.  These status levels correspond  to performance criteria in 
+building design codes such as FEMA. *

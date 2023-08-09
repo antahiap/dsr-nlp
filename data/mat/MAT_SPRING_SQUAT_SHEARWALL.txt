@@ -1,0 +1,33 @@
+ ....................... ................................................... ......... 2-1865  TABLE OF CONTENTS   
+0-10 (TABLE OF CONTENTS) LS-DYNA R13 *.  
+ *.  *.   *.   
+This is  Material Type 14 for discrete elements (*ELEMENT_DI SCRETE).  This material 
+allows squat shear walls to be modeled using discre te elements.  The behavior model 
+captures concrete cracking, reinforcement yield, ul timate strength followed by 
+degradation of strength ﬁnally leading to collapse.  
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID A14 B14 C14 D14 E14 LCID FSD 
+Type A8 F F F F F I F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+A14 Material coeﬃcient |u1D434 
+B14 Material coeﬃcient |u1D43J 
+C14 Material coeﬃcient |u1D436 
+D14 Material coeﬃcient |u1D437 
+E14 Material coeﬃcient |u1D438 
+LCID Load curve ID referencing the maximum strength  envelope curve  
+FSD Sustained strength reduction factor 
+Remarks: 
+Material coeﬃcients |u1D434, |u1D43J, |u1D436 and |u1D437 are empirically deﬁned constants used to deﬁne the  
+shape of the polynomial curves which govern the cyc lic behavior of the discrete 
+element.  A diﬀerent polynomial relationship is use d to deﬁne the loading and 
+unloading paths allowing energy absorption through hysteresis.  Coeﬃcient |u1D438 is used in 
+the deﬁnition of the path used to “jump” from the l oading path to the unloading path 
+(or vice versa) when a full hysteresis loop is not completed.  The load curve referenced 
+is used to deﬁne the force displacement characteris tics of the shear wall under 
+monotonic loading.  The polynomials deﬁning the cyc lic behavior refer to this curve.  
+On the second and subsequent loading / unloading cy cles, the shear wall will have 
+reduced strength.  The variable FSD is the sustaine d strength reduction factor. *

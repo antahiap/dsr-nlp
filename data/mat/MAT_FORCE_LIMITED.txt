@@ -1,0 +1,76 @@
+ ................................ ................................................... ......................... 2-267  
+*.  [1B] {30} 
+ *.   *.   *.   
+This is  Material Type 29.  It is a force limited resultant formulation.  With this material 
+model, for the Belytschko-Schwer beam only, plastic  hinge forming at the ends of a 
+beam can be modeled using curve deﬁnitions.  Option ally, collapse can also be 
+modeled.  See also *.   
+2-268 (MAT) LS-DYNA R13  Card 4 1 2 3 4 5 6 7 8 
+Variable LPS1 SFS1 LPS2 SFS2 YMS1 YMS2   
+Type F F F F F F   
+Default 0 1.0 LPS1 1.0 10 20  YMS1   
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable LPT1 SFT1 LPT2 SFT2 YMT1 YMT2   
+Type F F F F F F   
+Default 0 1.0 LPT1 1.0 10 20  YMT1   
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable LPR SFR YMR      
+Type F F F      
+Default 0 1.0 10 20       
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+DF Damping factor; see Remark 2 . A proper control for the timestep 
+must be maintained by the user.  *.   
+2-270 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+LPT1 Load curve ID for plastic moment as a function of r otation about 
+the |u1D461-axis at node 1.  If zero, this load curve is ignor ed. 
+SFT1 Scale factor for plastic moment as a function of ro tation curve 
+about the |u1D461-axis at node 1.  Default = 1.0. 
+LPT2 Load curve ID for plastic moment as a function of r otation about 
+the |u1D461-axis at node 2.   Default: LPT1. 
+SFT2 Scale factor for plastic momen t as a function of rotation curve 
+about the |u1D461-axis at node 2.  Default: SFT1. 
+YMT1 Yield moment about the |u1D461-axis at node 1 for interaction 
+calculations (default set to 10 20  to prevent interactions) 
+YMT2 Yield moment about the |u1D461-axis at node 2 for inte raction 
+calculations (default set to YMT1) 
+LPR Load curve ID for plastic torsional moment as a fun ction of 
+rotation.  If zero, this load curve is ignored. 
+SFR Scale factor for plastic torsional moment as a func tion of rotation 
+(default = 1.0). 
+YMR Torsional yield moment for interaction calculations  (default set to 
+10 20  to prevent interaction) 
+Remarks: 
+1.  Load Curves.   This material model is available for the Belytsch ko resultant 
+beam element only.  Plastic hinges form at the ends  of the beam when the mo- 
+ment reaches the plastic moment.  The moment as a f unction rotation relation- 
+ship is speciﬁed by the user in the form of a load curve and scale factor.  The 
+points of the load curve are |parenleftCv1plastic rotation in radians, plastic moment|parenriµhtCv1 .  Both 
+quantities should be positive for all points, with the ﬁrst point being 
+|parenleftCv10.0, initial plastic moment|parenriµhtCv1 .  Within this constraint any form of characteristi c 
+may be used, including ﬂat or falling curves.  Diﬀe rent load curves and scale 
+factors may be speciﬁed at each node and about each  of the local |u1D46≠ and |u1D461 axes. 
+Axial collapse occurs when the compressive axial lo ad reaches the collapse 
+load.  Collapse load as a function of collapse deﬂe ction is speciﬁed in the form 
+of a load curve.  The points of the load curve are either 
+|parenleftCv1true strain, collapse force|parenriµhtCv1  or |parenleftCv1change in length, collapse force|parenriµhtCv1 .  Both quanti- *.   
+2-272 (MAT) LS-DYNA R13 |u1D44≠|u1D4JFCstupper = max 
+⎝⎜⎛|u1D44≠|u1D4JFCst,|u1D44≠|u1D4JFCstyield 
+2⎠⎟⎞ 
+and similar conditions hold for |u1D44≠|u1D46≠Cstupper  and |u1D44≠|u1D461Cstupper . 
+Thereafter, the plastic moments will be given by 
+|u1D44≠|u1D4JFCst|u1D4JDCst= min(|u1D44≠|u1D4JFCstupper , |u1D44≠|u1D4JFCstcur v e ) 
+where |u1D44≠|u1D4JFCst|u1D4JDCsts is the current plastic moment and |u1D44≠|u1D4JFCstcur v e  is the moment from the 
+load curve at the current rotation scaled by the sc ale factor.  |u1D44≠|u1D46≠Cst|u1D4JDCstand |u1D44≠|u1D461Cst|u1D4JDCst satisfy 
+similar conditions. M1M1M2M3M4M5M6M7M8
+Strain (or change in length; see IAFLC)Axial Force
+Figure M29-1.  The force magnitude is limited by the applied end mom ent.  
+For an intermediate value of the end moment LS-DY NA interpolates between 
+the curves to determine the allowable force value. *

@@ -1,0 +1,41 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+LCIDK Load curve ID for bulk behavior if constants,  |u1D43∆|u1D4J6Cst, and |u1D6FD/u1D̅05|u1D4J6Cst are 
+determined using a least squares ﬁt.  This relaxati on curve is 
+shown in Figure M175-1 . 
+NTK Number of terms desired in bulk ﬁt.  If zero 6 term s are used by 
+default.  Currently, the maximum number is set to 6 . 
+BSTARTK In the ﬁt, |u1D6FD/u1D̅05|oneCst  is set to zero, |u1D6FD/u1D̅05|twoCst  is set to BSTARTK, |u1D6FD/u1D̅05|threeCst is 10 times 
+|u1D6FD/u1D̅05|twoCst, |u1D6FD/u1D̅05|fourCst is 10 times |u1D6FD/u1D̅05|threeCst , and so on.  If z ero, BSTARTK is 
+determined by an iterative trial and error scheme. 
+TRAMPK Optional ramp time for bulk loading 
+ 10n10n+110n+210n+3σ∕ε0
+optional ramp time for loadingTRAMP time
+Figure M175-1.   Relaxation curve.  This curve deﬁnes stress as a funct ion of 
+time where time is deﬁned on a l ogarithmic scale.  For best results, the points 
+deﬁned in the load curve should be equally spaced on th e logarithmic scale.  
+Furthermore, the load curve should be smooth and deﬁne d in the positive 
+quadrant.  If nonphysical values are determined by least squ ares ﬁt, LS-DY NA 
+will terminate with an error message after the initializat ion phase is completed.  
+If the ramp time for loading is included, then the rel axation which occurs 
+during the loading phase is taken into account.  This eﬀ ect may or may not be 
+important. *.   
+ /u1D458(|u1D461) = |summationCv1 |u1D43∆|u1D4JACst|u1D4J2−/u1D6FD.st|u1D4J8Csts/u1D45A.sts|u1D461Cst|u1D441Cst
+|u1D4JACst=|oneCst 
+The Arrhenius and Williams-Landel-Ferry (WLF) shift  functions account for the eﬀects 
+of the temperature on the stress relaxation.  A sca led time, |u1D461|minuteCst, 
+|u1D461|minuteCst=/integral.v:Φ(|u1D447)|u1D4J1|u1D461 |u1D461Cst
+|zeroCst , 
+is used in the relaxation function instead of the p hysical time.  The Arrhenius shift 
+function is 
+Φ(|u1D447) = exp |<racketleftCvJ−|u1D434 |parenleftCvJ1
+|u1D447−1
+|u1D447REF |parenriµhtCvJ|<racketriµhtCvJ  , 
+and the Williams-Landel-Ferry shift function is 
+Φ(|u1D447) = exp |parenleftCvJ−|u1D434|u1D447 − |u1D447REF 
+|u1D43J + |u1D447 − |u1D447REF |parenriµhtCvJ . 
+If all three values (TREF, A, and B) are not zero, the WLF function is used; the 
+Arrhenius function is used if B is zero; and no sca ling is applied if all three values are 
+zero. *

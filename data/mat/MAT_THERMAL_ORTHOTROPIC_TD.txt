@@ -1,0 +1,58 @@
+ ....................... ................................................... ............... 3-8  
+*. _LC .................... ................................................... ......... 3-27  
+*.  
+ *. _LC 
+ *.  *. _LC *.  
+*. _LC 
+*.   
+3-8 (.   
+This is Thermal Material Type 4.  It allows tempera ture dependent orthotropic 
+properties to be deﬁned.  The temperature dependenc y is deﬁned by specifying a 
+minimum of two and a maximum of eight data points.  The properties must be deﬁned 
+for the temperature range that the material will se e in the analysis. 
+Card Summary:  
+Card 1.   This card is required. 
+TMID TRO TGRLC TGMULT AOPT TLAT HLAT  
+Card 2.   This card is required. 
+T1 T2 T3 T4 T5 T6 T7 T8 
+Card 3.   This card is required. 
+C1 C2 C3 C4 C5 C6 C7 C8 
+Card 4.   This card is required. 
+(K1)1 (K1)2 (K1)3 (K1)4 (K1)5 (K1)6 (K1)7 (K1)8 
+Card 5.   This card is required. 
+(K2)1 (K2)2 (K2)3 (K2)4 (K2)5 (K2)6 (K2)7 (K2)8 
+Card 6.   This card is required. 
+(K3)1 (K3)2 (K3)3 (K3)4 (K3)5 (K3)6 (K3)7 (K3)8 
+Card 7.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 8.   This card is required. 
+D1 D2 D3      *.   
+3-10 (.   *.   
+3-12 (. _LC  *. _LC  
+This is Thermal Material Type 8. With this model, o rthotropic thermal properties that 
+are dependent on temperature (and/or mechanical his tory variables) can be speciﬁed 
+with load curves.  The properties must be deﬁned fo r the temperature (and/or history 
+variable) range that the material will see in the a nalysis. 
+Card Summary: 
+Card 1a.   This card is included if ITGHSV = 0 (see Card 2).  
+TMID TRO TGRLC TGMULT AOPT TLAT HLAT  
+Card 1b.   This card is included if |ITG H S V | > 0 (see Card 2). 
+TMID TRO TGRLC TGMULT AOPT TLAT HLAT  
+Card 2.   This card is required. 
+LCC LCK1 LCK2 LCK3 ILCCHSV ILCKHSV ITGHSV  
+Card 3.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 4.   This card is required. 
+D1 D2 D3      
+Data Card Deﬁnitions: 
+This card is included if ITGHSV = 0 (see Card 2). 
+ Card 1a 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT AOPT TLAT HLAT  
+Type A F I F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label must 
+be speciﬁed (see *PART). *. _LC  
+3-28 (. _LC  *. _LC  
+3-30 (. _LC  *. _LC  
+3-32 (

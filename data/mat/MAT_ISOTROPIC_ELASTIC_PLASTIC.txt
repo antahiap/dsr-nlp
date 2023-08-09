@@ -1,0 +1,37 @@
+ .................... ................................................... ............. 2-183  
+*.  [0,2,3a,3 c,5,8B] {0} 
+ *.   *. , requires less storage and is 
+more eﬃcient.  Whenever possible, Material 12 is re commended for solid ele- 
+ments, but for shell elements, it is less accurate and thus Material 12 is not rec- 
+ommended in this case. 
+3.  History Variables.   This material has the following extra history var iables.   
+ 
+History Variable # Description 
+1 Back stress component |u1D46J|u1D46J  
+2 Back stress component |u1D466|u1D466  
+3 Back stress component |u1D46J|u1D466  
+4 Back stress component |u1D466 /u1D46̅ 
+5 Back stress component /u1D46̅|u1D46J  *.   *.   
+This is  Material Type 12.  This is a very low cost isotropi c plasticity model for three-
+dimensional solids.  In the plane stress implementa tion for shell elements, a one-step 
+radial return approach is used to scale the Cauchy stress tensor if the state of stress 
+exceeds the yield surface.  This approach to plasti city leads to inaccurate shell thickness 
+updates and stresses after yielding.  This is the o nly model in LS-DYNA for plane stress 
+that does not default to an iterative approach. 
+ 
+ Card 1 2 3 4 5 6 7 8 
+Variable MID RO G SIGY ETAN BULK   
+Type A F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G Shear modulus 
+SIGY Yield stress 
+ETAN Plastic hardening modulus 
+BULK Bulk modulus, |u1D43∆ 
+Remarks: 
+The pressure is integrated in time from 
+|u1D4JḊ= −|u1D43∆|u1D7≠≠̇|u1D4J6Cst|u1D4J6Cst   , 
+where |u1D7≠≠̇|u1D4J6Cst|u1D4J6Cst  is the volumetric strain rate. *

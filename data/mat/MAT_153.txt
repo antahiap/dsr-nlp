@@ -1,0 +1,197 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density, |u1D7≠+  
+E Young’s modulus, |u1D438 
+LT.0: -E gives the curve ID for |u1D438 as a function of temperature. 
+PR Poisson’s ratio, /u1D̅08  
+LT.0: -PR gives the curve ID for /u1D̅08 as a function of temperature.  
+SIGY Initial yield stress, |u1D7≠∆|u1D466Cst|zeroCst (ignored if LCSS > 0) 
+HARDI Isotropic hardening modulus, /u1D4:B (ignored if LCSS > 0) 
+BETA Isotropic hardening parameter, |u1D6FD. Set |u1D6FD=0 for linear isotropic 
+hardening.  (Ignored if LCSS > 0 or if HARDI = 0.) 
+LCSS Load curve or table ID deﬁning eﬀective stress as a  function of 
+eﬀective plastic strain (and temperature in the tab le case) for 
+isotropic hardening.  For a table each curve corresponds to a 
+temperature.  The ﬁrst abscissa value (eﬀective pla stic strain) in 
+each curve must be zero corresponding to the initia l yield stress.  
+The ﬁrst ordinate value in each curve is the initia l yield stress.  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable HARDK1 GAMMA1  HARDK2 GAMMA2  SRC SRP HARDK3 GAMMA3  
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+HARDK j Kinematic hardening modulus, |u1D436|u1D4J7Cst 
+LT.0: -HARDK j gives the curve ID for |u1D436|u1D4J7Cst as a function of 
+temperature. 
+GAMMA j Kinematic hardening parameter, |u1D6F∆|u1D4J7Cst.  Set |u1D6F∆|u1D4J7Cst = 0 for linear kinematic 
+hardening.  Ignored if HARDK j = 0. 
+LT.0: -GAMMA j gives the curve ID for |u1D6F∆|u1D4J7Cst as a function of *.   
+  VARIABLE   DESCRIPTION  
+DC Critical damage value, |u1D437|u1D4J≠Cst.  When damage value reaches the 
+critical value, the element is deleted from calcula tion.  
+Default = 0.5. 
+KHFLG Kinematic hardening ﬂag:  
+EQ.0: Use kinematic hardening parameters HARDK j and 
+GAMMA j (default). 
+EQ.1: Kinematic hardening parameters ( |u1D436|u1D4J7Cst, |u1D6F∆|u1D4J7Cst) given by load 
+curve or table if temperature is considered.  NKH d ata 
+points used (with a maximum of 10) in each curve.  
+HARDK j and GAMMA j ﬁelds are ignored. 
+EQ.2: Fits NKH kinematic hardening parameters ( |u1D436|u1D4J7Cst, |u1D6F∆|u1D4J7Cst) to 
+uniaxial stress- strain data at constant temperature for a 
+half-cycle, meaning it ﬁts 
+|u1D7≠∆|u1D4J6Cst= |u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠|u1D4J6Cst|u1D4JDCst|parenriµhtCv2 + |summationCv1|u1D436|u1D4J7Cst
+|u1D6F∆|u1D4J7Cst|parenleftCv21 − exp|parenleftCv2−|u1D6F∆|u1D4J7Cst|u1D7≠≠|u1D4J6Cst|u1D4JDCst|parenriµhtCv2|parenriµhtCv2|u1D441Cst /u1D4:E.st |u1D43BCst 
+|u1D4J7Cst=|oneCst 
+to stress as a function of plastic strain data.  Th e stress, 
+|u1D7≠∆|u1D4J6Cst, can be given in ﬁeld LCKH as a function of strain , |u1D7≠≠|u1D4J6Cst|u1D4JDCst, 
+in a load curve or as a function of strain and temp era- 
+ture, |u1D447, in a table.  HARDK j and GAMMA j ﬁelds are 
+ignored. 
+EQ.3: Fits NKH kinematic hardening parameters ( |u1D436|u1D4J7Cst, |u1D6F∆|u1D4J7Cst) to 
+uniaxial stress-strain data for the tensile part of  a stabi- 
+lized cycle, meaning it ﬁts 
+|u1D7≠∆|u1D4J6Cst=|u1D7≠∆|oneCst+ |u1D7≠∆|u1D441Cst
+2+ |summationCv1|u1D436|u1D4J7Cst
+|u1D6F∆|u1D4J7Cst|parenleftCv21 − 2 exp|parenleftCv2−|u1D6F∆|u1D4J7Cst|u1D7≠≠|u1D4J6Cst|u1D4JDCst|parenriµhtCv2|parenriµhtCv2|u1D441Cst /u1D4:E.st |u1D43BCst 
+|u1D4J7Cst=|oneCst   
+to /u1D441 stress as a function of plastic strain data.  This data 
+is given by LCKH as either a load curve or table de pend- 
+ing on if temperature i s included.  Here the ﬁrst data 
+point is chosen such that |u1D7≠≠|oneCst|u1D4JDCst= 0. HARDK j and GAMMA j
+ﬁelds are ignored. 
+EQ.4: Fits NKH kinematic hardening parameters ( |u1D436|u1D4J7Cst, |u1D6F∆|u1D4J7Cst) to 
+uniaxial stress- strain data for diﬀerent stabilized cycles, 
+that is, it ﬁts 
+|u1D7≠∆|u1D4J6Cst=|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠|u1D4J6Cst|u1D4JDCst|parenriµhtCv2+|summationCv1|u1D436|u1D4J7Cst
+|u1D6F∆|u1D4J7Csttanh |parenleftCv2|u1D6F∆|u1D4J7Cst|u1D7≠≠|u1D4J6Cst|u1D4JDCst|parenriµhtCv2|u1D441Cst /u1D4:E.st |u1D43BCst 
+|u1D4J7Cst=|oneCst, *.   
+  VARIABLE   DESCRIPTION  
+NKH Number of kinematic hardening parameters when K HFLG > 0. 
+Up to 10 back stresses can be used. 
+Model Description: 
+This model is based on the work of Lemaitre [1992],  and Dufailly and Lemaitre [1995].  
+It is a pressure-independent plasticity model with the yield surface deﬁned by the 
+function 
+|u1D439 = |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt− |u1D7≠∆|u1D466Cst= 0  , 
+where |u1D7≠∆|u1D466Cst is uniaxial yield stress, 
+|u1D7≠∆|u1D466Cst= |u1D7≠∆|u1D466Cst|zeroCst+/u1D4:B
+|u1D6FD|<racketleftCv11 − exp|parenleftCv1−|u1D6FD|u1D4JF|parenriµhtCv1|<racketriµhtCv1  . 
+By setting |u1D6FD = 0 , a linear isotropic hardening is obtained 
+|u1D7≠∆|u1D466Cst= |u1D7≠∆|u1D466Cst|zeroCst+/u1D4:B |u1D4JF  , 
+where |u1D7≠∆|u1D466Cst|zeroCst is the initial yield stress.  In the above, |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is the equivalent von Mises stress, 
+with respect to the deviatoric eﬀective stress, 
+s|eCst= de v [σ/tilℂecomb.h1] −α=s−α   .  
+Here /u1D42C is deviatoric stress and /u1D6C2 is the back stress, which is the sum of up to four  terms 
+according to: 
+α=|summationCv1α/∗.st
+/∗.st  . 
+σ/tilℂecomb.h1 is eﬀective stress (undamaged stress), based on Co ntinuum Damage Mechanics 
+model [Lemaitre 1992], 
+σ/tilℂecomb.h1=σ
+1 − |u1D437  . 
+Here |u1D437 is the isotropic damage scalar, which is bounded b y 0 and 1 
+0 ≤ |u1D437 ≤ 1  . 
+|u1D437 = 0  represents a damage-free material RVE (representat ive volume element), while 
+|u1D437 = 1  represents a fully broken material RVE in two part s.  In fact, fracture occurs when 
+|u1D437 = |u1D437|u1D4J≠Cst< 1, modeled as element removal.  The evolution of the  isotropic damage value 
+related to ductile damage and fracture (the case wh ere the plastic strain or dissipation is 
+much larger than the elastic one, [Lemaitre 1992]) is deﬁned as 
+|u1D437̇=
+⎩|<raceleftCex⎨|<raceleftCex⎧
+|parenleftCvJ/u1D44C
+|u1D446|parenriµhtCvJ|u1D461Cst
+|u1D7≠≠̅̇pl when |u1D4JF > |u1D4JF/u1D451.st and |u1D7≠∆|u1D4JACst
+|u1D7≠∆e q > −1
+3
+0 otherwise  *.   
+ Uniaxial cyclic tension and compression: 
+This material can be used to model cyclic hardening  plasticity, including eﬀects known 
+as plastic shakedown  and strain racheting . To understand how the plasticity parameters 
+qualitatively inﬂuence the behavior in uniaxial ten sion and compression, we restrict 
+ourselves to a discussion concerning linear isotrop ic hardening with initial yield |u1D7≠∆/u1D44C.st and 
+hardening modulus /u1D4:B. We also only include two kinematic hardening term s.  For the 
+kinematic part, we use one linear term with hardeni ng |u1D436|zeroCst (and decay coeﬃcient |u1D6F∆|zeroCst= 0)  
+and one combined term with hardening |u1D436 and decay coeﬃcient |u1D6F∆. The elastic Young’s 
+modulus is denoted |u1D438, and we neglect any forms of temperature or rate e ﬀects. 
+ 
+While this is merely an attempt to explain the phen omena, estimating the parameters 
+that reﬂect the actual behavior of the physical mat erial may be diﬃcult.  Because of this, 
+we recommend the ﬁtting options provided by KHFLG, where even the eﬀects of 
+temperature can be accounted for. 
+ 
+Strain induced deformation 
+ 
+Consider the cyclic deformation depicted in Figure M153-1  in which the uniaxial strain 
+ranges between |u1D7≠≠ and |u1D7≠≠̅. Two subsequent stress-strain cycles are shown.  
+ 
+If the isotropic hardening modulus  /u1D4:B= 0, then the cycles are identical.  For nonzero 
+hardening /u1D4:B, the stress level increases with each cycle and th e strain width indicated by 
+|u1D7≠≠⃡ decreases.  As the yield surface expands, the isot ropic hardening eﬀect diminishes, 
+and we tend towards a stable cycle; this phenomenon  is called plastic shakedown . 
+ 
+If both /u1D4:B and |u1D436|zeroCst are zero, then the end of each cycle tends towards  ideal plastic since 
+the presence of a nonzero |u1D6F∆ saturates the level of back stress and consequentl y the stress 
+|u1D7≠∆ itself.  This physical phenomenon is unlikely.  Th erefore, we recommend having at 
+least one linear kinematic hardening term present i n combination with some isotropic 
+hardening for a realistic behavior. 
+ 
+Stress induced deformation 
+ 
+For stress induced deformation, we impose a cyclic stress between |u1D7≠∆ and |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt as shown in 
+Figure M153-2  and investigate two subsequent stress-strain cycle s.  In this case a 
+combination of isotropic hardening and nonlinear ki nematic hardening may cause a 
+drift in strain.  This drift is referred to as ratcheting strain  and may be considered a creep 
+phenomenon.  Even without the isotropic hardening /u1D4:B, a nonzero mean stress, 
+(|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt+ |u1D7≠∆)/2, in the cycle causes a ratcheting eﬀect.  We again  recommend using 
+combinations of isotropic, linear and nonlinear kin ematic hardening for accurate 
+predictions of this creep behavior. 
+  *.   
+  
+ 
+ t/g1
+/g1
+/g1
+/g1/g1/g1
+E
+/g2
+/g1/g1/g1
+/g2cycle n cycle  n + 1
+Strain ratcheting 
+caused by nonlinear 
+kinematic hardening
+E = 210000
+/g1Y = 500
+H = 0
+C = 10000
+/g3 = 100
+C0= 0
+/g1 = -525/g1 = 575
+-600-400-2000200400600
+0 0.01 0.02 0.03 0.04 0.05Strain
+Stress
+ Figure M153-2.   Schematic of Uniaxial Strain Ratcheting Phenomenon *.   
+ History Variable # Description 
+3 Back stress term 1 in the 22-direction 
+4 Back stress term 1 in the 12-direction 
+5 Back stress term 1 in the 23-direction 
+6 Back stress term 1 in the 31-direction 
+7 Back stress term 2 in the 11-direction 
+8 Back stress term 2 in the 22-direction 
+9 Back stress term 2 in the 12-direction 
+10 Back stress term 2 in the 23-direction 
+11 Back stress term 2 in the 31-direction 
+12 Back stress term 3 in the 11-direction 
+13 Back stress term 3 in the 22-direction 
+14 Back stress term 3 in the 12-direction 
+15 Back stress term 3 in the 23-direction 
+16 Back stress term 3 in the 31-direction 
+17 Back stress term 4 in the 11-direction 
+18 Back stress term 4 in the 22-direction 
+19 Back stress term 4 in the 12-direction 
+20 Back stress term 4 in the 23-direction 
+21 Back stress term 4 in the 31-direction *

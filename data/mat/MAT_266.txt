@@ -1,0 +1,109 @@
+: *.  
+*.   *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable ACT9 ACT10       
+Type F F       
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable AOPT BETA XP YP ZP A1 A2 A3 
+Type I F F F F F F F 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number must b e speciﬁed. 
+RO Mass density. 
+F Fiber dispersion parameter governs the extent to wh ich the ﬁber 
+dispersion extends to the third dimension. F = 0  and F = 1  apply 
+to 2D splay with the normal to the membrane being i n the  |u1D6FD and 
+the |u1D6F∆-directions, respectively (see Figure M266-1 ). F = 0.5  applies 
+to 3D splay with transverse isotropy.  Splay will b e orthotropic 
+whenever F≠0.5. This parameter is ignored if INIT = 1. 
+SIGMA The parameter SIG MA governs the extent of dispersion, such that 
+as SIG MA goes to zero, the material symmetry reduces to p ure 
+transverse isotropy.  Conversely, as SIG MA becomes large, the 
+material symmetry becomes isotropic in the plane.  This 
+parameter is ignored if INIT = 1. *.   
+  VARIABLE   DESCRIPTION  
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES.  
+EQ.1.0: locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction. 
+EQ.2.0: globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR.  
+EQ.3.0: locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector v with th e 
+element normal.  
+EQ.4.0: locally orthotropic in cylindrical coordinate syste m 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, /u1D42∫, which deﬁne the centerline ax- 
+is. 
+LT.0.0: the absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR). 
+BETA Material angle in degrees for AOPT = 3, may be overridden on 
+the element card *ELEMANT_SOLID_ORTHO. 
+XP - ZP XP, YP and ZP deﬁne the coordinates of poin t P for AOPT = 1 and 
+AOPT = 4. 
+A1 - A3 A1, A2 and A3 deﬁne the components of vecto r A for AOPT = 2. 
+D1 - D3 D1, D2 and D3 deﬁne components of vector D for AOPT = 2. 
+V1 - V3 V1, V2 and V3 deﬁne components of vector V for AOPT = 3 and 
+AOPT = 4. *.   
+ where Q is the transformation tensor that rotates from the  local to the global Cartesian 
+system.  In the case when INIT = 1, the dispersion tensor is given by 
+/u1D40∅|u1D4J6Cst=/u1D410|u1D4J6Cst
+⎝⎜⎜⎜⎜⎛/u1Dℜ12|u1D4J6Cst|oneCst0 0
+0/u1Dℜ12|u1D4J6Cst|twoCst0
+0 0/u1Dℜ12|u1D4J6Cst|threeCst⎠⎟⎟⎟⎟⎞
+/u1D410|u1D4J6Cst|u1D447Cst 
+where the /u1Dℜ12:s are given on the *INITIAL_FIELD_SOLID card.  For  the values to be 
+physically meaningful /u1Dℜ12|u1D4J6Cst|oneCst+/u1Dℜ12|u1D4J6Cst|twoCst+/u1Dℜ12|u1D4J6Cst|threeCst= 1. It is the responsibility of the user to assure tha t 
+this condition is met, no internal checking for thi s is done.  These values typically come 
+from diﬀusion tensor data taken from the myocardium . 
+Remarks: 
+1.  Passive ﬁber models.  Currently there are two mode ls available. 
+a)  If  FID = 1 a crimped ﬁber model is used.  It is s olely developed for colla- 
+gen ﬁbers.  Given  /u1D4:B|zeroCst and |u1D44J|zeroCst compute:  
+/u1D4:F|zeroCst=/radical.v2(2/u1D̅0B)|twoCst+ (/u1D4:B|zeroCst)|twoCst,Λ=/u1D4:F|zeroCst
+/u1D4:B|zeroCst 
+and 
+|u1D438|u1D46≠Cst=|u1D438/u1D45:.st/u1D4:B|zeroCst
+/u1D4:B|zeroCst+ |parenleftCv61 +3 7
+6/u1D̅0B|twoCst+ 2/u1D4:F|zeroCst|twoCst
+/u1D̅0B|twoCst|parenriµhtCv6 (/u1D4:F|zeroCst−/u1D4:B|zeroCst). 
+Now if the ﬁber stretches |u1D7≠6 <Λ the ﬁber stress is given by: 
+|u1D7≠∆ =/u1D̅0∫|u1D438|u1D46≠Cst(|u1D7≠6 − 1) 
+where 
+/u1D̅0∫=6/u1D̅0B|twoCst|parenleftCv2Λ|twoCst+ |parenleftCv24/u1D̅0B|twoCst− 1|parenriµhtCv2|u1D7≠6|twoCst|parenriµhtCv2|u1D7≠6
+Λ|parenleftCv33/u1D4:B|zeroCst|twoCst|parenleftCv1Λ|twoCst− |u1D7≠6|twoCst|parenriµhtCv1|parenleftCv13Λ|twoCst+ |parenleftCv18/u1D̅0B|twoCst− 3|parenriµhtCv1|u1D7≠6|twoCst|parenriµhtCv1 +8/u1D̅0B|twoCst|parenleftCv110 Λ|twoCst+ |parenleftCv13/u1D̅0B|twoCst− 10|parenriµhtCv1|u1D7≠6|twoCst|parenriµhtCv1|parenriµhtCv3 
+and if |u1D7≠6 >Λ the ﬁber stress equals: 
+|u1D7≠∆ = |u1D438|u1D46≠Cst(|u1D7≠6 − 1) + |u1D438/u1D45:.st(|u1D7≠6 −Λ). 
+In Figure M266-1  the ﬁber stress is rendered with /u1D4:B0 = 2 7.5, |u1D44J0 = 2  and 
+the transition point becomes Λ= 1.1.  *.   
+ |u1D714 =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex⎧/u1D̅0B|u1D461
+|u1D461|zeroCst0 ≤ |u1D461 < |u1D461|zeroCst
+/u1D̅0B|u1D461 − |u1D461|zeroCst+ |u1D461|u1D4JFCst
+|u1D461|u1D4JFCst|u1D461|zeroCst≤ |u1D461 < |u1D461|zeroCst+ |u1D461|u1D4JFCst
+0 |u1D461|zeroCst+ |u1D461|u1D4JFCst≤ |u1D461 
+and |u1D461|u1D4JFCst= |u1D4JA/u1D45∫|u1D44JCst|u1D7≠6 + |u1D44F.  Secondly, it can also be given as a load curve.  I f a load curve 
+should be used its index must be given in ACT10. No te that all variables that 
+correspond to ω are neglected if a load curve is used.  The active  parameters on 
+Card 3 and 4 are interpreted as: 
+ 
+ACT1  ACT2  ACT3 ACT4  ACT5  ACT6  ACT7  ACT8  ACT9  ACT10  
+|u1D447|mCst|aCst|xCst  |u1D436|u1D44∆|zeroCst (|u1D436|u1D44∆|zeroCst)|mCst|aCst|xCst  |u1D43J /u1D45∫|zeroCst |u1D461|zeroCst |u1D4JA |u1D44F /u1D45∫|u1D44JCst LCID 
+References: 
+1.  Freed AD., Einstein DR. and Vesely I., Invariant f ormulation for dispersed 
+transverse isotropy in aortic heart valves – An eﬃc ient means for modeling 
+ﬁber splay, Biomechan model Mechanobiol, 4, 100-117 , 2005. 
+2.  Guccione JM., Waldman LK., McCulloch AD., Mechanic s of Active Contraction 
+in Cardiac Muscle: Part II – Cylindrical Models of the Systolic Left Ventricle, J. 
+Bio Mech, 115, 82-90, 1993. *

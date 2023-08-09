@@ -1,0 +1,63 @@
+ ............................... ................................................... ..................... 2-1258  
+*.  [0,3c] {11} 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+EQ.3.0:  Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal.   
+EQ.4.0: Locally orthotr opic in cylindrical coordinate system 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, |u1D4JD, which deﬁne the centerline axis.  
+This option is for solid elements only. 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR).   
+A Flow potential exponent |u1D44∆ 
+LCSS Load curve ID or table ID for (isotropic) hardening :  
+GT.0: If LCSS is a load curve, then yield stress |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is a function of 
+plastic strain.  If LCSS is a table, then yield str ess |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is a 
+function of plastic strain and plastic strain rate.  
+LT.0: If -LCSS is a load curve, then yield stress |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is a function 
+of plastic strain.  If -LCSS is a table, then yield  stress |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is 
+a function of plastic strain and temperature. 
+XP YP ZP Deﬁne coordinates of point |u1D443 for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+MACF Material axes change ﬂag for solid elements: 
+EQ.-4: Switch material axes |u1D44F and /u1D450 before BETA rotation 
+EQ.-3: Switch material axes |u1D44∆ and /u1D450 before BETA rotation 
+EQ.-2: Switch material axes |u1D44∆ and |u1D44F before BETA rotation  
+EQ.1: No change, default 
+EQ.2: Switch material axes |u1D44∆ and |u1D44F after BETA rotation 
+EQ.3: Switch material axes |u1D44∆ and /u1D450 after BETA rotation 
+EQ.4: Switch material axes |u1D44F and /u1D450 after BETA rotation 
+Figure M2-2  indicates when LS-DY NA applies MACF during the 
+process to obtain the ﬁnal material axes.  If BETA on *ELE-
+MENT_SOLID_ {OPTION}  is deﬁned, then that BE TA is used for *.   
+ Each transformation matrix requires 9 coeﬃcients th at must be deﬁned on Cards 2, 3, 
+and 4 of this material model input.  For identiﬁcat ion of all 18 coeﬃcients, uniaxial tests 
+in several directions, biaxial tests, and crystal p lasticity models (for out-of-plane 
+properties) are needed.  See Barlat et al.  [2005] for more details and examples for 
+parameters sets. 
+ 
+Note that the sequence of stress tensor components in LS-DYNA is as follows 
+/u1D42C=
+⎣⎢⎢⎢⎢⎢⎡|u1D46≠|u1D46JCst|u1D46JCst 
+|u1D46≠|u1D466Cst|u1D466Cst 
+|u1D46≠|u1D467Cst|u1D467Cst 
+|u1D46≠|u1D46JCst|u1D466Cst 
+|u1D46≠|u1D466Cst|u1D467Cst 
+|u1D46≠|u1D467Cst|u1D46JCst ⎦⎥⎥⎥⎥⎥⎤
+ 
+meaning matrix entry “44” is linked to stress compo nent “ |u1D46J|u1D466 ”, “55” belongs to “ |u1D466 /u1D46̅”, and 
+“66” refers to “ /u1D46̅|u1D46J ”. If compared to the paper from Barlat et al.  [20 05] that means the 
+following relations hold (each equation: LS-DYNA pa rameters on the left, Barlat 
+coeﬃcients on the right): 
+CP44 =/u1D450|sixCst|sixCst |minuteCst          CP55 =/u1D450|fourCst|fourCst |minuteCst          CP66 =/u1D450|fiveCst|fiveCst |minuteCst
+CPP44 =/u1D450|sixCst|sixCst |minuteCst|minuteCst CPP55 =/u1D450|fourCst|fourCst |minuteCst|minuteCst CPP66 =/u1D450|fiveCst|fiveCst |minuteCst|minuteCst  
+For example, the following input would correspond t o the parameters in Table 2 of that 
+paper for 6111-T4 aluminum alloy: 
+*

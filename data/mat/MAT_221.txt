@@ -1,0 +1,93 @@
+: *.  
+*.   
+ *.   *.   
+  Card 8 1 2 3 4 5 6 7 8 
+Variable EPSC2C CDAM2C EPSD3C EPSC3C CDAM3C EPSD12 EPSC12 CDAM12 
+Type F F F F F F F F 
+Default 0. 0. 0. 0. 0. 0. 0. 0. 
+ 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable EPSD23 EPSC23 CDAM23 EPSD31 EPSC31 CDAM31   
+Type F F F F F F   
+Default 0. 0. 0. 0. 0. 0.   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+EA |u1D438|u1D44∆Cst, Young’s modulus in |u1D44∆-direction 
+EB |u1D438|u1D44FCst, Young’s modulus in |u1D44F-direction 
+EC |u1D438|u1D4J≠Cst, Young’s modulus in /u1D450-direction 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson ratio  
+PRCA /u1D̅08|u1D4J≠Cst|u1D44∆Cst , Poisson ratio 
+PRCB /u1D̅08|u1D4J≠Cst|u1D44FCst , Poisson ratio 
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , Shear modulus 
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , Shear modulu 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , Shear modulus *.   
+  VARIABLE   DESCRIPTION  
+BETA Material angle in degrees for AOPT = 3, may be overridden on 
+the element card, see  *ELEMENT_SOLID_ORTHO. 
+NERODE Element erosion ﬂag.  For multi- integration point elements, each 
+of the failure strains mentioned below for NERODE 2  and higher 
+need only occur in one integration point to trigger  element 
+erosion, and for NERODE valu es 6 to 11,  which require more 
+than one failure strain be reached, those failure s trains need not 
+occur in the same integration point.   
+EQ.0: No erosion (default). 
+EQ.1: Erosion occurs when one failure strain is reached i n all 
+integration points.  
+EQ.2: Erosion occurs when one failure strain is reached.  
+EQ.3: Erosion occurs when a tension or compr ession failure 
+strain in the |u1D44∆-direction is reached. 
+EQ.4: Erosion occurs when as a tension or compression failure 
+strain in the |u1D44F-direction is reached. 
+EQ.5: Erosion occurs when a tension or compression failure 
+strain in the /u1D450-direction is reached. 
+EQ.6: Erosion occurs when tension or compression failure 
+strain in both the |u1D44∆- and |u1D44F-directions are reached. 
+EQ.7: Erosion occurs when tension or compression failure 
+strain in both the |u1D44F- and /u1D450-directions are reached. 
+EQ.8: Erosion occurs when tension or compression failure 
+strain in both the |u1D44∆- and /u1D450-directions are reached. 
+EQ.9: Erosion occurs when tension or compression failure 
+strain in all 3 directions are reached.  
+EQ.10: Erosion occurs when tension or compression failure 
+strain in both the |u1D44∆- and |u1D44F-directions are reached and 
+either of the out-of-plane failure shear strains (b c or ac) is 
+reached.  .  
+EQ.11: Erosion occurs when tension failure strain in eithe r the |u1D44∆-
+or |u1D44F-directions is reached and either of the out-of-pla ne 
+failure shear strains (bc or ac) is reached. *.   
+  VARIABLE   DESCRIPTION  
+CDAM1C Critical damage in compression along the |u1D44∆-direction, |u1D437|oneCst|u1D4J≠Cst|u1D4J≠Cst 
+EPSD2C Damage threshold in compression along the |u1D44F-direction, |u1D7≠≠|twoCst|u1D4J≠Cst|u1D46≠Cst 
+EPSC2C Critical damage threshold in compression alo ng the |u1D44F-
+direction,  |u1D7≠≠|twoCst|u1D4J≠Cst|u1D4J≠Cst 
+CDAM2C Critical damage in compression along the |u1D44F-direction, |u1D437|twoCst|u1D4J≠Cst|u1D4J≠Cst 
+EPSD3C Damage threshold in compression along the /u1D450-direction, |u1D7≠≠|threeCst|u1D4J≠Cst|u1D46≠Cst 
+EPSC3C Critical damage threshold in compression alo ng the /u1D450-direction, 
+|u1D7≠≠|threeCst|u1D4J≠Cst|u1D4J≠Cst 
+CDAM3C Critical damage in compression along the /u1D450-direction, |u1D437|threeCst|u1D4J≠Cst|u1D4J≠Cst 
+EPSD12 Damage threshold for shear in the |u1D44∆|u1D44F -plane, |u1D7≠≠|oneCst|twoCst |u1D46≠Cst 
+EPSC12 Critical damage threshold for shear in the |u1D44∆|u1D44F -plane, |u1D7≠≠|oneCst|twoCst |u1D4J≠Cst 
+CDAM12 Critical damage for shear in the |u1D44∆|u1D44F -plane, |u1D437|oneCst|twoCst |u1D4J≠Cst 
+EPSD23 Damage threshold for shear in the |u1D44F /u1D450-plane, |u1D7≠≠|twoCst|threeCst |u1D46≠Cst 
+EPSC23 Critical damage threshold for shear in the |u1D44F /u1D450-plane, |u1D7≠≠|twoCst|threeCst |u1D4J≠Cst 
+CDAM23 Critical damage for shear in the |u1D44F /u1D450-plane, |u1D437|twoCst|threeCst |u1D4J≠Cst 
+EPSD31 Damage threshold for shear in the |u1D44∆ /u1D450-plane, |u1D7≠≠|threeCst|oneCst |u1D46≠Cst 
+EPSC31 Critical damage threshold for shear in the |u1D44∆ /u1D450-plane, |u1D7≠≠|threeCst|oneCst |u1D4J≠Cst 
+CDAM31 Critical damage for shear in the |u1D44∆ /u1D450-plane, |u1D437|threeCst|oneCst |u1D4J≠Cst 
+Remarks: 
+If |u1D7≠≠|u1D4J8Cst|u1D4J≠Cst< |u1D7≠≠|u1D4J8Cst|u1D46≠Cst , no damage is considered.  Failure occurs only whe n failure strain is reached. 
+Failure can occur along the 3 orthotropic direction s, in tension, in compression and for 
+shear behavior.  Nine failure strains drive the fai lure.  When failure occurs, elements are 
+deleted (erosion).  Under the control of the NERODE  ﬂag, failure may occur either 
+when only one integration point has failed, when se veral integration points have failed 
+or when all integrations points have failed. *.   
+ History 
+Variable  Description Value LS-PrePost 
+History Variable  
+|u1D4J1|twoCst|threeCst  shear damage in |u1D44F /u1D450-plane  7 
+|u1D4J1|oneCst|threeCst  shear damage in |u1D44∆ /u1D450-plane  8 
+The ﬁrst damage variable is stored as in the place of eﬀective plastic strain.  The eight 
+other damage variables may be plotted in LS-PrePost  as element history variables. *

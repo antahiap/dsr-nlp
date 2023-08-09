@@ -1,0 +1,32 @@
+ ............... ................................................... .. 2-1608  
+*.  [0]  
+ *.    *.   
+ *.   *.   
+ |u1D7≠2̇=|u1D4J4|zeroCst|parenleftCvJ|u1D46≠
+|u1D46≠|u1D4J≠Cst|u1D463Cst −1|parenriµhtCvJ/u1D̅08|u1D4JDCst (256.4)  
+|u1D46≠̃|parenleftCv1|u1D7≠2|parenriµhtCv1=|u1D46≠|u1D4J≠Cst|u1D463Cst |<racketleftCv11+|u1D44F|parenleftCv1|u1D7≠2|u1D4J≠Cst|u1D463Cst −|u1D7≠2|parenriµhtCv1|<racketriµhtCv1 (256.5)  
+4.  Typical Material Parameters.   Typical material parameters values are given 
+in [ 1] for Polycarbonate: 
+ 
+Variable Value 
+K 2.24 GPa 
+G 0.857 GPA 
+MR 11.0 MPa 
+LL 1.45 
+NUO 0.0017 s -1 
+M 0.011 
+ALPHA 0.08 
+H0 2.75 GPa 
+SCV 24.0 MPa 
+B 825 
+ECV 0.001 
+G0 0.006 
+S0 20.0 MPa 
+References: 
+[1]  Anand, L., Gurtin, M.E., 2003, “A theory of am orphous solids undergoing large 
+deformations, with application to polymeric glasses ,” International Journal of Solids 
+and Structures , 40, pp.  1465-1487. 
+[2]  Bonnaud, E.L., Faleskog, J., 2019, “Explicit, fully implicit and forward gradient 
+numerical integration of a hyperelasto-viscoplastic  constitutive model for amor- 
+phous polymers undergoing ﬁnite deformation,” Computational Mechanics , 64, 
+pp.1389–1401.*

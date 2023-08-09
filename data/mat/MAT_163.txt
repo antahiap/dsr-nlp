@@ -1,0 +1,18 @@
+ *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+NCYCLE Number of cycles to determine the average vo lumetric strain rate.  
+SRCLMT Strain rate change limit. 
+SFLAG The strain rate in the table may be the true strain rate (SFLAG = 0) 
+or the engineering strain rate (SFLAG = 1). 
+Remarks: 
+The volumetric strain is deﬁned in terms of the rel ative volume, |u1D449, as: 
+|u1D6F∆ = 1 −V 
+The relative volume is deﬁned as the ratio of the c urrent to the initial volume.  In place 
+of the eﬀective plastic strain in the d3plot  database, the integrated volumetric strain is 
+output. 
+ ε1ε2ε3
+ε3ε2ε1 >>
+1-Vσ
+Figure M163-1.  Rate eﬀects are deﬁned by a family of curves giving y i eld 
+stress as a function of volumetric strain where |u1D449 is the relative volume. *

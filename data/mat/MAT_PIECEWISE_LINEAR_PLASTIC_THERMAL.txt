@@ -1,0 +1,45 @@
+ ............. ................................................... . 2-1605  
+*.  [0 ,2,3a,3c] 
+ *.  *.   *.   
+This is Material Type 255, an isotropic elastoplast ic material with thermal properties.  It 
+can be used for both explicit and implicit analyses .  Young’s modulus and Poisson’s 
+ratio can depend on the temperature by deﬁning two load curves.  Moreover, the yield 
+stress in tension and compression are given as load  curves for diﬀerent temperatures by 
+using two tables.  The thermal coeﬃcient of expansi on can be given as a constant AL-
+PHA or as a load curve LALPHA. A positive curve ID for LALPHA models the 
+instantaneous thermal coeﬃcient, whereas a negative s curve ID models the thermal 
+coeﬃcient relative to a reference temperature, TREF .  The strain rate eﬀects are 
+modelled with the Cowper-Symonds rate model with th e parameters C and P on 
+Card 1.  Failure can be based on eﬀective plastic s train or using the *.   
+  VARIABLE   DESCRIPTION  
+E Young’s modulus: 
+LT.0.0: |E| is a load curve ID where |u1D438 is given as a function of 
+temperature, |u1D447.  The curve consists of (|u1D447, |u1D438)  data pairs.  
+GT.0.0: constant 
+PR Poisson’s ratio. 
+LT.0.0: |PR| is a load curve ID for Poisson’s ratio as a functio n 
+of temperature. 
+GT.0.0: constant 
+C Strain rate parameter.  See Remark 1 . 
+P Strain rate parameter.  See Remark 1 . 
+FAIL Eﬀective plastic strain when the material fails.  U ser deﬁned 
+failure subroutine, matusr_24  in dyn21.F , is called to determine 
+failure when FAIL < 0.  Note that for solids the *M AT_ADD_-
+EROSION can be used for additional failure criteria . 
+TDEL A time step less than TDEL is not allowed.  A step size less than 
+TDEL will trigger automatic element deletion.  This option is 
+ignored for implicit analyses. 
+TABIDC Table ID for yield stress in compression; se e Remark 2 . 
+TABIDT Table ID for yield stress in tension; see Remark 2 . 
+LALPHA Load curve I D for thermal expansion coeﬃcient as a function of 
+temperature: 
+GT.0: the instantaneous thermal expansion coeﬃcient based  on 
+the following formula: 
+|u1D4J1|u1D7≠≠|u1D4J6Cst|u1D4J7Cst thermal = |u1D6F+(|u1D447)|u1D4J1|u1D447|u1D6FF|u1D4J6Cst|u1D4J7Cst  
+LT.0: the thermal coeﬃcient is deﬁned relative a referenc e 
+temperature TREF, such that the total thermal strai n is 
+given by: 
+|u1D7≠≠|u1D4J6Cst|u1D4J7Cst thermal = |u1D6F+(|u1D447)(|u1D447 − |u1D447ref )|u1D6FF|u1D4J6Cst|u1D4J7Cst  
+With this option active, ALPHA is ignored. 
+VP Formulation for rate eﬀects; see Remarks 1  and 2. 
+EQ.0.0: eﬀective total strain rate (default) *

@@ -1,0 +1,19 @@
+: *.  
+*.   *. .  This viscous “ﬂuid-like” material model 
+is an advanced form of *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+PC Pressure cutoﬀ (≤ 0.0) 
+MULO Dynamic viscosity: 
+GE.0.0:  if MUHI = 0.0 or is not deﬁned, then this is the 
+traditional constant dynamic viscosity coeﬃcient, |u1D7≠7.  
+Otherwise if MUHI  >  0.0, then MU LO and MUHI are 
+the lower and upper dynamic viscosity limit values.    
+LT.0.0:  -MULO is a load curve ID deﬁning dynamic viscosity 
+as a function of equivalent strain rate. 
+MUHI Upper dynamic viscosity limit (default = 0.0) if MULO > 0.  This 
+is deﬁned only if RK and RN are deﬁned for the vari able viscosity 
+case. 
+RK Variable dynamic viscosity multiplier (see Remark 6  of .   *

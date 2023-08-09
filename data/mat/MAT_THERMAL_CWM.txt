@@ -1,0 +1,11 @@
+ .................................. ................................................... ......................... 3-24  
+*.  
+ *.  *.  
+*.   
+3-24 (.   
+This is Thermal Material Type 7.  It is a thermal m aterial with temperature dependent 
+properties that allows for material creation trigge red by temperature.  The acronym 
+CWM stands for Computational Welding Mechanics and the model is intended to be 
+used for simulating multistage weld processes in co mbination with the mechanical 
+counterpart, *.   *.   
+3-26 (

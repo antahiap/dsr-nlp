@@ -1,0 +1,80 @@
+:  *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+PR Poisson’s ratio.  See Remark 6 . 
+G12 i Coeﬃcients for the bias-extension angle change- engineering stress 
+curve in Figure M293-3 . G121 to G126 corresponds to the 6 th  order 
+to 1 st  order factors of the loading curve.  See Remark 6 . 
+GAMMAL Shear locking angle, in degrees.  See Remark 6 . 
+VF Fiber volume fraction in the prepreg composite. 
+EF3 Transverse compression modulus of the dry ﬁber.  
+VF23 Transverse Poisson’s ratio of the dry ﬁber 
+EM Young’s modulus of the cured resin. 
+VM Poisson’s ratio of the cured resin 
+EPSILON Stretch ratio at the end of undulation stage during  the uniaxial 
+tension test.  Example shown in Figure M293-2 .  See Remark 6 . 
+THETA Initial angle oﬀset between the ﬁber direction and the element 
+direction.  To reduce simulation error, when buildi ng the model, 
+the elements should be aligned to the same directio n as much as 
+possible. 
+BULK Bulk modulus of the prepreg material  
+G Shear modulus of the prepreg material  
+Remarks: 
+1.  Fiber and Resin Properties.   The dry ﬁber properties, EF3 and VF23, and the 
+cure resin properties, EM and VM, are used to calcu late the through thickness 
+elastic modulus of the prepreg using the rule of mi xture.  These properties will 
+not aﬀect the in-plane deformation of the prepreg d uring the preforming 
+simulation. 
+2.  Shear Locking.   In most of the preforming cases, the angle betwee n the ﬁber 
+yarns will not reach the shear locking state.  This  model is not designed for, 
+and, therefore, not recommended for simulating shea r locking. 
+3.  History Variables.  hsv1 represents the angle between warp/weft yarns,  and 
+hsv2,3 are the stretch ratio of ﬁbers in 1,2 direct ions respectively. *.   
+ The uniaxial tension test is used to obtain the ﬁbe r direction undulation strains 
+and the stable tensile moduli, together with the in -plane Poisson’s ratio (PR).  A 
+typical test result is shown in Figure M293-2 .  From the stretch ratio-
+engineering stress curve, the tensile modulus, ET, and the stretch ratio at the 
+end of undulation, EPSILON, can be captured. 
+The bias-extension test is used to characterize the  shear behavior of the compo- 
+site needed for ﬁelds G12 |u1D4J6. The test procedure comes from the benchmark test 
+literature [1].  An example of the bias-extension t est angle change-engineering 
+stress curve is shown in Figure M293-3 . Undulation
+region
+Stable Modulus
+region
+0.00% 1.00% 2.00% 3.00% 4.00% 5.00%050100150200250300350400
+Stretch RatioEngineering Strees (MPA)
+Figure M293-2.   An example of the engineering stress as a function of stretch 
+ratio from the uniaxial tension test [3]. |u1D466 |u1D466 
+|u1D6FD 
+|u1D6FD |u1D46J |u1D46J |u1D6F+ |u1D7≠∆|oneCst/u1D45:.st |u1D7≠∆|twoCst|u1D4JACst |u1D7≠∆|twoCst/u1D45:.st 
+|u1D7≠∆|oneCst|u1D4JACst 
+(a)  (b 
+) 
+Figure M293-1.   Stress components caused by (a) stretch in ﬁber dire ctions 
+and (b) rotation of the ﬁbers [3]. *.   
+ to the real experiment case.  The starting point fo r the compression modulus 
+iteration can be set as about 100X of the shear mod ulus when the warp and weft 
+yarns are perpendicular to each other. 
+7.  Element Type.   The material model is available for shell element s with OSU=1 
+and INN=2 in the CONTROL_ACCURACY card.  It is reco mmended to use a 
+double precision version of LS-DYNA. 
+References: 
+ [1]  J. Cao, R. Akkerman, P. Boisse, J. Chen, H.S.  Cheng, E.F. de Graaf, J.L. Gorczyca, P. 
+Harrison, G. Hivet, J. Launay, W. Lee, L. Liu, S.V.  Lomov, A. Long, E. de Luycker, 
+F. Morestin, J. Padvoiskis, X.Q. Peng, J. Sherwood,  Tz.  Stoilova, X.M. Tao, I. 
+Verpoest, A. Willems, J. Wiggers, T.X. Yu, B. Zhu, Characterization of mechanical 
+behavior of woven fabrics: Experimental methods and  benchmark results, Compo- 
+sites Part A: Applied Science and Manufacturing, Vo lume 39, Issue 6, 2008, Pages 
+1037-1053, ISSN 1359-835X. 
+ [2]  Pu Xue, Xiongqi Peng, Jian Cao, A non-orthogo nal constitutive model for 
+characterizing woven composites, Composites Part A:  Applied Science and 
+Manufacturing, Volume 34, Issue 2, 2003, Pages 183- 193, ISSN 1359-835X. 
+ [3]  Weizhao Zhang, Huaqing Ren, Biao Liang, Danie lle Zeng, Xuming Su, Jeffrey 
+Dahl, Mansour Mirdamadi, Qiangsheng Zhao, Jian Cao,  A non-orthogonal 
+material model of woven composites in the preformin g process, CIRP Annals - 
+Manufacturing Technology, Volume 66, Issue 1, 2017,  Pages 257-260, ISSN 0007-
+8506. 
+ [4]  X.Q. Peng, J. Cao, A continuum mechanics-base d non-orthogonal constitutive 
+model for woven composite fabrics, Composites Part A: Applied Science and 
+Manufacturing, Volume 36, Issue 6, 2005, Pages 859- 874, ISSN 1359-835X.*

@@ -1,0 +1,4 @@
+-MAXWELL_VISCOELASTIC .................. ................................................... ........ 2-448  
+*. -MAXWELL_VISCOELASTIC [0,3c,5 ,8B] {14} 
+ *. -MAXWELL_VISCOELASTIC  *. -MAXWELL_VISCOELASTIC  
+ *. -MAXWELL_VISCOELASTIC  *

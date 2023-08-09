@@ -1,0 +1,47 @@
+ ................................... ................................................... ....................... 2-1460  
+*.  [2,3a] 
+ *.  *.   
+ *.   *.   
+ The quasi-orthotropic, linear-elastic, plane-stress  model with tension stress cutoﬀ (to 
+simulate tension cracks) can model the as-fabricate d coating properties, which do not 
+show nonlinearities, but not the non-linear respons e of the ﬂight-degraded material.  
+Explicit ﬁnite element analysis (FEA) lends itself to nonlinear-elastic  stress-strain relation 
+instead of linear-elastic.  Thus, instead of /u1D̅48=/u1D404/u1D̅:A, the modulus will be deﬁned as a 
+function of some eﬀective strain quantity, or /u1D̅48=/u1D404(/u1D̅:Aeff )/u1D̅:A, even though it is uncertain, 
+from the available data, whether the coating respon se is completely nonlinear-elastic 
+and does not include some damage mechanism. 
+ 
+This nonlinear-elastic model cannot be implemented into a closed form solution or into 
+an implicit solver; however, for explicit FEA such as is used for LS-DYNA impact 
+analysis, the modulus can be adjusted at each time step to a higher or lower value as 
+desired.  In order to model the desired S-shape res ponse curve of ﬂight-degraded RCC 
+coating, a function of strain that replicates the d esired response must be found.  The 
+nonlinearities in the material are assumed recovera ble (elastic) and the modulus is 
+assumed to be communicative between the 1- and 2- d irections (going against the 
+tension-crack assumption that the two directions do  not interact).  Sometimes stability 
+can be a problem for this type of nonlinearity mode ling; however, stability was not 
+found to be a problem with the material constants u sed for the coating. 
+ 
+The von Mises strain is selected for the eﬀective s train deﬁnition as it couples the 3-
+dimensional loading but reduces to uniaxial data, s o that the desired uniaxial 
+compressive response can be reproduced.  So, 
+|u1D7≠≠eff =1
+/radical.v121
+1 +/u1D̅08/radical.v2(|u1D7≠≠|oneCst− |u1D7≠≠|twoCst)|twoCst+ (|u1D7≠≠|twoCst− |u1D7≠≠|threeCst)|twoCst+ (|u1D7≠≠|oneCst− |u1D7≠≠|threeCst)|twoCst+ 3|u1D6F∆|oneCst|twoCst |twoCst  , 
+where for a two-dimensional, isotropic shell elemen t case, the /u1D46̅-direction strain is given 
+by: 
+|u1D7≠≠|threeCst=−/u1D̅08
+1 −/u1D̅08(|u1D7≠≠|oneCst+ |u1D7≠≠|twoCst) . 
+The function for modulus is implemented as an arbit rary 5 th  order polynomial: 
+|u1D438(|u1D7≠≠eff ) = |u1D434|zeroCst|u1D7≠≠eff |zeroCst+ |u1D434|oneCst|u1D7≠≠eff |oneCst+⋯+ |u1D434|fiveCst|u1D7≠≠eff |fiveCst  . 
+In the case of as-fabricated material the ﬁrst coeﬃ cient, |u1D434|zeroCst, is simply the modulus |u1D438, 
+and the other coeﬃcients, |u1D434|u1D4JBCst>|zeroCst, are zero, reducing to a 0 th  order polynomial, or linear.  
+To match the degraded stress-strain compression cur ve, a higher order polynomial is 
+needed.  Six conditions on stress were used (stress  and its derivative at beginning, 
+middle, and end of the curve) to obtain a 5 th  order polynomial, and then the derivative 
+of that equation was taken to obtain modulus as a f unction of strain, yielding a 4 th  order 
+polynomial that represents the degraded coating mod ulus as strain curve. 
+ 
+For values of strain which exceed the failure strai n observed in the laminate 
+compression tests, the higher order polynomial will  no longer match the test data.  
+Therefore, after a speciﬁed eﬀective-strain, repres enting failure, the modulus is deﬁned *

@@ -1,0 +1,157 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+ROT Option for two-dimensional solids (shell elemen t forms 13, 14, or 
+15): 
+EQ.0.0: no rotation of material axes (default).  Direction o f 
+material axes are solely deﬁned by AOPT.  I t is only 
+possible to rotate in shell-plane.  
+EQ.1.0: rotate coordinate system around material 1- axis such 
+that 2-axis coincides with shell normal.  This rota ti on is 
+done in addition to AOPT. 
+EQ.2.0: Rotate coordinate system around material 2- axis such 
+that 1- axis coincides with shell normal.  This rotation is  
+done in addition to AOPT. 
+ 
+In plane Yield Surface Card 1. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable S01 A01 B01 C01 S02 A02 B02 C02 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+In plane Yield Surface Card 2.  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable S03 A03 B03 C03 S04 A04 B04 C04 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ *.   
+  VARIABLE   DESCRIPTION  
+BSIG Out-of-plane plasticity hardening parameter 
+CSIG Out-of-plane plasticity hardening parameter 
+TAU0 Transverse shear plasticity yield parameter 
+ATAU Transverse shear plasticity hardening paramete r 
+BTAU Transverse shear plasticity hardening paramete r 
+ 
+Orthotropic Parameter Card 1. 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable AOPT MACF XP YP ZP A1 A2 A3 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ ELASTIC for a 
+more complete description): 
+EQ.0.0: locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DE-
+FINE_COORDINATE_NODES 
+EQ.1.0: locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction.  This option is for solid 
+elements only. 
+EQ.2.0: globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DE-
+FINE_COORDINATE_VECTOR 
+EQ.3.0: locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+EQ.4.0: locally orthotropic in cylindrical coordinate syste m *.   
+ Remarks: 
+1.  Hardening Function.   Each hardening function, /u1D45E|u1D4J6Cst (note that /u1D45E|sixCst=/u1D45E|threeCst), is given 
+by a load curve if |u1D446|u1D4J6Cst|zeroCst< 0, otherwise 
+/u1D45E|u1D4J6Cst|parenleftCv3|u1D7≠≠|u1D4JDCst/u1D45:.st|parenriµhtCv3= |u1D446|u1D4J6Cst|zeroCst+ |u1D434|u1D4J6Cst|zeroCsttanh |parenleftCv3|u1D43J|u1D4J6Cst|zeroCst|u1D7≠≠|u1D4JDCst/u1D45:.st|parenriµhtCv3+ |u1D436|u1D4J6Cst|zeroCst|u1D7≠≠|u1D4JDCst/u1D45:.st. 
+2.  Material Model for Solid Elements.   The stress-strain relationship for solid 
+elements is based on a multiplicative split of the deformation gradient into an 
+elastic and a plastic part 
+/u1D405=/u1D405|u1D4J2Cst/u1D405|u1D4JDCst  . 
+The elastic Green strain is formed as 
+/u1D404|u1D4J2Cst=1
+2|parenleftCv2/u1D405|u1D4J2Cst/ε.st/u1D405|u1D4J2Cst−/u1D408|parenriµhtCv2  , 
+and the 2 nd  Piola-Kirchhoﬀ stress as 
+/u1D412=/u1D402/u1D404|u1D4J2Cst  , 
+where the constitutive matrix is taken as orthotrop ic and can be represented in 
+Voigt notation by its inverse as 
+/u1D402−|oneCst=
+⎣⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎡1
+|u1D438|oneCst−|u1D71≠|twoCst|oneCst 
+|u1D438|twoCst−|u1D71≠|threeCst|oneCst 
+|u1D438|threeCst
+−|u1D71≠|oneCst|twoCst 
+|u1D438|oneCst 1
+|u1D438|twoCst−|u1D71≠|threeCst|twoCst 
+|u1D438|threeCst
+−|u1D71≠|oneCst|threeCst 
+|u1D438|oneCst−|u1D71≠|twoCst|threeCst 
+|u1D438|twoCst1
+|u1D438|threeCst
+1
+|u1D43A|oneCst|twoCst 
+1
+|u1D43A|twoCst|threeCst 
+1
+|u1D43A|oneCst|threeCst ⎦⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎤
+  . 
+In out-of-plane compression the stress is modiﬁed a ccording to 
+|u1D446|threeCst|threeCst = |u1D436|threeCst|oneCst |u1D438|oneCst|oneCst |u1D4J2Cst+ |u1D436|threeCst|twoCst |u1D438|twoCst|twoCst |u1D4J2Cst+ |<raceleftCvJ|u1D438|threeCst|u1D438|threeCst|threeCst |u1D4J2Cst, |u1D438|threeCst|threeCst |u1D4J2Cst≥ 0
+|u1D438|threeCst|u1D4J≠Cst|<racketleftCv11 − exp|parenleftCv1−|u1D436|u1D4J≠Cst|u1D438|threeCst|threeCst |u1D4J2Cst|parenriµhtCv1|<racketriµhtCv1, |u1D438|threeCst|threeCst |u1D4J2Cst< 0 
+Three yield surfaces are present: in-plane, out-of- plane, and transverse shear.  
+The in-plane yield surface is given as (see Remark 1 ) 
+|u1D4J3 = |summationCv1
+⎣⎢⎡max(0, |u1D446:/u1D441|u1D4J6Cst)
+/u1D45E|u1D4J6Cst|parenleftCv3|u1D7≠≠|u1D4JDCst/u1D45:.st|parenriµhtCv3 ⎦⎥⎤|twoCst|u1D4J8Cst
+− 1 ≤ 0|sixCst
+|u1D4J6Cst=|oneCst  , 
+with the 6 yield plane normals (in strain Voigt not ation) *.   
+ /u1D40B|u1D4JDCst=
+⎣⎢⎢⎢⎢⎢⎢⎢⎡|u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D446|oneCst|oneCst |u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D446|oneCst|twoCst |u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D446|oneCst|threeCst 
+|u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D446|oneCst|twoCst |u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D446|twoCst|twoCst |u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D446|twoCst|threeCst 
+|u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D446|oneCst|threeCst |u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D446|twoCst|threeCst |u1D7≠≠̇|u1D4JDCst/u1D4⃡4.st|u1D71J|u1D4J4 
+|u1D71J|u1D446|threeCst|threeCst ⎦⎥⎥⎥⎥⎥⎥⎥⎤
+  , 
+and where it is implicitly assumed that the involve d derivatives in the expres- 
+sion of the velocity gradient is appropriately norm alized. 
+3.  Material Model for Shell Elements.  The stress-strain relationship for shell 
+elements is based on an additive split of the rate of deformation into an elastic 
+and a plastic part 
+/u1D40:=/u1D40:|u1D4J2Cst+/u1D40:|u1D4JDCst  , 
+and the rate of Cauchy stress is given by 
+/u1D6D4̇=/u1D402/u1D40:|u1D4J2Cst  . 
+In out-of-plane compression the stress rate is modi ﬁed according to 
+|u1D7≠∆̇|threeCst|threeCst = |u1D436|threeCst|oneCst |u1D437|oneCst|oneCst |u1D4J2Cst+ |u1D436|threeCst|twoCst |u1D437|twoCst|twoCst |u1D4J2Cst+ |u1D437|threeCst|threeCst |u1D4J2Cst|<raceleftCvJ|u1D438|threeCst, |u1D7≠≠|threeCst|threeCst |u1D4J2Cst≥ 0
+|u1D438|threeCst|u1D4J≠Cstexp|parenleftCv1−|u1D436|u1D4J≠Cst|u1D7≠≠|threeCst|threeCst |u1D4J2Cst|parenriµhtCv1 , |u1D7≠≠|threeCst|threeCst |u1D4J2Cst< 0 
+For shell elements, |u1D437|threeCst|threeCst |u1D4JDCst= 0, and only two yield surfaces are present: the in-
+plane yield surface (see Remark 1 ),  
+|u1D4J3 = |summationCv1
+⎣⎢⎡max(0, |u1D7≠∆:/u1D441|u1D4J6Cst)
+/u1D45E|u1D4J6Cst|parenleftCv3|u1D7≠≠|u1D4JDCst/u1D45:.st|parenriµhtCv3 ⎦⎥⎤|twoCst|u1D4J8Cst
+− 1 ≤ 0|sixCst
+|u1D4J6Cst=|oneCst  , 
+and the transverse-shear yield surface, 
+ℎ=/radical.v2|u1D7≠∆|oneCst|threeCst |twoCst+ |u1D7≠∆|twoCst|threeCst |twoCst
+/u1D̅0F|zeroCst+ [|u1D434/u1D̅0F.st− min(0, |u1D7≠∆|threeCst|threeCst ) |u1D43J/u1D̅0F.st]|u1D7≠≠|u1D4JDCst/uni210E.st− 1 ≤ 0  . 
+For this case, the plastic ﬂow rule is given by 
+/u1D6C6̇|u1D4JDCst=/u1D40:|u1D4JDCst=/u1D40B|u1D4JDCst  , 
+where the plastic velocity gradient is given as 
+/u1D40B|u1D4JDCst=
+⎣⎢⎢⎢⎢⎢⎢⎢⎡|u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|oneCst|oneCst |u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|oneCst|twoCst |u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D7≠∆|oneCst|threeCst 
+|u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|oneCst|twoCst |u1D7≠≠̇|u1D4JDCst/u1D45:.st|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|twoCst|twoCst |u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D7≠∆|twoCst|threeCst 
+|u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D7≠∆|oneCst|threeCst |u1D7≠≠̇|u1D4JDCst/uni210E.st|u1D71Jℎ
+|u1D71J|u1D7≠∆|twoCst|threeCst 0⎦⎥⎥⎥⎥⎥⎥⎥⎤
+  . *

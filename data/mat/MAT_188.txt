@@ -1,0 +1,63 @@
+: *.  
+*. ). *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+CX1 Kinematic hardening parameter |u1D436/u1D̅12.st|oneCst 
+QX2 Kinematic hardening parameter |u1D444/u1D̅12.st|twoCst 
+CX2 Kinematic hardening parameter |u1D436/u1D̅12.st|twoCst 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C P LCE LCPR LCSIGY LCQR LCQX LCALPH 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+C Viscous material parameter |u1D436 
+P Viscous material parameter |u1D443 
+LCE Load curve for scaling Young's modulus as a functio n of 
+temperature 
+LCPR Load curve for scaling Poisson's ratio as a fu nction of temperature  
+LCSIGY Load curve for scaling initial yield stress as a functio n of 
+temperature 
+LCQR Load curve for scaling the isotropic hardening para meters QR1 
+and QR2 or the stress given by the load curve LC SS as a function 
+of temperature 
+LCQX Load curve for scaling the kinematic hardening parameters QX1 
+and QX2 as a function of temperature 
+LCALPH Load curve for scaling the thermal expansion coeﬃci ent as a 
+function of temperature 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable LCC LCP LCCR LCCX CRPA CRPB CRPQ CRPM 
+Type F F F F F F F F *.   
+ Optional card 5 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable CRPLAW        
+Type F        
+ 
+ VARIABLE   DESCRIPTION  
+CRPLAW Creep law deﬁnition (see Remarks): 
+EQ.0.0: Garofalo’s hyperbolic sine law (default) 
+EQ.1.0: Norton’s power law 
+Remarks: 
+If LCSS is not deﬁned, the uniaxial stress-strain c urve has the form 
+|u1D7≠∆|parenleftCv2|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2 = |u1D7≠∆|zeroCst+ |u1D444|u1D4JFCst|oneCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4JFCst|oneCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2+ |u1D444|u1D4JFCst|twoCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4JFCst|twoCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2
++ |u1D444/u1D̅12.st|oneCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436/u1D̅12.st|oneCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2+ |u1D444/u1D̅12.st|twoCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436/u1D̅12.st|twoCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2. 
+ 
+Viscous eﬀects are accounted for using the Cowper-S ymonds model, which scales the 
+yield stress with the factor: 
+1 + |parenleftCv6|u1D7≠≠̇eff |u1D4JDCst
+|u1D436|parenriµhtCv6|oneCst|u1D4JDCst/fraction.v2
+  . 
+ 
+For CRPLAW = 0, the steady-state creep strain rate of Garafalo’s hyperbolic sine 
+equation is given by 
+|u1D7≠≠̇|u1D4J≠Cst= |u1D434[sinh(|u1D43J/u1D̅0F|u1D4J2Cst)]|u1D4JACstexp |parenleftCvJ−|u1D444
+|u1D447|parenriµhtCvJ  . 
+For CRPLAW = 1, the steady-state creep strain rate is given by Norton’s power law 
+equation: 
+|u1D7≠≠̇|u1D4J≠Cst= |u1D434|parenleftCv1/u1D̅0F|u1D4J2Cst|parenriµhtCv1|u1D43JCst|u1D461|u1D4JACst. 
+In the above, /u1D̅0F|u1D4J2Cst is the eﬀective elastic stress in the von Mises se nse, |u1D447 is the temperature 
+and |u1D461 is the time.  The following is a schematic overvie w of the resulting stress update.  
+The multiaxial creep strain increment is given by 
+∆|u1D7≠≠|u1D4J≠Cst= ∆|u1D7≠≠|u1D4J≠Cst3/u1D̅4∫|u1D4J2Cst
+2/u1D̅0F|u1D4J2Cst  , *

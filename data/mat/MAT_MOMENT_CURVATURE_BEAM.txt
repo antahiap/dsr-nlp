@@ -1,0 +1,64 @@
+ ........................ ................................................... ....... 2-1059  
+*.  [1B] {54} 
+ *.  *.   *.   
+This is Material Type 166.  This material is for pe rforming nonlinear elastic or multi-
+linear plastic analysis of Belytschko-Schwer beams with user-deﬁned axial force-strain, 
+moment curvature and torque-twist rate curves.  If strain, curvature or twist rate is 
+located outside the curves, use extrapolation to de termine the corresponding rigidity.  
+For multi-linear plastic analysis, the user-deﬁned curves are used as yield surfaces. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E ELAF EPFLG CTA CTB CTT 
+Type A F F F F F F F 
+Default none none none none 0.0 0.0 0.0 0.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable N1 N2 N3 N4 N5 N6 N7 N8 
+Type F F F F F F F F 
+Default none none 0.0 / 
+none 0.0 0.0 0.0 0.0 0.0 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LCMS1 LCMS2 LCMS3 LCMS4 LCMS5 LCMS6 LCMS7 LCMS8 
+Type I I I I I I I I 
+Default none none 0 / none  0 0 0 0 0 
+ *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable LCMT1 LCMT2 LCMT3 LCMT4 LCMT5 LCMT6 LCMT7 LCMT8 
+Type I I I I I I I I 
+Default none none 0 / none  0 0 0 0 0 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable LCT1 LCT2 LCT3 LCT4 LCT5 LCT6 LCT7 LCT8 
+Type I I I I I I I I 
+Default none none 0 / none  0 0 0 0 0 
+ 
+Multilinear Plastic Analysis Card.   Additional card for EPFLG = 1. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable CFA CFB CFT HRULE REPS RBETA RCAPAY RCAPAZ 
+Type F F F F F F F F 
+Default 1.0 1.0 1.0 0.0 10 20  10 20  10 20  10 20  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus.  This variable controls the time s tep size and 
+must be chosen carefully.  Increasing the value of E will decrease 
+the time step size. 
+ELAF Load curve ID for the axial force-strain curve  *.   
+ Remarks: 
+For symmetric curves (see ﬁelds CTA, CTB, and CTT a bove), all data points must be in 
+the ﬁrst quadrant, and at least three data points n eed to be given, starting from the 
+origin, followed by the yield point.   
+ 
+For asymmetric curves, at least ﬁve data points are  needed and exactly one point must 
+be at the origin.  The two points on both sides of the origin record the positive and 
+negative yield points. 
+ 
+The last data point(s) has no physical meaning: it serves only as a control point for inter 
+or extrapolation. 
+ 
+The curves are input by the user and treated in LS- DYNA as linearly piecewise 
+functions.  The curves must be monotonically increa sing while the slopes must be 
+monotonically decreasing. *

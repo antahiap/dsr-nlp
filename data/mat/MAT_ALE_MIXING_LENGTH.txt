@@ -1,0 +1,37 @@
+ ............................ ................................................... .................. 2-1840  
+*.  (same as *.  *.   
+ *.   *.   
+ Remarks: 
+1.  Deviatoric Viscous Stress.   The null material must be used with an equation 
+of-state.  Pressure cutoﬀ is negative in tension.  A (deviatoric) viscous stress of 
+the form 
+|u1D7≠∆′|u1D4J6Cst|u1D4J7Cst = |u1D7≠7|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst
+|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|<racketriµhtCvJ≈|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|u1D46≠|<racketriµhtCvJ |<racketleftCvJ1
+|u1D46≠|<racketriµhtCvJ 
+is computed for nonzero |u1D7≠7 where |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst is the deviatoric strain rate.  |u1D7≠7 is the dy- 
+namic viscosity with unit of [Pa × s] . 
+2.  Hourglass Control Issues.   The null material has no shear stiﬀness and 
+hourglass control must be used with care.  In some applications, the default 
+hourglass coeﬃcient might lead to signiﬁcant energy  losses.  In general for 
+ﬂuid(s), the hourglass coeﬃcient QM should be small  (in the range 10 -4 to 10 -6 
+for the standard default IHQ choice). 
+3.  Null Material Properties.   The null material has no yield strength and behav es 
+in a ﬂuid-like manner. 
+4.  Numerical Cavitation.   The pressure cut-oﬀ, PC, must be deﬁned to allow for 
+a material to “numerically” cavitate.  In other wor ds, when a material under- 
+goes dilatation above certain magnitude, it should no longer be able to resist 
+this dilatation.  Since dilatation stress or pressu re is negative, setting PC limit 
+to a very small negative number would allow for the  material to cavitate once 
+the pressure in the material goes below this negati ve value. 
+5.  Issues with Small Value of Viscosity Exponent.   If the viscosity exponent is 
+less than 1.0 ( RN < 1.0 ) then RN − 1.0 < 0.0 .  In this case, at very low equiva- 
+lent strain rate, the viscosity can be artiﬁcially very high.  MULO is then used 
+as the viscosity value. 
+6.  Turbulent Viscosity.   Turbulence is treated simply by considering its e ﬀects on 
+viscosity.  Total eﬀective viscosity is the sum of the laminar and turbulent vis- 
+cosities, |u1D7≠7eff = |u1D7≠7|u1D4J9Cst+ |u1D7≠7|u1D461Cst where |u1D7≠7eff  is the eﬀective viscosity, and |u1D7≠7|u1D461Cst is the turbu- 
+lent viscosity.  The turbulent viscosity is compute d based on the Prandtl’s 
+Mixing Length Model, 
+|u1D7≠7|u1D461Cst=ρ/u1D45∫|u1D4JACst|twoCst|∇/u1D42F|  .*

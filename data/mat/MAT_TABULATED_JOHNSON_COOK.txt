@@ -1,0 +1,292 @@
+ _{OPTION} ................................................... ............. 2-1406  
+*. _ORTHO_PLASTICITY ...... ....................................... 2-1677  
+*.  [0,2,3a,3c,, 5] {17} 
+ *. _GYS [0] {17} 
+ *. _ORTHO_PLASTI CITY [0] 
+ *.  *. _GYS *. _ORTHO_PLASTICITY *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+ids. 
+LT.0.0: -NUMINT is percentage of integration points/layers 
+which must fail before shell element fails.  For fu lly 
+integrated shells, a layer fails if one integration  point 
+fails .  Then, the given percentage of layers must fail 
+before the element fails.  Only available for shell s. 
+EQ.-200: Turns oﬀ erosion for shells and solids.  Not 
+recommended unless used in conjunction with 
+*CONSTRAINED_TIED_NODES_FAILURE. 
+LCK1 Load curv e ID or table ID. The load curve gives eﬀective str ess as 
+a function of eﬀective plastic strain.  The table g ives for each 
+plastic strain rate value a load curve ID specifyin g the 
+(isothermal) eﬀective stress as a function of eﬀect ive plastic strain 
+for that rate.  As in *.   *.   
+ perature should be set using *INITIAL_STRESS_SOLID/ SHELL by setting 
+history variable #14 for solid elements or history variable #10 for shell ele- 
+ments. 
+2.  Plastic Failure Strain.  Optional plastic failure strain is deﬁned as a func tion 
+of triaxiality  |u1D4JD/|u1D7≠∆v m , Lode parameter, plastic strain rate  |u1D7≠≠̇|u1D4JDCst, temperature |u1D447 and 
+initial element size /u1D45∫/c.st (square root of element area for shells and volume  over 
+maximum area for solids) by 
+|u1D7≠≠pf = |u1D4J3 |parenleftCvJ|u1D4JD
+|u1D7≠∆v m ,2 7/u1D4:D|threeCst
+2|u1D7≠∆v m |threeCst|parenriµhtCvJ |u1D4J4|parenleftCv2|u1D7≠≠̇|u1D4JDCst|parenriµhtCv2ℎ(|u1D447)|u1D4J6 |parenleftCvJ/u1D45∫|u1D4J≠Cst,|u1D4JD
+|u1D7≠∆v m |parenriµhtCvJ 
+using load curves/tables LCF, LCG, LCH and LCI.  If  more than one of these 
+four variables LCF, LCG, LCH and LCI are deﬁned, be  aware that the net plas- 
+tic failure strain is essentially the product of mu ltiple functions as shown in the 
+above equation.  This means that one and only one o f the variables LCF, LCG, 
+LCH, and LCI can point to curve(s) that have plasti c strain along the curve 
+ordinate.  The remaining nonzero variable(s) LCF, L CG, LCH, and LCI should 
+point to curve(s) that have a unitless scaling fact or along the curve ordinate.   
+A typical failure curve LCF for metal sheet, modele d with shell elements is 
+shown in Figure M224-1 . Triaxiality should be monotonically increasing in  this 
+curve.  A reasonable range for triaxiality is -2/3 to 2/3 if shell elements are 
+used (plane stress).  For 3-dimensional stress stat es (solid elements), the possi- 
+ble range of triaxiality goes from -∞ to +∞, but to  get a good resolution in the 
+internal load curve discretization (depending on pa rameter LCINT of *CON-
+TROL_SOLUTION) you should deﬁne lower limits, e.g. -1 to 1 if LCINT = 100 
+(default).  plastic
+failure
+strain
+compression tension
+triaxiality
+p/σvm-2/3 -1/3 1/3 2/3
+Figure M224-1.   Typical failure curve for metal sheet, modeled with she ll 
+elements. *.   
+ ment, not a shell element.  The relevant additional  variables of this material 
+model are tabulated below: 
+ 
+History 
+Variable #  Description for Shell 
+Elements History 
+Variable #  Description for Solid 
+Elements 
+1 Plastic strain rate 5 Plastic strain rate 
+7 Plastic work 8 Plastic failure strain 
+8 Ratio of plastic strain to 
+plastic failure strain 9 Triaxiality 
+9 Element size 10 Lode parameter 
+10 Temperature 11 Plastic work 
+11 Plastic failure strain 12 Ratio of plastic strain to 
+plastic failure strain 
+12 Triaxiality 13 Element size 
+16 Fraction of plastic work to 
+heat 14 Temperature 
+17 LCPS: critical value 17 LCPS: critical value 
+  18 Fraction of plastic work to 
+heat *. _GYS _{OPTION}  
+This is  Material Type 224_GYS. This is an isotropic elastic  plastic material law with a J3 
+dependent yield surface.  This material considers t ensile/compressive asymmetry in the 
+material response, which is important for HCP metal s like Titanium.  The model is 
+available for solid elements. 
+Available options include: 
+<BLANK> 
+LOG_INTERPOLATION 
+With LOG_INTERPOLATION, the strain rate eﬀect in ta ble LCK1 (Card 2) is 
+interpolated with logarithmic interpolation. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR CP TR BETA NUMINT 
+Type A F F F F F F F 
+Default none none none none none 0.0 1.0 1.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCK1 LCKT LCF LCG LCH LCI   
+Type I I I I I I   
+Default 0 0 0 0 0 0   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LCCR LCCT LCSR LCST IFLAG SFIEPM NITER  
+Type I I I I I F I  
+Default 0 0 0 0 0 1 100  *. _GYS  
+  
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus: 
+GT.0.0: Constant value is used. 
+LT.0.0: Temperature dependent Young’s modulus given by 
+load curve ID = -E 
+PR Poisson’s ratio 
+CP Speciﬁc heat 
+TR Room temperature 
+BETA Fraction of plastic work converted into heat (super seded by 
+FWORK in *CONTROL_THERMAL_ SOLVER if a coupled 
+thermal/structural analysis): 
+GT.0.0: Constant value is used. 
+LT.0.0: - BETA gives a load curve ID for strain rate depend- 
+ence, a table ID for strain rate and temperature de - 
+pendence, a 3- dimensional table ID for temperature 
+(TABLE_3D), strain rate (TABLE) and plastic strain 
+(CURVE) dependence, or a 4- dimensional table ID for 
+triaxiality (TABLE_4D), temperature (TABLE_ 3D), 
+strain rate (TABLE) and plastic strain (CURVE) de- 
+pendence. 
+NUMINT Number of integration points which must fail before  the element 
+is deleted. 
+EQ.-200: Turns oﬀ erosion for solids.  Not recommended 
+unless used in conjunction with *CONSTRAINED_-
+TIED_NODES_FAILURE. 
+LCK1 Table ID deﬁning for each plastic strain rate value  a load curve ID 
+giving the (isothermal) eﬀective stress as a fu nction of eﬀective 
+plastic strain for that rate. 
+LCKT Table ID deﬁning for each temperature value a load curve ID 
+giving the (qu asi- static) eﬀective stress as a function of eﬀective *. _GYS  
+  VARIABLE   DESCRIPTION  
+IFLAG Flag to specify abscissa for LCCR, LCCT, LCSR , LCST: 
+EQ.0: Compressive and shear yields are given as functions  of 
+plastic strain as deﬁned in Remark 1  (default). 
+EQ.1: Compressive and shear yield s are given as functions of 
+eﬀective plastic strain. 
+SFIEPM Scale factor on the initial estimate of the plastic multiplier 
+NITER Number of secant iterations to be performed 
+Remarks: 
+1.  IFLAG. If IFLAG = 0, the compressive and shear curves are deﬁned as follows: 
+σ|u1D4J≠Cst|parenleftCv2|u1D7≠≠|u1D4JDCst|u1D4J≠Cst , |u1D7≠≠̇|u1D4JDCst|u1D4J≠Cst |parenriµhtCv2,     |u1D7≠≠|u1D4JDCst|u1D4J≠Cst = |u1D7≠≠|u1D4J≠Cst−|u1D7≠∆|u1D4J≠Cst
+|u1D438,     |u1D7≠≠̇|u1D4JDCst|u1D4J≠Cst =  |u1D71J|u1D7≠≠|u1D4JDCst|u1D4J≠Cst 
+|u1D71J|u1D461  
+σ|u1D46≠Cst|parenleftCv2|u1D6F∆|u1D4JDCst|u1D46≠Cst , |u1D6F∆̇|u1D4JDCst|u1D46≠Cst |parenriµhtCv2,     |u1D6F∆|u1D4JDCst|u1D46≠Cst = |u1D6F∆|u1D46≠Cst−|u1D7≠∆|u1D46≠Cst
+|u1D43A,     |u1D6F∆̇|u1D4JDCst|u1D46≠Cst =  |u1D71J|u1D6F∆|u1D4JDCst|u1D46≠Cst 
+|u1D71J|u1D461  
+Two history variables (#16 plastic strain in compre ssion and #17 plastic strain 
+in shear) are stored in addition to those history v ariables already stored for 
+*. _GYS  *. _ORTHO_PLASTICITY  *. _ORTHO_PLASTICITY  
+This is Material Type 264. This is an orthotropic e lastic plastic material law with J3 
+dependent yield surface.  This material considers t ensile/compressive asymmetry in the 
+material response, which is important for HCP metal s like titanium.  This model is 
+available for solid elements. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR CP TR BETA NUMINT 
+Card 2.   This card is required. 
+LCT00R LCT00T LCF LCG LCH LCI   
+Card 3.   This card is required. 
+LCC00R LCC00T LCS45R LCS45T IFLAG SFIEPM NITER AOPT 
+Card 4.   This card is required. 
+LCT90R LCT45R LCTTHR LCC90R LCC45R LCCTHR   
+Card 5.   This card is required. 
+LCT90T LCT45T LCTTHT LCC90T LCC45T LCCTHT   
+Card 6.   This card is required. 
+XP YP ZP A1 A2 A3 MACF  
+Card 7.   This card is required. 
+V1 V2 V3 D1 D2 D3 MANGLE  *. _ORTHO_PLASTICITY  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR CP TR BETA NUMINT 
+Type A F F F F F F F 
+Default none none none none none 0.0 1.0 1.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or lab el must be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus: 
+GT.0.0: constant value is used. 
+LT.0.0: temperature dependent Young’s modulus given by 
+load curve ID = -E 
+PR Poisson’s ratio 
+CP Speciﬁc heat 
+TR Room temperature 
+BETA Fraction of plastic work converted into heat 
+NUMINT Number of integration points which must fail before  the element 
+is deleted. 
+EQ.-200: turns oﬀ erosion for solids.  Not recommended unles s 
+used in conjunction with *CONSTRAINED_TIED_-
+NODES_FAILURE. 
+ *. _ORTHO_PLASTICITY  
+  Card 3 1 2 3 4 5 6 7 8 
+Variable LCC00R LCC00T LCS45R LCS45T IFLAG SFIEPM NITER AOPT 
+Type I I I I I I I F 
+Default 0 0 0 0 0 1 100 None 
+ 
+ VARIABLE   DESCRIPTION  
+LCC00R Table ID. The curves in this table deﬁne compressiv e yield stress 
+as a function of plastic strain.  The table ID deﬁn es for each plastic 
+strain rate value a load curve ID giving the (isoth ermal) 
+compressive yield stress as a function of plastic s train fo r that rate 
+in the 00 degree direction. 
+LCC00T Table ID deﬁning for each temperature value a load curve ID 
+giving the (quasi- static) compressive yield stress as a function of 
+strain for that temperature.  The curves in this ta ble deﬁne 
+compressive yield stress as a function of plastic strain in the 00 
+degree direction. 
+LCS45R Table ID. The load curves deﬁne shear yield stress in function of 
+plastic strain.  The table ID deﬁnes for each plast ic strain rate 
+value a load curve ID giving the (isothermal) shear yield stress as 
+a function of plastic strain for that rate in the 4 5 degree direction. 
+LCS45T Table ID deﬁning for each temperature value a load curve ID 
+giving the (quasi- static) shear yield stress versus strain for that 
+temperature.  The load cur ves deﬁne shear yield stress as a 
+function of plastic strain or eﬀective plastic stra in (see IFLAG) in 
+the 45 degree direction. 
+IFLAG Flag to specify abscissa for LCT00R, LCC00R, LC S45R, LCT90R, 
+LCT45R, LCTTHR, LCC90R, LCC45R, LCCTHR: 
+EQ.0: compressive and shear yields are given as functions  of 
+plastic strain as deﬁned in the remarks (default). 
+EQ.1: compressive and shear yields are given as functions  of 
+eﬀective plastic strain. 
+SFIEPM Scale factor on the initial estimate of the plastic multiplier *. _ORTHO_PLASTICITY  
+  VARIABLE   DESCRIPTION  
+LCT90R Table ID deﬁning for each plastic strain rate value  a load curve ID 
+giving the (isothermal) tensile yield stress as a f unction of plastic 
+strain for that rate in the 90 degree direction 
+LCT45R Table ID deﬁning for each plastic strain rat e value a load c urve ID 
+giving the (isothermal) tensile yield stress as a f unction of plastic 
+strain for that rate in the 45 degree direction 
+LCTTHR Table ID deﬁning for each plastic strain rate value  a load curve ID 
+giving the (isothermal) tensile yield stress as a f un ction of plastic 
+strain for that rate in the thickness degree direct ion 
+LCC90R Table ID deﬁning for each plastic strain rate value  a load curve ID 
+giving the (isothermal) compressive yield stress as  a function of 
+plastic strain for that rate in the 90 degree direc tion 
+LCC45R Table ID deﬁning for each plastic strain rate value  a load curve ID 
+giving the (isothermal) compressive yield stress as  a function of 
+plastic strain for that rate in the 45 degree direc tion 
+LCCTHR Table ID deﬁning for each plastic strain rate value a load curve ID 
+giving the (isothermal) compressive yield stress as  a function of 
+plastic strain for that rate in the thickness degre e direction 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable LCT90T LCT45T LCTTHT LCC90T LCC45T LCCTHT   
+Type I I I I I I   
+Default 0 0 0 0 0 0   
+ 
+ VARIABLE   DESCRIPTION  
+LCT90T Table ID deﬁning for each temperature value a load curve ID 
+giving the (quasistatic) tensile yield stress as a function of plastic 
+strain for that rate in the 90 degree direction 
+LCT45T Table ID deﬁning for each temperature value a load curve ID 
+giving the (quasistatic) tensile yield stress as a function of plastic 
+strain for that rate in the 45 degree direction *. _ORTHO_PLASTICITY  
+  Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 MANGLE  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3  Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3  Components of vector /u1D41D for AOPT = 2 
+MANGLE Material angle in degrees for AOPT = 3.  It may be overridden on 
+the element card; see *ELEMENT_SOLID_ORTHO. 
+Remarks: 
+If IFLAG = 0 the compressive and shear curves are d eﬁned as follows: 
+σcomp |parenleftCv2|u1D7≠≠|u1D4JDCst/co⋯⋯a.st comp , |u1D7≠≠̇|u1D4JDCst/co⋯⋯a.st comp |parenriµhtCv2,     |u1D7≠≠|u1D4JDCst/co⋯⋯a.stcomp = |u1D7≠≠comp −|u1D7≠∆comp 
+|u1D438,     |u1D7≠≠̇|u1D4JDCst/co⋯⋯a.st comp =  |u1D71J|u1D7≠≠|u1D4JDCst/co⋯⋯a.stcomp 
+|u1D71J|u1D461  
+where comp is one of the tension (0°,45°,90°), compression (0° ,45°,90°), tension and 
+compression thickness or shear components. 
+ 
+If IFLAG = 1, the compressive and shear curves are deﬁned as follows: 
+σcomp |parenleftCv2|u1D7≠6̇, |u1D7≠6|parenriµhtCv2    /u1D44A|u1D4JDCsṫ= |u1D7≠∆eff |u1D7≠6̇ 
+ 
+History variables may be post-processed through add itional variables.  The number of 
+additional variables for solids written to the d3plot  and d3thdt  databases is input by the 
+optional *DATABASE_EXTENT_BINARY card as variable N EIPH.  The relevant 
+additional variables of this material model are tab ulated below: 
+ 
+LS-PrePost History 
+Variable # Description 
+5 Strain Rate 
+6 Plastic failure strain 
+7 Triaxiality 
+8 Lode parameter *

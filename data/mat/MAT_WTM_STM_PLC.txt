@@ -1,0 +1,91 @@
+ .................................. ................................................... ........................ 2-881  
+*.  [2,3a] {30} 
+ *.  *.   *.   
+This is Material Type 135.  This anisotropic materi al adopts the yield criteria proposed 
+by Aretz [2004].  The material strength is deﬁned b y McCormick’s constitutive relation 
+for materials exhibiting negative steady-state Stra in Rate Sensitivity (SRS).  McCormick 
+[1998] and Zhang, McCormick and Estrin [2001]. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR NUMFI EPSC WC TAUC 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SIGMA0 QR1 CR1 QR2 CR2 K   
+Type F F F F F F   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable A1 A2 A3 A4 A5 A6 A7 A8 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable S H OMEGA TD ALPHA EPS0   
+Type F F F F F F   
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable AOPT BETA       
+Type F F       *.   
+  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio  
+NUMFI Number of through thickness integration points that  must fail 
+before the element is deleted (remember to chang e this number if 
+switching between full and reduced integration type  of elements)  
+EPSC Critical value, |u1D7≠≠|u1D461Cst /u1D4:6.st , of the plastic thickness strain 
+WC Critical value, /u1D44A|u1D4J≠Cst, for the Cockcroft-Latham fracture criterion. 
+TAUC Critical value, /u1D̅0F|u1D4J≠Cst, for the shear fracture criterion. 
+SIGMA0 Initial yield stress, |u1D7≠∆|zeroCst 
+QR1 Isotropic hardening parameter, |u1D444|u1D44JCst|oneCst 
+CR1 Isotropic hardening parameter, |u1D436|u1D44JCst|oneCst 
+QR2 Isotropic hardening parameter, |u1D444|u1D44JCst|twoCst 
+CR2 Isotropic hardening parameter, |u1D436|u1D44JCst|twoCst *.   
+  VARIABLE   DESCRIPTION  
+tor /u1D42F with the normal to the plane of the element. 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR).   
+BETA Material angle in degrees for AOPT = 0 and 3. BE TA may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA.   
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+Remarks: 
+The yield function is deﬁned as 
+|u1D4J3 = |u1D7≠∆e q (σ) −/˙racketleft.v2|u1D7≠∆/u1D44C.st(|u1D461|u1D44∆Cst) + |u1D44J|parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2 + |u1D7≠∆|u1D463Cst|parenleftCv1|u1D7≠≠̇|u1D4JDCst|parenriµhtCv1/˙racketright.v2  , 
+where the equivalent stress |u1D7≠∆e q  is deﬁned as by an anisotropic yield criterion 
+|u1D7≠∆e q =|<racketleftCvJ1
+2|parenleftCv1|dividesCv1|u1D7≠∆′|oneCst|dividesCv1|u1D4JACst+ |dividesCv1|u1D7≠∆′|twoCst|dividesCv1|u1D4JACst+ |dividesCv1|u1D7≠∆′′|oneCst− |u1D7≠∆′′|twoCst|dividesCv1|parenriµhtCv1|<racketriµhtCvJ|oneCst
+|u1D4JACst
+  . 
+Here 
+|<raceleftCvJ|u1D7≠∆′|oneCst
+|u1D7≠∆′|twoCst|<raceriµhtCvJ =|u1D44∆/eight.st|u1D7≠∆|u1D46JCst|u1D46JCst + |u1D44∆|oneCst|u1D7≠∆|u1D466Cst|u1D466Cst 
+2±/radical.v5|parenleftCvJ|u1D44∆|twoCst|u1D7≠∆|u1D46JCst|u1D46JCst − |u1D44∆|threeCst|u1D7≠∆|u1D466Cst|u1D466Cst 
+2|parenriµhtCvJ|twoCst
++ |u1D44∆|fourCst|twoCst|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst 
+and 
+|<raceleftCvJ|u1D7≠∆′′|oneCst
+|u1D7≠∆′′|twoCst|<raceriµhtCvJ =|u1D7≠∆|u1D46JCst|u1D46JCst + |u1D7≠∆|u1D466Cst|u1D466Cst 
+2±/radical.v5|parenleftCvJ|u1D44∆|fiveCst|u1D7≠∆|u1D46JCst|u1D46JCst − |u1D44∆|sixCst|u1D7≠∆|u1D466Cst|u1D466Cst 
+2|parenriµhtCvJ|twoCst
++ |u1D44∆|sevenCst|twoCst|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst  . 
+The strain hardening function, |u1D44J, is deﬁned by the extended Voce law 
+|u1D44J|parenleftCv1|u1D7≠≠|u1D4JDCst|parenriµhtCv1 = |summationCv1 |u1D444|u1D44JCst|u1D4J6Cst |parenleftCv21 − exp|parenleftCv1−|u1D436|u1D44JCst|u1D4J6Cst |u1D7≠≠|u1D4JDCst|parenriµhtCv1|parenriµhtCv2|twoCst
+|u1D4J6Cst=|oneCst  , 
+where |u1D7≠≠|u1D4JDCst is the eﬀective (or accumulated) plastic strain, a nd |u1D444|u1D44JCst|u1D4J6Cst and |u1D436|u1D44JCst|u1D4J6Cst  are strain 
+hardening parameters. 
+ 
+Viscous stress, |u1D7≠∆|u1D463Cst, is given by *

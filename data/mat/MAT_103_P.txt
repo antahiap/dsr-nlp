@@ -1,0 +1,56 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+S12 Yield stress in local -direction.  This input is ignored if 
+(|u1D44J|zeroCst|zeroCst ,|u1D44J|fourCst|fiveCst ,|u1D44J/nine.st |zeroCst )>0. 
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES, and then rotated about the shell ele- 
+ment normal by an angle BETA. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR. 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector v with th e 
+element normal. 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+XP, YP, ZP |u1D46J|u1D4JDCst, |u1D466|u1D4JDCst, /u1D46̅|u1D4JDCst deﬁne coordinates of point /u1D42∫ for AOPT = 1 and 4. 
+A1, A2, A3 |u1D44∆|oneCst, |u1D44∆|twoCst, |u1D44∆|threeCst deﬁne components of vector /u1D41A for AOPT = 2. 
+D1, D2, D3 |u1D4J1|oneCst, |u1D4J1|twoCst, |u1D4J1|threeCst deﬁne components of vector /u1D41D for AOPT = 2. 
+V1, V2, V3 |u1D463|oneCst, |u1D463|twoCst, |u1D463|threeCst deﬁne components of vector /u1D42F for AOPT = 3 and 4. 
+BETA Material angle in degrees for AOPT = 0 and 3, may be overridden 
+on the element card, see *ELEMENT_SHELL_BETA. 
+Remarks: 
+If no load curve is deﬁned for the eﬀective stress versus eﬀective plastic strain, the 
+uniaxial stress-strain curve is given on the follow ing form 
+|u1D7≠∆(|u1D7≠≠eff |u1D4JDCst) = |u1D7≠∆|zeroCst+ |u1D444|u1D4JFCst|oneCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4JFCst|oneCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2+ |u1D444|u1D4JFCst|twoCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4JFCst|twoCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2 *. ).  
+Also, brittle orthotropic failure based on a phenom enological Tsai-Wu or Tsai-Hill 
+criterion can be deﬁned. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO SIGY LCSS QR1 CR1 QR2 CR2 
+Card 2.   This card is required. 
+C11 C12 C13 C14 C15 C16 C22 C23 
+Card 3.   This card is required. 
+C24 C25 C26 C33 C34 C35 C36 C44 
+Card 4a.   This card is included if the element type is shel ls. 
+C45 C46 C55 C56 C66 R00 R45 R90 
+Card 4b.   This card is included if the element type is soli ds. 
+C45 C46 C55 C56 C66 F G H 
+Card 5a.   This card is included if the element type is shel ls. 
+S11 S22 S33 S12 AOPT VP  MACF 
+Card 5a.   This card is included if the element type is soli ds. 
+L M N  AOPT VP  MACF 
+Card 6.   This card is required. 
+XP YP ZP A1 A2 A3  EXTRA 
+Card 7.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA IHIS *

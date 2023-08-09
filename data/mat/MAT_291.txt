@@ -1,0 +1,149 @@
+: *.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RHO EM EA PRM PRA AOPT STYPE 
+Type A8 F F F F F I I 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RHO Mass density 
+EM Martensite Young’s modulus 
+EA Austenite Young’s modulus 
+PRM Martensite Poisson’s ratio 
+PRA Austenite Poisson’s ratio 
+AOPT Material axes option (see *.   *.   
+  Card 3 1 2 3 4 5 6 7 8 
+Variable A1I A2I BI CI KI MI KL ML 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+A1I Tension/compression asymmetry for initiation su rface 
+A2I Tension/compression asymmetry for initiation su rface 
+BI Radius for initiation surface 
+CI Eccentricity of initiation surface with respect to material direction  
+KI Coeﬃcient in initiation energy 
+MI Exponent in initiation energy 
+KL Coeﬃcient in volume fraction energy 
+ML Exponent in volume fraction energy 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable A1S A2S BS CS KS MS   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+A1S Tension/compression asymmetry for saturation su rface 
+A2S Tension/compression asymmetry for saturation su rface 
+BS Radius for saturation surface 
+CS Eccentricity of saturation surface with respect to material 
+direction 
+KS Coeﬃcient in saturation energy *.   
+  Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA REF 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 3.  This angle may be 
+overridden on the element card; see *ELEMENT_SOLID_ OR-
+THO. 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword: *INITI AL_-
+FOAM_REFERENCE_GEOMETRY. 
+EQ.0.0: oﬀ 
+EQ.1.0: on 
+ 
+Anistropy Parameters Cards.   This card and the following two cards are included if 
+and only if STYPE = 1. 
+ Card 8.1 1 2 3 4 5 6 7 8 
+Variable N11 N22 N33 N44 N55 N66 N12 N23 
+Type F F F F F F F F 
+ 
+ Card 8.2 1 2 3 4 5 6 7 8 
+Variable N34 N45 N56 N13 N24 N35 N46 N14 
+Type F F F F F F F F 
+ *.   
+ where the functions of |u1D4J4/u1D4:C.st and |u1D4J4/u1D446.st depends on the parameter ST Y PE . For nega- 
+tive values of |u1D4J4|u1D4J6Cst, there will be no contribution to the free energy and |u1D4J4|u1D4J6Cst≤ 0 thus 
+deﬁnes the set of admissible values for |u1D7≠6 and |u1D7≠≠|u1D4JACst. 
+The function |u1D43A|u1D7≠6Cst denotes volume fraction energy and is deﬁned as 
+|u1D43A|u1D7≠6Cst(|u1D7≠6) =KL × |u1D7≠6/M.st/L.st +|oneCst
+ML + 1, KL, ML ≥ 0. 
+Thus, the amount of stored energy in the system can  increase with increasing 
+volume fraction. 
+For STYPE = 0, we have 
+|u1D4J4|u1D4J6Cst(|u1D46J) = −1 +1
+B|u1D4J6⎣⎢⎡|parenleftCvJ1
+2|u1D46J:|u1D46J|parenriµhtCvJ|threeCst
+|twoCst− A1|u1D4J6 × |u1D4J1|u1D4J2|u1D461(|u1D46J) − C|u1D4J6 × |dividesCv2|u1D4JB|u1D447Cst|u1D46J |u1D4JB|dividesCv2|threeCst
+⎦⎥⎤, |u1D4J6 =/u1D4:C, |u1D446, 
+where  B|u1D4J6 > 0 . The direction vector, |u1D4JB, is given by the main material direction 
+deﬁned with AOPT . 
+For ST Y PE = 1 , we have 
+|u1D4J4|u1D4J6Cst(|u1D46J) = −1 +1
+B|u1D4J6Cst/A.st |twoCst|u1D4J6Cst+|oneCst|summationCv1  |<racketleftCv1|dividesCv1|u1D7≠7|u1D4JBCst(N:|u1D46J)|dividesCv1 − A1|u1D4J6 × |u1D7≠7|u1D4JBCst(N:|u1D46J)|<racketriµhtCv1/A.st |twoCst|u1D4J6Cst+|oneCst
+|u1D4JBCst=|oneCst/co⋯⋯a.st|twoCst/co⋯⋯a.st|threeCst, |u1D4J6 =/u1D4:C, |u1D446, 
+for −1 < A1|u1D4J6 < 1 , A2|u1D4J6 > 0 , B|u1D4J6 > 0 , and the principal values |u1D7≠7|u1D4JBCst. The anisotropy 
+tensor, N, is relative to the main material direction, |u1D4JB, deﬁned with AOPT . 
+The driving forces for |u1D7≠6 and |u1D7≠≠|u1D4JACst are deﬁned as 
+|u1D4J1|u1D7≠6Cst= −|u1D71J /u1D44A 
+|u1D71J|u1D7≠6 = −1
+2|u1D436|minuteCst(|u1D7≠6)|u1D7≠≠|u1D4J2Cst:|u1D7≠≠|u1D4J2Cst+ |u1D7≠∆:|u1D7≠≠|u1D4JACst− |u1D714(|u1D447) +/u1D450|minuteCst(|u1D7≠6)|u1D447|u1D461Cst+/Delt∙.st|u1D461Cst/u1D45∫|u1D4JB |parenleftCvJ|u1D447
+TC |parenriµhtCvJ − |u1D43A|u1D4J6Cst(|u1D7≠≠|u1D4JACst)
+− |u1D7≠≠|u1D4JACst:|u1D43A|u1D46≠Cst|minuteCst(|u1D7≠6|u1D7≠≠|u1D4JACst) − |u1D43A|u1D7≠6Cst|minuteCst|parenleftCv1|u1D7≠6|u1D461Cst+/Delt∙.st|u1D461Cst|parenriµhtCv1, 
+|u1D4J1|u1D7≠≠Cst/u1D45A.sts= −|u1D71J /u1D44A 
+|u1D71J|u1D7≠≠|u1D4JACst= |u1D7≠6|parenleftCv3|u1D7≠∆ − |u1D43A|u1D4J6Cst|minuteCst(|u1D7≠≠|u1D4JACst) − |u1D43A|u1D46≠Cst|minuteCst(|u1D7≠6|u1D7≠≠|u1D4JACst)|parenriµhtCv3, 
+and typically govern the evolution of |u1D7≠6, |u1D7≠≠|u1D4JACst through evolution equations 
+|u1D7≠6̇= |u1D4J3|u1D7≠6Cst(|u1D4J1|u1D7≠6Cst), 
+|u1D7≠≠̇|u1D4JACst= |u1D4J3|u1D7≠≠Cst/u1D45A.sts|parenleftCv2|u1D4J1|u1D7≠≠Cst/u1D45A.sts|parenriµhtCv2. 
+In this model,  |u1D7≠6 and |u1D7≠≠|u1D4JACst can, however, evolve freely, and the evolution is in- 
+stead postulated to satisfy the kinetic relations: 
+|u1D7≠6̇= 0, |u1D4J6|u1D4J3  |dividesCv1|u1D4J1|u1D7≠6Cst|dividesCv1 < D0L, 
+|u1D4J1|u1D7≠6Cst|u1D7≠6̇≥ 0, 
+||u1D4J1|u1D7≠6Cst| ≤ D0L, 
+and *.   
+ 2.  Transition Temperatures.   The initial (zero stress) austenite and martensit e 
+start and ﬁnish temperatures, TMF ≤ TMS ≤ TAS ≤ TAF , can be given instead 
+of the parameters TC , KL, and D0L . The temperatures are deﬁned as  
+TMS = TC |parenleftCvJ1 −D0L 
+L H |parenriµhtCvJ
+TMF = TC |parenleftCvJ1 −D0L + KL 
+L H |parenriµhtCvJ
+TAS = TC |parenleftCvJ1 +D0L − KL 
+L H |parenriµhtCvJ
+  TAF = TC |parenleftCvJ1 +D0L 
+L H |parenriµhtCvJ 
+which gives 
+TC =1
+2(TMS + TAF)
+KL 
+L H = 1 −TMF + TAS 
+TMS + TAF 
+D0L 
+L H =TAF − TMS 
+TAF + TMS  
+Thus, if 0 < TMF ≤ TMS ≤ TAS ≤ TAF  are given as keyword input, then TC , 
+KL, and D0L  are calculated as above, and their keyword values are ignored. 
+3.  Heat Generation.   The internal energy is 
+/u1D̅16=/u1D44A− |u1D7≠2|u1D447  , 
+and the entropy is deﬁned as 
+|u1D7≠2 = −|u1D71J /u1D44A 
+|u1D71J|u1D447 = −|u1D7≠6L H 
+TC +/u1D450(|u1D7≠6) |parenleftCvJ1 + ln |parenleftCvJ|u1D447
+TC |parenriµhtCvJ|parenriµhtCvJ  . 
+From the diﬀerential of /u1D44A, we have 
+/u1D44Ȧ=  |u1D7≠∆:|u1D7≠≠̇− |u1D437 − |u1D7≠2|u1D447̇  , 
+and thus 
+/u1D̅16̇= |u1D7≠∆:|u1D7≠≠̇− |u1D437 − |u1D7≠2|u1D447̇− |parenleftCv1|u1D7≠2̇|u1D447 + |u1D7≠2|u1D447̇|parenriµhtCv1 = |u1D7≠∆:|u1D7≠≠̇− |u1D437 − |u1D7≠2̇|u1D447  . 
+Combining this with the energy balance 
+/u1D̅16̇= |u1D7≠∆:|u1D7≠≠̇+∇⋅(/u1D458∇|u1D447)  , 
+we get 
+/u1D450(|u1D7≠6)|u1D447̇=∇⋅(/u1D458∇|u1D447) + |u1D444  , 
+with the volumetric heat generation rate 
+|u1D444 = |u1D447L H 
+TC |u1D7≠6̇− |u1D447/u1D450|minuteCst(|u1D7≠6)|u1D7≠6̇|parenleftCvJ1 + ln |parenleftCvJ|u1D447
+TC |parenriµhtCvJ|parenriµhtCvJ + |u1D437  . 
+4.  History Variables.  The following history variables are available:  *.  can be coupled with  *.  uses volumetric quantities for CPA, CPM, a nd LH while the ther- 
+mal materials use speciﬁc quantities, meaning the v olumetric quantity divided 
+by density. *

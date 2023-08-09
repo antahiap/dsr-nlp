@@ -1,0 +1,45 @@
+ .................................. ................................................... ........................ 2-1164  
+*.  [7] {0} 
+ *.   *.   
+ *.   *.   
+ Remarks: 
+In this cohesive material model, a dimensionless se paration measure λ is used, which 
+grasps for the interaction between relative displac ements in normal ( δ3 - mode I) and 
+tangential ( δ1, δ2 - mode II) directions (see Figure M185-1  left): 
+|u1D7≠6 =/radical.v6|parenleftCvJ|u1D6FF|oneCst
+TLS |parenriµhtCvJ|twoCst
++ |parenleftCvJ|u1D6FF|twoCst
+TLS |parenriµhtCvJ|twoCst
++ |parenleftCvJ⟨|u1D6FF|threeCst⟩
+NLS |parenriµhtCvJ|twoCst
+ 
+where the Mc-Cauley bracket is used to distinguish between tension ( δ3≥0) and 
+compression ( δ3 < 0). NLS and TLS are critical values, representin g the maximum 
+separations in the interface in normal and tangenti al direction.  For stress calculation, a 
+trilinear traction-separation law is used, which is  given by (see Figure M185-1  right): 
+|u1D461(|u1D7≠6) =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex⎧|u1D7≠∆max |u1D7≠6
+Λ|oneCst/Λfail |u1D7≠6 <Λ|oneCst/Λfail 
+|u1D7≠∆max Λ|oneCst/Λfail < |u1D7≠6 <Λ|twoCst/Λfail 
+|u1D7≠∆max 1 − |u1D7≠6
+1 −Λ|twoCst/Λfail Λ|twoCst/Λfail < |u1D7≠6 < 1 
+With these deﬁnitions, the traction drops to zero w hen |u1D7≠6 = 1 . Then, a potential /u1D̅1∫ is 
+deﬁned as: 
+/u1D̅1∫(|u1D6FF|oneCst, |u1D6FF|twoCst, |u1D6FF|threeCst) = NLS × /integral.v:|u1D461|parenleftCv2|u1D7≠6/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|parenriµhtCv2|u1D7≠6Cst
+|zeroCst |u1D4J1|u1D7≠6/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt 
+Finally, tangential components ( t1, t2) and normal component ( t3) of the traction acting 
+on the interface in the fracture process zone are g iven by: 
+|u1D461|oneCst/co⋯⋯a.st|twoCst=∂/u1D̅1∫
+∂|u1D6FF|oneCst/co⋯⋯a.st|twoCst=|u1D461(|u1D7≠6)
+|u1D7≠6|u1D6FF|oneCst/co⋯⋯a.st|twoCst
+TLS NLS 
+TLS ,      |u1D461|threeCst=∂/u1D̅1∫
+∂|u1D6FF|threeCst=|u1D461(|u1D7≠6)
+|u1D7≠6|u1D6FF|threeCst
+NLS  δ
+1 2 3 max σ
+2/fail Λ Λ 1/fail λ λ ()tλ
+1/fail Λ Λ reversible  
+loading/unloadin 
+g 
+Figure M185-1.  Relative displacement and trilinear traction-separation law *.  (

@@ -1,0 +1,89 @@
+ ................................. ................................................... ......................... 2-290  
+*.  [2,3a] {9} 
+ *.  *.   
+2-290 (MAT) LS-DYNA R13 *.   *.   
+2-292 (MAT) LS-DYNA R13  Card 3 1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 AX AY AZ0 AZ1 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+C1 /u1D450|oneCst, see remarks below 
+C2 /u1D450|twoCst, see remarks below 
+C3 /u1D450|threeCst, see remarks below 
+C4 /u1D450|fourCst, see remarks below 
+AX |u1D44∆|u1D46JCst, see remarks below 
+AY |u1D44∆|u1D466Cst, see remarks below 
+AZ0 |u1D44∆|u1D467Cst|zeroCsts, see remarks below 
+AZ1 |u1D44∆|u1D467Cst|oneCsts, see remarks below 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT BETA       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option: 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES, and then rotated about the shell ele- 
+ment normal by an angle BETA 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by *.   
+2-294 (MAT) LS-DYNA R13 |u1D7≠∆|u1D466Cst=/u1D458|parenleftCv1|u1D7≠≠|zeroCst+ |u1D7≠≠|u1D4JDCst|parenriµhtCv1|u1D4JBCst|parenleftCvJ|u1D7≠≠̇
+|u1D7≠≠/u1D446.st |u1D44JCst|zeroCst|parenriµhtCvJ|u1D4JACst
+  . 
+The second, the Voce equation, is deﬁned as: 
+|u1D7≠∆|u1D466Cst= |u1D44∆ − |u1D44F|u1D4J2−|u1D4J≠Cst|u1D7≠≠Cst|u1D4JDCsts.   
+The third option is to give a load curve ID that de ﬁnes the yield stress as a function of 
+eﬀective plastic strain.   
+ 
+The yield function Φ is deﬁned as: 
+Φ= |u1D6F+|oneCst||u1D46≠|oneCst− |u1D46≠|twoCst||u1D44∆Cst+ |u1D6F+|twoCst|dividesCv1|u1D46≠|twoCst− |u1D46≠|threeCst|dividesCv1|u1D44∆Cst+ |u1D6F+|threeCst|dividesCv1|u1D46≠|threeCst− |u1D46≠|oneCst|dividesCv1|u1D44∆Cst= 2|u1D7≠∆|u1D466Cst|u1D44∆Cst  , 
+Here |u1D46≠|u1D4J6Cst is a principle component of the deviatoric stress tensor.  In vector notation: 
+/u1D42C=/u1D40B/u1D6D4   , 
+where /u1D40B is given as 
+/u1D40B=  
+⎣⎢⎢⎢⎢⎢⎢⎢⎡
+ /u1D450|twoCst+/u1D450|threeCst
+3−/u1D450|threeCst
+3−/u1D450|twoCst
+30
+−/u1D450|threeCst
+3/u1D450|threeCst+/u1D450|oneCst
+3−/u1D450|oneCst
+30
+−/u1D450|twoCst
+3−/u1D450|oneCst
+3 /u1D450|oneCst+/u1D450|twoCst
+30
+0 0 0 /u1D450|fourCst⎦⎥⎥⎥⎥⎥⎥⎥⎤
+ 
+A coordinate transformation relates the material fr ame to the principle directions of /u1D42C is 
+used to obtain the |u1D6F+|u1D4J8Cst coeﬃcients consistent with the rotated principle a xes: 
+|u1D6F+|u1D4J8Cst= |u1D6F+|u1D46JCst|u1D4JD|oneCst|u1D4J8Cst|twoCst+ |u1D6F+|u1D466Cst|u1D4JD|twoCst|u1D4J8Cst|twoCst+ |u1D6F+|u1D467Cst|u1D4JD|threeCst|u1D4J8Cst|twoCst
+|u1D6F+|u1D467Cst= |u1D6F+|u1D467Cst|zeroCstcos|twoCst|parenleftCv12|u1D6FD|parenriµhtCv1 + |u1D6F+|u1D467Cst|oneCstsin|twoCst|parenleftCv12|u1D6FD|parenriµhtCv1 
+where |u1D4JD|u1D4J6Cst|u1D4J7Cst  are components of the transformation matrix.  The angle |u1D6FD deﬁnes a measure 
+of the rotation between the frame of the principal value of /u1D42C and the principal 
+anisotropy axes. *. ) in LS-DYNA. This model is availa ble for shell elements only.  
+Starting with release R12, this model is also avail able for solid elements (at ﬁrst only for 
+explicit analysis), based on the approach by Dunand  et al.  [2012]. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR FIT BETA ITER ISCALE 
+Card 2.   This card is required. 
+K E0 N C P HARD A  
+Card 2.1.   This card is included if and only if A < 0. 
+CRC1 CRA1 CRC2 CRA2 CRC3 CRA3 CRC4 CRA4 
+Card 3a.   This card is included if and only if FIT = 0. 
+ALPHA1 ALPHA2 ALPHA3 ALPHA4 ALPHA5 ALPHA6 ALPHA7 ALPHA8 
+Card 3b.1.   This card is included if and only if FIT = 1. 
+SIG00 SIG45 SIG90 R00 R45 R90   
+Card 3b.2.   This card is included if and only if FIT = 1. 
+SIGXX SIGYY SIGXY DXX DYY DXY   
+Card 4.1.   This card is included if and only if HARD = 3. 
+CP T0 TREF TA0     
+Card 4.2.   This card is included if and only if HARD = 3. 
+A B C D P Q E0MART VM0 
+Card 4.3.   This card is included if and only if HARD = 3. 
+AHS BHS M N EPS0 HMART K1 K2 *

@@ -1,0 +1,102 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+HR Hardening rules (see section Hardening laws  below): 
+EQ.1.0: Linear hardening (default) 
+EQ.2.0: Exponential hardening (Swift) 
+EQ.3.0: Load curve  
+EQ.4.0: Exponential hardening (Voce) 
+EQ.5.0: Exponential hardening (Gosh) 
+EQ.6.0: Exponential hardening (Hocken-Sherby) 
+P1 Material parameter: 
+HR.EQ.1.0: Tangent modulus 
+HR.EQ.2.0: /u1D45E, coeﬃcient for exponential hardening law (Swift)  
+HR.EQ.4.0: |u1D44∆, coeﬃcient for exponential hardening law (Voce)  
+HR.EQ.5.0: /u1D45E, coeﬃcient for exponential hardening law (Gosh)  
+HR.EQ.6.0: |u1D44∆, coeﬃcient for exponential hardening law 
+(Hocket-Sherby) 
+P2 Material parameter: 
+HR.EQ.1.0: Yield stress for the linear hardening law 
+HR.EQ.2.0: |u1D4JB, coeﬃcient for (Swift) exponential hardening 
+HR.EQ.4.0: /u1D450, coeﬃcient for exponential hardening law (Voce) 
+HR.EQ.5.0: |u1D4JB, coeﬃcient for exponential hardening law (Gosh)  
+HR.EQ.6.0: /u1D450, coeﬃcient for exponential hardening law 
+(Hocket-Sherby) 
+ITER Iteration ﬂag for speed: 
+EQ.0.0: Fully iterative 
+EQ.1.0: Fixed at three iterations.  Generally, ITER = 0.0 is 
+recommended.  However, ITER = 1.0 is faster and may 
+give acceptable results in most problems. *.   
+  VARIABLE   DESCRIPTION  
+E0 Material parameter: 
+HR.EQ.2.0: |u1D7≠≠|zeroCst, initial yield strain for exponential hardening 
+law (Swift) (default = 0.0) 
+HR.EQ.4.0: |u1D44F, coeﬃcient for exponential hardening (Voce) 
+HR.EQ.5.0: |u1D7≠≠|zeroCst, initial yield strain for exponential hardening 
+(Gosh), Default = 0.0 
+HR.EQ.6.0: |u1D44F, coeﬃcient for exponential hardening law 
+(Hocket-Sherby) 
+LCF Fracture curve: 
+EQ.0: No fracture curves (default) 
+GT.0: Load curve or table ID of customized fracture 
+curve/surface.  If referring to a load curve ID, th e frac- 
+ture curve is deﬁned as eﬀective plastic strain as a func- 
+tion of triaxiality.  If referring to a table ID, f or each load 
+parameter, an eﬀective plastic strain as a function  of.  
+triaxiality curve can be deﬁned (only applicable to  sol- 
+ids 
+EQ.-1: Drucker ductile fracture criterion.  Optional Card 7 is 
+needed in this case.  VF1, VF2 and VF3 in Card 7 wi ll be 
+used as |u1D44∆, |u1D44F and /u1D450 in the Drucker ductile fracture criteri- 
+on.  See section Fracture criteria  for more details. 
+EQ.-2: DF2016 fracture criterion.  Optional card 7 is need ed in 
+this case.  VF1, VF2, VF3, VF4 and VF5 in Card 7 w ill be 
+used as C1, C2, C3 and C in DF2016 criterion.  See sec- 
+tion Fracture criteria  for more details. 
+P3 Material parameter: 
+HR.EQ.5.0: |u1D4JD, coeﬃcient for exponential hardening (Gosh) 
+HR.EQ.6.0: |u1D4JB, exponent for exponential hardening law 
+(Hocket-Sherby) 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2.0 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3.0 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2.0 *.   
+ where /u1D45E, |u1D7≠≠|zeroCst, |u1D4JB and |u1D4JD are material constants.  The Hocket-Sherby equatio n resemblance 
+the Voce equation, but with an additional parameter  added 
+|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2 = |u1D44∆ − |u1D44F|u1D4J2−|u1D4J≠Cst|u1D7≠≠Cst ep /u1D45B.sts
+ . 
+where |u1D44∆, |u1D44F,/u1D450 and |u1D4JB are material parameters. 
+Constitutive relations: 
+Drucker proposed a yield function that includes the  eﬀect of the third stress invariant in 
+the classic Von Mises yield function.  Lou and Yoon  (2017) extended this yield function 
+to an anisotropic form as shown below: 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D466Cst|parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2 = (/u1D4:D′|twoCst|threeCst−/u1D450/u1D4:D′|threeCst|twoCst)|oneCst |sixCst ⁄  . 
+Here /u1D4:D|twoCst|minuteCst and /u1D4:D|threeCst|minuteCst are the second and third invariants of the linear transformed deviatoric 
+stress tensor /u1D42C′: 
+/u1D42C|minuteCst=/u1D40B|minuteCst/u1D6D4 . 
+The fourth order linear transformation tensor /u1D40B′ is given by: 
+/u1D40B|minuteCst=  
+⎣⎢⎢⎢⎢⎢⎢⎡(/u1D450|twoCst|minuteCst+/u1D450|threeCst|minuteCst) 3 ⁄ −/u1D450|threeCst|minuteCst3 ⁄ −/u1D450|twoCst|minuteCst3 ⁄ 0 0 0
+−/u1D450|threeCst|minuteCst3 ⁄ (/u1D450|oneCst|minuteCst+/u1D450|threeCst|minuteCst) 3 ⁄ −/u1D450|oneCst|minuteCst3 ⁄ 0 0 0
+−/u1D450|twoCst|minuteCst3 ⁄ −/u1D450|oneCst|minuteCst3 ⁄ (/u1D450|twoCst|minuteCst+/u1D450|oneCst|minuteCst) 3 ⁄ 0 0 0
+0 0 0 /u1D450|fourCst|minuteCst0 0
+0 0 0 0 /u1D450|fiveCst|minuteCst0
+0 0 0 0 0 /u1D450|sixCst|minuteCst    
+⎦⎥⎥⎥⎥⎥⎥⎤
+  . 
+/u1D450|oneCst|minuteCst, /u1D450|twoCst|minuteCst, /u1D450|threeCst|minuteCst and /u1D450|sixCst|minuteCst can be calibrated from uniaxial tensile yield stre ss along diﬀerent 
+directions and the balanced biaxial yield stress.  /u1D450|fourCst|minuteCst and /u1D450|fiveCst|minuteCst, which are related to the 
+through-thickness material properties, are very diﬃ cult to obtain experimentally and 
+therefore assumed to be identical with /u1D450|sixCst|minuteCst. 
+ 
+With the non-associated ﬂow rule (non-AFR), the pla stic ﬂow is not necessarily aligned 
+with the yield surface normal and the |u1D44J-values are modeled by a diﬀerent plastic 
+potential: 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4JDCst|parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2 = (/u1D4:D̂|twoCst|threeCst−/u1D450/u1D4:D̂|threeCst|twoCst)|oneCst |sixCst ⁄  . 
+Here /u1D4:D̂|twoCst and /u1D4:D̂|threeCst are the second and third invariants of the linear transformed deviatoric 
+stress tensor: 
+/u1D42Ĉ=/u1D40B̂/u1D6D4  . 
+And /u1D4̅:̂ is deﬁned as:  *

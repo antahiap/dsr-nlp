@@ -1,0 +1,155 @@
+ ........................... ................................................... ................ 2-1700  
+*.  [0,5] 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+EQ.3:  4 parameter s train hardening model; K1, K2, S1, and S2 
+must be set. 
+VISEL Option for viscoelastic behavior; see the the ory section for details.  
+EQ.0: no viscoelasticity 
+EQ.1: free energy formulation based on Holzapfel and Ogde n 
+EQ.2: formulation based on stiﬀness ratios from Simo et a l. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable YLD0 FP GP HP LP MP NP PMU 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+YLD0 Initial yield stress (see Remark 3 ). 
+EQ.0.0: no plasticity 
+GT.0.0: initial yield stress; hardening is deﬁned separatel y. 
+LT.0.0: -YLD0 is taken as the load curve ID for the yield st ress 
+as a function of eﬀective plastic strain. 
+FP-NP Parameters for Hill’s general yield surface.  For V on Mises yield 
+criteria set FP = GP = HP = 0.5 and LP = MP = NP = 1.5.  See 
+Remark 3 . 
+PMU Kinematic hardening parameter.  It usually equa ls MU.  See 
+Remark 4 . 
+ *.   
+  VARIABLE   DESCRIPTION  
+TIME A time ﬁlter is used to smooth out the time de rivativ e of the strain 
+invariant over a TIME interval.  Default is no smoo thening but a 
+value 100 × TIMESTEP is recommended. 
+VCON A material constant for the volumetric part of the strain energy. 
+The default is 9.0 but any value can be used to tailor the 
+volumetric response.  
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable Q1 B1 Q2 B2 Q3 B3 Q4 B4 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+Q1 - B4 Voce hardening parameters.  See Remark 3 . 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable K1 S1 K2 S2 K3 S3   
+Type F F F F F F   
+Default 0.0 0.0 0.0 0.0 0.0 0.0   
+ 
+ VARIABLE   DESCRIPTION  
+K1 - S3 Viscoplastic parameters (see Remark 3 ). 
+VISPL.EQ.1: K1 and S1 are used. 
+VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used. 
+VISPL.EQ.3: K1, S1 and K2 are used. 
+ *.   
+  
+ Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 THETA  
+Type F F F F F F F  
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+ 
+ Card 8a 1 2 3 4 5 6 7 8 
+Variable TAU i BETA i       
+Type F F       
+Default 0.0 0.0       
+ 
+ VARIABLE   DESCRIPTION  
+TAU i Relaxation time.  See Remark 2 . 
+BETA i Dissipating energy factors (see Holzapfel).  See Remark 2 . 
+ 
+ Card 8b 1 2 3 4 5 6 7 8 
+Variable TAU i GAMMA i       
+Type F F       
+Default 0.0 0.0       
+ *.   
+ where |u1D434 and |u1D43J are constants, and an e v olution of |u1D463|u1D46≠Cst is gi v en b elow.  
+ 
+The Cauchy stress is then computed as 
+/u1D̅48=2
+/u1D4:D|u1D4J2Cst/u1D46D|u1D4J2Cst|u1D71J /u1D6F∫ 
+|u1D71J/u1D46A|u1D4J2Cst/u1D46D|u1D4J2Cst|u1D447Cst= |u1D463|u1D46≠Cst|u1D7≠7/u1D44B(|u1D463|u1D46≠Cst)
+3/u1D4:D|u1D4J2Cst|fiveCst/|threeCst/radical.v1/u1D441
+/u1D6EC|u1D4J≠Cst|u1D6FD |parenleftCvJ/u1D469|u1D4J2Cst−Tr(/u1D469|u1D4J2Cst)
+3/u1D4̅0|parenriµhtCvJ +/u1D̅05
+/u1D̅08con /u1D4:D|u1D4J2Cst|parenleftCv61 −1
+/u1D4:D|u1D4J2Cst/u1D̅08.stcon |parenriµhtCv6/u1D4̅0, 
+where /u1D469|u1D4J2Cst=/u1D46D|u1D4J2Cst/u1D46D|u1D4J2Cst|u1D447Cst is the left elastic Cauchy-Green tensor.  Without any Mullins 
+eﬀects, /u1D̅08|u1D46≠Cst= 1. 
+ 
+1.  Mullins Effect.   Two models for the Mullins eﬀect are implemented.  
+a)  MULL = 1 .  The strain softening is developed by the evoluti on law taken 
+from Boyce 2004: 
+|u1D463̇|u1D46≠Cst= |u1D44D(|u1D463|u1D46≠Cst|u1D46≠Cst − |u1D463|u1D46≠Cst)/radical.v1/u1D441− 1
+|parenleftCv3/radical.v1/u1D441−Λ|u1D4J≠Cst|mCst|aCst|xCst |parenriµhtCv3|twoCstΛ̇|u1D4J≠Cst|mCst|aCst|xCst   , 
+where |u1D44D is a parameter that characterizes the evolution in  |u1D463|u1D46≠Cst with increas- 
+ing Λ̇|u1D4J≠Cst|mCst|aCst|xCst . The parameter |u1D463|u1D46≠Cst|u1D46≠Cst  is the saturation value of |u1D463|u1D46≠Cst. Note that Λ̇|u1D4J≠Cst|mCst|aCst|xCst  is 
+the maximum of Λ|u1D4J≠Cst from the past: 
+Λ̇|u1D4J≠Cst|mCst|aCst|xCst = |<raceleftCvJ0Λ|u1D4J≠Cst<Λ|u1D4J≠Cst|mCst|aCst|xCst 
+Λ̇|u1D4J≠CstΛ|u1D4J≠Cst>Λ|u1D4J≠Cst|mCst|aCst|xCst . 
+The structure now evolves with the deformation.  Th e dissipation inequal- 
+ity requires that the evolution of the structure is  irreversible |u1D463̇|u1D46≠Cst≥ 0.  See Qi 
+and Boyce [2004]. 
+b)  MULL = 2 .  The energy driven model is based on Ogden and Ro xburgh.  
+When activated the strain energy is automatically t ransformed to a stand- 
+ard eight chain model, meaning the variables |u1D44D, |u1D463|u1D46≠Cst and /u1D44B are automatical- 
+ly set to 0, 1, and 1, respectively.  The stress is  multiplicative split of the 
+true stress and the softening factor |u1D7≠2. 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt= |u1D7≠2|u1D7≠∆,   |u1D7≠2 = 1 −1
+|u1D44≠1erf |parenleftCv6Ψ|oneCst|mCst|aCst|xCst −Ψ|oneCst
+|u1D44≠3 − |u1D44≠2Ψ|oneCst|mCst|aCst|xCst |parenriµhtCv6  . 
+2.  Viscoelasticity.  Two models for viscoelasticity are implemented. 
+a)  VISEL = 1 .  The viscoelasticity is based on work done by Hol zapfel (2004) 
+/u1D410̇/u1D6FC.st+/u1D410/u1D6FC.st
+/u1D̅0F/u1D6FC.st= 2|u1D6FD/u1D6FC.st|u1D4J1
+|u1D4J1|u1D461 ∂Ψ|oneCst
+∂/u1D402|u1D4J2Cst= |u1D6FD/u1D6FC.st/u1D412̇/u1D̅CF 
+where |u1D6F+ is the number of viscoelastic terms (1, …, 6). *.   
+ |u1D7≠≠̅̇=
+⎣⎢⎡ max (|u1D4J3 , 0)
+|u1D43∆|oneCst|parenleftCv21 − |u1D4J2−/u1D446.st|oneCsts(|u1D7≠≠Cst̅+/u1D4:E.st|twoCsts)|parenriµhtCv2|u1D4J2/u1D446.st|twoCsts|u1D7≠≠Cst̅/u1D43E.sts|threeCsts⎦⎥⎤/u1D446.st|threeCsts
+  , 
+where |u1D43∆|oneCst, |u1D43∆|twoCst, |u1D43∆|threeCst, |u1D446|oneCst, |u1D446|twoCst, and |u1D446|threeCst are viscoplastic parameters. 
+c)  VISPL = 3 .  The evolution equation is 
+|u1D7≠≠̅̇= |parenleftCvJmax (|u1D4J3 , 0)
+|u1D43∆|oneCst|parenriµhtCvJ/u1D446.st|oneCsts
+(|u1D7≠≠̅+ |u1D43∆|twoCst)/u1D446.st|twoCsts 
+where |u1D43∆|oneCst, |u1D43∆|twoCst, |u1D446|oneCst, and |u1D446|twoCst are viscoplastic parameters. 
+4.  Kinematic Hardening.   The back stress is calculated similar to the Cauc hy 
+stress above but without the softening factors: 
+β=|u1D7≠7|u1D4JDCst
+3/u1D4:D/radical.v1/u1D441
+Λ|u1D4J≠Cst/u1D4:F−|oneCst
+⎝⎜⎛Λ|u1D4J≠Cst
+/radical.v1/u1D441⎠⎟⎞|parenleftCvJ/u1D408−1
+3/u1D4:C|u1D4JDCst/u1D402|u1D4JDCst−|oneCst|parenriµhtCvJ  . 
+|u1D7≠7|u1D4JDCst is a hardening material parameter (PMU).  The tota l Piola-Kirchhoﬀ stress is 
+now given by /u1D412∗=/u1D412−β and the total stress is given by a standard push f or- 
+ward operation with the elastic deformation gradien t. 
+References: 
+Qi HJ., Boyce MC., Constitutive model for stretch-i nduced softening of stress-stretch 
+behavior of elastomeric materials, Journal of the M echanics and Physics of Solids, 52, 
+2187-2205, 2004. 
+Arrude EM., Characterization of the strain hardenin g response of amorphous polymers, 
+PhD Thesis, MIT, 1992. 
+Mullins L., Tobin NR., Theoretical model for the el astic behavior of ﬁller reinforced 
+vulcanized rubber, Rubber Chem.  Technol., 30, 555- 571, 1957. 
+Ogden RW. Roxburgh DG., A pseudo-elastic model for the Mullins eﬀect in Filled 
+rubber., Proc.  R. Soc.  Lond.  A., 455, 2861-2877,  1999. 
+Simo JC., Hughes TJR., Computational Inelasticity, Springer, New York, 2000. 
+Holzapfel GA., Nonlinear Solid Mechanics, Wiley, Ne w-York, 2000. *

@@ -1,0 +1,92 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+G Shear modulus for frequency independent damping.  F requency 
+independent damping is based on a spring and slider  in series.  
+The critical stress for the slider mechanism is SIG F deﬁned below.  
+For the best results, the value of G should be 250- 1000 times 
+greater than SIGF. 
+SIGF Limit stress for frequency independent, fricti onal, damping. 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword:*INITIA L_FOAM_-
+REFERENCE_GEOMETRY (see there for more details). 
+EQ.0.0: oﬀ, 
+EQ.1.0: on. 
+PRTEN The tensile Poisson’s ratio for shells (optio na l).  If PRTEN is zero, 
+PR/BETA will serve as the Poisson’s ratio for both tension and 
+compression in shells.  If PRTEN is nonzero, PR/BET A will serve 
+only as the compressive Poisson’s ratio for shells.    
+SGL Specimen gauge length 
+SW Specimen width 
+ST Specimen thickness 
+LC/TBID Load curve ID or table ID, see *DEFINE_TA BLE, deﬁning the 
+force versus actual change in the gauge length.  If  SGL, SW, and 
+ST are set to unity (1.0), then curve LC is also en gineering stress 
+versus engineering strain.  If the table deﬁnition is used, a family 
+of curves is deﬁned for discrete s train rates.  The curves should 
+cover the complete range of expected response, incl uding both 
+compressive (negative values) and tensile (positive  values) 
+regimes. 
+TENSION Parameter that controls how the rate eﬀects are tre ated.  
+Applicable to the table deﬁnition. 
+EQ.-1.0: rate eﬀects are considered during tension and 
+compression loading, but not during unloading, 
+EQ.0.0: rate eﬀects are considered for compressive loading 
+only, 
+EQ.1.0: rate eﬀects are treated identically in tension and 
+compression. *.   
+  VARIABLE   DESCRIPTION  
+GAMA1 Material failure parameter, see equations bel ow and Figure 181.1.  
+GAMA2 Material failure parameter, see equations bel ow. 
+EH Damage parameter. 
+LCUNLD Load curve, see *DEFINE_ CURVE, deﬁning the force versus 
+actual length during unloading.  The unload curve s hould cover 
+exactly the same range as LC or the load curves of TBID and its 
+end points should have identical values, i.e., the combination of 
+LC and LCUNLD or the ﬁrst cur ve of TBID and LCUNLD 
+describes a complete cycle of loading and unloading .  See also 
+material *.   *.   
+ /u1D4:C|threeCst= det(/u1D402) = |u1D7≠6|oneCst|twoCst |u1D7≠6|twoCst|twoCst |u1D7≠6|threeCst|twoCst 
+with |u1D7≠6|u1D4J6Cst are the stretch ratios in three principal directio ns. 
+ 
+To avoid sudden failure and numerical diﬃculty, mat erial failure, which is usually a 
+time point, is modeled as a process of damage growt h.  In this case, the two threshold 
+values are chosen as (1 - h)K and  K, where h (also called EH) is a small number chosen 
+based on experimental results reﬂecting the range b etween damage initiation and 
+material failure. 
+ 
+The damage is deﬁned as function of |u1D4J3: 
+|u1D437 =
+⎩|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex⎧
+  0     if    |u1D4J3 ≤ (1 − ℎ)|u1D43∆
+1
+2|<racketleftCvJ 1 + cos /u1D̅0B(|u1D4J3 − |u1D43∆)
+ℎ|u1D43∆|<racketriµhtCvJ    if    (1 −ℎ)|u1D43∆ < |u1D4J3 < |u1D43∆
+1     if    |u1D4J3 ≥ |u1D43∆ 
+This deﬁnition indicates that damage is ﬁrst-order continuous.  Under this deﬁnition, 
+the tangent stiﬀness matrix will be continuous.  Th e reduced stress considering damage 
+eﬀect is 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst = (1 − |u1D437)|u1D7≠∆|u1D4J6Cst|u1D4J7Cst /u1D45C.st 
+where |u1D7≠∆|u1D4J6Cst|u1D4J7Cst /u1D45C.st is the undamaged stress.  It is assumed that prior  to ﬁnal failure, material 
+damage is recoverable.  Once material failure occur s, damage will become permanent. 
+ 
+The LOG_LOG_INTERPOLATION option interpolates the s train rate eﬀect in the table 
+TBID using log-log interpolation. 
+ 
+Bad choices of curves for the stress-strain respons e may lead to an unstable model, and 
+there is an option to check this to a certain toler ance level, see dimensionless parameter 
+STOL. The check is done by examining the eigenvalue s of the tangent modulus at 
+selected stretch points and a warning message is is sued if an eigenvalue is less than –
+STOL × BULK, where BULK indicates the bulk modulus of the  material.  For STOL < 0 
+the check is disabled, otherwise it should be chose n with care, a too small value may 
+detect instabilities that are insigniﬁcant in pract ice.  To avoid signiﬁcant instabilities it is 
+recommended to use smooth curves, at best the curve s should be continuously 
+diﬀerentiable, in fact for the incompressible case,  a suﬃcient condition for stability is 
+that the stress-stretch curve |u1D446(|u1D7≠6)  can be written as 
+|u1D446(|u1D7≠6) =/u1D4:B(|u1D7≠6) −/u1D4:B
+⎝⎜⎛1
+/radical.v1|u1D7≠6⎠⎟⎞
+|u1D7≠6/radical.v1|u1D7≠6 
+where /u1D4:B(|u1D7≠6) is a function with /u1D4:B(1) = 0  and /u1D4:B′(|u1D7≠6) > 0 . 
+ *. /*

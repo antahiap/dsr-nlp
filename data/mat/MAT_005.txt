@@ -1,0 +1,37 @@
+: *.  
+*.   
+LS-DYNA R13 2-155 (MAT) *.   *.   
+LS-DYNA R13 2-157 (MAT)  VARIABLE   DESCRIPTION  
+dependent. 
+EPS1, … Volumetric strain values in pressure as a function of volumetric 
+strain curve (see Remarks below).  A maximum of 10 values 
+including 0.0 are allowed and a minimum of 2 values  are 
+necessary.  If EPS1 is not 0.0, then a point (0.0, 0.0)  will be 
+automatically generated and a maximum of nine value s may be 
+input. 
+P1, P2, …, PN Pressures corresponding to volumetric strain values  given on 
+Cards 3 and 4. 
+Remarks: 
+1.  Variable Deﬁnitions.  Pressure is positive in compression.  Volumetric st rain is 
+given by the natural log of the relative volume and  is negative in compression.  
+Relative volume is a ratio of the current volume to  the initial volume at the 
+start of the calculation.  The tabulated data shoul d be given in order of increas- 
+ing compression.  If the pressure drops below the c utoﬀ value speciﬁed, it is 
+reset to that value.  For a detailed description we  refer to Kreig [1972]. The bulk unloading modulus is used
+if the volumetric crushing option is on 
+(VCR = 0).  In thiscase the aterial's response
+follows the black arrows.Loading and unloading (along the grey
+arows) follows the input curve when the
+volumetric crushing option is off (VCR = 1.0)
+Volumetric Strain,
+Pressure Cutoff Value
+Pressure
+lnV
+V0⎛
+⎜
+⎝⎛
+⎜
+⎝tension compression
+Figure M5-1.  Pressure as a function of volumetric strain curve for soil and 
+crushable foam model.  The volumetric strain is given by the natural logarithm 
+of the relative volume, |u1D449. *

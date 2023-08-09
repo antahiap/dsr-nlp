@@ -1,0 +1,37 @@
+ ............... ................................................... .. 2-1482  
+*.  [2,3 a] 
+ *.   *.   
+ *.   *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable ALPHA1 ALPHA2 ALPHA3 ALPHA4 ALPHA5 ALPHA6 ALPHA7 ALPHA8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+ALPHA i |u1D4J6Cst, material constants in Barlat’s yield equation 
+LT.0.0: |ALP H A|u1D4J6| is a load curve ID specifying |u1D6F+|u1D4J6Cst as a function 
+of eﬀective plastic strain.  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable         
+Type         
+Default         
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable         
+Type         
+Default         
+ *.   
+  Card 6 1 2 3 4 5 6 7 8 
+Variable AOPT  IOPT C1 C2    
+Type I  I F F    
+Default none  none 0.0 0.0    
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see .   *.   
+ 4.  Convergence and Springback.   To improve convergence, it is recommended 
+that *CONTROL_IMPLICIT_FORMING type ‘1’ be used whe n conducting a 
+springback simulation. 
+Revisions: 
+1.  This material model is available starting in LS-DY NA R5 Revision 58432. 
+2.  The variables EA, COE, SC1, and SC2 are available starting in Revision 133318. *

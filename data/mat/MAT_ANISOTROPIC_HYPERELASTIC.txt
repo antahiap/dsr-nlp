@@ -1,0 +1,255 @@
+ ..................... ................................................... ......... 2-1808  
+*.  [0] {9} 
+ *.  *.   
+ *.   *.   
+ Card 4.2d.   Include this card if ACTYPE = 4. 
+L ETA       
+Card 4.1e.   Include this card if ACTYPE = 5. 
+FSEID FLID FVID ALPHAID     
+Card 5.   This card is optional and must be used in combinati on with the ANISOtropic 
+module only. 
+XP  YP  ZP  A1  A2  A3  MACF   
+Card 6.   This card is optional and must be used in combinati on with the ANISOtropic 
+module only. 
+V1 V2 V3 D1 D2 D3 BETA REF 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RHO AOPT      
+Type A F F      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RHO Mass density 
+AOPT Material axes option (see *MAT _002 for a more complete 
+description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes.  The /u1D41A-direction is from node 1 to node 
+2 of the element.  The /u1D41B-direction is orthogonal to the /u1D41A-
+direction and is in the plane formed by nodes 1, 2,  and 
+4. For shells only, the material axes are then rota ted 
+about the normal vector to the surface of the she ll by 
+the angle BETA. 
+EQ.1.0: Locally orthotropic with material axes determined b y a *.   
+  VARIABLE   DESCRIPTION  
+TITLE Module title which must be set to ISO 
+ITYPE Type of isotropic model (see Remarks 1  and 2): 
+EQ.±1: Compressible/nearly-incompressible Ogden [12] (see 
+Remark 4 ) 
+EQ.-2: Yeoh [13]  
+EQ.±3: Compressible/nearly-incompressible Holzapfel- Ogden 
+[1] , [7]  
+BETA Volumetric response function coeﬃcient 
+NU Poisson’s ratio (see Remark 3 ) 
+ 
+Ogden Model Card 1.   This card is only deﬁned if ITYPE = ±1.  
+Card 2.1a  1 2 3 4 5 6 7 8 
+Variable MU1 MU2 MU3 MU4 MU5 MU6 MU7 MU8 
+Type F F F F F F F F 
+ 
+Ogden Model Card 2.   This card is only deﬁned if ITYPE = ±1. 
+Card 2.2a  1 2 3 4 5 6 7 8 
+Variable ALPHA1 ALPHA2 ALPHA3 ALPHA4 ALPHA5 ALPHA6 ALPHA7 ALPHA8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MU i Ogden moduli, with i = 1,…,8 
+ALPHA i Ogden constants, with i = 1,…,8 
+ *.   
+  VARIABLE   DESCRIPTION  
+ATYPE Type of anisotropic model: 
+EQ.±1: General structure tensor-based; see Holzapfel et al . [8] 
+(see Remark 5 ) 
+INTYPE Type of interaction/coupling (see Remarks 6  and 7): 
+EQ.0: None 
+EQ.1: Holzapfel-Ogden [1] , [5]  
+NF Number of ﬁber families (see Remarks 5  and 6) 
+ 
+General Structure Tensor-Based Model Card A.   This card is only deﬁned if 
+ATYPE = ±1. Include a pair of this card and one of the 2 cards following this card for 
+each ﬁber family i = 1,…,NF, that is, 2 × NF cards in total.  
+ Card 3.1 1 2 3 4 5 6 7 8 
+Variable THETA A B      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+THETA Mean ﬁber family orientation angle with respe ct to the /u1D41A material 
+axis in the /u1D41A/u1D41B  material plane in degrees 
+A First structure tensor parameter 
+B Second structure tensor parameter 
+ 
+Holzapfel-Gasser-Ogden Model Card.   This card is only deﬁned if FTYPE = 1.  
+Card 3.2a  1 2 3 4 5 6 7 8 
+Variable FTYPE FCID K1 K2     
+Type I I F F     
+ *.   
+  
+Active Module Card.  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable TITLE ACTYPE ACDIR ACID ACTHR SF SS SN 
+Type A10 I I I F F F F 
+Default none none 0 0 0.0 1.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+TITLE  Module title which must be set to ACTIVE 
+ACTYPE Type of active model: 
+EQ.1: Guccione-Waldman-McCulloch [4]  
+EQ.2: Guccione-Waldman-McCulloch [4]  and Hunter-Nash-
+Sands [9]  
+EQ.3: Hunter-Nash-Sands [9]  
+EQ.4: Hunter-Nash-Sands [9]  and Hunter-McCulloch- ter Keurs 
+[10]  
+EQ.5: Martins-Pato-Pires [14]  
+ACDIR Direction of active tension: 
+EQ.0:  Active tension develops along the mean ﬁber orienta tion 
+of all ﬁber families.  
+GT.0: Active tension develops along the mean orientation of 
+the ACDIR th  ﬁber family. 
+ACID Activation curve ID (takes priority over T0 fo r ACTYPE = 1, 2, 3, 
+or 4 when deﬁned, see Remark 8 ) 
+ACTHR (De/re)activation threshold (see Remark 8 ) 
+SF Active stress scaling factor in the ﬁber directi on (see Remark 9 ) 
+SS Active stress scaling factor in the trans verse sheet direction (see 
+Remark 9 ) *.   
+  VARIABLE   DESCRIPTION  
+MR Slope of linear relaxation versus sarcomere leng th relation 
+TR Time intercept of linear relaxation as a function o f sarcomere 
+length relation 
+Guccione-Waldman-McCulloch and Hunter-Nash-Sands Mo del Card 1.   This card 
+is only deﬁned if ACTYPE = 2.  
+Card 4.1b  1 2 3 4 5 6 7 8 
+Variable T0 CA2ION CA2IONM  N TAUMAX ST B L0 
+Type F F F F F F F F 
+ 
+Guccione-Waldman-McCulloch and Hunter-Nash-Sands Mo del Card 2.   This card 
+is only deﬁned if ACTYPE = 2.  
+Card 4.2b  1 2 3 4 5 6 7 8 
+Variable L ETA       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+T0 Starting time of active stress development 
+CA2ION Intercellular calcium ion concentration 
+CA2IONM Maximum intercellular calcium ion concentra tion 
+N Hill coeﬃcient 
+TAUMAX Peak isometric tension under maximum activat ion 
+ST Active ﬁber stress scaling factor in the transverse  directions (see 
+Remark 9 ) 
+B Shape coeﬃcient 
+L0 Sarcomere length with no active tension 
+L Reference (stress-free) sarcomere length *.   
+ Hunter-Nash-Sands and Hunter-McCullogh-ter Keurs Mo del Card B.   This card is 
+only deﬁned if ACTYPE = 4.  
+Card 4.2d  1 2 3 4 5 6 7 8 
+Variable L ETA       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+T0 Starting time of active stress development 
+CA2ION50 Intercellular calcium ion concentration at  half of peak isometric 
+tension 
+CA2IONM Maximum intercellular calcium ion concentra tion 
+N Hill coeﬃcient 
+TAUMAX Peak isometric tension under maximum activat ion 
+ST Active ﬁber stress scaling factor in the transverse  directions (see 
+Remark 9 ) 
+CA2ION0 Intercellular calcium ion concentration at rest 
+TCA Shape coeﬃcient 
+L Reference (stress-free) sarcomere length 
+ETA Scaling parameter 
+ 
+Martins-Pato-Pires Model Card A.   This card is only deﬁned if ACTYPE = 5.  
+Card 4.1e  1 2 3 4 5 6 7 8 
+Variable FSEID FLID FVID ALPHAID     
+Type I I I I     
+ 
+ VARIABLE   DESCRIPTION  
+FSEID Serial stress function ID (see Remark 10 ) *.   
+  VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 (shells and thick shells 
+only) and AOPT = 3 (all element types).  This angle may be 
+overridden on the element card; see *ELEMENT_SHELL_ BE TA, 
+*ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO. 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword: *INITI AL_-
+FOAM_REFERENCE_GEOMETRY. 
+EQ.0.0: Oﬀ 
+EQ.1.0: On 
+Remarks: 
+1.  Volumetric Strain Energy Function.   The pure volumetric part of the strain 
+energy function is deﬁned as part of the ISOtropic module. 
+2.  Compressible and Nearly-Incompressible Models.  Depending on the sign 
+of ITYPE and ATYPE, several formulations are availa ble.  Negative model 
+numbers indicate that the corresponding part of the  strain energy function is 
+considered isochoric.  Furthermore, the sign of FTY PE and INTYPE is directly 
+linked to ATYPE.  For example, if ATYPE is negative , both ﬁber and ﬁber in- 
+teraction models are in their isochoric form.  Cons equently, compressible and 
+nearly-incompressible anisotropy is obtained by usi ng both INTYPE and 
+ATYPE with or without a sign, respectively. 
+3.  Incompressibility Limit. While there is no strict lower bound on the Poisson ’s 
+ratio (|u1D71≠|u1D43FCst), for nearly-incompressible materials, LS-DYNA will  issue a warning 
+message if  |u1D71≠ < |u1D71≠|u1D43FCst= 0.4 9. 
+4.  Special Cases of the Compressible/Nearly-Incompress ible Ogden Model.   
+The following described special cases of the OGDEN Model (ITYPE = ±1). 
+a)  The (nearly-in)compressible neo-Hookean model is o btained as special 
+case of ITYPE = (-)1 with |u1D7≠7|oneCst> 0, |u1D6F+|oneCst= 1. 
+b)  The Mooney-Rivlin model is obtained as a special c ase of ITYPE = -1 with 
+|u1D7≠7|u1D4J6Cst|u1D6F+|u1D4J6Cst> 0 for i = 1,2 , |u1D6F+|oneCst= 2, and |u1D6F+|twoCst= −2 . *.   
+ c)  For all ACTYPE methods, if you set up a coupled pr oblem with the elec- 
+trophysiology solver, ACTHR again gives the thresho ld value for the cal- 
+cium ion concentration (ACTYPE = 1, 2, 3, or 5) or transmembrane 
+potential (ACTYPE = 4).  The electrophysiology solv er provides the value 
+to compare to the threshold to activate and deactiv ate the active stress de- 
+velopment.  As with ACID, the active stress develop ment is activated 
+when the value exceeds ACTHR and deactivates when t he value is less 
+than ACTHR. With this method, the active stress dev elopment can be re- 
+activated again when the value exceeds the threshol d. 
+9.  Active stress development. Active stress is developed along direction(s) 
+deﬁned by ACDIR and may be scaled using the scaling  factors SF, SS, and SN. 
+For ACTYPE < 5, if SS and SN are zero, they are res et internally to ST.  
+Depending on ACDIR active stress may develop along one or multiple ﬁber 
+families.  Consider a single ﬁber family with unit ﬁber orientation vector /u1D41E/u1D45:.st. Let 
+/u1D̅0F|u1D434Cst be the active stress.  Then, the active stress ten sor in the local ﬁber frame is: 
+/u1D̅4∫|u1D434Cst=  /u1D̅0F|u1D434Cst|parenleftCv2SF /u1D41E/u1D45:.st⊗/u1D41E/u1D45:.st+ SS /u1D41E|u1D46≠Cst⊗/u1D41E|u1D46≠Cst+ SN /u1D41E|u1D4JBCst⊗/u1D41E|u1D4JBCst|parenriµhtCv2  . 
+Here /u1D41E|u1D46≠Cst and /u1D41E|u1D4JBCst are the unit vectors in the sheet and normal direc tions that form 
+a basis with /u1D41E/u1D45:.st. 
+If active tension develops along multiple ﬁber fami lies, then the active stress 
+tensor is: 
+/u1D̅4∫|u1D434Cst= |summationCv1/u1D̅4∫|u1D434Cst|u1D4J6CstsNF 
+|u1D4J6Cst=|oneCst  . 
+In the above NF is the number of ﬁber families and /u1D̅4∫|u1D434Cst|u1D4J6Csts is the active stress ten- 
+sor for the ith  ﬁber family. 
+10.  Serial stress function. The serial stress function needs to be expressed in  
+terms of the ﬁber stretch λ and contractile stretch λCE . Thus, the elastic stretch 
+in the serial element  λSE  needs to be eliminated using the multiplicative de - 
+composition of the ﬁber stretch, that is, λ=λ/C.st/E.st λ/S.st/E.st . 
+11.  History Variables.   The history variables are listed in the table bel ow.  The 
+default number of history variables depends on the used modules.  If only the 
+mandatory ISOtropic module is used, the number of h istory variables is 9. In- 
+cluding the ANISOtropic and ACTIVE modules in a hie rarchical fashion yields 
+an additional 12 and 9 history variables, that is, making the total number of 
+history variables 21 and 30, respectively. 
+ *.   
+ [7] Holzapfel G.A. and Ogden R.W., Constitutive mod elling of passive myocardi- 
+um: a structurally based framework for material cha racterization. Philosophical 
+Transactions of the Royal Society A  (2009) 367 :3445–3475 
+[8] Holzapfel G.A., Niestrawska J.A., Ogden R.W., R einisch A.J., and Schrieﬂ A.J., 
+Modelling non-symmetric collagen ﬁbre dispersion in  arterial walls. Journal of 
+the Royal Society Interface  (2015) 12 :1–14 
+[9] Hunter P.J., Nash, M.P., and Sands, G.B., Compu tational Electromechanics of 
+the Heart, Computational Biology of the Heart. John Wiley and Sons , London 
+(1997) 346–407 
+[10] Hunter P.J., McCulloch A.D., and ter Keurs H.E .D.J., Modelling the mechanical 
+properties of cardiac muscle. Progress in Biophysics and Molecular Biology  (1998) 
+69 :289–331 
+[11] Nolan D.R., Gower A.L., Destrade M., Ogden R.W ., and McGarry J.P., A robust 
+anisotropic hyperelastic formulation for the modeli ng of soft tissue . Journal of 
+the Mechanical Behavior of Biomedical Materials  (2014) 29 :48-60 
+[12] Ogden, R.W., Non-linear Elastic Deformations, Dover Publishing Inc. , New York 
+(1997). 
+[13] Yeoh O.H., Characterization of elastic propert ies of carbon-black ﬁlled rubber 
+vulcanizates. Rubber Chemistry and Technology  (1990) 63 :792-805 
+[14]  Martins J.A.C, Pato P.M.P, and Pires E.B, A ﬁ nite element model of skeletal 
+muscles, Virtual and Physical Prototyping  (2006) 1:159-170 *

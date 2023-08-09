@@ -1,0 +1,157 @@
+ ....................... ................................................... ............... 2-911  
+*.  [1B] {35} 
+ *.  *.   *.   
+This is  Material Type 139.  This material which is for the Belytschko-Schwer resultant 
+beam is an extension of .   
+ Card 10.   This card is required. 
+LPMS1_1 LPMS1_2 LPMS1_3 LPMS1_4 LPMS1_5 LPMS1_6 LPMS1_7 LPMS1_8 
+Card 11.   This card is required. 
+HMS2_1 HMS2_2 HMS2_3 HMS2_4 HMS2_5 HMS2_6 HMS2_7 HMS2_8 
+Card 12.   This card is required. 
+LPMS2_1 LPMS2_2 LPMS2_3 LPMS2_4 LPMS2_5 LPMS2_6 LPMS2_7 LPMS2_8 
+Card 13.   This card is required. 
+HMT1_1 HMT1_2 HMT1_3 HMT1_4 HMT1_5 HMT1_6 HMT1_7 HMT1_8 
+Card 14.   This card is required. 
+LPMT1_1 LPMT1_2 LPMT1_3 LPMT1_4 LPMT1_5 LPMT1_6 LPMT1_7 LPMT1_8 
+Card 15.   This card is required. 
+HMT2_1 HMT2_2 HMT2_3 HMT2_4 HMT2_5 HMT2_6 HMT2_7 HMT2_8 
+Card 16.   This card is required. 
+LPMT2_1 LPMT2_2 LPMT2_3 LPMT2_4 LPMT2_5 LPMT2_6 LPMT2_7 LPMT2_8 
+Card 17.   This card is required. 
+HMR_1 HMR_2 HMR_3 HMR_4 HMR_5 HMR_6 HMR_7 HMR_8 
+Card 18.   This card is required. 
+LPMR_1 LPMR_2 LPMR_3 LPMR_4 LPMR_5 LPMR_6 LPMR_7 LPMR_8 *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable M1 M2 M3 M4 M5 M6 M7 M8 
+Type F F F F F F F F 
+Default none 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+M1, M2, 
+…, M8 Applied end moment for force as a function of strai n/change in 
+length curve.  At least one moment must be deﬁned w ith a 
+maximum of 8.  The values should be in ascending or der.   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LC1 LC2 LC3 LC4 LC5 LC6 LC7 LC8 
+Type I I I I I I I I 
+Default none 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LC1, LC2, 
+…, LC8 Load curve ID (see *DEFINE_ CURVE) deﬁning axial force as a 
+function of strain/change in length (see IAFLC) for  the 
+corresponding applied end moment.  Deﬁne the same n umber as 
+end moments.  Each curve must contain the same numb er of 
+points. 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable LPS1 SFS1 LPS2 SFS2 YMS1 YMS2   
+Type I F I F F F   
+Default 0 1.0 LPS1 1.0 10 20  YMS1   
+ *.   
+  VARIABLE   DESCRIPTION  
+YMT2 Yield moment about the |u1D461-axis at node 2 for interaction 
+calculations (default set to YMT1) 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable LPR SFR YMR      
+Type I F F      
+Default 0 1.0 10 20       
+ 
+ VARIABLE   DESCRIPTION  
+LPR Load curve ID for plastic torsional moment as a fun ction of 
+rotation.  If zero, this load curve is ignored. 
+SFR Scale factor for plastic torsional moment as a func tion of rotation 
+(default = 1.0) 
+YMR Torsional yield moment for interaction calculat ions (d efault set to 
+10 20  to prevent interaction) 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable LYS1 SYS1 LYS2 SYS2 LYT1 SYT1 LYT2 SYT2 
+Type I F I F I F I F 
+Default 0 1.0 0 1.0 0 1.0 0 1.0 
+ 
+ VARIABLE   DESCRIPTION  
+LYS1 ID of curve deﬁning yield moment as a function of a xial force for 
+the |u1D46≠-axis at node 1 
+SYS1 Scale factor applied to load curve LYS1 
+LYS2 ID of curve deﬁning yield moment as a function of a xial force for 
+the |u1D46≠-axis at node 2 *.   
+  Card 10 1 2 3 4 5 6 7 8 
+Variable LPMS1_1  LPMS1_2  LPMS1_3  LPMS1_4  LPMS1_5  LPMS1_6  LPMS1_7  LPMS1_8  
+Type I I I I I I I I 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LPMS1_ n ID of curve deﬁning plastic moment as a function of  plastic 
+rotation for the |u1D46≠-axis at node 1 for hinge moment HMS1_ n 
+ 
+ Card 11 1 2 3 4 5 6 7 8 
+Variable HMS2_1 HMS2_2 HMS2_3 HMS2_4 HMS2_5 HMS2_6 HMS2_7 HMS2_8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+HMS2_ n Hinge moment for the |u1D46≠-axis at node 2 
+ 
+ Card 12 1 2 3 4 5 6 7 8 
+Variable LPMS2_1  LPMS2_2  LPMS2_3  LPMS2_4  LPMS2_5  LPMS2_6  LPMS2_7  LPMS2_8  
+Type I I I I I I I I 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LPMS2_ n ID of curve deﬁning plastic moment as a function of  plastic 
+rotation for the |u1D46≠-axis at node 2 for hinge moment HMS2_ n 
+ *.   
+  Card 16 1 2 3 4 5 6 7 8 
+Variable LPMT2_1  LPMT2_2  LPMT2_3  LPMT2_4  LPMT2_5  LPMT2_6  LPMT2_7  LPMT2_8  
+Type I I I I I I I I 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LPMT2_ n ID of curve deﬁning plastic moment as a function of  plastic 
+rotation for the |u1D461-axis at node 2 for hinge moment HMT2_ n 
+ 
+ Card 17 1 2 3 4 5 6 7 8 
+Variable HMR_1 HMR_2 HMR_3 HMR_4 HMR_5 HMR_6 HMR_7 HMR_8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+HMR_ n Hinge moment for the torsional axis 
+ 
+ Card 18 1 2 3 4 5 6 7 8 
+Variable LPMR_1 LPMR_2 LPMR_3 LPMR_4 LPMR_5 LPMR_6 LPMR_7 LPMR_8 
+Type I I I I I I I I 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+LPMR_ n ID of curve deﬁning plastic moment as a function of  plastic 
+rotation for the torsional axis for hinge moment HM R_ n *.   
+ ⎝⎜⎛|u1D44≠|u1D4JFCst
+|u1D44≠|u1D4JFCstyield ⎠⎟⎞|twoCst
++
+⎝⎜⎛|u1D44≠|u1D46≠Cst
+|u1D44≠|u1D46≠Cstyield ⎠⎟⎞|twoCst
++
+⎝⎜⎛|u1D44≠|u1D461Cst
+|u1D44≠|u1D461Cstyield ⎠⎟⎞|twoCst
+≥ 1  , 
+where 
+|u1D44≠|u1D4JFCst,  |u1D44≠|u1D46≠Cst,  |u1D44≠|u1D461Cst= current moment 
+|u1D44≠|u1D4JFCstyield , |u1D44≠|u1D46≠Cstyield , |u1D44≠|u1D461Cstyield = yield moment  
+Note that scale factors for hinge behavior deﬁned i n the input will also be ap- 
+plied to the yield moments:  for example, |u1D44≠|u1D46≠Cstyield  in the above formula is given 
+by the input yield moment about the local axis time s the input scale factor for 
+the local |u1D46≠-axis.  For strain-softening characteristics, the y ield moment should 
+generally be set equal to the initial peak of the m oment-rotation load curve. M1M1M2M3M4M5M6M7M8
+Strain (or change in length; see IAFLC)Axial Force
+Figure M139-1.   The force magnitude is limited by the applied end mom ent.  
+For an intermediate value of the end moment LS-DY NA interpolates between 
+the curves to determine the allowable force value. *.   
+ from the curves on cards 4 through 6.  The plastic moment is scaled by the 
+scale factors on lines 4 to 6. 
+A hinge will form if either the independent yield m oment is exceeded or if the 
+moment interaction equation is satisﬁed.  If both a re true, the plastic moment 
+will be set to the minimum of the interpolated valu e and |u1D44≠|u1D4JFCst|u1D4JDCsts.*

@@ -1,0 +1,229 @@
+ ............. ................................................. 2 -1641  
+*.  [0 ,2,3a,3c]  
+ *.  *.   *.   
+This is  Material Type 261 which is an orthotropic continuum  damage model for 
+laminated ﬁber-reinforced composites.  See Pinho, I annucci and Robinson [2006].  It is 
+based on a physical model for each failure mode and  considers non-linear in-plane 
+shear behavior. 
+This model is implemented for shell, thick shell an d solid elements. 
+Note: Laminated shell theory can be applied by sett ing LAMSHT ≥ 3 in *CONTROL_-
+SHELL. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO EA EB EC PRBA PRCA PRCB 
+Card 2.   This card is required. 
+GAB GBC GCA AOPT DAF DKF DMF EFS 
+Card 3.   This card is required. 
+XP YP ZP A1 A2 A3   
+Card 4.   This card is required. 
+V1 V2 V3 D1 D2 D3 MANGLE  
+Card 5.   This card is required. 
+ENKINK ENA ENB ENT ENL    
+Card 6.   This card is required. 
+XC XT YC YT SL    
+Card 7.   This card is required. 
+FIO SIGY LCSS BETA PFL PUCK SOFT DT *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EA EB EC PRBA PRCA PRCB 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EA |u1D438|u1D44∆Cst, Young’s modulus in |u1D44∆-direction (longitudinal) 
+EB |u1D438|u1D44FCst, Young’s modulus in |u1D44F-direction (transverse) 
+EC |u1D438|u1D4J≠Cst, Young’s modulus in /u1D450-direction 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio |u1D44F|u1D44∆  
+PRCA /u1D̅08|u1D4J≠Cst|u1D44∆Cst , Poisson’s ratio /u1D450|u1D44∆  
+PRCB /u1D̅08|u1D4J≠Cst|u1D44FCst , Poisson’s ratio /u1D450|u1D44F  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GAB GBC GCA AOPT DAF DKF DMF EFS 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus |u1D44∆|u1D44F  
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus |u1D44F /u1D450 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus /u1D450|u1D44∆  *.   
+  VARIABLE   DESCRIPTION  
+EQ.0.0: Integration point fails if any damage variable reac hes 
+1.0. 
+EQ.1.0: No failure of integration point due to ﬁber compres sive 
+failure.  This condition corresponds to history var iable 
+“dkink( i)” reaching 1.0. 
+DMF Flag to control failure of an integration point bas ed on transverse 
+(matrix) failure: 
+EQ.0.0: Integration point fails if any damage variable reaches 
+1.0. 
+EQ.1.0: No failure of integration point due to matrix failu re.  
+This condition corresponds to history variable 
+“dmat( i)” reaching 1.0. 
+EFS Maximum eﬀective strain for element layer failure.  A value of 
+unity would equal 100% strain. 
+GT.0.0: Fails when eﬀective strain calculated assuming 
+material is volume preserving exceeds EFS 
+LT.0.0: Fails when eﬀective strain calculated from the full  
+strain tensor exceeds |EFS | 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ *.   
+  VARIABLE   DESCRIPTION  
+characteristic element length. 
+LT.0.0: Load curve ID = (- ENA) which deﬁnes the fracture 
+toughness for ﬁber tensile failure mode as a functi on of 
+characteristic element length.  No further regulari za- 
+tion. 
+ 
+Table ID = (-ENA) which deﬁnes for each strain rate 
+value a load curve that deﬁnes the fracture toughne ss 
+for ﬁber tensile failure mode as a function of char acter- 
+istic element length.  No further regularization. 
+ENB Fracture toughness for intralaminar matrix tens ile failure. 
+GT.0.0: The given value will be regularized with the 
+characteristic element length. 
+LT.0.0: Load curve ID = (- ENB) which deﬁnes the fracture 
+toughness for intralaminar matrix tensile failure a s a 
+function of characteristic element length.  No furt her 
+regularization. 
+ 
+Table ID = (-ENB) which deﬁnes for each strain rate 
+value a load curve that deﬁnes the fracture toughne ss 
+for intralaminar matrix tensile failure as a functi on of 
+characteristic element length.  No further regulari za- 
+tion. 
+ENT Fracture toughness for int ralaminar matrix transverse shear 
+failure. 
+GT.0.0: The given value will be regularized with the 
+characteristic element length.  
+LT.0.0: Load curve ID = (- ENT) which deﬁnes the fracture 
+toughness for intralaminar matrix transverse shear 
+failure as a functi on of characteristic element length.  
+No further regularization. 
+ 
+Table ID = (-ENT) which deﬁnes for each strain rate 
+value a load curve that deﬁnes the fracture toughne ss 
+for intralaminar matrix transverse shear failure as  a 
+function of characteristic e lement length.  No further 
+regularization. *.   
+  VARIABLE   DESCRIPTION  
+compressive strength as a function of transverse st rain 
+rate ( /u1D̅16̇|u1D44FCst|u1D44FCst ) 
+YT Transverse tensile strength, |u1D44F-axis.  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- YT) which deﬁnes the transverse 
+tensile strength as a function of transverse strain  rate 
+(/u1D̅16̇|u1D44FCst|u1D44FCst ) 
+SL Longitudinal shear strength.  
+GT.0.0: Constant value  
+LT.0.0: Load curve ID = (- SL) which deﬁnes the longitudinal 
+shear strength as a function of in- plane shear strain 
+rate ( /u1D̅16̇|u1D44∆Cst|u1D44FCst ) 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable FIO SIGY LCSS BETA PFL PUCK SOFT DT 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+FIO Fracture angle in pure transverse compression ( default = 53.0°) 
+SIGY In-plane shear yield stress (only used when BE TA < 1.0) 
+LCSS Load curve ID or Table ID. 
+Load Curve.   When LCSS is a load curve ID, it deﬁnes the non-
+linear in-plane shear-stress as a function of in-pl ane shear- strain 
+(|u1D6F∆|u1D44∆Cst|u1D44FCst ). 
+Tabular Data.   The table maps in-plane strain rate values ( |u1D6F∆̇|u1D44∆Cst|u1D44FCst ) to 
+a load curve giving the in-plane shear-stress as a function of in-
+plane shear- strain.  For strain rates below the minimum value, the 
+curve for the lowest deﬁned value of strain rate is  used.  Likewise, 
+when the strain rate ex ceeds the maximum value, the curve for 
+the highest deﬁned value of strain rate is used. 
+Logarithmically Deﬁned Table.   An alternative way to invoke 
+logarithmic interpolation between discrete strain r ates is *.   
+ Remarks:  
+1.  Failure Surfaces.   The failure surface to limit the elastic domain i s assembled 
+by four  sub-surfaces, representing diﬀerent failure mechan isms.  See Figure 
+M261-1  for a deﬁnition of angles.  They are deﬁned as fol lows: 
+a)  longitudinal (ﬁber) tension, 
+|u1D4J3|u1D44∆Cst=|u1D7≠∆|u1D44∆Cst
+/u1D44B|u1D447Cst= 1  
+b)  longitudinal (ﬁber) compression (3D-kinking model)  – (transformation to 
+fracture plane), 
+|u1D4J3|u1D4J8Cst|u1D4J6Cst|u1D4JBCst|u1D4J8Cst =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex⎧|parenleftCvJ/u1D̅0F|u1D447Cst
+|u1D446|u1D447Cst− |u1D7≠7|u1D447Cst|u1D7≠∆|u1D4JBCst|parenriµhtCvJ|twoCst
++ |parenleftCvJ/u1D̅0F|u1D43FCst
+|u1D446|u1D43FCst− |u1D7≠7|u1D43FCst|u1D7≠∆|u1D4JBCst|parenriµhtCvJ|twoCst
+= 1            |u1D4J6|u1D4J3      |u1D7≠∆|u1D44FCst/u1D45A.sts≤ 0
+         |parenleftCvJ|u1D7≠∆|u1D4JBCst
+/u1D44C|u1D447Cst|parenriµhtCvJ|twoCst
++ |parenleftCvJ/u1D̅0F|u1D447Cst
+|u1D446|u1D447Cst|parenriµhtCvJ|twoCst
++ |parenleftCvJ/u1D̅0F|u1D43FCst
+|u1D446|u1D43FCst|parenriµhtCvJ|twoCst
+= 1                 |u1D4J6|u1D4J3      |u1D7≠∆|u1D44FCst/u1D45A.sts> 0   
+with 
+|u1D446|u1D447Cst=/u1D44C/u1D4:6.st
+2 tan|parenleftCv1/u1D̅1∫|zeroCst|parenriµhtCv1
+|u1D7≠7|u1D447Cst= −1
+tan|parenleftCv12/u1D̅1∫|zeroCst|parenriµhtCv1
+|u1D7≠7|u1D43FCst= |u1D446|u1D43FCst|u1D7≠7|u1D447Cst
+|u1D446|u1D447Cst
+|u1D7≠∆|u1D4JBCst=|u1D7≠∆|u1D44FCst/u1D45A.sts+ |u1D7≠∆|u1D4J≠Cst/u1Dℜ13.sts
+2+|u1D7≠∆|u1D44FCst/u1D45A.sts− |u1D7≠∆|u1D4J≠Cst/u1Dℜ13.sts
+2cos|parenleftCv12/u1D̅1∫|parenriµhtCv1 +/u1D̅0F|u1D44FCst/u1D45A.sts|u1D4J≠Cst/u1Dℜ13.stssin|parenleftCv12/u1D̅1∫|parenriµhtCv1
+/u1D̅0F|u1D447Cst= −|u1D7≠∆|u1D44FCst/u1D45A.sts− |u1D7≠∆|u1D4J≠Cst/u1Dℜ13.sts
+2sin|parenleftCv12/u1D̅1∫|parenriµhtCv1 +/u1D̅0F|u1D44FCst/u1D45A.sts|u1D4J≠Cst/u1Dℜ13.stscos|parenleftCv12/u1D̅1∫|parenriµhtCv1
+/u1D̅0F|u1D43FCst=/u1D̅0F|u1D44∆Cst/u1D45A.sts|u1D44FCst/u1D45A.stscos|parenleftCv1/u1D̅1∫|parenriµhtCv1 +/u1D̅0F|u1D4J≠Cst/u1Dℜ13.sts|u1D44∆Cst/u1D45A.stssin|parenleftCv1/u1D̅1∫|parenriµhtCv1 
+c)  transverse (matrix) failure: transverse tension,  
+|u1D4J3|u1D4JACst|u1D44∆Cst|u1D461Cst = |parenleftCvJ|u1D7≠∆|u1D4JBCst
+/u1D44C|u1D447Cst|parenriµhtCvJ|twoCst
++ |parenleftCvJ/u1D̅0F|u1D447Cst
+|u1D446|u1D447Cst|parenriµhtCvJ|twoCst
++ |parenleftCvJ/u1D̅0F|u1D43FCst
+|u1D446|u1D43FCst|parenriµhtCvJ|twoCst
+= 1      if     |u1D7≠∆|u1D4JBCst≥ 0 
+with 
+|u1D7≠∆|u1D4JBCst=|u1D7≠∆|u1D44FCst+ |u1D7≠∆|u1D4J≠Cst
+2+|u1D7≠∆|u1D44FCst− |u1D7≠∆|u1D4J≠Cst
+2cos|parenleftCv12/u1D̅1∫|parenriµhtCv1 +/u1D̅0F|u1D44FCst|u1D4J≠Cst sin|parenleftCv12/u1D̅1∫|parenriµhtCv1
+/u1D̅0F|u1D447Cst= −|u1D7≠∆|u1D44FCst− |u1D7≠∆|u1D4J≠Cst
+2sin|parenleftCv12/u1D̅1∫|parenriµhtCv1 +/u1D̅0F|u1D44FCst|u1D4J≠Cst cos|parenleftCv12/u1D̅1∫|parenriµhtCv1
+/u1D̅0F|u1D43FCst=/u1D̅0F|u1D44∆Cst|u1D44FCst cos /u1D̅1∫+/u1D̅0F|u1D4J≠Cst|u1D44∆Cst sin /u1D̅1∫ *.   
+ 3.  Nonlinear In-Plane Shear.   To account for the characteristic nonlinear in-
+plane shear behavior of laminated ﬁber-reinforced c omposites, a 1D elasto-
+plastic formulation is coupled to a linear damage b ehavior once the maximum 
+allowable stress state for shear failure is reached .  The non-linearity of the 
+shear behavior can be introduced using the deﬁnitio n of an explicit shear stress 
+as a function of engineering shear strain curve (LC SS) with *DEFINE_CURVE.  
+See Figure M261-3  (in which /u1D̅16|u1D44∆Cst|u1D44FCst  designates engineering shear strain rather than 
+tensorial shear strain). 
+4.  Element Deletion.   When failure has occurred in all the composite la yers 
+(through-thickness integration points), the element  is deleted.  Elements that 
+share nodes with the deleted element become “crashf ront” elements and can 
+have their strengths reduced by using the SOFT para meter.  An earlier initia- 
+tion of crashfront elements is possible by using th e parameter PFL. 
+5.  History Variables.   The number of additional integration point variab les 
+written to the LS-DYNA database is input by the *DA TABASE_EXTENT_BI-
+NARY deﬁnition with the variable NEIPS (shells) and  NEIPH (solids).  These 
+additional variables are tabulated below ( i = integration point).    
+When intending to initialize the stress state using  *INTIAL_STRESS_ OPTION , 
+the stress values SIGXX, SIGYY, etc.  in *INITIAL_S TRESS_ OPTION  are not 
+used, rather stresses are determined from the total  strain history variables 31 to 
+36. 
+ 
+History 
+Variable  Description Value Histor y 
+Variable #  
+fa( i) ﬁber tensile mode  0 → 1: elastic 
+ 1: failure criterion reached 1 
+fkink( i) ﬁber compressive mode 2 
+fmat( i) matrix mode 3 non-linearity defined via
+*DEFINE_CURVE
+ Figure M261-3.   Deﬁnition of nonlinear in-plane shear behavior *

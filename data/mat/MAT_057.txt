@@ -1,0 +1,68 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-415 (MAT)  VARIABLE   DESCRIPTION  
+LCID Load curve ID (see *DEFINE_CURVE) or tab le ID deﬁning the 
+nominal stress as a function of nominal strain.  If  a table is used, a 
+family of curves is deﬁned each corresponding to a discrete 
+temperature; see *DEFINE_TABLE. 
+TC Cut-oﬀ for the nominal tensile stress, /u1D̅0F|u1D4J6Cst. 
+HU Hysteretic unloading factor between 0.0 and 1.0 (default = 1.0, 
+that is, no energy dissipation); see also Figure M57-1 . 
+BETA Decay constant to model creep in unloading, |u1D6FD. 
+DAMP Viscous coeﬃcient (.05 < recommended value < .50) to model 
+damping eﬀects. 
+LT.0.0:  |DAMP|  is the load curve ID, which deﬁnes the 
+damping constant as a function of the maximum strai n 
+in compression deﬁned as: 
+|u1D7≠≠|mCst|aCst|xCst = max(1 − |u1D7≠6|oneCst, 1 − |u1D7≠6|twoCst, 1. −|u1D7≠6|threeCst) . 
+In tension, the damping constant is set to the valu e cor- 
+responding to the strain at 0.0. The abscissa shoul d be 
+deﬁned from 0.0 to 1.0. 
+SHAPE Shape factor for unloading.  Active for nonzero val ues of the 
+hysteretic unloading factor.  Values less than one reduces the 
+energy dissipation and greater than one increases d issipation; see 
+also Figure M57-1 . 
+FAIL Failure option after cutoﬀ stress is reached: 
+EQ.0.0:  tensile stress remains at cut-oﬀ value. 
+EQ.1.0:  tensile stress is reset to zero. 
+BVFLAG Bulk viscosity activation ﬂag: 
+EQ.0.0:  no bulk viscosity (recommended) 
+EQ.1.0:  bulk viscosity active 
+ED Optional Young's relaxation modulus, |u1D438/u1D451.st, for rate eﬀects.   
+BETA1 Optional decay constant, |u1D6FD|oneCst. *.   
+LS-DYNA R13 2-417 (MAT) for the eigenvalues of the left stretch tensor, |u1D449|u1D4J6Cst|u1D4J7Cst , which is obtained using a polar 
+decomposition of the deformation gradient matrix, |u1D439|u1D4J6Cst|u1D4J7Cst .  Recall that,  
+|u1D439|u1D4J6Cst|u1D4J7Cst = |u1D44J|u1D4J6Cst|u1D4J8Cst /u1D448|u1D4J8Cst|u1D4J7Cst = |u1D449|u1D4J6Cst|u1D4J8Cst |u1D44J|u1D4J8Cst|u1D4J7Cst  
+The update of |u1D449|u1D4J6Cst|u1D4J7Cst  follows the numerically stable approach of Taylor and Flanagan 
+[1989].  After solving for the principal stretches,  we compute the elongations and, if the 
+elongations are compressive, the corresponding valu es of the nominal stresses, /u1D̅0F|u1D4J6Cst are 
+interpolated.  If the elongations are tensile, the nominal stresses are given by 
+/u1D̅0F|u1D4J6Cst= |u1D438|u1D7≠≠|u1D4J6Cst 
+and the Cauchy stresses in the principal system bec ome 
+|u1D7≠∆|u1D4J6Cst=/u1D̅0F|u1D4J6Cst
+|u1D7≠6|u1D4J7Cst|u1D7≠6|u1D4J8Cst  . 
+The stresses can now be transformed back into the g lobal system for the nodal force 
+calculations. 
+Remarks: 
+1.  Decay Constant and Hysteretic Unloading.  When hysteretic unloading is 
+used the reloading will follow the unloading curve if the decay constant, |u1D6FD, is 
+set to zero.  If |u1D6FD is nonzero the decay to the original loading curve  is governed 
+by the expression: 
+1 − |u1D4J2−/u1D6FD.st |u1D461Cst   . 
+2.  Bulk Viscosity.   The bulk viscosity, which generates a rate depend ent 
+pressure, may cause an unexpected volumetric respon se and, consequently, it 
+is optional with this model. 
+3.  Hysteretic Unloading Factor.   The hysteretic unloading factor results in the 
+unloading curve to lie beneath the loading curve as  shown in Figure M57-1  
+This unloading provides energy dissipation which is  reasonable in certain 
+kinds of foam. 
+4.  Output.   Note that since this material has no eﬀective pla stic strain, the internal 
+energy per initial volume is written into the outpu t databases. 
+5.  Rate Effects.   Rate eﬀects are accounted for through linear visc oelasticity by a 
+convolution integral of the form 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JFCst=/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |u1D461Cst
+|zeroCst(|u1D461 −/u1D̅0F)∂|u1D7≠≠|u1D4J8Cst|u1D4J9Cst 
+∂/u1D̅0F|u1D4J1 /u1D̅0F   , 
+where |u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F) is the relaxation function.  The stress tensor, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JFCst, augments the 
+stresses determined from the foam, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst /u1D45:.st; consequently, the ﬁnal stress, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst , is 
+taken as the summation of the two contributions: *

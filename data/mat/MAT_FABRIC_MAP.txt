@@ -1,0 +1,63 @@
+ ................................... ................................................... ........................... 2-322  
+*.  [4] {17} 
+ *.  *.   
+2-322 (MAT) LS-DYNA R13 *.   *.   
+2-324 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+FVOPT Fabric venting option (see *.   *.   
+2-326 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+X0, X1 Coeﬃcients of Anagonye and Wang [1999] porosity equ ation for 
+the leakage area: |u1D434lea k = |u1D434|zeroCst|parenleftCv2/u1D44B|zeroCst+/u1D44B|oneCst|u1D4JF|u1D46≠Cst+/u1D44B|twoCst|u1D4JF|u1D4JDCst+/u1D44B|threeCst|u1D4JF|u1D46≠Cst|u1D4JF|u1D4JDCst|parenriµhtCv2; see 
+*.   *.   
+2-328 (MAT) LS-DYNA R13 This card is included if and only if X0 = 1 and FVO PT < 7. 
+ Card 2d 1 2 3 4 5 6 7 8 
+Variable FVOPT X0 X1 FLC FAC ELA   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+FVOPT Fabric venting option (see *.   *.   
+2-330 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+the leakage area: |u1D434lea k =|u1D434|zeroCst|parenleftCv2/u1D44B|zeroCst+/u1D44B|oneCst|u1D4JF|u1D46≠Cst+/u1D44B|twoCst|u1D4JF|u1D4JDCst+/u1D44B|threeCst|u1D4JF|u1D46≠Cst|u1D4JF|u1D4JDCst|parenriµhtCv2; see 
+*.   *.   
+2-332 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the el- 
+ement normal 
+LT.0.0: The absolute value of AOPT is a coordinate system ID  
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+ECOAT Young’s modulus of coat material to include bending properties.  
+This together with the following two parameters (SC OAT and 
+TCOAT) encompass the same coating/bending feature a s in 
+*.   *.   
+2-334 (MAT) LS-DYNA R13 the Green-Lagrange strain used in the formulae in Remark 1  above is substitut- 
+ed with  
+/u1D404̃=/u1D404− [1 − |u1D6F+(|u1D461)]/u1D404|zeroCst, 
+where /u1D404|zeroCst is the strain at time zero.  This is done in order  to smoothly initialize 
+the stress resulting from using a reference geometr y diﬀerent from the geome- 
+try at time zero. 
+4.  Dissipative Effects.   The factor |u1D6F∆ is a function of the strain history and is 
+initially set to unity.  It depends, more speciﬁcal ly, on the internal work /u1D̅16 given 
+by the stress power 
+/u1D̅16̇=/u1D412∶/u1D404̇. 
+The evolution of |u1D6F∆ is related to the stress power since it will incre ase on load- 
+ing and decrease on unloading, and as a result it i ntroduces dissipation.  The 
+exact mathematical formula is too complicated to re veal, but basically the func- 
+tion looks like 
+|u1D6F∆ =/˙raceleft.v61 −/u1D4:B(|u1D4J2̅/u1D44B.st/u1D44B.st , |u1D4J2/u1D44C.st/u1D44C.st ) +/u1D4:B(|u1D4J2̅/u1D44B.st/u1D44B.st , |u1D4J2/u1D44C.st/u1D44C.st )exp|<racketleftCv1|u1D6FD(/u1D̅16−/u1D̅16)|<racketriµhtCv1/u1D̅16̇< 0
+1 −/u1D4:B(|u1D4J2̅/u1D44B.st/u1D44B.st , |u1D4J2/u1D44C.st/u1D44C.st )exp|<racketleftCv1−|u1D6FD(/u1D̅16−/u1D̅16)|<racketriµhtCv1/u1D̅16̇≥ 0 
+Here /u1D̅16 is the maximum attained internal work up to this p oint in time, |u1D4J2̅/u1D44B.st/u1D44B.st  and 
+|u1D4J2̅/u1D44C.st/u1D44C.st  are the engineering strain values associated with value. /u1D4:B(|u1D4J2̅/u1D44B.st/u1D44B.st , |u1D4J2/u1D44C.st/u1D44C.st ) is the 
+hysteresis factor deﬁned by the user through the in put parameter TH; it may or 
+may not depend on the strains. |u1D6FD is a decay constant that depends on |u1D4J2̅/u1D44B.st/u1D44B.st  and 
+|u1D4J2̅/u1D44C.st/u1D44C.st , and /u1D̅16 is the minimum attained internal work at any point  in time after /u1D̅16 
+was attained.  In other words, on unloading |u1D6F∆ will exponentially decay to 1 −
+/u1D4:B, and on loading it will exponentially grow to 1 an d always be restricted by 
+the lower and upper bounds, 1 −/u1D4:B< |u1D6F∆ ≤ 1 . The only thing the user needs to 
+care about is to input a proper hysteresis factor /u1D4:B, and with reference to a gen- 
+eral loading/unloading cycle illustrated in Figure M34M-1  the relation 1 −/u1D4:B=
+/u1D̅16|u1D462Cst//u1D̅16|u1D4J9Cst should hold. 
+5.  Packing of Yarn in Compression.   To account for the packing of yarns in 
+compression, a compaction eﬀect is modeled by addin g a term to the strain 
+energy function of the form  Figure M34M-1.   Cyclic loading model for hysteresis model H *

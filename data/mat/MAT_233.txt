@@ -1,0 +1,230 @@
+: *.  
+*.   
+ *. . With 
+the MAGNESIUM option an alternative option for the hardening curve is available: von 
+Mises eﬀective stress as a function of equivalent p lastic strain, which is energy 
+conjugate to the von Mises stress. 
+ 
+Finally, the MAGNESIUM option allows for distortion al hardening by providing 
+hardening curves as measured in tension and compres sion tests.  This option is 
+however incompatible with the activation of rate eﬀ ects (visco-plasticity). 
+ 
+With the MAGNESIUM option this material model is al so available for solid elements. 
+NOTE:  Activating the MAGNESIUM options requires  setting 
+HR = 3 and FIT = 0.0 (also see below). 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR HR P1 P2 ITER *.   
+  VARIABLE   DESCRIPTION  
+HR Hardening rules: 
+EQ.1.0: linear hardening (default) 
+EQ.2.0: exponential hardening (Swift) 
+EQ.3.0: load curve  
+EQ.4.0: exponential hardening (Voce) 
+EQ.5.0: exponential hardening (Gosh) 
+EQ.6.0: exponential hardening (Hocken-Sherby) 
+HR must be set to 3 if the MAGNE SIUM keyword option is 
+active. 
+P1 Material parameter: 
+HR.EQ.1.0: tangent modulus 
+HR.EQ.2.0: /u1D45E, coeﬃcient for exponential hardening law (Swift)  
+HR.EQ.4.0: |u1D44∆, coeﬃcient for exponential hardening law (Voce) 
+HR.EQ.5.0: /u1D45E, coeﬃcient for exponential hardening law (Gosh)  
+HR.EQ.6.0: |u1D44∆, coeﬃcient for exponential hardening law 
+(Hocket-Sherby) 
+P2 Material parameter: 
+HR.EQ.1.0: yield stress for the linear hardening law 
+HR.EQ.2.0: |u1D4JB, coeﬃcient for (Swift) exponential hardening 
+HR.EQ.4.0: /u1D450, coeﬃcient for exponential hardening law (Voce) 
+HR.EQ.5.0: |u1D4JB, coeﬃcient for exponential hardening law (Gosh)  
+HR.EQ.6.0: /u1D450, coeﬃcient for exponential hardening law 
+(Hocket-Sherby) 
+ITER Iteration ﬂag for speed: 
+EQ.0.0: fully iterative 
+EQ.1.0: ﬁxed at three iterations.  Generally, ITER = 0.0 is 
+recommended.  However, ITER = 1.0 is faster and may 
+give acceptable results in most problems. 
+ *.   
+  VARIABLE   DESCRIPTION  
+K Material parameter (see Card 5 pos.8): 
+FIT.EQ.1.0 or EQ.2.0: yield stress for compression in the 00 
+direction 
+FIT.EQ.0.0: material parameter (-1  <  /u1D458  <  1) 
+P3 Material parameter: 
+HR.EQ.5.0: |u1D4JD, coeﬃcient for exponential hardening (Gosh) 
+HR.EQ.6.0: |u1D4JB, exponent for exponential hardening law 
+(Hocket-Sherby) 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT    C12 C13 C23 C44 
+Type F    F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see*.   *.   
+  
+ VARIABLE   DESCRIPTION  
+V1 - V3 Components of vector /u1D42F for AOPT = 3.0 
+D1 - D3 Components of vector /u1D41D for AOPT = 2.0 
+BETA Material angle in degrees for AOPT = 0 and 3. Note that BETA 
+may be overridden on the element card; see *ELEMENT _-
+SHELL_BETA 
+FIT Flag for parameter identiﬁcation algorithm: 
+EQ.0.0: No parameter identiﬁcation routine is used.  The 
+variables K, C11, C22, C33, C44, C12, C13 and C23 a re 
+interpreted as material parameters.  FIT MUST be se t to 
+zero if MAGNESIUM option is active 
+EQ.1.0: Parameter ﬁt is used.  The variables C11, C22, C33 , C44 
+and K are interpreted as yield stresses in the 00 degree 
+direction, the 45 degree direction, the 90 degree d irec- 
+tion, the balanced biaxial tension, and the 00 degree 
+compression, respectively. It is recommended to always 
+check the d3hsp  ﬁle to see the ﬁtted parameters before com- 
+plex jobs are submitted.  
+EQ.2.0: Same as EQ.1.0 but also produce contour plots of th e 
+yield surface.  For each material three xy -data ﬁles are 
+created: Contour1_ |u1D4JB, Contour2_ |u1D4JB and Contour3_ |u1D4JB
+where |u1D4JB equals the material number. 
+ 
+Magnesium Card.   Additional card for MAGNESIUM keyword option. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable LC1ID LC2ID NUMINT LCCID ICFLAG IDFLAG LC3ID EPSFG 
+Type I I F I I I I F 
+ 
+ VARIABLE   DESCRIPTION  
+LC1ID Load curve ID giving equivalent plastic strain to f ailure as a 
+function of stress triaxiality or a table ID giving  plastic strain to 
+failure as a function of Lode parameter and stress triaxiality 
+(solids) *.   
+ /u1D419=/u1D402/u1D412   . (233.1) 
+Here /u1D412 is the ﬁeld comprised of the four stresses deviato r components, |u1D446/u1D4:C.st=
+(|u1D46≠|oneCst|oneCst , |u1D46≠|twoCst|twoCst , |u1D46≠|threeCst|threeCst , |u1D46≠|oneCst|twoCst ), 
+/u1D42C=σ−1
+3tr(σ)δ  . 
+In the above equation, tr(σ) is the trace of the Cauchy stress tensor and δ is the 
+Kronecker delta.  For the 2D plane stress condition , the orthotropic condition gives 7 
+independent coeﬃcients.  The tensor /u1D402 is represented by the 4 × 4  matrix 
+|u1D436/u1D4:C.st/u1D4:D.st=
+⎝⎜⎜⎜⎜⎜⎛/u1D450|oneCst|oneCst /u1D450|oneCst|twoCst /u1D450|oneCst|threeCst 
+/u1D450|oneCst|twoCst /u1D450|twoCst|twoCst /u1D450|twoCst|threeCst 
+/u1D450|oneCst|threeCst /u1D450|twoCst|threeCst /u1D450|threeCst|threeCst 
+/u1D450|fourCst|fourCst ⎠⎟⎟⎟⎟⎟⎞
+. 
+The principal values of /u1D419 are denoted Σ|oneCst, Σ|twoCst, and Σ|threeCst and are given as the eigenvalues to 
+the matrix composed by the components Σ|u1D46JCst|u1D46JCst , Σ|u1D466Cst|u1D466Cst , Σ|u1D467Cst|u1D467Cst , and Σ|u1D46JCst|u1D466Cst through  
+Σ|oneCst=1
+2|parenleftCvJΣ|u1D46JCst|u1D46JCst +Σ|u1D466Cst|u1D466Cst +/radical.v:|parenleftCv2Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst |parenriµhtCv2|twoCst+ 4Σ|u1D46JCst|u1D466Cst |twoCst|parenriµhtCvJ , 
+Σ|twoCst=1
+2|parenleftCvJΣ|u1D46JCst|u1D46JCst +Σ|u1D466Cst|u1D466Cst −/radical.v:|parenleftCv2Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst |parenriµhtCv2|twoCst+ 4Σ|u1D46JCst|u1D466Cst |twoCst|parenriµhtCvJ , 
+Σ|threeCst=Σ|u1D467Cst|u1D467Cst  
+where 
+3Σ|u1D46JCst|u1D46JCst = (2/u1D450|oneCst|oneCst −/u1D450|oneCst|twoCst −/u1D450|oneCst|threeCst )|u1D7≠∆|u1D46JCst|u1D46JCst + (−/u1D450|oneCst|oneCst + 2/u1D450|oneCst|twoCst −/u1D450|oneCst|threeCst )|u1D7≠∆|u1D466Cst|u1D466Cst, 
+3Σ|u1D466Cst|u1D466Cst = (2/u1D450|oneCst|twoCst −/u1D450|twoCst|twoCst −/u1D450|twoCst|threeCst )|u1D7≠∆|u1D46JCst|u1D46JCst + (−/u1D450|oneCst|twoCst + 2/u1D450|twoCst|twoCst −/u1D450|twoCst|threeCst )|u1D7≠∆|u1D466Cst|u1D466Cst , 
+3Σ|u1D467Cst|u1D467Cst = (2/u1D450|oneCst|threeCst −/u1D450|twoCst|threeCst −/u1D450|threeCst|threeCst )|u1D7≠∆|u1D46JCst|u1D46JCst + (−/u1D450|oneCst|threeCst + 2/u1D450|twoCst|threeCst −/u1D450|threeCst|threeCst )|u1D7≠∆|u1D466Cst|u1D466Cst , 
+Σ|u1D46JCst|u1D466Cst =/u1D450|fourCst|fourCst |u1D7≠∆|oneCst|twoCst  
+Note that the symmetry of Σ|u1D46JCst|u1D466Cst  follows from the symmetry of the Cauchy stress ten sor. 
+ 
+The yield condition is written in the following for m: 
+|u1D4J3|parenleftCv2Σ,/u1D458,|u1D7≠≠ep |parenriµhtCv2=|u1D7≠∆eff (Σ|oneCst,Σ|twoCst,Σ|threeCst,/u1D458)−|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2≤0  , (233.2) 
+where |u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2 is a function representing the current yield stres s dependent on current 
+eﬀective plastic strain and /u1D458 is the asymmetric parameter for yield in compressi on and 
+tension.  The eﬀective stress |u1D7≠∆eff  is given by 
+|u1D7≠∆eff =[(|Σ|oneCst|−/u1D458Σ|oneCst)|u1D44∆Cst+(|Σ|twoCst|−/u1D458Σ|twoCst)|u1D44∆Cst+(|dividesCv1Σ|threeCst|dividesCv1−/u1D458Σ|threeCst)|u1D44∆Cst]|oneCst|u1D44∆Cst/fraction.v1  , (233.3) 
+where /u1D458∈[−1,1]  and |u1D44∆ ≥ 1.  Now, let |u1D7≠∆|zeroCst|zeroCst |u1D447Cst and |u1D7≠∆|zeroCst|zeroCst /u1D4:6.st represent the yield stress along the 
+rolling (00 degree) direction in tension and compre ssion, respectively.  Furthermore let 
+|u1D7≠∆|fourCst|fiveCst |u1D447Cst and |u1D7≠∆/nine.st |zeroCst |u1D447Cst represent the yield stresses in the 45 and the 90 degree directions, and last 
+let |u1D7≠∆|u1D43JCst|u1D447Cst be the balanced biaxial yield stress in tension.  Following Cazacu et al.  (2006) the 
+yield stresses can easily be derived. 
+ *.   
+ Ω|threeCst=1
+3(/u1D450|oneCst|threeCst +/u1D450|twoCst|threeCst − 2/u1D450|threeCst|threeCst ) 
+Hardening laws: 
+The following hardening laws are implemented: 
+1.  Swift hardening law 
+2.  Voce hardening law 
+3.  Gosh hardening law 
+4.  Hocket-Sherby hardening law 
+5.  Loading curve, where the yield stress is given as a function of the eﬀective 
+plastic strain 
+ 
+The Swift’s hardening law can be written as 
+|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2 =/u1D45E|parenleftCv2|u1D7≠≠|zeroCst+ |u1D7≠≠ep |parenriµhtCv2|u1D4JBCst 
+where /u1D45E and |u1D4JB are material parameters.  
+The Voce’s equation says that the yield stress can be written in the following form 
+|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2 = |u1D44∆ − |u1D44F|u1D4J2−|u1D4J≠Cst|u1D7≠≠Cst ep  
+where |u1D44∆, |u1D44F, and /u1D450 are material parameters.  The Gosh’s equation is s imilar to Swift’s 
+equation.  They only diﬀer by a constant 
+|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2 =/u1D45E|parenleftCv2|u1D7≠≠|zeroCst+ |u1D7≠≠ep |parenriµhtCv2|u1D4JBCst− |u1D4JD  . 
+Here /u1D45E, |u1D7≠≠|zeroCst, |u1D4JB and |u1D4JD are material constants.  The Hocket-Sherby equatio n resembles the 
+Voce’s equation, but with an additional parameter a dded 
+|u1D7≠∆|u1D466Cst|parenleftCv2|u1D7≠≠ep |parenriµhtCv2 = |u1D44∆ − |u1D44F|u1D4J2−|u1D4J≠Cst|u1D7≠≠Cst ep /u1D45B.sts
+  , 
+where |u1D44∆, |u1D44F,/u1D450 and |u1D4JB are material parameters. 
+Constitutive relation and material stiffness: 
+The classical elastic constitutive equation for lin ear deformations is the well-known 
+Hooke’s law.  This relation written in a rate formu lation is given by 
+/u1D6D4̇=/u1D40:ε̇|u1D4J2Cst  , (233.8) 
+where ε|u1D4J2Cst is the elastic strain and /u1D40: is the constitutive matrix.  An over imposed dot 
+indicates diﬀerentiation respect to time.  Introduc ing the total strain, ε, and the plastic 
+strain, ε|u1D4JDCst, Eq.  (233.8) is classically rewritten as *.   
+ ∂|u1D4J3
+|u1D71Jσ|oneCst|oneCst =|u1D71J|u1D4J3 
+|u1D71JΣ|threeCst1
+2|u1D71J|u1D4J3 
+|u1D71JΣ|oneCst⎣⎢⎡
+⎝⎜⎛1+Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Φ|oneCst+
+⎝⎜⎛1−Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Φ|twoCst⎦⎥⎤
++1
+2|u1D71J|u1D4J3 
+|u1D71JΣ|twoCst⎣⎢⎡
+⎝⎜⎛1 −Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Φ|oneCst+
+⎝⎜⎛1 +Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Φ|twoCst⎦⎥⎤+Φ|threeCst (233.14)  
+|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|twoCst|twoCst =1
+2|u1D71J|u1D4J3 
+|u1D71JΣ|oneCst⎣⎢⎡
+⎝⎜⎛1+Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Ψ|oneCst+
+⎝⎜⎛1−Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Ψ|twoCst⎦⎥⎤
++1
+2|u1D71J|u1D4J3 
+|u1D71JΣ|twoCst⎣⎢⎡
+⎝⎜⎛1 −Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Ψ|oneCst+
+⎝⎜⎛1 +Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst 
+/radical.v1Σ|u1D447Cst⎠⎟⎞Ψ|twoCst⎦⎥⎤+|u1D71J|u1D4J3 
+|u1D71JΣ|threeCstΨ|threeCst (233.15)  
+and the derivative with respect to the shear stress  component is 
+|u1D71J|u1D4J3 
+|u1D71J|u1D7≠∆|oneCst|twoCst =/u1D450|fourCst|fourCst 2Σ|u1D46JCst|u1D466Cst 
+/radical.v1Σ|u1D447Cst|parenleftCvJ|u1D71J|u1D4J3 
+|u1D71JΣ|oneCst−|u1D71J|u1D4J3 
+|u1D71JΣ|twoCst|parenriµhtCvJ (233.16) 
+where 
+Σ|u1D447Cst=|parenleftCv2Σ|u1D46JCst|u1D46JCst −Σ|u1D466Cst|u1D466Cst |parenriµhtCv2|twoCst+4Σ|u1D46JCst|u1D466Cst |twoCst (233.17)  
+and 
+|u1D71J|u1D4J3 
+|u1D71JΣ|u1D4J6Cst=|u1D4J3|parenleftCv2Σ,/u1D458,|u1D7≠≠|u1D4J2Cst|u1D4JDCst |parenriµhtCv2|oneCst
+|u1D44∆Cst−|oneCst(|Σ|u1D4J6Cst|−/u1D458Σ|u1D4J6Cst)|u1D44∆Cst−|oneCst|parenleftCv1sgn (Σ|u1D4J6Cst)−/u1D458|parenriµhtCv1  for   |u1D4J6=1,2,3 (233.18) 
+Implementation: 
+Assume that the stress and strain is known at time |u1D461|u1D4JBCst. A trial stress σ/tilℂecomb.h1|u1D4JBCst+|oneCst at time |u1D461|u1D4JBCst+|oneCst is 
+calculated by assuming a pure elastic deformation, that is, 
+/u1D6D4/tilℂecomb.h1|u1D4JBCst+|oneCst=/u1D6D4|u1D4JBCst+/u1D40:|parenleftCv2ε|u1D4JBCst+|oneCst−ε|u1D4JBCst|parenriµhtCv2 (233.19) 
+Now, if |u1D4J3 (Σ,/u1D458, |u1D7≠≠|u1D4J2Cst|u1D4JDCst ) ≤ 0 , the deformation is purely elastic, and the new st ress and plastic 
+strain are determined as 
+/u1D6D4|u1D4JBCst+|oneCst=/u1D6D4/tilℂecomb.h1|u1D4JBCst+|oneCst 
+|u1D7≠≠ep |u1D4JBCst+|oneCst=|u1D7≠≠ep |u1D4JBCst (233.20) 
+The thickness strain increment is given by 
+∆|u1D7≠≠|threeCst|threeCst =|u1D7≠≠|threeCst|threeCst |u1D4JBCst+|oneCst−|u1D7≠≠|threeCst|threeCst |u1D4JBCst=−|u1D463
+1−|u1D463(∆|u1D7≠≠|oneCst|oneCst +∆|u1D7≠≠|twoCst|twoCst ) (233.21) 
+If the deformation is not purely elastic, the stres s is not inside the yield surface and a 
+plastic iterative procedure must take place as desc ribed in the following: 
+1.  Set |u1D4JA = 0,  /u1D6D4(|zeroCst)|u1D4JBCst+|oneCst=/u1D6D4/tilℂecomb.h1|u1D4JBCst+|oneCst, |u1D7≠≠ep (|zeroCst)|u1D4JBCst+|oneCst= |u1D7≠≠ep |u1D4JBCst and ∆|u1D7≠≠|oneCst|oneCst |u1D4JDCst(|zeroCst)= ∆|u1D7≠≠|twoCst|twoCst |u1D4JDCst(|zeroCst)= 0 *.   
+ History Variable # Description 
+17 Equivalent plastic strain (energy conjugate to von Mises 
+stress) 
+19 Eﬀective stress (Cazacu-Barlat) *

@@ -1,0 +1,2 @@
+{OPTION} [0,3 c,5,8B] {4} 
+ *. {OPTION}  *. SPALL or . STOCHASTIC or 

@@ -1,0 +1,167 @@
+: *.  
+*.  (FLAG = -1)   
+EQ.4: 3-parameter damage tensor associated with IFLG1 = 2  
+NHIS Number of history variables as driving quantit ies (min = 1, 
+max = 3) 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable HIS1 HIS2 HIS3 IFLG1 IFLG2 IFLG3   
+Type I I I I I I   
+Default 0 optional  optional  0 0 0   
+ 
+ VARIABLE   DESCRIPTION  
+HIS n Choice of variable as driving quantity for damage, called “history 
+value” in the following:  
+EQ.0: Equivalent plastic strain rate is the driving quant ity for 
+the damage if IFLG1 = 0. Alternatively, if IFLG1 = 1, 
+components of the plastic strain rate tensor are driving 
+quantities for damage (see Remarks 2  and 3). 
+GT.0: The rate of the additional history variable HIS n is the 
+driving quantity for damage.  IFLG1 should be set t o 0.  
+LT.0: *DEFINE_FUNC TION IDs deﬁning the damage driving 
+quantities as a function of the components of the p lastic 
+strain rate tensor; IFLG1 should be set to 1. 
+IFLG1 Damage driving quantities: 
+EQ.0: Rates of history variables HIS n 
+EQ.1: Speciﬁc components of the plastic strain rate tensor ; see 
+Remarks 2  and 3. 
+EQ.2: Predeﬁned functions of plastic strain rate component s for 
+orthotropic damage model.  HIS n inputs will be ignored, 
+and IFLG2 should be set to 1. This option is for sh ell 
+elements only. *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+EPSD Damage threshold |u1D7≠≠|eCst /f.st/f.st/co⋯⋯a.st/d.st|u1D4JDCst. Damage eﬀective plastic strain when 
+material softening begins (default = 0.0). 
+EPSR Eﬀective plastic strain at which material rupt ures (logarithmic).  
+FLAG Damage type ﬂag: 
+EQ.-1: A nisotropic damage check ( only for shell elements ) 
+EQ.0: S tandard isotropic damage (default) 
+EQ.1: S tandard isotropic damage plus strain localization 
+check ( only for shell elements ) 
+EQ.10: Enhanced isotropic damage  
+EQ.11: Enhanced isotropic damage plus strain localization 
+check ( only for shell elements ) 
+ 
+Isotropic Damage Only Card.   This card is included if and only if FLAG ≥ 0. 
+ Card 2b 1 2 3 4 5 6 7 8 
+Variable Q1 C1 Q2 C2 EPSD S DC FLAG 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+Q1 Isotropic hardening parameter |u1D444|oneCst 
+C1 Isotropic hardening parameter |u1D436|oneCst 
+Q2 Isotropic hardening parameter |u1D444|twoCst 
+C2 Isotropic hardening parameter |u1D436|twoCst 
+EPSD Damage threshold |u1D7≠≠|eCst /f.st/f.st/co⋯⋯a.st/d.st|u1D4JDCst. Damage eﬀective plastic strain when 
+material softening begins (default = 0.0). 
+S Damage material constant |u1D446 (default =  |u1D7≠∆Cst|zeroCsts
+|twoCst|zeroCst|zeroCst ) 
+DC Critical damage value |u1D437/u1D4:6.st (default = 0.5).  When the damage 
+value, |u1D437, reaches this value, the element is deleted from t he 
+calculation.  *.   
+  VARIABLE   DESCRIPTION  
+VK Viscous material parameter, |u1D449|u1D4J8Cst 
+VM Viscous material parameter, |u1D449|u1D4JACst 
+F F for brick (default = 1/2) 
+G G for brick (default = 1/2)  
+H H for brick (default = 1/2)  
+L L for brick (default = 3/2)  
+M M for brick (default = 3/2)  
+N N for brick (default = 3/2)  
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT  CPH MACF Y0 ALPHA THETA ETA 
+Type F  F I F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES, and then, for shells only, rotated about 
+the shell element normal by an angle BETA 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the /u1D41A-direction.  This option is for solid 
+elements only. 
+EQ.2.0: Globally orthotropic with mat erial axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BETA, from a line in the plane of the ele ment 
+deﬁned by the cross product of the vector /u1D42F with the *.   
+  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+BETA Μaterial angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3.   BE TA may be overridden on the element card; see 
+*ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO. 
+Remarks: 
+1.  Standard Isotropic Damage Model (FLAG = 0 or 1).  The Continuum 
+Damage Mechanics (CDM) model is based on an approac h proposed by Le- 
+maitre [1992].  The eﬀective stress |u1D7≠∆̃, which is the stress calculated over the 
+section that eﬀectively resist the forces, reads 
+|u1D7≠∆̃=|u1D7≠∆
+1 − |u1D437 
+where |u1D437 is the damage variable.  The evolution equation fo r the damage varia- 
+ble is deﬁned as 
+|u1D437̇=
+⎩|<raceleftCex⎨|<raceleftCex⎧0 for |u1D7≠≠|eCst /f.st/f.st|u1D4JDCst≤ |u1D7≠≠|eCst /f.st/f.st/co⋯⋯a.st/d.st|u1D4JDCst
+/u1D44C
+|u1D446|u1D7≠≠̇|eCst /f.st/f.st|u1D4JDCstfor |u1D7≠≠|eCst /f.st/f.st|u1D4JDCst> |u1D7≠≠|eCst /f.st/f.st/co⋯⋯a.st/d.st|u1D4JDCstand |u1D7≠∆|oneCst> 0 
+where |u1D7≠≠|eCst /f.st/f.st/co⋯⋯a.st/d.st|u1D4JDCst is the damage threshold, |u1D446 is the so-called damage energy release 
+rate, and |u1D7≠∆|oneCst is the maximum principal stress.  The damage energ y density re- 
+lease rate is  
+/u1D44C=1
+2/u1D41E/u1D41E:/u1D402:/u1D41E/u1D41E=|u1D7≠∆|u1D463Cst|u1D4JACst |twoCst|u1D44J|u1D463Cst
+2|u1D438(1 − |u1D437)|twoCst 
+where |u1D438 is Young’s modulus and |u1D7≠∆|u1D463Cst|u1D4JACst  is the equivalent von Mises stress.  The 
+triaxiality function |u1D44J|u1D463Cst is deﬁned as  
+|u1D44J|u1D463Cst=2
+3(1 +/u1D̅08) + 3(1 − 2/u1D̅08) |parenleftCvJ|u1D7≠∆|u1D43BCst
+|u1D7≠∆|u1D463Cst|u1D4JACst |parenriµhtCvJ|twoCst
+ *.   
+ In the anisotropic damage formulation, |u1D437|oneCst(|u1D7≠≠|oneCst) and |u1D437|twoCst(|u1D7≠≠|twoCst) are anisotropic 
+damage functions for the loading directions 1 and 2 , respectively.  Stresses 
+|u1D7≠∆|oneCst|oneCst|zeroCst , |u1D7≠∆|twoCst|twoCst|zeroCst , |u1D7≠∆|oneCst|twoCst|zeroCst , |u1D7≠∆|oneCst|threeCst|zeroCst  and |u1D7≠∆|twoCst|threeCst|zeroCst  are stresses in the principal shell strain directi ons 
+as calculated from the undamaged elastic-plastic ma terial behavior.  The 
+strains |u1D7≠≠|oneCst and |u1D7≠≠|twoCst are the magnitude of the principal strains calcula ted upon 
+reaching the damage thresholds.  Damage can only de velop for tensile stresses, 
+and the damage functions |u1D437|oneCst(|u1D7≠≠|oneCst) and |u1D437|twoCst(|u1D7≠≠|twoCst)are identical to zero for negative 
+strains |u1D7≠≠|oneCst and |u1D7≠≠|twoCst. The principal strain directions are ﬁxed within an  integration 
+point as soon as either principal strain exceeds th e initial threshold strain in 
+tension.  A more detailed description of the damage  evolution for this material 
+model is given in the description of Material 81. 
+5.  Anisotropic Viscoplasticity. The uniaxial stress-strain curve is given in the 
+following form 
+|u1D7≠∆|parenleftCv2|u1D4JF, |u1D7≠≠̇eff |u1D4JDCst|parenriµhtCv2 = |u1D7≠∆|zeroCst+ |u1D444|oneCst|<racketleftCv11 − exp(−|u1D436|oneCst|u1D4JF)|<racketriµhtCv1 + |u1D444|twoCst|<racketleftCv11 − exp(−|u1D436|twoCst|u1D4JF)|<racketriµhtCv1 + |u1D449|u1D4J8Cst|u1D7≠≠̇eff |u1D4JDCst|u1D449Cst/u1D45A.sts , 
+where |u1D4JF is the damage accumulated plastic strain, which ca n be calculated by 
+|u1D4JḞ= |u1D7≠≠̇eff |u1D4JDCst(1 − |u1D437) . 
+For bricks the following yield criterion associated  with the Hill criterion is used 
+|u1D439(|u1D7≠∆̃|twoCst|twoCst − |u1D7≠∆̃|threeCst|threeCst )|twoCst+ |u1D43A(|u1D7≠∆̃|threeCst|threeCst − |u1D7≠∆̃|oneCst|oneCst )|twoCst+/u1D4:B(|u1D7≠∆̃|oneCst|oneCst − |u1D7≠∆̃|twoCst|twoCst )|twoCst
++2/u1D4:F|u1D7≠∆̃|twoCst|threeCst |twoCst+ 2|u1D44≠|u1D7≠∆̃|threeCst|oneCst |twoCst+ 2/u1D441|u1D7≠∆̃|oneCst|twoCst |twoCst= |u1D7≠∆(|u1D4JF, |u1D7≠≠̇eff |u1D4JDCst) 
+where |u1D4JF is the damage eﬀective viscoplastic strain and |u1D7≠≠̇eff |u1D4JDCst is the eﬀective visco- 
+plastic strain rate.  For shells the anisotropic be havior is given by the R-values: 
+|u1D44J|zeroCst|zeroCst , |u1D44J|fourCst|fiveCst , and |u1D44J/nine.st |zeroCst .  When |u1D449|u1D4J8Cst= 0, the material will behave as an elastoplastic 
+material without rate eﬀects.  Default values for t he anisotropic constants are 
+given by: 
+|u1D439 = |u1D43A =/u1D4:B=1
+2
+/u1D4:F= |u1D44≠ =/u1D441=3
+2
+|u1D44J|zeroCst|zeroCst = |u1D44J|fourCst|fiveCst = |u1D44J/nine.st |zeroCst = 1 
+so that isotropic behavior is obtained. 
+Strain rate is accounted for using the Cowper and S ymonds model which 
+scales the yield stress with the factor: 
+1 + |parenleftCvJ|u1D7≠≠̇
+|u1D436|parenriµhtCvJ|oneCst|u1D4JDCst/fraction.v2
+ 
+To convert these constants, set the viscoelastic co nstants, |u1D449|u1D4J8Cst and |u1D449|u1D4JACst, to the 
+following values: *

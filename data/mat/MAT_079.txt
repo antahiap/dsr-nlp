@@ -1,0 +1,119 @@
+: *.  
+*.   *.   
+ This card is included if FLAG5 = 1.  
+ Card 5 1 2 3 4 5 6 7 8 
+Variable SIGTH SIGR CHI      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+K0 Bulk modulus at the reference pressure 
+P0 Cut-oﬀ/datum pressure.  P0 is irrelevant if |u1D43J=|u1D4341=|u1D4342=0. 
+Otherwise, P0 must be < 0 (meaning tensile); a very small 
+negative value is acceptable.     Below this pressu re, stiﬀness and 
+strength go to zero.  This is also the “zero” press ure for pressure-
+varying properties. 
+B Exponent for the pressure-sensitive elastic modul i, |u1D44F.  See 
+Remarks .  B must be in the range 0 ≤ |u1D43J < 1 , and values too close 
+to 1 are not recommended because the pressure becom es 
+indeterminate. 
+A0 Yield function constant |u1D44∆|zeroCst (default = 1.0); see Material Type 5. 
+A1 Yield function constant |u1D44∆|oneCst(default = 0.0); see Material Type 5. 
+A2 Yield function constant |u1D44∆|twoCst (default = 0.0); see Material Type 5. 
+DF Damping factor (must be in the range 0 ≤ DF ≤ 1) : 
+EQ.0: No damping 
+EQ.1: \ Maximum damping 
+RP Reference pressure for following input data 
+LCID Load curve ID deﬁning shear stress as a function of  shear strain.  
+Up to ten points may be deﬁned in the load curve.  See *DE-
+FINE_CURVE. 
+SFLC Scale factor to apply to shear stress in LCID *.   
+  VARIABLE   DESCRIPTION  
+TAU4 /u1D̅0F|fourCst, shear stress at |u1D6F∆|fourCst (ignored if LCID is nonzero) 
+TAU5 /u1D̅0F|fiveCst, shear stress at |u1D6F∆|fiveCst (ignored if LCID is nonzero) 
+FLAG5 If FLAG5 = 1, optional Card 5 will be read. 
+SIGTH Threshold shear stress ratio for cyclic degra dation 
+SIGR Residual shear stress ratio for cyclic degrada tion 
+CHI Cyclic degradation parameter 
+Remarks: 
+The elastic moduli G and K are pressure sensitive: 
+|u1D43A|parenleftCv1|u1D4JD|parenriµhtCv1 =|u1D43A|zeroCst|parenleftCv1|u1D4JD − |u1D4JD|zeroCst|parenriµhtCv1|u1D44FCst
+|parenleftCv1|u1D4JDref − |u1D4JD|zeroCst|parenriµhtCv1|u1D44FCst 
+|u1D43∆|parenleftCv1|u1D4JD|parenriµhtCv1 =|u1D43∆|zeroCst|parenleftCv1|u1D4JD − |u1D4JD|zeroCst|parenriµhtCv1|u1D44FCst
+|parenleftCv1|u1D4JDref − |u1D4JD|zeroCst|parenriµhtCv1|u1D44FCst 
+In the above |u1D43∆|zeroCst is an input value, |u1D4JD is the current pressure, |u1D4JD|zeroCst is the cut-oﬀ or datum 
+pressure (must be zero or negative), and |u1D43A|zeroCst is the initial shear modulus at small shear 
+strain: 
+|u1D43A|zeroCst= SFLC ×/u1D̅0F|oneCst
+|u1D6F∆|oneCst  . 
+In the above (/u1D̅0F|oneCst, |u1D6F∆|oneCst) is the ﬁrst (nonzero) point in LCID. Therefore, |u1D43A|zeroCst represents the 
+total of the elastic slopes of all the layers. 
+ 
+If |u1D4JD falls below |u1D4JD|zeroCst (meaning becomes more tensile), the shear stresses  are set to zero and 
+the pressure is set to |u1D4JD|zeroCst.  Thus, the material has no stiﬀness or strength i n tension.  The 
+pressure in compression is calculated as follows: 
+|u1D4JD = |u1D4JD/r.st|eCst /f.st|<racketleftCvJ−|u1D43∆|zeroCst
+|u1D4JD/r.st|eCst /f.stln(|u1D449) |<racketriµhtCvJ|oneCst(|oneCst−|u1D44FCst)/fraction.v2
+ 
+where |u1D449 is the relative volume, that is, the ratio between  the original and current 
+volume.  This formula results in an instantaneous b ulk modulus that is proportional to 
+|u1D4JD|u1D44FCst whose value at the reference pressure is equal to |u1D43∆|zeroCst(1 − |u1D44F) ⁄ . 
+ 
+The stress-strain pairs deﬁne a shear stress as a f unction of shear strain curve.  The ﬁrst 
+point on the curve is assumed by default to be (0,0)  and does not need to be entered.  
+The slope of the curve must decrease with increasin g |u1D6F∆.  This curve applies at the 
+reference pressure; at other pressures, the curve i s scaled by *.  uses the following deﬁnitions: 
+• Input shear stress is treated by the material mod el as, Figure M79-1.  Family of stress- strain curves.  The curve labeled total 
+represents LCID × SFLC. The other curves represent one “layer” in the 
+material model. 
+shear stress
+shear strain
+elasto-plastic 1
+elasto-plastic 2elasto-plastic 3
+elasto-plastic 4total*.   
+ 0.5 ×V on  Mises  Stress = /radical.v2|parenleftCv13|u1D7≠∆′|u1D4J6Cst:|u1D7≠∆′|u1D4J6Cst8⁄ |parenriµhtCv1. 
+• Input shear strain is treated by the material mod el as 
+1.5 ×V on  Mises  Strain = /radical.v2|parenleftCv13|u1D7≠≠′|u1D4J6Cst:|u1D7≠≠′|u1D4J6Cst2 ⁄ |parenriµhtCv1. 
+ 
+For a particular stress or strain state (deﬁned by the relationship between the three 
+principal stresses or strains), a scaling factor ma y be needed in order to convert between 
+the deﬁnitions given above and the shear stress or strain that an engineer would expect.  
+The .   *.   
+ |u1D7≠≠|vCst= |u1D7≠≠/r.st+ |u1D7≠≠/g.st 
+|u1D7≠≠/r.st= DIL _A(Γ)DIL _B 
+|u1D7≠≠/g.st=∫(|u1D4J1|u1D6F∆|u1D46JCst|u1D467Cst |twoCst+ |u1D4J1|u1D6F∆|u1D466Cst|u1D467Cst|twoCst)|oneCst|twoCst/fraction.v2
+DIL _C + DIL _D ×∫(|u1D4J1|u1D6F∆|u1D46JCst|u1D467Cst |twoCst+ |u1D4J1|u1D6F∆|u1D466Cst|u1D467Cst |twoCst)|oneCst|twoCst/fraction.v2 
+Γ = (|u1D6F∆|u1D46JCst|u1D467Cst |twoCst+ |u1D6F∆|u1D466Cst|u1D467Cst |twoCst)|oneCst|twoCst/fraction.v2 
+|u1D6F∆|u1D46JCst|u1D467Cst = 2|u1D7≠≠|u1D46JCst|u1D467Cst  
+|u1D6F∆|u1D466Cst|u1D467Cst = 2|u1D7≠≠|u1D466Cst|u1D467Cst  
+|u1D6F∆/r.stdescribes the dilation of the soil due to the magni tude of the shear strains; this is 
+caused by the soil particles having to climb over e ach other to develop shear strain. |u1D6F∆/g.st 
+describes compaction of the soil due to collapse of  weak areas and voids, caused by 
+continuous shear straining. 
+ 
+Recommended inputs for sandy soil if dilatancy is t o be modelled: 
+ 
+DIL_A DIL_B DIL_C DIL_D 
+10 1.6 100 10 
+ 
+DIL_A and DIL_B may cause instabilities in some mod els.   
+Strain rate sensitivity: 
+Strain rate eﬀect is accounted for by scaling the y ield stress of each layer as the user-
+speciﬁed strain rate eﬀect is accounted for by scal ing the yield stress of each layer as the 
+user-speciﬁed function of plastic strain rate.  The  stress-strain curve deﬁned by LCID is 
+for quasi-static loading.  Scale factor (on the |u1D466-axis) as a function of strain rate (on the |u1D46J-
+axis) is deﬁned in curve LCSR. All scale factors mu st be equal to or larger than 1.0.  
+Because the rate enhancement factor applies to the strength but not the stiﬀness, and is 
+calculated separately for each layer, an overall en hancement factor between 1.0 and the 
+value in LSCR will be observed in situations where not all the layers are yielding.  
+Cyclic degradation: 
+Cyclic degradation is accounted for by reducing the  size of all yield surfaces 
+proportionally based on the accumulation of the dam age strain.  The strength reduction 
+factor, |u1D4J3, is determined by the following equation: 
+|u1D4J3 = 1 − (1 −Σ|u1D44JCst) |parenleftCv61 − |u1D4J2−/u1D̅12.st/u1D6FE.st/u1D451.sts
+|oneCst−/Sig⋯a.st/u1D44⃡.sts|parenriµhtCv6 
+where Σ is the shear stress ratio (deﬁned as current shear  stress divided by shear 
+strength at the current pressure); Σ|u1D44JCst is the residual shear strength ratio SIGR; /u1Dℜ12 is the 
+input parameter CHI; and |u1D6F∆/u1D451.st is the damage strain, deﬁned as the summation of *

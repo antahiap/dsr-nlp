@@ -1,0 +1,62 @@
+ . ..................................... 2-806  
+*.  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+Y Hardening parameter appearing in Yoshida & Uemori’s  
+equations. 
+SC1 The lowercase /u1D450|twoCst deﬁned in Yoshida & Uemori’s equat ions.  Note 
+the equation below from the paper: 
+/u1D450=
+⎩|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex⎧/u1D450|oneCst
+/u1D450|twoCstmax(|u1D6F+̅∗) < |u1D43J −/u1D44C
+otherwise  
+See more details in About SC1 and SC2 in the remarks section. 
+K Hardening parameter appearing in Yoshida & Uemori’s  
+equations. 
+RSAT Hardening parameter, |u1D44Jsat , appearing in Yoshida & Uemori’s 
+equations. 
+SB The lowercase |u1D44F appearing in Yoshida & Uemori’s equations. 
+H Anisotropic parameter associated with work- hardening 
+stagnation. 
+SC2 The lowercase /u1D450|oneCst deﬁned in the Yoshida and Uem ori’s equations.  
+Note the equation below from the paper: 
+/u1D450=
+⎩|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex⎧/u1D450|oneCst
+/u1D450|twoCstmax(|u1D6F+̅∗) < |u1D43J −/u1D44C
+otherwise  
+See more details in About SC1 and SC2 in the remarks section.  If 
+SC2 equals 0.0, is left blank, or equals SC1, then it turns into the 
+basic model (the one /u1D450 model).  SC2 is available for solids in 
+Revision 142716. 
+EA Variable controlling the change of Young’s modulus,  |u1D438|u1D434Cst in the 
+following equations. 
+COE Variable controlling the change of Young’s modu lus, /u1D̅01 in the 
+following equations. 
+IOPT Modiﬁed kinematic hardening rule ﬂag: 
+EQ.0: Original Yoshida & Uemori formulation, 
+EQ.1:  Modiﬁed formulation.  Deﬁne C1, C2 below. *.   
+ The change in Young’s modulus is deﬁned as a functi on of eﬀective plastic strain, 
+|u1D438 = |u1D438|zeroCst− (|u1D438|zeroCst− |u1D438|u1D434Cst)|<racketleftCv11 − exp|parenleftCv1−/u1D̅01|u1D7≠≠̅|u1D4JDCst|parenriµhtCv1|<racketriµhtCv1  . 
+About SC1 and SC2: 
+In Yoshida and Uemori’s paper, the material paramet er /u1D450 which controls the rate of the 
+kinematic hardening is modiﬁed to describe more acc urately the forward and reverse 
+deformations of the cyclic plasticity curve in the vicinity of the initial yield.  The 
+parameter /u1D450 is modiﬁed as: |u1D43J+|u1D44J /u1D44C 
+|u1D6F+ |u1D6FD |u1D6F+∗ |u1D7≠∆ |u1D7≠∆−|u1D6F+ |u1D437|u1D4JDCst 
+/u1D442 Yield Surface  Bounding Surface  
+Figure M125-1.   Schematic illustration of the two-surface model. /u1D442 is the 
+original center of the yield surface; |u1D6F+∗ is the current center for the yield surface; 
+|u1D6F+ is the center of the bounding surface; and |u1D6FD represents the relative position of 
+the centers of the two surfaces. /u1D44C is the size of the yield surface and is constant 
+throughout the deformation process.  |u1D43J + |u1D44J  represents the size of the bounding 
+surface, with |u1D44J being associated with isotropic hardening. Reproduced from 
+Yoshida and Uemori’s original paper . *.   
+ To enable the output of these history variables to the d3plot  ﬁles, NEIPS on the *DATA-
+BASE_EXTENT_BINARY card must be set to at least 3.   
+References: 
+ [1]  Shi, M.F., Zhu, X.H., Xia, Z.C. & Stoughton, T.B. (2008).  Determination of nonlinear 
+isotropic/kinematic hardening constitutive paramate rs for AHSS using tension and compression 
+tests.  NUMISHEET. 2008. 137-142. 
+ [2]  Yoshida, Fusahito & Uemori, Takeshi.  (2002).   A model of large-strain cyclic plasticity describ ing 
+the Bauschinger effect and workhardening stagnation .  International Journal of Plasticity.  18. 661-
+686. 10.1016/S0749-6419(01)00050-X. *

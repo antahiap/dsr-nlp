@@ -1,0 +1,24 @@
+ ................................. ................................................... ......................... 2-1801  
+*.  [11]  
+ *. _LAMINATE [11]  
+ *.  *. _LAMINATE *.   *.   
+This is  Material Type 292.  This material is valid for mode ling brittle elastic materials 
+with peridynamics solids.  Material failure is capt ured through a bond-based 
+peridynamics model.  See Ren et al 2017 for details  about this model. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E GT GS    
+Type I/A I F F F    
+Default none none none 10 20  10 20     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Material density 
+E Young’s modulus 
+GT Fracture energy release rate  
+GS Fracture energy release rate for compression 
+References: 
+B Ren, CT Wu, E Askari (2017) A 3D discontinuous Ga lerkin ﬁnite element method with 
+the bond-based peridynamics model for dynamic britt le failure analysis, International 
+Journal of Impact Engineering 99, 14-25. *

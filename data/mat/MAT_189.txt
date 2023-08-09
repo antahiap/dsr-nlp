@@ -1,0 +1,31 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+EQ.4.0: locally orthotropic in cylindrical coordinate s ystem 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, |u1D4JD, which deﬁne the centerline axis  
+LT.0.0: the absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+MACF Material axes change ﬂag for brick elements: 
+EQ.1: no change, default 
+EQ.2: switch material axes |u1D44∆ and |u1D44F 
+EQ.3: switch material axes |u1D44∆ and /u1D450 
+EQ.4: switch material axes |u1D44F and /u1D450 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4. 
+BETA Material angle in degrees for AOPT = 3.  It may be overwritten on 
+the element card; see *ELEMENT_SOLID_ORTHO. 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword: *INI-
+TIAL_FOAM_REFERENCE_GEO METRY (see there for more 
+details). 
+EQ.0.0: oﬀ 
+EQ.1.0: on *

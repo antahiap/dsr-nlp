@@ -1,0 +1,65 @@
+: *.   ALPHABETIZED MATERIALS LIST  
+LS-DYNA R13 2-27 (MAT) Material Keyword Number 
+*.   *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+C Diastolic material coeﬃcient 
+B1 |u1D44F|oneCst, diastolic material coeﬃcient  
+B2 |u1D44F|twoCst, diastolic material coeﬃcient 
+B3 |u1D44F|threeCst, diastolic material coeﬃcient 
+P Pressure in the muscle tissue 
+B Systolic material coeﬃcient.  Omit for the earlie r model. 
+L0 /u1D45∫|zeroCst, sarcomere length at which no active tension devel ops.  Omit 
+for the earlier model. 
+CA0MAX (|u1D436|u1D44∆|zeroCst)|mCst|aCst|xCst , maximum peak intracellular calcium concentrate.  Omit 
+for the earlier model. 
+LR /u1D45∫|u1D44JCst, Stress-free sarcomere length.  Omit for the earli er model. 
+M Systolic material coeﬃcient.  Omit for the earlie r model. 
+BB Systolic material coeﬃcient.  Omit for the earli er model. 
+CA0 |u1D436|u1D44∆|zeroCst, peak intracellular calcium concentration.  Omit f or the earlier 
+model. 
+TMAX |u1D447|mCst|aCst|xCst , maximum isometric tension achieved at the longest  
+sarcomere length.  Omit for the earlier model. 
+TACT |u1D461act , time at which active contraction initiates.  Omit  for the earlier 
+model *.   
+  VARIABLE   DESCRIPTION  
+BETA Material angle in degrees for AOPT = 3. BE TA may be overridden 
+on the element card; see *ELEMENT_SOLID_ORTHO. 
+Remarks: 
+1.  Tissue Model.   The tissue model is described in terms of the ene rgy functional 
+that is transversely isotropic with respect to the local ﬁber direction, 
+/u1D44A=|u1D436
+2(|u1D4J2|u1D444Cst− 1) 
+|u1D444 = |u1D44F/u1D45:.st|u1D438|oneCst|oneCst |twoCst+ |u1D44F|u1D461Cst(|u1D438|twoCst|twoCst |twoCst+ |u1D438|threeCst|threeCst |twoCst+ |u1D438|twoCst|threeCst |twoCst+ |u1D438|threeCst|twoCst |twoCst) + |u1D44F/u1D45:.st|u1D46≠Cst (|u1D438|oneCst|twoCst |twoCst+ |u1D438|twoCst|oneCst |twoCst+ |u1D438|oneCst|threeCst |twoCst+ |u1D438|threeCst|oneCst |twoCst) 
+Here |u1D436, |u1D44F/u1D45:.st, |u1D44F|u1D461Cst, and |u1D44F/u1D45:.st|u1D46≠Cst  are material parameters and /u1D404 is the Lagrange-Green 
+strain. 
+The systolic contraction is modeled as the sum of t he passive stress derived 
+from the strain energy function and an active ﬁber directional component, |u1D447|zeroCst, 
+which is a function of time, |u1D461, 
+/u1D412=∂/u1D44A
+∂/u1D404− |u1D4JD /u1D4:D/u1D402−|oneCst+ |u1D447|zeroCst{|u1D461, |u1D436|u1D44∆|zeroCst,/u1D45∫}
+/u1D6D4=1
+/u1D4:D/u1D405/u1D412/u1D405|u1D447Cst 
+with /u1D412, the second Piola-Kirchoﬀ stress tensor; /u1D402, the right Cauchy-Green de- 
+formation tensor; /u1D4:D, the Jacobian of the deformation gradient tensor /u1D405; and /u1D6D4, 
+the Cauchy stress tensor. 
+The active ﬁber directional stress component is deﬁ ned by a time-varying elas- 
+tance model, which at end-systole, is reduced to 
+|u1D447|zeroCst= |u1D447|mCst|aCst|xCst |u1D436|u1D44∆|zeroCst|twoCst
+|u1D436|u1D44∆|zeroCst|twoCst+ |u1D438|u1D436|u1D44∆|fiveCst|zeroCst |twoCst|u1D436|u1D461Cst 
+Here, |u1D447|mCst|aCst|xCst  is the maximum isometric tension achieved at the l ongest sarco- 
+mere length and maximum peak intracellular calcium concentration.  The 
+length-dependent calcium sensitivity and internal v ariable is given by, 
+|u1D438|u1D436|u1D44∆|fiveCst|zeroCst =(|u1D436|u1D44∆|zeroCst)|mCst|aCst|xCst 
+/radical.v2exp[|u1D43J(/u1D45∫−/u1D45∫|zeroCst] − 1 
+|u1D436|u1D461Cst= 1/2(1 − cos |u1D464) 
+/u1D45∫=/u1D45∫|u1D44JCst/radical.v12|u1D438|oneCst|oneCst + 1 
+|u1D464 =/u1D̅0B0.25 + |u1D461|u1D4JFCst
+|u1D461|u1D4JFCst 
+|u1D461|u1D4JFCst= |u1D4JA /u1D45∫+ |u1D44F|u1D44F *

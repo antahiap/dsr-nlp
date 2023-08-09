@@ -1,0 +1,57 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+I Area moment of inertia for bending/compression st iﬀ ness; see 
+Remark 5 . 
+J Torsional constant for bending/compression stiﬀness ; see 
+Remark 5 . 
+AS Shear area for bending/compression stiﬀness; see  Remark 5 . 
+F Maximum force in compression/tension; see Remark 5 . 
+M Maximum torque; see Remark 5 . 
+R Rotational mass scaling factor; see Remark 5 . 
+P1DOFF Part ID oﬀset for internally created 1D, bar -type, belt parts for 2D 
+seatbelt of this material, that is, the IDs of newly  created 1D belt 
+parts will be P1DOFF + 1, P1DOFF + 2, …  If zero, the maximum 
+ID of user-deﬁned parts is used as the part ID oﬀse t. 
+FORM Formulation of the translated fabric material; see FORM of 
+*.   *.   
+ 2.  Damping.   A small amount of damping is automatically includ ed.  This 
+reduces high frequency oscillation, but, with reali stic force-strain input charac- 
+teristics and loading rates, does not signiﬁcantly alter the overall forces-strain 
+performance.  The damping forced opposes the relati ve motion of the nodes 
+and is limited by stability: 
+|u1D437 =0.1 ×  mass × relati v e v elocity 
+ time step si ze  
+In addition, the magnitude of the damping force is limited to one-tenth of the 
+force calculated from the force-strain relationship  and is zero when the belt is 
+slack.  Damping forces are not applied to elements attached to sliprings and 
+retractors. 
+3.  Nodal Masses.  MPUL, the mass per unit length, is used to calculat e the nodal 
+masses during initialization. 
+4.  Minimum Length.   LMIN, the “minimum” length, controls the shortest  length 
+allowed in any element and determines when an eleme nt passes through 
+sliprings or is absorbed into the retractors.  One tenth of a typical initial ele- 
+ment length is usually a good choice. 
+5.  Bending and Compression Stiffness for 1D Elements.   Since one-
+dimensional elements do not possess any bending or compression stiﬀness, 
+dynamic analysis is mandatory during an implicit an alysis that includes belts.  
+However, one dimensional belt elements can  be used in implicit statics by asso- 
+ciating them with bending/compression properties wi th the ﬁrst optional card.  
+Two-dimensional belt elements are not supported wit h this feature. 
+To achieve bending and compression stiﬀness in one- dimensional belts, the 
+belt element is overlayed with a Belytschko-Schwer beam element (see *SEC-
+TION_BEAM, ELFORM = 2, for a more comprehensive des cription of ﬁelds A, 
+I, J and AS) with circular cross section.  These el ements have 6 degrees of free- 
+dom including rotational degrees of freedom.  The m aterial used in this context 
+is an elastic-ideal-plastic material where the elas tic part is governed by the 
+Young’s modulus, |u1D438.  Two yield values, F (the maximum compression/ten sion 
+force) and M (the maximum torque), are used as uppe r bounds for the result- 
+ants.  The bending/compression forces and moments f rom this contribution 
+are accumulated to the force from the seatbelt itse lf.  Since the main purpose is 
+to eliminate the singularities in bending and compr ession, it is recommended 
+to choose the bending and compression properties in  the optional card careful- 
+ly so as to not signiﬁcantly inﬂuence the overall r esponse. 
+For the sake of completeness, this feature is also supported by the explicit inte- 
+grator; therefore, a rotational nodal mass is neede d.  Each of the two nodes of 
+an element gets a contribution from the belt that i s calculated as RMASS =*

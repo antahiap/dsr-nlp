@@ -1,0 +1,64 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+K Bulk modulus 
+LC1 Load curve ID that deﬁnes the relaxation function i n shear.  This 
+curve is used to ﬁt the coeﬃcients G i and BETA i.  If zero, deﬁne 
+the coeﬃcients directly.  The latter is recommended . 
+LC2 Load curve ID that deﬁnes the instantaneous ela stic respon se in 
+compression and tension.  If zero, deﬁne the coeﬃci ents directly.  
+Symmetry is not assumed if only the tension side is  deﬁned; therefore, 
+deﬁning the response in tension only, may lead to n onphysical behavior 
+in compression.  Also, this curve sh ould give a softening response for 
+increasing strain without any negative or zero slop es.  A stiﬀening 
+curve or one with negative slopes is generally unst able.  
+N Number of terms used in the Prony series which must  be less 
+than or equal to 6. This number should be equal to the number of 
+decades of time covered by the experimental data.  Deﬁne this 
+number if LC1 is nonzero.  Carefully check the ﬁt i n the d3hsp  ﬁle 
+to ensure that it is valid, since the least square ﬁt is not always 
+reliable. 
+GSTART Star ting value for least square ﬁt.  If zero, a default  value is set 
+equal to the inverse of the largest time in the exp eriment.  Deﬁne 
+this number if LC1 is nonzero. 
+M Number of terms used to determine the instantaneous  elastic 
+response.  This variable is ignored with the new formulation but 
+is kept for compatibility with the previous input. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SO E_MIN E_MAX GAMA1 GAMA2 K EH FORM 
+Type F F F F F F F I 
+Default 0.0 -0.9 5.1 0.0 0.0 0.0 0.0 0 
+ *.   
+  VARIABLE   DESCRIPTION  
+In general, formulations 1 and 2 won’t give the sam e responses. 
+ 
+Viscoelastic Constants Card 1.   Additional card for LC1 = 0. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable G1 BETA1 G2 BETA2 G3 BETA3 G4 BETA4 
+Type F F F F F F F F 
+ 
+Viscoelastic Constants Card 2.   Additional card for LC1 = 0. 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable G5 BETA5 G6 BETA6 G7 BETA7 G8 BETA8 
+Type F F F F F F F F 
+ 
+Viscoelastic Constants Card 3.   Additional card for LC1 = 0. 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable G9 BETA9 G10 BETA10 G11 BETA11 G12 BETA12 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+Gi Coeﬃcients of the relaxation function.  The number of coeﬃcients 
+is currently limited to 6 although 12 may be read i n to maintain 
+compatibility with the previous formulation’s input .  Deﬁne these 
+coeﬃcients if LC1 is set to zero.  At least 2 coeﬃc ients must be 
+nonzero. 
+BETA i Decay constants of the relaxation function.  Deﬁne these 
+coeﬃcients if LC1 is set to zero.  The number of co eﬃcients is 
+currently limited to 6 although 12 may be read in t o maintain 
+compatibility with the previous formulation’s input . 
+ *

@@ -1,0 +1,29 @@
+-PARAMETER_BARLAT [2,3a, 3c] {7} 
+ *. -PARAMETER_BARLAT *. -PARAMETER_BARLAT  
+2-358 (MAT) LS-DYNA R13 *. -PARAMETER_BARLAT  *. -PARAMETER_BARLAT  
+2-360 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+LCRBI Load curve deﬁning biaxial R- value vs.  biaxial strain, see 
+discussion in the Remarks below for a deﬁnition.  D efault is a 
+constant R-value of 1.0, a negative input will result in a constant 
+R-value of –LCRBI. 
+LCRSH Load curve deﬁning shear R- value vs.  shear strain, see discussion 
+in the Remarks below for a deﬁnition.  Default is a  constant R-
+value of 1.0, a negative input will result in a con stant R-value of –
+LCRSH. 
+M Barlat ﬂow exponent, |u1D4JA, must be an integer value. 
+AOPT Material axes option (see . -PARAMETER_BARLAT  *. -PARAMETER_BARLAT  
+2-362 (MAT) LS-DYNA R13 These curves are transformed internally to be used with the eﬀective stress and strain 
+properties in the actual model.  The eﬀective plast ic strain does not coincide with the 
+plastic strain components in other directions than the rolling direction and may be 
+somewhat confusing to the user.  Therefore the von Mises work equivalent plastic strain 
+is output as history variable #2. As for hardening,  the optional biaxial and shear R-value 
+curves LCRBI and LCRSH are deﬁned in a special way for which we return to the local 
+plastic strain tensor /u1D̅:A as deﬁned above.  The biaxial and shear R-values a re deﬁned as 
+|u1D44J|u1D44FCst/|u1D46≠Cst=|u1D7≠≠̇|oneCst
+|u1D7≠≠̇|twoCst 
+and again the curves are |u1D44J|u1D44FCst/|u1D46≠Cst as function of |u1D7≠≠|oneCst+|u1D7≠≠|twoCst. Note here that the suﬃx |u1D44F assumes 
+loading biaxially and |u1D46≠ assumes loading in shear, so the R-values to be de ﬁned are 
+always positive. 
+ 
+The option HOSF = 0 is equivalent to the standard B arlat model with HR = 7 whose 
+yield function can be expressed by the potential Φ as given in the remarks for *

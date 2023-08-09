@@ -1,0 +1,247 @@
+ ........................... ................................................... ............... 2-813  
+*.  [0,3c] {20} 
+ *.  *.   *.   
+This is  Material Type 126.  This material model is usually used for aluminum 
+honeycomb crushable foam materials with anisotropic  behavior.  Three yield surfaces 
+are available.  The ﬁrst yield surface deﬁnes the n onlinear elastoplastic material 
+behavior separately for all normal and shear stress es, which are considered to be fully 
+uncoupled.  The second yield surface considers the eﬀects of oﬀ-axis loading.  It is 
+transversely isotropic.  However, because of this d eﬁnition of the second yield surface, 
+the material can collapse in a shear mode due to lo w shear resistance.  There was no 
+obvious way of increasing the shear resistance with out changing the behavior in purely 
+uniaxial compression.  Therefore, with the third yi eld surface, the model has been 
+modiﬁed so that the shear and hydrostatic resistanc e can be prescribed for the material 
+without aﬀecting the uniaxial behavior.  The choice  of the second yield surface is 
+ﬂagged by the sign of the ﬁrst load curve ID, LCA.  The third yield surface is ﬂagged by 
+the sign of ECCU, which becomes the initial stress yield limit in simple shear.  A 
+description is given below. 
+ 
+The development of the second and third yield surfa ces are based on experimental test 
+results of aluminum honeycomb specimens at Toyota M otor Corporation. 
+ 
+The default element for this material is solid type  0, a nonlinear spring type brick 
+element.  The recommended hourglass control is the type 2 viscous formulation for one 
+point integrated solid elements.  The stiﬀness form  of the hourglass control when used 
+with this constitutive model can lead to nonphysica l results since strain localization in 
+the shear modes can be inhibited. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR SIGY VF MU BULK 
+Card 2.   This card is required. 
+LCA LCB LCC LCS LCAB LCBC LCCA LCSR 
+Card 3.   This card is required. 
+EAAU EBBU ECCU GABU GBCU GCAU AOPT MACF 
+Card 4.   This card is required. 
+XP YP ZP A1 A2 A3   *.   
+ Card 5.   This card is required. 
+D1 D2 D3 TSEF SSEF VREF TREF SHDFLG 
+Card 6.   This card is included if and only if AOPT = 3 or 4 (see Card 3). 
+V1 V2 V3      
+Card 7.   This card is included if and only if LCSR = -1 (s ee Card 2). 
+LCSRA LCSRB LCSRC LCSRAB LCSRBC LCSCA LCSRA LCSRB 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY VF MU BULK 
+Type A F F F F F F F 
+Default none none none none none none .05 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus for compacted honeycomb material 
+PR Poisson’s ratio for compacted honeycomb material 
+SIGY Yield stress for fully compacted honeycomb 
+VF Relative volume at which the honeycomb is fully comp acted.  
+This ﬁeld is ignored for corotational solid element s, types 0 and 9.  
+MU Material viscosity coeﬃcient, |u1D7≠7.  The default value of 0.05 is 
+recommended. 
+BULK Bulk viscosity ﬂag: 
+EQ.0.0: Bulk viscosity is not used.  This is recommended. *.   
+  VARIABLE   DESCRIPTION  
+For the corotational solid elements, types 0 and 9,  
+engineering strain is expected, but for all other s olid 
+and thick shell element formulations a logarithmic 
+strain is expected.  See Remarks 1  and 3. 
+LCS Load curve ID (see *DEFINE_CURVE): 
+LCA.LT.0: Damage curve giving the shear stress multiplier as 
+a function of the shear strain component.  This 
+curve deﬁnition is optional and may be used if 
+damage is desired.  IF SHDFLG = 0 (the default), 
+the damage value multiplies the stress every time 
+step and the stress is updated incrementally.  The 
+damage curve should be set to unity until failure 
+begins.  Afte r failure the value should drop to 0.999 
+or 0.99 or any number between zero and one de- 
+pending on how many steps are needed to zero the 
+stress.  Alternatively, if SHDFLG = 1, the damage 
+value is treated as a factor that scales the shear 
+stress compared to the undamaged value. 
+LCA.GT.0: Shear stress as a function of shear strain.  For th e 
+corotational solid elements, types 0 and 9, enginee r- 
+ing strain is expected, but for all other solid and  
+thick shell element formulations a shear strain 
+based on the deforme d conﬁguration is used.  Each 
+component of shear stress may have its own load 
+curve.  See Remarks 1  and 3. 
+LCAB Load curve ID (see *DEFINE_CURVE):   
+LCA.LT.0: Damage curve giving shear |u1D44∆|u1D44F -stress multiplier as a 
+function of the ab- shear strain component.  This 
+curve deﬁnition is optional and may be used if 
+damage is desired.  See LCS above. 
+LCA.GT.0: |u1D7≠∆|u1D44∆Cst|u1D44FCst  as a function of shear strain- |u1D44∆|u1D44F , |u1D7≠≠|u1D44∆Cst|u1D44FCst .  For the 
+corotational solid elements, types 0 and 9, enginee r- 
+ing strain is expected, but for all other solid and  
+thick shell element formulations a shear strain 
+based on the deformed conﬁguration is used.  See 
+Remarks 1  and 3. 
+LCBC Load curve ID (see *DEFINE_CURVE):   
+LCA.LT.0: Damage curve giving |u1D44F /u1D450-shear stress multiplier as a *.   
+  VARIABLE   DESCRIPTION  
+EBBU Elastic modulus  |u1D438|u1D44FCst|u1D44FCst|u1D462Cst  in uncompressed conﬁguration. 
+LCA.LT.0: Weak axis elastic modulus in uncompressed 
+conﬁguration   
+ECCU Elastic modulus  |u1D438|u1D4J≠Cst|u1D4J≠Cst|u1D462Cst  in uncompressed conﬁguration. 
+LT.0.0: |ECC U | is the initial stress limit (yield) in simple shear , 
+|u1D7≠∆/u1D451.st/u1D44C.st.  ECCU < 0 activates the third yield surface if 
+LCA < 0. 
+GABU Shear modulus  |u1D43A|u1D44∆Cst|u1D44FCst|u1D462Cst in uncompressed conﬁguration. 
+LCA.LT.0: Strong- weak shear modulus in uncompressed 
+conﬁguration   
+GBCU Shear modulus |u1D43A|u1D44FCst|u1D4J≠Cst|u1D462Cst  in uncompressed conﬁguration. 
+LCA.LT.0: Weak- weak shear modulus in uncompressed 
+conﬁguration  
+GCAU Shear modulus  |u1D43A|u1D4J≠Cst|u1D44∆Cst|u1D462Cst  in uncompressed conﬁguration. 
+ECCU.LT.0.0: GCAU is the initial stress limit (yield) in 
+hydrostatic compression, |u1D7≠∆|u1D4JDCst/u1D44C.st. 
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES. 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR. 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector v with th e 
+element normal.  The plane of a solid element is the 
+midsurface between the inner surface and outer sur-
+face deﬁned by the ﬁrst four nodes and the last fou r *.   
+  VARIABLE   DESCRIPTION  
+TSEF Tensile strain at element failure (element will ero de) 
+SSEF Shear strain at element failure (element will erode ) 
+VREF This is an optional input parameter for solid eleme nts types 1, 2, 
+3, 4, and 10, and thick shell formulations 3, 5, an d 7.  Relative 
+volume at which the reference geometry is stored.  At this time 
+the element behaves like a nonlinear spring.  If TR EF, belo w, is 
+reached ﬁrst, then VREF will have no eﬀect. 
+TREF This is an optional input parameter for solid eleme nts types 1, 2, 
+3, 4, and 10, and thick shell formulation 3, 5, and  7.  Element time 
+step size at which the reference geometry is stored .  When thi s 
+time step size is reached the element behaves like a nonlinear 
+spring.  If VREF, above, is reached ﬁrst then TREF will have no 
+eﬀect. 
+SHDFLG Flag deﬁning treatment of damage from curves LCS, L CAB, 
+LCBC and LCCA (relevant only when LCA < 0): 
+EQ.0.0: Damage reduces shear stress every time step, 
+EQ.1.0: Damage = (shear stress)/(undamaged shear stress) 
+ 
+Additional card for AOPT = 3 or AOPT = 4. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+V1 V2 V3 Components of vector /u1D42F for AOPT = 3 and 4 
+ *.   
+  VARIABLE   DESCRIPTION  
+scale factor. 
+LCSRBC Optional load curve ID if LCSR = -1 (see *DEFINE_ CURVE) for 
+strain rate eﬀects deﬁning the scale factor for the  yield stress in 
+the |u1D44F /u1D450-direction as a function of the natural logarithm  of the 
+absolute value of strain rate in the |u1D44F /u1D450-direction.  The scale factor 
+for the lowest value of strain rate deﬁned by the c urve is used if 
+the strain rate is zero.  The scale factor for the highest value of 
+strain rate deﬁned by the curve also deﬁnes the upp er limit of the 
+scale factor. 
+LCSRCA Optional load curve ID if LCSR = -1 (see *DEFINE_ CURVE) for 
+strain rate eﬀects deﬁning the scale factor for the  yield stress in 
+the /u1D450|u1D44∆ -direction as a function of the natural logarithm  of the 
+absolute value of strain rate in the /u1D450|u1D44∆ -direction.  The scale factor 
+for the lowest value of strain rate deﬁned by the curve  is used if 
+the strain rate is zero.  The scale factor for the highest value of 
+strain rate deﬁned by the curve also deﬁnes the upp er limit of the 
+scale factor. 
+Remarks: 
+1.  Load Curves and Efﬁciency.   For eﬃciency it is strongly recommended that 
+the load curve IDs: LCA, LCB, LCC, LCS, LCAB, LCBC,  and LCCA, contain 
+exactly the same number of points with correspondin g strain values on the 
+abscissa.  If this recommendation is followed, the cost of the table lookup is 
+insigniﬁcant.  Conversely, the cost increases signi ﬁcantly if the abscissa strain 
+values are not consistent between load curves. 
+2.  Elastic Moduli.  For solid element formulations 1 and 2, and thick s hell 
+formulations 3, 5, and 7, the behavior before compa ction is orthotropic where 
+the components of the stress tensor are uncoupled, meaning a component of 
+strain will generate resistance in the local |u1D44∆-direction with no coupling to the 
+local |u1D44F and /u1D450 directions.  The elastic moduli vary from their in itial values to the 
+fully compacted values linearly with the relative v olume: 
+|u1D438|u1D44∆Cst|u1D44∆Cst =|u1D438|u1D44∆Cst|u1D44∆Cst|u1D462Cst +|u1D6FD(|u1D438−|u1D438|u1D44∆Cst|u1D44∆Cst|u1D462Cst ) 
+|u1D438|u1D44FCst|u1D44FCst = |u1D438|u1D44FCst|u1D44FCst|u1D462Cst + |u1D6FD(|u1D438 − |u1D438|u1D44FCst|u1D44FCst|u1D462Cst ) 
+|u1D438|u1D4J≠Cst|u1D4J≠Cst =|u1D438|u1D4J≠Cst|u1D4J≠Cst|u1D462Cst +|u1D6FD(|u1D438−|u1D438|u1D4J≠Cst|u1D4J≠Cst|u1D462Cst ) |u1D43A|u1D44∆Cst|u1D44FCst =|u1D438|u1D44∆Cst|u1D44FCst|u1D462Cst +|u1D6FD(|u1D43A−|u1D43A|u1D44∆Cst|u1D44FCst|u1D462Cst ) 
+|u1D43A|u1D44FCst|u1D4J≠Cst = |u1D43A|u1D44FCst|u1D4J≠Cst|u1D462Cst + |u1D6FD(|u1D43A − |u1D43A|u1D44FCst|u1D4J≠Cst|u1D462Cst ) 
+|u1D43A|u1D4J≠Cst|u1D44∆Cst =|u1D43A|u1D4J≠Cst|u1D44∆Cst|u1D462Cst +|u1D6FD(|u1D43A−|u1D43A|u1D4J≠Cst|u1D44∆Cst|u1D462Cst ) 
+where  
+|u1D6FD = max |<racketleftCv6min |parenleftCv61 − |u1D449
+1 − |u1D449/u1D45:.st, 1|parenriµhtCv6 , 0|<racketriµhtCv6 *.   
+ |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D4JBCst+|oneCsttrial =|u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D4JBCst+|u1D438|u1D44∆Cst|u1D44∆Cst ∆|u1D7≠≠|u1D44∆Cst|u1D44∆Cst  
+|u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |u1D4JBCst+|oneCsttrial = |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |u1D4JBCst+ |u1D438|u1D4J≠Cst|u1D4J≠Cst ∆|u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst  
+|u1D7≠∆|u1D44FCst|u1D44FCst|u1D4JBCst+|oneCsttrial =|u1D7≠∆|u1D44FCst|u1D44FCst |u1D4JBCst+|u1D438|u1D44FCst|u1D44FCst ∆|u1D7≠≠|u1D44FCst|u1D44FCst  |u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D4JBCst+|oneCsttrial =|u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D4JBCst+2|u1D43A|u1D44∆Cst|u1D44FCst ∆|u1D7≠≠|u1D44∆Cst|u1D44FCst  
+|u1D7≠∆|u1D44FCst|u1D4J≠Cst |u1D4JBCst+|oneCsttrial = |u1D7≠∆|u1D44FCst|u1D4J≠Cst |u1D4JBCst+ 2|u1D43A|u1D44FCst|u1D4J≠Cst ∆|u1D7≠≠|u1D44FCst|u1D4J≠Cst  
+|u1D7≠∆|u1D4J≠Cst|u1D44∆Cst |u1D4JBCst+|oneCsttrial =|u1D7≠∆|u1D4J≠Cst|u1D44∆Cst |u1D4JBCst+2|u1D43A|u1D4J≠Cst|u1D44∆Cst ∆|u1D7≠≠|u1D4J≠Cst|u1D44∆Cst  
+If LCA > 0, each component of the updated stress te nsor is checked to ensure 
+that it does not exceed the permissible value deter mined from the load curves; 
+for example, if 
+/divides.v4|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCsttrial /divides.v4> |u1D7≠6|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |parenleftCv2|u1D7≠≠|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2  , 
+then 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst= |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |parenleftCv2|u1D7≠≠|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|u1D7≠6|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCsttrial 
+/divides.v:|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCsttrial /divides.v: 
+On Card 3  |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |parenleftCv2|u1D7≠≠|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2 is deﬁned in the load curve speciﬁed in columns 31 -40 for 
+the aa stress component, 41-50 for the bb  component, 51-60 for the cc compo- 
+nent, and 61-70 for the ab, bc, cb  shear stress components.  The parameter |u1D7≠6 is 
+either unity or a value taken from the load curve n umber, LCSR, that deﬁnes |u1D7≠6 
+as a function of strain-rate.  Strain-rate is deﬁne d here as the Euclidean norm of 
+the deviatoric strain-rate tensor. 
+If LCA < 0, a transversely isotropic yield surface is obtained where the uniaxial 
+limit stress, |u1D7≠∆|u1D466Cst|parenleftCv2/u1Dℜ11, |u1D7≠≠v ol |parenriµhtCv2, can be deﬁned as a function of angle /u1Dℜ11 with the strong 
+axis and volumetric strain, |u1D7≠≠v ol .  In order to facilitate the input of data to such  a 
+limit stress surface, the limit stress is written a s: 
+|u1D7≠∆|u1D466Cst|parenleftCv2/u1Dℜ11, |u1D7≠≠v ol |parenriµhtCv2 = |u1D7≠∆|u1D44FCst|parenleftCv1/u1Dℜ11|parenriµhtCv1 + |parenleftCv1cos /u1Dℜ11|parenriµhtCv1|twoCst|u1D7≠∆|u1D46≠Cst|parenleftCv2|u1D7≠≠v ol |parenriµhtCv2 + |parenleftCv1sin /u1Dℜ11|parenriµhtCv1|twoCst|u1D7≠∆|u1D464Cst|parenleftCv2|u1D7≠≠v ol |parenriµhtCv2 
+where the functions |u1D7≠∆|u1D44FCst, |u1D7≠∆|u1D46≠Cst, and |u1D7≠∆|u1D464Cst are represented by load curves LCA, LCB, 
+LCC, respectively.  The latter two curves can be us ed to include the stiﬀening 
+eﬀects that are observed as the foam material crush es to the point where it 
+begins to lock up.  To ensure that the limit stress  decreases with respect to the 
+oﬀ-angle the curves should be deﬁned such that foll owing equations hold: 
+∂|u1D7≠∆|u1D44FCst|parenleftCv1/u1Dℜ11|parenriµhtCv1
+∂/u1Dℜ11≤ 0 
+and  
+|u1D7≠∆|u1D46≠Cst|parenleftCv2|u1D7≠≠v ol |parenriµhtCv2 − |u1D7≠∆|u1D464Cst|parenleftCv2|u1D7≠≠v ol |parenriµhtCv2 ≥ 0. 
+A drawback of this implementation was that the mate rial often collapsed in 
+shear mode due to low shear resistance.  There was no way of increasing the 
+shear resistance without changing the behavior in p ure uniaxial compression.  
+We have therefore modiﬁed the model so that the use r can optionally prescribe 
+the shear and hydrostatic resistance in the materia l without aﬀecting the uniax- *.   
+ We can now update the pressure using the elastic bu lk modulus, |u1D43∆ 
+|u1D4JD|u1D4JBCst+|oneCst= |u1D4JD|u1D4JBCst− |u1D43∆∆|u1D7≠≠|u1D4J8Cst|u1D4J8Cst |u1D4JBCst+|oneCst|twoCst/fraction.v2
+|u1D43∆ =|u1D438
+3(1 − 2/u1D̅08) 
+and obtain the ﬁnal value for the Cauchy stress 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst= |u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst− |u1D4JD|u1D4JBCst+|oneCst|u1D6FF|u1D4J6Cst|u1D4J7Cst  
+After completing the stress update, we transform th e stresses back to the global 
+conﬁguration. 
+5.  Failure.   For *CONSTRAINED_TIED_NODES_WITH_FAILURE, the fai lure is 
+based on the volume strain instead to the plastic s train. *

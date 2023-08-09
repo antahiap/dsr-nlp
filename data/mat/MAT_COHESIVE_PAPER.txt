@@ -1,0 +1,91 @@
+ ............................... ................................................... .................... 2-1777  
+*.  [7] 
+ *.  *.   *.   
+This is material type 279. This is a cohesive model  for paper materials and can be used 
+only with cohesive element fomulations; see the var iable ELFORM in *SECTION_SOL-
+ID and *SECTION_SHELL. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO ROFLG INTFAIL EN0 ET0 EN1 ET1 
+Type A8 F F F F F F F 
+Default none none none none none none none none 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable T0N DN T1N T0T DT T1T E3C CC 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable ASIG BSIG CSIG FAILN FAILT    
+Type F F F F F    
+Default none none none none none    
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density *.   
+ ROFLG Flag for whether density is speciﬁed per unit  area or volume. 
+ROFLG.EQ.0:  speciﬁed density per unit volume (default) 
+ROFLG.EQ.1:  speciﬁes the density is per unit area for 
+controlling the mass of cohesive elements with 
+an initial volume of zero. 
+INTFAIL The number of integration points required for the c ohesive 
+element to be d eleted.  If it is zero, the element will not be del eted 
+even if it satisﬁes the failure criterion.  The val ue of INT FAIL may 
+range from 1 to 4, with 1 the recommended value. 
+EN0 The initial tensile stiﬀness (units of stress /  length) normal to the 
+plane of the cohesive element. 
+EN1 The ﬁnal tensile stiﬀness (units of stress / length) normal to the 
+plane of the cohesive element. 
+ET0 The initial stiﬀness (units of stress / length) tangential to the 
+plane of the cohesive element.  
+ET1 The ﬁnal stiﬀness (units of stress / length) tangential to the plane 
+of the cohesive element. 
+T0N Peak tensile traction in normal direction. 
+DN Scale factor (unit of length). 
+T1N Final tensile traction in normal direction. 
+T0T Peak tensile traction in tangential direction.  If negative, the 
+absolute value indicates a curve with respect to th e normal 
+traction. 
+DT Scale factor (unit of length). If ne gative, the absolute value 
+indicates a curve with respect to the normal stress . 
+T1T Final traction in tangential direction.  If negativ e, the absolute 
+value indicates a curve with respect to the normal traction. 
+E3C Elastic parameter in normal compression. 
+CC Elastic parameter in normal compression. 
+ASIG Plasticity hardening parameter in normal compr ession. 
+BSIG Plasticity hardening parameter in normal compr ession. *.   
+ |u1D6FF̅|u1D4JDCst=/integral.v:|dividesCv2d|u1D6FF|u1D4JDCst|dividesCv2 . 
+Yield traction for tensile loads in normal directio n is given by 
+|u1D447yield = |parenleftCv2|u1D447|u1D441Cst|zeroCst− |u1D447|u1D441Cst|oneCst|parenriµhtCv2 exp 
+⎝⎜⎛−|u1D6FF̅|u1D4JDCst
+|u1D6FF|u1D441Cst⎠⎟⎞+ |u1D447|u1D441Cst|oneCst≥ 0, 
+and yielding occurs when |u1D447 > |u1D447yield ≥ 0. The above elastoplastic model gives the 
+traction-separation law depicted in Figure M279-1 . 
+ 
+Normal compression: 
+In normal compression the elastic traction is 
+|u1D447 = |u1D438|threeCst|u1D4J≠Cst|<racketleftCv11 − exp(−|u1D436|u1D4J≠Cst|u1D6FF|u1D4J2Cst)|<racketriµhtCv1 ≤ 0,  
+and the yield traction is 
+|u1D447yield = −/˙racketleft.v2|u1D434|u1D7≠∆Cst+ |u1D43J|u1D7≠∆Cstexp|parenleftCv2−|u1D436|u1D7≠∆Cst|u1D6FF̅|u1D4JDCst|parenriµhtCv2/˙racketright.v2≤ 0, 
+with yielding if  |u1D447 < |u1D447yield ≤ 0. 
+ 
+Tangential traction: 
+Assume the total separation is an additive split of  the elastic and plastic separation in 
+each in-plane direction 
+|u1D6FF|u1D4J6Cst= |u1D6FF|u1D4J2Cst|u1D4J6Cst+ |u1D6FF|u1D4JDCst|u1D4J6Cst, |u1D4J6 = 1,2. 
+The elastic traction is given by 
+|u1D447|u1D4J6Cst= |u1D438|u1D6FF|u1D4J2Cst|u1D4J6Cst= |u1D438(|u1D6FF|u1D4J6Cst− |u1D6FF|u1D4JDCst|u1D4J6Cst), 
+where the tensile normal stiﬀness 
+|u1D438 = |parenleftCv2|u1D438|u1D447Cst|zeroCst− |u1D438|u1D447Cst|oneCst|parenriµhtCv2 exp 
+⎝⎜⎛−|u1D6FF̅|u1D4JDCst
+|u1D6FF|u1D447Cst⎠⎟⎞+ |u1D438|u1D447Cst|oneCst, 
+depends on the eﬀective plastic separation 
+|u1D6FF̅|u1D4JDCst=/integral.v:d|u1D6FF|u1D4JDCst, d|u1D6FF|u1D4JDCst=/radical.v:|parenleftCv2d|u1D6FF|u1D4JDCst|oneCst|parenriµhtCv2|twoCst+ |parenleftCv2d|u1D6FF|u1D4JDCst|twoCst|parenriµhtCv2|twoCst. 
+Yield traction is given by 
+|u1D447yield = |parenleftCv2|u1D447|u1D447Cst|zeroCst− |u1D447|u1D447Cst|oneCst|parenriµhtCv2 exp 
+⎝⎜⎛−|u1D6FF̅|u1D4JDCst
+|u1D6FF|u1D447Cst⎠⎟⎞+ |u1D447|u1D447Cst|oneCst, 
+and yielding occurs when  
+|u1D447|oneCst|twoCst+ |u1D447|twoCst|twoCst− |u1D447|u1D466Cst|u1D4J6Cst|u1D4J2Cst|u1D4J9Cst /u1D451.st |twoCst≥ 0. 
+The plastic ﬂow increment follows the ﬂow rule  *

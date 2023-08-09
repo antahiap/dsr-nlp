@@ -1,0 +1,63 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+CVmass1 -
+CVmass8 Heat capacity at constant volume for up to eight diﬀerent gases in 
+per-mass unit. 
+CPmass1 -
+CPmass8 Heat capacity at constant pressure for up to eight diﬀerent gases 
+in per-mass unit. 
+ 
+Card 2 for Per Mole Calculation.   Method (B) RUNIV is nonzero. 
+Card 2b.1  1 2 3 4 5 6 7 8 
+Variable MOLWT1  MOLWT2  MOLWT3  MOLWT4  MOLWT5  MOLWT6  MOLWT7  MOLWT8  
+Type F F F F F F F F 
+ 
+Card 3 for Per Mole Calculation.   Method (B) RUNIV is nonzero. 
+Card 2b.2  1 2 3 4 5 6 7 8 
+Variable CPmole1 CPmole2 CPmole3 CPmole4 CPmole5 CPmole6 CPmole7 CPmole8 
+Type F F F F F F F F 
+ 
+Card 4 for Per Mole Calculation.   Method (B) RUNIV is nonzero. 
+Card 2b.3  1 2 3 4 5 6 7 8 
+Variable B1 B2 B3 B4 B5 B6 B7 B8 
+Type F F F F F F F F 
+ 
+Card 5 for Per Mole Calculation.   Method (B) RUNIV is nonzero. 
+Card 2b.4  1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 C5 C6 C7 C8 
+Type F F F F F F F F 
+ *.   
+ word *INITIAL_GAS_MIXTURE. 
+4.  Temperature and Energy Conservation.  The ideal gas mixture is assumed 
+to be thermal equilibrium, that is, all species are  at the same temperature ( |u1D447).  
+The gases in the mixture are also assumed to follow  Dalton’s Partial Pressure 
+Law, |u1D443 =∑ |u1D443|u1D4J6Cstngas 
+|u1D4J6Cst.  The partial pressure of each gas is then |u1D443|u1D4J6Cst= |u1D7≠+|u1D4J6Cst|u1D44Jgas |u1D4J6Cst|u1D447 where 
+|u1D44Jgas |u1D4J6Cst=|u1D44JCstuni v 
+/u1D440.st/u1D44A.st .  The individual gas species temperature equals th e mixture tem- 
+perature.  The temperature is computed from the int ernal energy where the 
+mixture internal energy per unit volume  is used, 
+|u1D4J2|u1D449Cst= |summationCv1 |u1D7≠+|u1D4J6Cst|u1D436|u1D449Cst|u1D4J6Cstsngas 
+|u1D4J6Cst|u1D447|u1D4J6Cst= |summationCv1 |u1D7≠+|u1D4J6Cst|u1D436|u1D449Cst|u1D4J6Cstsngas 
+|u1D4J6Cst|u1D447 
+|u1D447 = |u1D447|u1D4J6Cst=|u1D4J2|u1D449Cst
+∑ |u1D7≠+|u1D4J6Cst|u1D436|u1D449Cst|u1D4J6Cstsngas 
+|u1D4J6Cst 
+In general, the advection step conserves momentum  and internal energy , but not 
+kinetic energy .  This can result in energy lost in the system and  lead to a pres- 
+sure drop.  In *.   *.   
+ $-------------------------------------------------- ----------------------------- 
+$ One card is defined for each AMMG that will occup y some elements of a mesh set 
+*INITIAL_GAS_MIXTURE 
+$      SID     STYPE     MMGID        T0 
+         4         1         1    298.15 
+$     RHO1      RHO2      RHO3      RHO4      RHO5      RHO6      RHO7      RHO8 
+1.17913E-9 
+*INITIAL_GAS_MIXTURE 
+$      SID     STYPE     MMGID        T0 
+         4         1         2    298.15 
+$     RHO1      RHO2      RHO3      RHO4      RHO5      RHO6      RHO7      RHO8 
+1.17913E-9 
+$-------------------------------------------------- ----------------------------- *. . *

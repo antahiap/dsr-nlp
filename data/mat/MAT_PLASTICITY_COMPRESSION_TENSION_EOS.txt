@@ -1,0 +1,96 @@
+ ........... .................................................. 2-991  
+*.  [0,3c,5,8B] {16} 
+ *.  *.   *.   
+This is  Material Type 155.  An isotropic elastic-plastic ma terial where unique yield 
+stress as a function of plastic strain curves can b e deﬁned for compression and tension.  
+Also, failure can occur based on a plastic strain o r a minimum time step size.  Rate 
+eﬀects on the yield stress are modeled either by us ing the Cowper-Symonds strain rate 
+model or by using two load curves that scale the yi eld stress values in compression and 
+tension, respectively.  Material rate eﬀects, which  are independent of the plasticity 
+model, are based on a 6-term Prony series Maxwell m ode that generates an additional 
+stress tensor.  The viscous stress tensor is superi mposed on the stress tensor generated 
+by the plasticity.  Pressure is deﬁned by an equati on of state, which is required to utilize 
+this model.  This model is applicable to solid elem ents and SPH. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR C P FAIL TDEL 
+Card 2.   This card is required. 
+LCIDC LCIDT LCSRC LCSRT SRFLAG    
+Card 3.   This card is required. 
+PC PT PCUTC PCUTT PCUTF SCALEP SCALEE  
+Card 4.   This card is required. 
+K        
+Card 5.   This card is optional.  Up to six cards may be inpu t.  The next keyword (“*”) 
+card terminates this input. 
+Gi BETA i       *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR C P FAIL TDEL 
+Type A F F F F F F F 
+Default none none none none 0.0 0.0 10 20  0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed. 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+C Strain rate parameter, |u1D436; see Remarks below. 
+P Strain rate parameter, |u1D4JD; see Remarks below. 
+FAIL Failure ﬂag: 
+LT.0.0: User deﬁned failure subroutine, matusr_24  in 
+dyn21.F , is called to determine failure 
+EQ.0.0: Failure is not considered.  This option is recommen ded 
+if failure is not of interest since many calculatio ns will 
+be saved. 
+GT.0.0: Plastic strain to failure.  When the plastic strain  reaches 
+this value, the element is deleted from the calcula tion. 
+TDEL Minimum time step size for automatic element d eletion 
+ *.   
+  VARIABLE   DESCRIPTION  
+PC Compressive mean stress at which the yield stress f ollows load 
+curve ID LCIDC.  If the pressure falls between PC a nd PT, a 
+weighted average of the two load curves is used.   
+PT Tensile mean stress at which the yield stress follo ws load curve 
+ID LCIDT. 
+PCUTC Pressure cut-oﬀ in compression.  When the pre ssure cut- oﬀ is 
+reached, the deviatoric stress tensor is set to zer o.  The 
+compressive pressure is not, however, limited to PC UTC.  Like 
+the yield stress, PCUTC is scaled to account for ra te eﬀects. 
+PCUTT Pressure cut-oﬀ in tension.  When the pressur e cut- oﬀ is reached, 
+the deviatoric stress tensor and tensile pressure i s set to zero.  
+Like the yield stress, PCUTT is scaled to account f or rate eﬀects. 
+PCUTF Pressure cut-oﬀ ﬂag: 
+EQ.0.0: inactive 
+EQ.1.0: active 
+SCALEP Scale factor applied to the yield stress aft er the pressure cut- oﬀ is 
+reached in either compression or tension.  If SCALE P = 0.0 
+(default), the deviatoric stress is set to zero aft er the cut- oﬀ is 
+reached. 
+SCALEE Scale fa ctor applied to the yield stress after the strain e xceeds the 
+failure strain set by FAIL.  If SCALEE = 0.0 (default), the 
+deviatoric strain is set to zero if the failure str ain is exceeded.  If 
+both SCALEP > 0 and SCALEE > 0 and both failure con ditions are met, 
+then the minimum scale factor is used.  
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable K        
+Type F        
+ 
+ VARIABLE   DESCRIPTION  
+K Optional bulk modulus for the viscoelastic material .  If nonzero a 
+Kelvin type behavior will be obtained.  Generally, K is set to zero.  *.   
+ |u1D7≠≠̇=/radical.v2|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst   . 
+History Variables: 
+History Variable Description 
+4 Tensile pressure cutoﬀ (set to zero if 
+tensile or compressive failure occurs) 
+5 The cutoﬀ ﬂag, initially equals 1; set to 
+0 if tensile or compressive failure 
+occurs. 
+6 The failure mode ﬂag 
+EQ.0:  No failure 
+EQ.1: Compressive failure 
+EQ.2:  Tensile failure 
+EQ.3:  Failure by plastic strain 
+7 The current ﬂow stress *

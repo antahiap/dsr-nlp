@@ -1,0 +1,41 @@
+.................... ................................................... .... 2-706   TABLE OF CONTENTS 
+LS-DYNA R13 0-5 (TABLE OF CONTENTS) *.  [0,3c,5]  {15} 
+ *.   *.   
+ *.   *.   
+ strain rate by the reference strain rate deﬁned in the input.  In this equation |u1D44∆ is the 
+intact normalized strength parameter, /u1D450 is the strength parameter for strain rate 
+dependence, |u1D7≠≠̇∗ is the normalized plastic strain rate, and  
+|u1D461∗=|u1D447
+P H EL
+|u1D4JD∗=|u1D4JD
+P H EL  
+In the above, |u1D447 is the maximum tensile pressure strength, PHEL  is the pressure 
+component at the Hugoniot elastic limit, and |u1D4JD is the pressure. 
+ 
+|u1D437 = |summationCv1∆|u1D7≠≠|u1D4JDCst
+|u1D7≠≠/u1D45:.st|u1D4JDCst 
+represents the accumulated damage (history variable  2) based upon the increase in 
+plastic strain per computational cycle and the plas tic strain to fracture 
+|u1D7≠≠/u1D45:.st|u1D4JDCst= |u1D4J1|oneCst|parenleftCv1|u1D4JD∗+ |u1D461∗|parenriµhtCv1/u1D451.st|twoCsts 
+and 
+|u1D7≠∆/u1D45:.st∗= |u1D44F|parenleftCv1|u1D4JD∗|parenriµhtCv1|u1D4JACst(1 +/u1D450 ln|u1D7≠≠̇∗) ≤ SFMAX 
+represents the damaged behavior.  The parameter |u1D4J1|oneCst controls the rate at which damage 
+accumulates.  If it is set to 0, full damage occurs  in one time step, that is, instantaneous- 
+ly.  It is also the best parameter to vary when att empting to reproduce results generated 
+by another ﬁnite element program. 
+ 
+In undamaged material, the hydrostatic pressure is given by 
+|u1D443 =/u1D458|oneCst|u1D7≠7 +/u1D458|twoCst|u1D7≠7|twoCst+/u1D458|threeCst|u1D7≠7|threeCst 
+in compression and 
+|u1D443 =/u1D458|oneCst|u1D7≠7 
+in tension where |u1D7≠7 = |u1D7≠+ |u1D7≠+|zeroCst− 1 ⁄.  When damage starts to occur, there is an increas e in 
+pressure.  A fraction, between 0 and 1, of the elas tic energy loss, |u1D6FD, is converted into 
+hydrostatic potential energy (pressure).  The detai ls of this pressure increase are given 
+in the reference. 
+ 
+Given HEL  and G, |u1D7≠7hel  can be found iteratively from 
+H EL =/u1D458|oneCst|u1D7≠7hel +/u1D458|twoCst|u1D7≠7hel |twoCst+/u1D458|threeCst|u1D7≠7hel |threeCst+ (4 3 ⁄ )|u1D4J4(|u1D7≠7hel /|parenleftCv11 + |u1D7≠7hel |parenriµhtCv1 
+and, subsequently, for normalization purposes, 
+|u1D443hel =/u1D458|oneCst|u1D7≠7hel +/u1D458|twoCst|u1D7≠7hel |twoCst+/u1D458|threeCst|u1D7≠7hel |threeCst 
+and 
+|u1D7≠∆hel = 1.5|parenleftCv1hel − |u1D4JDhel |parenriµhtCv1  . *

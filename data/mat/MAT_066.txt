@@ -1,0 +1,8 @@
+: *. : *.  
+*.   
+ *.   *.   
+ ordinate system axes can rotate with either node of  the beam or an average 
+rotation of both nodes (see SCOOR variable in *SECT ION_BEAM). 
+2.  Null Stiffness.   For null stiﬀness coeﬃcients, no forces correspon ding to these 
+null values will develop.  The viscous damping coeﬃ cients are optional. 
+3.  Rotational Displacement.   Rotational displacement is measured in radians. *

@@ -1,0 +1,66 @@
+: *. : *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density; see also volume in *SECTION_BEAM d eﬁnition. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable DOF TYPE K D CDF TDF   
+Type I I F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+DOF Active degree-of- freedom, a number between 1 and 6 inclusive.  
+Each value of DOF can only be used once.  The activ e degree-of-
+freedom is measured in the local coordinate system for the 
+discrete beam element. 
+TYPE Material behavior: 
+EQ.0: elastic (default) 
+EQ.1: inelastic  
+K Elastic loading/unloading stiﬀness.  This is requir ed input for 
+inelastic behavior. 
+D Optional viscous damping coeﬃcient 
+CDF Compressive displacement at failure.  Input as a po sitive number.  
+After failure, no forces are carried.  This option does not apply to 
+zero length springs. 
+EQ.0.0: inactive 
+TDF Tensile displacement at failure.  After failure, no  forces are 
+carried. 
+EQ.0.0: inactive 
+ *.   
+ |u1D439 = |u1D43∆ |u1D4J3 (∆/u1D4:F) |<racketleftCv61 + C1 × ∆/u1D4:Ḟ+ C2 × sgn|parenleftCv1∆/u1D4:Ḟ|parenriµhtCv1ln |parenleftCv6max /˙raceleft.v61. ,|dividesCv2∆/u1D4:Ḟ|dividesCv2
+DLE /˙raceright.v6|parenriµhtCv6|<racketriµhtCv6 + D×∆/u1D4:Ḟ
++ |u1D4J4(∆/u1D4:F)ℎ|parenleftCv1∆/u1D4:Ḟ|parenriµhtCv1  . 
+In these equations, ∆/u1D4:F is the change in length  
+∆/u1D4:F= current length − initial length 
+For the ﬁrst three degrees of freedom the ﬁelds on Cards 2 and 3 have dimen- 
+sions as shown below.  Being angular in nature, the  next three degrees of free- 
+dom involve moment instead of force and angle inste ad of length but are 
+otherwise identical. 
+[K] =
+⎩|<raceleftCex⎨|<raceleftCex⎧[force]
+|<racketleftCv1length|<racketriµhtCv1FLCID = 0
+unitless FLCID > 0 
+[D] =[force]
+|<racketleftCv1v elocity|<racketriµhtCv1=[force][time]
+|<racketleftCv1length|<racketriµhtCv1 
+[FLCID] = [GLCID] = |parenleftCv1|<racketleftCv1length|<racketriµhtCv1, [force]|parenriµhtCv1 
+[H LCID] = |parenleftCv1|<racketleftCv1v elocity|<racketriµhtCv1, [force]|parenriµhtCv1 
+[C1] =[time]
+|<racketleftCv1length|<racketriµhtCv1 
+[C2] = unitless 
+[DLE] =|<racketleftCv1length|<racketriµhtCv1
+[time] 
+2.  Inelastic Behavior.   If TYPE = 1, inelastic behavior is obtained.  A t rial force is 
+computed as: 
+|u1D439|u1D447Cst= |u1D439|u1D4JBCst+ |u1D43∆ × ∆/u1D4:Ḟ(∆|u1D461) 
+and the yield force is taken from the load curve: 
+|u1D439/u1D44C.st= |u1D439|u1D466Cst|parenleftCv2∆/u1D4:F/p.st/l.st|aCst|sCst|tCst|iCst /c.st|parenriµhtCv2  , 
+where /u1D4:F/p.st/l.st|aCst|sCst|tCst|iCst /c.st is the plastic deﬂection, given by  
+∆/u1D4:F/p.st/l.st|aCst|sCst|tCst|iCst /c.st=|u1D439|u1D447Cst− |u1D439/u1D44C.st
+|u1D446 + |u1D43∆|mCst|aCst|xCst   . 
+The maximum elastic stiﬀness is |u1D43∆|mCst|aCst|xCst = max(|u1D43∆, 2 × |u1D446|mCst|aCst|xCst ), where |u1D446 is the slope 
+of FLCID. The trial force is checked against the yi eld force to determine |u1D439: 
+|u1D439 = |<raceleftCvJ|u1D439/u1D44C.stif  |u1D439|u1D447Cst> |u1D439/u1D44C.st
+|u1D439|u1D447Cstif  |u1D439|u1D447Cst≤ |u1D439/u1D44C.st 
+The ﬁnal force, which includes rate eﬀects and damp ing, is given by: *

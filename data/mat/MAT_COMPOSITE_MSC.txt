@@ -1,0 +1,175 @@
+ ................................ ................................................... .................... 2-1040  
+*.  [0] {34} 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus |u1D44∆|u1D44F  
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus |u1D44F /u1D450 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus /u1D450|u1D44∆  
+AOPT Material axes option (see *.   *.   
+  VARIABLE   DESCRIPTION  
+SBC Transverse compressive strength 
+SCT Through thickness tensile strength 
+SFC Crush strength 
+SFS Fiber mode shear strength 
+SAB Matrix mode shear strength, |u1D44∆|u1D44F  plane; see remarks. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable SBC SCA SFFC AMODEL PHIC E_LIMT S_DELM  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+SBC Matrix mode shear strength, |u1D44F /u1D450 plane; see remarks. 
+SCA Matrix mode shear strength, /u1D450|u1D44∆  plane; see remarks. 
+SFFC Scale factor for residual compressive strength  
+AMODEL Material models: 
+EQ.1.0: Unidirectional layer model 
+EQ.2.0: Fabric layer model 
+PHIC Coulomb friction angle for matrix and delamina tion failure, < 90 
+E_LIMT Element eroding axial strain 
+S_DELM Scale factor for delamination criterion 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable OMGMX ECRSH EEXPN CERATE1  AM1    
+Type F F F F F    
+ *.   
+ and out-of-plane directions, respectively, while fo r the fabric model, |u1D44∆, |u1D44F and /u1D450 denote 
+the in-plane ﬁll, in-plane warp and out-of-plane di rections, respectively. 
+Unidirectional Lamina Model: 
+Three criteria are used for ﬁber failure, one in te nsion/shear, one in compression and 
+another one in crush under pressure.  They are chos en in terms of quadratic stress 
+forms as follows: 
+1.  Tensile/shear ﬁber mode: 
+|u1D4J3|oneCst= |parenleftCvJ〈|u1D7≠∆|u1D44∆Cst〉
+|u1D446|u1D44∆Cst|u1D447Cst |parenriµhtCvJ|twoCst
++ |parenleftCv6/u1D̅0F|u1D44∆Cst|u1D44FCst|twoCst+/u1D̅0F|u1D4J≠Cst|u1D44∆Cst |twoCst
+|u1D446|u1D439Cst /u1D446.st |twoCst|parenriµhtCv6 − 1 = 0 
+2.  Compression ﬁber mode: 
+|u1D4J3|twoCst= |parenleftCv6/uni2ℜE8.β1|u1D7≠∆|u1D44∆Cst|minuteCst/uni2ℜE9.β1
+|u1D446|u1D44∆Cst /u1D4:6.st |parenriµhtCv6|twoCst
+− 1 = 0, |u1D7≠∆|u1D44∆Cst|minuteCst= −|u1D7≠∆|u1D44∆Cst+/uni2ℜE8.β3−|u1D7≠∆|u1D44FCst+ |u1D7≠∆|u1D4J≠Cst
+2/uni2ℜE9.β3 
+3.  Crush mode: 
+|u1D4J3|threeCst= |parenleftCv6/uni2ℜE8.β1|u1D4JD/uni2ℜE9.β1
+|u1D446|u1D439Cst /u1D4:6.st |parenriµhtCv6|twoCst
+− 1 = 0, |u1D4JD = −|u1D7≠∆|u1D44∆Cst+ |u1D7≠∆|u1D44FCst+ |u1D7≠∆|u1D4J≠Cst
+3 
+Here ⟨ ⟩ are Macaulay brackets, |u1D446|u1D44∆Cst|u1D447Cst  and |u1D446|u1D44∆Cst /u1D4:6.st  are the tensile and compressive strengths 
+in the ﬁber direction, and |u1D446|u1D439Cst /u1D446.st  and |u1D446|u1D439Cst /u1D4:6.st  are the layer strengths associated with the ﬁber 
+shear and crush failure, respectively. 
+ 
+Matrix mode failures must occur without ﬁber failur e, and hence they will be on planes 
+parallel to ﬁbers.  For simplicity, only two failur e planes are considered: one is 
+perpendicular to the planes of layering and the oth er one is parallel to them.  The matrix 
+failure criteria for the failure plane perpendicula r and parallel to the layering planes, 
+respectively, have the forms: 
+1.  Perpendicular matrix mode: 
+|u1D4J3|fourCst= |parenleftCvJ⟨|u1D7≠∆|u1D44FCst⟩
+|u1D446|u1D44FCst|u1D447Cst |parenriµhtCvJ|twoCst
++ |parenleftCv6/u1D̅0F|u1D44FCst|u1D4J≠Cst 
+|u1D446|u1D44FCst|u1D4J≠Cst |minuteCst|parenriµhtCv6|twoCst
++ |parenleftCvJ/u1D̅0F|u1D44∆Cst|u1D44FCst 
+|u1D446|u1D44∆Cst|u1D44FCst |parenriµhtCvJ|twoCst
+− 1 = 0 
+2.  Parallel matrix mode (Delamination): 
+|u1D4J3|fiveCst= |u1D446|twoCst
+⎩|<raceleftCex⎨|<raceleftCex⎧
+|parenleftCvJ⟨|u1D7≠∆|u1D4J≠Cst⟩
+|u1D446|u1D44FCst|u1D447Cst |parenriµhtCvJ|twoCst
++ |parenleftCv6/u1D̅0F|u1D44FCst|u1D4J≠Cst 
+|u1D446|u1D44FCst|u1D4J≠Cst /•uoteℂbl.st|parenriµhtCv6|twoCst
++ |parenleftCvJ/u1D̅0F|u1D4J≠Cst|u1D44∆Cst 
+|u1D446|u1D4J≠Cst|u1D44∆Cst |parenriµhtCvJ|twoCst
+⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+− 1 = 0 
+Here |u1D446|u1D44FCst|u1D447Cst  is the transverse tensile strength.  Based on the Coulomb-Mohr theory, the 
+shear strengths for the transverse shear failure an d the two axial shear failure modes are 
+assumed to be the forms, *.   
+ and the unloading path follows reduced shear moduli  to the zero shear stress and strain 
+state.  It should be noted that /u1D̅0F|u1D44FCst|u1D4J≠Cst  is governed by both the failure functions and shou ld 
+lie within or on each of these two strength surface s. 
+Fabric Lamina Model: 
+The ﬁber failure criteria of Hashin for a unidirect ional layer are generalized to 
+characterize the ﬁber damage in terms of strain com ponents for a plain weave layer.  
+The ﬁll and warp ﬁber tensile/shear failure are giv en by the quadratic interaction 
+between the associated axial and shear stresses, th at is, 
+|u1D4J3|sixCst = |parenleftCvJ⟨|u1D7≠∆|u1D44∆Cst⟩
+|u1D446|u1D44∆Cst|u1D447Cst |parenriµhtCvJ|twoCst
++|parenleftCv2/u1D̅0F|u1D44∆Cst|u1D44FCst |twoCst + /u1D̅0F|u1D4J≠Cst|u1D44∆Cst |twoCst|parenriµhtCv2
+|u1D446|u1D44∆Cst|u1D439Cst /u1D446.st |twoCst− 1 = 0
+|u1D4J3|sevenCst = |parenleftCvJ⟨|u1D7≠∆|u1D44FCst⟩
+|u1D446|u1D44FCst|u1D447Cst |parenriµhtCvJ|twoCst
++|parenleftCv2/u1D̅0F|u1D44∆Cst|u1D44FCst |twoCst + /u1D̅0F|u1D44FCst|u1D4J≠Cst |twoCst|parenriµhtCv2
+|u1D446|u1D44FCst|u1D439Cst /u1D446.st |twoCst− 1 = 0 
+where |u1D446|u1D44∆Cst|u1D447Cst and |u1D446|u1D44FCst|u1D447Cst  are the axial tensile strengths in the ﬁll and war p directions, 
+respectively, and |u1D446|u1D44∆Cst|u1D439Cst /u1D446.st  and |u1D446|u1D44FCst|u1D439Cst /u1D446.st  are the layer shear strengths due to ﬁber shear fa ilure in 
+the ﬁll and warp directions.  These failure criteri a are applicable when the associated |u1D7≠∆|u1D44∆Cst 
+or |u1D7≠∆|u1D44FCst is positive.  It is assumed |u1D446|u1D44∆Cst|u1D439Cst /u1D446.st  = SFS, and 
+|u1D446|u1D44FCst|u1D439Cst /u1D446.st  = SFS ×|u1D446|u1D44FCst|u1D447Cst 
+|u1D446|u1D44∆Cst|u1D447Cst   . 
+When |u1D7≠∆|u1D44∆Cst or |u1D7≠∆|u1D44FCstis compressive, it is assumed that the in-plane com pressive failure in both 
+the ﬁll and warp directions are given by the maximu m stress criterion, that is, 
+|u1D4J3/eight.st =  |<racketleftCv6/uni2ℜE8.β1|u1D7≠∆|u1D44∆Cst|minuteCst/uni2ℜE9.β1
+|u1D446|u1D44∆Cst /u1D4:6.st |<racketriµhtCv6|twoCst
+ −  1 =  0,      |u1D7≠∆|u1D44∆Cst|minuteCst =  −|u1D7≠∆|u1D44∆Cst + ⟨−|u1D7≠∆|u1D4J≠Cst⟩
+|u1D4J3/nine.st =  |<racketleftCv6/uni2ℜE8.β1|u1D7≠∆|u1D44FCst|minuteCst/uni2ℜE9.β1
+|u1D446|u1D44FCst /u1D4:6.st |<racketriµhtCv6|twoCst
+ −  1 =  0,      |u1D7≠∆|u1D44FCst|minuteCst =   −|u1D7≠∆|u1D44FCst + ⟨−|u1D7≠∆|u1D4J≠Cst⟩ 
+where |u1D446|u1D44∆Cst /u1D4:6.st and |u1D446|u1D44FCst /u1D4:6.st  are the axial compressive strengths in the ﬁll and  warp directions, 
+respectively.  The crush failure under compressive pressure is 
+|u1D4J3|oneCst|zeroCst  =  |parenleftCv6/uni2ℜE8.β1|u1D4JD/uni2ℜE9.β1
+|u1D446|u1D439Cst /u1D4:6.st |parenriµhtCv6|twoCst
+− 1 = 0,      |u1D4JD = −|u1D7≠∆|u1D44∆Cst+ |u1D7≠∆|u1D44FCst+ |u1D7≠∆|u1D4J≠Cst  
+3  . 
+A plain weave layer can fail under in-plane shear s tress without the occurrence of ﬁber 
+breakage.  This in-plane matrix failure mode is giv en by 
+|u1D4J3|oneCst|oneCst = |parenleftCvJ/u1D̅0F|u1D44∆Cst|u1D44FCst 
+|u1D446|u1D44∆Cst|u1D44FCst |parenriµhtCvJ|twoCst
+− 1 = 0  , 
+where |u1D446|u1D44∆Cst|u1D44FCst  is the layer shear strength due to matrix shear fa ilure. 
+ *.   
+ The eﬀect of strain-rate on the layer strength valu es of the ﬁber failure modes is 
+modeled by the strain-rate dependent functions for the strength values {|u1D446|u1D44JCst|u1D447Cst } as 
+{|u1D446|u1D44JCst|u1D447Cst  }={|u1D446|zeroCst }|parenleftCv6 1 + |u1D436rate1ln /˙raceleft.v1|u1D7≠≠̅̇/˙raceright.v1
+|u1D7≠≠̇|zeroCst|parenriµhtCv6 
+{|u1D446|u1D44JCst|u1D447Cst }=
+⎩|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎧|u1D446|u1D44∆Cst|u1D447Cst 
+|u1D446|u1D44∆Cst /u1D4:6.st 
+|u1D446|u1D44FCst|u1D447Cst 
+|u1D446|u1D44FCst /u1D4:6.st 
+|u1D446|u1D439Cst /u1D4:6.st 
+|u1D446|u1D439Cst /u1D446.st ⎭|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex⎬|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex⎫
+,{|u1D7≠≠̅̇}=
+⎩|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎧ |dividesCv1|u1D7≠≠̇|u1D44∆Cst|dividesCv1
+|dividesCv1|u1D7≠≠̇|u1D44∆Cst|dividesCv1
+|dividesCv1|u1D7≠≠̇|u1D44FCst|dividesCv1
+|dividesCv1|u1D7≠≠̇|u1D44FCst|dividesCv1
+|dividesCv1|u1D7≠≠̇|u1D4J≠Cst|dividesCv1
+|parenleftCv2|u1D7≠≠̇|u1D4J≠Cst|u1D44∆Cst |twoCst+ |u1D7≠≠̇|u1D44FCst|u1D4J≠Cst |twoCst|parenriµhtCv2|oneCst/|twoCst
+⎭|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex⎬|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex⎫
+ 
+where |u1D436rate1  is the strain-rate constants, and {|u1D446|zeroCst } are the strength values of {|u1D446|u1D44JCst|u1D447Cst } at the 
+reference strain-rate |u1D7≠≠̇|zeroCst. 
+Damage Model: 
+The damage model is a generalization of the layer f ailure model of Material 161 by 
+adopting the MLT damage mechanics approach, Matzenm iller et al.  [1995], for 
+characterizing the softening behavior after damage initiation.  Complete model 
+description is given in Yen [2002].  The damage fun ctions, which are expressed in terms 
+of ply level engineering strains, are converted fro m the above failure criteria of ﬁber 
+and matrix failure modes by neglecting the Poisson’ s eﬀect.  Elastic moduli reduction is 
+expressed in terms of the associated damage paramet ers /u1Dℜ1B|u1D4J6Cst: 
+|u1D438|u1D4J6Cst|minuteCst= (1 −/u1Dℜ1B|u1D4J6Cst)|u1D438|u1D4J6Cst 
+where /u1Dℜ1B|u1D4J6Cst is given by  
+/u1Dℜ1B|u1D4J6Cst= 1 − exp |parenleftCv6−|u1D4JF|u1D4J6Cst|u1D4JACst|u1D4J6Csts
+|u1D4JA|u1D4J6Cst|parenriµhtCv6 , |u1D4JF|u1D4J6Cst≥ 0, |u1D4J6 = 1, . . . ,6  . 
+In the above |u1D438|u1D4J6Cst are the initial elastic moduli, |u1D438|u1D4J6Cst|minuteCst are the reduced elastic moduli, |u1D4JF|u1D4J6Cst are the 
+damage thresholds computed from the associated dama ge functions for ﬁber damage, 
+matrix damage and delamination, and |u1D4JA|u1D4J6Cst are material damage parameters, which are 
+currently assumed to be independent of strain-rate.   The damage function is formulated 
+to account for the overall nonlinear elastic respon se of a lamina including the initial 
+‘hardening’ and the subsequent softening beyond the  ultimate strengths.  
+In the damage model (material 162), the eﬀect of st rain-rate on the nonlinear stress-
+strain response of a composite layer is modeled by the strain-rate dependent functions 
+for the elastic moduli {|u1D438|u1D44JCst|u1D447Cst  } as 
+{|u1D438|u1D44JCst|u1D447Cst  }={|u1D438|zeroCst }|parenleftCv61 +{|u1D436rate } ln /˙raceleft.v1|u1D7≠≠̅̇/˙raceright.v1
+|u1D7≠≠̇|zeroCst|parenriµhtCv6 *

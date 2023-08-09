@@ -1,0 +1,45 @@
+ ......................................... ................................................... .................................... 2-716  
+*.  [2,3a] {5} 
+ *.  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+HMART Hardening law parameter ∆/u1D4:B/u1D6FE.st→/u1D6FC.st/⋯inute.sts; see Remarks below. 
+K1 Hardening law parameter |u1D43∆|oneCst; see Remarks below. 
+K2 Hardening law parameter |u1D43∆|twoCst; see Remarks below. 
+Remarks: 
+Here a short description is given of the TRIP-mater ial model.  The material model uses 
+the von Mises yield surface in combination with iso tropic hardening.  The hardening is 
+temperature dependent.  Therefore, this material mo del must be run either in a coupled 
+thermo-mechanical solution, using prescribed temper atures or using the adiabatic 
+temperature calculation option.  Setting the parame ter CP to the speciﬁc heat, |u1D436|u1D4JDCst, of the 
+material activates the adiabatic temperature calcul ation that calculates the temperature 
+rate from the equation 
+|u1D447̇= |summationCv1|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D437|u1D4J6Cst|u1D4J7Cst |u1D4JDCst
+|u1D7≠+|u1D436|u1D4JDCst |u1D4J6Cst/co⋯⋯a.st|u1D4J7Cst  , 
+where /u1D6D4:/u1D40:|u1D4JDCst (the numerator) is the plastically dissipated heat .  Using the Kelvin scale is 
+recommended, even though other scales may be used w ithout problems. 
+ 
+The hardening behavior is described by the followin g equations.  The Martensite rate 
+equation is 
+∂|u1D449|u1D4JACst
+∂|u1D7≠≠̅|u1D4JDCst=
+⎩|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex⎧
+|u1D4340 |u1D7≠≠ < |u1D438|zeroCst(mart)
+B
+|u1D434|u1D449|u1D4JACst|u1D4JDCst|parenleftCvJ1 − |u1D449|u1D4JACst
+|u1D449|u1D4JACst|parenriµhtCvJ|u1D43JCst+|oneCst
+|u1D43JCst[1 − tanh(C + D × |u1D447)]
+2exp |parenleftCvJ|u1D444
+|u1D447 − |u1D447|u1D434Cst|zeroCst|parenriµhtCvJ |u1D7≠≠̅|u1D4JDCst≥ |u1D438|zeroCst(mart) 
+where |u1D7≠≠̅|u1D4JDCst is the eﬀective plastic strain and |u1D447 is the temperature. 
+ 
+The martensite fraction is integrated from the abov e rate equation: 
+|u1D449|u1D4JACst=/integral.v:∂|u1D449|u1D4JACst
+∂|u1D7≠≠̅|u1D4JDCst|u1D7≠≠Cst
+|zeroCst|u1D4J1|u1D7≠≠̅|u1D4JDCst  . 
+It always holds that 0.0 < |u1D449|u1D4JACst < 1.0. The initial martensite content is |u1D449|u1D4JACst|zeroCst and must be 
+greater than zero and less than 1.0.  Note that |u1D449|u1D4JACst|zeroCst is not used during a restart or when 
+initializing the |u1D449|u1D4JACst|zeroCst history variable using *INITIAL_STRESS_SHELL. 
+ 
+The yield stress is: 
+|u1D7≠∆|u1D466Cst=/˙raceleft.v1|u1D43J|u1D43BCst /u1D446.st − (|u1D43J|u1D43BCst /u1D446.st − |u1D434|u1D43BCst /u1D446.st )exp|parenleftCv1−|u1D4JA[|u1D7≠≠̅|u1D4JDCst+ |u1D7≠≠|zeroCst]|u1D4JBCst|parenriµhtCv1/˙raceright.v1(|u1D43∆|oneCst+ |u1D43∆|twoCst|u1D447) + ∆/u1D4:B/u1D6FE.st→/u1D6FC.st/⋯inute.sts|u1D449|u1D4JACst . *

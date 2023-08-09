@@ -1,0 +1,9 @@
+ ................. ................................................... .. 2-1852  
+*.   
+In addition, most of the material types which are a vailable for solids are also available for SPH.  Th ose 
+material models that may be used for SPH have a “5”  included in square brackets in the list of materia ls 
+given above.  In the detailed descriptions of those  materials which come later in the User's Manual, t he 
+word "solids" implies "solids and SPH”. 
+For the seatbelts one material is available: 
+ *.  *.   
+ *

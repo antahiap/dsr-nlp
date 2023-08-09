@@ -1,0 +1,25 @@
+: *.  
+*.   
+ *. .  This material is only used for the 
+implicit incompressible SPH formulation (FORM = 13 in *CONTROL_SPH). 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO MU GAMMA1  GAMMA2     
+Type A F F F F    
+Defaults none none 0.0 0.0 0.0    
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+MU Dynamic viscosity 
+GAMMA1 Numerical surface tension coeﬃcient.  For water, a coeﬃcient of 
+|u1D6F∆|oneCst=1000  m/s|twoCst is recommended.  
+GAMMA2 Numerical surface tension coeﬃcient.  For water, a coeﬃcient of 
+|u1D6F∆|twoCst=1 m/s|twoCst is recommended.  
+Remarks: 
+The surface tension coeﬃcients are purely numerical  and are based on a normalized 
+version of the algorithm presented in [ 1].  
+References: 
+ [1]  Akinci, N., Akinci, G. & Teschner, M. (2013).   Versatile surface tension and adhesion for SPH fl uids.  
+ACM Transactions on Graphics (TOG) 32.6 182. *

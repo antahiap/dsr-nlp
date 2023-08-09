@@ -1,0 +1,140 @@
+ ............................ ................................................... ....................... 3-2  
+*. _TD ......................... ................................................... ................... 3-6  
+*. _PHASE_CHANGE ............... ................................................... ... 3-33  
+*.  
+ *. _TD 
+ *. _PHASE_CHANGE 
+ *. _TD_LC 
+ *.  *. _PHASE_CHANGE *. _TD *. _TD_LC *. _T ITLE.  The TI-
+TLE keyword option must be deﬁned to distinguish be tween the thermal 
+expansion and chemical shrinkage. *MAT  *.  
+*. _TD 
+*. _PHASE_CHANGE 
+*.   
+3-2 (.   
+This is Thermal Material Type 1.  With this materia l, isotropic thermal properties can be 
+deﬁned. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT TLAT HLAT   
+Type A8 F F F F F   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable HC TC       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label not 
+exceeding 8 characters must be speciﬁed. 
+TRO Thermal density: 
+EQ.0.0:  default to structural density 
+TGRLC Thermal generation rate (see *DEFINE_CURVE):  See Remark 2. 
+GT.0: load curve ID deﬁning thermal generation rate as a 
+function of time 
+EQ.0: thermal generation rate is the constant multiplier,  TG-
+MULT. 
+LT.0: |TGRLC|  is a load curve ID deﬁning thermal generation 
+rate as a function of temperature. 
+TGMULT Thermal generation rate multiplier: 
+EQ.0.0: no heat generation 
+TLAT Phase change temperature 
+HLAT Latent heat *.  
+      1     2700.       210        1.0 
+      904.      222. 
+*define_curve_function 
+210 
+if(lc211,lc10,lc12,lc11) 
+*define_curve 
+211 
+0,-200 
+2.0,-200 
+*define_curve 
+10 
+0,1.43e+07 
+100,1.43e+07 
+*define_curve 
+11 
+0,2.43e+07 
+100,2.43e+07 
+*define_curve 
+12 
+0,3.43e+07 
+100,3.43e+07 *. _TD  
+3-6 (. _TD  
+This is Thermal Material Type 3.  Temperature depen dent isotropic properties can be 
+deﬁned.  The temperature dependency is deﬁned by sp ecifying a minimum of two and 
+a maximum of eight data points.  The properties mus t be deﬁned for the temperature 
+range that the material will see in the analysis. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT TLAT HLAT   
+Type A8 F F F F F   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable T1 T2 T3 T4 T5 T6 T7 T8 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 C5 C6 C7 C8 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable K1 K2 K3 K4 K5 K6 K7 K8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label not 
+exceeding 8 characters must be speciﬁed. *. _PHASE_CHANGE  *. _PHASE_CHANGE  
+This is Thermal Material Type 9.  With this materia l, temperature dependent isotropic 
+properties with phase change can be deﬁned.  The la tent heat of the material is deﬁned 
+together with the solid and liquid temperatures.  T he temperature dependency is 
+deﬁned by specifying a minimum of two and a maximum  of eight data points.  The 
+properties must be deﬁned for the temperature range  that the material will see in the 
+analysis. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT     
+Type A8 F F F     
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable T1 T2 T3 T4 T5 T6 T7 T8 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C1 C2 C3 C4 C5 C6 C7 C8 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable K1 K2 K3 K4 K5 K6 K7 K8 
+Type F F F F F F F F 
+ *. _PHASE_CHANGE  
+3-34 (. _PHASE_CHANGE  *. _TD_LC  
+3-36 (. _TD_LC  
+This is Thermal Material Type 10.  With this model,  isotropic thermal properties that are 
+dependent on temperature (and/or mechanical history  variables) can be speciﬁed with 
+load curves.  The properties must be deﬁned for the  temperature (and/or history 
+variable) range that the material will see in the a nalysis. 
+Card Summary: 
+Card 1a.   This card is included if TGHSV = 0. 
+TMID TRO TGRLC TGMULT TLAT HLAT   
+Card 1b.   This card is included if TGHSV ≠ 0. 
+TMID TRO TGRLC TGMULT TLAT HLAT   
+Card 2.   This card is required. 
+HCLC TCLC HCHSV TCHSV TGHSV    
+Data Card Deﬁnitions: 
+This card is included if TGHSV = 0 (see Card 2). 
+ Card 1a 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT TLAT HLAT   
+Type A F I F F F   
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label must 
+be speciﬁed (see *PART). 
+TRO Thermal density. 
+EQ.0.0: Default to structural density 
+TGRLC Thermal generation rate curve ID (see *DEFINE _CURVE): 
+GT.0: Function of time 
+EQ.0: Use constant multiplier value, TGMULT. *. _TD_LC  
+3-38 (. _TD_LC  *. _TD_LC  
+3-40 (. _TD_LC  *. _TD_LC  
+3-42 (. _TD_LC  *

@@ -1,0 +1,18 @@
+ ............................... ................................................... .................. 2-1222  
+*.  [0,3c] {24} 
+ *.   *.   
+ *.   *.   
+ Variable Description 
+|u1D4JD Hydrostatic pressure, |u1D4JD=/u1D4:D|oneCst3⁄ 
+|u1D461 |u1D461=/u1D45E2⁄|parenleftCv2|u1D44∆−|u1D44F|parenleftCv1|u1D4JF/u1D45E⁄|parenriµhtCv1|threeCst|parenriµhtCv2  
+/u1D45E von Mises stress, /u1D45E=/radical.v13/u1D4:D|twoCst 
+|u1D44∆ |u1D44∆=1+1|u1D43∆⁄  
+|u1D44F |u1D44F=1−1|u1D43∆⁄  
+|u1D43∆ Input ﬁeld RKF 
+|u1D4JF |u1D4JF=(2 7/u1D4:D|threeCst2⁄)|oneCst/|threeCst   
+/u1D4:D|twoCst Second deviatoric stress invariant 
+/u1D4:D|threeCst Third deviatoric stress invariant 
+tan |u1D6FD tan |u1D6FD=6sin /u1Dℜ11|parenleftCv13−sin /u1Dℜ11|parenriµhtCv1 ⁄    
+|u1D4J1 |u1D4J1=6|u1D436cos /u1Dℜ11|parenleftCv13−sin /u1Dℜ11|parenriµhtCv1 ⁄   
+/u1Dℜ11 Input ﬁeld PHI 
+|u1D436 Input ﬁeld CVAL *

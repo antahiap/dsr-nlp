@@ -1,0 +1,1793 @@
+EOLOGIC_CAP_MODEL ........................... ................................................... ............... 2-249  
+*. ENERAL_VISCOELASTIC ......................... ................................................... ................ 2-515  
+*. ENERAL_JOINT_DISCRETE_BEAM .................. ................................................... ....... 2-619  
+*. EPLASTIC_SRATE_2000a ........................ ................................................... ................ 2-655  
+*. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM ......... ............................................. 2-738  
+*. URSON_JC .................................... ................................................... ........................... 2-760  
+*. ENERAL_NONLINEAR_1DOF_DISCRETE_BEAM ......... ............................................. 2-775  
+*. AS_MIXTURE .................................. ................................................... .......................... 2-961  
+*. ENERAL_SPRING_DISCRETE_BEAM.................. ................................................... .. 2-1236  
+*. ENERALIZED_PHASE_CHANGE...................... ................................................... ...... 2-1587  
+*. LASS ........................................ ................................................... ............................... 2-1782  
+*. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID LCID1 LCID2 LCID3 LCID4    
+Type A I I I I    
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable UNLOAD K DMPF TFS CFS LOFFSET IVS  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or label must  be speciﬁed 
+(see *PART). 
+LCID1 Load curve for loading 
+LCID2 Load curve for unloading 
+LCID3 Load curve for damping as a function of volum etric strain rate 
+LCID4 Load curve for scaling the damping as a function of  the 
+volumetric strain 
+UNLOAD Unloading option (see Figure EOS15-1 ):  
+EQ.0.0: Loading and unloading follow loading curve 
+EQ.1.0: Loading follows loading curve, unloading follows 
+unloading curve.  The unloading curve ID if undeﬁne d 
+is taken as the loading curve. 
+EQ.2.0: Loading follows loading curve, unloading follows *EOS_GASKET  *EOS  
+LS-DYNA R13 1-49 (EOS)  VARIABLE   DESCRIPTION  
+unloading stiﬀness, K, to the unloading cu rve.  The 
+loading and unloading curves may only intersect at the 
+origin of the axes. 
+EQ.3.0: Quadratic unloading from peak displacement value to  
+a permanent oﬀset. 
+K Unloading stiﬀness, for UNLOAD = 2 only 
+DMPF Damping factor for stability.  Values in the neighb orhood of unity 
+are recommended.  The damping factor is properly sc aled to 
+eliminate time step size dependency.  KUnloading
+curveUnload  = 2
+μ = ρ∕ρ0 − 1P
+R
+E
+S
+S
+U
+R
+E
+uminumin
+× OFFSET
+Quadratic
+unloadingUnload  = 3
+μ = ρ∕ρ0 − 1P
+R
+E
+S
+S
+U
+R
+EUnload = 1Unloading
+curve
+μ = ρ∕ρ0 − 1P
+R
+E
+S
+S
+U
+R
+EUnload = 0
+Loading-unloading
+curve μ = ρ∕ρ0 − 1P
+R
+E
+S
+S
+U
+R
+E
+ Figure EOS15-1.   Load and unloading behavior. *EOS  *EOS_GASKET  
+1-50 (EOS) LS-DYNA R13  VARIABLE   DESCRIPTION  
+TFS Tensile failure strain 
+CFS Compressive failure strain 
+OFFSET Oﬀset factor between 0 and 1.0 to determine permanent set upon 
+unloading if the UNLOAD = 3.0.  The permanent sets in 
+compression and tension are equal to the product of  this oﬀset 
+value and the maximum compressive and tensile displ acements, 
+respectively. 
+IVS Initial volume strain *EOS_MIE_GRUNEISEN  *EOS  
+LS-DYNA R13 1-51 (EOS) *EOS_MIE_GRUNEISEN  
+This is Equation of State Form 16, a Mie-Gruneisen form with a |u1D4JD − |u1D6F+  compaction 
+model.  
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID GAMMA A1 A2 A3 PEL PCO N 
+Type A F F F F F F F 
+Default none none none none none none none none 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable ALPHA0 E0 V0      
+Type F F F      
+Default none none none      
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state identiﬁcation.  A unique number o r label must 
+be speciﬁed (see *PART). 
+GAMMA Gruneisen gamma 
+Ai Hugoniot polynomial coeﬃcient 
+PEL Crush pressure 
+PCO Compaction pressure 
+N Porosity exponent 
+ALPHA0 Initial porosity 
+E0 Initial internal energy 
+V0 Initial relative volume *EOS  *EOS_MIE_GRUNEISEN  
+1-52 (EOS) LS-DYNA R13 Remarks: 
+The equation of state is a Mie-Gruneisen form with a polynomial Hugoniot curve and a 
+|u1D4JD − |u1D6F+  compaction model.  First, we deﬁne a history varia ble representing the porosity |u1D6F+ 
+that is initialised to |u1D6F+|zeroCst> 1. The evolution of this variable is given as 
+|u1D6F+(|u1D461) = max 
+⎩|<raceleftCex⎨|<raceleftCex⎧
+1, min 
+⎣⎢⎡|u1D6F+|zeroCst, min|u1D46≠Cst≤|u1D461Cst
+⎝⎜⎛1 + (|u1D6F+|zeroCst− 1) |<racketleftCv6|u1D4JDcomp − |u1D4JD(|u1D46≠)
+|u1D4JDcomp − |u1D4JD|u1D4J2Cst|u1D4J9Cst |<racketriµhtCv6|u1D441Cst
+⎠⎟⎞
+⎦⎥⎤
+⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+  , 
+where |u1D4JD(|u1D461) indicates the pressure at time t. For later use, we deﬁne the cap pressure as 
+|u1D4JD|u1D4J≠Cst= |u1D4JDcomp − |parenleftCv2|u1D4JDcomp − |u1D4JD|u1D4J2Cst|u1D4J9Cst |parenriµhtCv2|<racketleftCvJ|u1D6F+ − 1
+|u1D6F+|zeroCst− 1|<racketriµhtCvJ|oneCst
+|u1D441Cst  . 
+The remainder of the EOS model is given by the equa tions 
+|u1D4JD(|u1D7≠+, |u1D4J2) = Γ|u1D6F+|u1D7≠+|u1D4J2 + |u1D4JD|u1D43BCst(|u1D7≠2)|<racketleftCvJ1 −1
+2Γ|u1D7≠2|<racketriµhtCvJ 
+|u1D4JD|u1D43BCst(|u1D7≠2) = |u1D434|oneCst|u1D7≠2 + |u1D434|twoCst|u1D7≠2|twoCst+ |u1D434|threeCst|u1D7≠2|threeCst 
+together with  
+|u1D7≠2|parenleftCv1|u1D7≠+|parenriµhtCv1 =|u1D6F+|u1D7≠+ 
+|u1D6F+|zeroCst|u1D7≠+|zeroCst− 1 .*EOS_MURNAGHAN  *EOS  
+LS-DYNA R13 1-53 (EOS) *EOS_ MURNAGHAN  
+This is  Equation of State Form 19. This EOS was designed to  model incompressible ﬂuid 
+ﬂow with SPH or ALE elements. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID GAMMA K0 V0     
+Type A F F F     
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or label must  be 
+speciﬁed (see *PART). 
+GAMMA, K0 Constants in the equation of state 
+V0 Initial relative volume 
+Remarks: 
+The Murnaghan equation of state deﬁnes pressure as 
+|u1D4JD =/u1D458|zeroCst|<racketleftCvJ|parenleftCvJ|u1D7≠+
+|u1D7≠+|zeroCst|parenriµhtCvJ/u1D6FE.st
+− 1|<racketriµhtCvJ  . 
+To model ﬂuid ﬂows accurately, |u1D6F∆ is often set to 7, and /u1D458|zeroCst is chosen such that 
+/u1D450|zeroCst=/radical.v5|u1D6F∆/u1D458|zeroCst
+|u1D7≠+|zeroCst≥ 10|u1D463|mCst|aCst|xCst    , 
+where |u1D463|mCst|aCst|xCst  is the maximum expected ﬂuid ﬂow velocity.  This w ill ensure low 
+compressibility while allowing for a relatively lar ge time step size. *EOS  *EOS_USER_DEFINED  
+1-54 (EOS) LS-DYNA R13 *EOS_USER_DEFINED  
+These are Equations of State 21-30. The user can su pply his own subroutines.  See also 
+Appendix B. The keyword input must be used for the user interface with data.  
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID EOST LMC NHV IVECT EO VO BULK 
+Type A I I I I F F F 
+ 
+Deﬁne LMC  material parameters using 8 parameters per card.  
+ Card 2 1 2 3 4 5 6 7 8 
+Variable P1 P2 P3 P4 P5 P6 P7 P8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or label must  be speciﬁed 
+(see *PART). 
+EOST User equation of state type (21- 30 inclusive).  A number between 
+21 and 30 has to be chosen. 
+LMC Length of material constant array which is equal to  the number of 
+material constants to be input.  (LMC ≤ 48) 
+NHV Number of history variables to be stored, see A ppendix B. 
+IVECT Vectorization ﬂag (on = 1).  A vectorized user subroutine must be 
+supplied. 
+EO Initial internal energy 
+V0 Initial relative volume 
+BULK Bulk modulus.  This value is used in the calculatio n of the contact 
+surface stiﬀness. 
+Pi Material parameters |u1D4J6=1,…,LMC .  *MAT 
+LS-DYNA R13 2-1 (MAT) *MAT 
+ 
+LS-DYNA has historically referenced each material m odel by a number.  As shown 
+below, a three digit numerical designation can stil l be used, e.g., *. EOLOGIC_CAP_MODEL [0,3c,5] {12} 
+ *. ENERAL_VISCOELASTIC [0,2,3a,3c,5,8 B] {53} *MAT   
+2-4 (MAT) LS-DYNA R13  *. ENERAL_JOINT_DISCRETE_BEAM [1D] {2 3} 
+ *. EPLASTIC_SRATE_2000a [2,3a] {15} 
+ *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEA M [1D] {62} 
+ *. URSON [0,2,3a,3c] {12} 
+ *. URSON_JC [0,2] {12} 
+ *. URSON_RCDC [0,2] {12} 
+ *. ENERAL_NONLINEAR_1DOF_DISCRETE_BEA M [1D] {20} 
+ *. AS_MIXTURE [0,8A] {14} 
+ *. ENERAL_SPRING_DISCRETE_BEAM [1D] { 25} 
+ *. ENERALIZED_PHASE_CHANGE [0,2] 
+ *. LASS [2,3a] {32} 
+ *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEA M  
+ *. ENERAL_NONLINEAR_1DOF_DISCRETE_BEA M  
+ *. ENERAL_SPRING_DISCRETE_BEAM  
+ *. AS_MIXTURE  *. ENERAL_JOINT_DISCRETE_BEAM  *. ENERAL_NONLINEAR_1DOF_DISCRETE_BEAM  *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  *. ENERAL_SPRING_DISCRETE_BEAM  *. ENERAL_VISCOELASTIC  *. ENERALIZED_PHASE_CHANGE *. EOLOGIC_CAP_MODEL  *. EPLASTIC_SRATE_2000a  *. LASS *. URSON  *. URSON_JC  *. URSON_RCDC  *. ENERAL_VISCOELASTIC 
+(*. ENERAL_VISCOELASTIC 
+$      mid        ro      bulk 
+         2    7.8e-9 116666.67 
+$ blank card 
+ 
+$        g     betag 
+   43750.0     0.005 
+   26250.0      0.05 
+   17500.0 
+  
+In general, with 
+|u1D43A =|u1D438
+2(1 +/u1D̅08),      |u1D43∆ =|u1D438
+3(1 − 2/u1D̅08) 
+in *. ENERAL_VISCOELASTIC, we have 
+|u1D43A = |summationCv1 |u1D43A/u1D4:C.st,         |u1D43∆ = |summationCv1 |u1D43∆/u1D4:C.st 
+while the weights are given as 
+|u1D464/u1D4:C.st=|u1D43A/u1D4:C.st
+|u1D43A=|u1D43∆/u1D4:C.st
+|u1D43∆ 
+which implies that the add inelasticity approach is  somewhat more restrictive than the 
+general approach.  However, an almost pure shear/bu lk link can be created by setting 
+the bulk/shear decay coeﬃcient to a very large numb er compared to the simulation 
+time.  To be speciﬁc, to get a shear link set |u1D6FD/u1D4:E.st≫1/|u1D447 and to get a bulk link set |u1D6FD/u1D4:A.st≫1/
+|u1D447, where |u1D447 is the termination time.  See also VFLAG in *. ENERAL_VISCOELASTIC 
+for a more general formulation. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK G0 GI BETA   
+Type A F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+BULK Elastic bulk modulus. 
+LT.0.0:  |B U LK| is a load curve of bulk modulus as a function of 
+temperature. 
+G0 Short-time shear modulus, |u1D43A|zeroCst; see the Remarks below. 
+LT.0.0:  |G0| is a load curve of short- time shear modulus as a 
+function of temperature. 
+GI Long-time (inﬁnite) shear modulus, |u1D43A∞. 
+LT.0.0:  |GI| is a load curve of long- time shear modulus as a 
+function of temperature. 
+BETA Decay constant. 
+LT.0.0:  |BETA|  is a load curve of decay constant as a function of 
+temperature. 
+Remarks: 
+The shear relaxation behavior is described by [Herm ann and Peterson, 1968]: 
+|u1D43A(|u1D461) = |u1D43A∞+ (|u1D43A|zeroCst− |u1D43A∞) exp|parenleftCv1−|u1D6FD|u1D461|parenriµhtCv1 . *. EOLOGIC_CAP_MODEL  *. EOLOGIC_CAP_MODEL  
+This is Material Type 25.  This is an inviscid two- invariant geologic cap model.  This 
+material model can be used for geomechanical proble ms or for materials such as 
+concrete; see references cited below. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK G ALPHA THETA GAMMA BETA 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable R D W X0 C N   
+Type F F F F F F   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable PLOT FTYPE VEC TOFF     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+BULK Initial bulk modulus, |u1D43∆ 
+G Initial shear modulus 
+ALPHA Failure envelope parameter, |u1D6F+ 
+THETA Failure envelope linear coeﬃcient, /u1D̅0: 
+GAMMA Failure envelope exponential coeﬃcient, |u1D6F∆ *. EOLOGIC_CAP_MODEL  
+2-250 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+BETA Failure envelope exponent, |u1D6FD 
+R Cap, surface axis ratio 
+D Hardening law exponent 
+W Hardening law coeﬃcient 
+X0 Hardening law exponent,  /u1D44B|zeroCst 
+C Kinematic hardening coeﬃcient,  /u1D450̅ 
+N Kinematic hardening parameter 
+PLOT Save the following variable for plotting in LS -PrePost, where it 
+will be labeled as “eﬀective plastic strain:” 
+EQ.1:  hardening parameter, /u1D̅05 
+EQ.2:  cap -J1 axis intercept, /u1D44B(/u1D̅05) 
+EQ.3:  volumetric plastic strain |u1D7≠≠/u1D̅08.st|u1D4JDCst 
+EQ.4:  ﬁrst stress invariant, /u1D4:D|oneCst 
+EQ.5:  second stress invariant, /radical.v1/u1D4:D|twoCst 
+EQ.6:  not used 
+EQ.7:  not used 
+EQ.8:  response mode number 
+EQ.9:  number of iterations 
+FTYPE Formulation ﬂag: 
+EQ.1:  soils (cap surface may contract) 
+EQ.2:  concrete and rock (cap doesn’t contract) 
+VEC Vectorization ﬂag: 
+EQ.0:  vectorized (ﬁxed number of iterations) 
+EQ.1:  fully iterative 
+If the vectorized solution is chosen, the stresses might be slightly 
+oﬀ the yield surface; however, on ve ctor computers a much more 
+eﬃcient solution is achieved. 
+TOFF Tension Cut Oﬀ, TOFF < 0 (positive in compress ion). *. EOLOGIC_CAP_MODEL  
+2-252 (MAT) LS-DYNA R13 and |u1D447|u1D4JACst|u1D4J6Cst|u1D46≠Cst|u1D4J2Cst|u1D46≠Cst ≡|/u1D44B(/u1D̅05|u1D4JBCst) −/u1D4:F(/u1D̅05|u1D4JBCst)|.  This failure envelop surface is ﬁxed in /radical.v1/u1D4:D|twoCst/u1D4:̅.st−/u1D4:D|oneCst space, 
+and therefore, does not harden unless kinematic har dening is present.  Next, there is a 
+cap surface, denoted |u1D4J3|twoCst in the ﬁgure, with |u1D4J3|twoCst given by 
+|u1D4J3|twoCst=/radical.v1/u1D4:D|twoCst/u1D4:̅.st− |u1D439|u1D4J≠Cst(/u1D4:D|oneCst, |u1D43∆) 
+where |u1D439|u1D4J≠Cst is deﬁned by 
+|u1D439|u1D4J≠Cst(/u1D4:D|oneCst,/u1D̅05)≡1
+|u1D44J/radical.v2[/u1D44B(/u1D̅05) −/u1D4:F(/u1D̅05)]|twoCst− [/u1D4:D|oneCst−/u1D4:F(/u1D̅05)]|twoCst, 
+/u1D44B(/u1D̅05) is the intersection of the cap surface with the /u1D4:D|oneCst axis 
+/u1D44B(/u1D̅05) =/u1D̅05+ |u1D44J|u1D439|u1D4J2Cst(/u1D̅05), 
+and /u1D4:F(/u1D̅05) is deﬁned by  
+/u1D4:F(/u1D̅05)≡|<raceleftCv4/u1D̅05   if   /u1D̅05> 0
+0   if   /u1D̅05≤ 0 
+The hardening parameter /u1D̅05 is related to the plastic volume change |u1D7≠≠|u1D463Cst|u1D4JDCst through the 
+hardening law 
+|u1D7≠≠|u1D463Cst|u1D4JDCst=/u1D44A/˙raceleft.v11 − exp[−|u1D437(/u1D44B(/u1D̅05) −/u1D44B|zeroCst)]/˙raceright.v1 
+Geometrically, /u1D̅05 is seen in the ﬁgure as the /u1D4:D|oneCst coordinate of the intersection of the cap 
+surface and the failure surface.  Finally, there is  the tension cutoﬀ surface, denoted |u1D4J3|threeCst in 
+the ﬁgure.  The function |u1D4J3|threeCst is given by  
+|u1D4J3|threeCst≡|u1D447 −/u1D4:D|oneCst 
+where |u1D447 is the input material parameter which speciﬁes the  maximum hydrostatic 
+tension sustainable by the material.  The elastic d omain in /radical.v1/u1D4:D|twoCst/u1D4:̅.st−/u1D4:D|oneCst space is then 
+bounded by the failure envelope surface above, the tension cutoﬀ surface on the left, 
+and the cap surface on the right. 
+ 
+An additive decomposition of the strain into elasti c and plastic parts is assumed: 
+/u1D6C6=/u1D6C6|u1D4J2Cst+/u1D6C6|u1D4JDCst , 
+where /u1D6C6|u1D4J2Cst is the elastic strain and /u1D6C6|u1D4JDCstis the plastic strain.  Stress is found from the el astic 
+strain using Hooke’s law, 
+/u1D6D4=/u1D402(/u1D6C6 −/u1D6C6|u1D4JDCst), 
+where /u1D6D4 is the stress and /u1D402 is the elastic constitutive tensor. 
+ 
+The yield condition may be written 
+|u1D4J3|oneCst(|u1D46≠) ≤ 0
+|u1D4J3|twoCst(|u1D46≠,/u1D̅05) ≤ 0
+|u1D4J3|threeCst(|u1D46≠) ≤ 0 
+and the plastic consistency condition requires that  *. EOLOGIC_CAP_MODEL  
+2-254 (MAT) LS-DYNA R13 surface.  Thus, the shape of the yield surfaces des cribed above remains unchanged, but 
+they may translate in a plane orthogonal to the /u1D4:D axis, 
+ 
+Translation of the yield surfaces is permitted thro ugh the introduction of a “back stress” 
+tensor, /u1D6C2. The formulation including kinematic hardening is obtained by replacing the 
+stress /u1D6D4 with the translated stress tensor |u1D7≠2≡|u1D7≠∆ − |u1D6F+  in all of the above equations.  The 
+history tensor /u1D6C2 is assumed deviatoric and therefore has only 5 uni que components.  
+The evolution of the back stress tensor is governed  by the nonlinear hardening law 
+|u1D6F+ =/u1D450̅|u1D439̅(|u1D7≠∆, |u1D6F+)|u1D4J2̇|u1D4JDCst 
+where /u1D450̅ is a constant, |u1D439̅ is a scalar function of /u1D6D4 and /u1D6C2  and |u1D4J2̇|u1D4JDCst is the rate of deviatoric 
+plastic strain.  The constant may be estimated from  the slope of the shear stress - plastic 
+shear strain curve at low levels of shear stress. 
+ 
+The function |u1D439̅ is deﬁned as 
+|u1D439̅≡max |<racketleftCvJ0,1 −(|u1D7≠∆ − |u1D6F+)|u1D6F+
+2/u1D441|u1D439|u1D4J2Cst(/u1D4:D|oneCst)|<racketriµhtCvJ  , 
+where /u1D441 is a constant deﬁning the size of the yield surfac e.  The value of /u1D441 may be 
+interpreted as the radial distant between the outsi de of the initial yield surface and the 
+inside of the limit surface.  In order for the limi t surface of the kinematic hardening cap 
+model to correspond with the failure envelope surfa ce of the standard cap model, the 
+scalar parameter |u1D6F+ must be replaced |u1D6F+ −/u1D441 in the deﬁnition |u1D439|u1D4J2Cst. 
+ 
+The cap model contains a number of parameters which  must be chosen to represent a 
+particular material and are generally based on expe rimental data.  The parameters |u1D6F+, |u1D6FD, 
+/u1D̅0:, and |u1D6F∆ are usually evaluated by ﬁtting a curve through fa ilure data taken from a set of 
+triaxial compression tests.  The parameters /u1D44A, |u1D437, and /u1D44B|zeroCst deﬁne the cap hardening law.  
+The value /u1D44A represents the void fraction of the uncompressed s ample and |u1D437 governs 
+the slope of the initial loading curve in hydrostat ic compression.  The value of |u1D44J is the 
+ratio of major to minor axes of the quarter ellipse  deﬁning the cap surface.  Additional 
+details and guidelines for ﬁtting the cap model to experimental data are found in Chen 
+and Baladi [1985]. *. ENERAL_VISCOELASTIC  *. ENERAL_VISCOELASTIC _{OPTION}  
+The available options include: 
+<BLANK> 
+MOISTURE 
+This is Material Type 76.  This material model prov ides a general viscoelastic Maxwell 
+model having up to 18 terms in the Prony series exp ansion and is useful for modeling 
+dense continuum rubbers and solid explosives.  Eith er the coeﬃcients of the Prony 
+series expansion or a relaxation curve may be speci ﬁed to deﬁne the viscoelastic 
+deviatoric and bulk behavior. 
+The material model can also be used with laminated shells.  Either an elastic or 
+viscoelastic layer can be deﬁned with the laminated  formulation.  To activate laminated 
+shells, you must set the laminated formulation ﬂag on *CONTROL_SHELL. With the 
+laminated option you must also deﬁne an integration  rule.  The addition of an elastic or 
+viscoelastic layer was implemented by Professor Ala  Tabiei, and the laminated shells 
+feature was developed and implemented by Professor Ala Tabiei. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO BULK PCF EF TREF A B 
+Card 2.   Leave blank if the Prony Series Cards (Card 4) are used below.  Also, leave 
+blank if an elastic layer is deﬁned in a laminated shell. 
+LCID NT BSTART TRAMP LCIDK NTK BSTARTK TRAMPK 
+Card 3.   This card is included if and only if the MOISTURE  keyword option is used. 
+MO ALPHA BETA GAMMA MST    
+Card 4.   Up to 18 cards may be input.  This input is termina ted at the next keyword 
+(“*”) card.   
+Gi BETA i Ki BETAK i     *. ENERAL_VISCOELASTIC  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK PCF EF TREF A B 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+BULK Elastic bulk modulus 
+PCF Tensile pressure elimination ﬂag for solid elements  only.  If set to 
+unity, tensile pressures are set to zero. 
+EF Elastic ﬂag: 
+EQ.0:  The layer is viscoelastic. 
+EQ.1:  The layer is elastic.  
+TREF Reference temperature for shift function (must  be greater than 
+zero) 
+A Coeﬃcient for the Arrhenius and the Williams-Land el-Ferry shift 
+functions 
+B Coeﬃcient for the Williams-Landel-Ferry shift fun ction 
+ 
+Relaxation Curve Card.   Leave blank if the Prony Series Cards  are used below.  Also, 
+leave blank if an elastic layer is deﬁned in a lami nated shell. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCID NT BSTART TRAMP LCIDK NTK BSTARTK  TRAMPK 
+Type F I F F F I F F *. ENERAL_VISCOELASTIC  
+  VARIABLE   DESCRIPTION  
+BSTART In the ﬁt, |u1D6FD|oneCst  is set to zero, |u1D6FD|twoCst  is set to BSTART, |u1D6FD|threeCst is 10 times  |u1D6FD|twoCst, 
+|u1D6FD|fourCst is 10 times |u1D6FD|threeCst, and so on.  If zero, BSTART is determined by an 
+iterative trial and error scheme. 
+TRAMP Optional ramp time for loading. 
+LCIDK Load curve ID for bulk relaxation behavior.  If LCI DK is given, 
+constants  |u1D43∆|u1D4J6Cst, and |u1D6FD|u1D4J8Cst|u1D4J6Cst  are determined via a least squares ﬁt.  See 
+Figure M76-1  for an example relaxation curve. 
+NTK Number of terms desired in bulk ﬁt.  If zero, the d efault is 6.  
+Currently, the maximum number is set to 18. 
+BSTARTK In the ﬁt, |u1D6FD|u1D4J8Cst|oneCst  is set to zero, |u1D6FD|u1D4J8Cst|twoCst  is set to BSTARTK, |u1D6FD|u1D4J8Cst|threeCst is 10 
+times  |u1D6FD|u1D4J8Cst|twoCst, |u1D6FD|u1D4J8Cst|fourCst is 100 times  |u1D6FD|u1D4J8Cst|threeCst, and so o n.  If zero, BSTARTK is 
+determined by an iterative trial and error scheme. 
+TRAMPK Optional ramp time for bulk loading. 
+ 
+Moisture Card.   Additional card for the MOISTURE keyword option. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable MO ALPHA BETA GAMMA MST    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+MO Initial moisture, |u1D44≠|zeroCst. Defaults to zero. 
+ALPHA Speciﬁes |u1D6F+ as a function of moisture. 
+GT.0.0: Speciﬁes a curve ID. 
+LT.0.0: Speciﬁes the negative of a constant value. 
+BETA Speciﬁes |u1D6FD as a function of moisture. 
+GT.0.0: Speciﬁes a curve ID. 
+LT.0.0: Speciﬁes the negative of a constant value. *. ENERAL_VISCOELASTIC  
+ where |u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst(|u1D461Cst−/u1D̅0F.st) is the relaxation functions for the diﬀerent stres s measures.  This stress is 
+added to the stress tensor determined from the stra in energy functional. 
+ 
+If we wish to include only simple rate eﬀects, the relaxation function is represented by 
+18 terms from the Prony series: 
+|u1D4J4(|u1D461) = |summationCv1 |u1D43A|u1D4JACst|u1D4J2−/u1D6FD.st/u1D45A.sts|u1D461Cst|u1D441Cst
+|u1D4JACst=|oneCst 
+We characterize this in the input by shear moduli, |u1D43A|u1D4J6Cst, and decay constants, |u1D6FD|u1D4J6Cst.  An 
+arbitrary number of terms, up to 18, may be used wh en applying the viscoelastic model. 
+ 
+For volumetric relaxation, the relaxation function is also represented by the Prony series 
+in terms of bulk moduli: 
+/u1D458(|u1D461) = |summationCv1 |u1D43∆|u1D4JACst|u1D4J2−/u1D6FD.st|u1D4J8Csts/u1D45A.sts|u1D461Cst|u1D441Cst
+|u1D4JACst=|oneCst 
+The Arrhenius and Williams-Landel-Ferry (WLF) shift  functions account for the eﬀects 
+of the temperature on the stress relaxation.  A sca led time, |u1D461|minuteCst, 
+|u1D461′=/integral.v:Φ(|u1D447)|u1D4J1|u1D461 |u1D461Cst
+|zeroCst 
+is used in the relaxation function instead of the p hysical time.  The Arrhenius shift 
+function is 
+Φ(|u1D447) = exp |<racketleftCvJ−|u1D434 |parenleftCvJ1
+|u1D447−1
+|u1D447REF |parenriµhtCvJ|<racketriµhtCvJ 
+and the Williams-Landel-Ferry shift function is 
+Φ(|u1D447) = exp |parenleftCvJ−|u1D434|u1D447 − |u1D447REF 
+|u1D43J + |u1D447 − |u1D447REF |parenriµhtCvJ 
+If all three values (TREF, A, and B) are nonzero, t he WLF function is used; the 
+Arrhenius function is used if B is zero; and no sca ling is applied if all three values are 
+zero. 
+ 
+The moisture model allows the scaling of the materi al properties as a function of the 
+moisture content of the material.  The shear and bu lk moduli are scaled by  |u1D6F+, the decay 
+constants are scaled by |u1D6FD, and a moisture strain, |u1D6F∆(|u1D44≠)[|u1D44≠ − |u1D44≠/u1D442.st] is introduced 
+analogous to the thermal strain. *. ENERAL_JOINT_DISCRETE_BEAM  *. ENERAL_JOINT_DISCRETE_BEAM  
+This is Material Type 97.  This model is used to de ﬁne a general joint constraining any 
+combination of degrees of freedom between two nodes .  The nodes may belong to rigid 
+or deformable bodies.  In most applications the end  nodes of the beam are coincident 
+and the local coordinate system ( |u1D4JF, |u1D46≠, |u1D461 axes) is deﬁned by CID (see *SECTION_BEAM). 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO TR TS TT RR RS RT 
+Type A F I I I I I I 
+Remarks 1        
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable RPST RPSR       
+Type F F       
+Remarks 2        
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density; see also volume in *SECTION_BEAM d eﬁnition. 
+TR Translational constraint code along the |u1D4JF-axis: 
+EQ.0: Free 
+EQ.1: Constrained 
+TS Translational constraint code along the |u1D46≠-axis: 
+EQ.0: Free 
+EQ.1: Constrained *. ENERAL_JOINT_DISCRETE_BEAM  
+  VARIABLE   DESCRIPTION  
+TT Translational constraint code along the |u1D461-axis: 
+EQ.0: Free 
+EQ.1: Constrained 
+RR Rotational constraint code about the |u1D4JF-axis: 
+EQ.0: Free 
+EQ.1: Constrained 
+RS Rotational constraint code about the |u1D46≠-axis: 
+EQ.0: Free 
+EQ.1: Constrained 
+RT Rotational constraint code about the |u1D461-axis:  
+EQ.0: Free 
+EQ.1: Constrained 
+RPST Penalty stiﬀness scale factor for translationa l constraints 
+RPSR Penalty stiﬀness scale factor for rotational c onstraints 
+Remarks: 
+1.  Inertia and Stability.   For explicit calculations, the additional stiﬀnes s due to 
+this joint may require addition mass and inertia fo r stability.  Mass and rotary 
+inertia for this beam element is based on the deﬁne d mass density, the volume, 
+and the mass moment of inertia deﬁned in the *SECTI ON_BEAM input. 
+2.  Penalty Stiffness.   The penalty stiﬀness applies to explicit calculat ions.  For 
+implicit calculations, constraint equations are gen erated and imposed on the 
+system equations; therefore, these constants, RPST and RPSR, are not used. *. EPLASTIC_SRATE_2000a  *. EPLASTIC_SRATE_2000a  
+This is Material Type 101. The GEPLASTIC_SRATE_2000 a material model characterizes 
+General Electric's commercially available engineeri ng thermoplastics subjected to high 
+strain rate events.  This material model features t he variation of yield stress as a 
+function of strain rate, cavitation eﬀects of rubbe r modiﬁed materials, and automatic 
+element deletion of either ductile or brittle mater ials. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR RATESF EDOT0 ALPHA  
+Type A F F F F F F  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCSS LCFEPS LCFSIG LCE     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young's Modulus 
+PR Poisson's ratio 
+RATESF Constant in plastic strain rate equation 
+EDOT0 Reference strain rate 
+ALPHA Pressure sensitivity factor 
+LCSS Load curve ID or table ID that deﬁnes the post yiel d material 
+behavior.   The values of this stress- strain curve are the diﬀerence 
+of the yield stress and strain, respectively.  This  means th e ﬁrst 
+values for both stress and strain should be zero.  All subsequent 
+values will deﬁne softening or hardening. *. EPLASTIC_SRATE_2000a  
+  VARIABLE   DESCRIPTION  
+LCFEPS Load curve ID that deﬁnes the plastic failure strai n as a function 
+of strain rate 
+LCFSIG Load curve ID that deﬁnes the maximum p rincipal failure stress 
+as a function of strain rate 
+LCE Load curve ID that deﬁnes the unloading moduli as a  function of 
+plastic strain 
+Remarks: 
+The constitutive model for this approach is: 
+|u1D7≠≠̇|u1D4JDCst= |u1D7≠≠̇|zeroCstexp /˙raceleft.v2|u1D434/˙racketleft.v2|u1D7≠∆ − |u1D446|parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2/˙racketright.v2/˙raceright.v2× exp|parenleftCv1−|u1D4JD|u1D6F+|u1D434|parenriµhtCv1 
+where |u1D7≠≠̇|zeroCst and |u1D434 are rate dependent yield stress parameters, |u1D446|parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2 is the internal 
+resistance (strain hardening), and |u1D6F+ is a pressure dependence parameter. 
+ 
+In this material the yield stress may vary througho ut the ﬁnite element model as a 
+function of strain rate and hydrostatic stress.  Po st yield stress behavior is captured in 
+material softening and hardening values.  Finally, ductile or brittle failure measured by 
+plastic strain or maximum principal stress, respect ively, is accounted for by automatic 
+element deletion. 
+ 
+Although this may be applied to a variety of engine ering thermoplastics, GE Plastics 
+have constants available for use in a wide range of  commercially available grades of 
+their engineering thermoplastics. *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+ *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+  VARIABLE   DESCRIPTION  
+IUNLD Unloading option (see Figure M119-1 ): 
+EQ.0.0: Loading and unloading follow loading curve 
+EQ.1.0: Loading follows loading curve, unloading follows 
+unloading curve.  The unloading curve ID if undeﬁne d 
+is taken as the loading curve. 
+EQ.2.0: Loading follows loading curve, unloading follows 
+unloading stiﬀness, KT or KR, to the unloading curv e.  
+The loadin g and unloading curves may only intersect 
+at the origin of the axes. 
+EQ.3.0: Quadratic unloading from peak displacement value to 
+a permanent oﬀset. 
+OFFSET Oﬀset factor between 0.0 and 1.0 to determine perma nent set 
+upon unloading if the IUNLD = 3.0.  Th e permanent sets in 
+compression and tension are equal to the product of  this oﬀset 
+value and the maximum compressive and tensile displ acements, 
+respectively. 
+DAMPF Damping factor for stability.  Values in the neighb orhood of unity 
+are recommended.  This damping factor is properly scaled to 
+eliminate time step size dependency.  Also, it is a ctive if and only 
+if the local stiﬀness is deﬁned. 
+IFLAG Formulation ﬂag: 
+EQ.0: Displacement formulation which is used in all other  
+models 
+EQ.1: Linear strain formulation.  The displacements and 
+velocities are divided by the initial length of the  beam. 
+EQ.2: A displacement formulation to simulate the buckling  
+behavior of crushable frames 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCIDTR LCIDTS LCIDTT LCIDRR LCIDRS LCIDRT   
+Type I I I I I I   
+ *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+  Card 3 1 2 3 4 5 6 7 8 
+Variable LCIDTUR LCIDTUS LCIDTUT LCIDRUR LCIDRUS LCIDRUT   
+Type I I I I I I   
+ 
+ VARIABLE   DESCRIPTION  
+LCIDTUR Load curve ID deﬁning translational force r esultant along local |u1D4JF-
+axis as a function of relative translational displa cement during 
+unloading.  The force values deﬁned by this curve m ust increase 
+monotonically from the most negative displacement t o the m ost 
+positive displacement.  For IUNLD = 1.0, the slope of this curve 
+must equal or exceed the loading curve for stabilit y reasons.  This 
+is not the case for IUNLD = 2.0.   For loading and unloading to 
+follow the same path simply set LCIDTUR = LCIDTR.  For 
+options IUNLD = 0.0 or 3.0 the unloading curve is not required.  
+For IUNLD = 2.0, if LCID TUR is left blank or zero, the default is 
+to use the same curve for unloading as for loading.  
+LCIDTUS Load curve ID deﬁning translational force r esultant along local |u1D46≠-
+axis as a function of relative translational displa cement during 
+unloading (IFLAG = 0 or 1 only). 
+LCIDTUT Load curve ID deﬁning translational force r esultant along local |u1D461-
+axis as a function of relative translational displa cement during 
+unloading (IFLAG = 0 or 1 only). 
+LCIDRUR Load curve ID deﬁning rotational moment res ultant about local |u1D4JF-
+axis as a function of relative rotational displacem ent during 
+unloading. 
+LCIDRUS Load curve for rotational moment resultant about local |u1D46≠-axis: 
+IFLAG.NE.2:  Load curve ID deﬁning rotational moment 
+resultant about local |u1D46≠-axis as a function of rela- 
+tive rotational displacement during unloading 
+IFLAG.EQ.2:  Load curve ID deﬁning rotational moment 
+resultant about local |u1D46≠-axis as a function of rela- 
+tive rotationa l displacement during unloading at 
+node 2 *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+  Card 5 1 2 3 4 5 6 7 8 
+Variable LCIDTER LCIDTES LCIDTET LCIDRER LCIDRES LCIDRET   
+Type I I I I I I   
+ 
+ VARIABLE   DESCRIPTION  
+LCIDTER Load curve ID deﬁning translational damping force s cale factor as 
+a function of relative displacement in local |u1D4JF-direction. 
+LCIDTES Load curve ID deﬁning translational damping force s cale factor as 
+a function of relative displacement in local |u1D46≠-direction. 
+LCIDTET Load curve ID deﬁning translational damping force s cale factor as 
+a function of relative displacement in local |u1D461-direction. 
+LCIDRER Load curve ID deﬁning rotational damping moment res ultant 
+scale factor as a function of relative displacement  in local |u1D4JF-
+rotation. 
+LCIDRES Load curve ID deﬁning rotational damping moment res ultant 
+scale factor as a function of relative displacement  in local |u1D46≠-
+rotation. 
+LCIDRET Load curve ID deﬁning rotational damping moment res ultant 
+scale factor as a function of relative displacement  in local |u1D461-
+rotation. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable UTFAILR UTFAILS UTFAILT WTFAILR WTFAILS WTFAILT FCRIT  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+UTFAILR Optional, translational displacement at failure in tension.  If zero, 
+the corresponding displacement, |u1D462|u1D4JFCst, is not considered in the 
+failure calculation. 
+UTFAILS Optional, translational displacement at failure in tension.  If zero, 
+the corresponding displacement, |u1D462|u1D46≠Cst, is not considered in the *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+  VARIABLE   DESCRIPTION  
+zero, the corresponding displacement, |u1D462|u1D461Cst, is not considered in the 
+failure calculation.  Deﬁne as a positive number. 
+WCFAILR Optional, rotational displacement at failur e in compression .  If 
+zero, the corresponding rotation, /u1D̅0:|u1D4JFCst, is not considered in the 
+failure calculation.  Deﬁne as a positive number. 
+WCFAILS Optional, rotational displacement at failure in com pression.  If 
+zero, the corresponding rotation, /u1D̅0:|u1D46≠Cst, is not considered in the 
+failure calculation.  Deﬁne as a positive number. 
+WCFAILT Optional, rotational displacement at failure in com pression.  If 
+zero, the corresponding rotation, /u1D̅0:|u1D461Cst, is not considered in the 
+failure calculation.  Deﬁne as a positive number. 
+ 
+ Card 8 1 2 3 4 5 6 7 8 
+Variable IUR IUS IUT IWR IWS IWT   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+IUR Initial translational displacement along local |u1D4JF-axis. 
+IUS Initial translational displacement along local |u1D46≠-axis. 
+IUT Initial translational displacement along local |u1D461-axis. 
+IWR Initial rotational displacement about the local  |u1D4JF-axis. 
+IWS Initial rotational displacement about the local  |u1D46≠-axis. 
+IWT Initial rotational displacement about the local  |u1D461-axis. 
+ 
+Loading Rotational Moment Card.   This card is read if IFLAG = 2.  It is optional. 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable LM1R1S LM1R2S LM1R1T LM1R2T LM2R1S LM2R1T   
+Type I I I I I I   *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+  VARIABLE   DESCRIPTION  
+LUM1R1T Load curve ID for unloading deﬁning rotational moment 
+resultant at node 1 about local |u1D461-axis as a function of relative 
+rotational displacement at node 1 
+LUM1R2T Load curve ID for unloading deﬁn ing rotational moment 
+resultant at node 1 about local |u1D461-axis as a function of relative 
+rotational displacement at node 2 
+LUM2R1S Load curve ID for unloading deﬁning rotational moment 
+resultant at node 2 about local |u1D46≠-axis as a function of relative 
+rotational displacement at node 1 
+LUM2R1T Load curve ID for unloading deﬁning rotational moment 
+resultant at node 2 about local |u1D461-axis as a function of relative 
+rotational displacement at node 1 
+ 
+Unload Stiffness for Bending Moment Card.   This card is read if IFLAG = 2.  It is 
+optional. 
+ Card 11 1 2 3 4 5 6 7 8 
+Variable KUM1R1S  KUM1R2S  KUM1R1T  KUM1R2T  KUM2R1S  KUM2R1T  KUM2R2S  KUM2R2T  
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+KUM1R1S Optional unload stiﬀness for bending moment  about local |u1D46≠-axis 
+at node 1 due to relative rotation at node 1.  If l eft blank, LS-DY-
+NA will calculate this value.   
+KUM1R2S Optional unload stiﬀness for bending moment  about local |u1D46≠-axis 
+at node 1 due to relative rotation at node 2.  If l eft blank, LS-DY-
+NA will calculate this value.   
+KUM1R1T Optional unload stiﬀness for bending moment  about local |u1D461-axis 
+at node 1 due to relative rotation at node 1.  If l eft blank, LS-DY-
+NA will calculate this value.   
+KUM1R2T Optional unload stiﬀness for bending moment  about local |u1D461-axis 
+at node 1 due to relative rotation at node 2.  If l eft blank, LS-DY-
+NA will calculate this value.   *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+ Elastic limit of loading curves.   This card is read if IFLAG = 2.  It is optional.  If not 
+input, the values derived by LS-DYNA based on the r elated curves will be used. 
+ Card 13 1 2 3 4 5 6 7 8 
+Variable E1M1R1S  E2M1R1S  E1M1R2S  E2M1R2S  E1M1R1T  E2M1R1T  E1M1R2T  E2M1R2T  
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+E1M1R1S  Negative, tensile, elastic limit of curve LM1R1S 
+E2M1R1S  Positive, tensile, elastic limit of curve LM1R1S 
+E1M1R2S Negative elastic limit of curve LM1R2S 
+E2M1R2S Positive elastic limit of curve LM1R2S 
+E1M1R1T Negative, tensile, elastic limit of curve L M1R1T 
+E2M1R1T  Positive, tensile, elastic limit of curve LM1R1T 
+E1M1R2T Negative elastic limit of curve LM1R2T 
+E2M1R2T Positive elastic limit of curve LM1R2T 
+ 
+Elastic limit of loading curves.   This card is read if IFLAG = 2.  It is optional.  If not 
+input, the values derived by LS-DYNA based on the r elated curves will be used. 
+ Card 14 1 2 3 4 5 6 7 8 
+Variable E1M2R1S  E2M2R1S  E1M2R1T  E2M2R1T      
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+E1M2R1S Negative, tensile, elastic limit of curve L M2R1S 
+E2M2R1S  Positive, tensile, elastic limit of curve LM2R1S 
+E1M2R1T Negative elastic limit of curve LM2R1T 
+E2M2R1T Positive elastic limit of curve LM2R1T *. ENERAL_NONLINEAR_6DOF_DISCRETE_BEAM  
+ ically reduces the stiﬀness of the spring as the le ngth increases, allowing an 
+entire family of springs to be modeled with a singl e material.  Note that all the 
+displacement and velocity components are divided by  the initial length, and 
+therefore the scaling applies to the damping and ro tational stiﬀness. 
+3.  Rotational Displacement.   Rotational displacement is measured in radians.   
+ 
+  
+  
+Figure M119-1.   Load and unloading behavior. Unload = 0
+Loading-unloading
+curveDISPLACEMENTR
+E
+S
+U
+L
+T
+A
+N
+TUnload = 1Unloading
+curve
+DISPLACEMENTR
+E
+S
+U
+L
+T
+A
+N
+T
+DISPLACEMENTR
+E
+S
+U
+L
+T
+A
+N
+T
+KUnloading
+curveUnload = 2
+uminumin
+× OFFSET
+Quadra tic
+unloadingUnload = 3
+DISPLACEMENTR
+E
+S
+U
+L
+T
+A
+N
+T*. URSON  
+This is  Material Type 120. This is the Gurson dilatational- plastic model.  This model is 
+available for shell and solid elements.  A detailed  description of this model can be 
+found in the following references: Gurson [1975, 19 77], Chu and Needleman [1980] and 
+Tvergaard and Needleman [1984].  The implementation  in LS-DYNA is based on the 
+implementation of Feucht [1998] and Faßnacht [1999] , which was recoded at LSTC.  
+Strain rate dependency can be deﬁned using a table (see LCSS on Card 6). 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR SIGY N Q1 Q2 
+Card 2.   This card is required. 
+FC F0 EN SN FN ETAN ATYP FF0 
+Card 3.   This card is required. 
+EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Card 4.   This card is required. 
+ES1 ES2 ES3 ES4 ES5 ES6 ES7 ES8 
+Card 5.   This card is required. 
+L1 L2 L3 L4 FF1 FF2 FF3 FF4 
+Card 6.   This card is required. 
+LCSS LCFF NUMINT LCF0 LCFC LCFN VGTYP DEXP 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY N Q1 Q2 
+Type A F F F F F F F 
+ *. URSON  
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed. 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Yield stress 
+N Exponent for Power law (default = 0.0).  This value is only used if 
+ATYP = 1 and LCSS = 0 (see Cards 2 and 6). 
+Q1 Gurson ﬂow function parameter  /u1D45E|oneCst 
+Q2 Gurson ﬂow function parameter /u1D45E|twoCst 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FC F0 EN SN FN ETAN ATYP FF0 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+FC Critical void volume fraction |u1D4J3|u1D4J≠Cst where voids begin to aggregate.  
+This value is only used if LCFC = 0 (see Card 6). 
+F0 Initial void volume fraction, |u1D4J3|zeroCst. This value is only used if LCF0 = 0 
+(see Card 6). 
+EN Mean nucleation strain |u1D7≠≠|u1D441Cst: 
+GT.0.0: Constant value 
+LT.0.0: Load curve ID = (- EN) which deﬁnes mean nucleation 
+strain |u1D7≠≠|u1D441Cst  as a function of element length 
+SN Standard deviation |u1D46≠|u1D441Cst of the normal distribution of |u1D7≠≠|u1D441Cst:  
+GT.0.0: Constant value *. URSON  
+  VARIABLE   DESCRIPTION  
+EPS1 - EPS8 Eﬀective plastic strain values.  The ﬁrst point mus t be zero 
+corresponding to the initial yield stress.  At leas t 2 points should 
+be deﬁned.  These values are used if ATYP = 3 and L CSS = 0 (see 
+Cards 2 and 6). 
+ES1 - ES8 Corresponding yield stress values to EPS1  – EP S8. These values 
+are used if ATYP = 3 and LCSS = 0 (see Cards 2 and 6). 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable L1 L2 L3 L4 FF1 FF2 FF3 FF4 
+Type F F F F F F F F 
+Default 0 0 0 0 0 0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+L1 - L4 Element length values.  These values are on ly used if LCFF = 0 
+(see Card 6). 
+FF1 - FF4 Corresponding failure void volume fraction.  These values are 
+only used if LCFF = 0 (see Card 6). 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable LCSS LCFF NUMINT LCF0 LCFC LCFN VGTYP DEXP 
+Type I I I I I I F F 
+Default 0 0 1 0 0 0 0 3.0 
+ 
+ VARIABLE   DESCRIPTION  
+LCSS Load curve ID or Table ID. If deﬁned, ATYP, EP S1 - EP S8 and ES1 
+- ES8 are ignored. 
+Load Curve.   When LC SS is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  *. URSON  
+  VARIABLE   DESCRIPTION  
+DEXP Exponent value for damage history variable 16 
+Remarks: 
+The Gurson ﬂow function is deﬁned as: 
+Φ=|u1D7≠∆/u1D440.st|twoCst
+|u1D7≠∆/u1D44C.st|twoCst+ 2/u1D45E|oneCst|u1D4J3∗cosh |parenleftCvJ3/u1D45E|twoCst|u1D7≠∆|u1D43BCst
+2|u1D7≠∆/u1D44C.st|parenriµhtCvJ − 1 − |parenleftCv1/u1D45E|oneCst|u1D4J3∗|parenriµhtCv1|twoCst= 0  , 
+where |u1D7≠∆/u1D440.st is the equivalent von Mises stress, |u1D7≠∆/u1D44C.st is the yield stress, and |u1D7≠∆|u1D43BCst is the mean 
+hydrostatic stress.  The eﬀective void volume fract ion is deﬁned as 
+|u1D4J3∗|parenleftCv1|u1D4J3 |parenriµhtCv1 =
+⎩|<raceleftCex⎨|<raceleftCex⎧|u1D4J3 |u1D4J3 ≤ |u1D4J3|u1D4J≠Cst
+|u1D4J3|u1D4J≠Cst+1//u1D45E|oneCst− |u1D4J3|u1D4J≠Cst
+|u1D4J3|u1D439Cst− |u1D4J3|u1D4J≠Cst|parenleftCv1|u1D4J3 − |u1D4J3|u1D4J≠Cst|parenriµhtCv1 |u1D4J3 > |u1D4J3c 
+The growth of void volume fraction is deﬁned as 
+|u1D4J3̇= |u1D4J3̇/u1D4:A.st+ |u1D4J3̇|u1D441Cst  , 
+where the growth of existing voids is deﬁned as 
+|u1D4J3̇/u1D4:A.st= |parenleftCv11 − |u1D4J3 |parenriµhtCv1|u1D7≠≠̇|u1D4J8Cst|u1D4J8Cst |u1D4JDCst 
+and nucleation of new voids is deﬁned as 
+|u1D4J3̇|u1D441Cst= |u1D434|u1D7≠≠̇|u1D4JDCst 
+with function |u1D434 
+|u1D434 =|u1D4J3|u1D441Cst
+|u1D446|u1D441Cst/radical.v12/u1D̅0Bexp |<racketleftCv6−1
+2|parenleftCvJ|u1D7≠≠|u1D4JDCst− |u1D7≠≠|u1D441Cst
+|u1D446|u1D441Cst|parenriµhtCvJ|twoCst
+|<racketriµhtCv6  . 
+Voids are nucleated only in tension. 
+History Variables: 
+Shell Solid Description 
+1 1 Void volume fraction 
+4 2 Triaxiality variable |u1D7≠∆|u1D43BCst|u1D7≠∆/u1D440.st⁄ 
+5 3 Eﬀective strain rate 
+6 4 Growth of voids 
+7 5 Nucleation of voids *. URSON_JC  
+ *. URSON_JC  *. URSON_JC  
+  VARIABLE   DESCRIPTION  
+F0 Initial void volume fraction, |u1D4J3|zeroCst. This ﬁeld is only used if LCF0 = 0.  
+EN Mean nucleation strain, |u1D7≠≠|u1D441Cst:  
+GT.0.0: Constant value 
+LT.0.0: Load curve ID = (- EN) which deﬁnes mean nucleation 
+strain, |u1D7≠≠|u1D441Cst, as a function of element length 
+SN Standard deviation, |u1D46≠|u1D441Cst, of the normal distribution of |u1D7≠≠|u1D441Cst:  
+GT.0.0: Constant value 
+LT.0.0: Load curve ID = (- SN) which deﬁnes standard 
+deviation, |u1D46≠|u1D441Cst, of the normal distribution of |u1D7≠≠|u1D441Cst as a 
+function of element length 
+FN Void volume fraction of nucleating particles, |u1D4J3|u1D441Cst. This ﬁeld is only 
+used if LCFN = 0. 
+ETAN Hardening modulus.  This ﬁeld is only used if ATYP = 2 and LC-
+SS = 0 (see Card 6). 
+ATYP Type of hardening: 
+EQ.0.0: Ideal plastic, 
+|u1D7≠∆/u1D44C.st= SIG Y  
+EQ.1.0: Power law, 
+|u1D7≠∆/u1D44C.st= SIG Y × |parenleftCv6|u1D7≠≠|u1D4JDCst+ SIG Y /E
+SIG Y /E|parenriµhtCv6|oneCst//N.st
+ 
+EQ.2.0: Linear hardening, 
+|u1D7≠∆/u1D44C.st= SIG Y +E × ETAN 
+E − ETAN |u1D7≠≠|u1D4JDCst 
+EQ.3.0: 8 points curve 
+FF0 Failure void volume fraction, |u1D4J3|u1D439Cst. This ﬁeld is only used if 
+LCFF = 0 (see Card 6). 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Type F F F F F F F F *. URSON_JC  
+  Card 6 1 2 3 4 5 6 7 8 
+Variable LCSS LCFF NUMINT LCF0 LCFC LCFN VGTYP DEXP 
+Type I I I I I I F F 
+Default 0 0 1 0 0 0 0.0 3.0 
+ 
+ VARIABLE   DESCRIPTION  
+LCSS Load curve ID or Table ID. If deﬁned, ATYP, EP S1 - EP S8 and ES1 
+- ES8 are ignored. 
+Load Curve.   When LC SS is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of eﬀective p lastic strain.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the eﬀective stress as a funct ion eﬀective 
+plastic strain for that rate; see Figure M24-1  and *. URSON_JC  *. URSON_JC  
+ Φ=|u1D7≠∆/u1D440.st|twoCst
+|u1D7≠∆/u1D44C.st|twoCst+ 2/u1D45E|oneCst|u1D4J3∗cosh |parenleftCvJ3/u1D45E|twoCst|u1D7≠∆|u1D43BCst
+2|u1D7≠∆/u1D44C.st|parenriµhtCvJ − 1 − |parenleftCv1/u1D45E|oneCst|u1D4J3∗|parenriµhtCv1|twoCst= 0 
+where |u1D7≠∆/u1D440.st is the equivalent von Mises stress, |u1D7≠∆/u1D44C.st is the yield stress, and |u1D7≠∆|u1D43BCst is the mean 
+hydrostatic stress.  The eﬀective void volume fract ion is deﬁned as 
+|u1D4J3∗|parenleftCv1|u1D4J3 |parenriµhtCv1 =
+⎩|<raceleftCex⎨|<raceleftCex⎧|u1D4J3 |u1D4J3 ≤ |u1D4J3|u1D4J≠Cst
+|u1D4J3|u1D4J≠Cst+1//u1D45E|oneCst− |u1D4J3|u1D4J≠Cst
+|u1D4J3|u1D439Cst− |u1D4J3|u1D4J≠Cst|parenleftCv1|u1D4J3 − |u1D4J3|u1D4J≠Cst|parenriµhtCv1 |u1D4J3 > |u1D4J3c 
+The growth of void volume fraction is deﬁned as 
+|u1D4J3̇= |u1D4J3̇/u1D4:A.st+ |u1D4J3̇|u1D441Cst 
+where the growth of existing voids is deﬁned as 
+|u1D4J3̇/u1D4:A.st= |parenleftCv11 − |u1D4J3 |parenriµhtCv1|u1D7≠≠̇|u1D4J8Cst|u1D4J8Cst |u1D4JDCst+/u1D458|u1D714Cst|u1D714(σ)|u1D4J3 |parenleftCv11 − |u1D4J3 |parenriµhtCv1|u1D7≠≠̇/u1D440.st|u1D4JDCst|u1D4J9Cst |u1D7≠∆/u1D44C.st
+|u1D7≠∆/u1D440.st 
+The second term is an optional extension for shear failure proposed by Nahshon and 
+Hutchinson [2008] with new parameter /u1D458|u1D714Cst (= 0 by default), eﬀective plastic strain rate in 
+the matrix |u1D7≠≠̇/u1D440.st|u1D4JDCst|u1D4J9Cst , and Lode cosin function |u1D714(σ): 
+|u1D714(σ) = 1 −/u1D̅0∫|twoCst− |u1D6FD ×/u1D̅0∫(1 −/u1D̅0∫),        /u1D̅0∫= cos(3/u1D̅0:) =2 7
+2/u1D4:D|threeCst
+|u1D7≠∆/u1D440.st|threeCst 
+with parameter |u1D6FD, Lode angle /u1D̅0: and third deviatoric stress invariant /u1D4:D|threeCst. 
+ 
+Nucleation of new voids is deﬁned as 
+|u1D4J3̇|u1D441Cst= |u1D434|u1D7≠≠̇/u1D440.st|u1D4JDCst|u1D4J9Cst  
+with function |u1D434 
+|u1D434 =|u1D4J3|u1D441Cst
+|u1D446|u1D441Cst/radical.v12/u1D̅0Bexp 
+⎣⎢⎢⎡−1
+2⎝⎜⎛|u1D7≠≠/u1D440.st|u1D4JDCst|u1D4J9Cst − |u1D7≠≠|u1D441Cst
+|u1D446|u1D441Cst⎠⎟⎞|twoCst
+⎦⎥⎥⎤  . 
+Voids are nucleated only in tension. 
+ 
+The Johnson-Cook failure criterion is added to this  material model.  Based on the 
+triaxiality ratio |u1D7≠∆|u1D43BCst/|u1D7≠∆/u1D440.st failure is calculated as: 
+|u1D7≠∆|u1D43BCst/|u1D7≠∆/u1D440.st>/u1D4:F|oneCst : Gurson model 
+/u1D4:F|oneCst≥ |u1D7≠∆|u1D43BCst/|u1D7≠∆/u1D440.st≥/u1D4:F|twoCst : Gurson model and Johnson-Cook failure criteria 
+/u1D4:F|twoCst< |u1D7≠∆|u1D43BCst/|u1D7≠∆/u1D440.st : Gurson model 
+ 
+Johnson-Cook failure strain is deﬁned as *. URSON_JC  
+ Shell Solid Description 
+EQ.3:   region (c) Gurson 
+11 11 Dimensionless material damage value =
+⎩|<raceleftCex⎨|<raceleftCex⎧|parenleftCv1/u1D45:.st−/u1D45:.st|zeroCsts|parenriµhtCv1
+|parenleftCv1/u1D45:.st/u1D4⃡0.sts−/u1D45:.st|zeroCsts|parenriµhtCv1|u1D4J3≤|u1D4J3c
+1+|parenleftCv1/u1D45:.st−/u1D45:.st/u1D4⃡0.sts|parenriµhtCv1
+|parenleftCv1/u1D45:.st/u1D439.sts−/u1D45:.st/u1D4⃡0.sts|parenriµhtCv1|u1D4J3>|u1D4J3c 
+13 13 Deviatoric part of microscopic plastic strain  
+14 14 Volumetric part of macroscopic plastic strain 
+16 16 Dimensionless material damage value =|parenleftCv4/u1D45:.st−/u1D45:.st|zeroCsts
+/u1D45:.st/u1D439.sts−/u1D45:.st|zeroCsts|parenriµhtCv4|oneCst//D.st/E.st/X.st/P.st 
+ *. URSON_RCDC  
+This is an enhancement of Material Type 120. This i s the Gurson model with the Wilkins 
+Rc-Dc [Wilkins, et al., 1977] fracture model added.   This model is available for shell and 
+solid elements.  A detailed description of this mod el can be found in the following 
+references: Gurson [1975, 1977]; Chu and Needleman [1980]; and Tvergaard and 
+Needleman [1984]. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR SIGY N Q1 Q2 
+Card 2.   Description. 
+FC F0 EN SN FN ETAN ATYP FF0 
+Card 3.   This card is required. 
+EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Card 4.   This card is required. 
+ES1 ES2 ES3 ES4 ES5 ES6 ES7 ES8 
+Card 5.   This card is required. 
+L1 L2 L3 L4 FF1 FF2 FF3 FF4 
+Card 6.   This card is required. 
+LCSS LCFF NUMINT      
+Card 7.   This card is required. 
+ALPHA BETA GAMMA D0 B LAMBDA DS L *. URSON_RCDC  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY N Q1 Q2 
+Type A F F F F F F F 
+Default none none none none none 0.0 none none 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Yield stress 
+N Exponent for Power law.  This ﬁeld is only used i f ATYP = 1 and 
+LCSS = 0.  See Cards 2 and 6. 
+Q1 Gurson ﬂow function parameter  /u1D45E|oneCst 
+Q1 Gurson ﬂow function parameter /u1D45E|twoCst 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FC F0 EN SN FN ETAN ATYP FF0 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+FC Critical void volume fraction, |u1D4J3|u1D4J≠Cst *. URSON_RCDC  
+  VARIABLE   DESCRIPTION  
+EPS1 - EPS8 Eﬀective plastic strain values.  The ﬁrst point mus t be zero 
+corresponding to the initial yield stress.  This op tion is only used 
+if ATYP equal to 3. At least 2 points should be deﬁ ned.  These 
+values are used if ATYP = 3 and LCSS = 0.  See Card s 2 and 6. 
+ES1 - ES8 Corresponding yield stress values to EPS1  - EP S8. These values 
+are used if ATYP = 3 and LCSS = 0.  See Cards 2 and  6. 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable L1 L2 L3 L4 FF1 FF2 FF3 FF4 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+L1 - L4 Element length values.  These ﬁelds are onl y used if LCLF = 0. 
+FF1 - FF4 Corresponding failure void volume fraction.  These values are 
+only used if LCLF = 0. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable LCSS LCFF NUMINT      
+Type I I I      
+Default 0 0 1      
+ 
+ VARIABLE   DESCRIPTION  
+LCSS Load curve ID deﬁning eﬀective stress as a function  of eﬀective 
+plastic strain.  ATYP is ignored with this option. 
+LCLF Load curve ID deﬁning failure void volume fraction as a function 
+of element length.  The values L1 - L4 and FF1 - FF4 are ignored 
+with this option. *. URSON_RCDC  
+ The growth of the void volume fraction is deﬁned as  
+|u1D4J3̇= |u1D4J3̇/u1D4:A.st+ |u1D4J3̇|u1D441Cst  , 
+where the growth of existing voids is given as: 
+|u1D4J3̇/u1D4:A.st= |parenleftCv11 − |u1D4J3 |parenriµhtCv1|u1D7≠≠̇|u1D4J8Cst|u1D4J8Cst |u1D4JDCst, 
+and nucleation of new voids as: 
+|u1D4J3̇|u1D441Cst= |u1D434|u1D7≠≠̇|u1D4JDCst 
+in which |u1D434 is deﬁned as 
+|u1D434 =|u1D4J3|u1D441Cst
+|u1D446|u1D441Cst/radical.v12/u1D̅0Bexp |parenleftCv6−1
+2|parenleftCvJ|u1D7≠≠|u1D4JDCst− |u1D7≠≠|u1D441Cst
+|u1D446|u1D441Cst|parenriµhtCvJ|twoCst
+|parenriµhtCv6  . 
+ 
+The Rc-Dc model is described in the following.  The  damage |u1D437 is given by 
+|u1D437 =/integral.v:|u1D714|oneCst|u1D714|twoCst|u1D4J1|u1D7≠≠|u1D4JDCst  , 
+where |u1D7≠≠|u1D4JDCst is the equivalent plastic strain,  
+|u1D714|oneCst= |parenleftCvJ1
+1 − |u1D6F∆|u1D7≠∆|u1D4JACst|parenriµhtCvJ/u1D6FC.st
+ 
+is a triaxial stress weighting term, and 
+|u1D714|twoCst= (2 − |u1D434/u1D4:̅.st)/u1D6FD.st 
+is a asymmetric strain weighting term.  In the abov e |u1D7≠∆|u1D4JACst is the mean stress and  
+|u1D434/u1D4:̅.st= max |parenleftCvJ|u1D446|twoCst
+|u1D446|threeCst,|u1D446|twoCst
+|u1D446|oneCst|parenriµhtCvJ 
+Fracture is initiated when the accumulation of dama ge is 
+|u1D437
+|u1D437|u1D4J≠Cst> 1  , 
+where |u1D437|u1D4J≠Cst is the a critical damage given by 
+|u1D437|u1D4J≠Cst= |u1D437|zeroCst|parenleftCv21 + |u1D44F|∇|u1D437||u1D7≠6Cst|parenriµhtCv2  . 
+A fracture fraction  
+|u1D439 =|u1D437 − |u1D437|u1D4J≠Cst
+|u1D437|u1D46≠Cst 
+deﬁnes the degradations of the material by the Rc-D c model. 
+ 
+The characteristic element length is used in the ca lculation of  ∇|u1D437. Calculation of this 
+factor is only done for elements with a smaller ele ment length than this value. *. ENERAL_NONLINEAR_1DOF_DISCRETE_BEAM  
+This is Material Type 121.  This is a very general spring and damper model.  This beam 
+is based on the . ENERAL_NONLINEAR_1DOF_DISCRETE_BEAM  
+  VARIABLE   DESCRIPTION  
+is taken as the loading curve. 
+EQ.2.0: Loading follows loading curve; unloading follows 
+unloading stiﬀness, K, to the unloading curve.  The  
+loading and unloading curves may only intersect at the 
+origin of the axes. 
+EQ.3.0: Quadratic unloading fr om peak displacement value to 
+a permanent oﬀset. 
+OFFSET Oﬀset to determine permanent set upon unloading if the 
+IUNLD = 3.0.  The permanent sets in compression and tension  are 
+equal to the product of this oﬀset value and the ma ximum 
+compressive and tensile displacements, respectively . 
+DAMPF Damping factor for stability.  Values in the neighb orhood of unity 
+are recommended.  This damping factor is properly s caled to 
+eliminate time step size dependency.  Also, it is a ctive if and only 
+if the local stiﬀness is deﬁned. 
+LCIDT Load curve ID deﬁning translational force resultant  along the axis 
+as a function of relative translational displacemen t.  If zero, no 
+stiﬀness related forces are generated for this degr ee of freedom.  
+The loading curves must be deﬁ ned from the most negative 
+displacement to the most positive displacement.  Th e force does 
+not need to increase monotonically for the loading curve.  The 
+curves are extrapolated when the displacement range  falls 
+outside the curve deﬁnition. 
+LCIDTU Load curve ID deﬁning translational force resultant  along the axis 
+as a function of relative translational displacemen t during 
+unloading.  The force values deﬁned by this curve m ust increase 
+monotonically from the most negative displacement t o the most 
+positive displacement.  For IUNLD = 1.0, the slope of this curve 
+must equal or exceed the loading curve for stabilit y reasons.  This 
+is not the case for IUNLD = 2.0.  For loading and unloading to 
+follow the same path simply set LCIDTU = LCIDT. 
+LCIDTD Load curve ID deﬁning translational damping force result ant 
+along the axis as a function of relative translatio nal velocity. 
+LCIDTE Load curve ID deﬁning translational damping force s cale factor as 
+a function of relative displacement along the axis.  *. EOLOGIC_CAP_MODEL (*MA T_025) that includes 
+viscoplasticity for rate eﬀects and damage mechanic s to model strain softening.  The 
+primary references for the model are Schwer and Mur ray [1994], Schwer [1994], and 
+Murray and Lewis [1994].  *. AS_MIXTURE  *. AS_MIXTURE  
+This is Material Type 148.  This model is for the s imulation of thermally equilibrated 
+ideal gas mixtures.  This model only works with the  multi-material ALE formulation 
+(ELFORM = 11 in *SECTION_SOLID).  This keyword must  be used together with *INI-
+TIAL_GAS_MIXTURE for the initialization of gas dens ities and temperatures.  When 
+applied in the context of ALE airbag modeling, the injection of inﬂator gas is done with 
+a *SECTION_POINT_SOURCE_MIXTURE command which contr ols the injection 
+process.  *. AS_MIXTURE  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID IADIAB RUNIV      
+Type A I F      
+Default none 0 0.0      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+IADIAB This ﬂag is used to turn ON/OFF adiabatic compressi on logics 
+for an ideal gas.  See Remark 5 . 
+EQ.0: Oﬀ (default) 
+EQ.1: On 
+RUNIV Universal gas constant in per-mole unit (8.31 447 J/(mole × K)).  
+See Remark 1 . 
+ 
+Card 2 for Per Mass Calculation.   Method (A) RUNIV = blank or 0.0. 
+Card 2a.1  1 2 3 4 5 6 7 8 
+Variable CVmass1  CVmass2  CVmass3  CVmass4  CVmass5  CVmass6  CVmass7  CVmass8  
+Type F F F F F F F F 
+ 
+Card 3 for Per Mass Calculation.   Method (A) RUNIV = blank or 0.0. 
+Card 2a.2  1 2 3 4 5 6 7 8 
+Variable CPmass1  CPmass2  CPmass3  CPmass4  CPmass5  CPmass6  CPmass7  CPmass8  
+Type F F F F F F F F 
+ *. AS_MIXTURE  
+  VARIABLE   DESCRIPTION  
+MOLWT1 -
+MOLWT8 Molecular weight of each ideal gas in the mixture ( mass-
+unit/mole).  See Remark 2 . 
+CPmole1 - 
+CPmole8 Heat capacity at constant pressure for up to eight diﬀerent gases 
+in per-mole unit.  These ar e nominal heat capacity values 
+typically at STP.  These are denoted by the variabl e |u1D434 in the 
+equation in Remark 2 . 
+B1 - B8 First order coeﬃcient for a temperature dependent h eat capacity 
+at co nstant pressure for up to eight diﬀerent gases.  Th ese are 
+denoted by the variable |u1D43J in the equation in Remark 2 . 
+C1 - C8 Second order coeﬃcient for a temperature dependent heat 
+capacity at constant pressure for up to eight diﬀer ent gases.  
+These are denoted by the variable |u1D436 in the equation in Remark 2 . 
+Remarks: 
+1.  Methods for Deﬁning Gas Properties.   There are 2 methods of deﬁning the 
+gas properties for the mixture.  If RUNIV is BLANK or ZERO, Method (A) is 
+used to deﬁne constant heat capacities where per-ma ss unit values of |u1D436|u1D463Cst and 
+|u1D436|u1D4JDCst are input.  Only Cards 2a.1 and 2a.2 are required for this method.  Method 
+(B) is used to deﬁne constant or temperature depend ent heat capacities where 
+per-mole unit values of |u1D436|u1D4JDCst are input.  Cards 2b.1 through 2b.4 are required f or 
+this method. 
+2.  Temperature Dependent Heat Capacity.   The per-mass-unit, temperature-
+dependent, constant-pressure heat capacity is 
+|u1D436|u1D4JDCst(|u1D447) =[CPmole + |u1D43J × |u1D447 + |u1D436 × |u1D447|twoCst]
+MOLWT  
+See Table M148-1 . 
+3.  Initial Temperature and Density.   The initial temperature and the density of 
+the gas species present in a mesh or part at time z ero is speciﬁed by the key- 
+|u1D436|u1D4JDCst(|u1D447) CPmole  |u1D43J |u1D436 
+J
+kg  K J
+mole  K J
+mole  K|twoCst J
+mole  K|threeCst 
+ 
+ Table M148-1.   Standard SI units *. AS_MIXTURE the dissipated kine tic energy is automat- 
+ically converted into heat (internal energy).  Thus , in eﬀect the total energy is 
+conserved instead of conserving just the internal e nergy.  This numerical 
+scheme has been shown to improve accuracy in some c ases.  However, the user 
+should always be vigilant and check the physics of the problem closely. 
+5.  IADIAB.   As an example, consider an airbag surrounded by a mbient air.  As 
+the inﬂator gas ﬂows into the bag, the ALE elements  cut by the airbag fabric 
+shell elements will contain some inﬂator gas inside  and some ambient air out- 
+side.  The multi-material element treatment is not perfect.  Consequently the 
+temperature of the outside air may be made artiﬁcia lly high after the multi-
+material element treatment.  To prevent the outside  ambient air from getting 
+artiﬁcially high |u1D447, set IADIAB = 1 for the ambient air outside.  A si mple adia- 
+batic compression equation is then assumed for the outside air.  The use of this 
+ﬂag may be needed, but only when that air is modele d by the *. AS _MIXTURE input deﬁnes the 
+gas properties of ALE parts H5 & H6.  The *. AS_MIXTURE  
+  
+The *INITIAL_GAS_MIXTURE keyword input is also show n below.  It basically 
+speciﬁes that “AMMGID 2 may be present in part or m esh H4 at |u1D461 = 0 , and the initial 
+density of this gas is deﬁned in the rho1 position which corresponds to the 1 st  material 
+in the mixture (or H5, the resident gas).” 
+Example Conﬁguration: 
+ 
+Sample Input: 
+$-------------------------------------------------- ----------------------------- 
+*PART 
+H5 = initial gas inside the tank 
+$      PID     SECID       MID     EOSID      HGID      GRAV    ADPOPT      TMID 
+         5         5         5         0         5         0         0 
+*SECTION_SOLID 
+         5        11         0 
+$-------------------------------------------------- ----------------------------- 
+$ Example 1:  Constant heat capacities using per-ma ss unit. 
+$*. AS_MIXTURE 
+$      MID    IADIAB    R_univ 
+         5         0  8.314470 
+$      MW1       MW2       MW3       MW4       MW5       MW6       MW7       MW8 
+ 0.0288479   0.02256 
+$  Cp1_mol   Cp2_mol   Cp3_mol   Cp4_mol   Cp5_mol   Cp6_mol   Cp7_mol   Cp8_mol 
+ 29.049852  36.23388 
+$       B1        B2        B3        B4        B5        B6        B7        B8 
+  7.056E-3  0.132E-1 
+$       C1        C2        C3        C4        C5        C6        C7        C8 
+ -1.225E-6 -0.190E-5 
+S1 = tank  
+H4 = AMMG1 = background 
+outside air (initially deﬁned 
+ALE mesh) 
+H5 = AMMG2 = initial gas 
+inside the tank (this has no 
+initial mesh)  
+H6 = AMMG2 = inﬂator gas(es) 
+injected in (this has no initial 
+mesh)  Cut-oﬀ view *. ENER AL_VISCOELASTIC (Material 
+Type 76) has all the capability of *. ENERAL_SPRING_DISCRETE_BEAM  
+ *. ENERAL_SPRING_DISCRETE_BEAM  *. ENERAL_SPRING_DISCRETE_BEAM  
+  Card 3 1 2 3 4 5 6 7 8 
+Variable FLCID HLCID C1 C2 DLE GLCID   
+Type F F F F F I   
+ 
+ VARIABLE   DESCRIPTION  
+FLCID Load curve ID (see *DEFINE_CURVE).   
+TYPE.EQ.0: this curve deﬁnes force or moment as a function of 
+deﬂection for nonlinear elastic behavior.   
+TYPE.EQ.1: this curve deﬁnes the yield force as a function of 
+plastic deﬂection.  If the abscissa of the ﬁrst poi nt 
+of the curve is 0. the force magnitude i s identical in 
+tension and compression, that is, only the sign 
+changes.  If not, the yield stress in the compressi on 
+is used when the spring force is negative.  The 
+plastic displacement increases monotonically in 
+this implementation.  The load curve is req uired 
+input. 
+HLCID Optional load curve ID (see *DEFINE_ CURVE) deﬁning force as a 
+function of relative velocity.  If the origin of th e curve is at (0,0) , 
+the force magnitude is identical for a given magnit ude of the 
+relative velocity, meaning only the sign changes. 
+C1 Damping coeﬃcient 
+C2 Damping coeﬃcient 
+DLE Factor to scale time units 
+GLCID Optional load curve ID (see *DEFINE_ CURVE) deﬁning a scale 
+factor as a function of deﬂection for load curve ID , HLCID.  If 
+zero, a scale factor of unity is assumed. 
+Remarks: 
+1.  Elastic Behavior.   If TYPE = 0, elastic behavior is obtained.  In th is case, if the 
+linear spring stiﬀness is used, the force, |u1D439, is given by: 
+|u1D439 = K × ∆/u1D4:F+ D × ∆/u1D4:Ḟ  . 
+But if the load curve ID is speciﬁed, the force is then given by: *. ENERAL_SPRING_DISCRETE_BEAM  
+ |u1D439|u1D4JBCst+|oneCst= |u1D439 × |<racketleftCv61 + C1 × ∆/u1D4:Ḟ+ C2 × sgn|parenleftCv1∆/u1D4:Ḟ|parenriµhtCv1ln |parenleftCv6max /˙raceleft.v61. ,|dividesCv2∆/u1D4:Ḟ|dividesCv2
+DLE /˙raceright.v6|parenriµhtCv6|<racketriµhtCv6 + D × ∆/u1D4:Ḟ
++ |u1D4J4(∆/u1D4:F)ℎ|parenleftCv1∆/u1D4:Ḟ|parenriµhtCv1  . 
+Unless the origin of the curve starts at (0,0) , the negative part of the curve is 
+used when the spring force is negative where the ne gative of the plastic dis- 
+placement is used to interpolate, |u1D439|u1D466Cst.  The positive part of the curve is used 
+whenever the force is positive.  
+3.  Cross-Sectional Area.  The cross-sectional area is deﬁned on the section c ard 
+for the discrete beam elements, See *SECTION_BEAM.  The square root of this 
+area is used as the contact thickness oﬀset if thes e elements are included in the 
+contact treatment. 
+4.  Rotational Displacement.   Rotational displacement is measured in radians. *. ENERALIZED_PHASE_CHANGE  *. ENERALIZED_PHASE_CHANGE 
+This is Material Type 254. It is designed to model phase transformations in materials 
+and the implied changes in the material properties.   It is applicable to hot stamping, 
+heat treatment and welding processes for a wide ran ge of materials.  It accounts for up 
+to 24 phases and provides a list of generic phase c hange mechanisms for each possible 
+phase changes. The parameters for the phase transfo rmation laws are to be given in 
+tabulated form. 
+Given the current microstructure composition, the f ormulation implements a 
+temperature and strain-rate dependent elastic-plast ic material with non-linear 
+hardening behavior.  Above a certain temperature, t he model shows an ideal elastic-
+plastic behavior with no evolution of plastic strai ns. 
+The material has been implemented for solid and she ll elements and is suitable for 
+explicit and implicit analysis. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO N E PR MIX MIXR  
+Card 2.   This card is required. 
+TASTART TAEND CTE   EPSINI DTEMP  
+Card 2.1.   This card is included if and only if TASTART > 0 and TAEND = 0. 
+XASTR XAEND XAIPA1 XAIPA2 XAIPA3 XAFPA CTEANN  
+Card 3.   This card is required. 
+PTLAW PTSTR PTEND PTX1 PTX2 PTX3 PTX4 PTX5 
+Card 4.   This card is required. 
+PTTAB1 PTTAB2 PTTAB3 PTTAB4 PTTAB5 PTTAB6 PTTAB7  
+Card 5.   This card is required. 
+PTEPS PTRIP PTLAT POSTV NUSHIS GRAIN T1PHAS  T2PHAS 
+Card 5.1.   This card is included if and only if NUSHIS > 0. 
+FUSHI1 FUSHI2 FUSHI3 FUSHI4 FUSHI5 FUSHI6 FUSHI7 FUSHI8 *. ENERALIZED_PHASE_CHANGE  
+ Card 6.   For each of the N phases, one parameter SIGYi must be speciﬁed.  A maximum 
+of 10 of this card may be included.  The next keywo rd (“*”) card terminates this input. 
+SIGY1 SIGY2 SIGY3 SIGY4 SIGY5 SIGY6 SIGY7 SIGY8 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO N E PR MIX MIXR  
+Type A F I F F I I  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density, |u1D7≠+ 
+N Number of phases 
+E Young’s modulus: 
+GT.0.0: Constant value is used. 
+LT.0.0:  Temperature dependent Young’s modulus given 
+by load curve or table ID = -E. Tables are used to 
+describe a temperature dependent modulus for 
+each phase individually. 
+PR Poisson’s ratio: 
+GT.0.0: Constant value is used. 
+LT.0.0:  Temperature dependent Poisson’s ratio given by 
+load curve or table ID = -E. Tables are used to de-
+scribe a temperature dependent Poisson’s ratio for 
+each phase individually. 
+MIX Load curve ID with initial phase concentrations  
+MIXR Load curve or table ID for mixture rule.  Tabl es are used to 
+deﬁne temperature dependency. 
+ *. ENERALIZED_PHASE_CHANGE  
+  VARIABLE   DESCRIPTION  
+XASTR Annealing start temperature 
+XAEND Annealing end temperature 
+XAIPA i Load curve or table ID deﬁning the ith  parameter of the enhanced 
+annealing option.  Interpretation of the parameter depends on 
+TASTART. 
+XAFPA Scalar parameter of the enhanced annealing option i f applicable.  
+Interpretation of the parameter depends on TASTART.  
+CTEAN Annealing option for thermal expansion: 
+LT.0: |CTEAN|  deﬁnes the upper temperature limit (cut-
+oﬀ temperature) for evaluation of thermal strains. 
+EQ.0: No modiﬁcation of thermal strains 
+EQ.1: XAEND deﬁnes the upper temperature limit (cut-
+oﬀ temperature) for evaluation of thermal strains. 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable PTLAW PTSTR PTEND PTX1 PTX2 PTX3 PTX4 PTX5 
+Type I I I I I I I I 
+ 
+ VARIABLE   DESCRIPTION  
+PTLAW Table ID to deﬁne the phase transformation model as  a function 
+of source phase and target phase.  The values in *D EFINE_TA BLE 
+are the phase numbers before transformation.  The c urves 
+referenced by the table specify transformation mode l (ordinate) as 
+a function of phase number after transformation. 
+LT.0: transformation model used in heating 
+EQ.0: no transformation 
+GT.0: transformation model is used in cooling 
+A variety of transformation models can be speciﬁed as ordinate 
+values of the curves: 
+EQ.1: Koinstinen-Marburger 
+EQ.2: Johnson-Mehl-Avrami-Kolmogorov (JMAK) *. ENERALIZED_PHASE_CHANGE  
+  VARIABLE   DESCRIPTION  
+phase (see Remark 2  and Table M254-1  to determine which 
+parameters apply).   
+ 
+The values in *DEFINE_TABLE_3D are the phase numbers before 
+transformation.  The values in the 2D tables refere nced by *DE-
+FINE_TABLE_ 3D are the phase numbers after transformation.  
+The curves referenced by the 2D tables specify tabu late d 
+parameter (ordinate) as a function of either temper ature or 
+temperature rate (abscissa). 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable PTEPS PTRIP PTLAT POSTV NUSHIS GRAIN T1PHAS  T2PHAS 
+Type I F I I I F F F 
+ 
+ VARIABLE   DESCRIPTION  
+PTEPS Table ID deﬁning transformation induced strains.  
+If ID of 2D table 
+The values in *DEFINE_TABLE are the phase numbers 
+before transformation.  The curves referenced by th e 
+table specify strains (ordinate) as a function of p hase 
+number after transformation (abscissa) . 
+If ID of 3D table 
+The values in *DEFINE_TABLE_3D are the phase numbers 
+before transformation.  The values in the 2D tables  referenced 
+by *DEFINE_TABLE_ 3D are the phase number after 
+transformation.  The curves referenced by the 2D ta b les 
+specify induced strains as a function of temperatur e. 
+PTRIP Flag for transformation induced plasticity (TRIP).  Algorithm 
+active for positive values of PTRIP. 
+PTLAT Table ID deﬁning transformation induced heat genera tion (latent 
+heat).  
+If ID of 2D table 
+The values in *DEFINE_TABLE are the phase numbers 
+before transformation.  The curves referenced by th e 
+table specify heat values (ordinate) versus phase n umber *. ENERALIZED_PHASE_CHANGE  
+ Phase Yield Stress Cards.   For each of the N phases, one parameter SIGY i must be 
+speciﬁed.  A maximum of 10 of this card may be incl uded.  The next keyword (“*”) card 
+terminates this input. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable SIGY1 SIGY2 SIGY3 SIGY4 SIGY5 SIGY6 SIGY7 SIGY8 
+Type I I I I I I I I 
+ 
+ VARIABLE   DESCRIPTION  
+SIGY i Load curve or table ID for hardening of phase i. 
+If load curve ID 
+Input yield stress as a function of effective plast ic strain. 
+If table ID of 2D table 
+Input temperatures as table values and hardening cu rves 
+(yield stress as a function of effective plastic st rain) as 
+targets for those temperatures. 
+If table ID of 3D table 
+Input temperatures as main table values and strain rates as 
+values for the sub- tables.  Hardening curves (yield stress as a 
+function of effective plastic strain) are targe ts for those strain 
+rates.  
+  *. ENERALIZED_PHASE_CHANGE  
+ a)  Koistinen-Marburger (KM), law 1 .  
+The KM formulation is tailored for non-diﬀusive tra nsformations.  In the 
+most basic and commonly used version, the temperatu re dependent 
+amount of the target phase is computed as 
+|u1D46J|u1D44FCst= (|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst)|parenleftCv21.0 − |u1D4J2−/u1D6FC.stKM (|u1D447Cststart −|u1D447Cst)|parenriµhtCv2  . 
+PTXI deﬁnes the so-called Koistinen-Marburger facto r, |u1D6F+KM . 
+b)  Generalized Johnson-Mehl-Avrami-Kolmogorov (JMAK), law 2 . 
+This is a widely used model for diﬀusive phase tran sformation.  In litera- 
+ture, often the incremental form of the JMAK equati on is given for an iso- 
+thermal, incomplete transformation: 
+|u1D46J|u1D44FCst= |u1D46Je q (|u1D447)(|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst)
+⎝⎜⎛1 − |u1D4J2−|parenleftCv4|u1D461Cst
+/u1D̅0F.st(|u1D447Cst)|parenriµhtCv4/u1D45B.sts(/u1D44̅.sts)
+⎠⎟⎞  . 
+In the previous equation, exponent, |u1D4JB; equilibrium concentration, |u1D46Je q ; and 
+relaxation time, /u1D̅0F, are functions of the temperature. 
+In this material model, the diﬀerential form of the  JMAK equation is em- 
+ployed which makes the model readily applicable for  non-isothermal pro- 
+cesses: 
+|u1D4J1|u1D46J|u1D44FCst
+|u1D4J1|u1D461 = |u1D4JB(|u1D447)|parenleftCv1/u1D458|u1D44∆Cst|u1D44FCst |u1D46J|u1D44∆Cst−/u1D458|u1D44∆Cst|u1D44FCst |minuteCst|u1D46J|u1D44FCst|parenriµhtCv1
+⎝⎜⎛ln |parenleftCv6/u1D458|u1D44∆Cst|u1D44FCst (|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst)
+/u1D458|u1D44∆Cst|u1D44FCst |u1D46J|u1D44∆Cst−/u1D458|u1D44∆Cst|u1D44FCst |minuteCst|u1D46J|u1D44FCst|parenriµhtCv6
+⎠⎟⎞|u1D4JBCst(|u1D447Cst)−|oneCst/period.st|zeroCst
+|u1D4JBCst(|u1D447Cst)
+  , 
+In this evolution equation, the following factors a re deﬁned: 
+/u1D458|u1D44∆Cst|u1D44FCst =|u1D46J|u1D4J2Cst /u1D45E.st(|u1D447)
+/u1D̅0F(|u1D447) × |u1D6F+(|u1D7≠≠|u1D4JDCst)|u1D4J3 |parenleftCv1|u1D447̇|parenriµhtCv1
+/u1D458|u1D44∆Cst|u1D44FCst |minuteCst=1.0 − |u1D46J|u1D4J2Cst /u1D45E.st(|u1D447)
+/u1D̅0F(|u1D447) × |u1D6F+(|u1D7≠≠|u1D4JDCst)|u1D4J3|minuteCst|parenleftCv1|u1D447̇|parenriµhtCv1 
+As user input, load curve data for the exponent, |u1D4JB(|u1D447) , is deﬁned in PT-
+TAB1, the equilibrium concentration, |u1D46Je q (|u1D447), in PTTAB2, and the relaxa- 
+tion time, /u1D̅0F(|u1D447), in PTTAB3.  This model is a generalized JMAK appr oach 
+that features additional parameters, such as the te mperature rate correc- 
+tion factors, |u1D4J3 |parenleftCv1|u1D447̇|parenriµhtCv1 and |u1D4J3′|parenleftCv1|u1D447̇|parenriµhtCv1, given in PTTAB4 and PTTAB5, respectively.  
+As an optional parameter an accelerator |u1D6F+|parenleftCv1|u1D7≠≠|u1D4JDCst|parenriµhtCv1 for the transformation can 
+be deﬁned as function of equivalent plastic strain in PTTAB6.  If not de- 
+ﬁned, a constant value of 1.0 is assumed. 
+Like the Koistinen-Marburger case, a temperature de pendent equilibrium 
+concentration, |u1D46Je q /co⋯⋯a.st|u1D44∆Cst, of the source phase can optionally be deﬁned.  If  de- *. ENERALIZED_PHASE_CHANGE  
+ For |u1D46J|u1D44FCst< |u1D46J|u1D44FCsttre , t he transformation scheme comprises three steps.  Fi rst, a 
+temperature dependent equilibrium fraction for the starting phase is cal- 
+culated based on an incomplete KM equation: 
+|u1D46Je q /co⋯⋯a.st|u1D44∆Cst= (|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst− |u1D46Jinc )|parenleftCv21.0 − |u1D4J2−/u1D6FC.stKM |parenleftCv1|u1D447CstKM /comm∙.sts/u1D460.sts−|u1D447Cst|parenriµhtCv1|parenriµhtCv2  . 
+The KM-parameter |u1D6F+KM  and the start temperature |u1D447KM /co⋯⋯a.st|u1D46≠Cst must be given in 
+PTX1 and PTX2, respectively.  The incompleteness pa rameter |u1D46Jinc  is a 
+function of temperature deﬁned in PTTAB4. 
+Second, if the current fraction of the starting pha se |u1D46J|u1D44∆Cst exceeds the calculat- 
+ed equilibrium concentration |u1D46Je q /co⋯⋯a.st|u1D44∆Cst,  a diﬀusional process follows.  It is de- 
+scribed by a JMAK approach.  Its incremental form f or an isothermal 
+process is given by 
+|u1D46J|u1D44∆Cst= |u1D46Je q /co⋯⋯a.st|u1D44∆Cst+ |parenleftCv2|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst− |u1D46Je q /co⋯⋯a.st|u1D44∆Cst|parenriµhtCv2|u1D4J2−|parenleftCv4|u1D461Cst
+/u1D̅0F.st(|u1D447Cst)|parenriµhtCv4/u1D45B.sts(/u1D44̅.sts)
+. 
+Naturally, a diﬀerential form of this equation is u sed in the model in order 
+to be applicable to non-isothermal situations.  The  ﬁnal calculated change 
+∆|u1D46J|u1D44∆Cst in identiﬁed with the formation of a recovery phas e |u1D46J|u1D44∆Cst|u1D4JFCst= −∆|u1D46J|u1D44∆Cst.  The 
+parameters for the JMAK equation are given in PTTAB 1 ( |u1D4JB) and PTTAB2 
+(/u1D̅0F). 
+Third, some of the recovery phase is partially tran sformed into the target 
+phase: 
+∆|u1D46J|u1D44FCst= |u1D6F∆(|u1D447)|u1D46J|u1D44∆Cst|u1D4JFCst  . 
+The quotient |u1D6F∆(|u1D447)  can be deﬁned in PTTAB5. 
+f)  Phase recovery II, law 6.  
+This is the second part of the recovery and can onl y be deﬁned if the pre- 
+vious transformation law (law 5) has also been deﬁn ed with the same 
+starting phase.  This second step aims to transform  the remaining fraction 
+of the virtual, recovery phase |u1D46J|u1D44∆Cst|u1D4JFCst into the physical phases deﬁned in the 
+material. 
+In order to allow for the deﬁnition of more than tw o target phases for one 
+recovery process, an optional parameter |u1D7≠2(|u1D447)  can be deﬁned as the only 
+input of this transformation in PTTAB1.  It is used  to control the transfor- 
+mation by  
+∆|u1D46J|u1D44FCst= |u1D7≠2(|u1D447)|u1D46J|u1D44∆Cst|u1D4JFCst  . 
+Note that |u1D46J|u1D44∆Cst|u1D4JFCst here refers to the complete fraction of the recove ry phase as 
+calculated by the JMAK approach.  If the parameter is not deﬁned, then 
+the remainder of the virtual phase fraction is comp letely transformed. *. ENERALIZED_PHASE_CHANGE  
+ Furthermore, an incomplete transformation is possib le in case of relatively 
+slow cooling rates.  For this purpose, you can deﬁn e two rate limits |u1D447̇lim /co⋯⋯a.st|oneCst 
+and |u1D447̇lim /co⋯⋯a.st|twoCst in PTX2 and PTX3, respectively, and an incompleten ess parame- 
+ter |u1D46Jinc (|u1D447) as a function of temperature in PTTAB2.  The corre sponding 
+equation for the transformation then is given by: 
+|u1D46J|u1D44FCst=/˙raceleft.v6(|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst)|parenleftCv21.0 − |u1D4J2−/u1D6FC.stKM (|u1D447Cststart −|u1D447Cst)|parenriµhtCv2 , for   |u1D447̇< |u1D447̇lim /co⋯⋯a.st|oneCst
+(|u1D46J|u1D44∆Cst+ |u1D46J|u1D44FCst− |u1D46Jinc)|parenleftCv21.0 − |u1D4J2−/u1D6FC.stKM (|u1D447Cststart −|u1D447Cst)|parenriµhtCv2 , for |u1D447̇lim /co⋯⋯a.st|oneCst<  |u1D447̇< |u1D447̇lim /co⋯⋯a.st|twoCst  
+ 
+A summary of input parameters for the diﬀerent mate rial laws is given in the 
+following table.  If not stated otherwise, the para meters in the tabular data PT-
+TAB i are expected to be functions of the current temper ature, |u1D447. 
+ 
+PTLAW # 1 2/12 3 4 5 6 7 8 9 
+PTX1 |u1D6F+KM   |u1D4J3(|u1D436) |u1D4JB |u1D6F+KM   GID GID |u1D6F+KM  
+PTX2   |u1D4JB|u1D447Cst /u1D450|oneCst |u1D447KM /co⋯⋯a.st|u1D46≠Cst   POS |u1D447̇lim /co⋯⋯a.st|oneCst 
+PTX3   |u1D4JB|oneCst /u1D450|twoCst     |u1D447̇lim /co⋯⋯a.st|twoCst 
+PTX4   |u1D4JB|twoCst       
+PTTAB1  |u1D4JB |u1D437  |u1D4JB |u1D7≠2 |u1D46J|u1D44FCsttre    |u1D46Je q /co⋯⋯a.st|u1D44∆Cst 
+PTTAB2  |u1D46Je q  /u1D44C(/u1D44B|u1D44FCst)  /u1D̅0F  |u1D46Je q /co⋯⋯a.st|u1D44FCst  |u1D46Jinc  
+PTTAB3  /u1D̅0F /u1D̅0F  |u1D46J|u1D44FCsttre    |u1D4J3diss    
+PTTAB4  |u1D4J3|parenleftCv1|u1D447̇|parenriµhtCv1   |u1D46Jinc   |u1D461crit    
+PTTAB5  |u1D4J3′|parenleftCv1|u1D447̇|parenriµhtCv1   |u1D6F∆     
+PTTAB6  |u1D6F+|parenleftCv2|u1D7≠≠pl |parenriµhtCv2        
+PTTAB7  |u1D46Je q /co⋯⋯a.st|u1D44∆Cst        
+Table M254-1.  Summary of input parameters for the various laws 
+3.  User-Deﬁned History Data.   You can deﬁne up to eight additional history 
+variables that are added to the list of history var iables starting at position 31 
+(see Remark 4 ). These values can for example be used to evaluate  the hardness 
+of the material based on diﬀerent formulas given in  the literature. *. ENERALIZED_PHASE_CHANGE  
+ Flag Description Variables  # Hist 
+|u1D44∆|oneCst Accumulated thermal strain |u1D7≠≠|u1D447Cst 1 
+|u1D44∆|twoCst Accumulated strain tensor /u1D6C6 6 
+|u1D44∆|threeCst Plastic strain tensor /u1D6C6|u1D4JDCst 6 
+|u1D44∆|fourCst Equivalent strain |u1D7≠≠/V.st/M.st  1 
+In total NXH extra variables are required depending  on the choice of parame- 
+ter POSTV. For example, the maximum number of addit ional variables is 
+NXH  =  14 for POSTV  =  15. 
+A complete list of history variables for the materi al is given in the following 
+table.  “Position” refers to the history variable n umber as listed by LS-PrePost 
+when post-processing the d3plot database.  The valu e of N indicates the num- 
+ber of phases accounted for in the model. 
+ 
+History Variable # Description 
+1 → N Phase concentrations 
+N + 1 Maximum temperature 
+N + 2 Cooling rate between T2PHAS and 
+T1PHAS 
+N + 3 Yield stress 
+N + 4 Young’s modulus 
+N + 5 Grain size 
+N + 6 Indicator of plastic behavior 
+N + 7 → N + 6 + NUSHIS User deﬁned history variable s 
+N + 7 + NUSHIS Current temperature *. ENERALIZED_PHASE_CHANGE  
+ |u1D6F+ =|u1D447|u1D44∆Cstend − |u1D447
+|u1D447|u1D44∆Cstend − |u1D447|u1D44∆Cststart + |u1D6F+e q |u1D447 − |u1D447|u1D44∆Cststart 
+|u1D447|u1D44∆Cstend − |u1D447|u1D44∆Cststart  
+Here, the end temperature, |u1D447|u1D44∆Cstend , is deﬁned by XAEND and the newly in- 
+troduced incompleteness factor, |u1D6F+e q , as scalar input data in XAFPA. 
+b)  Johnson-Mehl-Avrami-Kolmogorov (JMAK). For TASTART = 2, the evolution 
+of the scale factor follows a JMAK-type approach.  For isothermal situa- 
+tions and assuming a start time for the process of 0.0, an incremental form 
+can be explicitly stated a 
+|u1D6F+ = |u1D6F+e q (|u1D447) + |parenleftCv41 − |u1D6F+e q (|u1D447)|parenriµhtCv4|u1D4J2−|parenleftCv4|u1D461Cst
+/u1D̅0F.st(|u1D447Cst)|parenriµhtCv4/u1D45B.sts(/u1D44̅.sts)
+. 
+In the last equation, |u1D4JB(|u1D447)  denotes the exponent for the diﬀerential equa- 
+tion, /u1D̅0F(|u1D447) the relaxation time and |u1D6F+|u1D4J2Cst /u1D45E.st(|u1D447) denotes the limit value for the 
+scale factor for inﬁnitely long processes.  All of those are functions of tem- 
+perature and, thus, require the input of load curve  IDs in XAIPA1 ( |u1D4JB(|u1D447) ), 
+XAIPA2 ( |u1D6F+e q (|u1D447)) and XAIPA3 ( /u1D̅0F(|u1D447)). 
+In the material implementation a diﬀerential form o f the JMAK approach 
+is invoked, which makes the formulation applicable to non-isothermal 
+processes as well as independent of the start time of annealing. *. ENERAL_VISCOELASTIC. -0.08-0.05-0.030.000.020.050.07
+0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0Stress
+Strain %b1 = 100
+b1 = 200
+b1 = 500
+b1 = 1000
+ Figure M275-3.   Eﬀect of |u1D44F|oneCst in cyclic loading *. ENERAL_VISCOELASTIC.  T he aging time is denoted 
+by |u1D461|u1D44∆Cst. 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst (|u1D461|u1D44∆Cst, |u1D461) = −|u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst +/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |minuteCst(|u1D461|u1D44∆Cst, |u1D461 −/u1D̅0F)∂|u1D7≠≠|u1D4J8Cst|u1D4J9Cst (/u1D̅0F)
+∂/u1D̅0F|u1D4J1 /u1D̅0F |u1D461Cst
+|zeroCst 
+where 
+|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |minuteCst(|u1D461|u1D44∆Cst, |u1D461) = |u1D6F+(|u1D461|u1D44∆Cst)|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |<racketleftCv1|u1D6FD(|u1D461|u1D44∆Cst)|u1D461|<racketriµhtCv1  . 
+Here |u1D6F+(|u1D461|u1D44∆Cst) and |u1D6FD(|u1D461|u1D44∆Cst) are two new material properties that are functions  of the aging 
+time |u1D461|u1D44∆Cst.  The material properties functions |u1D6F+(|u1D461|u1D44∆Cst) and |u1D6FD(|u1D461|u1D44∆Cst) will be determined using 
+experimental results.  For determination of |u1D6F+(|u1D461|u1D44∆Cst) and |u1D6FD(|u1D461|u1D44∆Cst), the above equations can be 
+written in the following form 
+log|parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst − |u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|u1D461Cst|u1D44∆Csts/co⋯⋯a.st|u1D461Cst= log |u1D6F+(|u1D461|u1D44∆Cst) + log|parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst − |u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|u1D461Cst|u1D44∆Csts=|zeroCst/co⋯⋯a.st|u1D461Cst→/u1Dℜ09.st
+log /u1D̅0∫= log |u1D6FD(|u1D461|u1D44∆Cst) + log |u1D461 
+Therefore, if one plots the stress as a function of  time on log-log scales, with the vertical 
+axis being the stress and the horizontal axis being  the time, then the stress-relaxation 
+curve for any aged time history can be obtained dir ectly from the stress-relaxation curve 
+at |u1D461|u1D44∆Cst= 0 by imposing a vertical shift and a horizontal shif t on the stress-relaxation 
+curves.  The vertical shift and the horizontal shif t are log |u1D6F+(|u1D461|u1D44∆Cst) and log |u1D6FD(|u1D461|u1D44∆Cst) respectively. *. ENERAL_VIS-
+COELASTIC. If all three values (WLFTREF, WLFA, and WLFB) are nonzero, 
+the WLF function is used; the Arrhenius function is  used if WLFB is zero; and 
+no scaling is applied if all three values are zero.*. LASS  
+ *. LASS  *. LASS  
+  VARIABLE   DESCRIPTION  
+AT Tensile damage evolution parameter |u1D6F+|u1D461Cst. Can be interpreted as the 
+residual load carrying capacity ratio for tensile f ailure ranging 
+from 0 to 1. 
+BT Tensile damage evolution parameter, |u1D6FD|u1D461Cst. It controls the softening 
+velocity for tensile failure. 
+AC Compressive damage evolution parameter, |u1D6F+|u1D4J≠Cst. Can be interpreted 
+as the residual load carrying capacity ratio for co mpressive failure 
+ranging from 0 to 1. 
+BC Compressive damage evolution parameter |u1D6FD|u1D4J≠Cst. It controls the 
+softening velocity for compressive failure. 
+FTSCL Scale factor for the tensile strength (defaul t = 1.0): 
+FT mod = FTSCL × FT 
+If RATENL = 0.0 (see Card 4), then the tensile strength drops to 
+its original value, FT, as soon as the ﬁrst crack h appens in the 
+associated part.  In this case, FTSCL > 1.0 can be helpful to model 
+high force peaks in impact events. 
+ 
+If RATENL ≠ 0.0, then, when a crack forms in a neighboring 
+element, the tensile strength for an element is eva luated 
+depending on the smoothed eﬀective strain rate (see  Remark 7 ).   
+SFSTI Scale factor for stiﬀness after failure.  For  example, SFSTI = 0.001 
+means that stiﬀness is reduced to 0.1% of the elast ic stiﬀness at 
+failure. 
+SFSTR Scale factor for stress in case of failure.  For example, SF-
+STR = 0.01 means that stress is reduced to 1% of the fail ure stress 
+at failure. 
+ICRIN Flag for crack strain initialization: 
+EQ.0.0: initial crack strain is strain at failure (default) . 
+EQ.1.0: initial crack strain is zero. 
+ECRCL Crack strain necessary to reactivate certain stress  components 
+after crack closure 
+NCYCR Number of cycles in which the stress is reduc ed to SF-
+STR × failure stress 
+NIPF Number of failed through thickness integration poin ts needed to 
+fail all  through thickness integration points for IMOD = 0 *. LASS  
+ 1
+2|u1D4J3|u1D4J≠Cst|<racketleftCvJ|parenleftCvJ|u1D4J3|u1D4J≠Cst
+|u1D4J3|u1D461Cst− 1|parenriµhtCvJ (|u1D7≠∆|oneCst+ |u1D7≠∆|twoCst) + |parenleftCvJ|u1D4J3|u1D4J≠Cst
+|u1D4J3|u1D461Cst+ 1|parenriµhtCvJ/radical.v2|u1D7≠∆|oneCst|twoCst+ |u1D7≠∆|twoCst|twoCst− |u1D7≠∆|oneCst|u1D7≠∆|twoCst|<racketriµhtCvJ< 1 
+The modiﬁed versions, FMOD = 10, 11, 12, change wha t is considered tensile 
+and compressive failure.  The form of the failure s tays the same for each type.  
+In each case, a line with slope − |u1D4J3|u1D4J≠Cst|u1D4J3|u1D461Cst⁄ distinguishes the diﬀerence between the 
+two types of failure.  See Figure M280-1  for an example of how the tensile and 
+compressive failure are modiﬁed for the Rankine fai lure criterion. 
+2.  Crack Formation.   As soon as failure happens in the tensile regime,  a crack 
+occurs perpendicular to the maximum principal stres s direction.  That means a 
+crack coordinate system is set up and stored, deﬁne d by a relative angle with 
+respect to the element coordinate system.  Appropri ate stress and stiﬀness ten- 
+sor components (e.g. normal to the crack) are reduc ed according to SFSTR and 
+SFSTI if IMOD = 0. The stress reduction takes place  in a period of NCYCR time 
+step cycles.  For IMOD = 1.0 the stress and stiﬀnes s tensor are reduced by a 
+damage model (see Remark 5 ). A second crack orthogonal to the ﬁrst crack is 
+possible which can open and close independently fro m the ﬁrst one, further 
+reducing the element stiﬀness. 
+3.  Crack Closure.   To deal with crack closure, the current strain in  principal 
+stress direction is stored as initial crack strain (ICRIN = 0, default) or the initial 
+crack strain is set to zero (ICRIN = 1).  After fai lure, the crack strain is tracked, 
+so that later crack closure will be detected.  If t hat is the case, appropriate stress 
+and stiﬀness tensor components (e.g. compressive) a re reactivated so that e.g. 
+under pressure a load could be carried and cause a nonzero stress perpendicu- 
+lar to the crack. /g11/g12
+/g11/g12
+FMOD = 0 FMOD = 10Compr essive failure
+Tensile failure
+ft
+ft
+-fc-fcft
+ft -fc
+-fc
+Figure M280-1.   Rankine failure criterion.  With FMOD = 10, the form of th e 
+failure criterion does not change but what is consider ed compressive failure is 
+modiﬁed. *. LASS  
+ Here |u1D7≠≠̇max = 10 /nine.st× RATENL . See Figure M280-2  for a plot of this tensile 
+strength as a function of average strain rate.  The  average strain rate in this case 
+is calculated as: 
+|u1D7≠≠̇|u1D4JBCsta v g = RFILTF × |u1D7≠≠̇|u1D4JBCst−|oneCsta v g + (1 − RFILTF) × |u1D7≠≠ ̇|u1D4JBCst 
+where |u1D4JB is the time step. 
+ 
+ 
+8.  History Variables.   This material has the following additional histor y variables 
+that can be output to the d3plot  ﬁle.   
+ 
+History 
+Variable # Description 
+1 Crack ﬂag:  
+EQ.0:  No crack 
+EQ.1:  One crack 
+EQ.2:  Two cracks 
+EQ.-1:  Failed under compression 
+2 Direction of 1 st  principle stress as angle in radians with respect 
+to the element direction.  The shell normal deﬁnes the positive 
+angle direction.  The 1 st  crack direction is perpendicular to the 
+direction of 1 st  principle stress. 
+3 Angle in radians that deﬁnes the orthogonal to the 2 nd  crack 
+direction (with respect to the element direction). 
+4 Failure criterion value, see Remark 1  RATENL /g1max./g1avg.Strain rate,  /g1. FTFTSCL × FT
+FT～Tensile strength
+Figure M280-2.   Modiﬁed tensile strength of elements neighboring an element 
+that has at least one failed integration point as a functi on of strain rate when 
+RATENL > 0.0. |u1D7≠≠̇max =10 /nine.st×RATENL . *. AS_MIXTURE or *

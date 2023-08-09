@@ -1,0 +1,46 @@
+........................ ................................................... ......... 2-1086  
+*.  [1B] {35} 
+ *.  *.   
+ *.   *.   
+  
+The member slenderness ratio, |u1D7≠6,  is deﬁned as |u1D4J8Cst|u1D43FCst 
+|u1D4JFCst, where /u1D458 depends on end conditions, /u1D4:F 
+is the element length, and |u1D4JF is the radius of gyration such that |u1D434|u1D4JF|twoCst=/u1D4:C (and /u1D4:C=
+min|parenleftCv2/u1D4:C|u1D466Cst|u1D466Cst ,/u1D4:C|u1D467Cst|u1D467Cst |parenriµhtCv2);  |u1D7≠6 will by default be calculated from the section prop erties and element 
+length using /u1D458= 1. Optionally, this may be overridden by input param eter LAMDA to 
+allow for diﬀerent end conditions.  
+ 
+Optionally, you may provide a buckling curve BCUR.  The points of the curve give 
+compressive displacement ( |u1D46J-axis) as a function of force ( |u1D466-axis); the ﬁrst point should 
+have zero displacement and the initial buckling for ce.  Displacement and force should 
+both be positive.  The initial buckling force must not be greater than the yield force.  
+ 
+The tensile yield force (point 5 and segment 16-17 in Figure M171-1 ) is deﬁned by 
+|u1D439|u1D466Cst= SIG Y × |u1D434, 
+where yield stress SIGY is an input parameter and |u1D434 is the cross-sectional area. 
+ 
+Following initial buckling and subsequent yield in tension, the member is assumed to 
+be damaged.  The initial buckling curve is then sca led by input parameter CCBRF, 
+leading to reduced strength curves such as segments  6-7, 10-14 and 18-19.  This  Figure M171-1.  Cyclic Behavior of a Steel Brace Displacemen tForce  
+-0.15 -0.10 -0.05 0 0.05-6-4-20246
+E6Steel Brace
+1
+2345
+6789
+1011,1312
+141516 17
+1819*.   
+ FEMA thresholds are the total axial strains (deﬁned  by change of length/initial length) 
+at which the element is deemed to have passed from one category to the next, such as 
+“Elastic”, “Immediate Occupancy”, “Life Safe”, etc.   During the analysis, the maximum 
+tensile and compressive strains (“high tide strains ”) are recorded.  These are checked 
+against the user-deﬁned limits TS1 to TS4 and CS1 t o CS4.  The output ﬂag is then set to 
+0, 1, 2, 3, or 4 according to which limits have bee n passed.  The value in the output ﬁles 
+is the highest such ﬂag from tensile or compressive  strains.  To plot this data, select IN-
+TEGRATED beam results, Integration point 4, Axial S train. 
+ 
+Maximum plastic strains in tension and compression are also output.  These are deﬁned 
+as maximum total strain to date minus the yield or ﬁrst buckling strain for tensile and 
+compressive plastic strains, respectively.  To plot  these, select INTEGRATED beam 
+results, Integration point 4, “shear stress XY” and  “shear stress XZ” for tensile and 
+compressive plastic strains, respectively. *

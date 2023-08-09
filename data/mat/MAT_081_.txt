@@ -1,0 +1,13 @@
+ STOCHASTIC 
+The ORTHO option invokes an orthotropic damage mode l, an extension that was ﬁrst 
+added as for modelling failure in aluminum panels.  Directional damage begins after a 
+deﬁned failure strain is reached in tension and con tinues to evolve until a tensile 
+rupture strain is reached in either one of the two orthogonal directions.  After rupture is 
+detected at all  integration points, the element is deleted.   
+The ORTHO_RCDC option invokes the damage model deve loped by Wilkins [Wilkins, 
+et al.  1977].  The ORTHO_RCDC1980 option invokes a  damage model based on strain 
+invariants as developed by Wilkins [Wilkins, et al.   1980].  A nonlocal formulation, 
+which requires additional storage, is used if a cha racteristic length is deﬁned.  The 
+RCDC option, which was added at the request of Toyo ta, works well in predicting 
+failure in cast aluminum; see Yamasaki, et al., [20 06]. 
+ *

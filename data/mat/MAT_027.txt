@@ -1,0 +1,28 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-263 (MAT)  VARIABLE   DESCRIPTION  
+SGL Specimen gauge length /u1D45∫0; see Figure M27-1 . 
+SW Specimen width; see Figure M27-1 . 
+ST Specimen thickness; see Figure M27-1 . 
+LCID Curve ID, see *DEFINE_ CURVE, giving the force versus actual 
+change /u1D4:F in the gauge length.  See also Figure M27-2  for an 
+alternative deﬁnition.  A least squares ﬁt is compu ted from this 
+data.  A and B are ignored if this ﬁeld is deﬁned.  
+Remarks: 
+The strain energy density function is deﬁned as: 
+/u1D44A= |u1D434(/u1D4:C− 3) + |u1D43J(/u1D4:C/u1D4:C− 3) + |u1D436|parenleftCv2/u1D4:C/u1D4:C/u1D4:C−|twoCst− 1|parenriµhtCv2 + |u1D437(/u1D4:C/u1D4:C/u1D4:C− 1)|twoCst 
+where 
+|u1D436 = 0.5|u1D434 + |u1D43J 
+|u1D437 =|u1D434(5|u1D71≠ − 2) + |u1D43J(11|u1D71≠ − 5)
+2(1 − 2|u1D71≠) 
+/u1D̅08=  Poisson ’s ratio 
+2(|u1D434 + |u1D43J) = shear modulus of linear elasticity 
+/u1D4:C,/u1D4:C/u1D4:C,/u1D4:C/u1D4:C/u1D4:C=  in v ariants of right Cauchy-Green Tensor C. 
+Forcegauge
+length
+thickness
+widthSection AAAAΔ gauge length
+ Figure M27-1.   Uniaxial specimen for experimental data *.   
+LS-DYNA R13 2-265 (MAT) The history variable labeled as “eﬀective plastic s train” in LS-PrePost is internal energy 
+density in the case of *.  will pr ovide a poor ﬁt to a curve that exhibits a strong 
+upturn in slope as strains become large. *

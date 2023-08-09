@@ -1,0 +1,121 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+RLAMBDA Material coeﬃcient, see Remark 1 . 
+RKAPPA Material coeﬃcient, see Remark 1 . 
+RIOTA Material coeﬃcient, see Remark 1 . 
+RBETA1 Material coeﬃcient, see Remark 1 . 
+RBETA2 Material coeﬃcient, see Remark 1 . 
+RMU Shape factor coeﬃcient .  This parameter will modify the shape of 
+the yield surface used. A value of 1.0 implies a von Mises type 
+surface, while 1.1 to 1.25 is more indicative of so ils.  The default 
+value is 1.0.  See Remarks 1  and 9. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable RNU RLCID TOL PGCL SUB-INC BLK GRAV THEORY 
+Type F F F F F F F I 
+Default none none 0.0005 none none none 9.807 0 
+ 
+ VARIABLE   DESCRIPTION  
+RNU Poisson’s ratio.  See Remarks 1  and 2. 
+RLCID Load curve ID (see *DEFINE_ CURVE) consisting of up to 10 
+points deﬁning nonlinear response in terms of stiﬀn ess 
+degradation.  The |u1D46J-axis is strain (“string length”), and the |u1D466-axis 
+is the ratio of secant stiﬀness to small-strain sti ﬀness. See 
+Remarks 3  and 12 . 
+TOL User deﬁned tolerance for convergence checking.  De fault value is 
+set to 0.0005 (recommended).  See Remark 11 . *.   
+  VARIABLE   DESCRIPTION  
+RVHHH Anisotropy parameter: shear modulus in vertical pla nes divided 
+by shear modulus in horizontal plane.  If this ﬁeld  is blank or 
+zero, isotropic behavior is assumed.  See Remark 10 . 
+STRSUB Strain limit, used to determin e whether subcycling within the 
+material model is required (recommended value: 0.00 1) 
+ 
+Deﬁne Card 3b only if THEORY = 204 or 304. Omit oth erwise. 
+ Card 3b 1 2 3 4 5 6 7 8 
+Variable RVHHH      STRSUB CRFLG 
+Type F      F F 
+Default 0.0      0.001 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+RVHHH Anisotropy parameter: shear modulus in vertical pla nes divided 
+by shear modulus in horizontal plane.  If this ﬁeld  is blank or 
+zero, isotropic behavior is assumed.  See Remark 10 . 
+STRSUB Strain limit, used to determin e whether subcycling within the 
+material model is required (recommended value: 0.00 1) 
+CRFLG Creep ﬂag:  
+EQ.0: No creep 
+EQ.24: Creep activated; see Card 4. 
+ 
+Deﬁne Card 3c only if THEORY = 7 or 107. Omit other wise. 
+ Card 3c 1 2 3 4 5 6 7 8 
+Variable EHEV GHHGVH PRHH CAP     
+Type F F F F     
+Default 0.0 0.0 0.0 0.0     *.   
+ input parameters and underlying concepts may be fou nd in Simpson (1992), 
+Lehane & Simpson (2000), and Ellison et al (2012).  The input parameters cor- 
+respond to those described in Ellison et al as foll ows:  
+ 
+LS-DYNA Ellison et al  
+RLAMBDA |u1D7≠6 
+RKAPPA /u1D̅05 
+RIOTA /u1Dℜ04 
+RBETA1 |u1D6FD/u1D4:A.st 
+RBETA2 |u1D6FD/u1D̅1∫.st 
+RMU |u1D7≠7 
+RNU /u1D̅08 
+EHEV |u1D438/uni210E.st|u1D438|u1D463Cst⁄ 
+GHHGVH |u1D43A/uni210E.st/uni210E.st |u1D43A|u1D463Cst/uni210E.st⁄  
+PRHH /u1D̅08/uni210E.st/uni210E.st  
+CAP /u1D̅01 
+See Table 3 in Ellison et al for example input para meter values. 
+2.  Elastic Stiffness.  The elastic bulk modulus is given by |u1D4JD′/u1Dℜ04⁄, where |u1D4JD′ is the 
+current mean effective stress (compression positive ), and the small-strain 
+elastic shear modulus is calculated from the bulk m odulus and Poisson’s ratio 
+RNU.  
+3.  Nonlinear Stress-Strain Response. The curve RLCID deﬁnes the nonlinear 
+behavior in terms of secant stiffness degradation.  The same curve is assumed 
+to apply to all six BRICK stress-strain components.   For example, shear in the 
+|u1D46J /u1D46̅-plane will follow the curve, such that the |u1D46J-axis points correspond to shear 
+angle |u1D6F∆|u1D46JCst|u1D467Cst , while the |u1D466-axis contains |u1D43A |u1D43Amax ⁄ , where |u1D43A is the secant stiﬀness 
+(equal to /u1D̅0F|u1D46JCst|u1D467Cst |u1D6F∆|u1D46JCst|u1D467Cst ⁄) and |u1D43A|u1D4JACst|u1D44∆Cst|u1D46JCst  is the small-strain elastic shear modulus.  
+4.  Model Requirements.   This material type requires that the model be ori ented 
+such that the /u1D46̅-axis is deﬁned in the upward direction.  Compressi ve initial 
+stress must be deﬁned, using, for example, *INITIAL _STRESS_SOLID or *INI-*.   
+ platforms.  Nevertheless, the 2015 version is recom mended.  THEORY = 0, 4, 
+and 104 are retained only for backward compatibilit y. 
+9.  Shape Factor.   The shape factor for a typical soil would be 1.25 .  Do not use 
+values higher than 1.35.  
+10.  Anisotropy.   Anisotropy is treated by applying stretch factors  to the strain axis 
+of the stress-strain curves for certain BRICK shear  components.  It may be de- 
+ﬁned by either  using THEORY = 204 or 304 together with RVHHH on C ard 3b 
+or  using THEORY = 7 or 107 with the parameters on Car d 3c.  Using THEO-
+RY = 4 or 104 with non-zero anisotropy parameters o n Card 3a is permitted but 
+not recommended.  See Ellison et al (2012) for desc ription of the anisotropy 
+eﬀects modelled by THEORY = 7/107 and the meaning o f the parameters on 
+Card 3c.  If anisotropy is not required, use THEORY  = 204 or 304 and leave 
+Card 3b blank.  “Vertical” and “horizontal” are deﬁ ned in the global coordi- 
+nate system with “vertical” being the global /u1D46̅-axis. 
+11.  TOL and SUBINC.   These parameters usually have little inﬂuence on the 
+result.  Smaller values may sometimes improve accur acy, at cost of greater run 
+times.  
+12.  Creep.  Creep is implemented by scaling the strain “string  lengths” (see RL-
+CID) as a function of strain rate: 
+|u1D446 = SLRATIO × |u1D446RLCID |<racketleftCvJ1 + BETAC ×/u1D45∫|u1D4JB |parenleftCvJ||u1D7≠≠̇|
+|u1D7≠≠̇ref + 1|parenriµhtCvJ |<racketriµhtCvJ 
+Where  |u1D446 is string length; |u1D446|u1D44JCst|u1D43FCst /u1D4:6.st/u1D4:C.st/u1D4:̅.st  are the string lengths in the curve RLCID; 
+SLRATIO and BETAC are input parameters on Card 4; ||u1D7≠≠̇| is strain rate; and |u1D7≠≠̇ref  
+is input parameter EPSDOT1 or EPSDOT2 for volumetri c and shear strains, 
+respectively.  Note that SLRATIO × |u1D446RLCID  gives the string lengths for zero 
+strain rate. 
+References: 
+ [1]  Simpson, B., “Retaining structures: displacem ent and design”, Géotechnique , Vol.  42, No.  4, 
+539-576, (1992).  
+ [2]  Lehane, B. & Simpson, B., “Modelling glacial till conditions using a Brick soil model”, Can.  
+Geotech.  J . Vol.  37, No.  5, 1078–1088 (2000). 
+ [3]  Ellison, K., Soga, K., & Simpson, B., “A stra in space soil with evolving stiffness memory”, 
+Géotechnique,  Vol.  62, No.  7, 627-641 (2012). *

@@ -1,0 +1,35 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+ALPHA2 Material parameter, |u1D6F+|twoCst; see Remarks. 
+BETA Material parameter, |u1D6FD; see Remarks. 
+SIGP Material parameter, |u1D7≠∆|u1D4JDCst; see Remarks. 
+DERFI Type of derivation used in material subroutin e: 
+EQ.0:  Numerical derivation 
+EQ.1:  Analytical derivation 
+CFAIL Tensile volumetric strain at failure.  Default is n o failure due to 
+tensile volumetric strain. 
+PFAIL Maximum principal stress at failure.  Must be susta ined NUM 
+( > 0) timesteps to fail element.  Default is no failur e due to 
+maximum principal stress. 
+NUM Number of timesteps at or above PFAIL to trigge r element failure  
+Remarks: 
+The yield stress function, Φ, is deﬁned by: 
+Φ= |u1D7≠∆̂− |u1D7≠∆|u1D466Cst  . 
+The equivalent stress, |u1D7≠∆̂, is given by: 
+|u1D7≠∆̂|twoCst=|u1D7≠∆|u1D449Cst /u1D440.st |twoCst+ |u1D6F+|twoCst|u1D7≠∆|u1D4JACst|twoCst
+1 +|parenleftCv3|u1D6F+
+3|parenriµhtCv3|twoCst  , 
+where, |u1D7≠∆|u1D449Cst /u1D440.st , is the von Mises eﬀective stress: 
+|u1D7≠∆|u1D449Cst /u1D440.st =/radical.v52
+3σde v :σde v   . 
+In this equation |u1D7≠∆|u1D4JACst and /u1D6D4de v  are the mean and deviatoric stress: 
+σde v =σ− |u1D7≠∆|u1D4JACstI  . 
+The yield stress, |u1D7≠∆|u1D466Cst, can be expressed as: 
+|u1D7≠∆|u1D466Cst= |u1D7≠∆|u1D4JDCst+ |u1D6F∆|u1D7≠≠̂
+|u1D7≠≠/u1D4:̅.st+ |u1D6F+|twoCstln 
+⎣⎢⎡1
+1 − |parenleftCv4|u1D7≠≠̂
+|u1D7≠≠/u1D4:̅.st|parenriµhtCv4/u1D6FD.st
+⎦⎥⎤  . 
+Here, |u1D7≠∆|u1D4JDCst, |u1D6F+|twoCst, |u1D6F∆, and |u1D6FD are material parameters.  The densiﬁcation strain |u1D7≠≠/u1D4:̅.st is deﬁned as: *

@@ -1,0 +1,346 @@
+ ................................. ................................................... ..................... 2-1091  
+*.  [1H,2,3a] {64} 
+ *.   *.   *.   
+This is Material Type 172.  This model is available  for shell and Hughes-Liu beam 
+elements only.  The material model can represent pl ain concrete only, reinforcing steel 
+only, or a smeared combination of concrete and rein forcement.  The model includes 
+concrete cracking in tension and crushing in compre ssion as well as reinforcement 
+yield, hardening, and failure.  Properties are ther mally sensitive; the material model can 
+be used for ﬁre analysis.  Material data and equati ons governing the behavior 
+(including thermal properties) are taken from Euroc ode 2 (EC2).  See the remarks below 
+for more details on how the standard is applied in the material model.  
+ 
+Although the material model oﬀers many options, a r easonable response may be 
+obtained by entering only RO, FC, and FT for plain concrete.  If reinforcement is 
+present, YMREINF, SUREINF, FRACRX, FRACRY must be d eﬁned, or for an alternative 
+way to model the reinforcement, see *.   
+ Card 6.   This card is included if AOPT > 0.0. 
+V1 V2 V3 D1 D2 D3 BETA  
+Card 7.   This card is included if ISHCHK ≠ 0. 
+TYPESC P_OR_F EFFD GAMSC ERODET ERODEC ERODER TMPOFF 
+Card 8.   This card is included if TYPEC = 6 or 9. 
+EC1_6 ECSP69 GAMCE9 PHIEF9     
+Card 9.   This card is included if FT < 0.0. 
+FT2 FTSHR LCFTT WRO_G ZSURF    
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO FC FT TYPEC UNITC ECUTEN FCC 
+Type A F F F F F F F 
+Default none none none 0.0 1.0 1.0 0.0025 ↓ 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+FC Compressive strength of concrete (stress units).  I ts meaning 
+depends on TYPEC. 
+TYPEC.EQ.1,2,3,4,5,7,8: FC is the actual compressive strength.  
+TYPEC.EQ.6: FC is the unconﬁned compressive 
+strength used in Mander equations.  
+TYPEC.EQ.9: FC is the characteri stic compressive 
+strength (f ck  in EC2 1- 1).  See also FCC 
+and the remarks below. *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable ESOFT LCHAR MU TAUMXF TAUMXC ECRAGG AGGSZ UNITL 
+Type F F F F F F F F 
+Default 0.0 0.0 0.4 10 20  1.161 
+× FT 0.001 0.0 1.0 
+ 
+ VARIABLE   DESCRIPTION  
+ESOFT Tension stiﬀening (slope of stress-strain cur ve post- cracking in 
+tension).  See Figure M172-1 . 
+LCHAR Characteristic length at which ES OFT applies, also used as crack 
+spacing in aggregate-interlock calculation 
+MU Friction on crack planes ( max shear =|u1D7≠7×compressi v e stress ) 
+TAUMXF Maximum friction shear stress on crack plane s (ignored if AG-
+GSZ > 0.0 - see remarks). 
+TAUMXC Maximum through- thickness shear stress after cracking (see 
+remarks). 
+ECRAGG Strain parameter for aggregate interlock (ig nored if AGGSZ > 0.0 
+- see remarks). 
+AGGSZ Aggregate size (length units - used in NS3473 aggregate interlock 
+formula - see remarks). 
+UNITL Factor to convert length units to millimeters  (used only if AG-
+GSZ > 0.0 - see remarks).  For example, if model unit is meters , 
+UNITL = 1000. 
+ *.   
+  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT ET36 PRT36 ECUT36 LCALPC DEGRAD ISHCHK UNLFAC 
+Type F F F F I F I F 
+Default 0.0 0.0 0.25 10 20  none 0.0 0 0.5 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description):  
+EQ.0.0: Locally orthotropic with material axes determined by 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES, and then rotated about the shell ele- 
+ment normal by an angle BETA. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR. 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal. 
+ET36 Young’s modulus of concrete (TYPEC = 3 and 6).  For other 
+values of TYPEC, the Young’s modulus is calculated internally 
+(see remarks). 
+PRT36 Poisson’s ratio of concrete.  Applies to all values of TYPEC. 
+ECUT36 Strain to failure of concrete in compression  (TYPEC = 3 and 6). 
+LCALPC Optional load curve giving thermal expansion coeﬃci ent of 
+concrete as a function of temperature – overrides relationship 
+from EC2. 
+DEGRAD If non-zero, the compressive strength of con crete parallel to an 
+open crack will be reduced (see remarks). *.   
+ Include if ISHCHK ≠ 0. 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable TYPESC P_OR_F EFFD GAMSC ERODET ERODEC ERODER TMPOFF 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 2.0 0.01 0.05 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+TYPESC Type of shear capacity check (see Remark 5 ): 
+EQ.1: BS 8110, no failure even if capacity is exceeded 
+EQ.2: ACI 318-05M, no failure even if capacity is exceede d  
+EQ.11: BS 8110, failure occurs if capacity is exceeded 
+EQ.12: ACI 318-05M, failure occurs if capacity is exceeded  
+P_OR_F If BS8110 shear check, percent reinforcement  – for example, if 
+0.5%, input 0.5. If ACI shear check, ratio (cylinde r strength/FC) -
+defaults to 1. 
+EFFD Eﬀective section depth (length units), used in shea r capacity 
+check.  This is usually the section depth excluding  the cover 
+concrete. 
+GAMSC Load factor used in BS8110 shear capacity che ck 
+ERODET Crack-opening strain at which element is del eted; see Remark 7 . 
+ERODEC Compressive strain used in erosion criteria;  see Remark 7 . 
+ERODER Reinforcement plastic strain used in erosion  criteria; see Remark 
+7. 
+TMPOFF Constant to be added to the model’s temperature uni t to convert 
+into degrees Celsius.  For example, if the model’s temperature 
+unit is degrees Kelvin, set TMPOFF to - 273.  Degrees Celsius 
+temperatures are then used throughout the material model fo r 
+LCALPC as well as for the default thermally-sensiti ve properties.  
+ *.   
+ Remarks: 
+1.  Material Types.   This material model can be used to represent unre inforced 
+concrete (FRACR = 0.0 where FRACR = max (FRACX, FRAC Y )), reinforcing 
+steel (FRACR = 1.0), or a smeared combination of re inforced concrete with 
+evenly distributed reinforcement (0.0 < FRACR < 1.0 ).  Concrete is modelled as 
+an initially-isotropic material with a non-rotating  smeared crack approach in 
+tension, together with a plasticity model for compr essive loading.  Reinforce- 
+ment is treated as separate sets of bars in the loc al material |u1D46J and |u1D466 axes.  The 
+reinforcement is assumed not to carry through-thick ness shear or in-plane 
+shear.  Therefore, this material model should not b e used to model steel-only 
+sections, that is, do not create a section in which  all the integration points are of 
+*.  with FRACRX and/or FRA CRY = 1.0. 
+The material ID of each integration point is then s et to represent either concrete 
+or steel.  The position of each integration point w ithin the cross-section and its 
+cross-sectional area are chosen to represent the ac tual distribution of rein- 
+forcement.  If desired, *.   *.   
+ list of extra history variables in Remark 8 ). Furthermore, we assume that 
+the shear reinforcement will prevent any inelastic through-thickness shear 
+deformation.  Thus, through-thickness slipping on c rack planes is auto- 
+matically disabled. 
+b)  TYPESC > 10 represents the situation where no shea r reinforcement is 
+provided.  A brittle failure occurs if the shear ca pacity is exceeded.  Note, 
+however, that the shear capacity is calculated from  equations in design 
+codes and may be quite conservative. 
+c)  If TYPESC = 1 or 11, the shear capacity calculatio n is based on BS 8110-
+1:1997. You should supply the percentage reinforcem ent (P_OR_F), eﬀec- 
+tive depth of section EFFD (this typically excludes  the cover concrete), and 
+load factor GAMSC. These are used in Table 3.8 of B S 8110-1:1997 to de- 
+termine the design shear stress.  The “shear capaci ty” is this design shear 
+stress times the total section thickness (force per  unit width), modiﬁed ac- 
+cording to Equation 6b of BS 8110 to allow for axia l load.  
+d)  If TYPESC = 2 or 12, the shear capacity calculatio n is based on ACI 318-
+05M. The shear capacity, ∅|u1D449|u1D4JBCst, is calculated assuming ∅= 0.75  and taking 
+|u1D449|u1D4JBCst from ACI 318-05M equations 11-4 (for compressive a xial load) or 11-8 
+(for tensile axial load).  In these equations, |u1D4J3|u1D4J≠Cst|minuteCst is taken as P_OR_F × FC, the 
+term |u1D4J1 is taken as EFFD, and the term |u1D44F|u1D464Cst is taken as 1 to give shear capaci- 
+ty as a force per unit width.  Note that in LS-DYNA  versions prior to R13, 
+Equation 11-4 was incorrectly implemented, so resul ts from the TYPE-
+SC = 2 check prior to R13 should not be used. 
+For all of the above options, the “shear demand” (a ctual shear force per unit 
+width) is compared to the shear capacity.  This pro cess is performed separately 
+for each of the two local directions of the reinfor cement in each element.  When 
+deﬁning sections using *PART_COMPOSITE or integrati on rules with multiple 
+sets of material properties, it is important that e ach set of material properties 
+referenced has the same local material axes (see Remark 4 ). The shear demand 
+and axial load (used in calculation of the shear ca pacity) are summed across 
+the integration points within the section.  The ext ra history variables for capaci- 
+ty, demand, and diﬀerence between capacity and dema nd relate to the whole 
+section (not to each integration point separately).   Thus, the same values are 
+written to all the integration points within an ele ment. 
+6.  Thermal Expansion.   By default, thermal expansion properties from EC2  are 
+used.  If no temperatures are deﬁned in the model, properties for 20℃ are 
+used.  For TYPEC = 3, 6 or 9, and TYPER = 5, there is no thermal expansion by 
+default, and the properties do not vary with temper ature.  The user may over- 
+ride the default thermal expansion behaviour by deﬁ ning curves of thermal *.   
+ Extra Variable Description 
+1 Current crack opening strain (if two cracks are pre sent, max of two) 
+2 Equivalent uniaxial strain for concrete compressi ve behavior 
+3 Number of cracks (0, 1, 2, 3, or 4) 
+4 Temperature 
+5 Thermal strain 
+6 Current crack opening strain for the ﬁrst crack t o form 
+7 Current crack opening strain for the crack at 90 de grees to the ﬁrst 
+crack 
+8 Max crack opening strain for the ﬁrst crack to fo rm 
+9 Max crack opening strain for the crack at 90 degree s to the ﬁrst crack 
+10 TYPESC.EQ.0:  Maximum through-thickness shear stress 
+(resultant of local /u1D44C |u1D44D  and |u1D44D /u1D44B  shear stresses) 
+TYPESC.GE.1:  Maximum diﬀerence (shear demand minus 
+capacity) that has occurred so far in either of the  
+two reinforcement directions 
+11 TYPESC.EQ.0:  Maximum through-thickness /u1D44C |u1D44D  shear stress 
+(element axes) 
+TYPESC.GE.1:  Maximum diﬀerence (shear demand minus 
+capacity) that has occurred so far in reinforcement  
+|u1D46J-direction 
+12 TYPESC.EQ.0:  Maximum through-thickness |u1D44D /u1D44B  shear stress 
+(element axes) 
+TYPESC.GE.1:  Maximum diﬀerence (shear demand minus 
+capacity) that has occurred so far in reinforcement  
+|u1D466-direction 
+13 TYPESC.GE.1:  Current shear demand minus capacity in 
+reinforcement |u1D46J-direction 
+14 TYPESC.GE.1:  Current shear demand minus capacity in 
+reinforcement |u1D466-direction *.   
+ Extra Variable Description 
+35 TYPESC.GT.0:  Excess shear, |u1D449max −|u1D449/c.st/thet∙.st 
+36 TYPESC.GT.0:  Maximum excess shear that has occurred so far 
+56 Max crack opening strain for the crack at 45 degree s to ﬁrst crack 
+57 Max crack opening strain for the crack at -45 de grees to ﬁrst crack 
+58 Current crack opening strain for the crack at 45 de grees to ﬁrst crack 
+59 Current crack opening strain for the crack at -4 5 degrees to ﬁrst crack 
+In the above table |u1D449max  is given by 
+|u1D449max =/radical.v2|u1D449|u1D46JCst|twoCst+ |u1D449|u1D466Cst|twoCst  , 
+where |u1D449|u1D46JCst and |u1D449|u1D466Cst is the shear demand reinforcement in |u1D46J and |u1D466 directions re- 
+spectively.  Additionally, 
+|u1D449|u1D4J≠Cst /u1Dℜ03.st =|u1D449max 
+⎷/radical.ex/radical.ex/radical.tp
+|parenleftCvJ|u1D449|u1D46JCst
+|u1D449|u1D4J≠Cst|u1D46JCst |parenriµhtCvJ|twoCst
++ |parenleftCv6|u1D449|u1D466Cst
+|u1D449|u1D4J≠Cst|u1D466Cst |parenriµhtCv6|twoCst  , 
+where |u1D449|u1D4J≠Cst|u1D46JCst  and |u1D449|u1D4J≠Cst|u1D466Cst  are the shear capacities in the |u1D46J- and |u1D466-directions, respec- 
+tively. 
+Note that the concrete stress history variables are  stored in element local axes 
+irrespective of AOPT, that is, local |u1D46J is always the direction from node 1 to 
+node 2. The reinforcement stresses are in the reinf orcement directions; these do 
+take account of AOPT. 
+Material Behavior of Concrete: 
+Thermal sensitivity 
+ 
+For TYPEC = 1,2,4,5,7,8, the material properties ar e thermally-sensitive.  If no 
+temperatures are deﬁned in the model, it behaves as  if at 20℃. Pre-programmed 
+relationships between temperature and concrete prop erties are taken from the EC2 
+document.  The thermal expansion coeﬃcient is as de ﬁned in EC2, is non-zero by 
+default, and is a function of temperature.  This co eﬃcient may be overridden by 
+inputting the curve LCALPC. TYPEC = 3, 6 and 9 are not thermally sensitive and have 
+no thermal expansion coeﬃcient by default. 
+ *.   
+ LCHAR can optionally be used to maintain constant e nergy per unit area of crack 
+irrespective of mesh size, that is, the crack openi ng displacement is ﬁxed rather than the 
+crack opening strain.  LCHAR × ECUTEN is then the displacement to fully open a 
+crack.  For the actual elements, crack opening disp lacement is estimated by strain ×
+/radical.v1area .  Note that if LCHAR is deﬁned, it is also used as  the crack spacing in the NS 3473 
+aggregate interlock calculation. 
+ 
+For the thermally-sensitive values of TYPEC, the re lationship of FT with temperature is 
+taken from EC2 – there is no input option to change  this.  FT is assumed to remain at its 
+input value at temperatures up to 100°C, then to re duce linearly with temperature to 
+zero at 600°C. Up to 500°C, the crack opening strai n ECUTEN increases with 
+temperature such that the fracture energy to open t he crack remains constant.  Above 
+500℃ the crack opening strain does not increase fur ther. 
+ 
+In some concrete design codes and standards, it is stipulated that the tensile strength of 
+concrete should be assumed to be zero.  However, fo r .   *.   
+ |u1D7≠≠csp = |u1D7≠≠cu + 2FCC 
+E 
+Note that for unconﬁned concrete, FCC = FC causing |u1D7≠≠c1  to default to 0.002.  To over-
+ride the default values |u1D7≠≠c1 , |u1D7≠≠cu , and |u1D7≠≠csp , set EC1_6, ECUT36, and ECSP69, respectively.  
+ 
+Compressive response: TYPEC = 9 
+ 
+For TYPEC = 9, the input parameter FC is the charac teristic cylinder strength in the 
+stress units of the model.  FC × UNITC is assumed t o be f ck , the strength class in MPa 
+units.  The mean tensile strength f ctm , mean Young’s modulus E cm , and the strains used 
+to construct the stress-strain curve such as |u1D7≠≠c1  are by default evaluated automatically 
+from tabulated functions of f ck  given in Table 3.1 of EC2. The compressive strengt h of 
+the material is given by the input parameter FCC, w hich defaults to the mean 
+compressive strength f cm  deﬁned in EC2 as f ck  + 8MPa.  The user may override the 
+default compressive strength by inputting FCC expli citly.  The stress-strain curve 
+follows this form: 
+Stress 
+FCC =  /u1D458|u1D7≠2 − |u1D7≠2|twoCst
+1 + (/u1D458− 2)|u1D7≠2  , 
+where FCC is the input parameter FCC (default: = (f ck  + 8MPa)/UNITC), |u1D7≠2 = strain/|u1D7≠≠c1, 
+/u1D458= 1.05|u1D438 × |u1D7≠≠c1 FCC ⁄ , and |u1D438 is the Young’s modulus.    
+ Figure M172-3.   Type 6 concrete.  Values with superscripts |u1D462 and /u1D450 specify 
+they are for the unconﬁned and conﬁned curves, respectively. stress  
+strain  FT  
+-FC  
+-FCC  -|u1D7≠≠c1 |u1D462Cst -|u1D7≠≠cu |u1D462Cst -|u1D7≠≠csp |u1D462Cst -|u1D7≠≠csp |u1D4J≠Cst -|u1D7≠≠cu |u1D4J≠Cst -|u1D7≠≠c1 |u1D4J≠Cst Tension: cracking with 
+tension-stiﬀening 
+Unconﬁned 
+(FCC = FC) 
+Conﬁned 
+(FCC > FC) Compression: 
+crushing *.   
+ Reduction factor = min |parenleftCvJ1.0,1.0
+0.8+ 100|u1D7≠≠tmax |parenriµhtCvJ , 
+where |u1D7≠≠tmax  is the maximum (tensile) crack-opening strain that  has occurred up to the 
+current time. 
+Shear Strength on Cracking Planes: 
+Before cracking, the through-thickness shear stress  in the concrete is unlimited., unless 
+TYPESC > 10 (see Remark 5 ) For cracked elements, shear stress on the crack p lane 
+(magnitude of shear stress including element-plane and through-thickness terms) is 
+treated in one of two ways: 
+1.  If AGGSZ > 0.0, the relationship from Norwegian st andard NS3473 is used to 
+model the aggregate-interlock that allows cracked c oncrete to carry shear load- 
+ing.  The maximum shear stress that can be carried on the crack plane, /u1D̅0F|u1D4JACst|u1D44∆Cst|u1D46JCst , 
+depends on compressive stress on the crack |u1D7≠∆|u1D4J≠Cst(if the crack is closed) or on 
+crack opening width |u1D464 (if the crack is open):  
+/u1D̅0Fmax = 0.1 8/u1D̅0Frm + 1.64|u1D7≠∆|u1D4J≠Cst− 0.82 |u1D7≠∆|u1D4J≠Cst|twoCst
+/u1D̅0Frm  
+/u1D̅0Frm =  2FTS H R 
+0.31 + 24|u1D464
+(D|zeroCst+ 16) 
+FTSHR is deﬁned on Card 9 and defaults to FT on Car d 1.  
+UNITL is compulsory when AGGSZ is non-zero. This is  the factor that con- 
+verts model length units to millimeters, that is, t he aggregate size in millime- 
+tres D|zeroCst= AGGS Z  ×U NITL .  
+The crack width is estimated from |u1D464 =U NITL × |u1D7≠≠cro ×/u1D4:F|u1D4J2Cst, where |u1D7≠≠cro  is the 
+crack opening strain and /u1D4:F|u1D4J2Cst is the crack spacing.  /u1D4:F|u1D4J2Cst is taken as LCHAR if non-
+zero or is equal to element size if LCHAR is zero.  
+Optionally, TAUMXC may be used to set the maximum s hear stress when the 
+crack is closed and the normal stress is zero – by default this works out as 
+1.161 × FT from the above equations.  If TAUMXC is deﬁned, the shear stress 
+from the NS3473 formula, /u1D̅0Fmax , is scaled by TAUMXC / 1.161 × FT. 
+2.  If AGGSZ = 0.0, the aggregate interlock is modeled  by this formula: 
+/u1D̅0Fmax =TA U MXC 
+1.0 +|u1D7≠≠cro 
+ECRAGG + min|parenleftCv2M U × |u1D7≠∆comp ,TA U MXF|parenriµhtCv2  , 
+where /u1D̅0Fmax  is the maximum shear stress carried across a crack ; |u1D7≠∆comp is the 
+compressive stress across the crack (this is zero i f the crack is open); and EC- *. . When using 
+beam elements, ELFORM = 1 is required. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO YM PR SIGY LAMDA SBUCK POWER 
+Type I F F F F F F F 
+Default none 0.0 0.0 0.0 0.0 0.0 SIGY 0.5 
+ 
+ Card 2 1 2 3 4 5 6 7  
+Variable FRACX FRACY LCTEN LCCOMP AOPT EBU DOWNSL   
+Type F F F F F F F  
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.1  
+ 
+ Card 3 1 2 3 4 5 6 7  
+Variable DBAR FCDOW LCHARD UNITC UNITL    
+Type F F F F F    
+Default 0.0 0.0 0.0 1.0 1.0    
+ *MAY_HYSTERETIC_REINFORCEMENT  *

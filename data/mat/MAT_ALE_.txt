@@ -1,0 +1,211 @@
+INCOMPRESSIBLE ........................... ................................................... ................ 2-1038  
+*. VACUUM ................................... ................................................... ........................ 2-1835  
+*. VISCOUS .................................. ................................................... ........................ 2-1837  
+*. INCOMPRESSIBLE ........................... ................................................... ................ 2-1843  
+*. INCOMPRESSIBLE 
+ *. 01: *. 02: *. 03: *. 04: *. 05: *. 06: *. GAS_MIXTURE *. HERSCHEL *. INCOMPRESSIBLE *. MIXING_LENGTH *. VACUUM *. VISCOIS *. GAS_MIXTURE (*. INCOMPRESSIBLE  
+ *. INCOMPRESSIBLE  *. VACUUM  *. VACUUM  
+See *. 02  *. GAS_MIXTURE  
+See *. VISCOUS  *. VISCOUS  
+This may also be referred to as .  cards apply only  to ALE elements. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PC MULO MUHI RK  RN 
+Type I F F F F F  F 
+Defaults none none 0.0 0.0 0.0 0.0  0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+PC Pressure cutoﬀ (≤ 0.0).  See Remark 4 . 
+MULO Dynamic viscosity (see Remark 1 ): 
+EQ.0.0:  inviscid ﬂuid is assumed. 
+GT.0.0:  if MUHI = 0.0 or is not deﬁned, then this is the 
+traditional constant dynamic viscosity coeﬃcient, |u1D7≠7.  
+Otherwise if MUHI > 0.0, then MU LO and MUHI are 
+the lower and upper dynamic viscosity limit values for 
+a power-law-like variable viscosity model.  
+LT.0.0:  -MULO is a load curve ID deﬁning dynamic viscosity 
+as a function of equivalent strain rate. 
+MUHI Dynamic viscosity: 
+EQ.0.0:  only MU LO is used to deﬁne the dynamic viscosity, 
+default 
+LT.0.0:  the viscosity can be deﬁned by the user in the ﬁle 
+dyn21.F  with a routine called f3dm9ale_userdef1 . The *. VISCOUS  
+  VARIABLE   DESCRIPTION  
+ﬁle is part of the general usermat  package.  Note that in 
+this case MULO is a parameter for the subroutine. 
+GT.0.0:  this is the upper dynamic viscos ity limit.  This is 
+deﬁned only if RK and RN are deﬁned for the variabl e 
+viscosity case. 
+RK Variable dynamic viscosity multiplier.  See Remark 6 . 
+RN Variable dynamic viscosity exponent.  See Remark 6 . 
+Remarks: 
+1.  Deviatoric Viscous Stress.   The null material must be used with an equation-
+of-state.  Pressure cutoﬀ is negative in tension.  A (deviatoric) viscous stress of 
+the form 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |minuteCst= 2|u1D7≠7|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst 
+|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|<racketriµhtCvJ~|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|u1D46≠|<racketriµhtCvJ |<racketleftCvJ1
+|u1D46≠|<racketriµhtCvJ 
+is computed for nonzero |u1D7≠7 where |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst is the deviatoric strain rate.  |u1D7≠7 is the dy- 
+namic viscosity.  For example, in SI unit system, |u1D7≠7 has a unit of [Pa × s] . 
+2.  Hourglass Control Issues.   The null material has no shear stiﬀness and 
+hourglass control must be used with care.  In some applications, the default 
+hourglass coeﬃcient might lead to signiﬁcant energy  losses.  In general for 
+ﬂuid(s), the hourglass coeﬃcient QM should be small  (in the range 10 -4 to 10 -6 
+for the standard default IHQ choice). 
+3.  Null Material Properties.   Null material has no yield strength and behaves i n 
+a ﬂuid-like manner. 
+4.  Numerical Cavitation.   The pressure cut-oﬀ, PC, must be deﬁned to allow for 
+a material to “numerically” cavitate.  In other wor ds, when a material under- 
+goes dilatation above certain magnitude, it should no longer be able to resist 
+this dilatation.  Since dilatation stress or pressu re is negative, setting PC limit 
+to a very small negative number would allow for the  material to cavitate once 
+the pressure in the material goes below this negati ve value. 
+5.  Issues with Small Values of Viscosity Exponent.   If the viscosity exponent is 
+less than 1.0 ( RN < 1.0 ), then RN − 1.0 < 0.0.   In this case, at very low equiva- 
+lent strain rate, the viscosity can be artiﬁcially very high.  MULO is then used 
+as the viscosity value. *. 03  
+ 6.  Empirical Dynamic Viscosity.   The empirical variable dynamic viscosity is 
+typically modeled as a function of equivalent shear rate  based on experimental 
+data. 
+µ|parenleftCv1|u1D6F∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rṫ|minuteCst|parenriµhtCv1 = RK × |u1D6F∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rṫ|minuteCst(RN−|oneCst) 
+For an incompressible ﬂuid, this may be written equ ivalently as 
+µ|parenleftCv1|u1D7≠≠̅̇|minuteCst|parenriµhtCv1 = RK × |u1D7≠≠̅̇|minuteCst(RN−|oneCst) 
+The “overbar” denotes a scalar equivalence.  The “d ot” denotes a time deriva- 
+tive or rate eﬀect.  And the “prime” symbol denotes  deviatoric or volume pre- 
+serving components.  The equivalent shear rate  components may be related to 
+the basic deﬁnition of (small-strain) strain rate c omponents as follows: 
+|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst =1
+2|parenleftCv6∂|u1D462|u1D4J6Cst
+∂|u1D46J|u1D4J7Cst+∂|u1D462|u1D4J7Cst
+∂|u1D46J|u1D4J6Cst|parenriµhtCv6⇒|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst= |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst − |u1D6FF|u1D4J6Cst|u1D4J7Cst |parenleftCvJ|u1D7≠≠̇|u1D4J8Cst|u1D4J8Cst 
+3|parenriµhtCvJ
+|u1D6F∆̇|u1D4J6Cst|u1D4J7Cst = 2|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst  
+Typically, the 2 nd  invariant of the deviatoric strain rate tensor is deﬁned as: 
+/u1D4:C|twoCst|u1D7≠≠Cst̅̇/⋯inute.sts=1
+2/˙racketleft.v2|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst/˙racketright.v2 
+The equivalent (small-strain) deviatoric strain rat e is deﬁned as:  
+|u1D7≠≠̅′̇≡2/radical.v1/u1D4:C|twoCst|u1D7≠≠Cst|minuteCsṫ=/radical.v:2/˙racketleft.v:|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst/˙racketright.v:=/radical.v:4/˙racketleft.v:|u1D7≠≠̇|oneCst|twoCst |minuteCst|twoCst+ |u1D7≠≠̇|twoCst|threeCst |minuteCst|twoCst+ |u1D7≠≠̇|threeCst|oneCst |minuteCst|twoCst/˙racketright.v:+ 2/˙racketleft.v:|u1D7≠≠̇|oneCst|oneCst |minuteCst|twoCst+ |u1D7≠≠̇|twoCst|twoCst |minuteCst|twoCst+ |u1D7≠≠̇|threeCst|threeCst |minuteCst|twoCst/˙racketright.v: 
+In non-Newtonian literatures, the  equivalent shear rate  is sometimes deﬁned as  
+|u1D6F∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rṫ≡/radical.v5|u1D6F∆̇|u1D4J6Cst|u1D4J7Cst |u1D6F∆̇|u1D4J6Cst|u1D4J7Cst 
+2=/radical.v22|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst =/radical.v24|<racketleftCv1|u1D7≠≠̇|oneCst|twoCst |twoCst+ |u1D7≠≠̇|twoCst|threeCst |twoCst+ |u1D7≠≠̇|threeCst|oneCst |twoCst|<racketriµhtCv1 + 2|<racketleftCv1|u1D7≠≠̇|oneCst|oneCst |twoCst+ |u1D7≠≠̇|twoCst|twoCst |twoCst+ |u1D7≠≠̇|threeCst|threeCst |twoCst|<racketriµhtCv1 
+It turns out that, (a) for incompressible materials  ( |u1D7≠≠̇|u1D4J8Cst|u1D4J8Cst = 0), and (b) the shear 
+terms are equivalent when |u1D4J6 ≠/u1D45̅→ |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst = |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst, the equivalent shear rate  is algebrai- 
+cally equivalent to the equivalent (small-strain) deviatoric strain rate . 
+|u1D7≠≠̅̇|minuteCst= |u1D6F∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rṫ|minuteCst*. MIXING_LENGTH  
+ *. 04.  This viscous “ﬂuid-like” material model 
+is an advanced form of *. cards apply only to 
+ALE elements.  
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PC MULO MUHI RK  RN 
+Type A8 F F F F F  F 
+Defaults none 0.0 0.0 0.0 0.0 0.0  0.0 
+ 
+Internal Flow Card. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCI C0 C1 C2 C3 C4 C5 C6 
+Type F F F F F F F F 
+Defaults 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+External Flow Card. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LCX D0 D1 D2 E0 E1 E2  
+Type F F F F F F F  
+Defaults 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+ *. 04  
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+PC Pressure cutoﬀ (≤ 0.0) 
+MULO Dynamic viscosity: 
+GE.0.0:  if MUHI = 0.0 or is not deﬁned, then this is the 
+traditional constant dynamic viscosity coeﬃcient, |u1D7≠7.  
+Otherwise if MUHI  >  0.0, then MU LO and MUHI are 
+the lower and upper dynamic viscosity limit values.    
+LT.0.0:  -MULO is a load curve ID deﬁning dynamic viscosity 
+as a function of equivalent strain rate. 
+MUHI Upper dynamic viscosity limit (default = 0.0) if MULO > 0.  This 
+is deﬁned only if RK and RN are deﬁned for the vari able viscosity 
+case. 
+RK Variable dynamic viscosity multiplier (see Remark 6  of . 04  *. INCOMPRESSIBLE  *. INCOMPRESSIBLE  
+See *. 06  *. HERSCHEL  
+This may also be referred to as . VISCOUS (*.  
+cards apply only to ALE element formulation. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PC MULO MUHI RK Not used RN 
+Type I F F F F F  F 
+Defaults none none 0.0 0.0 0.0 0.0  0.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GDOTC TAO0       
+Type F F       
+Default none none       
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number has to  be chosen. 
+RO Mass density 
+PC Pressure cutoﬀ (≤ 0.0); see Remark 4 . 
+MULO There are 4 possible cases (see Remark 1 ): 
+1.  If MULO = 0.0, then inviscid ﬂuid is assumed. 
+2.  If MULO > 0.0, and MUHI = 0.0 or is not deﬁned, then 
+this is the traditional constant dynamic viscosity coeﬃ- 
+cient |u1D7≠7. *. 06  
+  VARIABLE   DESCRIPTION  
+3.  If MULO > 0.0, and MUHI > 0.0, then MU LO and MUHI 
+are lower and upper viscosity limit values for a po wer-
+law-like variable viscosity model. 
+4.  If MULO is negative (for example, MULO = - 1), then a 
+user-input data load curve (with LCID = 1) deﬁning dy- 
+namic viscosity as a function of equivalent strain rate is 
+used. 
+MUHI Upper dynamic viscosity limit (default = 0.0).  This is deﬁned 
+only if RK and RN are deﬁned for the variable visco sity case. 
+RK /u1D458, consistency factor (see Remark 6 ) 
+RN |u1D4JB, power law index (see Remark 6 ) 
+GDOTC |u1D6F∆̇|u1D4J≠Cst, critical shear strain rate (see Remark 6 ) 
+TAO0 /u1D̅0F|zeroCst, yield stress (see Remark 6 ) 
+Remarks: 
+1.  Viscous Stress.   The null material must be used with an equation-o f-state.  
+Pressure cutoﬀ is negative in tension.  A (deviator ic) viscous stress of the form 
+|u1D7≠∆′|u1D4J6Cst|u1D4J7Cst = 2|u1D7≠7|u1D7≠≠′̇|u1D4J6Cst|u1D4J7Cst  
+|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|<racketriµhtCvJ~|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|u1D46≠|<racketriµhtCvJ |<racketleftCvJ1
+|u1D46≠|<racketriµhtCvJ 
+is computed for nonzero |u1D7≠7 where |u1D7≠≠′̇|u1D4J6Cst|u1D4J7Cst  is the deviatoric strain rate.  |u1D7≠7 is the dy- 
+namic viscosity.  For example, in SI unit system, |u1D7≠7 has a unit of [Pa-s]. 
+2.  Hourglass Control.   The null material has no shear stiﬀness and hourg lass 
+control must be used with care.  In some applicatio ns, the default hourglass 
+coeﬃcient might lead to signiﬁcant energy losses.  In general for ﬂuid(s), the 
+hourglass coeﬃcient QM should be small (in the rang e of 10 -4 to 10 -6 for the 
+standard default IHQ choice). 
+3.  Yield Strength.   Null material has no yield strength and behaves i n a ﬂuid-like 
+manner. 
+4.  Pressure Cut-Off.   The pressure cut-oﬀ, PC, must be deﬁned to allow for a 
+material to “numerically” cavitate.  In other words , when a material undergoes 
+dilatation above certain magnitude, it should no lo nger be able to resist this *. HERSCHEL  
+ dilatation.  Since dilatation stress or pressure is  negative, setting PC limit to a 
+very small negative number would allow for the mate rial to cavitate once the 
+pressure in the material goes below this negative v alue. 
+5.  Viscosity.   If the viscosity exponent is less than 1.0, |u1D44J /u1D441 < 1.0 , then |u1D44J /u1D441 − 1.0 <
+0.0.  In this case, at very low equivalent strain rate , the viscosity can be artiﬁ- 
+cially very high.  MULO is then used as the viscosi ty value. 
+6.  Herschel-Buckley Model.   The Herschel-Buckley model employs a large 
+viscosity to model the “rigid-like” behavior for lo w shear strain rates ( |u1D6F∆̇< |u1D6F∆̇|u1D4J≠Cst).   
+µ(|u1D6F∆̇) =/u1D̅0F|zeroCst(|twoCst−/u1D6FE.st ̇//u1D6FE.st ̇_|u1D4J≠Cst )
+/u1D6FE.sṫ/u1D4⃡0.sts+/u1D458[(2 − |u1D4JB) + (|u1D4JB − 1)/u1D6FE.sṫ
+/u1D6FE.sṫ/u1D4⃡0.sts] 
+A power law is used once the yield stress is passed .   
+µ(|u1D6F∆̇) =/u1D̅0F|zeroCst
+|u1D6F∆̇+/u1D458(|u1D6F∆̇
+|u1D6F∆̇|u1D4J≠Cst)|u1D4JBCst−|oneCst 
+The shear strain rate is:  
+|u1D6F∆̇≡/radical.v5|u1D6F∆̇|u1D4J6Cst|u1D4J7Cst |u1D6F∆̇|u1D4J6Cst|u1D4J7Cst 
+2=/radical.v22|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst =/radical.v24|<racketleftCv1|u1D7≠≠̇|oneCst|twoCst |twoCst+ |u1D7≠≠̇|twoCst|threeCst |twoCst+ |u1D7≠≠̇|threeCst|oneCst |twoCst|<racketriµhtCv1 + 2|<racketleftCv1|u1D7≠≠̇|oneCst|oneCst |twoCst+ |u1D7≠≠̇|twoCst|twoCst |twoCst+ |u1D7≠≠̇|threeCst|threeCst |twoCst|<racketriµhtCv1*

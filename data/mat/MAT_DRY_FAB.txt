@@ -1,0 +1,129 @@
+RIC ................................... ................................................... .......................... 2-1347  
+*. RIC [9] 
+ *. RIC  *. RIC  *. RIC  
+This is  Material Type 214. This material model can be used to model high strength 
+woven fabrics, such as Kevlar ® 49, with transverse orthotropic behavior for use i n 
+structural systems where high energy absorption is required (Bansal et al., Naik et al., 
+Stahlecker et al.).  The major applications of the model are for the materials used in 
+propulsion engine containment system, body armor an d personal protections. 
+Woven dry fabrics are described in terms of two pri ncipal material directions, 
+longitudinal warp and transverse ﬁll yarns.  The pr imary failure mode in these 
+materials is the breaking of either transverse or l ongitudinal yarn.  An equivalent 
+continuum formulation is used and an element is des ignated as having failed when it 
+reaches some critical value for strain in either di rections.  A linearized approximation to 
+a typical stress-strain curve is shown in Figure M214-1  and to a typical engineering 
+shear stress-strain curve is shown in the ﬁgure cor responding to the GAB i ﬁeld in the 
+variable list.  Note that the principal directions are labeled |u1D44∆ for the warp and |u1D44F for the 
+ﬁll, and the direction /u1D450 is orthogonal to |u1D44∆ and |u1D44F. 
+The material model is available for membrane elemen ts and it is recommended to use a 
+double precision version of LS-DYNA. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO EA EB GAB1 GAB2 GAB3  
+Card 2.   This card is required. 
+GBC GCA GAMAB1 GAMAB2     
+Card 3.   This card is required. 
+AOPT        A1 A2 A3 
+Card 4.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA  
+Card 5.   This card is required. 
+EACRF EBCRF EACRP EBCRP     
+Card 6.   This card is required. 
+EASF EBSF EUNLF ECOMF EAMAX EBMAX SIGPOST  *. RIC  
+ Card 7.   This card is required. 
+CCE PCE CSE PSE DFAC EMAX EAFAIL EBFAIL 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EA EB GAB1 GAB2 GAB3  
+Type A F F F F F F  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GBC GCA GAMAB1 GAMAB2     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Continuum equivalent mass density 
+EA Modulus of elasticity in the longitudinal (warp) di rection, which 
+corresponds to the slope of segment AB in Figure M214-1  
+EB Modulus of elasticity in the transverse (ﬁll) direc tion, which 
+corresponds to the slope of segment of AB in Figure M214-1  
+GAB i / 
+GAMAB i Shear stress-strain behavior is 
+modeled as piecewise linear 
+in three segments.  See the 
+ﬁgure to the right .  The shear 
+moduli GAB i correspond to 
+the slope of the ith  segment.  
+The start and end points for 
+the segments are speciﬁed in 
+the GAMAB[1-2] ﬁelds. GAB1GAB2GAB3
+GAMAB1 GAMAB2Shear
+StrainStress*.  RIC.  This curve 
+models the force-response in the longitudinal and transverse  directions. *. RIC  
+  VARIABLE   DESCRIPTION  
+mal 
+LT.0.0: the absolute value of AOPT is a c oordinate system ID 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  BE TA may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable EACRF EBCRF EACRP EBCRP     
+Type F F F F     
+Remarks 2 2       
+ 
+ VARIABLE   DESCRIPTION  
+EACRF Factor for crimp region modulus of elasticity  in longitudinal 
+direction (see Figure M214-1 ): 
+|u1D438|u1D44∆Cst/co⋯⋯a.stcrimp =|u1D438|u1D44∆Cst/co⋯⋯a.stcrimpfac |u1D438, |u1D438|u1D44∆Cst/co⋯⋯a.stcrimpfac =EACRF  *. RIC  
+  VARIABLE   DESCRIPTION  
+EAMAX Strain at peak stress in longitudinal directi on (see Figure M214-1 ): 
+|u1D7≠≠|u1D44∆Cst/co⋯⋯a.stmax  
+EBMAX Strain at peak stress in transverse direction  (see Figure M214-1 ): 
+|u1D7≠≠|u1D44FCst/co⋯⋯a.stmax  
+SIGPOST Stress value in post- peak region at which nonlinear behavior 
+begins (see Figure M214-1 ): 
+|u1D7≠∆post  
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable CCE PCE CSE PSE DFAC EMAX EAFAIL EBFAIL 
+Type F F F F F F F F 
+Remarks 1 1 1 1 2 3 2, 3 2, 3 
+ 
+ VARIABLE   DESCRIPTION  
+CCE Strain rate parameter |u1D436, Cowper- Symonds factor for modulus.  If 
+zero, rate eﬀects are not considered. 
+PCE Strain rate parameter |u1D443, Cowper- Symonds factor for modulus.  If 
+zero, rate eﬀects are not considered. 
+CSE Strain rate parameter |u1D436, Cowper- Symonds factor for stress to 
+peak / failure.  If zero, rate eﬀects are not consi dered. 
+PSE Strain rate parameter |u1D443, Cowper-Symonds fact or for stress to 
+peak / failure.  If zero, rate eﬀects are not consi dered. 
+DFAC Damage factor: 
+|u1D4J1fac  
+EMAX Erosion strain of element: 
+|u1D7≠≠max  *. RIC  
+ where |u1D7≠∆post  and |u1D7≠≠post  are, respectively, the stress and strain demarcati ng the 
+onset of nonlinear behavior.  The value of SIGPOST is the same in both the 
+transverse and longitudinal directions, whereas |u1D7≠≠a,post  and |u1D7≠≠b ,post  depend on 
+direction and are derived internally from EASF, EBS F, and SIGPOST.  The fail- 
+ure strain, |u1D7≠≠[|u1D44∆Cst/|u1D44FCst],fail , speciﬁes the onset of failure and diﬀers in the l ongitudinal 
+and transverse directions.  Lastly the exponent, |u1D4J1fac , determines the shape of 
+nonlinear stress-strain curve between |u1D7≠≠post  and |u1D7≠≠[|u1D44∆Cst |u1D44FCst ⁄ ]/co⋯⋯a.stfail . 
+3.  Element Erosion.   The element is eroded if either (a) or (b) is sat isﬁed: 
+a)  |u1D7≠≠|u1D44∆Cst>  |u1D7≠≠|u1D44∆Cst/co⋯⋯a.stfail  and |u1D7≠≠|u1D44FCst>  |u1D7≠≠|u1D44FCst/co⋯⋯a.stfail  
+b)  |u1D7≠≠|u1D44∆Cst>  |u1D7≠≠max  and |u1D7≠≠|u1D44FCst>  |u1D7≠≠max .*

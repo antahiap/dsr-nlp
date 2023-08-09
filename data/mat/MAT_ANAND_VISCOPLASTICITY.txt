@@ -1,0 +1,29 @@
+......................... ................................................... ............. 2-1827  
+*.  [0] 
+ *.  *.   *.   
+This is  Material Type 296. This visco-plastic model by Prof essor Anand uses a set of 
+evolution equations instead of loading-unloading cr iterion to describe dislocation 
+motion and hardening or softening behavior of mater ials.  This model can be applied to 
+simulate solders used in electronic packaging. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO YM PR ALPHA A1 RATIOQR  XI 
+Type A8 F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable M S0 H0 A2 SBAR N  TREF 
+Type F F F F F F  F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+YM Young’s Modulus 
+PR Poisson’s ratio 
+ALPHA Coeﬃcient of thermal expansion, |u1D6F+  
+A1 Pre-exponential factor, |u1D434 
+RATIOQR Ratio of the activation energy, |u1D444 (J/mol), to the universal gas 
+constant, |u1D44J (J/mol/K) 
+XI Multiplier of stress, /u1D̅0∫ 
+M Strain rate sensitivity, |u1D4JA 
+S0 Initial value of deformation resistance, |u1D46≠|zeroCst *.   *

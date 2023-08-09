@@ -1,0 +1,146 @@
+ ................................ ................................................... ...................... 2-197  
+*.  [0,3c,5,8B] {6} 
+ 
+1 Error associated with advection inherently leads t o state variables that may be inconsistent with 
+nonlinear constitutive routines and thus may lead t o nonphysical results, nonconservation of energy, a nd 
+even numerical instability in some cases.  Caution is advised, particularly when using the 2 nd  tier of 
+material models implemented for ALE multi-material solids (designated by [8B]) which are largely 
+untested as ALE materials. 
+2 These commands do not, by themselves, deﬁne a mate rial model but rather can be used in certain cases 
+to supplement material models.  *MAT 
+LS-DYNA R13 2-3 (MAT)  *.  *.   *.   
+This is  Material Type 16.  This model has been used to anal yze buried steel reinforced 
+concrete structures subjected to impulsive loadings . 
+This model can be used in two major modes - a simpl e tabular pressure-dependent 
+yield surface and a potentially complex model featu ring two yield as a function of 
+pressure functions with the means of migrating from  one curve to the other.  These 
+modes are discussed in detail in the Remarks sectio n.  For both modes, load curve LCP 
+is taken to be a strain rate multiplier for the yie ld strength.  Note that this model must 
+be used with equation-of-state type 8, 9 or 11. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO G PR     
+Card 2.   This card is required. 
+SIGF A0 A1 A2 A0F A1F B1 PER 
+Card 3.   This card is required. 
+ER PRR SIGY ETAN LCP LCR   
+Card 4.   This card is required. 
+X1 X2 X3 X4 X5 X6 X7 X8 
+Card 5.   This card is required. 
+X9 X10 X11 X12 X13 X14 X15 X16 
+Card 6.   This card is required. 
+YS1 YS2 YS3 YS4 YS5 YS6 YS7 YS8 
+Card 7.   This card is required. 
+YS9 YS10 YS11 YS12 YS13 YS14 YS15 YS16 *.   
+2-198 (MAT) LS-DYNA R13 Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO G PR     
+Type A F F F     
+Default none none none none     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G Shear modulus 
+PR Poisson’s ratio 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SIGF A0 A1 A2 A0F A1F B1 PER 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+SIGF Tensile cutoﬀ (maximum principal stress for fa ilure) 
+A0 Cohesion 
+A1 Pressure hardening coeﬃcient 
+A2 Pressure hardening coeﬃcient 
+A0F Cohesion for failed material 
+A1F Pressure hardening coeﬃcient for failed materia l *.   
+2-200 (MAT) LS-DYNA R13  Card 5 1 2 3 4 5 6 7 8 
+Variable X9 X10 X11 X12 X13 X14 X15 X16 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+Xn Eﬀective plastic strain, damage, or pressure.  See Remarks below.  
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable YS1 YS2 YS3 YS4 YS5 YS6 YS7 YS8 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable YS9 YS10 YS11 YS12 YS13 YS14 YS15 YS16 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+YS n Yield stress (Mode I) or scale factor (Mode II.B or  II.C) 
+Remarks: 
+1.  Response Mode I (Tabulated Yield Stress as a Functi on of Pressure).  This 
+model is well suited for implementing standard geol ogic models like the 
+Mohr-Coulomb yield surface with a Tresca limit, as shown in Figure M16-1 .  *.   
+2-202 (MAT) LS-DYNA R13 2.  Response Mode II (Two Curve Model with Damage and F ailure).   This 
+approach uses two yield versus pressure curves of t he form  
+|u1D7≠∆|u1D466Cst= |u1D44∆|zeroCst+|u1D4JD
+|u1D44∆|oneCst+ |u1D44∆|twoCst|u1D4JD 
+The upper curve is best described as the maximum yi eld strength curve and 
+the lower curve is the failed material curve.  Ther e are a variety of ways of 
+moving between the two curves and each is discussed  below. 
+a)  Mode II.A (Simple Tensile Failure).   To use this mode, deﬁne |u1D44∆|zeroCst, |u1D44∆|oneCst, |u1D44∆|twoCst, |u1D44∆0f , 
+and |u1D44∆1f , set |u1D44F|oneCst to zero, and leave Cards 4 through 7 blank.  In th is case the 
+yield strength is taken from the maximum yield curv e until the maximum 
+principal stress ( |u1D7≠∆|oneCst) in the element exceeds the tensile cutoﬀ ( |u1D7≠∆cut ). When 
+|u1D7≠∆|oneCst> |u1D7≠∆cut  is detected, the yield strength is scaled back by a fraction of the 
+distance between the two curves in each of the next  20 time steps so that 
+after those 20 time steps, the yield strength is de ﬁned by the failure curve. 
+b)  Mode II.B (Tensile Failure plus Plastic Strain Scal ing).   Deﬁne |u1D44∆|zeroCst, |u1D44∆|oneCst, |u1D44∆|twoCst, |u1D44∆0f , 
+and |u1D44∆1f , set |u1D44F|oneCst to zero, and use Cards 4 through 7 to deﬁne a scal e factor, |u1D7≠2, 
+(Cards 6 and 7) as a function of eﬀective plastic s train (Cards 4 and 5).  LS-
+DYNA evaluates |u1D7≠2 at the current eﬀective plastic strain and then ca lculates 
+the yield stress as 
+|u1D7≠∆yield = |u1D7≠∆failed + |u1D7≠2(|u1D7≠∆max − |u1D7≠∆failed ) , 
+where |u1D7≠∆|mCst|aCst|xCst  and |u1D7≠∆failed  are found as shown in Figure M16-2 .  This yield 
+strength is then subject to scaling for tensile fai lure as described above.  
+This type of model describes a strain hardening or softening material, 
+such as concrete. PressureYield
+ Figure M16-2.   Two-curve concrete model with damage and failure  *.   
+2-204 (MAT) LS-DYNA R13 lus, shear modulus, and yield strength are then cal culated from a simple mix- 
+ture rule.  For example, for the bulk modulus the r ule gives: 
+|u1D43∆ = |parenleftCv11 − |u1D4J3|u1D4JFCst|parenriµhtCv1|u1D43∆|u1D4JACst+ |u1D4J3|u1D4JFCst|u1D43∆|u1D4JFCst  , 
+where |u1D43∆|u1D4JACst and |u1D43∆|u1D4JFCst are the bulk moduli for the geologic material and the rein- 
+forcement material, respectively.  This feature sho uld be used with caution.  It 
+gives an isotropic eﬀect in the material instead of  the true anisotropic material 
+behavior.  A reasonable approach would be to use th e mixture elements only 
+where the reinforcing exists and plain elements els ewhere.  When the mixture 
+model is being used, the strain rate multiplier for  the principal material is tak- 
+en from load curve N1 and the multiplier for the re inforcement is taken from 
+load curve N2. 
+5.  Suggested Parameters.   The LLNL DYNA3D manual from 1991 [Whirley 
+and Hallquist] suggests using the damage function ( Mode II.C) in Material 
+Type 16 with the following set of parameters: 
+|u1D44∆|zeroCst=|u1D4J3|u1D4J≠Cst|minuteCst
+4 
+|u1D44∆|oneCst=1
+3 |u1D44∆|twoCst=1
+3|u1D4J3|u1D4J≠Cst|minuteCst 
+|u1D44∆|zeroCst/u1D45:.st=|u1D4J3|u1D4J≠Cst|minuteCst
+10  |u1D44∆|oneCst/u1D45:.st=1.5 
+|u1D44F|oneCst=1.25  
+and a damage table of: 
+Card 4: 0.0  8.62E-06 2.15E-05 3.14E-05 3.95E-04 
+  5.17E-04 6.38E-04 7.98E-04 
+Card 5: 9.67E-04 1.41E-03 1.97E-03 2.59E-03 3.27E-0 3 
+  4.00E-03 4.79E-03 0.909 
+Card 6: 0.309  0.543  0.840  0.975  1.000  
+  0.790  0.630  0.469  
+Card 7: 0.383  0.247  0.173  0.136  0.114  
+  0.086  0.056  0.0 
+This set of parameters should give results consiste nt with Dilger, Koch, and 
+Kowalczyk [1984] for plane concrete.  It has been s uccessfully used for rein- 
+forced structures where the reinforcing bars were m odeled explicitly with em- 
+bedded beam and shell elements.  The model does not  incorporate the major 
+failure mechanism - separation of the concrete and reinforcement leading to 
+catastrophic loss of conﬁnement pressure.  However,  experience indicates that 
+this physical behavior will occur when this model s hows about 4% strain. *

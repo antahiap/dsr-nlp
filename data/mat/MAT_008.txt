@@ -1,0 +1,17 @@
+: *.  
+*.   
+LS-DYNA R13 2-163 (MAT) *.   *.   
+LS-DYNA R13 2-165 (MAT) /u1D4:D|twoCst=1
+2|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D46≠|u1D4J6Cst|u1D4J7Cst  
+and the yield stress is |u1D7≠∆|u1D466Cst.  If yielding has occurred, namely, /u1D̅1∫> 0, the deviatoric trial 
+stress is scaled to obtain the ﬁnal deviatoric stre ss at time |u1D4JB + 1 : 
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst=|u1D7≠∆|u1D466Cst
+/radical.v13/u1D4:D|twoCst∗|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst 
+If /u1D̅1∫≤ 0, then 
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst=∗|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst 
+Before detonation, pressure is given by the express ion 
+|u1D4JD|u1D4JBCst+|oneCst=Κ|parenleftCvJ1
+|u1D449|u1D4JBCst+|oneCst− 1|parenriµhtCvJ  , 
+where |u1D43∆ is the bulk modulus.  Once the explosive material detonates: 
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst= 0  , 
+and the material behaves like a gas. *

@@ -1,0 +1,270 @@
+ UDFIBER  
+*. CRASH  
+ *. CRASH  *. CRASH  
+  Card 2 1 2 3 4 5 6 7 8 
+Variable NFIB AOPT    A1 A2 A3 
+Type I F    F F F 
+ 
+ VARIABLE   DESCRIPTION  
+NFIB  Number of ﬁber families to be considered (up to 3) 
+AOPT  Material axes option (see *. CRASH  *. CRASH  
+  VARIABLE   DESCRIPTION  
+EF1 Young’s modulus for 1 st  ﬁber family 
+LCEF1 Load curve for stress as a function of fiber strain  of 1 st  ﬁber.  With 
+this option active, EF1 is ignored. 
+G23_1 Transverse shear modulus orthogonal to direct ion of 1 st  ﬁber 
+G31_1 Transverse shear modulus in direction of 1 st  ﬁber 
+DAF1 Load curve or table ID for damage parameter |u1D4J1|oneCst/u1D45:.stfor 1 st  ﬁber (see 
+Remark 2 ). If a curve, DAF1 speciﬁes damage as a function o f 
+ﬁber strain (for compression and elongation).  If D AF1 refers to a 
+table, then tw o diﬀerent damage functions for tensile and 
+compressive stresses are input.  The values in the table are 
+arbitrary and exist only to index the two curves.  The ﬁrst indexed 
+curve is assumed to specify tensile damage as a fun ction of ﬁber 
+strains while s econd curve speciﬁes compressive damage as a 
+function of ﬁber strains.  i nput different damage functions for 
+tensile and compressive stresses.  Any other curves  input with the 
+table definition are ignored.  
+The damager parameter |u1D4J1|oneCst/u1D45:.st ranges from 0.0 for an undamaged 
+ﬁber to 1.0 for a failed ﬁber family.  If all famil ies have failed, 
+material failure at the integration point is initia ted.  
+DAM1 Load curve or table ID for damage parameter |u1D4J1|oneCst|u1D4JACstfor matrix 
+material based on the current deformation status of  the 1 st  ﬁber 
+(see Remark 2 ). If a curve, it speciﬁes damage as a function of 
+ﬁber strain (for compression and elongation).  If a  table, then the 
+values are ﬁber strain rates which index damage as a function of 
+ﬁber strain curves. 
+The damager parameter |u1D4J1|oneCst|u1D4JACst ranges from 0.0 to 1.5. A value of 0.0 
+indicates an undamaged matrix, whereas 1.0 refers t o a 
+completely damaged matrix.  To initiate failure of the composite 
+at the integration point, a matrix damage |u1D4J1|oneCst|u1D4JACst of 1.5 must be 
+reached.  Naturally, the mechanical behavior of the  matrix does 
+not change for damage values between 1.0 and 1.5.  
+ *. CRASH  
+  VARIABLE   DESCRIPTION  
+EQ.10:  Elastic shear response.  Curve LCG12 speciﬁes shear  
+stress as a function of shear angle (radians) between the 
+ﬁbers.  This option is tailored for woven fabrics a nd 
+guarantees a pure shear stress response.  
+EQ.11: Elasto- plastic shear response.  Curve LCG12 speciﬁes 
+yield shear stress as a function of normalized shea r an- 
+gle.  This option is tailored for woven fabrics and  guar- 
+antees a pure shear stress response 
+DAM12 Load curve ID deﬁning the damage parameter |u1D4J1|oneCst|twoCst |u1D4JACst for the matrix 
+as function of shear angle (radians) between the 1 st  and 2 nd  ﬁber 
+(see Remark 2 ). The damage parameter |u1D4J1|oneCst|twoCst |u1D4JACst ranges from 0.0 to 1.5. 
+A value of 0.0 indicates an undamaged matrix, where as 1.0 refers 
+to a completely damaged matrix.  To initiate failur e of the 
+composite at the integration point, a matrix damage  |u1D4J1|oneCst|twoCst |u1D4JACst of 1.5 
+must be r eached.  Naturally, the mechanical behavior of the 
+matrix does not change for damage values between 1. 0 and 1.5. 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable IDF2 ALPH2 EF2 LCEF2 G23_2 G31_2 DAF2 DAM2 
+Type I F F I F F I I 
+ 
+ VARIABLE   DESCRIPTION  
+IDF2 ID for 2 nd  ﬁber family for post-processing 
+ALPH2 Orientation angle |u1D6F+|twoCst for 2 nd  ﬁber with respect to overall material 
+direction 
+EF2 Young’s modulus for 2 nd  ﬁber family 
+LCEF2 Load curve for stress as a function of fiber strain  of 2 nd  ﬁber.  With 
+this option active, EF2 is ignored. 
+G23_2 Transverse shear modulus orthogonal to direct ion of 2 nd  ﬁber 
+G31_2 Transverse shear modulus in direction of 2 nd  ﬁber 
+DAF2 Load curve or table ID for damage parameter |u1D4J1|twoCst/u1D45:.stfor 2 nd  ﬁber (see 
+Remark 2 ). If a curve, DAF2 speciﬁes damage as a function o f *. CRASH  
+  VARIABLE   DESCRIPTION  
+GLOC23 Linear shear modulus for shear angles larger  than ALOC23 
+METH23 Option for shear response between ﬁbers 2 and 3 (se e METH12 
+for input options and Remark 1 ). 
+DAM23 Load curve ID deﬁning the damage parameter |u1D4J1|twoCst|threeCst |u1D4JACst for the matrix 
+as function of shear angle (in radians) between the  1 st  and 2 nd  ﬁber 
+(see Remark 2 ). The damager parameter |u1D4J1|twoCst|threeCst |u1D4JACst ranges from 0.0 to 1.5. 
+A value of 0.0 indicates an undamaged matrix, where as 1.0 refers 
+to a completely damaged matrix.  To initiate failur e of the 
+composite at the integration point, a matrix damage  |u1D4J1|twoCst|threeCst |u1D4JACst of 1.5 
+must be reached.  Naturally, the mechani cal behavior of the 
+matrix does not change for damage values between 1. 0 and 1.5. 
+ 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable IDF3 ALPH3 EF3 LCEF3 G23_3 G31_3 DAF3 DAM3 
+Type I F F I F F I I 
+ 
+ VARIABLE   DESCRIPTION  
+IDF3 ID for 3 rd  ﬁber family for post-processing 
+ALPH3 Orientation angle |u1D6F+|threeCst for 3 rd  ﬁber with respect to overall material 
+direction 
+EF3 Young’s modulus for 3 rd  ﬁber family 
+LCEF3 Load curve for stress versus fiber strain  of 3 rd  ﬁber.  With this 
+option active, EF3 is ignored. 
+G23_3 Transverse shear modulus orthogonal to direct ion of 3 rd  ﬁber 
+G31_3 Transverse shear modulus in direction of 3 rd  ﬁber 
+DAF3 Load curve or table ID for damage parameter |u1D4J1|threeCst/u1D45:.stfor 3 rd  ﬁber (see 
+Remark 2 ). If a curve, DAF3 speciﬁes damage as a function o f 
+ﬁber strain (for compression and elongation).  If D AF3 refers to a 
+table, then two diﬀerent damage functions for tensi le and 
+compressive stresses are input.  The values in the table are 
+arbitrary and exist only to index the two curves.  The ﬁrst indexed *. CRASH  
+  VARIABLE   DESCRIPTION  
+GE.1:  Use *INITIAL_STRESS_ SHELL to initialize some 
+material properties on an element-by-ele ment basis (see 
+Remark 5  below). 
+Remarks: 
+1.  Stress Calculation.   This material features an additive split of the m atrix and 
+reinforcement contributions to the stress.  Therefo re, the combined stress re- 
+sponse, /u1D̅48, equals the sum  /u1D̅48|u1D4JACst+/u1D̅48/u1D45:.st. 
+The matrix uses an elastic-plastic material formula tion with a von-Mises yield 
+criterion.  This material supports a mixed hardenin g approach. 
+We formulated the contribution of the ﬁber reinforc ement as a hyperelastic 
+material.  Based on the orientation angle, |u1D6F+|u1D4J6Cst, of the ith  ﬁber family, LS-DYNA 
+computes an initial ﬁber direction in the element c oordinate system /u1D426|u1D4J6Cst|zeroCst. By 
+using the deformation gradient, /u1D405, the current ﬁber conﬁguration is given as 
+/u1D426|iCst=/u1D405 /u1D426|u1D4J6Cst|zeroCst, containing all necessary information on ﬁber stra in and reorienta- 
+tion.  Here, this vector is always orthogonal to th e shell normal and can, thus, 
+be represented by the two in-plane vector component s. 
+Following standard textbook mechanics for anisotrop ic and hyperelastic mate- 
+rials, the elastic stresses within the ﬁbers due to  tension or compression are 
+given as  
+/u1D̅48|u1D447Cst/u1D45:.st= |summationCv1/u1D̅48|u1D447Cst/co⋯⋯a.st|u1D4J6Cst/u1D45:.st(|u1D7≠6|u1D4J6Cst)|u1D4JBCst
+|u1D4J6Cst=|oneCst= |summationCv11
+/u1D4:D|u1D4J3|u1D4J6Cst(|u1D7≠6|u1D4J6Cst)(/u1D426|iCst⊗/u1D426|iCst)|u1D4JBCst
+|u1D4J6Cst=|oneCst  , 
+where the function |u1D4J3|u1D4J6Cst of the ﬁber strain |u1D7≠6|u1D4J6Cst corresponds to the load curve LCEF i. 
+|u1D4JB is the number of ﬁber families. 
+The shear behavior of the reinforcement can be cont rolled by METH ij.  For val- 
+ues less than 10, the behavior is again standard te xtbook mechanics: 
+/u1D̅48/u1D446.st/u1D45:.st= |summationCv1/u1D̅48/u1D446.st/co⋯⋯a.st|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst/u1D45:.st|u1D4JBCst−|oneCst
+|u1D4J6Cst=|oneCst= |summationCv11
+/u1D4:D|u1D4J4|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst(/u1D̅05|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst)(/u1D426|iCst⊗/u1D426|iCst+|oneCst)|u1D4JBCst−|oneCst
+|u1D4J6Cst=|oneCst  . 
+Here /u1D̅05|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst represents the employed shear measure (scalar prod uct or shear 
+angle in radians).  In general, the dyadic product /u1D426|iCst⊗/u1D426|iCst+|oneCst does not deﬁne a 
+shear stress tensor.  This formulation might result  in unphysical shear behavior 
+in the case of woven fabrics.  Therefore, we devise d METH ij  = 10 and 11 to 
+always give a pure shear stress tensor, /u1D̅48/u1D446.st/u1D45:.st.  *. CRASH  
+ Matrix failure ( |u1D4J1|u1D4JACst= 1.0 ) does not necessarily initiate failure of the comp osite 
+material.  In this implementation, matrix damage pa rameters |u1D4J1|u1D4J6Cst|u1D4JACst and |u1D4J1|u1D4J6Cst/co⋯⋯a.st|u1D4J6Cst+|oneCst|u1D4JACst that 
+exceed a value of 1.0 are admissible.  Failure of t he composite is initiated as 
+soon as the damage parameter reaches 1.5. To accoun t for this delayed failure, 
+the degradation of the matrix stresses is given by:  
+/u1D̅48/circum⨂lexcmb.h1|u1D4JACst= |parenleftCv21 − min |parenleftCv11.0, |u1D4J1|u1D4JACst|parenriµhtCv1|parenriµhtCv2/u1D̅48|u1D4JACst  . 
+3.  Fiber Viscosity.   Input parameter VISC activates ﬁber viscosity.  Thi s feature 
+adds numerical damping to the post-damage behavior of the material.  Damp- 
+ing might be necessary since brittle ﬁber failure t ends to induce shockwaves 
+through the material, resulting in oscillations or even unphysical damage 
+propagation.  
+If activated, an additional viscous stress term is added to the ﬁber contribution: 
+/u1D̅48|u1D447Cst/co⋯⋯a.st|u1D463Cst/u1D45:.st= |summationCv11
+/u1D4:D⎝⎜⎛/integral.v:|u1D4J3|u1D463Cst(|u1D461 −/u1D̅0F)|u1D71J|u1D7≠6|u1D4J6Cst(/u1D̅0F)
+|u1D71J /u1D̅0F |u1D461Cst
+|zeroCst|u1D4J1 /u1D̅0F 
+⎠⎟⎞(/u1D426|iCst⊗/u1D426|iCst)|u1D4JBCst
+|u1D4J6Cst=|oneCst  . 
+The relaxation function, |u1D4J3|u1D463Cst, is represented by up to four terms of the Prony 
+series expansions and thus reads 
+|u1D4J3|u1D463Cst(|u1D461) = |summationCv1 |u1D43A|u1D4J8Cst|u1D4J2−/u1D6FD.st|u1D4J8Csts|u1D461Cst
+|u1D4J8Cst 
+with relaxation moduli |u1D43A|u1D4J8Cst and decay constants |u1D6FD|u1D4J8Cst. 
+4.  History Data.   This material formulation outputs to d3plot  additional data for 
+post-processing to the set of history variables if requested.  The parameter 
+POSTV speciﬁes the data to be written.  Its value i s calculated as 
+POST V = |u1D44∆|oneCst+ 2 |u1D44∆|twoCst+ 4 |u1D44∆|threeCst+8 |u1D44∆|fourCst+ 16 |u1D44∆|fiveCst+ 32 |u1D44∆|sixCst+ 64 |u1D44∆|sevenCst. 
+Each ﬂag  |u1D44∆|u1D4J6Cst is a binary number (can be either 1 or 0) and corr esponds to one 
+particular type of post-processing variable accordi ng to the following table. 
+ 
+Flag Description Variables # History Var 
+|u1D44∆|oneCst Fiber angle |u1D7≠2|oneCst|twoCst , |u1D7≠2|twoCst|threeCst  2 
+|u1D44∆|twoCst Fiber ID IDF1, IDF2, IDF3 3 
+|u1D44∆|threeCst Fiber strain |u1D7≠6|oneCst, |u1D7≠6|twoCst, |u1D7≠6|threeCst 3 
+|u1D44∆|fourCst Fiber direction  
+(in global coordinates) /u1D426|oneCst/g.st, /u1D426|twoCst/g.st, /u1D426|threeCst/g.st 9 
+|u1D44∆|fiveCst Individual ﬁber stresses |u1D4J3|oneCst(|u1D7≠6|oneCst), |u1D4J3|twoCst(|u1D7≠6|twoCst), |u1D4J3|threeCst(|u1D7≠6|threeCst) 3 *. CRASH  
+ 5.  Description of IHIS.   Some material data can be initialized on an element -by-
+element basis through history variables deﬁned with  *INITIAL_STRESS_-
+SHELL starting at position HISV5.   
+How the data is interpreted depends on the paramete r IHIS. Following the 
+same concept as for parameter POSTV, the value of I HIS is computed by the 
+following expression: 
+I H IS = |u1D44∆|oneCst+ 2 |u1D44∆|twoCst 
+Each ﬂag  |u1D44∆|u1D4J6Cst is a binary number (can be either 1 or 0) and corr esponds to one 
+particular type of material variable.  So far, the only material variables imple- 
+mented are ﬁber orientation in two diﬀerent coordin ate systems, global and 
+material.  Thus, at most one of the ﬂags |u1D44∆|oneCst and |u1D44∆|twoCst should be set to 1. 
+ 
+Flag  Description Variables # History Var 
+|u1D44∆|oneCst Fiber direction  
+(in global coordinates) /u1D426|oneCst/g.st, /u1D426|twoCst/g.st, /u1D426|threeCst/g.st 9 
+|u1D44∆|twoCst Fiber direction 
+(in material coordinates) /u1D426|oneCst|mCst, /u1D426|twoCst|mCst, /u1D426|threeCst|mCst 6 *. UDFIBER  
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label b e speciﬁed 
+(see *PART). 
+RO Density 
+EM Isotropic Young’s modulus, |u1D438|iCst|sCst /o.st  
+PR Poisson’s ratio, |u1D463 
+G Linear shear modulus, |u1D43A/f.st|iCst /˙.st  
+EZDEF Algorithmic parameter.  If set to 1, last row of de formation 
+gradient is not updated during the calculation. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable NFIB AOPT XP YP ZP A1 A2 A3 
+Type I F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+NFIB Number of ﬁber families to be considered (maxi mum of 3) 
+AOPT Material axes option (see . UDFIBER  *. UDFIBER  
+  Card 6 1 2 3 4 5 6 7 8 
+Variable IDF3 ALPH3 EF3 KAP3     
+Type I F F F     
+ 
+ VARIABLE   DESCRIPTION  
+IDF i ID for ith  ﬁber family for post-processing 
+ALPH i Orientation angle |u1D6F+|u1D4J6Cst for ith  ﬁber with respect to overall material 
+direction 
+EF i Young’s modulus |u1D438|u1D4J6Cst for ith  ﬁber family 
+KAP i Fiber volume ratio /u1D̅05|u1D4J6Cst of ith  ﬁber family 
+Stress Calculation: 
+In this model up to three distinct ﬁber families ar e considered.  We assume that there is 
+no interaction between the families.  Thus, the res ulting stress tensor is the sum of the 
+single ﬁber responses.  Each ﬁber response is the s um of an isotropic and a spatially 
+transversely isotropic neo-Hookean stress contribut ion, /u1D̅48|u1D4J6Cst|iCst|sCst /o.st  and /u1D̅48|u1D4J6Cst|tCst /r.st , respectively. The 
+implementation is based on the work of Bonet and Bu rton (1998), adapted by BMW for 
+simulation of unidirectional fabrics (see reference s below).  
+ 
+The isotropic stress tensor, /u1D̅48|u1D4J6Cstiso , depends on an isotropic shear modulus, |u1D7≠7, and an 
+isotropic bulk modulus, |u1D7≠6|u1D4J6Cst where:  
+|u1D7≠7 =|u1D438|iCst|sCst /o.st 
+2(1 +/u1D̅08) and |u1D7≠6|u1D4J6Cst=|u1D438|iCst|sCst /o.st (/u1D̅08+ |u1D4JB|u1D4J6Cst/u1D̅08|twoCst)
+2(1 +/u1D̅08). 
+Here, the variable |u1D4JB|u1D4J6Cst denotes the ratio between stiﬀness orthogonally to  the ﬁbers and in 
+ﬁber direction, that is, |u1D4JB|u1D4J6Cst= |u1D438|iCst|sCst /o.st /|u1D438|u1D4J6Cst.  |u1D438iso , /u1D̅08, and |u1D438|u1D4J6Cst are input parameters.  Using the left 
+Cauchy-Green tensor, /u1D41B, the isotropic neo-Hookean model reads: 
+/u1D̅48|u1D4J6Cst|iCst|sCst /o.st =|u1D7≠7
+/u1D4:D(/u1D41B−/u1D408) + |u1D7≠6|u1D4J6Cst(/u1D4:D− 1)/u1D408 . 
+ 
+Based on the orientation angel |u1D6F+|u1D4J6Cst of the ith  ﬁber family, an initial ﬁber direction /u1D426|u1D4J6Cst|zeroCst is 
+computed.  The deformation gradient, /u1D405, transforms the initial ﬁber conﬁguration to the 
+current ﬁber conﬁguration as /u1D426|u1D4J6Cst=/u1D405 /u1D426 |u1D4J6Cst|zeroCst. This vector contains all necessary information 
+on ﬁber elongation and reorientation.  
+ *. UDFIBER  
+ History Variable #  Description 
+15 Number of ﬁbers 
+16 Projected orthogonal ﬁber strain (1 st  ﬁber) 
+17 Projected parallel ﬁber strain (1 st  ﬁber) 
+18 Shear angle (1 st  ﬁber) in rad 
+19 Euler-Almansi strain (1 st  ﬁber) 
+20 Porosity (1 st  ﬁber) 
+21 Fiber volume ratio (1 st  ﬁber) 
+22 Projected orthogonal ﬁber strain (2 nd  ﬁber) 
+23 Projected parallel ﬁber strain (2 nd  ﬁber) 
+24 Shear angle (2 nd  ﬁber) in rad 
+25 Euler-Almansi strain (2 nd  ﬁber) 
+26 Porosity (2 nd  ﬁber) 
+27 Fiber volume ratio (2 nd  ﬁber) 
+28 Projected orthogonal ﬁber strain (3 rd  ﬁber) 
+29 Projected parallel ﬁber strain (3 rd  ﬁber) 
+30 Shear angle (3 rd  ﬁber) in rad 
+31 Euler-Almansi strain (3 rd  ﬁber) 
+32 Porosity (3 rd  ﬁber) 
+33 Fiber volume ratio (3 rd  ﬁber) *

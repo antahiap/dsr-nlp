@@ -1,0 +1,497 @@
+: *. M: *.  
+*. M 
+*.   
+LS-DYNA R13 2-295 (MAT) *.   *.   
+LS-DYNA R13 2-297 (MAT)  VARIABLE   DESCRIPTION  
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Minor Poisson’s ratio |u1D44F|u1D44∆  direction 
+PRAB /u1D̅08|u1D44∆Cst|u1D44FCst , Major Poisson’s ratio |u1D44∆|u1D44F  direction (see Remark 15 ) 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GAB   CSE EL PRL LRATIO DAMP 
+Type F   F F F F F 
+Remarks    1 4 4 4  
+ 
+ VARIABLE   DESCRIPTION  
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus in the |u1D44∆|u1D44F  direction.  Set to zero for an isotropic 
+elastic material. 
+CSE Compressive stress elimination option (see Remark 1 ): 
+EQ.0.0:  Do not eliminate compressive stresses ( default) . 
+EQ.1.0:  Eliminate compressive stresses.  This option does n ot 
+apply to the liner. 
+EL Young’s modulus for elastic liner (required if L RATIO > 0) 
+PRL Poisson’s ratio for elastic liner (required if LRATIO > 0) 
+LRATIO A non-zero value activates the elastic liner  and deﬁnes the ratio of 
+liner thickness to total fabric thickness (optional ). 
+DAMP Rayleigh damping coeﬃcient.  A 0.05 coeﬃcient is re commended 
+corresponding to 5% of critical damping.  Sometimes  larger values 
+are necessary. 
+ 
+This card is included if 0 < X0 < 1 (see Card 5). 
+ Card 3a 1 2 3 4 5 6 7 8 
+Variable AOPT X2 X3 ELA LNRC FORM FVOPT TSRFAC 
+Type F F F F F F F F *.   
+LS-DYNA R13 2-299 (MAT)  VARIABLE   DESCRIPTION  
+FORM Flag to modify membrane formulation for fabric  material: 
+EQ.0.0:  Default.  Least costly and very reliable. 
+EQ.1.0: Invariant local membrane coordinate system 
+EQ.2.0: Green-Lagrange strain formulation 
+EQ.3.0: Large strain with nonorthogonal material angles.  S ee 
+Remark 5 . 
+EQ.4.0: Large strain with nonorthogonal material angles and  
+nonlinear stress strain behavior.  Deﬁne optional l oad 
+curve IDs on optional card. 
+EQ.12.0: Enhanced version of formulation 2.  See Remark 11 . 
+EQ.13.0: Enhanced version of formulation 3.  See Remark 11 . 
+EQ.14.0: Enhanced version of formulation 4.  See Remark 11 . 
+EQ.-14.0: Same as formulation 14 but invokes reading of Card 8. 
+See Remark 14 . 
+EQ.24.0: Enhanced version of formulation 14.  See Remark 11 . 
+FVOPT Fabric venting option (see Remark 9 ). 
+EQ.1: Wang- Nefske formulas for venting through an oriﬁce are 
+used.  Blockage is not considered. 
+EQ.2: Wang- Nefske formulas for venting through an oriﬁce are 
+used.  Blockage of venting area due to contact is c onsid- 
+ered. 
+EQ.3: Leakage formulas of Graefe, Krummheuer, and Siejak 
+[1990] are used.  Blockage is not considered. 
+EQ.4: Leakage fo rmulas of Graefe, Krummheuer, and Siejak 
+[1990] are used.  Blockage of venting area due to c ontact is 
+considered. 
+EQ.5: Leakage formulas based on ﬂow through a porous medi a 
+are used.  Blockage is not considered. 
+EQ.6: Leakage formulas based on ﬂow throug h a porous media 
+are used.  Blockage of venting area due to contact is con- 
+sidered. 
+EQ.7: Leakage is based on gas volume outﬂow versus pressu re 
+load curve [Lian, 2000].  Blockage is not considere d.  Ab- 
+solute pressure is used in the porous-velocity-vers us-
+pressure load curve, given as FAC in the *.   *.   
+LS-DYNA R13 2-301 (MAT)  VARIABLE   DESCRIPTION  
+EQ.2.0:  Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally ort hotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the el- 
+ement normal 
+LT.0.0: The absolute value of AOPT is a coordinate system ID 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+FLC Optional porous leakage ﬂow coeﬃcient.  (See th eory manual.) 
+GE.0:  Porous leakage ﬂow coeﬃcient. 
+LT.0:  |FLC|  is interpreted as a load curve ID deﬁning FLC as a 
+function of time. 
+FAC Optional characteristic fabric parameter.  (See  theory manual.) 
+GE.0: Characteristic fabric parameter 
+LT.0: |FAC|  is interpreted as a load curve ID deﬁning FAC as a 
+function of absolute pressure. 
+ELA Eﬀective leakage area for blocked fabric, ELA ( see Remark 3 ): 
+LT.0.0: |ELA|  is the load curve ID of the curve deﬁning ELA as a 
+functio n of time.  The default value of zero assumes that 
+no leakage occurs.  A value of .10 would assume tha t 
+10% of the blocked fabric is leaking gas. 
+LNRC Flag to turn oﬀ compression in liner until the refe rence geometry is 
+reached, that is, the fabric element becomes tensil e:  
+EQ.0.0: Oﬀ 
+EQ.1.0: On 
+FORM Flag to modify membrane formulation for fabric  material: 
+EQ.0.0:  Default.  Least costly and very reliable. 
+EQ.1.0: Invariant local membrane coordinate system *.   
+LS-DYNA R13 2-303 (MAT)  VARIABLE   DESCRIPTION  
+as a function of time. 
+GT.0 and LT.1: TSRFAC applied from time 0. 
+GE.1: TSRFAC is the ID of a curve that deﬁnes TSR-
+FAC as a function of time using an alternate 
+method (not available for FORM = 0 or 1). 
+ 
+This card is included if X0 = 0 or X0 = -1 and FVOP T ≥ 7. 
+ Card 3c 1 2 3 4 5 6 7 8 
+Variable AOPT FLC FAC ELA LNRC FORM FVOPT TSRFAC 
+Type F F F F F F F F 
+Remarks  2 2 3 4 11  9 10  
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description).  Also, please refer to Remark 5  for 
+additional information speciﬁc to ﬁber directions f or fabrics: 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES, and then rotated about the element 
+normal by an angle BETA 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BETA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the el- 
+ement normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. *.   
+LS-DYNA R13 2-305 (MAT)  VARIABLE   DESCRIPTION  
+EQ.12.0:  Enhanced version of formulation 2.  See Remark 11 . 
+EQ.13.0:  Enhanced version of formulation 3.  See Remark 11 . 
+EQ.14.0:  Enhanced version of formulation 4.  See Remark 11 . 
+EQ.-14.0: Same as formulation 14 but invokes reading of Card 8. 
+See Remark 14 . 
+EQ.24.0:  Enhanced version of formulation 14.  See Remark 11 . 
+FVOPT Fabric venting option: 
+EQ.7: Leakage is based on gas volume outﬂow versus pressu re 
+load curve [Lian, 2000].  Blockage is not considere d.  Ab- 
+solute pressure is used in the porous-velocity-vers us-
+pressure load curve, given as FAC in the *.   *.   
+LS-DYNA R13 2-307 (MAT)  VARIABLE   DESCRIPTION  
+GE.0: Characteristic fabric parameter 
+LT.0: |FAC|  is interpreted as a load curve deﬁning FAC as a 
+function of the pressure ratio |u1D4JF|u1D4JDCst= |u1D443ai|u1D4JFCst/|u1D443b ag .  See Remark 2
+below. 
+ELA Eﬀective leakage area for blocked fabric, ELA ( see Remark 3 ): 
+LT.0.0: |ELA|  is the load curve ID of the curve deﬁning ELA as a 
+function of time.  The default value of zero assume s that 
+no leakage occurs.  A va lue of .10 would assume that 
+10% of the blocked fabric is leaking gas. 
+LNRC Flag to turn oﬀ compression in liner until the refe rence geometry is 
+reached, that is, the fabric element becomes tensil e:  
+EQ.0.0: Oﬀ 
+EQ.1.0: On 
+FORM Flag to modify membrane formulation for fabric  material: 
+EQ.0.0:  Default.  Least costly and very reliable. 
+EQ.1.0: Invariant local membrane coordinate system 
+EQ.2.0: Green-Lagrange strain formulation 
+EQ.3.0: Large strain with nonorthogonal material angles.  S ee 
+Remark 5 . 
+EQ.4.0: Large strain with nonorthogonal material angles and  
+nonlinear stress strain behavior.  Deﬁne optional l oad 
+curve IDs on optional card. 
+EQ.12.0:  Enhanced version of formulation 2.  See Remark 11 . 
+EQ.13.0:  Enhanced version of formulation 3.  See Remark 11 . 
+EQ.14.0:  Enhanced version of formulation 4.  See Remark 11 . 
+EQ.-14.0: Same as formulation 14 but invokes reading of Card 8. 
+See Remark 14 . 
+EQ.24.0:  Enhanced version of formulation 14.  See Remark 11 . 
+FVOPT Fabric venting option. 
+EQ.1: Wang-Nefske fo rmulas for venting through an oriﬁce are 
+used.  Blockage is not considered. 
+EQ.2: Wang- Nefske formulas for venting through an oriﬁce are *.   
+LS-DYNA R13 2-309 (MAT)  VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description).  Also, please refer to Remark 5  for 
+additional information speciﬁc to ﬁber directions f or fabrics: 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES, and then rotated about the element 
+normal by an angle BETA 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally ort hotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element 
+deﬁned by the cross product of the vector /u1D42F with the el- 
+ement normal 
+LT.0.0: The absolute value of AOPT is a coordinate system ID 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+FLC Optional porous leakage ﬂow coeﬃcient.  (See th eory manual.) 
+GE.0:  Porous leakage ﬂow coeﬃcient. 
+LT.0:  |FLC|  is interpreted as a load curve ID deﬁning FLC as a 
+function of the stretching ratio deﬁned as |u1D4JF|u1D46≠Cst= |u1D434/|u1D434|zeroCst.  See 
+notes below. 
+FAC Optional characteristic fabric parameter.  (See  theory manual.) 
+GE.0: Characteristic fabric parameter 
+LT.0: |FAC| is interpreted as a load curve deﬁning leakag e 
+volume ﬂux rate versus the pressure ratio deﬁned as  |u1D4JF|u1D4JDCst=
+|u1D443air /|u1D443b ag . See Remark 2  below.  The volume ﬂux (per area) 
+rate (per time) has the unit of 
+|u1D4J1(v ol flux ) dt ⁄ ≈ |<racketleftCv1length|<racketriµhtCv1|threeCst|parenleftCv2|<racketleftCv1length|<racketriµhtCv1|twoCst[time]|parenriµhtCv2/fraction.v1  
+≈ |<racketleftCv1length|<racketriµhtCv1 [time] ⁄ ,  
+equivalent to relative porous gas speed. *.   
+LS-DYNA R13 2-311 (MAT)  VARIABLE   DESCRIPTION  
+given as FAC in the *.   *.   
+LS-DYNA R13 2-313 (MAT)  
+Additional card for FORM = 4, 14, -14, or 24. 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable LCA LCB LCAB LCUA LCUB LCUAB RL  
+Type I I I I I I F  
+ 
+ VARIABLE   DESCRIPTION  
+LCA Load curve or table ID. Load curve ID deﬁnes the st ress as a 
+function of uniaxial strain along the |u1D44∆-axis ﬁber.  Table ID deﬁnes 
+for each strain rate a load curve representing stre ss as a function of 
+uniaxial strain along the |u1D44∆-axis ﬁber.  The load c urve is available 
+for FORM = 4, 14, – 14, and 24 while the table is allowed only for 
+FORM = -14. If zero, EA is used.  For FORM = 14, - 14, and 24, this 
+curve can be deﬁned in both tension and compression ; see 
+Remark 6  below. 
+LCB Load curve or table ID. Load curve ID deﬁnes the st ress as a 
+function of uniaxial strain along the |u1D44F-axis ﬁber.  Table ID deﬁnes 
+for each strain rate a load curve representing stre ss as a function of 
+uniaxial strain along the |u1D44F-axis ﬁber.  The load curve is available 
+for FORM = 4, 14, - 14, and 24 while the table is allowed only for 
+FORM = -14. If zero, EB is used.  For FORM = 14, - 14, and 24, this 
+curve can be deﬁned in both tension and compression ; see 
+Remark 6  below. 
+LCAB Load curve ID for shear stress as a function of she ar strain in the 
+|u1D44∆|u1D44F -plane.  If zero, GAB  is used. 
+LCUA Unload/reload curve ID for stress as a function of strain along the 
+|u1D44∆-axis ﬁber.  If zero, LCA  is used. 
+LCUB Unload/reload curve ID for stress as a function of strain along the 
+|u1D44F-axis ﬁber.  If zero, LCB  is used. 
+LCUAB Unload/reload curve ID for shea r stress as a function of shear 
+strain in the |u1D44∆|u1D44F -plane.  If zero, LCAB  is used. 
+RL Optional reloading parameter for FORM = 14 and 24.  Values 
+between 0.0 (reloading on unloading curve- default) and 1.0 
+(reloading on a minimum linear slope between unload i ng curve 
+and loading curve) are possible . *.   
+LS-DYNA R13 2-315 (MAT) The no compression option can allow elements to col lapse to a line which can 
+lead to elements becoming tangled.  The elastic lin er option is one way to add 
+some stiﬀness in compression to prevent this, see Remark 4 .  Alternatively, 
+when using fabric formulations 14, -14, or 24 (see FORM) tangling can be re- 
+duced by deﬁning stress/strain curves that include negative strain and stress 
+values.  See Remark 6 . 
+2.  Porosity.   The parameters FLC and FAC are optional for the W ang-Nefske and 
+Hybrid inﬂation models.  It is possible for the air bag to be constructed of mul- 
+tiple fabrics having diﬀerent values for porosity a nd permeability.  Typically, 
+FLC and FAC must be determined experimentally and t heir variations in time 
+or with pressure are optional to allow for maximum ﬂexibility. 
+3.  Effects of Airbag-Structure Interaction on Porosity .   To calculate the 
+leakage of gas through the fabric it is necessary t o accurately determine the 
+leakage area.  The dynamics of the airbag may cause  the leakage area to change 
+during the course of the simulation.  In particular , the deformation may change 
+the leakage area, but the leakage area may also dec rease when the contact be- 
+tween the airbag and the structure blocks the ﬂow.  LS-DYNA can check the 
+interaction of the bag with the structure and split  the areas into regions that are 
+blocked and unblocked depending on whether the regi ons are in or not in con- 
+tact, respectively.  Blockage eﬀects may be control led with the ELA ﬁeld. 
+4.  Elastic Liner.   An optional elastic liner can be deﬁned using EL,  PRL and LRA-
+TIO.  The liner is an isotropic layer that acts in both tension and compression.  
+However, setting, LNRC to 1.0 eliminates compressiv e stress in the liner until 
+both principle stresses are tensile.  The compressi ve stress elimination option, 
+CSE = 1 , has no inﬂuence on the liner behavior. 
+5.  Fiber Axes.   For formulations 0, 1, and 2, (see FORM) the |u1D44∆-axis and |u1D44F-axis 
+ﬁber directions are assumed to be orthogonal  and are completely deﬁned by the 
+material axes option, AOPT = 0, 2, or 3.  For FORM = 3, 4, 13, or 14, the ﬁber 
+directions are not assumed to be orthogonal  and must be speciﬁed using the 
+ICOMP = 1 option on *SECTION_SHELL.  Oﬀset angles s hould be input into 
+the B1 and B2 ﬁelds used normally for integration p oints 1 and 2.  The |u1D44∆-axis 
+and |u1D44F-axis directions will then be oﬀset from the |u1D44∆-axis direction as determined 
+by the material axis option, AOPT = 0, 2, or 3. 
+When reference geometry is deﬁned, the material axe s are computed using 
+coordinates from the reference geometry.  The mater ial axes are determined by 
+computing the angle between the element system and the material direction. 
+6.  Stress as a function of Strain Curves.   For formulations (see FORM) 4, 14, -
+14, and 24, 2 nd  Piola-Kirchhoﬀ stress as a function of Green’s str ain curves may 
+be deﬁned for |u1D44∆-axis, |u1D44F-axis, and shear stresses for loading and also for unload- 
+ing and reloading.  Alternatively, the |u1D44∆-axis and |u1D44F-axis curves can be input us- *.   
+LS-DYNA R13 2-317 (MAT) 8.  Shear Unload-Reload, Fabric Formulation, and LS-DYN A version.   With 
+release 6.0.0 of version 971, LS-DYNA changed the w ay that unload/reload 
+curves for shear stress-strain relations are interp reted.  Let f be the shear stress 
+unload-reload curve LCUAB.  Then, 
+|u1D7≠∆|u1D44∆Cst|u1D44FCst =/u1D450|twoCst|u1D4J3 (/u1D450|oneCst|u1D7≠≠|u1D44∆Cst|u1D44FCst ) 
+where the scale factors /u1D450|oneCst and /u1D450|twoCst depend on the fabric form (see FORM) and 
+version of LS-DYNA. 
+ 
+Fabric form 4 14 and -14 24 
+/u1D450|oneCst /u1D450|twoCst /u1D450|oneCst /u1D450|twoCst /u1D450|oneCst /u1D450|twoCst 
+LS971 R5.1.0 and earlier 2 1 2 1 - - 
+LS971 R6.0.0 to R7.0 2 1 1 2 - - 
+LS-DYNA R7.1 and later 2 1 1 2 1 1 
+When switching fabric forms or versions, the curve scale factors SFA and SFO 
+on *DEFINE_CURVE can be used to oﬀset this behavior . 
+9.  Per Material Venting Option.   The FVOPT ﬂag allows an airbag fabric venting 
+equation to be assigned to a material.  The anticip ated use for this option is to 
+allow a vent to be deﬁned using FVOPT = 1 or 2 for one material and fabric 
+leakage to be deﬁned for using FVOPT = 3, 4, 5, or 6 for other materials.  In 
+order to use FVOPT, a venting option must ﬁrst be d eﬁned for the airbag using 
+the OPT parameter on *AIRBAG_WANG_NEFSKE or *AIRBAG _HYBRID.  If 
+OPT = 0, then FVOPT is ignored.  If OPT is deﬁned a nd FVOPT is omitted, 
+then FVOPT is set equal to OPT. 
+10.  TSRFAC Option to Restore Element Strains.   Airbags that use a reference 
+geometry will typically have nonzero strains at the  start of the calculation.  To 
+prevent such initial strains from prematurely openi ng an airbag, initial strains 
+are stored and subtracted from the measured strain throughout the calculation. 
+/u1D̅48= |u1D4J3 (/u1D̅:A−/u1D̅:A|iCst|nCst|iCst|tCst|iCst|aCst /l.st) 
+• Fabric formulations 2, 3, and 4 (see FORM) subtra ct oﬀ only the initial ten- 
+sile strains so these forms are typically used with  CSE = 1 and LNRC = 1. 
+• Fabric formulations 12, 13, 14, -14, and 24 subtr act oﬀ the total initial 
+strains, so these forms may be used with CSE = 0 or  1 and LNRC = 0 or 1.  
+A side eﬀect of this strain modiﬁcation is that air bags may not achieve the 
+correct volume when they open.  Therefore, the TSRF AC option is imple- *.   
+LS-DYNA R13 2-319 (MAT) tions can be used without setting CSE = 1 and LNRC = 1 since compressive 
+stress cutoﬀ is not needed to prevent initial airba g movement.  Formulations 2, 
+3, and 4 need compressive stress cutoﬀ when used wi th a reference geometry 
+or they can generate compressive stress at the star t of a calculation.  Available 
+for formulation 12 only, the ISREFG parameter activ ates an option to calculate 
+the initial stress by using a reference geometry. 
+Material formulation 24 is an enhanced version of f ormulation 14 implement- 
+ing a correction for Poisson’s eﬀects when stress a s a function of strain curves 
+are input for the |u1D44∆-ﬁber or |u1D44F-ﬁber.  Also, for formulation 24, the outputted 
+stress and strain in the elout  or d3plot  database ﬁles is engineering stress and 
+strain rather than the 2 nd  Piola Kirchoﬀ and Green’s strain used by formula- 
+tions other than 0 and 1. 
+12.  Noise Reduction for the Strain Rate Measure.   If tables are used, then the 
+strain rate measure is the time derivative of the G reen-Lagrange strain in the 
+direction of interest.  To suppress noise, the stra in rate is averaged according to 
+the value of DT.  If DT > 0, it is recommended to u se a large enough value to 
+suppress the noise, while being small enough to not  lose important infor- 
+mation in the signal. 
+13.  Hysteresis.   The hysteresis parameter /u1D4:B deﬁnes the fraction of dissipated 
+energy during a load cycle in terms of the maximum possible dissipated ener- 
+gy.  Referring to the Figure M34-1 , Figure M34-1.  A1 A2 
+E S 
+loading 
+unloading 
+reloading *.   
+LS-DYNA R13 2-321 (MAT)  |u1D434|u1D4J2Cst /u1D45:.st/u1D45:.st=|u1D434|zeroCst
+/u1D4:F|twoCst⎣⎢⎡|parenleftCv2|u1D436|oneCst∆|u1D4JD/u1D4:6.st|twoCsts|parenriµhtCv2(/u1D4:F− 2|u1D4JF)|twoCst+ |u1D436|threeCst⎝⎜⎛/u1D4:F|u1D7≠6|oneCst−2|u1D4JF
+/radical.v1|u1D7≠6|twoCst⎠⎟⎞
+⎝⎜⎛/u1D4:F|u1D7≠6|twoCst−2|u1D4JF
+/radical.v1|u1D7≠6|oneCst⎠⎟⎞
+⎦⎥⎤sin(|u1D6F+|oneCst|twoCst ) 
+where |u1D7≠6|u1D4J6Cst is the stretch in ﬁber direction |u1D4J6 and |u1D6F+|oneCst|twoCst  is the angle between the ﬁ- 
+bers.  The initial membrane area is equal to |u1D434|zeroCst. |u1D4JF and /u1D4:F represent the radius of 
+the fabric ﬁber and the edge length of the fabric s et, respectively.  The coeﬃ- 
+cients, /u1D4:F, |u1D4JF, |u1D436|oneCst, |u1D436|twoCst, and |u1D436|threeCst, must be deﬁned on additional Card 4. This option is 
+supported for *AIRBAG_WANG_NESFKE, *AIRBAG_HYBRID, and *AIR-
+BAG_PARTICLE. No additional input in *AIRBAG cards is needed.  All FORM 
+options are supported, whereas |u1D6F+|oneCst|twoCst  can only be diﬀerent from 90 degree for 
+FORM = 3, 4, 13, or 14. 
+17.  CPM (*AIRBAG_PARTICLE) Bags .  Only FVOPT = -1, -2, 7, and 8 are 
+supported for CPM bags.  If FVOPT = 0 is used, it d efaults to FVOPT = 8. .  For 
+FVOPT = -1 and -2, FLC is active and can be either a scalar or a curve deﬁning 
+the porous leakage ﬂow coeﬃcient as a function of t ime.  The FAC coeﬃcient, 
+however, is inactive  as the porous leakage velocity is computed using t he for- 
+mula speciﬁed in Remark 16  from the coeﬃcient deﬁned in Card 4.  Note that 
+for uniform pressure airbags (*AIRBAG_HYBRID_...) both  the FLC and FAC 
+coeﬃcients are active. *. M  
+LS-DYNA R13 2-323 (MAT) Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PXX PYY SXY DAMP TH  
+Type A F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+PXX Table giving engineering local /u1D44B/u1D44B -stress as function of engineering 
+local /u1D44B/u1D44B -strain and /u1D44C/u1D44C -strain 
+PYY Table giving engineering local /u1D44C/u1D44C -stress as function of engineering 
+local /u1D44C/u1D44C -strain and /u1D44B/u1D44B -strain 
+SXY Curve giving local 2 nd  Piola-Kirchhoﬀ /u1D44B/u1D44C -stress as function of local 
+Green /u1D44B/u1D44C -strain. 
+DAMP Damping coeﬃcient for numerical stability 
+TH Table giving hysteresis factor 0≤/u1D4:B<1 as function of engineering 
+local /u1D44B/u1D44B -strain and /u1D44C/u1D44C -strain: 
+GT.0.0: TH is table ID. 
+LE.0.0: -TH is used as constant value for hysteresis factor . 
+ 
+This card is included if and only if 0 < X0 < 1. 
+ Card 2a 1 2 3 4 5 6 7 8 
+Variable FVOPT X0 X1 X2 X3 ELA   
+Type F F F F F F   
+ *. M  
+LS-DYNA R13 2-325 (MAT)  VARIABLE   DESCRIPTION  
+ELA Eﬀective leakage area for blocked fabric, ELA ( see Remark 3  of 
+*. M  *. M  
+LS-DYNA R13 2-327 (MAT)  VARIABLE   DESCRIPTION  
+EQ.8:  Leakage is based on gas volume outﬂow versus pres sure 
+load curve [Lian 2000].  Blockage of venting or por ous 
+area due to contact is considered.  Absolute pressu re is 
+used in the porous-velocity-versus- pressure load curve, 
+given as FAC.  
+Note: See Remark 17  of *. M  *. M  
+LS-DYNA R13 2-329 (MAT)  VARIABLE   DESCRIPTION  
+function of the stretching ratio deﬁned as |u1D4JF|u1D46≠Cst=|u1D434/|u1D434|zeroCst. 
+FAC Optional characteristic fabric parameter.  (See  theory manual and 
+*. M  *. M  
+LS-DYNA R13 2-331 (MAT)  VARIABLE   DESCRIPTION  
+CSE Compressive stress elimination option: 
+EQ.0.0: Do not eliminate compressive stresses. 
+EQ.1.0: Eliminate compressive stresses. 
+SRFAC Load curve ID for smooth stress initialization when  using a 
+reference geometry 
+BULKC Bulk modulus for fabric compaction 
+JACC Jacobian for the onset of fabric compaction 
+FXX Load curve giving scale factor of uniaxial stress in ﬁrst material 
+direction as function of engineering strain rate 
+FYY Load curve giving scale factor of uniaxial stress i n second material 
+direction as function of engineering strain rate 
+DT Time window for smoothing strain rates used for FXX and FYY 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT ECOAT SCOAT TCOAT     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description).  Also, please refer to Remark 5  of 
+*. M  *. M  
+LS-DYNA R13 2-333 (MAT)  VARIABLE   DESCRIPTION  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  It may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+Remarks: 
+1.  Material Model.   This material model invokes a special membrane el ement 
+formulation regardless of the element choice.  It i s an anisotropic hyperelastic 
+model where the 2 nd  Piola-Kirchhoﬀ stress  /u1D412 is a function of the Green-
+Lagrange strain /u1D404 and possibly its history.  Due to anisotropy, this  strain is 
+transformed to obtain the strains in each of the ﬁb er directions, |u1D438/u1D44B.st/u1D44B.st  and |u1D438/u1D44C.st/u1D44C.st , 
+together with the shear strain, |u1D438/u1D44B.st/u1D44C.st . The associated stress components in the 
+local system are given as functions of the strain c omponents 
+|u1D446/u1D44B.st/u1D44B.st =γ|u1D446/u1D44B.st/u1D44B.st (|u1D438/u1D44B.st/u1D44B.st , |u1D438/u1D44C.st/u1D44C.st )ϑ
+|u1D446/u1D44C.st/u1D44C.st =γ|u1D446/u1D44C.st/u1D44C.st (|u1D438/u1D44C.st/u1D44C.st , |u1D438/u1D44B.st/u1D44B.st )ϑ
+|u1D446/u1D44B.st/u1D44C.st =γ|u1D446/u1D44B.st/u1D44C.st (|u1D438/u1D44B.st/u1D44C.st )ϑ 
+The factor |u1D6F∆ is used for dissipative eﬀects and is described in  more detail in 
+Remark 4 .  For TH = 0, |u1D6F∆ = 1 .  The function ϑ represents a strain rate scale fac- 
+tor (see Remark 6 ); for FXX = FYY = 0 this factor is 1. While the sh ear relation is 
+given directly in the input through the curve SXY, the tabular input of the ﬁber 
+stress components PXX and PYY is for the sake of co nvenience.  PXX and PYY 
+give the engineering stress as function of engineer ing strain, that is, 
+|u1D443/u1D44B.st/u1D44B.st = |u1D443/u1D44B.st/u1D44B.st (|u1D4J2/u1D44B.st/u1D44B.st , |u1D4J2/u1D44C.st/u1D44C.st )
+|u1D443/u1D44C.st/u1D44C.st = |u1D443/u1D44C.st/u1D44C.st (|u1D4J2/u1D44C.st/u1D44C.st , |u1D4J2/u1D44B.st/u1D44B.st ) 
+Because of this, the following conversion formulae are used between stresses 
+and strains 
+|u1D4J2 =/radical.v11 + 2|u1D438 − 1
+|u1D446 =|u1D443
+1 + |u1D4J2 
+which are applied in each of the two ﬁber direction s. 
+2.  Compressive Stress Elimination.   Compressive stress elimination is optional 
+through the CSE parameter, and when activated the p rincipal components of 
+the 2 nd  Piola-Kirchhoﬀ stress is restricted to positive va lues.  
+3.  Reference Geometry and Smooth Stress Initialization .  If a reference 
+geometry is used, then SRFAC is the curve ID for a function |u1D6F+(|u1D461) that should 
+increase from zero to unity during a short time spa n.  During this time span, *. M  
+LS-DYNA R13 2-335 (MAT) /u1D44A|u1D4J≠Cst= |u1D43∆|u1D4J≠Cst/u1D4:D|<raceleftCvJln |parenleftCvJ/u1D4:D
+/u1D4:D|u1D4J≠Cst|parenriµhtCvJ − 1|<raceriµhtCvJ ,  for /u1D4:D≤/u1D4:D|u1D4J≠Cst  . 
+Here |u1D43∆|u1D4J≠Cst (BULKC) is a physical bulk modulus, /u1D4:D= det(/u1D405) is the jacobian of the 
+deformation and /u1D4:D|u1D4J≠Cst (JACC) is the critical jacobian for when the eﬀect  commenc- 
+es. /u1D405 is the deformation gradient.  This contributes to the pressure with a term 
+|u1D4JD = |u1D43∆|u1D4J≠Cstln |parenleftCvJ/u1D4:D|u1D4J≠Cst
+/u1D4:D|parenriµhtCvJ ,  for /u1D4:D≤/u1D4:D|u1D4J≠Cst 
+and thus prevents membrane elements from collapsing  or inverting when sub- 
+jected to compressive loads.  The bulk modulus |u1D43∆|u1D4J≠Cst should be selected with the 
+slopes in the stress map tables in mind, presumably  some order of magni- 
+tude(s) smaller.   
+6.  Strain Rate Scale Factor.   As an option, the local membrane stress can be 
+scaled based on the engineering strain rates via th e function /u1D̅1̅=/u1D̅1̅(|u1D4J2̇,/u1D412). We set 
+|u1D4J2̇= max |parenleftCvJ/u1D̅16̇
+‖/u1D405/u1D412‖, 0|parenriµhtCvJ 
+to be the equivalent engineering strain rate in the  direction of loading and de- 
+ﬁne 
+/u1D̅1̅(|u1D4J2̇,/u1D4̅A) =|u1D439/u1D44B.st/u1D44B.st (|u1D4J2̇)||u1D446/u1D44B.st/u1D44B.st | + |u1D439/u1D44C.st/u1D44C.st (|u1D4J2̇)||u1D446/u1D44C.st/u1D44C.st | + 2||u1D446/u1D44B.st/u1D44C.st |
+||u1D446/u1D44B.st/u1D44B.st | + ||u1D446/u1D44C.st/u1D44C.st | + 2||u1D446/u1D44B.st/u1D44C.st |, 
+meaning that the strain rate scale factor defaults to the user input data FXX and 
+FYY for uniaxial loading in the two material direct ions, respectively.  Note that 
+we only consider strain rate scaling in loading and  not in unloading, and fur- 
+thermore that the strain rates used in evaluating t he curves are pre-ﬁltered 
+using the time window DT to avoid excessive numeric al noise.  It is, therefore, 
+recommended to set DT to a time corresponding to at  least hundred time steps 
+or so. *

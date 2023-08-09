@@ -1,0 +1,3 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-371 (MAT) where |u1D439|u1D4J6Cst|u1D4J7Cst  is the deformation gradient tensor. *

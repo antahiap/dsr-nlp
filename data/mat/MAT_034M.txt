@@ -1,0 +1,125 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-323 (MAT) Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PXX PYY SXY DAMP TH  
+Type A F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+PXX Table giving engineering local /u1D44B/u1D44B -stress as function of engineering 
+local /u1D44B/u1D44B -strain and /u1D44C/u1D44C -strain 
+PYY Table giving engineering local /u1D44C/u1D44C -stress as function of engineering 
+local /u1D44C/u1D44C -strain and /u1D44B/u1D44B -strain 
+SXY Curve giving local 2 nd  Piola-Kirchhoﬀ /u1D44B/u1D44C -stress as function of local 
+Green /u1D44B/u1D44C -strain. 
+DAMP Damping coeﬃcient for numerical stability 
+TH Table giving hysteresis factor 0≤/u1D4:B<1 as function of engineering 
+local /u1D44B/u1D44B -strain and /u1D44C/u1D44C -strain: 
+GT.0.0: TH is table ID. 
+LE.0.0: -TH is used as constant value for hysteresis factor . 
+ 
+This card is included if and only if 0 < X0 < 1. 
+ Card 2a 1 2 3 4 5 6 7 8 
+Variable FVOPT X0 X1 X2 X3 ELA   
+Type F F F F F F   
+ *.   
+LS-DYNA R13 2-325 (MAT)  VARIABLE   DESCRIPTION  
+ELA Eﬀective leakage area for blocked fabric, ELA ( see Remark 3  of 
+*.   *.   
+LS-DYNA R13 2-327 (MAT)  VARIABLE   DESCRIPTION  
+EQ.8:  Leakage is based on gas volume outﬂow versus pres sure 
+load curve [Lian 2000].  Blockage of venting or por ous 
+area due to contact is considered.  Absolute pressu re is 
+used in the porous-velocity-versus- pressure load curve, 
+given as FAC.  
+Note: See Remark 17  of *.   *.   
+LS-DYNA R13 2-329 (MAT)  VARIABLE   DESCRIPTION  
+function of the stretching ratio deﬁned as |u1D4JF|u1D46≠Cst=|u1D434/|u1D434|zeroCst. 
+FAC Optional characteristic fabric parameter.  (See  theory manual and 
+*.   *.   
+LS-DYNA R13 2-331 (MAT)  VARIABLE   DESCRIPTION  
+CSE Compressive stress elimination option: 
+EQ.0.0: Do not eliminate compressive stresses. 
+EQ.1.0: Eliminate compressive stresses. 
+SRFAC Load curve ID for smooth stress initialization when  using a 
+reference geometry 
+BULKC Bulk modulus for fabric compaction 
+JACC Jacobian for the onset of fabric compaction 
+FXX Load curve giving scale factor of uniaxial stress in ﬁrst material 
+direction as function of engineering strain rate 
+FYY Load curve giving scale factor of uniaxial stress i n second material 
+direction as function of engineering strain rate 
+DT Time window for smoothing strain rates used for FXX and FYY 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable AOPT ECOAT SCOAT TCOAT     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description).  Also, please refer to Remark 5  of 
+*.   *.   
+LS-DYNA R13 2-333 (MAT)  VARIABLE   DESCRIPTION  
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 and 3.  It may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+Remarks: 
+1.  Material Model.   This material model invokes a special membrane el ement 
+formulation regardless of the element choice.  It i s an anisotropic hyperelastic 
+model where the 2 nd  Piola-Kirchhoﬀ stress  /u1D412 is a function of the Green-
+Lagrange strain /u1D404 and possibly its history.  Due to anisotropy, this  strain is 
+transformed to obtain the strains in each of the ﬁb er directions, |u1D438/u1D44B.st/u1D44B.st  and |u1D438/u1D44C.st/u1D44C.st , 
+together with the shear strain, |u1D438/u1D44B.st/u1D44C.st . The associated stress components in the 
+local system are given as functions of the strain c omponents 
+|u1D446/u1D44B.st/u1D44B.st =γ|u1D446/u1D44B.st/u1D44B.st (|u1D438/u1D44B.st/u1D44B.st , |u1D438/u1D44C.st/u1D44C.st )ϑ
+|u1D446/u1D44C.st/u1D44C.st =γ|u1D446/u1D44C.st/u1D44C.st (|u1D438/u1D44C.st/u1D44C.st , |u1D438/u1D44B.st/u1D44B.st )ϑ
+|u1D446/u1D44B.st/u1D44C.st =γ|u1D446/u1D44B.st/u1D44C.st (|u1D438/u1D44B.st/u1D44C.st )ϑ 
+The factor |u1D6F∆ is used for dissipative eﬀects and is described in  more detail in 
+Remark 4 .  For TH = 0, |u1D6F∆ = 1 .  The function ϑ represents a strain rate scale fac- 
+tor (see Remark 6 ); for FXX = FYY = 0 this factor is 1. While the sh ear relation is 
+given directly in the input through the curve SXY, the tabular input of the ﬁber 
+stress components PXX and PYY is for the sake of co nvenience.  PXX and PYY 
+give the engineering stress as function of engineer ing strain, that is, 
+|u1D443/u1D44B.st/u1D44B.st = |u1D443/u1D44B.st/u1D44B.st (|u1D4J2/u1D44B.st/u1D44B.st , |u1D4J2/u1D44C.st/u1D44C.st )
+|u1D443/u1D44C.st/u1D44C.st = |u1D443/u1D44C.st/u1D44C.st (|u1D4J2/u1D44C.st/u1D44C.st , |u1D4J2/u1D44B.st/u1D44B.st ) 
+Because of this, the following conversion formulae are used between stresses 
+and strains 
+|u1D4J2 =/radical.v11 + 2|u1D438 − 1
+|u1D446 =|u1D443
+1 + |u1D4J2 
+which are applied in each of the two ﬁber direction s. 
+2.  Compressive Stress Elimination.   Compressive stress elimination is optional 
+through the CSE parameter, and when activated the p rincipal components of 
+the 2 nd  Piola-Kirchhoﬀ stress is restricted to positive va lues.  
+3.  Reference Geometry and Smooth Stress Initialization .  If a reference 
+geometry is used, then SRFAC is the curve ID for a function |u1D6F+(|u1D461) that should 
+increase from zero to unity during a short time spa n.  During this time span, *.   
+LS-DYNA R13 2-335 (MAT) /u1D44A|u1D4J≠Cst= |u1D43∆|u1D4J≠Cst/u1D4:D|<raceleftCvJln |parenleftCvJ/u1D4:D
+/u1D4:D|u1D4J≠Cst|parenriµhtCvJ − 1|<raceriµhtCvJ ,  for /u1D4:D≤/u1D4:D|u1D4J≠Cst  . 
+Here |u1D43∆|u1D4J≠Cst (BULKC) is a physical bulk modulus, /u1D4:D= det(/u1D405) is the jacobian of the 
+deformation and /u1D4:D|u1D4J≠Cst (JACC) is the critical jacobian for when the eﬀect  commenc- 
+es. /u1D405 is the deformation gradient.  This contributes to the pressure with a term 
+|u1D4JD = |u1D43∆|u1D4J≠Cstln |parenleftCvJ/u1D4:D|u1D4J≠Cst
+/u1D4:D|parenriµhtCvJ ,  for /u1D4:D≤/u1D4:D|u1D4J≠Cst 
+and thus prevents membrane elements from collapsing  or inverting when sub- 
+jected to compressive loads.  The bulk modulus |u1D43∆|u1D4J≠Cst should be selected with the 
+slopes in the stress map tables in mind, presumably  some order of magni- 
+tude(s) smaller.   
+6.  Strain Rate Scale Factor.   As an option, the local membrane stress can be 
+scaled based on the engineering strain rates via th e function /u1D̅1̅=/u1D̅1̅(|u1D4J2̇,/u1D412). We set 
+|u1D4J2̇= max |parenleftCvJ/u1D̅16̇
+‖/u1D405/u1D412‖, 0|parenriµhtCvJ 
+to be the equivalent engineering strain rate in the  direction of loading and de- 
+ﬁne 
+/u1D̅1̅(|u1D4J2̇,/u1D4̅A) =|u1D439/u1D44B.st/u1D44B.st (|u1D4J2̇)||u1D446/u1D44B.st/u1D44B.st | + |u1D439/u1D44C.st/u1D44C.st (|u1D4J2̇)||u1D446/u1D44C.st/u1D44C.st | + 2||u1D446/u1D44B.st/u1D44C.st |
+||u1D446/u1D44B.st/u1D44B.st | + ||u1D446/u1D44C.st/u1D44C.st | + 2||u1D446/u1D44B.st/u1D44C.st |, 
+meaning that the strain rate scale factor defaults to the user input data FXX and 
+FYY for uniaxial loading in the two material direct ions, respectively.  Note that 
+we only consider strain rate scaling in loading and  not in unloading, and fur- 
+thermore that the strain rates used in evaluating t he curves are pre-ﬁltered 
+using the time window DT to avoid excessive numeric al noise.  It is, therefore, 
+recommended to set DT to a time corresponding to at  least hundred time steps 
+or so. *

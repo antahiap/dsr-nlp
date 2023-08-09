@@ -1,0 +1,36 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+ALPHA Creep parameter, |u1D6F+ (see Remark 2 ) 
+H0 Isotropic hardening parameter, ℎ|zeroCst (see Remark 3 ) 
+SCV Isotropic hardening parameter, |u1D46≠|u1D4J≠Cst|u1D463Cst  (see Remark 3 ) 
+B Isotropic hardening parameter, |u1D44F (see Remark 3 ) 
+ECV Isotropic hardening parameter, |u1D7≠2c v  (see Remark 3 ) 
+G0 Isotropic hardening parameter, |u1D4J4|zeroCst (see Remark 3 ) 
+S0 Isotropic hardening parameter, |u1D46≠|zeroCst (see Remark 3 ) 
+Remarks: 
+1.  Kinematic Hardening.   Kinematic hardening gives rise to the second 
+hardening occurrence in the hardening-softening-har dening sequence.  The 
+constants |u1D7≠7|u1D44JCst and |u1D7≠6|u1D43FCst enter the back stress, |u1D7≠7|u1D43J  (where |u1D43J is the left Cauchy-Green 
+deformation tensor), through the function |u1D7≠7 according to: 
+|u1D7≠7=|u1D7≠7|u1D44JCst|parenleftCvJ|u1D7≠6|u1D43FCst
+3|u1D7≠6|u1D4JDCst|parenriµhtCvJ/u1D4:F−|oneCst|parenleftCv6|u1D7≠6|u1D4JDCst
+|u1D7≠6|u1D43FCst|parenriµhtCv6  , (256.1)  
+where |u1D7≠6|u1D4JDCst=|oneCst
+/radical.v1|threeCst/radical.v1|u1D461|u1D4JF(|u1D43J|u1D4JDCst) and |u1D43J|u1D4JDCst is the plastic part of the left Cauchy-Green de- 
+formation tensor and /u1D4:F is the Langevin function deﬁned by: 
+/u1D4:F(/u1D44B) = coth(/u1D44B) −/u1D44B−|oneCst  . 
+2.  Creep.   This material model assumes plastic incompressibi lity.  Nevertheless 
+in order to account for the diﬀerent behaviours in tension and compression a 
+Drucker-Prager law is included in the creep law acc ording to: 
+/u1D̅08|u1D4JDCst=/u1D̅08|zeroCst|parenleftCvJ/u1D̅0F̅
+|u1D46≠+|u1D6F+ /u1D̅0B |parenriµhtCvJ|oneCst|u1D4JACst/fraction.v1
+  , (256.2) 
+where /u1D̅08|u1D4JDCst is the equivalent plastic shear strain rate, /u1D̅0F̅ is the equivalent shear 
+stress, |u1D46≠ is the internal variable deﬁned below and −/u1D̅0B is the hydrostatic stress. 
+3.  Isotropic Hardening.   Isotropic hardening gives rise to the ﬁrst harden ing 
+occurrence in the hardening-softening-hardening seq uence.  Two coupled in- 
+ternal variables are deﬁned:  the resistance to pla stic ﬂow, |u1D46≠, and the local free 
+volume, |u1D7≠2. Their evolution equations are: 
+|u1D46≠̇=ℎ|zeroCst|<racketleftCvJ1−|u1D46≠
+|u1D46≠̃|parenleftCv1|u1D7≠2|parenriµhtCv1|<racketriµhtCvJ/u1D̅08|u1D4JDCst (256.3)  *

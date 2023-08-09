@@ -1,0 +1,129 @@
+: *.  
+*.   
+ *.   *.   
+ FT Uniaxial tensile strength (stress) 
+FC Uniaxial compression strength (stress) 
+HP Hardening parameter.  Default is HP = 0.5 which is the value 
+used in Grassl et al.  (2011) for strain rate depen dent material 
+response (STRFLG = 1).  For applications without strain rate eﬀect  
+(STRFLG = 0) a value of HP = 0.01 is recommended, which has 
+been used in Grassl et al.  (2013). 
+AH Hardening ductility parameter 1 
+BH Hardening ductility parameter 2 
+CH Hardening ductility parameter 3 
+DH Hardening ductility parameter 4 
+AS Ductility parameter during damage 
+DF Flow rule parameter 
+FC0 Rate dependent parameter.  Only needed if STRFL G = 1. 
+Recommended value is 10 MPa, which has to be entere d 
+consistently with the system of units used. 
+TYPE Flag for damage type. 
+EQ.0.0: Linear damage formulation 
+EQ.1.0: Bi-linear damage formulation 
+EQ.2.0: Exponential damage formulation 
+EQ. 3.0: No damage 
+The best results are obtained with the bi-linear fo rmulation.   
+BS Damage ductility exponent during damage. 
+Default = 1.0 
+WF Tensile threshold value for linear damage formulati on.  
+Parameter controlling tensile softening branch for exponential 
+tensile damage formulation. 
+WF1 Tensile threshold value for the second part of the bi- linear 
+damage formulation. 
+Default = 0.15 × WF *.   
+ The eﬀective stress /u1D̅48/u1D41E/u1D41F/u1D41F  is deﬁned according to the damage mechanics conven tion as  
+/u1D̅48/u1D41E/u1D41F/u1D41F=/u1D46B/u1D486:(/u1D̅:A−/u1D̅:A/u1D491) 
+Plasticity: 
+The yield surface is described by the Haigh-Westerg aard coordinates: the volumetric 
+eﬀective stress |u1D7≠∆|u1D463, the norm of the deviatoric eﬀective stress |u1D7≠+ and the Lode angle /u1D̅0:, and 
+it is given by 
+|u1D4J3|u1D4JD|parenleftCv1|u1D7≠∆|u1D463, |u1D7≠+,/u1D̅0:,/u1D̅05|parenriµhtCv1=
+⎣⎢⎢⎢⎡
+/˙racketleft.v21 −/u1D45E1(/u1D̅05)/˙racketright.v2
+⎝⎜⎜⎛|u1D7≠+
+/radical.v16|u1D4J3/u1D450+|u1D7≠∆|u1D463
+|u1D4J3/u1D450⎠⎟⎟⎞2
++/radical.v53
+2|u1D7≠+
+|u1D4J3/u1D450⎦⎥⎥⎥⎤2
++ |u1D4JA 0/u1D45E1(/u1D̅05)2/u1D45E2(/u1D̅05)
+⎣⎢⎡|u1D7≠+
+/radical.v16|u1D4J3/u1D450|u1D4JF|parenleftCv1cos /u1D̅0:|parenriµhtCv1+|u1D7≠∆|u1D463
+|u1D4J3/u1D450⎦⎥⎤
+−/u1D45E12(/u1D̅05)/u1D45E22(/u1D̅05) . 
+The variables /u1D45E1 and /u1D45E2 are dependent on the hardening variable /u1D̅05. The parameter |u1D4J3/u1D450 is 
+the uniaxial compressive strength.  The shape of th e deviatoric section is controlled by 
+the function 
+|u1D4JF(cos /u1D̅0:) =4|parenleftCv21 − |u1D4J2|twoCst|parenriµhtCv2 cos|twoCst/u1D̅0:+ (2|u1D4J2 − 1)|twoCst
+2|parenleftCv11 − |u1D4J2|twoCst|parenriµhtCv1 cos /u1D̅0:+ (2|u1D4J2 − 1)/radical.v24|parenleftCv11 − |u1D4J2|twoCst|parenriµhtCv1 cos |twoCst/u1D̅0:+ 5|u1D4J2|twoCst− 4|u1D4J2 
+where |u1D4J2 is the eccentricity parameter (ECC).  The paramete r |u1D4JA0 is the friction parameter 
+and it is deﬁned as 
+|u1D4JA0= 3|parenleftCv3|u1D4J3/u1D4502− |u1D4J3|u1D4612|parenriµhtCv3
+|u1D4J3/u1D450|u1D4J3|u1D461|u1D4J2
+|u1D4J2 + 1 
+where |u1D4J3|u1D461 is the tensile strength. 
+ 
+The ﬂow rule is non-associative which means that th e direction of the plastic ﬂow is not 
+normal to the yield surface.  This is important for  concrete since an associative ﬂow rule 
+would give an overestimated maximum stress.  The pl astic potential is given by 
+|u1D4J4|parenleftCv1|u1D7≠∆|u1D463Cst, |u1D7≠+,/u1D̅05|parenriµhtCv1 =
+⎩|<raceleftCex⎨|<raceleftCex⎧
+|<racketleftCv11 −/u1D45E|oneCst(/u1D̅05)|<racketriµhtCv1
+⎝⎜⎛|u1D7≠+
+/radical.v16|u1D4J3|u1D4J≠Cst+|u1D7≠∆|u1D463Cst
+|u1D4J3|u1D4J≠Cst⎠⎟⎞|twoCst
++/radical.v53
+2|u1D7≠+
+|u1D4J3|u1D4J≠Cst⎭|<raceriµhtCex⎬|<raceriµhtCex⎫|twoCst
++/u1D45E|oneCst(/u1D̅05)
+⎝⎜⎛|u1D4JA|zeroCst|u1D7≠+
+/radical.v16|u1D4J3|u1D4J≠Cst+|u1D4JA/u1D4⃡4.st(|u1D7≠∆|u1D463Cst,/u1D̅05)
+|u1D4J3|u1D4J≠Cst ⎠⎟⎞ 
+where  
+|u1D4JA|u1D4J4(|u1D7≠∆|u1D463,/u1D̅05)= |u1D434 |u1D4J4(/u1D̅05)|u1D43J|u1D4J4(/u1D̅05)|u1D4J3/u1D450|u1D4J2|u1D7≠∆|u1D463−/u1D45E2|u1D4J3|u1D461/3
+|u1D43J|u1D4J4|u1D4J3/u1D450 
+and *.   
+  
+The variable ℎ is a mesh-dependent measure used to convert strain s to displacements.  
+The variable  |u1D7≠≠|u1D461 is called the inelastic tensile strain and is deﬁn ed as the sum of the 
+irreversible plastic strain |u1D7≠≠|u1D4JD and the reversible strain |u1D464|u1D461|parenleftCv2|u1D7≠≠ − |u1D7≠≠ |u1D4JD|parenriµhtCv2 (in compression 
+|u1D464/u1D450|parenleftCv2|u1D7≠≠ − |u1D7≠≠ |u1D4JD|parenriµhtCv2). To get the inﬂuence of multi-axial stress states  on the softening a damage 
+ductility measure |u1D46J|u1D46≠ is added: 
+|u1D46J|u1D46≠= 1 + |parenleftCv1|u1D434|u1D46≠− 1|parenriµhtCv1|u1D44J|u1D46≠|u1D43J|u1D46≠ 
+Where |u1D434|u1D46≠ and |u1D43J|u1D46≠ are input parameters, and 
+|u1D44J|u1D46≠= −/radical.v16|u1D7≠∆|u1D463
+|u1D7≠+, |u1D7≠∆ |u1D463< 0  |u1D44∆|u1D4JB|u1D4J1  |u1D44J |u1D46≠= 0, |u1D7≠∆ |u1D463> 0  
+The inelastic strain is then modiﬁed according: 
+|u1D7≠≠|u1D4J6=|u1D7≠≠|u1D4J6
+|u1D46J|u1D46≠ 
+Compressive damage is controlled by an exponential stress-inelastic strain law.  Stress 
+value /u1D48ℜ/u1D484 and inelastic strain /u1D̅:A/u1D48ℜ/u1D484 need to be speciﬁed, see ﬁgure below how the stres s 
+softening is controlled by the input parameters.  A  small value of /u1D̅:A/u1D48ℜ/u1D484, i.e. 1.0E-4 
+(default),  provides for a rather brittle form of d amage. 
+ 
+ 
+|u1D4J3|u1D461Cst 
+|u1D464/u1D45:.st 
+|u1D4J3|u1D461Cst 
+|u1D464/u1D45:.st 
+|u1D4J3|u1D461Cst|oneCst  
+|u1D464/u1D45:.st|oneCst  
+ 
+ 
+ 
+|u1D4J3|u1D461Cst 
+|u1D464/u1D45:.st 
+ |u1D7≠≠|u1D461Cstℎ 
+ |u1D7≠≠|u1D461Cstℎ 
+ |u1D7≠≠|u1D461Cstℎ 
+|u1D7≠∆|u1D461Cst 
+ |u1D7≠∆|u1D461Cst 
+ |u1D7≠∆|u1D461Cst 
+  
+ 
+ 
+ 
+|u1D434|u1D46≠Cst |u1D7≠≠/u1D45:.st|u1D4J≠Cst  |u1D7≠≠|u1D4J≠Cst |u1D7≠∆|u1D4J≠Cst 
+ 
+|u1D4J3|u1D4J≠Cst 
+ *

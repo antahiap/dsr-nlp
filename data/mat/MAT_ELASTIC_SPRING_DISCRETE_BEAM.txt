@@ -1,0 +1,32 @@
+ ................. ................................................... ....... 2-510  
+*.  [1D] { 8} 
+ *.  
+ *.  *.   
+ *.   *.  (t ype 74 above).  
+Generally, these referenced parts are used only for  the deﬁnition of this material model 
+and are not referenced by any elements.  The two no des deﬁning a beam may be 
+coincident to give a zero length beam or oﬀset to g ive a ﬁnite length beam.  For ﬁnite 
+length discrete beams the absolute value of the var iable SCOOR in the *SECTION_-
+BEAM input should be set to a value of 2.0, which c auses the local |u1D4JF-axis to be aligned 
+along the two nodes of the beam to give physically correct behavior.  The distance 
+between the nodes of a beam should not aﬀect the be havior of this material model.  A 
+triad is used to orient the beam for the directiona l springs. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO TPIDR TPIDS TPIDT RPIDR RPIDS RPIDT 
+Type A F I I I I I I 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density; see also volume in *SECTION_BEAM d eﬁnition. 
+TPIDR Translational motion in the local |u1D4JF-direction is governed by part 
+ID TPIDR .  If zero, no force is computed in this direction. 
+TPIDS Translational motion in the local |u1D46≠-direction is governed by part 
+ID TPIDS .  If zero, no force is computed in this direction. 
+TPIDT Translational motion in the local |u1D461-direction is governed by part 
+ID TPIDT .  If zero, no force is computed in this direction. 
+RPIDR Rotational motion about the local |u1D4JF-axis is governed by part ID 
+RPIDR .  If zero, no moment is computed about this axis. 
+RPIDS Rotational motion about the local |u1D46≠-axis is governed by part ID 
+RPIDS .  If zero, no moment is computed about this axis. *

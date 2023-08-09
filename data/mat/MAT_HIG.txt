@@ -1,0 +1,374 @@
+H_EXPLOSIVE_BURN .......................... ................................................... ................. 2-163  
+*.  H_EX-
+PLOSIVE_BURN in which the variable BETA is set to 0  or 2, the absolute value 
+of the history variable labeled as “eﬀective plasti c strain” is the explosive light- 
+ing time.  This lighting time takes into account sh adowing if invoked (see 
+*CONTROL_EXPLOSIVE_SHADOW).   
+There are four additional history variables for the  JWL equation of state.  Those 
+history variables are internal energy, bulk viscosi ty in units of pressure, vol- 
+ume, and burn fraction, respectively.  To output th e history variables, set the 
+variable NEIPH in *DATABASE_EXTENT_BINARY.  
+The AFTERBURN option introduces an additional 5 th  history variable that rec- 
+ords the added afterburn energy |u1D444 for simple afterburn (OPT = 1 or 2) but 
+contains the growth term |u1D7≠6 when using the Miller’s extension model (OPT = 3).*EOS  *EOS_SACK_TUESDAY  
+1-14 (EOS) LS-DYNA R13 *EOS_SACK_TUESDAY  
+This is  Equation of State Form 3. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID A1 A2 A3 B1 B2 E0 V0 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or label must  be speciﬁed 
+(see *PART). 
+Ai, Bi Constants in the equation of state 
+E0 Initial internal energy 
+V0 Initial relative volume 
+Remarks: 
+The Sack equation of state deﬁnes pressure as 
+|u1D4JD =|u1D434|threeCst
+|u1D449|u1D434Cst|oneCsts|u1D4J2−|u1D434Cst |twoCsts|u1D449Cst|parenleftCvJ1 −|u1D43J|oneCst
+|u1D449|parenriµhtCvJ +|u1D43J|twoCst
+|u1D449|u1D438 
+and is used for detonation products of high explosi ves. *EOS_GRUNEISEN  *EOS  
+LS-DYNA R13 1-15 (EOS) *EOS_GRUNEISEN  
+This is  Equation of State Form 4. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID C S1 S2 S3 GAMMAO  A E0 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable V0 (not used)  LCID      
+Type F  I      
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or labe l must be 
+speciﬁed (see *PART). 
+C, Si, 
+GAMMA0 Constants in the equation of state 
+A First order volume correction coeﬃcient 
+E0 Initial internal energy 
+V0 Initial relative volume 
+LCID Load curve ID, which can be the ID of a *DEFIN E_ CURVE, 
+*DEFINE_CURVE_FUNCTION, or *DEFINE_FUNC TION, 
+deﬁning the energy deposition rate as a function of  time. If an 
+energy leak rate is intended, do not specify a nega tive ordinate 
+in LCID, rather, use the constant(s) in the equatio n of state, that 
+is, set GAMMA0 and/or A to a negative value.  If *D EFINE_-
+FUNCTION is used, the input of the deﬁned function is time. 
+Remarks: 
+The Gruneisen equation of state with cubic shock-ve locity as a function of particle-
+velocity |u1D463|u1D46≠Cst|parenleftCv2|u1D463|u1D4JDCst|parenriµhtCv2 deﬁnes pressure for compressed materials as *EOS  *EOS_GRUNEISEN  
+1-16 (EOS) LS-DYNA R13 |u1D4JD =|u1D7≠+|zeroCst|u1D436|twoCst|u1D7≠7|<racketleftCv41 + |parenleftCv41 −|u1D6F∆|zeroCst
+2|parenriµhtCv4|u1D7≠7 −|u1D44∆
+2|u1D7≠7|twoCst|<racketriµhtCv4
+|<racketleftCvJ1 − (|u1D446|oneCst− 1)|u1D7≠7 − |u1D446|twoCst|u1D7≠7|twoCst
+|u1D7≠7 + 1− |u1D446|threeCst|u1D7≠7|threeCst
+|parenleftCv1|u1D7≠7 + 1|parenriµhtCv1|twoCst|<racketriµhtCvJ|twoCst+ |parenleftCv1|u1D6F∆|zeroCst+ |u1D44∆|u1D7≠7|parenriµhtCv1|u1D438  
+and for expanded materials as  
+|u1D4JD = |u1D7≠+|zeroCst|u1D436|twoCst|u1D7≠7 + |parenleftCv1|u1D6F∆|zeroCst+ |u1D44∆|u1D7≠7|parenriµhtCv1|u1D438  . 
+Here |u1D436 is the intercept of the |u1D463|u1D46≠Cst|parenleftCv2|u1D463|u1D4JDCst|parenriµhtCv2 curve (in velocity units); |u1D446|oneCst, |u1D446|twoCst, and |u1D446|threeCst are the 
+unitless coeﬃcients of the slope of the |u1D463|u1D46≠Cst|parenleftCv2|u1D463|u1D4JDCst|parenriµhtCv2 curve; |u1D6F∆|zeroCst is the unitless Gruneisen gamma; 
+|u1D44∆ is the unitless, ﬁrst order volume correction to  |u1D6F∆|zeroCst; and 
+|u1D7≠7 =|u1D7≠+
+|u1D7≠+|zeroCst− 1  . 
+|u1D438 denotes the internal energy, which is increased ac cording to an energy deposition rate 
+as a function of time curve (LCID). *EOS_RATIO_OF_POLYNOMIALS  *EOS  
+LS-DYNA R13 1-17 (EOS) *EOS_RATIO_OF_POLYNOMIALS  
+This is  Equation of State Form 5. 
+Card Summary:  
+Card 1.   This card is required. 
+EOSID        
+Card 2.   This card is required. 
+A10 A11 A12 A13 
+Card 3.   This card is required. 
+A20 A21 A22 A23 
+Card 4.   This card is required.  
+A30 A31 A32 A33 
+Card 5.   This card is required. 
+A40 A41 A42 A43 
+Card 6.   This card is required. 
+A50 A51 A52 A53 
+Card 7.   This card is required. 
+A60 A61 A62 A63 
+Card 8.   This card is required. 
+A70 A71 A72 A73 
+Card 9.   This card is required. 
+A14 A24   
+Card 10.   This card is required. 
+ALPHA BETA E0 V0 *EOS  *EOS_RATIO_OF_POLYNOMIALS  
+1-18 (EOS) LS-DYNA R13 Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID        
+Type A        
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or labe l must be speciﬁed 
+(see *PART). 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable A10 A11 A12 A13 
+Type F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable A20 A21 A22 A23 
+Type F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable A30 A31 A32 A33 
+Type F F F F 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable A40 A41 A42 A43 
+Type F F F F *EOS_RATIO_OF_POLYNOMIALS  *EOS  
+LS-DYNA R13 1-19 (EOS)  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable A50 A51 A52 A53 
+Type F F F F 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable A60 A61 A62 A63 
+Type F F F F 
+ 
+ Card 8 1 2 3 4 5 6 7 8 
+Variable A70 A71 A72 A73 
+Type F F F F 
+ 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable A14 A24   
+Type F F   
+ 
+ VARIABLE   DESCRIPTION  
+Aij  Polynomial coeﬃcients 
+ 
+ Card 10 1 2 3 4 5 6 7 8 
+Variable ALPHA BETA E0 V0 
+Type F F F F 
+ *EOS  *EOS_RATIO_OF_POLYNOMIALS  
+1-20 (EOS) LS-DYNA R13  VARIABLE   DESCRIPTION  
+ALPHA |u1D6F+    
+BETA |u1D6FD    
+E0 Initial internal energy 
+V0 Initial relative volume 
+Remarks: 
+The ratio of polynomials equation of state deﬁnes t he pressure as 
+|u1D4JD =|u1D439|oneCst+ |u1D439|twoCst|u1D438 + |u1D439|threeCst|u1D438|twoCst+ |u1D439|fourCst|u1D438|threeCst
+|u1D439|fiveCst+ |u1D439|sixCst|u1D438 + |u1D439|sevenCst|u1D438|twoCst|parenleftCv11 + |u1D6F+|u1D7≠7|parenriµhtCv1  , 
+where 
+|u1D439|u1D4J6Cst= |summationCv1 |u1D434|u1D4J6Cst|u1D4J7Cst |u1D7≠7|u1D4J7Cst|u1D4JBCst
+|u1D4J7Cst=|zeroCst, |u1D4JB = |<raceleftCv44 |u1D4J6 < 3
+3 |u1D4J6 ≥ 3 
+|u1D7≠7 =|u1D7≠+
+|u1D7≠+|zeroCst− 1 
+In expanded elements |u1D439|oneCst is replaced by |u1D439|oneCst|minuteCst= |u1D439|oneCst+ |u1D6FD|u1D7≠7|twoCst.  By setting coeﬃcient |u1D434|oneCst|zeroCst = 1.0 , 
+the delta-phase pressure modeling for this material  will be initiated.  The code will reset 
+it to 0.0 after setting ﬂags. *EOS_LINEAR_POLYNOMIAL_WITH_ENERGY_LEAK  *EOS  
+LS-DYNA R13 1-21 (EOS) *EOS_LINEAR_POLYNOMIAL_WITH_ENERGY_LEAK  
+This is Equation of State Form 6. 
+ 
+Purpose:  Deﬁne coeﬃcients for a linear polynomial EOS and initialize the thermody- 
+namic state of the material by deﬁning E0 and V0 be low.  Energy deposition is 
+prescribed using a curve. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID C0 C1 C2 C3 C4 C5 C6 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable E0 V0 LCID      
+Type F F I      
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or labe l must be speciﬁed 
+(see*PART). 
+Ci Constants in the equation of state 
+E0 Initial internal energy 
+V0 Initial relative volume 
+LCID Load curve ID, which can be the ID of *DEFINE_ CURVE, *DE-
+FINE_CURVE_FUNCTION or *DEFINE_FUNCT ION, deﬁning 
+the energy deposition rate as a function of time. If an energy leak 
+rate is intended, do not specify a negative ordinat e in LCID, 
+rather, use the constant(s) in the equation of stat e, such as setting 
+C4 to a negative value.  If *DEFINE_FUNC TION is used, the 
+input of the deﬁned function is time. *EOS  *EOS_LINEAR_POLYNOMIAL_WITH_ENERGY_LEAK  
+1-22 (EOS) LS-DYNA R13 Remarks: 
+This polynomial equation of state, linear in the in ternal energy per initial volume, |u1D438, is 
+given by 
+|u1D4JD = |u1D436|zeroCst+ |u1D436|oneCst|u1D7≠7 + |u1D436|twoCst|u1D7≠7|twoCst+ |u1D436|threeCst|u1D7≠7|threeCst+ |parenleftCv2|u1D436|fourCst+ |u1D436|fiveCst|u1D7≠7 + |u1D436|sixCst|u1D7≠7|twoCst|parenriµhtCv2|u1D438 
+in which |u1D436|oneCst, |u1D436|twoCst, |u1D436|threeCst, |u1D436|fourCst, |u1D436|fiveCst, and |u1D436|sixCst are user deﬁned constants and  
+|u1D7≠7 =   1
+|u1D449− 1  . 
+where |u1D449 is the relative volume.  In expanded elements, we set the coeﬃcients of |u1D7≠7|twoCst to 
+zero, that is, 
+|u1D436|twoCst= |u1D436|sixCst= 0 
+Internal energy, |u1D438, is increased according to an energy deposition rat e as a function of 
+time curve (LCID). *EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE  *EOS  
+LS-DYNA R13 1-23 (EOS) *EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE 
+This is Equation of State Form 7. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID A B XP1 XP2 FRER G R1 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable R2 R3 R5 R6 FMXIG FREQ GROW1 EM 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AR1 ES1 CVP CVR EETAL CCRIT ENQ TMP0 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable GROW2 AR2 ES2 EN FMXGR FMNGR   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or label must  be speciﬁed 
+(see *PART). 
+A Product JWL constant (see second equation in Rema rks) 
+B Product JWL constant (see second equation in Rema rks) 
+XP1 Product JWL constant (see second equation in Re marks) *EOS  *EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE  
+1-24 (EOS) LS-DYNA R13  VARIABLE   DESCRIPTION  
+XP2 Product JWL constant (see second equation in Re marks) 
+FRER Constant in ignition term of reaction equation  
+G |u1D714|u1D436|u1D463Cst of product 
+R1 Unreacted JWL constant (see ﬁrst equation in Rem arks) 
+R2 Unreacted JWL constant (see ﬁrst equation in Rem arks) 
+R3 |u1D714|u1D436|u1D463Cst of unreacted explosive 
+R5 Unreacted JWL constant (see ﬁrst equation in Rem arks) 
+R6 Unreacted JWL constant (see ﬁrst equation in Rem arks) 
+FMXIG Maximum |u1D439 for ignition term 
+FREQ Constant in ignition term of reaction equation  
+GROW1 Constant in growth term of reaction equation 
+EM Constant in growth term of reaction equation 
+AR1 Constant in growth term of reaction equation 
+ES1 Constant in growth term of reaction equation 
+CVP Heat capacity of reaction products 
+CVR Heat capacity of unreacted HE 
+EETAL Constant in ignition term of reaction equatio n 
+CCRIT Constant in ignition term of reaction equatio n 
+ENQ Heat of reaction 
+TMP0 Initial temperature (°K) 
+GROW2 Constant in completion term of reaction equat ion 
+AR2 Constant in completion term of reaction equatio n 
+ES2 Constant in completion term of reaction equatio n 
+EN Constant in completion term of reaction equation  *EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE  *EOS  
+LS-DYNA R13 1-25 (EOS)  VARIABLE   DESCRIPTION  
+FMXGR Maximum |u1D439 for growth term 
+FMNGR Maximum |u1D439 for completion term 
+Remarks: 
+Equation of State Form 7 is used to calculate the s hock initiation (or failure to initiate) 
+and detonation wave propagation of solid high explo sives.  It should be used instead of 
+the ideal HE burn options whenever there is a quest ion whether the HE will react, there 
+is a ﬁnite time required for a shock wave to build up to detonation, and/or there is a 
+ﬁnite thickness of the chemical reaction zone in a detonation wave.  At relatively low 
+initial pressures (<2-3 GPa), this equation of stat e should be used with material type 10 
+for accurate calculations of the unreacted HE behav ior.  At higher initial pressures, 
+material type 9 can be used.  A JWL equation of sta te deﬁnes the pressure in the 
+unreacted explosive as 
+|u1D443|u1D4J2Cst= |u1D4JF|oneCst|u1D4J2−|u1D4JFCst|fiveCsts|u1D449Cst|u1D4J2Csts+ |u1D4JF|twoCst|u1D4J2−|u1D4JFCst|sixCsts|u1D449Cst|u1D4J2Csts+ |u1D4JF|threeCst|u1D447|u1D4J2Cst
+|u1D449|u1D4J2Cst, |parenleftCv2|u1D4JF|threeCst= |u1D714|u1D4J2CstC|vCst|rCsts|parenriµhtCv2 
+where |u1D449|u1D4J2Cst and |u1D447|u1D4J2Cst are the relative volume and temperature, respectiv ely, of the unreacted 
+explosive.  Another JWL equation of state deﬁnes th e pressure in the reaction products 
+as 
+|u1D443|u1D4JDCst= |u1D44∆|u1D4J2−|u1D46JCst|u1D4JDCst |oneCsts|u1D449Cst|u1D4JDCsts+ |u1D44F|u1D4J2−|u1D46JCst|u1D4JDCst |twoCsts|u1D449Cst|u1D4JDCsts+|u1D4J4|u1D447|u1D4JDCst
+|u1D449|u1D4JDCst, |parenleftCv3|u1D4J4 = |u1D714|u1D4JDCstC|vCst|pCsts|parenriµhtCv3 
+where |u1D449|u1D4JDCst and |u1D447|u1D4JDCst are the relative volume and temperature, respectiv ely, of the reaction 
+products.  As the chemical reaction converts unreac ted explosive to reaction products, 
+these JWL equations of state are used to calculate the mixture of unreacted explosive 
+and reaction products deﬁned by the fraction reacte d |u1D439 (|u1D439 = 0  implies no reaction, |u1D439 = 1  
+implies complete reaction).  The temperatures and p ressures are assumed to be equal 
+(|u1D447|u1D4J2Cst= |u1D447|u1D4JDCst, |u1D4JD|u1D4J2Cst= |u1D4JD|u1D4JDCst) and the relative volumes are additive, that is, 
+|u1D449 = (1 − |u1D439)|u1D449|u1D4J2Cst+ |u1D439|u1D449|u1D4JDCst 
+The chemical reaction rate for conversion of unreac ted explosive to reaction products 
+consists of three physically realistic terms:  an i gnition term in which a small amount of 
+explosive reacts soon after the shock wave compress es it; a slow growth of reaction as 
+this initial reaction spreads; and a rapid completi on of reaction at high pressure and 
+temperature.  The form of the reaction rate equatio n is 
+|u1D71J|u1D439 
+|u1D71J|u1D461 = FREQ × (1 − |u1D439)FRER |parenleftCv1|u1D449|u1D4J2Cst−|oneCst− 1 − CCRIT|parenriµhtCv1EETAL |uni23D∆Clft|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cmd|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆CrtIgnition 
++ GROW1 × (1 − |u1D439)ES1 |u1D439AR1 |u1D4JDEM |uni23D∆Clft|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cmd|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆Cex|uni23D∆CrtGrowth 
++ GROW2 × (1 − |u1D439)ES2 |u1D439AR2 |u1D4JDEN |uni23DFClft|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCmd|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCrt
+Completion  *EOS  *EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE  
+1-26 (EOS) LS-DYNA R13 The ignition rate is set equal to zero when |u1D439 ≥ FMXIG , the growth rate is set equal to 
+zero when |u1D439 ≥ FMXGR , and the completion rate is set equal to zero when  |u1D439 ≤ FMNGR . 
+ 
+Details of the computational methods and many examp les of one and two dimensional 
+shock initiation and detonation wave calculation ca n be found in the references 
+(Cochran and Chan [1979], Lee and Tarver [1980]).  Unfortunately, suﬃcient 
+experimental data has been obtained for only two so lid explosives to develop very 
+reliable shock initiation models:  PBX-9504 (and th e related HMX-based explosives LX-
+14,LX-10,LX-04, etc.) and LX-17 (the insensitive TA TB-based explosive).  Reactive ﬂow 
+models have been developed for other explosives (TN T, PETN, Composition B, 
+propellants, etc.) but are based on very limited ex perimental data. 
+ 
+When this EOS is used with *. H_EXPLOSIVE_BURN [0,5,3c,8A] {4}  
+ *. H_EXPLOSIVE_BURN  *. H_EXPLOSIVE_BURN  *. H_EXPLOSIVE_BURN  
+This is  Material Type 8.  It allows the modeling of the det onation of a high explosive.  In 
+addition, an equation of state must be deﬁned.  See  Wilkins [1969] and Giroux [1973]. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO D PCJ BETA K G SIGY 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+D Detonation velocity 
+PCJ Chapman-Jouget pressure 
+BETA Beta burn ﬂag (see remarks below): 
+EQ.0.0: beta and programmed burn 
+EQ.1.0: beta burn only 
+EQ.2.0: programmed burn only 
+K Bulk modulus (BETA = 2.0 only) 
+G Shear modulus (BETA = 2.0 only) 
+SIGY |u1D7≠∆|u1D466Cst, yield stress (BETA = 2.0 only) 
+Remarks: 
+Burn fractions, |u1D439, which multiply the equations of states for high e xplosives, control the 
+release of chemical energy for simulating detonatio ns.  At any time, the pressure in a 
+high explosive element is given by: 
+|u1D4JD = |u1D439|u1D4JDeos (|u1D449, |u1D438) , 
+where |u1D4JDeos  is the pressure from the equation of state (either  types 2, 3, or 14), |u1D449 is the 
+relative volume, and |u1D438 is the internal energy density per unit initial vo lume. 
+ *. H_EXPLOSIVE_BURN  
+2-164 (MAT) LS-DYNA R13 In the initialization phase, a lighting time, |u1D461|u1D4J9Cst, is computed for each element by dividing 
+the distance from the detonation point to the cente r of the element by the detonation 
+velocity, |u1D437.  If multiple detonation points are deﬁned, the cl osest detonation point 
+determines t l.  The burn fraction |u1D439 is taken as the maximum, 
+|u1D439 = max(|u1D439|oneCst, |u1D439|twoCst)  , 
+where 
+|u1D439|oneCst=
+⎩|<raceleftCex⎨|<raceleftCex⎧2  (|u1D461 − |u1D461|u1D4J9Cst)|u1D437|u1D434|u1D4J2Cst/⋯.sts |aCsts /x.sts 
+3|u1D463|u1D4J2Cst  if  |u1D461 >  |u1D461|u1D4J9Cst
+ 0 if  |u1D461 ≤  |u1D461|u1D4J9Cst 
+|u1D439|twoCst= |u1D6FD =  1 − |u1D449
+1 − |u1D449/u1D4:6.st/u1D4:D.st 
+where |u1D449/u1D4:6.st/u1D4:D.st is the Chapman-Jouguet relative volume and |u1D461 is current time.  If |u1D439 exceeds 1, 
+it is reset to 1.  This calculation of the burn fra ction usually requires several time steps 
+for |u1D439 to reach unity, thereby spreading the burn front o ver several elements.  After 
+reaching unity, |u1D439 is held constant.  This burn fraction calculation is based on work by 
+Wilkins [1964] and is also discussed by Giroux [197 3]. 
+ 
+If the beta burn option is used, BETA = 1.0, any vo lumetric compression will cause 
+detonation and  
+|u1D439 = |u1D439|twoCst  . 
+|u1D439|oneCst is not computed. BETA  =  1 does not allow for the  initialization of the lighting time. 
+ 
+If the programmed burn is used, BETA = 2.0, the und etonated high explosive material 
+will behave as an elastic perfectly plastic materia l if the bulk modulus, shear modulus, 
+and yield stress are deﬁned.  Therefore, with this option the explosive material can 
+compress without causing detonation.  The location and time of detonation is controlled 
+by *INITIAL_DETONATION. 
+ 
+As an option, the high explosive material can behav e as an elastic perfectly-plastic solid 
+prior to detonation.  In this case we update the st ress tensor, to an elastic trial stress, ∗
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst, 
+∗|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst= |u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+ |u1D46≠|u1D4J6Cst|u1D4JDCst /u1D6FA|u1D4JDCst|u1D4J7Cst + |u1D46≠|u1D4J7Cst|u1D4JDCst /u1D6FA|u1D4JDCst|u1D4J6Cst + 2|u1D43A|u1D7≠≠′̇|u1D4J6Cst|u1D4J7Cst |u1D4J1|u1D461 
+where |u1D43A is the shear modulus, and |u1D7≠≠′̇|u1D4J6Cst|u1D4J7Cst  is the deviatoric strain rate.  The von Mises yiel d 
+condition is given by: 
+/u1D̅1∫=/u1D4:D|twoCst−|u1D7≠∆|u1D466Cst|twoCst
+3  , 
+where the second stress invariant, /u1D4:D|twoCst, is deﬁned in terms of the deviatoric stress 
+components as *

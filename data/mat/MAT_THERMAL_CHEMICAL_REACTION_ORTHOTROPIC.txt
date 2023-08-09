@@ -1,0 +1,268 @@
+ ........ ............................................. 3-44   *EOS 
+LS-DYNA R13 1-1 (EOS) *EOS  
+ 
+When deﬁning an equation of state, the type of equa tion of state is speciﬁed by a 
+corresponding 3-digit number in the command name, e .g., *EOS_004, or equivalently, 
+by it’s more descriptive designation, e.g., *EOS_GR UNEISEN.  The equations of state 
+can be used with a subset of the materials that are  available for solid elements; see the 
+MATERIAL MODEL REFERENCE TABLES in the beginning of  the *MAT section of 
+this Manual.   *EOS_015 is linked to the type 2 thi ck shell element and can be used to 
+model engine gaskets. 
+ 
+The meaning associated with particular extra histor y variables for a subset of material 
+models and equations of state are  tabulated at http://www.dynasupport.com/howtos-
+/material/history-variables .  The ﬁrst three extra history variables when usin g an 
+equation of state are (1) internal energy, (2) pres sure due to bulk viscosity, and (3) the 
+element volume from the previous time step. 
+ 
+ 
+TYPE 1: *EOS_LINEAR_POLYNOMIAL 
+TYPE 2: *EOS_JWL 
+TYPE 3: *EOS_SACK_TUESDAY 
+TYPE 4: *EOS_GRUNEISEN 
+TYPE 5: *EOS_RATIO_OF_POLYNOMIALS 
+TYPE 6: *EOS_LINEAR_POLYNOMIAL_WITH_ENERGY_LEAK 
+TYPE 7: *EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE 
+TYPE 8: *EOS_TABULATED_COMPACTION 
+TYPE 9: *EOS_TABULATED 
+TYPE 10: *EOS_PROPELLANT_DEFLAGRATION 
+TYPE 11: *EOS_TENSOR_PORE_COLLAPSE 
+TYPE 12: *EOS_IDEAL_GAS  
+TYPE 13: *EOS_PHASE_CHANGE 
+TYPE 14: *EOS_JWLB *EOS   
+1-2 (EOS) LS-DYNA R13 TYPE 15: *EOS_GASKET 
+TYPE 16: *EOS_MIE_GRUNEISEN  
+TYPE 19: *EOS_ MURNAGHAN  
+TYPE 21-30: *EOS_USER_DEFINED 
+An additional option TITLE may be appended to all the *EOS keywords.  If this option 
+is used then an additional line is read for each se ction in 80a format which can be used 
+to describe the equation of state.  At present LS-D YNA does not make use of the title.  
+Inclusion of title simply gives greater clarity to input decks.  
+Deﬁnitions and Conventions 
+In order to prescribe the boundary and/or initial t hermodynamic condition, manual 
+computations are often necessary.  Conventions or d eﬁnitions must be established to 
+simplify this process.  Some basic variables are de ﬁned in the following.  Since many of 
+these variables have already been denoted by diﬀere nt symbols, the notations used here 
+are unique in this section only!  They are presente d to only clarify their usage.  A 
+corresponding SI unit set is also presented as an e xample. 
+First consider a few volumetric parameters since th ey are a measure of compression (or 
+expansion). 
+Volume: 
+|u1D449 ≈ (m|threeCst) 
+Mass: 
+|u1D44≠ ≈ (Kg) 
+Current speciﬁc volume (per mass): 
+|u1D71≠ =|u1D449
+|u1D44≠=1
+|u1D7≠+≈ |parenleftCv6|u1D4JA|threeCst
+Kg |parenriµhtCv6 
+Reference speciﬁc volume: 
+|u1D71≠|zeroCst=|u1D449|zeroCst
+|u1D44≠=1
+|u1D7≠+|zeroCst≈ |parenleftCv6|u1D4JA|threeCst
+Kg |parenriµhtCv6 
+Relative volume: 
+|u1D71≠|u1D4JFCst=|u1D449
+|u1D449|zeroCst=(|u1D449 |u1D44≠ ⁄ )
+(|u1D449|zeroCst|u1D44≠ ⁄ )=|u1D71≠
+|u1D71≠|zeroCst=|u1D7≠+|zeroCst
+|u1D7≠+ 
+Current normalized volume increment:  *EOS 
+LS-DYNA R13 1-3 (EOS) |u1D4J1|u1D71≠ 
+|u1D71≠=|u1D71≠ − |u1D71≠|zeroCst
+|u1D71≠= 1 −1
+|u1D71≠|u1D4JFCst= 1 −|u1D7≠+
+|u1D7≠+|zeroCst 
+A frequently used volumetric parameter is: 
+|u1D7≠7 =1
+|u1D71≠|u1D4JFCst− 1 =|u1D71≠|zeroCst− |u1D71≠
+|u1D71≠= −|u1D4J1|u1D71≠ 
+|u1D71≠=|u1D7≠+
+|u1D7≠+|zeroCst− 1 
+Sometimes another volumetric parameter is used: 
+|u1D7≠2 =|u1D71≠|zeroCst
+|u1D71≠=|u1D7≠+
+|u1D7≠+|zeroCst 
+Thus, the relation between |u1D7≠7 and |u1D7≠2  is, 
+|u1D7≠7 =|u1D71≠|zeroCst− |u1D71≠
+|u1D71≠= |u1D7≠2 − 1 
+The following table summarizes these volumetric par ameters. 
+VARIABLES COMPRESSION NO LOAD EXPANSION 
+|u1D71≠|u1D4JFCst=|u1D71≠
+|u1D71≠|zeroCst=|u1D7≠+|zeroCst
+|u1D7≠+ < 1 1 > 1 
+|u1D7≠2=1
+|u1D71≠|u1D4JFCst=|u1D71≠|zeroCst
+|u1D71≠=|u1D7≠+
+|u1D7≠+|zeroCst > 1 1 < 1 
+|u1D7≠7=1
+|u1D71≠|u1D4JFCst−1=|u1D7≠2−1 > 0 0 < 0 
+V0 – Initial Relative Volume 
+There are 3 deﬁnitions of density that must be dist inguished from each other: 
+|u1D7≠+|zeroCst= |u1D7≠+ref  
+= Density at nominal reference ⁄ state, usually non-stre ss or non-deformed state. 
+|u1D7≠+|dividesCv1|u1D461Cst=|zeroCst= Density at time 0 
+|u1D7≠+ = Current density 
+ 
+Recalling the current relative volume 
+|u1D71≠|u1D4JFCst=|u1D7≠+|zeroCst
+|u1D7≠+=|u1D71≠
+|u1D71≠|zeroCst, 
+at time = 0 the relative volume is 
+|u1D71≠|u1D4JFCst|zeroCst= |u1D71≠|u1D4JFCst||u1D461Cst=|zeroCst=|u1D7≠+|zeroCst
+|u1D7≠+|dividesCv1|u1D461Cst=|zeroCst=|u1D71≠||u1D461Cst=|zeroCst
+|u1D71≠|zeroCst. *EOS   
+1-4 (EOS) LS-DYNA R13 Generally, the V0 input parameter in an *EOS card r efers to this |u1D71≠|u1D4JFCst|zeroCst.  |u1D7≠+|zeroCst is generally the 
+density deﬁned in the *MAT card.  Hence, if a mater ial is mechanically compressed at 
+t = 0, V0, or |u1D71≠|u1D4JFCst|zeroCst, the initial relative volume, may be computed and i nput accordingly 
+(|u1D71≠|zeroCst≠ |u1D4490 ). 
+ 
+The “reference” state is a unique state with respec t to which the material stress tensor is 
+computed.  Therefore |u1D71≠|zeroCst is very critical in computing the pressure level i n a material.  
+Incorrect choice of |u1D71≠|zeroCst would lead to incorrect pressure computed.  In gen eral, |u1D71≠|zeroCst is 
+chosen such that at zero compression or expansion, the material should be in 
+equilibrium with its ambient surrounding.  In many of the equations shown in the EOS 
+section, |u1D7≠7 is frequently used as a measure of compression (or  expansion).  However, the 
+users must clearly distinguish between |u1D7≠7 and |u1D71≠|u1D4JFCst|zeroCst. 
+E0 – Internal Energy 
+Internal energy represents the thermal energy state  (temperature dependent 
+component) of a system.  One deﬁnition for internal  energy is 
+|u1D438 = |u1D44≠|u1D436|u1D463Cst|u1D447 ≈ (Joule) 
+Note that the capital “ |u1D438” here is the absolute internal energy.  It is not the same as that 
+used in the subsequent *EOS keyword input, or some equations shown for each *EOS 
+card.  This internal energy is often deﬁned with re spect to a mass or volume unit. 
+ 
+Internal energy per unit mass (also called speciﬁc internal energy): 
+|u1D4J2 =|u1D438
+|u1D44≠= |u1D436|u1D449Cst|u1D447 ≈ |parenleftCvJJoule 
+Kg |parenriµhtCvJ 
+Internal energy per unit current volume:  
+|u1D4J2|u1D449Cst=|u1D44≠
+|u1D449|u1D436|u1D449Cst|u1D447 = |u1D7≠+|u1D436|u1D449Cst|u1D447 =|u1D436|u1D449Cst|u1D447
+|u1D71≠≈ |parenleftCvJJoule 
+m3=N
+m2|parenriµhtCvJ 
+Internal energy per unit reference volume: 
+|u1D4J2|u1D449Cst|zeroCsts=|u1D44≠
+|u1D449|zeroCst|u1D436|u1D463Cst|u1D447 = |u1D7≠+|zeroCst|u1D436|u1D463Cst|u1D447 =|u1D436|u1D463Cst|u1D447
+|u1D71≠|zeroCst≈ |parenleftCvJJoule 
+m3=N
+m2|parenriµhtCvJ 
+|u1D4J2|u1D449Cst|zeroCsts typically refers to the capital “E” shown in some equations under this “EOS” 
+section.  Hence the initial “ internal energy per unit reference volume ”, E0, a keyword input 
+parameter in the *EOS section can be computed from 
+|u1D4J2|u1D449Cst|zeroCsts|dividesCv2|u1D461Cst=|zeroCst= |u1D7≠+|zeroCst|u1D436|u1D449Cst|u1D447||u1D461Cst=|zeroCst 
+To convert from |u1D4J2|u1D449Cst|zeroCst to |u1D4J2|u1D449Cst, simply divide |u1D4J2|u1D449Cst|zeroCst by |u1D71≠|u1D4JFCst 
+|u1D4J2|u1D449Cst= |u1D7≠+|u1D436|u1D449Cst|u1D447 = |<racketleftCv1|u1D7≠+|zeroCst|u1D436|u1D449Cst|u1D447|<racketriµhtCv1|u1D7≠+
+|u1D7≠+|zeroCst=|u1D4J2|u1D449Cst|zeroCsts
+|u1D71≠|u1D4JFCst  *EOS 
+LS-DYNA R13 1-5 (EOS) Equations of States (EOS) 
+A thermodynamic state of a homogeneous material, no t undergoing any chemical 
+reactions or phase changes, may be deﬁned by two st ate variables.  This relation is 
+generally called an equation of state.  For example , a few possible forms relating 
+pressure to two other state variables are 
+|u1D443 = |u1D443(|u1D7≠+, |u1D447) = |u1D443(|u1D71≠, |u1D4J2) = |u1D443(|u1D71≠|u1D4JFCst, |u1D4J2|u1D449Cst) = |u1D443(|u1D7≠7, |u1D4J2|u1D449Cst|zeroCsts) 
+The last equation form is frequently used to comput e pressure.  The EOS for solid phase 
+materials is sometimes partitioned into 2 terms, a cold pressure and a thermal pressure  
+|u1D443 = |u1D443|u1D4J≠Cst(|u1D7≠7) + |u1D443|u1D447Cst(|u1D7≠7, |u1D4J2|u1D449Cst|zeroCsts) 
+|u1D443|u1D4J≠Cst(|u1D7≠7) is the cold pressure hypothetically evaluated alon g a 0-degree-Kelvin isotherm.  
+This is sometimes called a 0-K pressure-volume rela tion or cold compression curve.  
+|u1D443|u1D447Cst(|u1D7≠7, |u1D4J2|u1D449Cst|zeroCsts) is the thermal pressure component that depends on both volumetric 
+compression and thermal state of the material.  
+ 
+Diﬀerent forms of the EOS describe diﬀerent types o f materials and how their 
+volumetric compression (or expansion) behaviors.  T he coeﬃcients for each EOS model 
+come from data-ﬁtting, phenomenological description s, or derivations based on 
+classical thermodynamics, etc.  
+Linear Compression 
+In low pressure processes, pressure is not signiﬁca ntly aﬀected by temperature.  When 
+volumetric compression is within an elastic linear deformation range, a linear bulk 
+modulus may be used to relate volume changes to pre ssure changes.  Recalling the 
+deﬁnition of an isotropic bulk modulus is [Fung 196 5], 
+∆|u1D71≠
+|u1D71≠= −|u1D443
+|u1D43∆. 
+This may be rewritten as 
+|u1D443 = |u1D43∆ |<racketleftCvJ−∆|u1D71≠
+|u1D71≠|<racketriµhtCvJ= |u1D43∆|u1D7≠7. 
+The bulk modulus, |u1D43∆, thus is equivalent to |u1D436|oneCst in *EOS_LINEAR_POLYNOMIAL when 
+all other coeﬃcients are zero.  This is a simplest form of an EOS.  To initialize a pressure 
+for such a material, only |u1D71≠|u1D4JFCst|zeroCst must be deﬁned.  
+Initial Conditions 
+In general, a thermodynamic state must be deﬁned by  two state variables.  The need to 
+specify |u1D71≠|u1D4JFCst|zeroCst and/or |u1D4J2|u1D449Cst|zeroCsts|dividesCv2|u1D461Cst=|zeroCst depends on the form of the EOS chosen.  The user s hould 
+review the equation term-by-term to establish what parameters to be initialized. *EOS   
+1-6 (EOS) LS-DYNA R13 For many of the EOS available, pressure is speciﬁed  (given), and the user must make an 
+assumption on either |u1D4J2|u1D449Cst|zeroCsts|dividesCv2|u1D461Cst=|zeroCst or |u1D71≠|u1D4JFCst|zeroCst.  Consider two possibilities (1) |u1D447||u1D461Cst=|zeroCst is deﬁned or 
+assumed from which |u1D4J2|u1D449Cst|zeroCsts|dividesCv2|u1D461Cst=|zeroCst may be computed, or (2) |u1D7≠+|dividesCv1|u1D461Cst=|zeroCst is deﬁned or assumed from 
+which |u1D71≠|u1D4JFCst|zeroCst may be obtained. 
+When to Use EOS 
+For small strains considerations, a total stress te nsor may be partitioned into a 
+deviatoric stress component and a mechanical pressu re. 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst = |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |minuteCst+|u1D7≠∆|u1D4J8Cst|u1D4J8Cst 
+3|u1D6FF|u1D4J6Cst|u1D4J7Cst = |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |minuteCst− |u1D443|u1D6FF|u1D4J6Cst|u1D4J7Cst  
+|u1D443 = −|u1D7≠∆|u1D4J8Cst|u1D4J8Cst 
+3 
+The pressure component may be written from the diag onal stress components. 
+ 
+Note that |u1D7≠∆Cst|u1D4J8Csts|u1D4J8Csts 
+|threeCst=[|u1D7≠∆Cst|oneCsts|oneCsts +|u1D7≠∆Cst|twoCsts|twoCsts +|u1D7≠∆Cst|threeCsts|threeCsts ]
+|threeCst is positive in tension while P is positive in comp ression.   
+ 
+Similarly, the total strain tensor may be partition ed into a deviatoric strain component 
+(volume-preserving deformation) and a volumetric de formation. 
+|u1D7≠≠|u1D4J6Cst|u1D4J7Cst= |u1D7≠≠|u1D4J6Cst|u1D4J7Cst |minuteCst+|u1D7≠≠|u1D4J8Cst|u1D4J8Cst 
+3|u1D6FF|u1D4J6Cst|u1D4J7Cst  
+where |u1D7≠≠Cst|u1D4J8Csts|u1D4J8Csts 
+|threeCst is called the mean normal strain, and |u1D7≠≠|u1D4J8Cst|u1D4J8Cst  is called the dilatation or volume 
+strain (change in volume per unit initial volume) 
+|u1D7≠≠|u1D4J8Cst|u1D4J8Cst =|u1D449 − |u1D449|zeroCst
+|u1D449|zeroCst 
+Roughly speaking, a typical convention may refer to  the relation |u1D7≠∆|u1D4J6Cst|u1D4J7Cst|minuteCst= |u1D4J3 (|u1D7≠≠|u1D4J6Cst|u1D4J7Cst |minuteCst) as a 
+“constitutive equation”, and |u1D443 = |u1D4J3 (|u1D7≠7, |u1D4J2|u1D449Cst|zeroCsts) as an EOS.  The use of an EOS may be 
+omitted only when volumetric deformation is very sm all, and ||u1D443| ≪ |dividesCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |minuteCst|dividesCv2. 
+A Note About Contact When Using an Equation of Stat e 
+When a part includes an equation of state, it is im portant that the initial geometry of 
+that part not be perturbed by the contact algorithm .  Such perturbation can arise due to 
+initial penetrations in the contact surfaces but ca n usually be avoided by setting the 
+variable IGNORE to 1 or 2 in the *CONTACT input or by using a segment based contact 
+(SOFT = 2). *EOS_LINEAR_POLYNOMIAL  *EOS  
+LS-DYNA R13 1-7 (EOS) *EOS_LINEAR_POLYNOMIAL  
+This is Equation of State Form 1. 
+Purpose:  Deﬁne coeﬃcients for a linear polynomial EOS, and initialize the 
+thermodynamic state of the material by deﬁning E0 a nd V0 below. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable EOSID C0 C1 C2 C3 C4 C5 C6 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable E0 V0       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+EOSID Equation of state ID. A unique number or label must  be speciﬁed 
+(see *PART). 
+C0 The 0 th  polynomial equation coeﬃcient 
+C1 The 1 st  polynomial equation coeﬃcient (when used by itself,  this 
+is the elastic  bulk modulus, meaning it cannot be used for 
+deformation that is beyond the elastic regime). 
+⋮    ⋮ 
+C6 The 6 th  polynomial equation coeﬃcient 
+E0 Initial internal energy per unit reference volume ( see the 
+beginning of the *EOS section) 
+V0 Initial relative volume (see the beginning of th e *EOS section) *EOS  *EOS_LINEAR_POLYNOMIAL  
+1-8 (EOS) LS-DYNA R13 Remarks: 
+1.  Pressure.   The linear polynomial equation of state is linear  in internal energy.  
+The pressure is given by: 
+|u1D443 = |u1D436|zeroCst+ |u1D436|oneCst|u1D7≠7 + |u1D436|twoCst|u1D7≠7|twoCst+ |u1D436|threeCst|u1D7≠7|threeCst+ |parenleftCv2|u1D436|fourCst+ |u1D436|fiveCst|u1D7≠7 + |u1D436|sixCst|u1D7≠7|twoCst|parenriµhtCv2|u1D438. 
+where terms |u1D436|twoCst|u1D7≠7|twoCst and |u1D436|sixCst|u1D7≠7|twoCst are set to zero if |u1D7≠7 < 0 , |u1D7≠7 = |u1D7≠+ |u1D7≠+|zeroCst⁄ − 1 , and |u1D7≠+ |u1D7≠+|zeroCst⁄ is 
+the ratio of current density to reference density.  |u1D7≠+ is a nominal or reference 
+density deﬁned in the *.  *.   
+3-44 (.  
+This is Thermal Material Type 17. The chemical spec ies making up this material 
+undergo speciﬁed chemical reactions.  The chemical reaction kinetics is the same as for 
+thermal material *.   *.   
+3-46 (.   *.   
+3-48 (.   *.   
+3-50 (.   *

@@ -1,0 +1,43 @@
+ ..................................... ................................................... ............................ 2-127  
+*.  2 
+ *.    ALPHABETIZED MATERIALS LIST  
+LS-DYNA R13 2-29 (MAT) Material Keyword Number 
+*.   *MAT  
+LS-DYNA R13 2-127 (MAT) *.   
+2-128 (MAT) LS-DYNA R13 Symmetry Plane Cards.   Deﬁne one card for each symmetry plane.  Up to six 
+symmetry planes can be deﬁned.  The next keyword (“ *”) card terminates this input.  
+ Cards 3 1 2 3 4 5 6 7 8 
+Variable XC1 YC1 ZC1 XC2 YC2 ZC2   
+Type F F F F F F   
+Default none none none none none none   
+ 
+ VARIABLE   DESCRIPTION  
+IDNL Nonlocal material input ID 
+PID Part ID for nonlocal material 
+P Exponent of weighting function.  A typical value mi ght be 8 
+depending somewhat on the choice of L.  See Remark 4 . 
+Q Exponent of weighting function.  A typical value mi ght be 2.  
+See Remark 4 . 
+L Characteristic length.  This length should span a f ew elements.  
+See Remark 4 . 
+NFREQ Number of time steps between searching for integrat ion points 
+that lie in the neighborhood.  Nonlocal smoothing w ill be done 
+each cycle using these neighbors until the next sea rch is done.  
+The neighbor search can add signiﬁcant computationa l time, so 
+it is suggested that NFREQ be set to a value betwee n 10 and 100 
+depending on the problem.  This parameter may be so mewhat 
+problem dependent.  If NFREQ  =  0, a single search will be 
+done at the start of the calculation. 
+NHV N umber of variables with nonlocal treatment of incre ments.  See 
+Remark 1  
+NHVT Number of variables with nonlocal treatment of total values.  
+See Remark 1 . 
+NL1, …, NL8 Identiﬁes the history variable(s) for nonlocal trea tment.  Deﬁne 
+NHV + NHVT values (maximum of 8 values per line).  See 
+Remark 2 . *.   
+2-130 (MAT) LS-DYNA R13 in the third column in the table below corresponds to the history variable 
+number as tabulated at http://www.dynasupport.com/howtos/material-
+/history-variables .  Note that the NL n value is the history variable number 
+plus 1. 
+ 
+Material Model Name *

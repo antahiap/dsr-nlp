@@ -1,0 +1,12 @@
+ ............................. ................................................... .................. 2-394  
+*.  [0,3c,8B] {0} 
+ *.   *.   
+2-394 (MAT) LS-DYNA R13 *.   *.   
+2-396 (MAT) LS-DYNA R13 |u1D7≠∆|u1D4J6Csts k = min|parenleftCv2|u1D7≠∆|u1D466Cst,|dividesCv2|u1D7≠∆|u1D4J6Csts k t |dividesCv2|parenriµhtCv2|u1D7≠∆|u1D4J6Csts k t 
+|dividesCv2|u1D7≠∆|u1D4J6Csts k t |dividesCv2  . 
+The yield stress is deﬁned by 
+|u1D7≠∆|u1D466Cst= |u1D44∆ + |u1D44F(1 +/u1D450|u1D6F∆)  , 
+where |u1D44∆, |u1D44F, and /u1D450 are user deﬁned input constants and |u1D6F∆ is the volumetric strain as 
+deﬁned above.  After scaling the principal stresses  they are transformed back into the 
+global system and the ﬁnal stress state is computed  
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst = |u1D7≠∆|u1D4J6Cst|u1D4J7Cst s k − |u1D6FF|u1D4J6Cst|u1D4J7Cst |u1D7≠∆air .*

@@ -1,0 +1,86 @@
+-050: *. -050 
+*. -050  
+LS-DYNA R13 2-379 (MAT) *. -050  *. -050  
+LS-DYNA R13 2-381 (MAT)  Card 2 1 2 3 4 5 6 7 8 
+Variable IVECT IFAIL ITHERM IHYPER IEOS LMCA   
+Type I I I I I I   
+ 
+ VARIABLE   DESCRIPTION  
+IVECT Vectorization ﬂag: 
+EQ.0:  Oﬀ 
+EQ.1:  On.  A vectorized user subroutine must be supplied . 
+IFAIL Failure ﬂag. 
+EQ.0: No failure 
+EQ.1: Allows failure of shell and solid elements 
+LT.0: |IFAIL|  is the address of NU MINT in the material 
+constants array.  NU MINT is deﬁned as the number of 
+failed integration points that will trigger element  dele- 
+tion.  This option applies only to shell and solid elements 
+(release 5 of version 971). 
+ITHERM Temperature ﬂag: 
+EQ.0:  Oﬀ 
+EQ.1:  On.  Compute element temperature. 
+IHYPER Deformation gradient ﬂag (see Appendix A): 
+EQ.0: Do not compute deformation gradient. 
+EQ.-1: Same as 1, except if IORTHO = 1 or 3, the deformation 
+gradient is in the global coordinate system. 
+EQ.-10: Same as - 1, except that this will enforce full integration 
+for elements -1, -2 and 2. 
+EQ.1: Compute deformation gradient for bricks and shells.   If 
+IORTHO = 1 or 3, the deformation gradient is in the  lo- 
+cal coordinate system instead of the global coordin ate 
+system.  
+EQ.10: Same as 1, except that this will enforce full integ ration 
+for elements -1, -2 and 2. 
+EQ.3: Compute deformation gradient for shells from the *. -050  
+LS-DYNA R13 2-383 (MAT)  VARIABLE   DESCRIPTION  
+This option is for solid elements only. 
+LT.0.0: The absolute value of AOPT is a coordinate sys tem ID 
+number (CID on *DEFINE_COOR DINATE_NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DE-
+FINE_COORDINATE_VECTOR).  Available in R3 ver- 
+sion of 971 and later. 
+MACF Material axes change ﬂag for brick elements fo r quick changes: 
+EQ.1: No change, default 
+EQ.2: Switch material axes |u1D44∆ and |u1D44F 
+EQ.3: Switch material axes |u1D44∆ and /u1D450 
+EQ.4: Switch material axes |u1D44F and  /u1D450 
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+Orthotropic Card 2.   Additional card for IORTHO = 1 or 3. 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA IEVTS 
+Type F F F F F F F I 
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3.   BE TA may be overridden on the element card; see 
+*ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO.  
+IEVTS Address of |u1D438|u1D44∆Cst for orthotropi c material with thick shell 
+formulation 5 (see Remark 4 ) 
+ *. -050  
+LS-DYNA R13 2-385 (MAT) b)  P2.   The second parameter, P2, speciﬁes the number of integration points 
+(one to four) that are required to fail for the ele ment to fail.  If it is zero, 
+the element will not fail regardless of IFAIL. The recommended value for 
+P2 is 1. 
+c)  Other Parameters.   The cohesive element only uses MID, RO, MT, LMC, 
+NHV, IFAIL and IVECT in addition to the material pa rameters. 
+d)  Appendix R.   See Appendix R for the speciﬁcs of the umat  subroutine re- 
+quirements for the cohesive element. 
+2.  Material Constants.   If IORTHO = 0, LMC must be ≤ 48.  If IORTHO = 1, LMC 
+must be ≤ 40.  If more material constants are neede d, LMCA may be used to 
+create an additional material constant array.  Ther e is no limit on the size of 
+LMCA. 
+3.  Spot weld thinning.   If the user-deﬁned material is used for beam or b rick 
+element spot welds that are tied to shell elements,  and SPOTHIN > 0 on *CON-
+TROL_CONTACT, then spot weld thinning will be done for those shells if IS-
+POT = 2.  Otherwise, it will not be done.  
+4.  Thick Shell Formulation 5.   IEVTS is optional and is used only by thick shell  
+formulation 5.  It points to the position of |u1D438|u1D44∆Cst in the material constants array.  
+Following |u1D438|u1D44∆Cst, the next 5 material constants must be |u1D438|u1D44FCst, |u1D438|u1D4J≠Cst, /u1D̅08|u1D44FCst|u1D44∆Cst , /u1D̅08|u1D4J≠Cst|u1D44∆Cst , and /u1D̅08|u1D4J≠Cst|u1D44FCst .  
+This data enables thick shell formulation 5 to calc ulate an accurate thickness 
+strain, otherwise the thickness strain will be base d on the elastic constants 
+pointed to by IBULK and IG. *

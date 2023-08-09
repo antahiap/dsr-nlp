@@ -1,0 +1,62 @@
+: *.  ALPHABETIZED MATERIALS LIST   
+2-24 (MAT) LS-DYNA R13 Material Keyword Number 
+*.   *.   
+  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3 MACF  
+Type F F F F F F I  
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+LT.0.0: -E is either a load curve ID for Young’s modulus as a 
+function of plastic strain or a table ID for Young’ s 
+modulus as a function of plastic strain and tempera - 
+ture. 
+PR Poisson’s ratio 
+CP ij  9 coeﬃcients /u1D450|u1D4J6Cst|u1D4J7Cst |minuteCst of the ﬁrst linear transformation matrix /u1D402′ 
+CPP ij  9 coeﬃcients /u1D450|u1D4J6Cst|u1D4J7Cst |minuteCst|minuteCst  of the second linear transformation matrix /u1D402′′ 
+AOPT Material axes option (see *.   *.   
+  VARIABLE   DESCRIPTION  
+the rotation for all AOPT options.  Otherwise, if A OPT = 3, the 
+BETA input on Card 3 rotates the axes.  For all other values of 
+AOPT, the material axes will be switched as speciﬁe d by MACF, 
+but no BETA rotation will be performed. 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 3.  It may be overridden on 
+the element card; see *ELEMENT_SOLID_ORTHO. 
+Remarks: 
+The 3D yield condition for this material can be wri tten as (see Barlat et al.  [2005]) 
+/u1D̅1∫=/u1D̅1∫|parenleftCv2/u1D412̃|minuteCst,/u1D412̃|minuteCst|minuteCst |parenriµhtCv2
+=|dividesCv2|u1D446̃|oneCst|minuteCst− |u1D446̃|oneCst|minuteCst|minuteCst |dividesCv2|u1D44∆Cst+|dividesCv2|u1D446̃|oneCst|minuteCst− |u1D446̃|twoCst|minuteCst|minuteCst |dividesCv2|u1D44∆Cst+ ||u1D446̃|oneCst|minuteCst− |u1D446̃|threeCst|minuteCst|minuteCst ||u1D44∆Cst+ ||u1D446̃|twoCst|minuteCst− |u1D446̃|oneCst|minuteCst|minuteCst ||u1D44∆Cst+ ||u1D446̃|twoCst|minuteCst− |u1D446̃|twoCst|minuteCst|minuteCst ||u1D44∆Cst
++ ||u1D446̃|twoCst|minuteCst− |u1D446̃|threeCst|minuteCst|minuteCst ||u1D44∆Cst+ ||u1D446̃|threeCst|minuteCst− |u1D446̃|oneCst|minuteCst|minuteCst ||u1D44∆Cst+ ||u1D446̃|threeCst|minuteCst− |u1D446̃|twoCst|minuteCst|minuteCst ||u1D44∆Cst+ ||u1D446̃|threeCst|minuteCst− |u1D446̃|threeCst|minuteCst|minuteCst ||u1D44∆Cst
+= 4|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D44∆Cst 
+Here |u1D446̃|u1D4J6Cst|minuteCst and |u1D446̃|u1D4J6Cst|minuteCst|minuteCst  (i = 1,2,3) are the 6 principal values, |u1D44∆ is the ﬂow potential exponent, and 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is the eﬀective uniaxial yield stress (deﬁned with  LCSS).  The diagonal tensors /u1D412̃|minuteCst=
+diag|parenleftCv2|u1D446̃|oneCst|minuteCst, |u1D446̃|twoCst|minuteCst, |u1D446̃|threeCst|minuteCst|parenriµhtCv2 and /u1D412̃|minuteCst|minuteCst = diag|parenleftCv2|u1D446̃|oneCst|minuteCst|minuteCst , |u1D446̃|twoCst|minuteCst|minuteCst , |u1D446̃|threeCst|minuteCst|minuteCst |parenriµhtCv2 contain the principal values of /u1D42C̃|minuteCst and /u1D42C̃|minuteCst|minuteCst .  /u1D42C̃|minuteCst 
+and /u1D42C̃|minuteCst|minuteCst  result from two linear transformations of the devi atoric portion of the Cauchy 
+stress, /u1D42C: 
+/u1D42C̃|minuteCst=/u1D402|minuteCst/u1D42C
+/u1D42C̃|minuteCst|minuteCst =/u1D402|minuteCst|minuteCst /u1D42C 
+/u1D402|minuteCst and /u1D402|minuteCst|minuteCst  have the following form: 
+/u1D402|minuteCst=
+⎣⎢⎢⎢⎢⎢⎢⎡0˗/u1D450|oneCst|twoCst |minuteCst˗/u1D450|oneCst|threeCst |minuteCst0 0 0
+˗/u1D450|twoCst|oneCst |minuteCst0˗/u1D450|twoCst|threeCst |minuteCst0 0 0
+˗/u1D450|threeCst|oneCst |minuteCst˗/u1D450|threeCst|twoCst |minuteCst0 0 0 0
+0 0 0/u1D450|fourCst|fourCst |minuteCst0 0
+0 0 0 0 /u1D450|fiveCst|fiveCst |minuteCst0
+0 0 0 0 0 /u1D450|sixCst|sixCst |minuteCst⎦⎥⎥⎥⎥⎥⎥⎤
+/u1D402|minuteCst|minuteCst =
+⎣⎢⎢⎢⎢⎢⎢⎡0˗/u1D450|oneCst|twoCst |minuteCst|minuteCst ˗/u1D450|oneCst|threeCst |minuteCst|minuteCst 0 0 0
+˗/u1D450|twoCst|oneCst |minuteCst|minuteCst 0˗/u1D450|twoCst|threeCst |minuteCst|minuteCst 0 0 0
+˗/u1D450|threeCst|oneCst |minuteCst|minuteCst ˗/u1D450|threeCst|twoCst |minuteCst|minuteCst 0 0 0 0
+0 0 0/u1D450|fourCst|fourCst |minuteCst|minuteCst 0 0
+0 0 0 0 /u1D450|fiveCst|fiveCst |minuteCst|minuteCst 0
+0 0 0 0 0 /u1D450|sixCst|sixCst |minuteCst|minuteCst ⎦⎥⎥⎥⎥⎥⎥⎤ *

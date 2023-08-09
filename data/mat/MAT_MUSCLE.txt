@@ -1,0 +1,37 @@
+ ....................................... ................................................... ............................... 2-997  
+*.  [1T] {0} 
+ *.  *.   *.   
+This is  Material Type 156 for truss elements.  This materia l is a Hill-type muscle model 
+with activation and a parallel damper.  Also, see * .   
+  VARIABLE   DESCRIPTION  
+DMP Damping constant (stress × time units) 
+ALM Activation level as a function of time: 
+LT.0.0: Absolute value gives load curve ID. 
+GE.0.0: Constant value of ALM is used. 
+SFR Scale factor for strain rate maximum as a function of act ivation 
+level, |u1D44∆(|u1D461): 
+LT.0.0: Absolute value gives load curve ID. 
+GE.0.0: Constant value of 1.0 is used. 
+SVS Active dimensionless tensile stress as a function o f the stretch 
+ratio,  /u1D45∫ /u1D45∫/o.st/r.st|iCst /g.st /fraction.v1 : 
+LT.0.0: Absolute value gives load curve ID. 
+GE.0.0: Constant value of 1.0 is used. 
+SVR Active dimensionless tensile stress as a function o f the 
+normalized strain rate, |u1D7≠≠̅̇: 
+LT.0.0: Absolute value gives load curve ID. 
+GE.0.0: Constant value of 1.0 is used. 
+SSP Isometric dimensionless stress as a function of the  stretch ratio, 
+/u1D45∫ /u1D45∫/o.st/r.st|iCst /g.st /fraction.v1 , for the parallel elastic element: 
+LT.0.0: Absolute value gives load curve ID or table ID (s ee 
+Remarks). 
+EQ.0.0: Exponential function is used (see Remarks). 
+GT.0.0: Constant value of 0.0 is used. 
+Remarks: 
+The material behavior of the muscle model is adapte d from *.   *.   
+  
+Stress of Damping Element is: 
+|u1D7≠∆|threeCst= DMP ×/u1D45∫
+/u1D45∫orig |u1D7≠≠̇  . 
+ 
+Total Stress is: 
+|u1D7≠∆ = |u1D7≠∆|oneCst+ |u1D7≠∆|twoCst+ |u1D7≠∆|threeCst  .*

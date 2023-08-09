@@ -1,0 +1,47 @@
+(_T): *. (_T) 
+*.   
+ *.  
+*. _T 
+Card Summary: 
+Card 1a.   This card is included if the keyword option is un set (<BLANK>). 
+MID RO E PR T HC VP  
+Card 1b.   This card is included if the THERMAL keyword opti on is used. 
+MID RO ALPHA N A Q G EPSO 
+Card 2a.   This card is included if the keyword option is un set (<BLANK>). 
+ALPHA N A Q G EPS0 LCQ  
+Card 2b.   This card is included if the THERMAL keyword opti on is used. 
+LCE LCPR LCCTE      
+Data Card Deﬁnitions: 
+Card 1 for no keyword option (<BLANK>) 
+ Card 1a 1 2 3 4 5 6 7 8 
+Variable MID RO E PR T HC VP  
+Type A F F F F F F  
+ *.   
+  VARIABLE   DESCRIPTION  
+EPS0 Minimum strain rate considered in calculating |u1D44D. 
+ 
+Card 2 for no keyword option (<BLANK>) 
+ Card 2a 1 2 3 4 5 6 7 8 
+Variable ALPHA N A Q G EPS0 LCQ  
+Type F F F F F F I  
+ 
+ VARIABLE   DESCRIPTION  
+ALPHA |u1D6F+, see Remarks.  Not to be confused with coeﬃcient of thermal 
+expansion. 
+N See Remarks. 
+A See Remarks. 
+Q See Remarks. 
+G See Remarks. 
+EPS0 Minimum strain rate considered in calculating |u1D44D. 
+LCQ ID of curve specifying parameter |u1D444: 
+GT.0: |u1D444 as function of plastic strain. 
+LT.0: |u1D444 as function of temperature. 
+ 
+Card 2 for the THERMAL keyword option 
+ Card 2b 1 2 3 4 5 6 7 8 
+Variable LCE LCPR LCCTE      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+LCE ID of curve deﬁning Young’s Modulus as a function o f 
+temperature *

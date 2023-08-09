@@ -1,0 +1,39 @@
+ .................. ................................................... ...... 2-1057  
+*.  [0,2,3a ,3c,8B] {8} 
+ *.  *.   *.   
+This is  Material Type 165.  This relatively simple model, b ased on a material model by 
+Lemaitre and Chaboche [1990], is suited to model no nlinear kinematic hardening 
+plasticity.  The model accounts for the nonlinear B auschinger eﬀect, cyclic hardening, 
+and ratcheting.  Huang [2009] programmed this model  and provided it as a user 
+subroutine.  It is a very cost eﬀective model and i s available for shell and solid elements. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY H C GAMMA 
+Type A F F F F F F F 
+Default none none none none none 0.0 0.0 0.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FS        
+Type F        
+Default 10 16         
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Initial yield stress, |u1D7≠∆|u1D466Cst|zeroCst 
+H Isotropic plastic hardening modulus 
+C Kinematic hardening modulus *.   
+  VARIABLE   DESCRIPTION  
+GAMMA Kinematic hardening parameter, |u1D6F∆ 
+FS Failure strain for eroding elements 
+Remarks: 
+If the isotropic hardening modulus, /u1D4:B, is nonzero, the size of the surface increases as a 
+function of the equivalent plastic strain, |u1D7≠≠|u1D4JDCst: 
+|u1D7≠∆|u1D466Cst= |u1D7≠∆|u1D466Cst|zeroCst+/u1D4:B|u1D7≠≠|u1D4JDCst  . 
+The rate of evolution of the kinematic component is  a function of the plastic strain rate: 
+|u1D6F+̇= [|u1D436|u1D4JB − |u1D6F∆|u1D6F+]|u1D7≠≠̇|u1D4JDCst  , 
+where |u1D4JB is the ﬂow direction.  The term, |u1D6F∆|u1D6F+|u1D7≠≠̇|u1D4JDCst, introduces the nonlinearity into the 
+evolution law, which becomes linear if the paramete r, |u1D6F∆, is set to zero. *

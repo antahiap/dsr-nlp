@@ -1,0 +1,151 @@
+ ................................ ................................................... ..................... 2-562  
+*.  [0,3c,5,8B] {54} 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+KCON Optional Young's modulus used to compute the sound speed.  
+This will inﬂuence the time step, contact forces, h ourglass 
+stabilization forces, and the numerical damping (DA MP). 
+EQ.0.0: KCON is set equal to the, 
+max(|u1D438, current tangent to stress-strain cur v e)  , 
+ if TBID ≠ 0.  Otherwise, if TBID = 0, KCON is set 
+equal to the maximum slope of the stress-strain cur ve.  
+TC Tension cut-oﬀ stress 
+FAIL Failure option after cutoﬀ stress is reached: 
+EQ.0.0: Tensile stress remains at cut-oﬀ value. 
+EQ.1.0: Tensile stress is reset to zero. 
+EQ.2.0: The element is eroded. 
+DAMP Viscous coeﬃcient to model damping eﬀects (0.0 5 < 
+recommended value < 0.50; default is 0.05) 
+TBID Table ID (see *DEFINE_TA BLE) for nominal stress as a function 
+of strain data at a given strain rate.  If the tabl e ID is provided, 
+Cards 3 and 4 may be left blank and the input curves will  be 
+used directly in the model.  The Table ID can be positive or 
+negative (see Remark 6  below).  If TBID < 0, enter |TBID|  on the 
+*DEFINE_TABLE keyword. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable BVFLAG SFLAG RFLAG TFLAG PVID SRAF REF HU 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 *.   
+ DAMAGE_DECAY Card.   Card 3 for DAMAGE_DECAY keyword option.  
+ Card 3a 1 2 3 4 5 6 7 8 
+Variable MINR MAXR SHAPE BETAT BETAC    
+Type F F F F F    
+Default 0.0 0.0 0.0 0.0 0.0    
+ 
+ VARIABLE   DESCRIPTION  
+MINR Minimum strain rate of interest 
+MAXR Maximum strain rate of interest 
+SHAPE Shape factor for unloading.  Active for nonzero val ues of the 
+hysteretic unloading factor HU. Values less than on e reduces the 
+energy dissipation and greater than one increases d issipation; see 
+Figure M83-2 . 
+BETAT Decay constant for damage in tension.  The damage d ecays after 
+loading ceases according to |u1D4J2−BETAT ×|u1D461Cst. 
+BETAC Decay constant for damage in compression.  The dama ge decays 
+after loading ceases according to |u1D4J2−BETAC ×|u1D461Cst. 
+ 
+Material Constants Card.   Card 3 for keyword option NOT  set to DAMAGE_DECAY. 
+ Card 3b 1 2 3 4 5 6 7 8 
+Variable D0 N0 N1 N2 N3 C0 C1 C2 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+D0 Material constant; see Material Formulation . 
+N0 Material constant; see Material Formulation . *.   
+  VARIABLE   DESCRIPTION  
+MINR Minimum strain rate of interest 
+MAXR Maximum strain rate of interest 
+SHAPE Shape factor for unloading.  Active for nonzero val ues of the 
+hysteretic unloading factor HU. Values less than on e reduces the 
+energy dissipation and greater than one increases d issipation; see 
+Figure M83-2 . 
+ 
+Unloading Card.   This card is optional. 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable EXPON RIULD       
+Type F F       
+Default 1.0 0.0       
+ 
+ VARIABLE   DESCRIPTION  
+EXPON Exponent for unloading.  Active for nonzero values of the 
+hysteretic unloading factor HU. Default is 1.0 Current State
+Nominal StrainNominal Stressε1ε2ε3
+ε0ε3ε2ε1 >>
+ Figure M83-2.  HU = 0, TBID > 0 *.   
+ we may write 
+/u1D404̇|u1D461Cst|u1D441Cst= |u1D4J3 |parenleftCv1/u1D412(|u1D461),/u1D42C(|u1D461)|parenriµhtCv1 
+which states that the nonlinear strain rate is the function of stress and a state variable 
+which represents the history of loading.  Therefore , the proposed kinetic equation for 
+foam materials is: 
+/u1D404̇|u1D461Cst|u1D441Cst=/u1D6D4
+‖/u1D6D4‖|u1D437|zeroCstexp /˙raceleft.v6−/u1D450|zeroCst|<racketleftCvJ/u1D6D4:/u1D412
+(‖/u1D6D4‖)|twoCst|<racketriµhtCvJ|twoCst|u1D4JBCst|zeroCsts
+/˙raceright.v6  , 
+where |u1D437|zeroCst, /u1D450|zeroCst, and |u1D4JB|zeroCst are material constants, and /u1D412 is the overall state variable.  If either 
+|u1D437|zeroCst= 0 or /u1D450|zeroCst→∞  then the nonlinear strain rate vanishes. 
+|u1D446̇|u1D4J6Cst|u1D4J7Cst =/˙racketleft.v:/u1D450|oneCst|parenleftCv2|u1D44∆|u1D4J6Cst|u1D4J7Cst |u1D44J −/u1D450|twoCst|u1D446|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|u1D443 +/u1D450|threeCst/u1D44A|u1D4JBCst|oneCsts|parenleftCv2/p∙r∙llel.β2/u1D404̇|u1D441Cst/p∙r∙llel.β2|parenriµhtCv2|u1D4JBCst|twoCsts/u1D4:C|u1D4J6Cst|u1D4J7Cst /˙racketright.v:|u1D44J 
+|u1D44J = 1 +/u1D450|fourCst⎣⎢⎡/p∙r∙llel.β2/u1D404̇|u1D441Cst/p∙r∙llel.β2
+/u1D450|fiveCst− 1
+⎦⎥⎤|u1D4JBCst|threeCsts
+ 
+|u1D443 =/u1D6D4:/u1D404̇|u1D441Cst 
+/u1D44A=/integral.v:/u1D6D4:(|u1D4J1/u1D404) 
+where /u1D450|oneCst, /u1D450|twoCst, /u1D450|threeCst, /u1D450|fourCst, /u1D450|fiveCst, |u1D4JB|oneCst, |u1D4JB|twoCst, |u1D4JB|threeCst, and |u1D44∆|u1D4J6Cst|u1D4J7Cst  are material constants and: 
+‖/u1D6D4‖= |parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst |u1D7≠∆|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|oneCst
+|twoCst 
+/p∙r∙llel.β2/u1D404̇/p∙r∙llel.β2= |parenleftCv2|u1D438̇|u1D4J6Cst|u1D4J7Cst |u1D438̇|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|oneCst
+|twoCst 
+/p∙r∙llel.β2/u1D404̇|u1D441Cst/p∙r∙llel.β2= |parenleftCv2|u1D438̇|u1D441Cst
+|u1D4J6Cst|u1D4J7Cst |u1D438̇|u1D441Cst
+|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|oneCst
+|twoCst 
+In the implementation by Fu Chang the model was sim pliﬁed such that the input 
+constants |u1D44∆|u1D4J6Cst|u1D4J7Cst  and the state variables |u1D446|u1D4J6Cst|u1D4J7Cst  are scalars. 
+Additional Remarks: 
+1.  Bulk Viscosity.   The bulk viscosity, which generates a rate depend ent 
+pressure, may cause an unexpected volumetric respon se.  Consequently, it is 
+optional with this model. 
+2.  Constant Velocity Loading.   Dynamic compression tests at the strain rates of 
+interest in vehicle crash are usually performed wit h a drop tower.  In this test 
+the loading velocity is nearly constant but the tru e strain rate, which depends 
+on the instantaneous specimen thickness, is not.  T herefore, the engineering 
+strain rate input is optional so that the stress-st rain curves obtained at constant 
+velocity loading can be used directly.  See the SFL AG ﬁeld. 
+3.  Strain Rates with Multiaxial Loading .  To further improve the response 
+under multiaxial loading, the strain rate parameter  can either be based on the 
+principal strain rates or the volumetric strain rat e.  See the RFLAG ﬁeld. *.   
+ In this case the curve with lowest strain rate valu e (typically zero) in TBID 
+must correspond to the unloading path of the materi al as measured in a 
+quasistatic test.  The quasistatic loading path the n corresponds to a realis- 
+tic (small) value of the strain rate.  At least thr ee curves should be used in 
+the table: one for unloading, one for quasistatic, and one or more for dy- 
+namic response.  The quasistatic loading and unload ing path (thus the 
+ﬁrst two curves of the table) should form a closed loop.  The unloading re- 
+sponse is given by a damage formulation for the pri ncipal stresses as fol- 
+lows: 
+|u1D7≠∆|u1D4J6Cst= (1 − |u1D4J1)|u1D7≠∆|u1D4J6Cst 
+The damage parameter, |u1D4J1, is computed internally in such a way that the 
+unloading path under uniaxial tension and compressi on is ﬁtted exactly in 
+the simulation.  The unloading response is rate dep endent in this case.  In 
+some cases, this rate dependence for loading and  unloading can lead to 
+noisy results.  To reduce that noise, it is possibl e to switch to rate inde- 
+pendent unloading with RIULD = 1. 
+c)  HU > 0 and TBID > 0.   See Figure M83-4 . 
+No unloading curve should be provided in the table and the curve with 
+the lowest strain rate value in TBID should corresp ond to the loading path 
+of the material as measured in a quasistatic test.  At least two curves 
+should be used in the table: one for quasistatic an d one or more for dy- 
+namic response.  In this case the unloading respons e is given by a damage 
+formulation for the principal stresses as follows: Current State
+Nominal StrainNominal Stressε1ε2ε3
+ε0ε3ε2ε1 >> >ε0
+Unloading curve computed
+internally based on HU and SHAPE
+ Figure M83-4.   HU > 0, TBID > 0 *

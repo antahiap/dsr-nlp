@@ -1,0 +1,116 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+RO Mass density 
+PIJ Initial compactness tensor |u1D443|u1D4J6Cst|u1D4J7Cst  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable E0 LCK PR LCX LCY LCC L R 
+Type F I F I I I F F 
+Default none none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+E0 Initial anisotropy variable |u1D4J2 (value between 1 and 2) 
+LCK Load curve ID for bulk modulus |u1D43∆ as function of relative density 
+|u1D4J1 
+PR Poisson’s ratio, /u1D̅08 
+LCX Load curve ID for hydrostatic compressive yield  /u1D44B as function of 
+relative density |u1D4J1 
+LCY Load curve for uniaxial compressive yield /u1D44C as function of 
+relative density |u1D4J1 
+LCC Load curve ID for shear yield |u1D436|zeroCst as function of relative density |u1D4J1 
+L Yield surface parameter /u1D4:F relating hydrostatic compressive yield 
+to point on hydrostatic axis with maximum strength 
+R Yield surface parameter |u1D44J governing the shape of the yield 
+surface 
+ *.   
+  VARIABLE   DESCRIPTION  
+LCFK Load curve ID for viscous compliance, |u1D4J3/u1D4:E.st, as function of relative 
+density, |u1D4J1 
+LCFS2 Load curve ID for viscous compliance, |u1D4J3/u1D446.st|twoCst, as function of 
+temperature, |u1D447 
+DV1 Volume diﬀusion coeﬃcient |u1D4J1|u1D449Cst|oneCst 
+DV2 Volume diﬀusion coeﬃcient |u1D4J1|u1D449Cst|twoCst 
+DS1 Surface diﬀusion coeﬃcient |u1D4J1/u1D446.st|oneCst 
+DS2 Surface diﬀusion coeﬃcient |u1D4J1/u1D446.st|twoCst 
+OMEGA Blending parameter |u1D714 
+RGAS Universal gas constant, |u1D44Jgas  
+ 
+Sintering Card 2.   Additional card for SINT = 1. 
+ Card 3.2 1 2 3 4 5 6 7 8 
+Variable LCPR LCFS3 LCTAU ALPHA LCFS1 GAMMA L0 LCFKS 
+Type I I I F I F F I 
+Default none none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+LCPR Load curve ID for viscous Poisson’s ratio, /u1D̅08|u1D463Cst, as a function of 
+relative density, |u1D4J1 
+LCFS3 Load curve ID for evolution of mobility facto r, |u1D4J3/u1D446.st|threeCst, as function of 
+temperature, |u1D447 
+LCTAU Load curve for relaxation time, /u1D̅0F, as function of temperature, |u1D447 
+ALPHA Thermal expansion coeﬃcient, |u1D6F+ 
+LCFS1 Load curve ID for sintering stress scaling, |u1D4J3/u1D446.st|oneCst, as function of 
+relative density, |u1D4J1 *.   
+  
+The yield surface is represented by two functions i n the Rendulic plane according to 
+|u1D7≠∆/u1D44C.st(|u1D4J1) =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex⎧
+2|u1D436|zeroCst(|u1D4J1) − |u1D436|oneCst(|u1D4J1)/u1D4:D|oneCst− |u1D436|twoCst(|u1D4J1)/u1D4:D|oneCst|twoCst/u1D4:D|oneCst≥/u1D4:F/u1D44B (|u1D4J1)
+/radical.v2[(/u1D4:F− 1)/u1D44B(|u1D4J1)]|twoCst− [/u1D4:D|oneCst−/u1D4:F/u1D44B (|u1D4J1)]|twoCst
+|u1D44J/u1D4:D|oneCst</u1D4:F/u1D44B (|u1D4J1) 
+and is in this way capped in both compression and t ension.  Here 
+/u1D4:D|oneCst= 3|u1D7≠∆|u1D4JACst= Tr(σ)  . 
+The polynomial coeﬃcients in the expression above a re chosen to give continuity at /u1D4:D|oneCst=
+/u1D4:F/u1D44B (|u1D4J1) and to give the uniaxial compressive strength /u1D44C(|u1D4J1). Yielding is assumed to occur 
+when the equivalent stress (note the deﬁnition) equ als the yield stress 
+|u1D7≠∆e q =|u1D7≠∆|u1D449Cst /u1D440.st 
+/radical.v13=/radical.v51
+2/u1D42C:/u1D42C≤ |u1D7≠∆/u1D44C.st(|u1D4J1) , 
+where 
+/u1D42C=σ− |u1D7≠∆|u1D4JACst/u1D408 |uni23DFClft|uni23DFCex|uni23DFCmd|uni23DFCex|uni23DFCrt
+σ/u1D451.sts−κ 
+in which the last term is the back stress to be des cribed below.  The yield surface does 
+not depend on the third stress invariant.  The plas tic ﬂow is non-associated and its 
+direction is given by 
+/u1D42ℜ|u1D7≠≠Cst= |parenleftCvJcos /u1D̅1∫−sin /u1D̅1∫
+sin /u1D̅1∫   cos /u1D̅1∫|parenriµhtCvJ/u1D42ℜ  , 
+where  
+/u1D42ℜ=|u1D7≠∆/u1D44C.st(|u1D4J1)
+|u1D7≠∆|mCst|aCst|xCst ⎝⎜⎜⎛∂|u1D7≠∆/u1D44C.st
+∂/u1D4:D|oneCst
+1⎠⎟⎟⎞ 
+is the normal to the yield surface as depicted in t he Rendulic plane above (note the sign 
+of  /u1D4:D|oneCst). The angle /u1D̅1∫ is a function of and deﬁned only for positive valu es of the relative 
+volumetric stress /u1D4:D|oneCst/u1D44B(|u1D4J1) ⁄ > 0 ; for negative values /u1D̅1∫ is determined internally to achieve /u1D42ℜ|u1D7≠≠Cst |u1D7≠∆/u1D44C.st(|u1D4J1) 
+|u1D436|zeroCst(|u1D4J1) 
+-/u1D4:D|oneCst=|u1D7≠∆|u1D449Cst /u1D440.st  /u1D44C(|u1D4J1) 
+-/u1D44B(|u1D4J1)/u1D4:F -/u1D44B(|u1D4J1) -/u1D4:D|oneCst |u1D7≠∆max =(/u1D4:F−1)/u1D44B(|u1D4J1)|u1D44J⁄ /u1D42ℜ|u1D7≠≠Cst /u1D42ℜ 
+/u1D̅1∫(/u1D4:D|oneCst/u1D44B(|u1D4J1) ⁄ ) 
+ Figure M271-1.   Yield Surface *.   
+ |u1D43∆|u1D46≠Cst= |u1D4J3/u1D4:E.st/u1D446.st (|u1D447)|u1D43∆(|u1D4J1)
+|u1D43A|u1D46≠Cst=3(1 − 2/u1D̅08)
+2(1 +/u1D̅08)|u1D43∆|u1D46≠Cst 
+The inelastic strain rates are diﬀerent from the co mpaction model and is here given by 
+ε̇|u1D4JDCst=/u1D̅48/u1D451.st
+2|u1D43A|u1D463Cst+|u1D7≠∆|u1D4JACst− |u1D7≠∆|u1D46≠Cst
+3|u1D43∆|u1D463Cst/u1D408 
+which results in a viscoelastic behavior depending on the viscous compliance and 
+sintering stress.  The viscous bulk compliance can be written 
+1
+|u1D43∆|u1D463Cst= 3|u1D4J3/u1D4:E.st(|u1D4J1)/˙raceleft.v6|u1D4J1|u1D449Cst|oneCstexp |<racketleftCv6−|u1D4J1|u1D449Cst|twoCst
+|u1D44J/u1D4⃡4.st |u1D44∆Cst|u1D46≠Cst (|u1D447 − |u1D447|zeroCst)|<racketriµhtCv6 + |u1D714|u1D4J1/u1D446.st|oneCstexp |<racketleftCv6−|u1D4J1/u1D446.st|twoCst
+|u1D44J/u1D4⃡4.st |u1D44∆Cst|u1D46≠Cst (|u1D447 − |u1D447|zeroCst)|<racketriµhtCv6/˙raceright.v6|<racketleftCv11 + |u1D4J3/u1D446.st|twoCst(|u1D447)/u1D̅0∫|<racketriµhtCv1 
+from which the viscous shear compliance is modiﬁed with aid of the viscous Poisson’s 
+ratio 
+1
+|u1D43A|u1D463Cst=2[1 +/u1D̅08|u1D463Cst(|u1D4J1)]
+3[1 − 2/u1D̅08|u1D463Cst(|u1D4J1)]1
+|u1D43∆|u1D463Cst  . 
+The mobility factor /u1D̅0∫ evolves with temperature according to 
+/u1D̅0∫̇=|u1D4J3/u1D446.st|threeCst(|u1D447)|u1D447̇−/u1D̅0∫
+/u1D̅0F(|u1D447)  , 
+and the sintering stress is given as 
+|u1D7≠∆|u1D46≠Cst= |u1D4J3/u1D446.st|oneCst(|u1D4J1)|u1D6F∆
+/u1D45∫|zeroCst . 
+All this is accompanied with, again, the evolution of relative density given as 
+|u1D4J1̇= −3|u1D7≠≠̇|u1D4JDCst|u1D4JACst|u1D4J1  .*

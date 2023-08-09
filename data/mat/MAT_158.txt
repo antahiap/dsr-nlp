@@ -1,0 +1,66 @@
+: *.  
+*.   *.   
+ Card 9.   Include up to 6 of this card.  This input ends wi th the next keyword (“*”) card. 
+Gi BETA i       
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EA EB (EC) PRBA TAU1 GAMMA1  
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EA |u1D438|u1D44∆Cst, Young’s modulus - longitudinal direction 
+EB |u1D438|u1D44FCst, Young’s modulus - transverse direction 
+(EC) |u1D438|u1D4J≠Cst, Young’s modulus - normal direction (not used) 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio |u1D44F|u1D44∆  
+TAU1 /u1D̅0F|oneCst, stress limit of the ﬁrst slightly nonlinear part  of the shear 
+stress as a function of shear strain curve.  The va lues /u1D̅0F|oneCst and |u1D6F∆|oneCst are 
+used to deﬁne a curve of shear stress as a function of shea r strain.  
+These values are input if FS, deﬁned in Card 3, is set to -1. 
+GAMMA1 |u1D6F∆|oneCst, strain limit of the ﬁrst slightly nonlinear part of the shear 
+stress as a function of shear strain curve 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GAB GBC GCA SLIMT1 SLIMC1 SLIMT2 SLIMC2 SLIMS 
+Type F F F F F F F F 
+ *.   
+  VARIABLE   DESCRIPTION  
+deﬁned by the cross product of the vector /u1D42F with the 
+element normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR. 
+TSIZE Time step for automatic element deletion 
+ERODS Maximum eﬀective strain for element layer failure.  A value of 
+unity would equal 100% strain. 
+SOFT Softening reduction factor for strength in the  crashfront. 
+FS Failure surface type: 
+EQ.1.0: Smooth failure surface with a quadratic criterion f or 
+both the ﬁber ( |u1D44∆) and transverse ( |u1D44F) directions.  This op- 
+tion can be used with complete laminates and fabric s. 
+EQ.0.0: Smooth failure surface in the transverse ( |u1D44F) direction 
+with a limiting value in the ﬁber ( |u1D44∆) direction.  This 
+model is appropriate for unidirectional (UD) layere d 
+composites only. 
+EQ.-1: Faceted failure surface.  When the strength values are 
+reached, then damage evolves in tension and compres - 
+sion for both the ﬁber and transverse direction.  S hear 
+behavior is also considered.  This option can be us ed 
+with complete laminates and fabrics. 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3 PRCA PRCB 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 *.   
+  Card 7 1 2 3 4 5 6 7 8 
+Variable XC XT YC YT SC    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+XC Longitudinal compressive strength; see Remark 2  of *.   *

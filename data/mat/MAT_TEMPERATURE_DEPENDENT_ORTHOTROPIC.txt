@@ -1,0 +1,78 @@
+ ............ ............................................... 2-2 36  
+*.  [ 0,2,3ac] {19} 
+ *.   *.   
+2-236 (MAT) LS-DYNA R13 *.   *.   
+2-238 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+EQ.2:  switch material axes |u1D44∆ and |u1D44F. 
+EQ.3: switch material axes |u1D44∆ and /u1D450. 
+EQ.4: switch material axes |u1D44F and /u1D450. 
+IHYPO Option to switch between two diﬀerent elastic approaches (only 
+available for solid elements): 
+EQ.0.0: hyperelastic formulation, default 
+EQ.1.0: hypoelastic formulation (allows stress initializati on 
+through *INITIAL_STRESS_SOLID) 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D4JD for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 and 4 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+BETA Material angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3. It may be overridden on the element card;  see *ELE-
+MENT_SHELL_BETA or *ELEMENT_SOLID_ORTHO. 
+ *.   
+2-240 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+GCA i |u1D43A|u1D4J≠Cst|u1D44∆Cst , Shear modulus /u1D450|u1D44∆  at temperature T i. 
+Ti ith  temperature 
+Remarks: 
+In the implementation for three-dimensional continu a a total Lagrangian formulation is 
+used.  In this approach the material law that relat es second Piola-Kirchhoﬀ stress /u1D412 to 
+the Green-St.  Venant strain /u1D404 is 
+/u1D412=/u1D402:/u1D404 =/u1D41:/ε.st/u1D402/u1D48D/u1D41::/u1D404 
+where /u1D41: is the transformation matrix [Cook 1974]. 
+/u1D41:=  
+⎣⎢⎢⎢⎢⎢⎢⎢⎡
+ /u1D45∫|oneCst|twoCst|u1D4JA|oneCst|twoCst|u1D4JB|oneCst|twoCst/u1D45∫|oneCst|u1D4JA|oneCst |u1D4JA|oneCst|u1D4JB|oneCst |u1D4JB|oneCst/u1D45∫|oneCst
+/u1D45∫|twoCst|twoCst|u1D4JA|twoCst|twoCst|u1D4JB|twoCst|twoCst/u1D45∫|twoCst|u1D4JA|twoCst |u1D4JA|twoCst|u1D4JB|twoCst |u1D4JB|twoCst/u1D45∫|twoCst
+/u1D45∫|threeCst|twoCst|u1D4JA|threeCst|twoCst|u1D4JA|threeCst|twoCst/u1D45∫|threeCst|u1D4JA|threeCst |u1D4JA|threeCst|u1D4JB|threeCst |u1D4JB|threeCst/u1D45∫|threeCst
+2/u1D45∫|oneCst/u1D45∫|twoCst2|u1D4JA|oneCst|u1D4JA|twoCst2|u1D4JB|oneCst|u1D4JB|twoCst(/u1D45∫|oneCst|u1D4JA|twoCst+/u1D45∫|twoCst|u1D4JA|oneCst) (|u1D4JA|oneCst|u1D4JB|twoCst+ |u1D4JA|twoCst|u1D4JB|oneCst) (|u1D4JB|oneCst/u1D45∫|twoCst+ |u1D4JB|twoCst/u1D45∫|oneCst)
+2/u1D45∫|twoCst/u1D45∫|threeCst2|u1D4JA|twoCst|u1D4JA|threeCst2|u1D4JB|twoCst|u1D4JB|threeCst(/u1D45∫|twoCst|u1D4JA|threeCst+/u1D45∫|threeCst|u1D4JA|twoCst) (|u1D4JA|twoCst|u1D4JB|threeCst+ |u1D4JA|threeCst|u1D4JB|twoCst) (|u1D4JB|twoCst/u1D45∫|threeCst+ |u1D4JB|threeCst/u1D45∫|twoCst)
+2/u1D45∫|threeCst/u1D45∫|oneCst2|u1D4JA|threeCst|u1D4JA|oneCst2|u1D4JB|threeCst|u1D4JB|oneCst(/u1D45∫|threeCst|u1D4JA|oneCst+/u1D45∫|oneCst|u1D4JA|threeCst) (|u1D4JA|threeCst|u1D4JB|oneCst+ |u1D4JA|oneCst|u1D4JB|threeCst) (|u1D4JB|threeCst/u1D45∫|oneCst+ |u1D4JB|oneCst/u1D45∫|threeCst)⎦⎥⎥⎥⎥⎥⎥⎥⎤
+ 
+/u1D45∫|u1D4J6Cst, |u1D4JA|u1D4J6Cst, |u1D4JB|u1D4J6Cst are the direction cosines 
+|u1D46J|u1D4J6Cst|minuteCst=/u1D45∫|u1D4J6Cst|u1D46J|oneCst+ |u1D4JA|u1D4J6Cst|u1D46J|twoCst+ |u1D4JB|u1D4J6Cst|u1D46J|threeCst for  |u1D4J6 = 1, 2, 3 
+and |u1D46J|u1D4J6Cst|minuteCst denotes the material axes.  The temperature depend ent constitutive matrix /u1D402|u1D4J9Cst is 
+deﬁned in terms of the material axes as 
+/u1D402|u1D4J9Cst−|oneCst=  
+⎣⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎡1
+|u1D438|oneCst|oneCst (|u1D447)−|u1D71≠|twoCst|oneCst (|u1D447)
+|u1D438|twoCst|twoCst (|u1D447)−|u1D71≠|threeCst|oneCst (|u1D447)
+|u1D438|threeCst|threeCst (|u1D447)0 0 0
+−|u1D71≠|oneCst|twoCst (|u1D447)
+|u1D438|oneCst|oneCst (|u1D447)1
+|u1D438|twoCst|twoCst (|u1D447)−|u1D71≠|threeCst|twoCst (|u1D447)
+|u1D438|threeCst|threeCst (|u1D447)0 0 0
+−|u1D71≠|oneCst|threeCst (|u1D447)
+|u1D438|oneCst|oneCst (|u1D447)−|u1D71≠|twoCst|threeCst (|u1D447)
+|u1D438|twoCst|twoCst (|u1D447)1
+|u1D438|threeCst|threeCst (|u1D447)0 0 0
+0 0 01
+|u1D43A|oneCst|twoCst (|u1D447)0 0
+0 0 0 01
+|u1D43A|twoCst|threeCst (|u1D447)0
+0 0 0 0 01
+|u1D43A|threeCst|oneCst (|u1D447) ⎦⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎤
+ 
+where the subscripts denote the material axes,  
+|u1D71≠|u1D4J6Cst|u1D4J7Cst = |u1D71≠|u1D46JCst|u1D4J6Csts/⋯inute.sts|u1D46JCst/u1D45̅.sts/⋯inute.sts      and      |u1D438|u1D4J6Cst|u1D4J6Cst = |u1D438|u1D46JCst|u1D4J6Csts/⋯inute.sts 
+Since /u1D402|u1D4J9Cst is symmetric *

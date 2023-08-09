@@ -1,0 +1,53 @@
+ ........................ ................................................... ................ 2-655  
+*.  [2,3a] {15} 
+ *.   *.   *.   
+This is Material Type 101. The GEPLASTIC_SRATE_2000 a material model characterizes 
+General Electric's commercially available engineeri ng thermoplastics subjected to high 
+strain rate events.  This material model features t he variation of yield stress as a 
+function of strain rate, cavitation eﬀects of rubbe r modiﬁed materials, and automatic 
+element deletion of either ductile or brittle mater ials. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR RATESF EDOT0 ALPHA  
+Type A F F F F F F  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCSS LCFEPS LCFSIG LCE     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young's Modulus 
+PR Poisson's ratio 
+RATESF Constant in plastic strain rate equation 
+EDOT0 Reference strain rate 
+ALPHA Pressure sensitivity factor 
+LCSS Load curve ID or table ID that deﬁnes the post yiel d material 
+behavior.   The values of this stress- strain curve are the diﬀerence 
+of the yield stress and strain, respectively.  This  means th e ﬁrst 
+values for both stress and strain should be zero.  All subsequent 
+values will deﬁne softening or hardening. *.   
+  VARIABLE   DESCRIPTION  
+LCFEPS Load curve ID that deﬁnes the plastic failure strai n as a function 
+of strain rate 
+LCFSIG Load curve ID that deﬁnes the maximum p rincipal failure stress 
+as a function of strain rate 
+LCE Load curve ID that deﬁnes the unloading moduli as a  function of 
+plastic strain 
+Remarks: 
+The constitutive model for this approach is: 
+|u1D7≠≠̇|u1D4JDCst= |u1D7≠≠̇|zeroCstexp /˙raceleft.v2|u1D434/˙racketleft.v2|u1D7≠∆ − |u1D446|parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2/˙racketright.v2/˙raceright.v2× exp|parenleftCv1−|u1D4JD|u1D6F+|u1D434|parenriµhtCv1 
+where |u1D7≠≠̇|zeroCst and |u1D434 are rate dependent yield stress parameters, |u1D446|parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2 is the internal 
+resistance (strain hardening), and |u1D6F+ is a pressure dependence parameter. 
+ 
+In this material the yield stress may vary througho ut the ﬁnite element model as a 
+function of strain rate and hydrostatic stress.  Po st yield stress behavior is captured in 
+material softening and hardening values.  Finally, ductile or brittle failure measured by 
+plastic strain or maximum principal stress, respect ively, is accounted for by automatic 
+element deletion. 
+ 
+Although this may be applied to a variety of engine ering thermoplastics, GE Plastics 
+have constants available for use in a wide range of  commercially available grades of 
+their engineering thermoplastics. *

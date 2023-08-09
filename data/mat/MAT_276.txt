@@ -1,0 +1,19 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+determined by an iterative trial and error scheme. 
+TRAMPK Optional ramp time for bulk loading 
+Gi Optional shear relaxation modulus for the ith  term 
+BETA i Optional shear decay constant for the ith  term 
+Ki Optional bulk relaxation modulus for the ith  term 
+BETAK i Optional bulk decay constant for the ith  term 
+Remarks: 
+The Cauchy stress, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst , is related to the strain rate by  
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst (|u1D461) = −|u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst +/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F)∂|u1D7≠≠|u1D4J8Cst|u1D4J9Cst (/u1D̅0F)
+∂/u1D̅0F|u1D4J1 /u1D̅0F |u1D461Cst
+|zeroCst 
+For this model, it is postulated that the mathemati cal form is preserved in the 
+constitutive equation for aging; however two new ma terial functions, |u1D4J4|zeroCst|minuteCst(|u1D461|u1D44∆Cst) and |u1D4J4|oneCst|minuteCst(|u1D461|u1D44∆Cst, |u1D461) 
+are introduced to replace |u1D4J4|zeroCst and |u1D4J4|oneCst(|u1D461), which is expressed in terms of a Prony series as 
+in material model 76, *

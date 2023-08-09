@@ -1,0 +1,99 @@
+: *. _96: *.  
+*. _96 
+*.   *.   
+LS-DYNA R13 2-287 (MAT)  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus, |u1D438 
+PR Poisson’s ratio, /u1D̅08 
+K /u1D458, strength coeﬃcient (see remarks below) 
+E0 |u1D7≠≠|zeroCst, strain corresponding to the initial yield (see re marks below) 
+N |u1D4JB, hardening exponent for yield strength 
+M |u1D4JA, ﬂow potential exponent in Barlat’s Model 
+A |u1D44∆, anisotropy coeﬃcient in Barlat’s Model 
+B |u1D44F, anisotropy coeﬃcient in Barlat’s Model 
+C /u1D450, anisotropy coeﬃcient in Barlat’s Model 
+F |u1D4J3, anisotropy coeﬃcient in Barlat’s Model 
+G |u1D4J4, anisotropy coeﬃcient in Barlat’s Model 
+H ℎ, anisotropy coeﬃcient in Barlat’s Model 
+LCID Option load curve ID deﬁning eﬀective stress as a function of 
+eﬀective plastic strain.  If nonzero , this curve will be used to 
+deﬁne the yield stress.   The load curve is impleme nted for solid 
+elements only. 
+AOPT Material axes option: 
+EQ.0.0: locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-*.   
+LS-DYNA R13 2-289 (MAT) Remarks: 
+The yield function Φ is deﬁned as: 
+Φ= ||u1D446|oneCst− |u1D446|twoCst||u1D4JACst+ |dividesCv1|u1D446|twoCst− |u1D446|threeCst|dividesCv1|u1D4JACst+ |dividesCv1|u1D446|threeCst− |u1D446|oneCst|dividesCv1|u1D4JACst= 2|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4JACst 
+where |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is the eﬀective stress and |u1D446|u1D4J6Cst=|oneCst/co⋯⋯a.st|twoCst/co⋯⋯a.st|threeCst are the principal values of the symmetric 
+matrix |u1D446/u1D6FC.st/u1D6FD.st , 
+|u1D446|u1D46JCst|u1D46JCst =/˙racketleft.v2/u1D450|parenleftCv2|u1D7≠∆|u1D46JCst|u1D46JCst − |u1D7≠∆|u1D466Cst|u1D466Cst |parenriµhtCv2 − |u1D44F(|u1D7≠∆|u1D467Cst|u1D467Cst − |u1D7≠∆|u1D46JCst|u1D46JCst )/˙racketright.v23 ⁄ ,            |u1D446|u1D466Cst|u1D467Cst = |u1D4J3 |u1D7≠∆|u1D466Cst|u1D467Cst  
+|u1D446|u1D466Cst|u1D466Cst =/˙racketleft.v2|u1D44∆|parenleftCv2|u1D7≠∆|u1D466Cst|u1D466Cst − |u1D7≠∆|u1D467Cst|u1D467Cst |parenriµhtCv2 −/u1D450|parenleftCv2|u1D7≠∆|u1D46JCst|u1D46JCst − |u1D7≠∆|u1D466Cst|u1D466Cst |parenriµhtCv2/˙racketright.v23 ⁄ , |u1D446|u1D467Cst|u1D46JCst = |u1D4J4|u1D7≠∆|u1D467Cst|u1D46JCst 
+|u1D446|u1D467Cst|u1D467Cst =/˙racketleft.v2|u1D44F(|u1D7≠∆|u1D467Cst|u1D467Cst − |u1D7≠∆|u1D46JCst|u1D46JCst ) − |u1D44∆|parenleftCv2|u1D7≠∆|u1D466Cst|u1D466Cst − |u1D7≠∆|u1D467Cst|u1D467Cst |parenriµhtCv2/˙racketright.v23 ⁄ , |u1D446|u1D46JCst|u1D466Cst =ℎ|u1D7≠∆|u1D46JCst|u1D466Cst  
+The material constants a, b, c, f, g and h represent anisotropic properties.  When 
+|u1D44∆ = |u1D44F =/u1D450= |u1D4J3 = |u1D4J4 =ℎ= 1, 
+the material is isotropic and the yield surface red uces to the Tresca yield surface for |u1D4JA =
+1 and von Mises yield surface for |u1D4JA = 2 or 4 . 
+ 
+For face centered cubic (FCC) materials |u1D4JA =8 is recommended and for body centered 
+cubic (BCC) materials |u1D4JA = 6  is  used.  The yield strength of the material is 
+|u1D7≠∆|u1D466Cst=/u1D458|parenleftCv1|u1D7≠≠|u1D4JDCst+ |u1D7≠≠|zeroCst|parenriµhtCv1|u1D4JBCst  , 
+where |u1D7≠≠|zeroCst is the strain corresponding to the initial yield s tress and |u1D7≠≠|u1D4JDCst is the plastic strain. *. _96  
+LS-DYNA R13 2-291 (MAT)  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus, |u1D438 
+PR Poisson’s ratio, /u1D̅08 
+K /u1D458, strength coeﬃcient or |u1D44∆ in Voce (see remarks below) 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable E0 N ESR0 M HARD A   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+E0 |u1D7≠≠|zeroCst, strain corresponding to the initial yield or |u1D44F in Voce (see 
+remarks below)  
+N |u1D4JB, hardening exponent for yield strength or /u1D450 in Voce 
+ESR0 |u1D7≠≠SR0 , in power law rate sensitivity  
+M |u1D4JA, exponent for strain rate eﬀects 
+HARD Hardening option: 
+LT.0.0: Absolute value deﬁnes the load curve ID 
+EQ.1.0: Power law 
+EQ.2.0: Voce 
+A Flow potential exponent 
+ *. _96  
+LS-DYNA R13 2-293 (MAT)  VARIABLE   DESCRIPTION  
+oﬀsetting the material axes by an angle, BE TA, from a 
+line determined by taking the cross product of the vec- 
+tor /u1D42F with the normal to the plane of the element 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR).  
+BETA Material angle in degrees for AOPT = 0 and 3.  BE TA may be 
+overridden on the element card; see *ELEMENT_SHELL_ BETA. 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ VARIABLE   DESCRIPTION  
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+Remarks: 
+The yield stress |u1D7≠∆|u1D466Cst is deﬁned three ways.  The ﬁrst, the Swift equatio n, is given in terms 
+of the input constants as: *

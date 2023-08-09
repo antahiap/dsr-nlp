@@ -1,0 +1,95 @@
+Y ......... ................................................... . 2-792  
+*.  Y [0,2,3a,3c,5] {11} 
+ *. Y *. Y.  If consi dering laminated or 
+sandwich shells with non-uniform material propertie s (this is deﬁned through the user 
+speciﬁed integration rule), the model, . Y  
+ *. Y  *. Y  
+  VARIABLE   DESCRIPTION  
+TDEL Minimum time step size for automatic element d eletion 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C P LCSS LCSR VP EPSTHIN EPSMAJ NUMINT 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+C Strain rate parameter, C; see Remark 1  of *. Y  *. Y  
+  Card 3 1 2 3 4 5 6 7 8 
+Variable EPS1 EPS2 EPS3 EPS4 EPS5 EPS6 EPS7 EPS8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+EPS1 - EPS8 Eﬀective plastic strain values.  At least 2 points should be deﬁned.  
+The ﬁrst point must be zero corresponding to the in itial yield 
+stress.  If this option is used, SIGY and ETAN are ignored.  
+WARNING: If the ﬁrst point is nonzero, the yield st ress i s 
+extrapolated to determine the initial yield.   
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable ES1 ES2 ES3 ES4 ES5 ES6 ES7 ES8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+ES1 - ES8 Corresponding yield stress values to EPS1  - EPS8 
+ 
+RTCL/Rate Card.   Required if the PRESTRAIN, RATE, or RTCL option i s active.  
+ Card 5 1 2 3 4 5 6 7 8 
+Variable LCTSRF EPS0 TRIAX IPS LCEMOD BETA RFILTF  
+Type I F F I I F F  
+Default 0 0.0 0.0 0 0 0.0 0.0  
+ *. Y  
+ Remarks: 
+1.  Major Principal Strain Failure.  The EPSMAJ parameter is compared to the 
+major principal strain in the following senses: 
+a)  For shells it is the maximum eigenvalue of the in- plane strain tensor that is 
+incremented by the strain increments.  If IPS = 1, then prestrain set with 
+*INITIAL_STRAIN_SHELL is also included in the strai n measure for 
+shells.  
+b)  For solid elements it is calculated as the maximum  eigenvalue to the loga- 
+rithmic strain tensor 
+/u1D6C6=1
+2ln|parenleftCv2/u1D405/ε.st/u1D405|parenriµhtCv2  , 
+where /u1D405 is the global deformation gradient.   
+In sum, both element types use a natural strain mea sure for determining fail- 
+ure.  The major strain calculated in this way is ou tput as history variable #7. 
+2.  RTCL Damage. With the RTCL option, an RTCL damage is calculated and 
+elements are deleted when the damage function excee ds 1.0.  During each solu- 
+tion cycle, if the plastic strain increment is grea ter than zero, an increment of 
+RTCL damage is calculated by 
+/u1D6E5|u1D4J3damage =1
+|u1D7≠≠|zeroCst|u1D4J3 |parenleftCv4|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|parenriµhtCv4
+RTCL |u1D4J1|u1D7≠≠̅|u1D4JDCst 
+where 
+|u1D4J3 |parenleftCv4|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|parenriµhtCv4
+RTCL =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎧0
+21 +|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt/r∙ℂic∙l.β412 − 2 7|parenleftCv4|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|parenriµhtCv4|twoCst
+3|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt+/r∙ℂic∙l.β412 − 2 7|parenleftCv4|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|parenriµhtCv4|twoCst
+1
+1.65 exp |parenleftCvJ3|u1D7≠∆|u1D43BCst
+2|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|parenriµhtCvJ|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt≤ −1
+3
+1
+3<|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt<1
+3
+|u1D7≠∆|u1D43BCst
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt≥1
+3 
+and, 
+|u1D7≠≠|zeroCst= uniaxial fracture strain / critical damage v alue 
+|u1D7≠∆|u1D43BCst= hydrostatic stress 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt= effecti v e stress 
+|u1D4J1|u1D7≠≠̅|u1D4JDCst= effecti v e plastic strain increment 
+The increments are summed through time and the elem ent is deleted when 
+|u1D4J3damage ≥ 1.0 .  For 0.0 < |u1D4J3damage < 1.0 ,  the element strength will not be degrad- 
+ed. *

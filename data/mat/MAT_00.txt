@@ -1,0 +1,502 @@
+9, history variab les 4, 7, 9, and 10 are temperature, 
+burn fraction, 1/|u1D449|u1D4J2Cst, and 1/|u1D449|u1D4JDCst, respectively.  When used with *. 1, and is 
+equivalent to a corresponding descriptive designati on, e.g., *. 1: *. 1_FLUID: *. 2: *. 3: *. 4: *. 5: *. 6: *. 7: *. 8: *. 9: *. 9) 
+ *. 9)  
+ *. 2 
+*. 2_ANISO 
+*. 7 
+*. 1 
+*. 1_FLUID 
+*. 4 
+*. 8 
+*. 9 
+*. 2 
+*. 3 
+*. 5 
+*. 6 
+*. 2 for a detai led description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point in space and t he global location of the element 
+center 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by *MAT  *. 2. 
+A1, A2, A3 Components of vector, /u1D482, for AOPT = 2; see *. 2. 
+D1, D2, D3 Components of vector, /u1D485, for AOPT = 2; see *. 2 or *. 1  
+LS-DYNA R13 2-131 (MAT) *. 1 
+*. 1_FLUID 
+The ﬂuid option is valid for solid elements only. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR DA DB K  
+Type A F F F F F F  
+Default none none none 0.0 0.0 0.0 0.0  
+ 
+Additional card for FLUID keyword option. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable VC CP       
+Type F F       
+Default none 10 20        
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). *. 2, would be more appropriate. 
+2.  Damping Factors.  The axial and bending damping factors are used to d amp 
+down numerical noise.  The update of the force resu ltants, |u1D439|u1D4J6Cst, and moment 
+resultants, |u1D44≠|u1D4J6Cst, includes the damping factors: 
+|u1D439|u1D4J6Cst|u1D4JBCst+|oneCst= |u1D439|u1D4J6Cst|u1D4JBCst+ |parenleftCvJ1 +|u1D437|u1D434 
+∆|u1D461|parenriµhtCvJ ∆|u1D439|u1D4J6Cst|u1D4JBCst+|oneCst
+|twoCst
+|u1D44≠|u1D4J6Cst|u1D4JBCst+|oneCst= |u1D44≠|u1D4J6Cst|u1D4JBCst+ |parenleftCvJ1 +|u1D437|u1D43J 
+∆|u1D461|parenriµhtCvJ ∆|u1D44≠|u1D4J6Cst|u1D4JBCst+|oneCst
+|twoCst 
+3.  Effective Plastic Strain.   The history variable labeled as “eﬀective plastic  
+strain” by LS-PrePost is volumetric strain in the c ase of *. 1  
+LS-DYNA R13 2-133 (MAT) 5.  FLUID Keyword Option.   For the FLUID keyword option, the bulk modulus 
+ﬁeld, |u1D43∆, must be deﬁned, and both the Young’s modulus and Poisson’s ratio 
+ﬁelds are ignored.  Fluid-like behavior is obtained  where the bulk modulus, |u1D43∆, 
+and pressure rate, |u1D4JD, are given by: 
+|u1D43∆ =|u1D438
+3(1 − 2/u1D̅08)
+|u1D4JḊ= − |u1D43∆|u1D7≠≠̇|u1D4J6Cst|u1D4J6Cst  
+and the shear modulus is set to zero.  A tensor vis cosity is used which acts only 
+the deviatoric stresses, |u1D446|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst, given in terms of the damping coeﬃcient as: 
+|u1D446|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst=V C × ∆/u1D4:F× |u1D44∆ × |u1D7≠+|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst 
+where ∆/u1D4:F is a characteristic element length, |u1D44∆ is the ﬂuid bulk sound speed, |u1D7≠+ is 
+the ﬂuid density, and |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |minuteCst is the deviatoric strain rate. *. 2 (4 cards follow) 
+*. 2_ANIS (5 cards follow) 
+Card Summary:  
+Card 1a.1.   This card is required for the ORTHO keyword optio n.   
+MID RO EA EB EC PRBA PRCA PRCB 
+Card 1a.2.   This card is required for the ORTHO keyword optio n.   
+GAB GBC GCA AOPT G SIGF   *. 2  
+LS-DYNA R13 2-135 (MAT) Card 1b.1.   This card is required for the ANISO keyword optio n.   
+MID RO C11 C12 C22 C13 C23 C33 
+Card 1b.2.   This card is required for the ANISO keyword optio n. 
+C14 C24 C34 C44 C15 C25 C35 C45 
+Card 1b.3.   This card is required for the ANISO keyword optio n. 
+C55 C16 C26 C36 C46 C56 C66 AOPT 
+Card 2.   This card is required. 
+XP YP ZP A1 A2 A3 MACF IHIS 
+Card 3.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA REF 
+Data Card Deﬁnitions: 
+Orthotropic Card 1.  Included for ORTHO keyword option.  
+Card 1a.1  1 2 3 4 5 6 7 8 
+Variable MID RO EA EB EC PRBA PRCA PRCB 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EA |u1D438|u1D44∆Cst, Young’s modulus in |u1D44∆-direction 
+EB |u1D438|u1D44FCst, Young’s modulus in |u1D44F-direction 
+EC |u1D438|u1D4J≠Cst, Young’s modulus in /u1D450-direction (nonzero value required but 
+not used for shells) 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio in the |u1D44F|u1D44∆  direction *. 2  
+LS-DYNA R13 2-137 (MAT)  VARIABLE   DESCRIPTION  
+vector /u1D42F and the normal vector to the plane of the ele- 
+ment (see Figure M2-1 ). The plane of a solid element is 
+the midsurface between the inner su rface and outer 
+surface deﬁned by the ﬁrst four nodes and the last four 
+nodes of the connectivity of the element, respectiv ely.  
+Thus, for solid elements, AOPT = 3 is only available for 
+hexahedrons. /u1D41A is determined by taking the cross 
+product of /u1D42F with the normal vector, /u1D41B is determined 
+by taking the cross product of the normal vector wi th /u1D41A, 
+and /u1D41C is the normal vector.  Then /u1D41A and /u1D41B are rotated 
+about /u1D41C by an angle BETA. BE TA may be set in the 
+keyword input for the element or in the input for t h is 
+keyword.  Note that for solids, the material axes m ay 
+be switched depending on the choice of MACF. The 
+switch may occur before or after applying BETA de- 
+pending on the value of MACF.  
+EQ.4.0: Locally orthotropic in a cylindrical coordinate sys tem 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, |u1D443, which deﬁne the centerline ax- 
+is.  This option is for solid elements only. 
+LT.0.0: |AOPT|  is a coordinate system ID (see *DEFINE_CO-
+ORDINATE_ OPTION ).   
+G Shear modulus for frequency independent damping.  F requency 
+independent damping is based on a spring and slider  in series.  
+The critical stress for the slider mechanism is SIG F.  For the best 
+results, the value of G should be 250- 1000 times greater than 
+SIGF.  This option applies only to solid elements. 
+SIGF Limit stress for frequency independent, fricti onal, damping 
+ 
+Anisotropic Card 1.  Included for ANISO keyword option.  
+Card 1b.1  1 2 3 4 5 6 7 8 
+Variable MID RO C11 C12 C22 C13 C23 C33 
+Type A F F F F F F F 
+ *. 2  
+LS-DYNA R13 2-139 (MAT)  VARIABLE   DESCRIPTION  
+then rotated about the normal vector to the surface  of 
+the shell by the angle BETA. 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point, |u1D443, in space and the global location of the element 
+center; this is the /u1D41A-direction.  This option is for solid 
+elements only. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors /u1D41A and /u1D41D input below, as with *DEFINE_COOR-
+DINATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by a 
+vector /u1D42F and the normal vector to the plane of the ele- 
+ment (see Figure M2-1 ). The plane of a solid element is 
+the midsurface between the inner surface and outer 
+surface deﬁned by the ﬁrst four nodes and t he last four 
+nodes of the connectivity of the element, respectiv ely.  
+Thus, for solid elements, AOPT = 3 is only available for 
+hexahedrons. /u1D41A is determined by taking the cross 
+product of /u1D42F with the normal vector, /u1D41B is determined 
+by taking the cross product of the normal vector wi th /u1D41A, 
+and /u1D41C is the normal vector.  Then /u1D41A and /u1D41B are rotated 
+about /u1D41C by an angle BETA. BE TA may be set in the 
+keyword input for the element or in the input for t his 
+keyword.  Note that for solids, the material axes m ay 
+be s witched depending on the choice of MACF. The 
+switch may occur before or after applying BETA de- 
+pending on the value of MACF.  
+EQ.4.0: Locally orthotropic in a cylindrical coordinate sys tem 
+with the material axes determined by a vector /u1D42F, and 
+an originating point, |u1D443, which deﬁne the centerline ax- 
+is.  This option is for solid elements only. 
+LT.0.0: |AOPT|  is a coordinate system ID (see *DEFINE_CO-
+ORDINATE_ OPTION ).  
+ 
+Local Coordinate System Card 1.   Required for all keyword options. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3 MACF IHIS 
+Type F F F F F F I I *. 2  
+LS-DYNA R13 2-141 (MAT)  VARIABLE   DESCRIPTION  
+BETA Angle in degrees of a material rotation about the c- axis, available 
+for AOPT = 0 (shells and tshells only) and AOPT = 3 (all element 
+types).  This angle may be overridden on the elemen t card; see 
+*ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BE TA, and 
+*ELEMENT_SOLID_ORTHO. 
+REF Flag to use reference geometry speciﬁed with *I NITIAL_FOAM_-
+REFERENCE_GEOMETRY to initialize the stress tensor.    
+EQ.0.0: Oﬀ 
+EQ.1.0: On 
+Remarks: 
+1.  Stress-Strain Material Law.   The material law that relates stresses to strains  is 
+deﬁned as: 
+/u1D402=/u1D41:/ε.st/u1D402|u1D43FCst/u1D41: 
+where /u1D41: is a transformation matrix, and /u1D402|u1D43FCst is the constitutive matrix deﬁned in 
+terms of the material constants of the orthogonal m aterial axes, {/u1D41A,/u1D41B,/u1D41C}.  The 
+inverse of /u1D402|u1D43FCstfor the orthotropic case is deﬁned as: 
+/u1D402|u1D43FCst−|oneCst=
+⎣⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎡1
+|u1D438|u1D44∆Cst−|u1D71≠|u1D44FCst|u1D44∆Cst 
+|u1D438|u1D44FCst−|u1D71≠|u1D4J≠Cst|u1D44∆Cst 
+|u1D438|u1D4J≠Cst0 0 0
+−|u1D71≠|u1D44∆Cst|u1D44FCst 
+|u1D438|u1D44∆Cst1
+|u1D438|u1D44FCst−|u1D71≠|u1D4J≠Cst|u1D44FCst 
+|u1D438|u1D4J≠Cst0 0 0
+−|u1D71≠|u1D44∆Cst|u1D4J≠Cst 
+|u1D438|u1D44∆Cst−|u1D71≠|u1D44FCst|u1D4J≠Cst
+|u1D438|u1D44FCst1
+|u1D438|u1D4J≠Cst0 0 0
+0 0 01
+|u1D43A|u1D44∆Cst|u1D44FCst 0 0
+0 0 0 01
+|u1D43A|u1D44FCst|u1D4J≠Cst 0
+0 0 0 0 01
+|u1D43A|u1D4J≠Cst|u1D44∆Cst ⎦⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎤
+ 
+where, 
+|u1D71≠|u1D44∆Cst|u1D44FCst 
+|u1D438|u1D44∆Cst=|u1D71≠|u1D44FCst|u1D44∆Cst 
+|u1D438|u1D44FCst  ,|u1D71≠|u1D4J≠Cst|u1D44∆Cst 
+|u1D438|u1D4J≠Cst=|u1D71≠|u1D44∆Cst|u1D4J≠Cst 
+|u1D438|u1D44∆Cst  ,|u1D71≠|u1D4J≠Cst|u1D44FCst 
+|u1D438|u1D4J≠Cst=|u1D71≠|u1D44FCst|u1D4J≠Cst 
+|u1D438|u1D44FCst  . *. 2  
+LS-DYNA R13 2-143 (MAT) History 
+Variable # Description (solids and thick shells 3, 
+5, and 7) Description (shells and 
+thick shells 1, 2 and 6) 
+10  Stiﬀness component |u1D436|fiveCst|fiveCst  
+11  Stiﬀness component |u1D436|fiveCst|sixCst  
+12  Stiﬀness component |u1D436|sixCst|sixCst  
+Material Directions: 
+We will give an overview of how LS-DYNA ﬁnds the pr incipal material directions for 
+solid and shell elements for this material and othe r anisotropic materials based on the 
+input.  We will call the material coordinate system  the {/u1D41A,/u1D41B,/u1D41C} coordinate system.  The 
+AOPT options illustrated in Figure M2-1  deﬁne the preliminary {/u1D41A,/u1D41B,/u1D41C} system for all 
+elements of the parts that use the material, but th is is not the ﬁnal material direction.  
+The {/u1D41A,/u1D41B,/u1D41C} system deﬁned by the AOPT options may be oﬀset by a ﬁnal rotation about 
+the /u1D41C-axis.  The oﬀset angle we call BETA. Note that *EL EMENT_SOLID_ORTHO and 
+*ELEMENT_SHELL_MCID allow you to set the preliminar y {/u1D41A,/u1D41B,/u1D41C} coordinate system 
+for individual solid and shell elements, instead of  using the preliminary system created 
+with AOPT. Figures M2-2  and M2-3  give the ﬂow chart for ﬁnding the ﬁnal material 
+direction based on the input to the *MAT keyword an d the *ELEMENT keyword.  As 
+indicated in the ﬁgures, the orientation of the ﬁna l material axes is updated 
+continuously through the simulation as the element moves and deforms, in accordance 
+with the invariant numbering scheme (INN in *CONTRO L_ACCURACY). 
+ 
+For solid elements, the BETA angle is speciﬁed in o ne of two ways.  When using 
+AOPT = 3, the BETA parameter deﬁnes the oﬀset angle  for all elements that use the 
+material.  The BETA parameter on *MAT has no meanin g for the other AOPT options.  
+Alternatively, a BETA angle can be deﬁned for indiv idual solid elements as described in 
+Remark 5 for *ELEMENT_SOLID_ORTHO.  The BETA angle set using the ORTHO 
+option is available for all values of AOPT, and it overrides the BETA angle on the *MAT 
+card for AOPT = 3 (see Figure M2-2 ). Note that when the BETA angle is applied in 
+either case depends on the value of MACF (if availa ble) of the *MAT keyword.  With 
+MACF two of the material directions may be switched .  
+ 
+There are two fundamental diﬀerences between shell and solid element orthotropic 
+materials.  (In the following discussion, tshell el ements fall into the “shell” category.)  
+First, the /u1D41C-direction is always normal to a shell element such  that the /u1D41A and /u1D41B-directions 
+are within the plane of the element.  Second, for s ome anisotropic materials, shell 
+elements may have unique ﬁber directions within eac h layer through the thickness of 
+the element so that a layered composite can be mode led with a single element.   
+ *. 2  
+LS-DYNA R13 2-145 (MAT) Illustration of AOPT: Figure M2-1 
+AOPT  = 0.0 AOPT  = 1.0 (solid only)  
+ 
+AOPT  = 2.0 (solid)  AOPT  = 2.0 (shell)  
+ 12
+4567
+8
+a = v12
+v14
+bc = a ×b
+3
+b = v14 - aa⋅v14
+a⋅a⇒ a⋅b = 0 ey
+ex4
+1
+pezb = c x a  d ∕∕ ez
+a
+235 78
+c = a x d
+a is set parallel to the 
+line segment connecting
+p to the element center.
+d is set parallel to ez.
+input(p) → {a} → {c} → {b} 6
+a
+b = c × a dc = a × d 
+a,d are input.
+The computed
+axes do not
+depend on the
+element.c is orthogonal
+to the a,d plane
+b is orthogonal
+to the c,a planec = n
+ainput
+b = c×a
+ a = ainput - n  ainput⋅n
+n⋅n
+ *. 2  
+LS-DYNA R13 2-147 (MAT)  
+  /c0d/c28/c2f/c28/c30/c28/c31/c37/c42/c36/c32/c2f/c2c/c27/c42/c5e/c32/c33/c37/c2c/c32/c31/c60
+/c2a/c2f/c31/c36/c35 /c34/c3a/c2e/c23/c30/c2d/c10/c25/c26/c34/c24
+/c31/c2a/c25 /c51/c50/c4a/c4f/c55/c46/c53 /c55/c50 /c51/c42/c53/c55
+/c23/c26/c35/c22/c10/c22/c12 =O/c0d /c45/c46/c47/c42/c56/c4d/c55/c54 /c55/c50 /c11
+/c09/c22/c12/c0a/c0d /c22/c13/c0d /c22/c14 /c42O/c0d /c50/c51/c55/c4a/c50/c4f/c42/c4d
+/c25/c12/c0d /c25/c13/c0d /c25/c14 /c45O/c0d /c50/c51/c55/c4a/c50/c4f/c42/c4d/c0d/c33/c24/c35/c37
+/c2a/c2f/c31/c36/c35 /c34/c3a/c2e/c23/c30/c2d/c10/c25/c26/c34/c24
+/c31/c2a/c25 /c54/c46/c55/c54 /c2a/c25 /c47/c50/c53 /c55/c49/c4a/c54 /c51/c42/c53/c55
+/c2e/c2a/c25 /c51/c50/c4a/c4f/c55/c46/c53 /c55/c50 /c4e/c42/c55/c46/c53/c4a/c42/c4d/c0d/c30/c24/c37
+/c2a/c2f/c31/c36/c35 /c34/c3a/c2e/c23/c30/c2d/c10/c25/c26/c34/c24
+/c2e/c2a/c25 /c54/c46/c55 /c2a/c25 /c47/c50/c53 /c55/c49/c4a/c54 /c4e/c42/c55/c46/c53/c4a/c42/c4d
+/c22/c30/c31/c35 /c42/c59/c46/c54 /c42/c4d/c48/c50/c53/c4a/c55/c49/c4e /c1b/c42/c48
+/c2e/c22/c24/c27 /c42/c59/c46/c54 /c44/c49/c42/c4f/c48/c46 /c1b/c42/c48
+/c39/c31/c0d /c3a/c31/c0d /c3b/c31 /c51o
+/c22/c12/c0d /c22/c13/c0d /c22/c14 /c42o
+/c37/c12/c0d /c37/c13/c0d /c37/c14 /c57o
+/c25/c12/c0d /c25/c13/c0d /c25/c14 /c45o
+/c23/c26/c35/c22 =o/c0d /c45/c46/c47/c42/c56/c4d/c55/c54 /c55/c50 /c11
+/c25/c50/c46/c54 /c55/c49/c4a/c54
+/c46/c4d/c46/c4e/c46/c4f/c55 /c49/c42/c57/c46
+/c42O/c42/c4f/c45/c45O/c20/c35/c49/c46/c4f /c4d/c46/c55
+/c42 /c42O
+/c44 /c42O/c45O
+/c43 /c44O/c42O
+=O/c4a/c54 /c4f/c50/c55 /c45/c46 /c1a/c4f/c46/c45/c0f/c5a/c46/c54
+/c22/c30/c31/c35 /c20 /c22/c51/c51/c4d/c5a /c2e/c22/c24/c27/c0f/c4f/c50
+/c24/c42/c4d/c44/c56/c4d/c42/c55/c46 /c42/c0d/c43/c0d /c42/c4f/c45 /c44/c47/c53/c50/c4e
+/c51o/c0d/c42o/c0d/c57o/c0d /c42/c4f/c45 /c45o/c42/c44/c0e
+/c44/c50/c53/c45/c4a/c4f/c48 /c55/c50 /c22/c30/c31/c35 /c09/c54/c46/c46
+/c22/c30/c31/c35 /c1a/c48/c56/c53/c46/c0a/c0f/c4f/c50
+=O/c45/c46/c1a/c4f/c46/c45/c20/c4f/c50
+=/c1e=O/c5a/c46/c54=/c1e=o/c5a/c46/c54
+/c2e/c22/c24/c27 /c20/c33/c50/c55/c42/c55/c46 /c42/c42/c4f/c45/c43
+/c43/c5a=/c42/c43/c50/c56/c55 /c44/c0f
+/c5a/c46/c54
+/c22/c51/c51/c4d/c5a /c2e/c22/c24/c27/c0f/c4f/c50
+/c33/c50/c55/c42/c55/c46 /c42/c42/c4f/c45/c43
+/c43/c5a=/c42/c43/c50/c56/c55 /c44/c0f/c35/c4a/c4e/c46 /c46/c57/c50/c4d/c57/c46 /c42/c0d/c43/c0d /c42/c4f/c45
+/c44/c58/c4a/c55/c49 /c55/c49/c46 /c46/c4d/c46/c4e/c46/c4f/c55/c0f/c33/c46/c55/c56/c53/c4f /c42/c0d
+/c43/c0d /c42/c4f/c45 /c44/c0f
+Figure M2-2.   Flowchart showing how for each solid element LS-DY NA 
+determines the vectors {/u1D41A,/u1D41B,/u1D41C} from the input. *. 3  
+LS-DYNA R13 2-149 (MAT) *. 3  *. 3  
+LS-DYNA R13 2-151 (MAT) |u1D6FD′ equal to 0 and 1, respectively, kinematic and isot ropic hardening are ob- 
+tained as shown in Figure M3-1 .  For isotropic hardening, |u1D6FD′ = 1, Material 
+Model 12, *. 4  *. 4  
+LS-DYNA R13 2-153 (MAT)  Card 5 1 2 3 4 5 6 7 8 
+Variable ALPHA1 ALPHA2 ALPHA3 ALPHA4 ALPHA5 ALPHA6 ALPHA7 ALPHA8 
+Type F F F F F F F F 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable SIGY1 SIGY2 SIGY3 SIGY4 SIGY5 SIGY6 SIGY7 SIGY8 
+Type F F F F F F F F 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable ETAN1 ETAN2 ETAN3 ETAN4 ETAN5 ETAN6 ETAN7 ETAN8 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+Ti Temperatures.  The minimum required is 2 while the maximum 
+allowed is 8. 
+Ei Corresponding Young’s modulus at temperature T i 
+PR i Corresponding Poisson’s ratio at temperature T i 
+ALPHA i Corresponding coeﬃcient of thermal expansion at te mperature T i 
+SIGY i Corresponding yield stress at temperature T i 
+ETAN i Corresponding plastic hardening modulus at temperat ure T i *. 5  
+LS-DYNA R13 2-155 (MAT) *. 5  *. 5  
+LS-DYNA R13 2-157 (MAT)  VARIABLE   DESCRIPTION  
+dependent. 
+EPS1, … Volumetric strain values in pressure as a function of volumetric 
+strain curve (see Remarks below).  A maximum of 10 values 
+including 0.0 are allowed and a minimum of 2 values  are 
+necessary.  If EPS1 is not 0.0, then a point (0.0, 0.0)  will be 
+automatically generated and a maximum of nine value s may be 
+input. 
+P1, P2, …, PN Pressures corresponding to volumetric strain values  given on 
+Cards 3 and 4. 
+Remarks: 
+1.  Variable Deﬁnitions.  Pressure is positive in compression.  Volumetric st rain is 
+given by the natural log of the relative volume and  is negative in compression.  
+Relative volume is a ratio of the current volume to  the initial volume at the 
+start of the calculation.  The tabulated data shoul d be given in order of increas- 
+ing compression.  If the pressure drops below the c utoﬀ value speciﬁed, it is 
+reset to that value.  For a detailed description we  refer to Kreig [1972]. The bulk unloading modulus is used
+if the volumetric crushing option is on 
+(VCR = 0).  In thiscase the aterial's response
+follows the black arrows.Loading and unloading (along the grey
+arows) follows the input curve when the
+volumetric crushing option is off (VCR = 1.0)
+Volumetric Strain,
+Pressure Cutoff Value
+Pressure
+lnV
+V0⎛
+⎜
+⎝⎛
+⎜
+⎝tension compression
+Figure M5-1.  Pressure as a function of volumetric strain curve for soil and 
+crushable foam model.  The volumetric strain is given by the natural logarithm 
+of the relative volume, |u1D449. *. 6  
+LS-DYNA R13 2-159 (MAT) *. 6  *. 7  
+LS-DYNA R13 2-161 (MAT) *. 7  *. 8  
+LS-DYNA R13 2-163 (MAT) *. 8  *. 8  
+LS-DYNA R13 2-165 (MAT) /u1D4:D|twoCst=1
+2|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D46≠|u1D4J6Cst|u1D4J7Cst  
+and the yield stress is |u1D7≠∆|u1D466Cst.  If yielding has occurred, namely, /u1D̅1∫> 0, the deviatoric trial 
+stress is scaled to obtain the ﬁnal deviatoric stre ss at time |u1D4JB + 1 : 
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst=|u1D7≠∆|u1D466Cst
+/radical.v13/u1D4:D|twoCst∗|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst 
+If /u1D̅1∫≤ 0, then 
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst=∗|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst 
+Before detonation, pressure is given by the express ion 
+|u1D4JD|u1D4JBCst+|oneCst=Κ|parenleftCvJ1
+|u1D449|u1D4JBCst+|oneCst− 1|parenriµhtCvJ  , 
+where |u1D43∆ is the bulk modulus.  Once the explosive material detonates: 
+|u1D46≠|u1D4J6Cst|u1D4J7Cst |u1D4JBCst+|oneCst= 0  , 
+and the material behaves like a gas. *. 9  
+LS-DYNA R13 2-167 (MAT)  VARIABLE   DESCRIPTION  
+PR Poisson’s ratio (used for null beams and shells only) 
+Remarks: 
+These remarks apply to solids and thick shells only . 
+1.  Material Model.   When used with solids or thick shells, this mater ial must be 
+used with an equation-of-state.  Pressure cutoﬀ is negative in tension.  A (devi- 
+atoric) viscous stress of the form,  
+|u1D7≠∆|minuteCst
+|u1D4J6Cst|u1D4J7Cst = 2|u1D7≠7|u1D7≠≠|minuteCsṫ|u1D4J6Cst|u1D4J7Cst   ,  
+is computed for nonzero |u1D7≠7, where |u1D7≠≠′̇|u1D4J6Cst|u1D4J7Cst  is the deviatoric strain rate and |u1D7≠7 is the 
+dynamic viscosity.  Analyzing the dimensions of the  above equation gives 
+units of the components in SI of 
+|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|<racketriµhtCvJ~|<racketleftCvJ/u1D441
+|u1D4JA|twoCst|u1D46≠|<racketriµhtCvJ |<racketleftCvJ1
+|u1D46≠|<racketriµhtCvJ  . 
+Therefore, |u1D7≠7 may have units of [Pa × s]. 
+2.  Hourglass Control.   Null materials have no shear stiﬀness (except fro m 
+viscosity) and hourglass control must be used with great care.  In some appli- 
+cations, the default hourglass coeﬃcient may lead t o signiﬁcant energy losses.  
+In general, for ﬂuids the hourglass coeﬃcient QM sh ould be small (in the range 
+10 -6 to 10 -4), and the hourglass type IHQ should be set to 1 (d efault). 
+3.  Yield Strength.   The Null material has no yield strength and behav es in a 
+ﬂuid-like manner. 
+4.  Cut-off Pressure.   The cut-oﬀ pressure, PC, must be deﬁned to allow for a 
+material to “numerically” cavitate.  In other words , when a material undergoes 
+dilatation above certain magnitude, it should no lo nger be able to resist this 
+dilatation.  Since dilatation stress or pressure is  negative, setting the PC limit to 
+a very small negative number would allow for the ma terial to cavitate once the 
+pressure in the material goes below this negative v alue. *. 2 / *. 2 / .  3 and *. 2) and the anisotropic plast ic material model (*. 2 for a complete 
+description.) 
+EQ.0.0: locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES 
+EQ.1.0: locally orthotropic with material axes determined b y a 
+point in space and the global locati on of the element 
+center; this is the |u1D44∆-direction.  This option is for solid 
+elements only. 
+EQ.2.0: globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element *. 2 or *. 1_FLUID) for fu rther details. 
+ 
+ Card 1 2 3 4 5 6 7 8 
+Variable MID RO K VC     
+Type A8 F F F     
+Default none none none none     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+K Bulk modulus 
+VC Tensor viscosity coeﬃcient *. 9) for further  details.  Accurate results are 
+to be expected only for the case where the EOS pres ents a linear relationship between 
+the pressure and volumetric strain.  
+This material is a variant of *. 2 for a more complete description): 
+EQ.0.0: locally orthotropic with material axes deﬁned by 
+element nodes 1, 2 and 4 
+EQ.1.0: locally orthotropic with material axes determined by  a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction. 
+EQ.2.0: globally orthotropic with material axes determined b y 
+vectors deﬁned below. 
+EQ.3.0: locally orth otropic material axes determined by 
+rotating the material axes about the element normal  by 
+angle THETA. The angle is deﬁned from the line in t he 
+plane that is the cross product of the vector /u1D42F with the 
+element normal.  The plane of a solid is deﬁned as the 
+midsurface between the inner surface and the outer 
+surface deﬁned by the ﬁrst 4 nodes and last 4 nodes . 
+EQ.4.0: locally orthotropic in cylindrical coordinate system  
+with the material axes determined by a vector /u1D42F and an 
+originating point |u1D4JD. 
+MACF Material axes change ﬂag: 
+EQ.1.0: no change (default) 
+EQ.2.0: switch axes |u1D44∆ and |u1D44F 
+EQ.3.0: switch axes |u1D44∆ and /u1D450 
+EQ.4.0: switch axes |u1D44F and /u1D450 
+XP, YP, ZP Coordinates for point |u1D4JD for AOPT  =  1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 *

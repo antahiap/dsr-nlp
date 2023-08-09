@@ -1,0 +1,118 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+HR Hardening rule: 
+EQ.1.0: linear (default), 
+EQ.2.0: exponential (Swift) 
+EQ.3.0: load curve or table with strain rate eﬀects 
+EQ.4.0: exponential (Voce) 
+EQ.5.0: exponential (Gosh) 
+EQ.6.0: exponential (Hocket-Sherby) 
+EQ.7.0: load curves in three directions 
+EQ.8.0: table with temperature dependence 
+EQ.9.0: 3d table with temperature and strain rate dependenc e 
+P1 Material parameter: 
+HR.EQ.1.0: Tangent modulus, 
+HR.EQ.2.0: k, strength coeﬃcient for Swift exponential 
+hardening  
+HR.EQ.4.0: a, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: k, strength coeﬃcient for Gosh exponential 
+hardening 
+HR.EQ.6.0: a, coeﬃcient for Hocket- Sherby exponential 
+hardening 
+HR.EQ.7.0: load curve ID for hardening in 45 degree direction.  
+See Remark 2. 
+P2 Material parameter: 
+HR.EQ.1.0: Yield stress 
+HR.EQ.2.0: n, exponent for Swift exponential hardening 
+HR.EQ.4.0: c, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: n, exponent for Gosh exponential hardening 
+HR.EQ.6.0: c, coeﬃcient for Hocket- Sherby exponential 
+hardening 
+HR.EQ.7.0: load curve ID for hardening in 90 degree direction.   
+See Remark 2. *.   
+  VARIABLE   DESCRIPTION  
+CH c, Hill90 parameter, which is read instead of R90 i f FLAG = 1. 
+LCID Load curve/table ID for hardening in the 0 degree d irection.  See 
+Remark 1. 
+E0 Material parameter 
+HR.EQ.2.0: |u1D7≠≠|zeroCst for determining initial yield stress for Swift 
+exponential hardening.  (Default = 0.0) 
+HR.EQ.4.0: b, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: |u1D7≠≠|zeroCst for determining initial yield stress for Gosh 
+exponential hardening.  (Default = 0.0) 
+HR.EQ.6.0: b, coeﬃcient for Hocket- Sherby exponential 
+hardening 
+SPI if |u1D7≠≠|zeroCst is zero above and HR = 2.0. (Default = 0.0) 
+EQ.0.0: |u1D7≠≠|zeroCst=|parenleftCv3|u1D438/u1D458/fraction.v2|parenriµhtCv3|oneCst(|u1D4JBCst−|oneCst)/fraction.v2 
+LE.0.02: |u1D7≠≠|zeroCst= SPI  
+GT.0.02: |u1D7≠≠|zeroCst=|parenleftCv3SPI 
+/u1D458/fraction.v2|parenriµhtCv3|oneCst |u1D4JBCst ⁄ 
+If HR = 5.0 the strain at plastic yield is determined by an  iterative 
+procedure based on the same principles as for HR.EQ .2.0. 
+P3 Material parameter: 
+HR.EQ.5.0: p, parameter for Gosh exponential hardening 
+HR.EQ.6.0: n, exponent for Hocket- Sherby exponential 
+hardening 
+AOPT Material axes option (see .   *.   
+ of strain for uniaxial tension in the rolling direc tion, VLCID curve should give 
+the relative volume change as function of strain fo r uniaxial tension in the roll- 
+ing direction and load curve given by -E should giv e the Young’s modulus as 
+function of strain for uniaxial tension in the roll ing direction.  Optionally the 
+curve can be substituted for a table deﬁning harden ing as function of plastic 
+strain rate (HR = 3) or temperature (HR = 8). 
+2.  Exceptions from the rule above are curves deﬁned a s functions of plastic strain 
+in the 45 and 90 directions, i.e., P1 and P2 for HR  = 7 and negative R45 or R90. 
+The hardening curves are here deﬁned as measured st ress as function of meas- 
+ured plastic strain for uniaxial tension in the dir ection of interest, i.e., as deter- 
+mined from experimental testing using a standard pr ocedure.  Moreover, the 
+curves deﬁning the R values are as function of the measured plastic strain for 
+uniaxial tension in the direction of interest.  The se curves are transformed in- 
+ternally to be used with the eﬀective stress and st rain properties in the actual 
+model.  The eﬀective plastic strain does not coinci de with the plastic strain 
+components in other directions than the rolling dir ection and may be some- 
+what confusing to the user.  Therefore the von Mise s work equivalent plastic 
+strain is output as history variable #2 if HR = 7 o r if any of the R-values is de- 
+ﬁned as function of the plastic strain. 
+3.  The R-values in curves are deﬁned as the ratio of instantaneous width change 
+to instantaneous thickness change.  That is, assume  that the width W and 
+thickness T are measured as function of strain.  Th en the corresponding R-
+value is given by: 
+|u1D44J =|u1D4J1 /u1D44A 
+|u1D4J1|u1D7≠≠ //u1D44A
+|u1D4J1|u1D447 
+|u1D4J1|u1D7≠≠ /|u1D447 
+4.  The anisotropic yield criterion Φ for plane stress is deﬁned as: 
+Φ= |u1D43∆|oneCst|u1D4JACst+ |u1D43∆|threeCst|u1D43∆|twoCst(|u1D4JACst/|twoCst)−|oneCst+/u1D450|u1D4JACst|u1D43∆|fourCst|u1D4JACst/|twoCst= |parenleftCv11 +/u1D450|u1D4JACst− 2|u1D44∆ + |u1D44F|parenriµhtCv1|u1D7≠∆/u1D44C.st|u1D4JACst 
+where |u1D7≠∆/u1D44C.st is the yield stress and K i = 1,4  are given by: 
+|u1D43∆|oneCst=|dividesCv2|u1D7≠∆|u1D46JCst+ |u1D7≠∆|u1D466Cst|dividesCv2 
+|u1D43∆|twoCst=|dividesCv2|u1D7≠∆|u1D46JCst|twoCst+ |u1D7≠∆|u1D466Cst|twoCst+ 2|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst|dividesCv2 
+|u1D43∆|threeCst= −2|u1D44∆|parenleftCv2|u1D7≠∆|u1D46JCst|twoCst− |u1D7≠∆|u1D466Cst|twoCst|parenriµhtCv2 + |u1D44F|parenleftCv2|u1D7≠∆|u1D46JCst− |u1D7≠∆|u1D466Cst|parenriµhtCv2|twoCst 
+|u1D43∆|fourCst=/divides.v4|parenleftCv2|u1D7≠∆|u1D46JCst− |u1D7≠∆|u1D466Cst|parenriµhtCv2|twoCst+ 4|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst/divides.v4 
+If FLAG = 0, the anisotropic material constants a, b, and c are obtained through 
+R00 , R 45 , and R 90  using these 3 equations: 
+1 + 2|u1D44J|zeroCst|zeroCst =/u1D450|u1D4JACst− |u1D44∆ +{(|u1D4JA + 2)/2|u1D4JA}|u1D44F
+1 − |u1D44∆ +{(|u1D4JA − 2)/2|u1D4JA}|u1D44F 
+1 + 2|u1D44J|fourCst|fiveCst =/u1D450|u1D4JACst *.   
+ To include strain rate eﬀects in the model we multi ply the yield stress by a 
+factor depending on the eﬀective plastic strain rat e.  We use the Cowper-
+Symonds’ model, hence the yield stress can be writt en 
+|u1D7≠∆/Y.st(|u1D7≠≠|u1D4JDCst, |u1D7≠≠̇|u1D4JDCst) = |u1D7≠∆/Y.st|u1D46≠Cst(|u1D7≠≠|u1D4JDCst)
+⎣⎢⎡1 + |parenleftCv6|u1D7≠≠̇|u1D4JDCst
+|u1D436|parenriµhtCv6|oneCst/|u1D4JDCst
+⎦⎥⎤ 
+where |u1D7≠∆/Y.st|u1D46≠Cst denotes the static yield stress, |u1D436 and |u1D4JD are material parameters, |u1D7≠≠̇|u1D4JDCst is 
+the eﬀective plastic strain rate. 
+5.  A kinematic hardening model is implemented followi ng the works of 
+Chaboche and Roussilier.  A back stress α is introduced such that the eﬀective 
+stress is computed as 
+|u1D7≠∆|eCst /f.st/f.st= |u1D7≠∆|eCst /f.st/f.st(|u1D7≠∆|oneCst|oneCst − 2|u1D6F+|oneCst|oneCst − |u1D6F+|twoCst|twoCst , |u1D7≠∆|twoCst|twoCst − 2|u1D6F+|twoCst|twoCst − |u1D6F+|oneCst|oneCst , |u1D7≠∆|oneCst|twoCst − |u1D6F+|oneCst|twoCst ) 
+The back stress is the sum of up to four terms acco rding to 
+|u1D6F+|u1D4J6Cst|u1D4J7Cst = |summationCv1 |u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst|fourCst
+|u1D4J8Cst=|oneCst 
+and the evolution of each back stress component is as follows 
+|u1D6FF|u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst= |u1D436|u1D4J8Cst|parenleftCvJ|u1D44∆|u1D4J8Cst|u1D46≠|u1D4J6Cst|u1D4J7Cst 
+|u1D7≠∆|eCst /f.st/f.st− |u1D6F+|u1D4J6Cst|u1D4J7Cst |u1D4J8Cst|parenriµhtCvJ |u1D6FF|u1D7≠≠|u1D4JDCst 
+where |u1D436|u1D4J8Cst and |u1D44∆|u1D4J8Cst are material parameters, |u1D46≠|u1D4J6Cst|u1D4J7Cst  is the deviatoric stress tensor, |u1D7≠∆|eCst /f.st/f.st is 
+the eﬀective stress and |u1D7≠≠|u1D4JDCst is the eﬀective plastic strain. *

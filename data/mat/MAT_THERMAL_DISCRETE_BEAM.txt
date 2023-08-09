@@ -1,0 +1,28 @@
+ ........................ ................................................... ............... 3-13  
+*.  
+ *.  *.  
+*.   *.   
+This is thermal material type 5.  It deﬁnes propert ies for discrete beams.  It is only 
+applicable when used with *SECTION_BEAM elform = 6.  
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable TMID TRO       
+Type A8 F       
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable HC TC       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label not 
+exceeding 8 characters must be speciﬁed. 
+TRO Thermal density: 
+EQ.0.0:  default to structural density.  
+HC Speciﬁc heat 
+TC Thermal conductance (SI units are W/K) 
+ HC  =  (heat transfer coeﬃcient) × (beam cross section area) 
+[W/K]  =  [W / m^2 K] * [m^2] 
+Note: 
+A beam cross section area is not deﬁned on the SECT ION_BEAM keyword for an 
+elform = 6 discrete beam.  A beam cross section are a is needed for heat transfer 
+calculations.  Therefore, the cross section area is  lumped into the value entered for HC. *

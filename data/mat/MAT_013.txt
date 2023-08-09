@@ -1,0 +1,19 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-185 (MAT)  VARIABLE   DESCRIPTION  
+REM Element erosion option: 
+EQ.0.0: failed element eroded after failure. 
+NE.0.0: element is kept, no removal except by ∆|u1D461 below. 
+TREM ∆|u1D461 for element removal: 
+EQ.0.0: ∆|u1D461 is not considered (default). 
+GT.0.0: element eroded if element time step size falls belo w ∆|u1D461. 
+Remarks: 
+When the eﬀective plastic strain reaches the failur e strain or when the pressure reaches 
+the failure pressure, the element loses its ability  to carry tension and the deviatoric 
+stresses are set to zero, causing the material to b ehave like a ﬂuid.  If ∆|u1D461 for element 
+removal is deﬁned, the element removal option is ig nored. 
+ 
+The element erosion option based on ∆|u1D461 must be used cautiously with the contact 
+options.  Nodes to surface contact is recommended w ith all nodes of the eroded brick 
+elements included in the node list.  As the element s are eroded the mass remains and 
+continues to interact with the master surface. *

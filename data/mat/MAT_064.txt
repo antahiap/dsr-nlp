@@ -1,0 +1,5 @@
+: *.  
+*.   
+ *.   *.   
+ 3.  Viscoplastic Formulation.  A fully viscoplastic formulation is optional.  An 
+additional cost is incurred, but the improvement in  results can be dramatic. *

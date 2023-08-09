@@ -1,0 +1,437 @@
+TWELD ..................................... ................................................... ............................ 2-626  
+*. TWELD_{OPTION} [0,1SW] {6} 
+ *. TWELD_DAIMLERCHRYSLER [0] {6}  
+ *. TWELD_{OPTION} *. TWELD_DAIMLERCHRYSLER *. TWELD  
+ *.  TWELD are written to the spot 
+weld force ﬁle, swforc , and the ﬁle for element stresses and resultants f or designated 
+elements, elout . 
+It is advisable to include all spot welds, which pr ovide the slave nodes, and spot welded 
+materials, which deﬁne the master segments, within a single *CONTACT_SPOTWELD 
+interface for beam element spot welds or a *CONTACT _TIED_SURFACE_TO_SURFACE 
+interface for solid element spot welds.   As a constraint method these interfaces are treat ed 
+independently which can lead to signiﬁcant problems  if such interfaces share common 
+nodal points.  An added beneﬁt is that memory usage  can be substantially less with a 
+single interface. 
+Available options for OPTION1  include: 
+<BLANK> 
+DAMAGE-FAILURE 
+The DAMAGE-FAILURE option causes one additional lin e to be read with the damage 
+parameter and a ﬂag that determines how failure is computed from the resultants.  On 
+this line the parameter, RS, if nonzero, invokes da mage mechanics combined with the *. TWELD  
+ Card 2f.   This card is included if the DAMAGE-FAIL URE keyword option is used and 
+OPT = 5 on Card 3. 
+EFAIL ZD ZT ZT2     
+Card 2g.   This card is included if the DAMAGE-FAIL URE keyword option is used and 
+OPT = 6, 7, 9, -9 or 10 on Card 3. 
+EFAIL       NF 
+Card 2h.   This card is included if the DAMAGE-FAIL URE keyword option is used and 
+OPT = 11 on Card 3. 
+EFAIL LCT LCC     NF 
+Card 3.   This card is included if the DAMAGE-FAILURE keywo rd option is used. 
+RS OPT FVAL TRUE_T ASFF BETA  DMGOPT 
+Card 3.1.   This card is included if the DAMAGE-FAIL URE keyword option is used and 
+DMGOPT = -1 on Card 3. 
+DMGOPT FMODE FFCAP TTOPT     
+Card 4.   This card is included if the DAMAGE-FAIL URE keyword option is used and 
+OPT = 12 or 22 on Card 3. 
+USRV7 USRV8 USRV9 USRV10 USRV11 USRV12 USRV13 USRV14 
+Card 5.   This card is included if the DAMAGE-FAIL URE keyword option is used and 
+OPT = 12 or 22 on Card 3. 
+USRV15 USRV16 USRV17 USRV18 USRV19 USRV20 USRV21 USRV22 
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY EH DT TFAIL 
+Type A F F F F F F F 
+ *. TWELD  
+  VARIABLE   DESCRIPTION  
+GT.0: Constant value 
+LT.0: |NRR|  is a load curve ID, deﬁning the axial force resulta nt 
+/u1D441|u1D4JFCst|u1D4JFCst/u1D439.sts at failure as a function of the eﬀective strain ra te.  
+NRS Force resultant /u1D441|u1D4JFCst|u1D46≠Cst/u1D439.sts at failure.  If zero, failure due to this 
+component is not considered.   
+GT.0: Constant value 
+LT.0: |NRS|  is a load curve ID, deﬁning the force resultant /u1D441|u1D4JFCst|u1D46≠Cst/u1D439.sts
+at failure as a function of the eﬀective strain rat e. 
+NRT Force resultant /u1D441|u1D4JFCst|u1D461Cst/u1D439.sts at failure.  If zero, failure due to this 
+component is not considered.   
+GT.0: Constant value 
+LT.0: |NRT|  is a load curve ID, deﬁning the force resultant /u1D441|u1D4JFCst|u1D461Cst/u1D439.sts
+at failure as a function of the eﬀective strain rat e. 
+MRR Torsional moment resultant |u1D44≠|u1D4JFCst|u1D4JFCst/u1D439.sts at failure.  If zero, failure due to 
+this component is not considered.   
+GT.0: Constant value 
+LT.0: |MRR|  is a load curve ID, deﬁning the torsional moment 
+resultant |u1D44≠|u1D4JFCst|u1D4JFCst/u1D439.sts at failure as a function of the eﬀective strain 
+rate. 
+MSS Moment resultant |u1D44≠|u1D46≠Cst|u1D46≠Cst/u1D439.sts at failure.  If zero, failure due to this 
+component is not considered.   
+GT.0: Constant value 
+LT.0: |MSS|  is a load curve ID, deﬁning the moment resultant 
+|u1D44≠|u1D46≠Cst|u1D46≠Cst /u1D439.sts at failure as a function of the eﬀective strain ra te. 
+MTT Moment resultant |u1D44≠|u1D461Cst|u1D461Cst/u1D439.sts at failure.  If zero, failure due to this 
+component is not considered.   
+GT.0: Constant value 
+LT.0: |MTT|  is a load curve ID, deﬁning the moment resultant 
+|u1D44≠|u1D461Cst|u1D461Cst /u1D439.sts at failure as a function of the eﬀective strain ra te. 
+NF Number of force vectors stored for ﬁltering 
+ *. TWELD  
+  VARIABLE   DESCRIPTION  
+MSS Moment resultant |u1D44≠|u1D46≠Cst|u1D46≠Cst/u1D439.sts at failure.  If zero, failure due to this 
+component is not considered.   
+GT.0: Constant value 
+LT.0: |MSS|  is a load curve ID, deﬁning the moment resultant 
+|u1D44≠|u1D46≠Cst|u1D46≠Cst /u1D439.sts at failure as a function of the eﬀective strain ra te. 
+MTT Moment resultant |u1D44≠|u1D461Cst|u1D461Cst/u1D439.sts at failure.  If zero, failure due to this 
+component is not considered.   
+GT.0: Constant value 
+LT.0: |MTT|  is a load curve ID, deﬁning the moment resultant 
+|u1D44≠|u1D461Cst|u1D461Cst /u1D439.sts at failure as a function of the eﬀective strain ra te. 
+NF Number of force vectors stored for ﬁltering 
+ 
+Card 2 for Stress Based Failure.   Additional card for DAMAGE-FAIL URE keyword 
+option with OPT = 1. 
+ Card 2c 1 2 3 4 5 6 7 8 
+Variable EFAIL SIGAX SIGTAU     NF 
+Type F F F     F 
+ 
+ VARIABLE   DESCRIPTION  
+EFAIL Eﬀective plastic strain in weld material at failure .  The plastic strain 
+must exceed the rupture strain (RS) at each integra tion point before 
+deletion occurs.  See Card 3. 
+SIGAX Maximum axial stress |u1D7≠∆|u1D4JFCst|u1D4JFCst |u1D439Cst at failure.   
+GT.0.0: Constant maximum axial stress at failure 
+EQ.0.0: Failure due to this component is not considered. 
+LT.0.0: |SIGAX|  is a load curve ID deﬁning the maximum axial 
+stress at failure as a function of the eﬀective str ain rate.  
+SIGTAU Maximum shear stress /u1D̅0F|u1D439Cst at failure.   
+GT.0.0: Constant maximum shear stress at failure *. TWELD  
+  VARIABLE   DESCRIPTION  
+ZD Notch diameter 
+ZT Sheet thickness 
+ZALP1 Correction factor |u1D6F+|oneCst 
+ZALP2 Correction factor |u1D6F+|twoCst 
+ZALP3 Correction factor |u1D6F+|threeCst 
+ZRRAD Notch root radius (OPT = 3 only) 
+NF Number of force vectors stored for ﬁltering 
+ 
+Card 2 for Structural Stress Failure.  Additional card for DAMAGE-FAIL URE 
+keyword option with OPT = 5. 
+ Card 2f 1 2 3 4 5 6 7 8 
+Variable EFAIL ZD ZT ZT2     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+EFAIL Eﬀective plastic strain in weld material at failure .  The plastic strain 
+must exceed the rupture strain (RS) at each integra tion point before 
+deletion occurs.  See Card 3. 
+ZD Notch diameter 
+ZT Sheet thickness 
+ZT2 Second sheet thickness  
+ *. TWELD  
+ Additional card for the DAMAGE-FAILURE option.  
+ Card 3 1 2 3 4 5 6 7 8 
+Variable RS OPT FVAL TRUE_T ASFF BETA  DMGOPT 
+Type F F F F I F  F 
+ 
+ VARIABLE   DESCRIPTION  
+RS Rupture strain (or rupture time if DMGOPT = 2 or 12).  Deﬁne if 
+and only if damage is active. 
+OPT Failure option: 
+EQ.-9: OPT = 9 failure is evaluated and written to the swforc 
+ﬁle, but element failure is suppressed. 
+EQ.-2: Same as option – 1 but in addition, the peak value of the 
+failure criteria and the time it occurs is stored a nd is 
+written into the swforc  database.  This information may 
+be necessary since the instantaneous values written  at 
+speciﬁed time intervals may miss the peaks.  Additi onal 
+storage is allocated to store this information. 
+EQ.-1: OPT = 0 failure is evaluated and written into the swforc 
+ﬁle, but element failure is suppressed. 
+EQ.0: Resultant based failure 
+EQ.1: Stress based failure computed from resultants (Toyo ta) 
+EQ.2: User subroutine uweldfail  to determine failure 
+EQ.3: Notch stress- based failure (beam and hex assembly 
+welds only) 
+EQ.4: Stress intensity factor at failure (beam and hex assembly 
+welds only) 
+EQ.5: Structural stress at failure (beam and hex assembly  
+welds only) 
+EQ.6: Stress based failure computed from resultants (Toyo ta).  
+In this option a shell strain rate dependent failur e model 
+is used (beam and hex assembly welds only).  The sta tic 
+failure stresses are deﬁned by part ID using the ke yword 
+*DEFINE_SPOTWELD_RUPTURE_STRESS. 
+EQ.7: Stress based failure for solid elements (Toyota) wi th 
+peak stresses computed from resultants, and s trength *. TWELD  
+  VARIABLE   DESCRIPTION  
+to trigger beam deletion. 
+OPT.EQ.7: Not used 
+OPT.EQ.9: Number of cycles that failure condition must be met  
+to trigger beam deletion. 
+OPT.EQ.10: ID of data deﬁned by *DEFINE_SPOTWELD_FAIL-
+URE. 
+OPT.EQ.12:  Number of history varia bles available in user 
+deﬁned failure subroutine, uweldfaill2 . 
+TRUE_T True weld thickness.  This optional value is availa ble for solid 
+element failure and is used to reduce the moment co ntribution to 
+the failure calculation from artiﬁcially thick weld  e lements under 
+shear loading so shear failure can be modeled more accurately.  
+See comments under the remarks for *. TWELD  *. TWELD  
+  
+Failure Constants Card.  Additional card for OPT = 12 or 22.  
+ Card 4 1 2 3 4 5 6 7 8 
+Variable USRV7 USRV8 USRV9 USRV10 USRV11 USRV12 USRV13 USRV14 
+Type F F F F F F F F 
+ 
+Failure Constants Card.  Additional card for OPT = 12 or 22.  
+ Card 5 1 2 3 4 5 6 7 8 
+Variable USRV15 USRV16 USRV17 USRV18 USRV19 USRV20 USRV21 USRV22 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+USRV n Failure constants for OPT = 12 or 22 user deﬁned fa ilure, |u1D4JB=7,
+8,…,22  
+Remarks: 
+1.  Failure Model Overview.  Spot weld material is modeled with isotropic 
+hardening plasticity coupled to failure models.  EF AIL speciﬁes a failure strain 
+which fails each integration point in the spot weld  independently.  The OPT 
+parameter is used to specify a failure criterion th at fails the entire weld element 
+when the criterion is met.  Alternatively, EFAIL an d OPT may be used to initi- 
+ate damage when the DAMAGE-FAILURE option is active  using RS, BETA, 
+and DMGOPT as described below. 
+Beam spot weld elements can use any OPT value excep t 7.  Brick spot weld 
+elements can use any OPT value except 3, 4, 5, 6, 9 , and -9.  Hex assembly spot 
+welds can use any OPT value except 9 and -9. 
+For all OPT failure criteria, if a zero is input fo r a failure parameter on Card 2, 
+the corresponding term will be omitted from the equ ation.  For example, if for 
+OPT = 0, only /u1D441|u1D4JFCst|u1D4JFCst/u1D439.sts is nonzero, the failure surface is reduced to |/u1D441|u1D4JFCst|u1D4JFCst | =/u1D441|u1D4JFCst|u1D4JFCst/u1D439.sts (see 
+below). 
+Similarly, if the failure strain EFAIL is set to ze ro, the failure strain model is not 
+used.  Both EFAIL and OPT failure may be active at the same time. *. TWELD  
+ 5.  Yield Curve or Table for SIGY.   When using a yield curve or table for SIGY, a 
+simpliﬁed plasticity algorithm is used, assuming a linear behavior within one 
+time increment.  Thus, no iterative return mapping has to be performed. 
+6.  Damage.  When the DAMAGE-FAILURE option is invoked, the cons titutive 
+properties for the damaged material are obtained fr om the undamaged materi- 
+al properties.  The amount of damage evolved is rep resented by the constant, 
+|u1D714, which varies from zero if no damage has occurred to unity for complete 
+rupture.  For uniaxial loading, the nominal stress in the damaged material is 
+given by  
+|u1D7≠∆nominal =|u1D443
+|u1D434 
+where |u1D443 is the applied load and |u1D434 is the surface area.  The true stress is given 
+by:  
+|u1D7≠∆true =|u1D443
+|u1D434 − |u1D434loss  
+where |u1D434loss  is the void area.  The damage variable can then be  deﬁned: 
+|u1D714 =|u1D434loss 
+|u1D434  , 
+where 
+0 ≤ |u1D714 ≤ 1  . 
+In this model, damage is initiated when the eﬀectiv e plastic strain in the weld 
+exceeds the failure strain, EFAIL.  If DMGOPT = 10,  11, or 12, damage will 
+initiate when the eﬀective plastic strain exceeds E FAIL, or when the failure 
+criterion is met, whichever occurs ﬁrst.  The failu re criterion is speciﬁed by the 
+OPT parameter.  If the inputted value of EFAIL = 0 and DMGOPT = 10, 11, or 
+12, then damage will only be initiated if the failu re criterion is met.  After dam- 
+age initiates, the damage variable is evaluated by one of two ways: 
+a)  For DMGOPT = 0, 1, 10, or 11, the damage variable is a function of eﬀec- 
+tive plastic strain in the weld: 
+|u1D7≠≠failure |u1D4JDCst≤ |u1D7≠≠eff |u1D4JDCst≤ |u1D7≠≠rupture |u1D4JDCst⇒|u1D714 =|u1D7≠≠eff |u1D4JDCst− |u1D7≠≠failure |u1D4JDCst
+|u1D7≠≠rupture |u1D4JDCst− |u1D7≠≠failure |u1D4JDCst   , 
+where |u1D7≠≠failure |u1D4JDCst = EFAIL and |u1D7≠≠rupture |u1D4JDCst = RS.  If DMGOPT = 10 or 11, and dam- 
+age initiates by the failure criterion, then |u1D7≠≠failure |u1D4JDCstis set equal to the eﬀective 
+plastic strain in the weld at the time of damage in itiation. 
+b)  For DMGOPT = 2 or 12, the damage variable is a fun ction of time: 
+|u1D461failure ≤ |u1D461 ≤ |u1D461rupture ⇒|u1D714 =|u1D461 − |u1D461failure 
+|u1D461rupture  *. TWELD  
+ For weld elements in an assembly (see RPBHX on *CON TROL_SPOTWELD_-
+BEAM or *DEFINE_HEX_SPOTWELD_ASSEMBLY), the failure  criterion is 
+evaluated using the assembly cross section.  If dam age is not active, all ele- 
+ments will be deleted when the failure criterion is  met.  If damage is active, 
+then damage is calculated independently in each ele ment of the assembly.  By 
+default, elements of the assembly are deleted as da mage in each element is 
+complete.  If ASFF = 1, then failure and deletion o f all elements in the assembly 
+will occur simultaneously when damage is complete i n any one of the ele- 
+ments. 
+8.  TRUE_T.   Weld elements and weld assemblies are tied to the  mid-plane of 
+shell materials and so typically have a thickness t hat is half the sum of the 
+thicknesses of the welded shell sections.  As a res ult, a weld under shear load- 
+ing can be subject to an artiﬁcially large moment w hich will be balanced by 
+normal forces transferred through the tied contact.   These normal forces will 
+cause the out-of-plane bending moment used in the f ailure calculation to be 
+artiﬁcially high.  Inputting a TRUE_T that is small er than the modeled thick- 
+ness, for example, 10%-30% of true thickness will s cale down the moment or 
+stress that results from the balancing moment and p rovide more realistic fail- 
+ure calculations for solid elements and weld assemb lies.  TRUE_T eﬀects only 
+the failure calculation, not the weld element behav ior.  If TRUE_T = 0 or data is 
+omitted, the modeled weld element thickness is used .  For OPT = 0 (see below), 
+the two out-of-plane moments, |u1D44≠|u1D46≠Cst|u1D46≠Cst  and |u1D44≠|u1D461Cst|u1D461Cst  are replaced by modiﬁed terms 
+|u1D44≠/circum⨂lexcmb.h2|u1D46≠Cst|u1D46≠Cst  and |u1D44≠/circum⨂lexcmb.h2|u1D461Cst|u1D461Cst , as shown below: 
+|<racketleftCv6max(/u1D441|u1D4JFCst|u1D4JFCst , 0)
+/u1D441|u1D4JFCst|u1D4JFCst/u1D439.sts|<racketriµhtCv6|twoCst
++ |<racketleftCv6/u1D441|u1D4JFCst|u1D46≠Cst 
+/u1D441|u1D4JFCst|u1D46≠Cst/u1D439.sts|<racketriµhtCv6|twoCst
++ |<racketleftCv6/u1D441|u1D4JFCst|u1D461Cst 
+/u1D441|u1D4JFCst|u1D461Cst/u1D439.sts|<racketriµhtCv6|twoCst
++ |<racketleftCv6|u1D44≠|u1D4JFCst|u1D4JFCst 
+|u1D44≠|u1D4JFCst|u1D4JFCst/u1D439.sts|<racketriµhtCv6|twoCst
++ |<racketleftCv6|u1D44≠/circum⨂lexcmb.h2|u1D46≠Cst|u1D46≠Cst 
+|u1D44≠|u1D46≠Cst|u1D46≠Cst/u1D439.sts|<racketriµhtCv6|twoCst
++ |<racketleftCv6|u1D44≠/circum⨂lexcmb.h2|u1D461Cst|u1D461Cst 
+|u1D44≠|u1D461Cst|u1D461Cst/u1D439.sts|<racketriµhtCv6|twoCst
+− 1 = 0
+|u1D44≠/circum⨂lexcmb.h2|u1D46≠Cst|u1D46≠Cst = |u1D44≠|u1D46≠Cst|u1D46≠Cst −/u1D441|u1D4JFCst|u1D461Cst (|u1D461 − |u1D461true )
+|u1D44≠/circum⨂lexcmb.h2|u1D461Cst|u1D461Cst = |u1D44≠|u1D461Cst|u1D461Cst −/u1D441|u1D4JFCst|u1D46≠Cst (|u1D461 − |u1D461true ) 
+In the above, |u1D461 is the element thickness and  |u1D461true  is the TRUE_T parameter.  For 
+OPT = 1 (see below), the same modiﬁcation is done t o the moments that con- 
+tribute to the normal stress, as shown below: 
+|u1D7≠∆|u1D4JFCst|u1D4JFCst =/u1D441|u1D4JFCst|u1D4JFCst 
+|u1D434+/radical.v2|u1D44≠/circum⨂lexcmb.h2|u1D46≠Cst|u1D46≠Cst |twoCst+ |u1D44≠/circum⨂lexcmb.h2|u1D461Cst|u1D461Cst |twoCst
+|u1D44D  . 
+9.  TTOPT .  In LS-DYNA version 971R9, a modiﬁcation to the TR UE_T behavior 
+was made to address a condition of weld elements th at are tied to shell ele- 
+ments of signiﬁcantly diﬀerent stiﬀness.  This chan ge had unintended eﬀects 
+on the behavior of weld failure, so a new option, T TOPT, was added to revert 
+the behavior of TRUE_T to that of R8 and earlier ve rsions.  The default behav- 
+ior of TTOPT is to continue with the new calculatio n but setting TTOPT = 1 
+will cause the earlier method to be used.  Setting TTOPT = 2 will invoke 
+TTOPT = 1 plus a change to make the welds invariant  with respect to solid 
+element node numbering.  By default, failure is cal culated using forces on the *. TWELD  
+ Alternatively, a *DEFINE_FUNCTION could be used to deﬁne the Weld Failure for 
+OPT = 0. Then set FVAL = function ID. Such a functi on could look like this: 
+*DEFINE_FUNCTION 
+        100 
+ func(nrr,nrs,nrt,mrr,mss,mtt)= (nrr/5.0)*(nrr/5.0)  
+ 
+The six arguments for this function (nrr, …, mtt) a re the force and moment resultants 
+during the computation. 
+OPT = 1: 
+OPT = 1 invokes a stress based failure model, which  was developed by Toyota Motor 
+Corporation  and is based on the peak axial and transverse shea r stresses.  The weld fails 
+if the stresses are outside of the failure surface deﬁned by 
+|parenleftCvJ|u1D7≠∆|u1D4JFCst|u1D4JFCst 
+|u1D7≠∆|u1D4JFCst|u1D4JFCst |u1D439Cst|parenriµhtCvJ|twoCst
++|parenleftCv4/u1D̅0F
+/u1D̅0F|u1D439Cst|parenriµhtCv4|twoCst
+− 1 = 0 
+If strain rates are considered, then the failure cr iteria becomes: 
+|<racketleftCvJ|u1D7≠∆|u1D4JFCst|u1D4JFCst 
+|u1D7≠∆|u1D4JFCst|u1D4JFCst |u1D439Cst(|u1D7≠≠̇eff )|<racketriµhtCvJ|twoCst
++|<racketleftCvJ/u1D̅0F
+/u1D̅0F|u1D439Cst(|u1D7≠≠̇eff )|<racketriµhtCvJ|twoCst
+− 1 = 0 
+where |u1D7≠∆|u1D4JFCst|u1D4JFCst |u1D439Cst(|u1D7≠≠̇eff ) and /u1D̅0F|u1D439Cst(|u1D7≠≠̇eff ) are deﬁned by load curves (SIGAX and SIGTAU are le ss 
+than zero).  The peak stresses are calculated from the resultants using simple beam 
+theory: n1n4n5n8
+n6n7
+n3
+n2
+Figure M100-1.  A solid element used as spot weld is shown.  When resu ltant 
+based failure is used orientation is very important.  No des n1  - n4 attach to the 
+lower shell mid-surface and nodes n5 - n8 attach to the up per shell mid -
+surface.  The resultant forces and moment s are computed based on the 
+assumption that the brick element is properly oriented. *. TWELD  
+ OPT = 4 
+OPT = 4 invokes failure based on structural stress intensity, see Zhang [1999].  Failure 
+occurs when the failure criterion: 
+|u1D43∆e q − |u1D43∆e q F ≥ 0 
+is satisﬁed where 
+|u1D43∆e q =/radical.v2|u1D43∆/u1D4:C.st|twoCst+ |u1D43∆/u1D4:C.st/u1D4:C.st|twoCst 
+and 
+|u1D43∆/u1D4:C.st= |u1D6F+|oneCst/radical.v13|u1D439
+2/u1D̅0B |u1D4J1 /radical.v1|u1D461+ |u1D6F+|twoCst2/radical.v13|u1D44≠
+/u1D̅0B |u1D4J1|u1D461 /radical.v1|u1D461+ |u1D6F+|threeCst5/radical.v12|u1D439|u1D4JFCst|u1D4JFCst 
+3/u1D̅0B |u1D4J1 /radical.v1|u1D461 
+|u1D43∆/u1D4:C.st/u1D4:C.st= |u1D6F+|oneCst2|u1D439
+/u1D̅0B |u1D4J1 /radical.v1|u1D461 
+Here, |u1D439 and |u1D44≠ are as deﬁned above for the notch stress formulas and again, |u1D6F+|u1D4J6Cst (|u1D4J6 =
+1, 2, 3 ) are input corrections factors with default values  of unity.  If spot welds are 
+between sheets of unequal thickness, the minimum th ickness of the spot welded sheets 
+may be used as a crude approximation. 
+ 
+The maximum structural stress at the spot weld was utilized successfully for predicting 
+the fatigue failure of spot welds, see Rupp, et.  a l . [1994] and Sheppard [1993].  The 
+corresponding results from] Rupp, et.  al. are list ed below where it is assumed that they 
+may be suitable for crash conditions. 
+OPT = 5 
+OPT = 5 invokes failure by 
+max(|u1D7≠∆|u1D463Cst|oneCst, |u1D7≠∆|u1D463Cst|twoCst, |u1D7≠∆|u1D463Cst|threeCst) − |u1D7≠∆|u1D46≠Cst|u1D439Cst = 0  , 
+where |u1D7≠∆|u1D46≠Cst|u1D439Cst  is the critical value of structural stress at fail ure.  It is noted that the forces 
+and moments in the equations below refer to the bea m node 1, beam node 2, and the 
+midpoint, respectively.  The three stress values, |u1D7≠∆|u1D463Cst|oneCst, |u1D7≠∆|u1D463Cst|twoCst, |u1D7≠∆|u1D463Cst|threeCst, are deﬁned by: 
+|u1D7≠∆|u1D463Cst|oneCst(/u1D̅01) =|u1D439|u1D4JFCst|u1D46≠Cst|oneCst
+/u1D̅0B |u1D4J1|u1D461|oneCstcos /u1D̅01+|u1D439|u1D4JFCst|u1D461Cst|oneCst
+/u1D̅0B |u1D4J1|u1D461|oneCstsin /u1D̅01−1.046|u1D6FD|oneCst|u1D439|u1D4JFCst|u1D4JFCst|oneCst
+|u1D461|oneCst/radical.v1|u1D461|oneCst−1.123|u1D44≠|u1D46≠Cst|u1D46≠Cst|oneCst
+|u1D4J1|u1D461|oneCst/radical.v1|u1D461|oneCstsin /u1D̅01+1.123|u1D44≠|u1D461Cst|u1D461Cst|oneCst
+|u1D4J1|u1D461|oneCst/radical.v1|u1D461|oneCstcos /u1D̅01 
+with  
+|u1D6FD|oneCst= |<raceleftCvJ0 |u1D439|u1D4JFCst|u1D4JFCst|oneCst≤ 0
+1 |u1D439|u1D4JFCst|u1D4JFCst|oneCst> 0 
+|u1D7≠∆|u1D463Cst|twoCst(/u1D̅01) =|u1D439|u1D4JFCst|u1D46≠Cst|twoCst
+/u1D̅0B |u1D4J1|u1D461|twoCstcos /u1D̅01+|u1D439|u1D4JFCst|u1D461Cst|twoCst
+/u1D̅0B |u1D4J1|u1D461|twoCstsin /u1D̅01−1.046|u1D6FD|oneCst|u1D439|u1D4JFCst|u1D4JFCst|twoCst
+|u1D461|twoCst/radical.v1|u1D461|twoCst+1.123|u1D44≠|u1D46≠Cst|u1D46≠Cst|twoCst
+|u1D4J1|u1D461|twoCst/radical.v1|u1D461|twoCstsin /u1D̅01−1.123|u1D44≠|u1D461Cst|u1D461Cst|twoCst
+|u1D4J1|u1D461|twoCst/radical.v1|u1D461|twoCstcos /u1D̅01 
+with  *. TWELD_DAIMLERCHRYSLER  
+ *. TWELD_DAIMLERCHRYSLER  *. TWELD_DAIMLERCHRYSLER  
+  VARIABLE   DESCRIPTION  
+RS Rupture strain.  See Remark 2 . 
+ASFF Weld assembly simultaneous failure ﬂag (see Remark 4 ): 
+EQ.0:  Damaged elements fail individually. 
+EQ.1:  Damaged elements fail when ﬁrst reaches failure 
+criterion. 
+TRUE_T True weld thickness for single hexahedron solid wel d elements.  
+See Remark 3 . 
+CON_ID Connection ID of *DEFINE_CONNEC TION card.  A negative 
+CON_ID deactivates failure; see Remark 6 . 
+RFILTF Smoothing factor on the eﬀective strain rate (default is 0.0), 
+potentially used in table DSIGY < 0 and in functions for 
+PRUL.ge.2 (see *DEFINE_CONNECTION_PROPERTIES). 
+|u1D7≠≠̇|u1D4JBCsta v g =RFILTF × |u1D7≠≠̇|u1D4JBCst−|oneCsta v g +(1−RFILTF )×|u1D7≠≠̇|u1D4JBCst 
+JTOL Tolerance value for relative volume change (de fault: JTOL = 0.01).  
+Solid element spot welds with a Jacobian less than JTOL w ill be 
+eroded.  
+Remarks: 
+1.  Loading Solid Welds Uniaxially. We have implemented two methods of 
+loading solid and solid weld assemblies uniaxially.   The older method is in- 
+voked by deﬁning the elastic modulus, |u1D438, as a negative number where the ab- 
+solute value of |u1D438 is the desired value for |u1D438.  This uniaxial option causes the two 
+transverse stress terms to be assumed to be zero th roughout the calculation.  
+This assumption eliminates parasitic transverse str ess that causes slow growth 
+of plastic strain-based damage.  
+The other method is invoked by setting OPTION  to UNIAXIAL. This method is 
+preferred.  It causes the two transverse stress ter ms and the two transverse 
+strains terms to be set to zero.  It was added beca use we found that the older 
+method sometimes induced spurious oscillations in t he axial force, leading to 
+premature failure.  
+The motivation for the uniaxial options can be expl ained with a weld loaded in 
+tension.  Due to Poisson’s eﬀect, an element in ten sion would be expected to 
+contract in the transverse directions.  However, be cause the weld nodes are *. TWEL_DA IMLER-
+CHRYSLER are written to the spot weld force ﬁle, swforc , and the ﬁle for ele- 
+ment stresses and resultants for designated element s, ELOUT .  Also, spot weld 
+failure data is written to the ﬁle, dcfail . *. TWELD_DAIMLERCHRYSLER  
+ 6.  Deactivating Weld Failure.  An option to deactivate weld failure is switched 
+on by setting CON_ID to a negative value where the absolute value of CON_-
+ID becomes the connection ID.  When weld failure is  deactivated, the failure 
+function is evaluated and output to swforc  and dcfail , but the weld retains its 
+full strength. *. TWELD. On *SECTION_SOLID, set ELFORM  =  1. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR HELAS TELAS   
+Type A8 F F F F F   
+Default none none none none 0.0 0.0   
+ 
+Cards 2 and 3 deﬁne “Head” end of SPR inputs 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCAXH LCSHH LCBMH SFAXH SFSHH SFBMH   
+Type I I I F F F   
+Default none none none 1.0 1.0 1.0   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable DFAKH DFSHH RFBMH DMFAXH DMFSHH DMFBMH    
+Type F F F F F F   
+Default Rem 13  Rem 13  Rem 13  0.1 0.1 0.1   
+ *

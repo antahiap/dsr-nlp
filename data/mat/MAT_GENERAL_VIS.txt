@@ -1,0 +1,192 @@
+COELASTIC ......................... ................................................... ................ 2-515  
+*. COELASTIC [0,2,3a,3c,5,8 B] {53} *MAT   
+2-4 (MAT) LS-DYNA R13  *. COELASTIC  *. COELASTIC 
+(*. COELASTIC 
+$      mid        ro      bulk 
+         2    7.8e-9 116666.67 
+$ blank card 
+ 
+$        g     betag 
+   43750.0     0.005 
+   26250.0      0.05 
+   17500.0 
+  
+In general, with 
+|u1D43A =|u1D438
+2(1 +/u1D̅08),      |u1D43∆ =|u1D438
+3(1 − 2/u1D̅08) 
+in *. COELASTIC, we have 
+|u1D43A = |summationCv1 |u1D43A/u1D4:C.st,         |u1D43∆ = |summationCv1 |u1D43∆/u1D4:C.st 
+while the weights are given as 
+|u1D464/u1D4:C.st=|u1D43A/u1D4:C.st
+|u1D43A=|u1D43∆/u1D4:C.st
+|u1D43∆ 
+which implies that the add inelasticity approach is  somewhat more restrictive than the 
+general approach.  However, an almost pure shear/bu lk link can be created by setting 
+the bulk/shear decay coeﬃcient to a very large numb er compared to the simulation 
+time.  To be speciﬁc, to get a shear link set |u1D6FD/u1D4:E.st≫1/|u1D447 and to get a bulk link set |u1D6FD/u1D4:A.st≫1/
+|u1D447, where |u1D447 is the termination time.  See also VFLAG in *. COELASTIC 
+for a more general formulation. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK G0 GI BETA   
+Type A F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+BULK Elastic bulk modulus. 
+LT.0.0:  |B U LK| is a load curve of bulk modulus as a function of 
+temperature. 
+G0 Short-time shear modulus, |u1D43A|zeroCst; see the Remarks below. 
+LT.0.0:  |G0| is a load curve of short- time shear modulus as a 
+function of temperature. 
+GI Long-time (inﬁnite) shear modulus, |u1D43A∞. 
+LT.0.0:  |GI| is a load curve of long- time shear modulus as a 
+function of temperature. 
+BETA Decay constant. 
+LT.0.0:  |BETA|  is a load curve of decay constant as a function of 
+temperature. 
+Remarks: 
+The shear relaxation behavior is described by [Herm ann and Peterson, 1968]: 
+|u1D43A(|u1D461) = |u1D43A∞+ (|u1D43A|zeroCst− |u1D43A∞) exp|parenleftCv1−|u1D6FD|u1D461|parenriµhtCv1 . *. COELASTIC  *. COELASTIC _{OPTION}  
+The available options include: 
+<BLANK> 
+MOISTURE 
+This is Material Type 76.  This material model prov ides a general viscoelastic Maxwell 
+model having up to 18 terms in the Prony series exp ansion and is useful for modeling 
+dense continuum rubbers and solid explosives.  Eith er the coeﬃcients of the Prony 
+series expansion or a relaxation curve may be speci ﬁed to deﬁne the viscoelastic 
+deviatoric and bulk behavior. 
+The material model can also be used with laminated shells.  Either an elastic or 
+viscoelastic layer can be deﬁned with the laminated  formulation.  To activate laminated 
+shells, you must set the laminated formulation ﬂag on *CONTROL_SHELL. With the 
+laminated option you must also deﬁne an integration  rule.  The addition of an elastic or 
+viscoelastic layer was implemented by Professor Ala  Tabiei, and the laminated shells 
+feature was developed and implemented by Professor Ala Tabiei. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO BULK PCF EF TREF A B 
+Card 2.   Leave blank if the Prony Series Cards (Card 4) are used below.  Also, leave 
+blank if an elastic layer is deﬁned in a laminated shell. 
+LCID NT BSTART TRAMP LCIDK NTK BSTARTK TRAMPK 
+Card 3.   This card is included if and only if the MOISTURE  keyword option is used. 
+MO ALPHA BETA GAMMA MST    
+Card 4.   Up to 18 cards may be input.  This input is termina ted at the next keyword 
+(“*”) card.   
+Gi BETA i Ki BETAK i     *. COELASTIC  
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK PCF EF TREF A B 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+BULK Elastic bulk modulus 
+PCF Tensile pressure elimination ﬂag for solid elements  only.  If set to 
+unity, tensile pressures are set to zero. 
+EF Elastic ﬂag: 
+EQ.0:  The layer is viscoelastic. 
+EQ.1:  The layer is elastic.  
+TREF Reference temperature for shift function (must  be greater than 
+zero) 
+A Coeﬃcient for the Arrhenius and the Williams-Land el-Ferry shift 
+functions 
+B Coeﬃcient for the Williams-Landel-Ferry shift fun ction 
+ 
+Relaxation Curve Card.   Leave blank if the Prony Series Cards  are used below.  Also, 
+leave blank if an elastic layer is deﬁned in a lami nated shell. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCID NT BSTART TRAMP LCIDK NTK BSTARTK  TRAMPK 
+Type F I F F F I F F *. COELASTIC  
+  VARIABLE   DESCRIPTION  
+BSTART In the ﬁt, |u1D6FD|oneCst  is set to zero, |u1D6FD|twoCst  is set to BSTART, |u1D6FD|threeCst is 10 times  |u1D6FD|twoCst, 
+|u1D6FD|fourCst is 10 times |u1D6FD|threeCst, and so on.  If zero, BSTART is determined by an 
+iterative trial and error scheme. 
+TRAMP Optional ramp time for loading. 
+LCIDK Load curve ID for bulk relaxation behavior.  If LCI DK is given, 
+constants  |u1D43∆|u1D4J6Cst, and |u1D6FD|u1D4J8Cst|u1D4J6Cst  are determined via a least squares ﬁt.  See 
+Figure M76-1  for an example relaxation curve. 
+NTK Number of terms desired in bulk ﬁt.  If zero, the d efault is 6.  
+Currently, the maximum number is set to 18. 
+BSTARTK In the ﬁt, |u1D6FD|u1D4J8Cst|oneCst  is set to zero, |u1D6FD|u1D4J8Cst|twoCst  is set to BSTARTK, |u1D6FD|u1D4J8Cst|threeCst is 10 
+times  |u1D6FD|u1D4J8Cst|twoCst, |u1D6FD|u1D4J8Cst|fourCst is 100 times  |u1D6FD|u1D4J8Cst|threeCst, and so o n.  If zero, BSTARTK is 
+determined by an iterative trial and error scheme. 
+TRAMPK Optional ramp time for bulk loading. 
+ 
+Moisture Card.   Additional card for the MOISTURE keyword option. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable MO ALPHA BETA GAMMA MST    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+MO Initial moisture, |u1D44≠|zeroCst. Defaults to zero. 
+ALPHA Speciﬁes |u1D6F+ as a function of moisture. 
+GT.0.0: Speciﬁes a curve ID. 
+LT.0.0: Speciﬁes the negative of a constant value. 
+BETA Speciﬁes |u1D6FD as a function of moisture. 
+GT.0.0: Speciﬁes a curve ID. 
+LT.0.0: Speciﬁes the negative of a constant value. *. COELASTIC  
+ where |u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst(|u1D461Cst−/u1D̅0F.st) is the relaxation functions for the diﬀerent stres s measures.  This stress is 
+added to the stress tensor determined from the stra in energy functional. 
+ 
+If we wish to include only simple rate eﬀects, the relaxation function is represented by 
+18 terms from the Prony series: 
+|u1D4J4(|u1D461) = |summationCv1 |u1D43A|u1D4JACst|u1D4J2−/u1D6FD.st/u1D45A.sts|u1D461Cst|u1D441Cst
+|u1D4JACst=|oneCst 
+We characterize this in the input by shear moduli, |u1D43A|u1D4J6Cst, and decay constants, |u1D6FD|u1D4J6Cst.  An 
+arbitrary number of terms, up to 18, may be used wh en applying the viscoelastic model. 
+ 
+For volumetric relaxation, the relaxation function is also represented by the Prony series 
+in terms of bulk moduli: 
+/u1D458(|u1D461) = |summationCv1 |u1D43∆|u1D4JACst|u1D4J2−/u1D6FD.st|u1D4J8Csts/u1D45A.sts|u1D461Cst|u1D441Cst
+|u1D4JACst=|oneCst 
+The Arrhenius and Williams-Landel-Ferry (WLF) shift  functions account for the eﬀects 
+of the temperature on the stress relaxation.  A sca led time, |u1D461|minuteCst, 
+|u1D461′=/integral.v:Φ(|u1D447)|u1D4J1|u1D461 |u1D461Cst
+|zeroCst 
+is used in the relaxation function instead of the p hysical time.  The Arrhenius shift 
+function is 
+Φ(|u1D447) = exp |<racketleftCvJ−|u1D434 |parenleftCvJ1
+|u1D447−1
+|u1D447REF |parenriµhtCvJ|<racketriµhtCvJ 
+and the Williams-Landel-Ferry shift function is 
+Φ(|u1D447) = exp |parenleftCvJ−|u1D434|u1D447 − |u1D447REF 
+|u1D43J + |u1D447 − |u1D447REF |parenriµhtCvJ 
+If all three values (TREF, A, and B) are nonzero, t he WLF function is used; the 
+Arrhenius function is used if B is zero; and no sca ling is applied if all three values are 
+zero. 
+ 
+The moisture model allows the scaling of the materi al properties as a function of the 
+moisture content of the material.  The shear and bu lk moduli are scaled by  |u1D6F+, the decay 
+constants are scaled by |u1D6FD, and a moisture strain, |u1D6F∆(|u1D44≠)[|u1D44≠ − |u1D44≠/u1D442.st] is introduced 
+analogous to the thermal strain. *. COELASTIC. -0.08-0.05-0.030.000.020.050.07
+0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0Stress
+Strain %b1 = 100
+b1 = 200
+b1 = 500
+b1 = 1000
+ Figure M275-3.   Eﬀect of |u1D44F|oneCst in cyclic loading *. COELASTIC.  T he aging time is denoted 
+by |u1D461|u1D44∆Cst. 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst (|u1D461|u1D44∆Cst, |u1D461) = −|u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst +/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |minuteCst(|u1D461|u1D44∆Cst, |u1D461 −/u1D̅0F)∂|u1D7≠≠|u1D4J8Cst|u1D4J9Cst (/u1D̅0F)
+∂/u1D̅0F|u1D4J1 /u1D̅0F |u1D461Cst
+|zeroCst 
+where 
+|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |minuteCst(|u1D461|u1D44∆Cst, |u1D461) = |u1D6F+(|u1D461|u1D44∆Cst)|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst |<racketleftCv1|u1D6FD(|u1D461|u1D44∆Cst)|u1D461|<racketriµhtCv1  . 
+Here |u1D6F+(|u1D461|u1D44∆Cst) and |u1D6FD(|u1D461|u1D44∆Cst) are two new material properties that are functions  of the aging 
+time |u1D461|u1D44∆Cst.  The material properties functions |u1D6F+(|u1D461|u1D44∆Cst) and |u1D6FD(|u1D461|u1D44∆Cst) will be determined using 
+experimental results.  For determination of |u1D6F+(|u1D461|u1D44∆Cst) and |u1D6FD(|u1D461|u1D44∆Cst), the above equations can be 
+written in the following form 
+log|parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst − |u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|u1D461Cst|u1D44∆Csts/co⋯⋯a.st|u1D461Cst= log |u1D6F+(|u1D461|u1D44∆Cst) + log|parenleftCv2|u1D7≠∆|u1D4J6Cst|u1D4J7Cst − |u1D4JD|u1D6FF|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2|u1D461Cst|u1D44∆Csts=|zeroCst/co⋯⋯a.st|u1D461Cst→/u1Dℜ09.st
+log /u1D̅0∫= log |u1D6FD(|u1D461|u1D44∆Cst) + log |u1D461 
+Therefore, if one plots the stress as a function of  time on log-log scales, with the vertical 
+axis being the stress and the horizontal axis being  the time, then the stress-relaxation 
+curve for any aged time history can be obtained dir ectly from the stress-relaxation curve 
+at |u1D461|u1D44∆Cst= 0 by imposing a vertical shift and a horizontal shif t on the stress-relaxation 
+curves.  The vertical shift and the horizontal shif t are log |u1D6F+(|u1D461|u1D44∆Cst) and log |u1D6FD(|u1D461|u1D44∆Cst) respectively. *. -
+COELASTIC. If all three values (WLFTREF, WLFA, and WLFB) are nonzero, 
+the WLF function is used; the Arrhenius function is  used if WLFB is zero; and 
+no scaling is applied if all three values are zero.*

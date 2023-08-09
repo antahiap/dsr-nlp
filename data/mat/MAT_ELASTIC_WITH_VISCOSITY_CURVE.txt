@@ -1,0 +1,65 @@
+ ................. ................................................... ........ 2-445  
+*.  [0,2, 3a,3c,5,8B] {8} 
+ *.   *.   *.   
+This is Material Type 60 which was developed to sim ulate forming of glass products 
+(such as car windshields) at high temperatures.  De formation is by viscous ﬂow, but 
+elastic deformations can also be large.  The materi al model, in which the viscosity may 
+vary with temperature, is suitable for treating a w ide range of viscous ﬂow problems 
+and is implemented for brick and shell elements.  L oad curves are used to represent the 
+temperature dependence of Poisson’s ratio, Young’s modulus, the coeﬃcient of 
+expansion, and the viscosity. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO V0 A B C LCID  
+Type A F F F F F F  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable PR_LC YM_LC A_LC V_LC V_LOG    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+V0 Temperature independent dynamic viscosity coeﬃci ent, |u1D449|zeroCst. If 
+deﬁned, the temperature dependent viscosity curve, V_ LC, is 
+skipped; see type i and ii deﬁnitions for viscosity  below. 
+A Dynamic viscosity coeﬃcient; see type i and ii de ﬁnitions below. 
+B Dynamic viscosity coeﬃcient; see type i and ii de ﬁnitions below. 
+C Dynamic viscosity coeﬃcient; see type i and ii de ﬁnitions below. 
+LCID Load curve (see *DEFINE_ CURVE) deﬁning factor on dynamic 
+viscosity as a function of temperature; see type ii i.  (Optional). *.   
+  VARIABLE   DESCRIPTION  
+PR_LC Load curve (see *DEFINE_ CURVE) deﬁning Poisson’s ratio as a 
+function of temperature. 
+YM_LC Load curve (see *DEFINE_CURVE) deﬁning Young’ s mod ulus as 
+a function of temperature. 
+A_LC Load curve (see *DEFINE_ CURVE) deﬁning the coeﬃcient of 
+thermal expansion as a function of temperature. 
+V_LC Load curve (see *DEFINE_ CURVE) deﬁning the dynamic 
+viscosity as a function of temperature. 
+V_LOG Flag for the form of V_LC:  
+EQ.1.0:  The value speciﬁed in V_ LC is the natural logarithm of 
+the viscosity, ln |u1D449. The value interpolated from the 
+curve is then exponentiated to obtain the viscosity .  
+The logarithmic form is useful if the value of the vis- 
+cosity changes by orders of magnitude over the tem-
+perature range of the data. 
+EQ.0.0:  The value speciﬁed in V_LC is the viscosity.  
+Remarks: 
+Volumetric behavior is treated as linear elastic.  The deviatoric strain rate is considered 
+to be the sum of elastic and viscous strain rates: 
+ε̇total |minuteCst=ε̇elastic |minuteCst+ε̇v iscous |minuteCst=  /u1D̅48̇′
+2|u1D43A+ σ′
+2|u1D463 
+where |u1D43A is the elastic shear modulus, |u1D463 is the viscosity coeﬃcient, and bold indicates a 
+tensor.  The stress increment over one timestep |u1D4J1|u1D461  is 
+|u1D4J1/u1D̅48|minuteCst= 2|u1D43Aε̇total |minuteCst |u1D4J1|u1D461 −|u1D43A
+|u1D463 |u1D4J1|u1D461 /u1D̅48′ 
+The stress before the update is used for σ′.  For shell elements the through-thickness 
+strain rate is calculated as follows. 
+|u1D4J1|u1D7≠∆|threeCst|threeCst = 0 = |u1D43∆(|u1D7≠≠̇|oneCst|oneCst + |u1D7≠≠̇|twoCst|twoCst + |u1D7≠≠̇|threeCst|threeCst )|u1D4J1|u1D461 + 2|u1D43A|u1D7≠≠′̇|threeCst|threeCst |u1D4J1|u1D461 −|u1D43A
+|u1D71≠|u1D4J1|u1D461|u1D7≠∆′|threeCst|threeCst  
+where the subscript 33 denotes the through-thicknes s direction and |u1D43∆ is the elastic bulk 
+modulus.  This leads to: 
+|u1D7≠≠̇|threeCst|threeCst = −|u1D44∆(|u1D7≠≠̇|oneCst|oneCst + |u1D7≠≠̇|twoCst|twoCst ) + |u1D44F|u1D4JD *

@@ -1,0 +1,65 @@
+: *.  
+*.   *.   
+LS-DYNA R13 2-387 (MAT)  VARIABLE   DESCRIPTION  
+PR Poisson’s ratio 
+T Initial temperature (°R, degrees Rankine) 
+HC Heat generation coeﬃcient ( °R/psi )  
+C1 psi 
+C2 °R 
+C3 psi  
+C4 °R 
+C5 s-1 
+C6 °R 
+C7 1/psi   
+C8 °R 
+C9 psi 
+C10 °R 
+C11 1psi -s ⁄   
+C12 °R 
+C13 1/psi   
+C14 °R 
+C15 psi 
+C16 °R 
+C17 1psi -s ⁄   
+C18 °R 
+A1 |u1D6F+|oneCst, initial value of internal state variable 1 
+A2 |u1D6F+|twoCst, initial value of internal state variable 2.  Note :  |u1D6F+|threeCst=−(|u1D6F+|oneCst+|u1D6F+|twoCst) 
+A4 |u1D6F+|fourCst, initial value of internal state variable 3 *.   
+LS-DYNA R13 2-389 (MAT) With the assumption of linear elasticity, we can wr ite: 
+/u1D6D4/u1D45C.st= |u1D7≠6 tr|parenleftCv1/u1D40:|u1D4J2Cst|parenriµhtCv1/u1D̅CF+ 2|u1D7≠7/u1D40:|u1D4J2Cst  , 
+where the Cauchy stress /u1D6D4 is convected with the elastic spin /u1D416|u1D4J2Cst as, 
+/u1D6D4/u1D45C.st=/u1D6D4̇−/u1D416|u1D4J2Cst/u1D6D4+/u1D6D4/u1D416|u1D4J2Cst  . 
+This is equivalent to writing the constitutive mode l with respect to a set of directors 
+whose direction is deﬁned by the plastic deformatio n [Bammann and Aifantis 1987, 
+Bammann and Johnson 1987].  Decomposing both the sk ew symmetric and symmetric 
+parts of the velocity gradient into elastic and pla stic parts, we write for the elastic 
+stretching /u1D40:|u1D4J2Cst and the elastic spin /u1D416|u1D4J2Cst, 
+/u1D40:|u1D4J2Cst=/u1D40:−/u1D40:|u1D4JDCst−/u1D40:|u1D461Cst/uni210E.st,/u1D416|u1D4J2Cst=/u1D416=/u1D416|u1D4JDCst  . 
+Within this structure it is now necessary to prescr ibe an equation for the plastic spin /u1D416|u1D4JDCst 
+in addition to the normally prescribed ﬂow rule for  /u1D40:|u1D4JDCst and the stretching due to the 
+thermal expansion D|u1D461Cst/uni210E.st. As proposed, we assume a ﬂow rule of the form, 
+/u1D40:|u1D4JDCst= |u1D4J3 (|u1D447)sinh |<racketleftCvJ|/u1D6CF| −/u1D̅05−/u1D44C(|u1D447)
+|u1D449(|u1D447)|<racketriµhtCvJ/u1D6CF′
+|dividesCv1/u1D6CF′|dividesCv1  . 
+where |u1D447 is the temperature, /u1D̅05 is the scalar hardening variable, and /u1D6CF|minuteCst is the diﬀerence 
+between the deviatoric Cauchy stress /u1D6D4|minuteCst and the tensor variable /u1D6C2|minuteCst, 
+/u1D6CF|minuteCst=/u1D6D4|minuteCst−/u1D6C2|minuteCst  , 
+and |u1D4J3 (|u1D447) , /u1D44C(|u1D447), and |u1D449(|u1D447)  are scalar functions whose speciﬁc dependence upon  the 
+temperature is given below.  Assuming isotropic the rmal expansion and introducing 
+the expansion coeﬃcient |u1D434̇, the thermal stretching can be written, 
+/u1D40:|u1D461Cst/uni210E.st= |u1D434̇|u1D447̇/u1D̅CF 
+The evolution of the internal variables /u1D6C2 and /u1D6CB are prescribed in a hardening minus 
+recovery format as, 
+/u1D6C2/u1D45C.st=ℎ(|u1D447)/u1D40:|u1D4JDCst− [|u1D4JF/u1D451.st(|u1D447)|dividesCv1/u1D40:|u1D4JDCst|dividesCv1 + |u1D4JF|u1D46≠Cst(|u1D447)]|/u1D6C2|/u1D6C2
+/u1D6CB⋅=/u1D4:B(|u1D447)/u1D40:|u1D4JDCst− [|u1D44J/u1D451.st(|u1D447)|dividesCv1/u1D40:|u1D4JDCst|dividesCv1 + |u1D44J|u1D46≠Cst(|u1D447)]/u1D6CB|twoCst 
+where ℎ and /u1D4:B are the hardening moduli, |u1D4JF|u1D46≠Cst(|u1D447) and |u1D44J|u1D46≠Cst(|u1D447) are scalar functions 
+describing the diﬀusion controlled ‘static’ or ‘the rmal’ recovery, and |u1D4JF/u1D451.st(|u1D447) and |u1D44J/u1D451.st(|u1D447) 
+are the functions describing dynamic recovery.   
+ 
+If we assume that /u1D416|u1D4JDCst= 0, we recover the Jaumann stress rate which results in the 
+prediction of an oscillatory shear stress response in simple shear when coupled with a 
+Prager kinematic hardening assumption [Johnson and Bammann 1984].  Alternatively, 
+we can choose, 
+/u1D416|u1D4JDCst=/u1D411|u1D447Cst/u1D414̇/u1D414−|oneCst/u1D411, 
+which recovers the Green-Naghdi rate of Cauchy stre ss and has been shown to be 
+equivalent to Mandel’s isoclinic state [Bammann and  Aifantis 1987].  The model *

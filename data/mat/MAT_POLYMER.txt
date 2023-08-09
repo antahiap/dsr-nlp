@@ -1,0 +1,41 @@
+ ...................................... ................................................... ........................... 2-1066  
+*.  [0,3c,8B] {60} 
+ *.  *.   
+ *.   *.   
+ on a Neo-Hookean material is here selected for desc ribing the spring in resistance A in 
+Figure M168-1 . 
+ 
+Referring to Figure M168-1 , it is assumed that the deformation gradient tenso r is the 
+same for the two resistances (Part A and B) 
+/u1D405=/u1D405|u1D434Cst=/u1D405|u1D43JCst 
+while the Cauchy stress tensor for the system is as sumed to be the sum of the Cauchy 
+stress tensors for the two parts 
+σ=σ|u1D434Cst+σ|u1D43JCst  . 
+Part A: Inter-Molecular Resistance: 
+The deformation is decomposed into elastic and plas tic parts, /u1D405|u1D434Cst=/u1D405|u1D434Cst|u1D4J2Cst/u1D405|u1D434Cst|u1D4JDCst, where it is 
+assumed that the intermediate conﬁguration Ω/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D434Cst deﬁned by /u1D405|u1D434Cst|u1D4JDCst is invariant to rigid 
+body rotations of the current conﬁguration.  The ve locity gradient in the current 
+conﬁguration Ω is deﬁned by 
+/u1D40B|u1D434Cst=/u1D405̇|u1D434Cst/u1D405|u1D434Cst−|oneCst=/u1D40B|u1D434Cst|u1D4J2Cst+/u1D40B|u1D434Cst|u1D4JDCst 
+Owing to the decomposition, /u1D405|u1D434Cst=/u1D405|u1D434Cst|u1D4J2Cst/u1D405|u1D434Cst|u1D4JDCst, the elastic and plastic rate-of-deformation and 
+spin tensors are deﬁned by 
+/u1D40B|u1D434Cst|u1D4J2Cst=/u1D40:|u1D434Cst|u1D4J2Cst+/u1D416|u1D434Cst|u1D4J2Cst=/u1D405̇|u1D434Cst|u1D4J2Cst(/u1D405|u1D434Cst|u1D4J2Cst)−|oneCst
+/u1D40B|u1D434Cst|u1D4JDCst=/u1D40:|u1D434Cst|u1D4JDCst+/u1D416|u1D434Cst|u1D4JDCst=/u1D405|u1D434Cst|u1D4J2Cst/u1D405̇|u1D434Cst|u1D4JDCst(/u1D405|u1D434Cst|u1D4JDCst)−|oneCst(/u1D405|u1D434Cst|u1D4J2Cst)−|oneCst=/u1D405|u1D434Cst|u1D4J2Cst/u1D40B̅|u1D434Cst|u1D4JDCst(/u1D405|u1D434Cst|u1D4J2Cst)−|oneCst 
+where /u1D40B̅|u1D434Cst|u1D4JDCst=/u1D405̇|u1D434Cst|u1D4JDCst(/u1D405|u1D434Cst|u1D4JDCst)−|oneCst. The Neo-Hookean material represents an extension o f Hooke's 
+law to large elastic deformations and may be chosen  for the elastic part of the 
+deformation when the elastic behavior is assumed to  be isotropic. 
+τ|u1D434Cst= |u1D7≠6|zeroCstln /u1D4:D|u1D434Cst|u1D4J2Cst  /u1D408+ |u1D7≠7|zeroCst(/u1D401|u1D434Cst|u1D4J2Cst−/u1D408) 
+where /u1D6D⃡|u1D434Cst=/u1D4:D|u1D434Cst/u1D6D4|u1D434Cst is the Kirchhoﬀ stress tensor of Part A and /u1D4:D|u1D434Cst|u1D4J2Cst=/radical.v2det /u1D401|u1D434Cst|u1D4J2Cst=/u1D4:D|u1D434Cst is the 
+Jacobian determinant.  The elastic left Cauchy-Gree n deformation tensor is given by 
+/u1D401|u1D434Cst|u1D4J2Cst=/u1D405|u1D434Cst|u1D4J2Cst/u1D405|u1D434Cst|u1D4J2Cst|u1D447Cst. 
+ 
+The ﬂow rule is deﬁned by 
+/u1D40B|u1D434Cst|u1D4JDCst= |u1D6F∆̇|u1D434Cst|u1D4JDCst/u1D40D|u1D434Cst 
+where 
+/u1D40D|u1D434Cst=1
+/radical.v12 /u1D̅0F|u1D434Cstτ|u1D434Cstde v ,/u1D̅0F|u1D434Cst=/radical.v51
+2tr|parenleftCv2τ|u1D434Cstde v |parenriµhtCv2|twoCst 
+and τ|u1D434Cstde v  is the stress deviator.  The rate of ﬂow is taken to be a thermally activated 
+process *.   
+ The model has been implemented into LS-DYNA using a  semi-implicit stress-update 
+scheme [Moran et.  al 1990], and is available for t he explicit solver only. *

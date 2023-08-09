@@ -1,0 +1,59 @@
+ ................................ ................................................... ................... 2-1233  
+*.  [1H] {5} 
+ *.   *.   *.   
+This is  Material Type 195 for beam elements.  An elasto-pla stic material with an 
+arbitrary stress as a function of strain curve and arbitrary strain rate dependency can be 
+deﬁned.  Failure based on a plastic strain or a min imum time step size can be deﬁned.  
+See Remarks below. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY ETAN FAIL TDEL 
+Type A8 F F F F F F F 
+Default none none none none none 0.0 10 20  10 20  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C P LCSS LCSR     
+Type F F F F     
+Default 0 0 0 0     
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable NOTEN TENCUT SDR      
+Type I F F      
+Default 0 10 15  0.0      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density *.   
+  VARIABLE   DESCRIPTION  
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Yield stress 
+ETAN Tangent modulus; ignored if LCSS > 0  
+FAIL Failure ﬂag: 
+LT.0.0: user deﬁned failure subroutine is called to determine 
+failure. 
+EQ.0.0: failure is not considered.  This option is recommen ded 
+if failure is not of interest since many calculatio ns will 
+be saved. 
+GT.0.0: plastic strain to failure.  When the plastic strain  reach es 
+this value, the element is deleted from the calcula tion. 
+TDEL Minimum time step size for automatic element d eletion. 
+C Strain rate parameter, |u1D436; see Remarks below. 
+P Strain rate parameter, |u1D4JD; see Remarks below. 
+LCSS Load curve ID or Table ID.  Load curve ID deﬁning e ﬀective 
+stress as a function of eﬀective plastic strain.  T he table ID deﬁnes 
+for each strain rate value a load curve ID giving t he stress as a 
+function of eﬀective plastic strain for that rate; see Figure M16-1
+Stress as a function of eﬀective plastic strain cur ve for the lowest 
+value of strain rate is used if the strain rate fal ls below the 
+minimum value.  Likewise, the stress as a function of eﬀective 
+plastic strain curve for the highest value of strai n rat e is used if 
+the strain rate exceeds the maximum value.  The str ain rate 
+parameters ( |u1D436 and |u1D4JD) and the curve ID, LC SR, are ignored if a 
+Table ID is deﬁned. 
+LCSR Load curve ID deﬁning strain rate scaling eﬀec t on yield stress 
+NOTEN No-tension ﬂag: 
+EQ.0: beam takes tension. 
+EQ.1: beam takes no tension. 
+EQ.2: beam takes tension up to value given by TENCUT. *

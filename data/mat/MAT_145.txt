@@ -1,0 +1,121 @@
+: *.  
+*.   *.  is a Continuou s Surface Cap Model and is a three 
+invariant extension of *.  was developed fo r geomaterials including soils, 
+concrete, and rocks.  We recommend using an updated  version of a Continuous Surface 
+Cap Model, *. ). 
+WARNING : No default input parameter values are as- 
+sumed, but recommendations for the more ob- 
+scure parameters are provided in the 
+descriptions that follow. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO SHEAR BULK GRUN SHOCK PORE  
+Card 2.   This card is required. 
+ALPHA THETA GAMMA BETA EFIT FFIT ALPHAN CALPHA 
+Card 3.   This card is required. 
+RO XO IROCK SECP AFIT BFIT RDAMO  
+Card 4.   This card is required. 
+W D1 D2 NPLOT EPSMAX CFIT DFIT TFAIL 
+Card 5.   This card is required. 
+FAILFL DBETA DDELTA VPTAU     
+Card 6.   This card is required. 
+ALPHA1 THETA1 GAMMA1 BETA1 ALPHA2 THETA2 GAMMA2 BETA2 *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO SHEAR BULK GRUN SHOCK PORE  
+Type A F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+SHEAR Shear modulus, |u1D43A 
+BULK Bulk modulus, |u1D43∆ 
+GRUN Gruneisen ratio (typically  = 0), Γ 
+SHOCK Shock velocity parameter (typically 0), |u1D446|u1D4J9Cst 
+PORE Flag for pore collapse 
+EQ.0.0: Pore collapse 
+EQ.1.0: Constant bulk modulus (typical) 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable ALPHA THETA GAMMA BETA EFIT FFIT ALPHAN CALPHA 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+ALPHA Shear failure parameter, |u1D6F+ 
+THETA Shear failure parameter, /u1D̅0: 
+GAMMA Shear failure parameter, |u1D6F∆ *.   
+  Card 4 1 2 3 4 5 6 7 8 
+Variable W D1 D2 NPLOT EPSMAX CFIT DFIT TFAIL 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+W Plastic Volume Strain parameter, /u1D44A 
+D1 Plastic Volume Strain parameter, |u1D437|oneCst 
+D2 Plastic Volume Strain parameter, |u1D437|twoCst 
+|u1D7≠≠|u1D449Cst|u1D443Cst=/u1D44A|<raceleftCv41−exp /˙raceleft.v2−|u1D437|oneCst[/u1D44B(/u1D̅05)−/u1D44B(/u1D̅05|zeroCst)]−|u1D437|twoCst[(/u1D44B(/u1D̅05)−/u1D44B(/u1D̅05|zeroCst)]|twoCst/˙raceright.v2/br∙ceri∧ht.β4 
+NPLOT History variable post- processed as eﬀective plastic strain.  (See 
+Table M145-1  for history variables available for plotting.) 
+EPSMAX Maximum permitted strain increment: 
+EQ.0.0:  ∆|u1D7≠≠|mCst|aCst|xCst = 0.05(|u1D6F+ −/u1D441/u1D6FC.st− |u1D6F∆)min|parenleftCv2|oneCst
+/u1D4:A.st,|u1D44JCst
+/nine.st/u1D4:E.st|parenriµhtCv2 (calculated 
+default) 
+CFIT Brittle damage mechanics parameter (= 1 no dam age) 
+DFIT Brittle damage mechanics parameter (= 0 no dam age) 
+TFAIL Tensile failure stress 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable FAILFL DBETA DDELTA VPTAU     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+FAILFL Flag controlling element deletion and eﬀect of dama ge on stress 
+(see Remark 1 ): 
+EQ.1: |u1D7≠∆|u1D4J6Cst|u1D4J7Cst  reduces with increasing damage; element is deleted 
+when fully damaged (default). *.   
+ Remarks: 
+1.  Damage Accumulation and Element Deletion. FAILFL controls whether the 
+damage accumulation applies to either the total str ess tensor, |u1D7≠∆|u1D4J6Cst|u1D4J7Cst , or the devia- 
+toric stress tensor, |u1D446|u1D4J6Cst|u1D4J7Cst . When FAILFL = 2, damage does not diminish the abi lity 
+of the material to support hydrostatic stress. 
+FAILFL also serves as a ﬂag to control element dele tion.  Fully damaged ele- 
+ments are deleted only if FAILFL is a positive valu e.  When *.   *.   
+ Mass: M (e.g. grams - g ) 
+Time: T (e.g. milliseconds - ms ) 
+The following consistent unit systems can then be d erived using Newton's 
+Law, |u1D439 = |u1D44≠|u1D44∆ : 
+Force: |u1D439 = |u1D44≠ /u1D4:F /|u1D447|twoCst [ g-mm/ms  |twoCst= Kg-m/s  |twoCst= Newton - N ] 
+Stress: |u1D7≠∆ = |u1D439/L|twoCst [ N/mm  |twoCst = 10  |sixCstN/m  |twoCst = 10  |sixCst Pascals = MPa ] 
+Density: |u1D7≠+ = M/L|threeCst [ g/mm  |threeCst = 10  |sixCst Kg/m  |threeCst ] 
+Variable  MID RO SHEAR BULK GRUN SHOCK PORE  
+Units   Density:  
+M/L 3 Stress: 
+F/L 2 Stress:  
+F/L 2     
+Variable  ALPHA THETA GAMMA BETA EFIT FFIT ALPHAN CALPHA 
+Units  Stress:  
+F/L 2  Stress: 
+F/L 2 Stress -1: 
+L2/F  Stress -
+½: 
+L/F ½ Stress: 
+F/L 2 Stress:  
+F/L 2 
+Variable  R0 X0 IROCK SECP AFIT BFIT RDAM0  
+Units   Stress: 
+F/L 2    Stress -
+½: 
+L/F ½ Stress ½: 
+F½/L  
+Variable  W D1 D2 NPLOT MAXEPS CFIT DFIT TFAIL 
+Units   Stress -1: 
+L2/F Stress -2: 
+L4/F 2    Stress -
+½: 
+L/F ½ Stress:  
+F/L 2 
+Variable  FAILFG DBETA DDELTA VPTAU     
+Units   Angle: 
+degrees  Time: 
+T     *

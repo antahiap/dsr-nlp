@@ -1,0 +1,37 @@
+ .......................... ................................................... .................. 2-669  
+*.  [2,3a,3c] {20 } 
+ *.   *.   *.   
+This is  Material Type 103_P.  This anisotropic-plastic mate rial model is a simpliﬁed 
+version of the .   
+  Card 6 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Initial yield stress 
+LCSS Load curve ID. The load curve ID deﬁnes eﬀective st ress as a 
+function of eﬀective plastic strain.  Card 2 is ign ored with this 
+option. 
+QR1 Isotropic hardening parameter |u1D444|u1D4JFCst|oneCst 
+CR1 Isotropic hardening parameter |u1D436|u1D4JFCst|oneCst 
+QR2 Isotropic hardening parameter |u1D444|u1D4JFCst|twoCst 
+CR2 Isotropic hardening parameter |u1D436|u1D4JFCst|twoCst 
+R00 |u1D44J|zeroCst|zeroCst  for anisotropic hardening 
+R45 |u1D44J|fourCst|fiveCst  for anisotropic hardening 
+R90 |u1D44J/nine.st |zeroCst  for anisotropic hardening 
+S11 Yield stress in local |u1D46J-direction.  This input is ignored if 
+(|u1D44J|zeroCst|zeroCst ,|u1D44J|fourCst|fiveCst ,|u1D44J/nine.st |zeroCst )>0. 
+S22 Yield stress in local |u1D466-direction.  This input is ignored if 
+(|u1D44J|zeroCst|zeroCst ,|u1D44J|fourCst|fiveCst ,|u1D44J/nine.st |zeroCst )>0. 
+S33 Yield stress in local /u1D46̅-direction.  This input is ignored if 
+(|u1D44J|zeroCst|zeroCst ,|u1D44J|fourCst|fiveCst ,|u1D44J/nine.st |zeroCst )>0. *.   
+ where |u1D7≠≠eff |u1D4JDCst is the eﬀective plastic strain.  For shells the an isotropic behavior is given by 
+|u1D44J|zeroCst|zeroCst , |u1D44J|fourCst|fiveCst  and |u1D44J/nine.st |zeroCst , or the yield stress in the diﬀerent direction.  De fault values are given 
+by: 
+|u1D44J|zeroCst|zeroCst = |u1D44J|fourCst|fiveCst = |u1D44J/nine.st |zeroCst = 1 
+if the variables R00, R45, R90, S11, S22, S33 and S 12 are set to zero. *

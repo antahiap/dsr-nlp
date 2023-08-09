@@ -1,0 +1,35 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+NE.0.0:  eﬀective plastic strain rate 
+ALPHA Coeﬃcient of thermal expansion 
+TREF Reference temperature, which is required if an d only if LAL PHA 
+is given with a negative load curve ID 
+Remarks: 
+1.  Strain Rate Effects.   The strain rate eﬀect is modelled by using the Co wper 
+and Symonds model which scales the yield stress acc ording to the factor 
+1 + |parenleftCvJ|u1D7≠≠̇|eCst /f.st/f.st
+|u1D436|parenriµhtCvJ|oneCst |u1D443Cst ⁄
+ 
+where |u1D7≠≠̇|eCst /f.st/f.st=/radical.v2tr|parenleftCv1/u1D6C6̇/u1D6C6̇/ε.st|parenriµhtCv1 is the Euclidean norm of the total strain rate ten sor if 
+VP = 0 (default), otherwise |u1D7≠≠̇|eCst /f.st/f.st= |u1D7≠≠̇|eCst /f.st/f.st|u1D4JDCst. 
+2.  Yield Stress Tables.  The dependence of the yield stresses on the eﬀecti ve 
+plastic strains is given in two tables. 
+a)  TABIDC gives the behaviour of the yield stresses i n compression 
+b)  TABIDT gives the behaviour of the yield stresses i n tension. 
+The table indices consist of temperatures, and at e ach temperature a yield 
+stress curve must be deﬁned. 
+Both TABIDC and TABIDT can be 3D tables, in which t emperatures indexes 
+the main table and strain rates are deﬁned as value s for the sub tables with 
+hardening curves as targets for those strain rates.  If the same yield stress 
+should be used in both tension and compression, onl y one table needs to be 
+deﬁned and the same TABID is put in position 1 and 2 on Card 2. If VP = 0, 
+eﬀective total strain rates are used in the 3D tabl es, otherwise plastic strain 
+rates. 
+3.  History Variables.   Two history variables are added to the d3plot  ﬁle, the 
+Young’s modulus and the Poisson’s ratio, respective ly.  They can be requested 
+through the *DATABASE_EXTENT_BINARY keyword. 
+4.  Nodal Temperatures.   Nodal temperatures must be deﬁned by using a 
+coupled analysis or some other way to deﬁne the tem peratures, such as 
+*LOAD_THERMAL_VARIABLE or *LOAD_THERMAL_LOAD_CURVE.*

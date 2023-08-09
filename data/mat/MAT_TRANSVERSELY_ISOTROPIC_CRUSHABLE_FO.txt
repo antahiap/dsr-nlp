@@ -1,0 +1,48 @@
+AM ........ ........................................... 2-928  
+*.  AM [0,3c] {12} 
+ *. AM *. AM  
+ *. AM  *. AM  
+  VARIABLE   DESCRIPTION  
+MU Damping coeﬃcient for tensor viscosity which acts i n both 
+tension and compression.  Recommended values vary b etween 
+0.05 to 0.10.  If zero, bulk viscosity is used inst ead of tensor 
+viscosity.  Bulk viscosity create s a pressure as the element 
+compresses that is added to the normal stresses whi ch can have 
+the eﬀect of creating transverse deformations when none are 
+expected. 
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC, 
+particularly the Material Directions  section, for details): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_ NODES. For shells only, the material axes are 
+then rotated a bout the normal vector to the surface of 
+the shell by the angle BETA. 
+EQ.1.0: Locally orthotropic with material axes determined b y a 
+point, |u1D443, in space and the global location of the element 
+center; this is the /u1D41A-direction.  This option is for solid 
+elements only. 
+EQ.2.0: Globally orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by a 
+vector /u1D42F and the normal vector to the plane of the ele- 
+ment.  The plane of a solid element is the midsurface 
+between the inner surface and outer surface deﬁned by 
+the ﬁrst four nodes and the last four nodes of the con- 
+nectivity of the element, respectively.  Thus, for solid 
+elements, AOPT = 3 is only available for hexahedrons. 
+/u1D41A is determined by taking the cross product of /u1D42F with 
+the normal vector, /u1D41B is determined by taking the cross 
+product of the normal vector with /u1D41A, and /u1D41C is the nor- 
+mal vector.  Then /u1D41A and /u1D41B are rotated about /u1D41C by an an- 
+gle BETA. BETA m ay be set in the keyword input for 
+the element or in the input for this keyword.  Note  that 
+for solids, the material axes may be switched depen d- 
+ing on the choice of MACF. The switch may occur be-
+fore or after applying BE TA depending on the value of 
+MACF.  
+EQ.4.0: Locally orthotropic in a cylindrical coordinate sys tem 
+with the material axes determined by a vector /u1D42F, and *. AM  
+ Remarks: 
+This model behaves in a more physical way for oﬀ ax is loading the material than, for 
+example, *

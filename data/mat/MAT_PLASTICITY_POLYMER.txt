@@ -1,0 +1,99 @@
+............................ ................................................... .................. 2-595  
+*.  [0,2,3a,3c] {46}  
+ *.  *.   *.   
+This is Material Type 89.  An elasto-plastic materi al with an arbitrary stress as a 
+function of strain curve and arbitrary strain rate dependency can be deﬁned.  It is 
+intended for applications where the elastic and pla stic sections of the response are not 
+as clearly distinguishable as they are for metals.  Rate dependency of failure strain is 
+included.  Many polymers show a more brittle respon se at high rates of strain. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR     
+Type A F F F     
+Default none none none none     
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C P LCSS LCSR     
+Type F F I I     
+Default 0 0 0 0     
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable EFTX DAMP RFAC LCFAIL NUMINT    
+Type F F F I F    
+Default 0 0 0 0 0    
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density *.   
+  VARIABLE   DESCRIPTION  
+E Young’s modulus 
+PR Poisson’s ratio 
+C Strain rate parameter, |u1D436, (Cowper Symonds) 
+P Strain rate parameter, |u1D443, (Cowper Symonds) 
+LCSS Load curve ID or Table ID 
+Load Curve.   When LC SS is a load curve ID, it is taken as 
+deﬁning eﬀective stress as a function of total eﬀec tive strain.  
+Tabular Data.   The table ID deﬁnes for each strain rate value a 
+load curve ID giving the stress as a function eﬀect ive strain for 
+that rate.   
+Logarithmically Deﬁned Tables.   If the ﬁrst  value in the table is 
+negative, LS-DYNA assumes that all the table val ues represent 
+the natural logarithm of a strain rate.  Since the tables are 
+internally discretized to equally space the table v alues, it makes 
+good sense from an accuracy standpoint that the tab le values 
+represent the natural log of strain rate when the l o west strain rate 
+and highest strain rate diﬀer by several orders of magnitude. 
+LCSR Load curve ID deﬁning strain rate scaling eﬀect on yield stress.  If 
+LC SR is negative, the load curve is evaluated using a  binary 
+search for the correct interval for t he strain rate.  The binary 
+search is slower than the default incremental searc h, but in cases 
+where large changes in the strain rate may occur ov er a single 
+time step, it is more robust. 
+EFTX Failure ﬂag: 
+EQ.0.0: Failure determined by maximum tensile strain 
+(default). 
+EQ.1.0: Failure determined only by tensile strain in local |u1D46J
+direction. 
+EQ.2.0: Failure determined only by tensile strain in local |u1D466
+direction. 
+DAMP Stiﬀness-proportional damping ratio.  Typical value s are 10 −|threeCst or 
+10 −|fourCst.  If set too high, instabilities can result. 
+RFAC Filtering factor for strain rate eﬀects.  Must be b etween 0 (no 
+ﬁltering) and 1 (inﬁnite ﬁltering).  The ﬁlter is a  simple low pass *.   
+ /u1D6C6|minuteCst= de v iatoric strain tensor, where each |u1D7≠≠|u1D46JCst, |u1D7≠≠|u1D466Cst, and |u1D7≠≠|u1D467Cst is cumulati v e 
+3.  Yield Stress Load Curves.   When looking up yield stress from the load curve 
+LCSS, the |u1D46J-axis value is |u1D7≠≠v m . 
+4.  Failure Strain Load Curves.  
+|u1D7≠≠sr =d|u1D7≠≠pm 
+d|u1D461= strain rate for failure and damage calculation 
+|u1D7≠≠|u1D439Cst= LCFAIL(|u1D7≠≠|u1D46≠Cst|u1D4JFCst ) 
+= Instantanous true strain to failure from loo k -up on the cur v e LCFAIL 
+5.  Damage.   A damage approach is used to avoid sudden shocks when the 
+failure strain is reached.  Damage begins when the "strain ratio," |u1D44J, reaches 1.0, 
+where 
+|u1D44J =/integral.v:|u1D4J1|u1D7≠≠pm 
+|u1D7≠≠|u1D439Cst. 
+Damage is complete, and the element fails and is de leted, when |u1D44J = 1.1 .  The 
+damage, 
+|u1D437 =
+⎩|<raceleftCex⎨|<raceleftCex⎧1.0  |u1D44J < 1.0
+10(1.1 − |u1D44J) 1.0 < |u1D44J < 1.1  , 
+is a reduction factor applied to all stresses.  For  example, when |u1D44J = 1.05 , then 
+|u1D437 = 0.5 . 
+6.  Strain Deﬁnitions.   Unlike other LS-DYNA material models, both the in put 
+stress-strain curve and the strain to failure are d eﬁned as total true strain, not 
+plastic strain.  The input can be deﬁned from uniax ial tensile tests; nominal 
+stress and nominal strain from the tests must be co nverted to true stress and 
+true strain.  The elastic component of strain must not be subtracted out. 
+7.  Elastic Stiffness Scaling.   The stress-strain curve is permitted to have sect ions 
+steeper (i.e. stiﬀer) than the elastic modulus.  Wh en these are encountered the 
+elastic modulus is increased to prevent spurious en ergy generation.  The elastic 
+stiﬀness is scaled by a factor |u1D4J3e, which is calculated as follows: 
+|u1D4J3|u1D4J2Cst= max |parenleftCv41.0,|u1D46≠max 
+3|u1D43A|parenriµhtCv4 
+where 
+|u1D43A = initial shear modulus 
+|u1D446max = maximum slope of stress-strain cur v e encountered during the analysis 
+8.  Precision.   Double precision is recommended when using this m aterial model, 
+especially if the strains become high. *

@@ -1,0 +1,28 @@
+: *.  
+*.   *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EA Young’s Modulus |u1D438|u1D44∆Cst 
+EB Young’s Modulus |u1D438|u1D44FCst 
+EC Young’s Modulus |u1D438|u1D4J≠Cst 
+VF Volume fraction of viscoelastic material 
+K Elastic bulk modulus 
+G0 |u1D43A|zeroCst, short-time shear modulus 
+GINF |u1D43A∞, long-time shear modulus 
+BETA |u1D6FD, decay constant 
+PRBA Poisson’s ratio, /u1D̅08|u1D44FCst|u1D44∆Cst  
+PRCA Poisson’s ratio, /u1D̅08|u1D4J≠Cst|u1D44∆Cst  
+PRCB Poisson’s ratio, /u1D̅08|u1D4J≠Cst|u1D44FCst  
+GAB Shear modulus, |u1D43A|u1D44∆Cst|u1D44FCst  
+GBC Shear modulus, |u1D43A|u1D44FCst|u1D4J≠Cst  
+GCA Shear modulus, |u1D43A|u1D4J≠Cst|u1D44∆Cst  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined by 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-*

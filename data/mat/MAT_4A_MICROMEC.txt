@@ -1,0 +1,146 @@
+ [0,2,3a,3c] 
+ *.  *.   *.   
+ Card Summary: 
+Cards 2 through 4 specify ﬁber orientation.  They m ay be overwritten with may be 
+overwritten by *INITIAL_STRESS_(T)SHELL/SOLID. Card s 5 and 6 are for specifying 
+parameters for the ﬁber/inclusion material.  Cards 7 through 9 give properties 
+associated with the matrix material. 
+Card 1.   This card is required. 
+MID MMOPT BUPD   FAILM FAILF NUMINT 
+Card 2.   This card is required. 
+AOPT MACF XP YP ZP A1 A2 A3 
+Card 3.   This card is required. 
+V1 V2 V3 D1 D2 D3 BETA  
+Card 4.   This card is required. 
+FVF  FL FD  A11 A22  
+Card 5.   This card is required. 
+ROF EL ET GLT PRTL PRTT   
+Card 6.   This card is required. 
+XT      SLIMXT NCYRED 
+Card 7.   This card is required. 
+ROM E PR      
+Card 8.   This card is required. 
+SIGYT  ETANT    EPS0  C   
+Card 9.   This card is required. 
+LCIDT     LCDI  UPF    *.   
+  VARIABLE   DESCRIPTION  
+NUMINT Number or percentage of failed integration points p rior to 
+element deletion (default value is 1): 
+GT.0.0: Number of integration points which must fail before  
+element is deleted.  
+LT.0.0: Applies only to shells. |N U MINT|  is the percentage of 
+layers which must fail before an element fails.  Fo r shell 
+formulations with 4 integration points per layer, t he 
+layer is considered failed if any of the integratio n points 
+in the layer fails. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable AOPT MACF XP YP ZP A1 A2 A3 
+Type F F F F F F F F 
+Default 0.0 0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see .   *.   
+  VARIABLE   DESCRIPTION  
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+V1, V2, V3 Deﬁne components of vector v for AOPT = 3 and 4. 
+D1, D2, D3 Deﬁne components of vector d for AOPT = 2. 
+BETA Angle in degrees of a material rotation about the /u1D450-axis, available 
+for AOPT = 0 (shells and tshells only) and AOPT = 3 (all element 
+types).  T his angle may be overridden on the element card; se e 
+*ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BE TA, and 
+*ELEMENT_SOLID_ORTHO. 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable FVF  FL FD  A11 A22  
+Type F  F F  F F  
+Default 0.0  0.0 1.0  1.0 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+FVF Fiber volume or mass fraction: 
+GT.0.0: Fiber volume fraction  
+LT.0.0: |F V F | is the ﬁber mass fraction.  
+FL Fiber length unless FD = 1. If FD  =  1, then it  is the aspect ratio 
+(may be overwritten by *INITIAL_STRESS_(T)SHELL/SOL ID) *.   
+  VARIABLE   DESCRIPTION  
+XT Fiber tensile strength in the longitudinal direc tion 
+SLIMXT Factor to determine the minimum stress limit in the  ﬁber after 
+stress maximum (ﬁber tension) 
+NCYRED Number of cycles for stress reduction from maximum to 
+minimum (ﬁber tension) 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable ROM E PR      
+Type F F F      
+Default 0.0 0.0 0.0      
+ 
+ VARIABLE   DESCRIPTION  
+ROM Mass density of matrix 
+E Young’s modulus of matrix 
+PR Poisson’s ratio of matrix 
+ 
+ Card 8 1 2 3 4 5 6 7 8 
+Variable SIGYT ETANT   EPS0 C   
+Type F F   F F   
+Default 0.0 0.0   0.0 0.0   
+ 
+ VARIABLE   DESCRIPTION  
+SIGYT Yield stress of matrix in tension 
+ETANT Tangent modulus of matrix in tension, ignore if LCIDT > 0 is 
+deﬁned. *.   
+ Output: 
+For this material, “Plastic Strain” is the equivale nt plastic strain in the matrix. Extra 
+history variables may be requested for (t)shell (NE IPS) and solid (NEIPH) elements 
+with *DATABASE_EXTENT_BINARY. Extra history variabl es 1 through 8 are intended 
+for post-processing while 9 through18 are intended for initialization with *INITIAL_-
+STRESS_(T)SHELL/SOLID. They have the following mean ing: 
+ 
+History Variable # Description 
+1 Equivalent plastic strain rate of matrix 
+2 Triaxiality of matrix, |u1D7≠2=−|u1D4JD/u1D45E⁄ 
+3 Lode parameter of matrix, =−|twoCst|sevenCst /u1D4:D.st|threeCsts
+|twoCst/u1D45E.st 
+4 Damage initiation, |u1D4J1, of matrix (Ductile Criteria) 
+5 Damage evolution, |u1D437, of matrix  
+6 Fiber reserve factor 
+7 Fiber damage variable 
+8 Currently unused 
+9 Value of ﬁrst principal ﬁber orientation, A11 
+10 Value of second principal ﬁber orientation, A22 
+11 For shells, cos |u1D6F+ where |u1D6F+ is the in-plane angle 
+between the material coordinate system and the 
+element coordinate system.  For solids, /u1D45E|oneCst|oneCst  where 
+/u1D45E|oneCst|oneCst  is the |u1D46J-direction component of the ﬁrst 
+orientation direction in the element coordinate 
+system.  
+12 For shells, - sin |u1D6F+ where |u1D6F+ is the in-plane angle 
+between the material coordinate system and the 
+element coordinate system.  For solids, /u1D45E|oneCst|twoCst  where 
+/u1D45E|oneCst|twoCst  is the |u1D466-direction component of the ﬁrst 
+orientation direction in the element coordinate 
+system. 
+13 For shells, unused.  For solids, /u1D45E|oneCst|threeCst  where /u1D45E|oneCst|threeCst  is the 
+/u1D46̅-direction component of the ﬁrst orientation *.  – micr o mechanic based material model, 14 th  German 
+LS-DYNA Conference (2016), Bamberg. 
+ [2]  Reithofer, P., et.  al, *.   
+  [6]  Eshelby, J. D., The determination of the elas tic field of an ellipsoidal inclusion, and related 
+problems, Proceedings of the Royal Society, London,  Vol.A, No241, pp.376-396, (1957). 
+ [7]  Mlekusch, B., Kurzfaserverstärkte Thermoplast e, Dissertation, Montanuniversität Leoben (1997). 
+ [8]  http://micromec.4a.co.at  
+ [9]  Reithofer et al., Material characterization of composites using micro  mechanic models as key 
+enabler , NAFEMS DACH, Bamberg 2016. 
+ [10]  http://impetus.4a.co.at  
+ [11]  Reithofer et al., Short and long fiber reinforced thermoplastics mate rial models in LS-DYNA , 10th 
+European LS-DYNA Conference, Würzburg 2015. 
+ [12]  http://fibermap.4a.co.at  
+ [13]  Liebold et al., The Significance of the Production Process of FRP P arts for the Performance in 
+Crashworthiness , 14th International LS-DYNA Users Conference, 2016 ,  
+http://www.dynalook.com/14th-international-ls-dyna- conference/simulation/the-significance-of-
+the-production-process-of-frp-parts-for-the-perform ance-in-crashworthiness *

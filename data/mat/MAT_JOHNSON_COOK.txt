@@ -1,0 +1,163 @@
+ ................................. ................................................... ...................... 2-187  
+*.  [0,2,3a,3c,5,8A] {6} 
+ *.  *.   *.  _{OPTION}  
+This is  Material Type 15.  The Johnson/Cook strain and temp erature sensitive plasticity 
+is sometimes used for problems where the strain rat es vary over a large range and 
+adiabatic temperature increases due to plastic heat ing cause material softening.  When 
+used with solid elements, this model requires an eq uation-of-state.  If thermal eﬀects 
+and damage are unimportant, we recommend the much l ess expensive *.   
+2-188 (MAT) LS-DYNA R13 Card 4c.   This card is included for RATEOP = 5.0. 
+D5 D EROD EFMIN NUMINT K EPS1  
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO G E PR DTF VP RATEOP 
+Type A F F F F F F F 
+Default none none none none none 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+G Shear modulus.  G and an equation-of- state are required for 
+element types that use a 3D stress update, such as solids, 2D shell 
+forms 13- 15, and tshell forms 3, 5, and 7.   For other eleme nt 
+types, G is ignored, and E and PR must be provided.  
+E Young’s Modulus (see note above pertaining to G) 
+PR Poisson’s ratio (see note above pertaining to G)  
+DTF Minimum time step size for automatic element deleti on (shell 
+elements).  The element will be deleted when the so lution time 
+step size drops below DTF × TSSFAC  where TSS FAC is the time 
+step scale factor deﬁned by *CONTROL_ TIMESTEP.  See 
+Remark 4 . 
+VP Formulation for rate eﬀects: 
+EQ.0.0: Scale yield stress (default) 
+EQ.1.0: Viscoplastic formulation 
+RATEOP Form of strain rate term.  RATEOP is ignored  if VP = 0. See 
+Remark 5 . *.   
+2-190 (MAT) LS-DYNA R13  Card 3 1 2 3 4 5 6 7 8 
+Variable CP PC SPALL IT D1 D2 D3 D4 
+Type F F F F F F F F 
+Default none 0.0 2.0 0.0 0.0 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+CP Speciﬁc heat (superseded by heat capacity in *MA T_THER-
+MAL_ OPTION  if a coupled thermal/structural analysis) 
+PC Tensile failure stress or tensile pressure cutoﬀ  (PC   <  0.0) 
+SPALL Spall type (see Remark 3 ): 
+EQ.0.0: Set to “2.0” (default). 
+EQ.1.0: Tensile pressure is limited by PC, that is, |u1D4JD is always ≥
+PC. 
+Shell Element  Speciﬁc Behavior: 
+EQ.2.0: Shell elements are deleted when |u1D7≠∆max ≥ −PC . 
+EQ.3.0: Shell elements are deleted when  |u1D4JD < PC . 
+Solid Element  Speciﬁc Behavior 
+EQ.2.0:  For solid elements |u1D7≠∆max ≥ −PC  resets tensile stresses to 
+zero.  Compressive stress are still allowed. 
+EQ.3.0:  For solid elements |u1D4JD < PC  resets the pressure to zero 
+thereby disallowing tensile pressure. 
+IT Plastic strain iteration option.  This input applie s to solid 
+elements only since it is always necessary to itera te for the shell 
+element plane stress condition. 
+EQ.0.0: No iterations (default) 
+EQ.1.0: Accurate iterative solution for p lastic strain.  Much 
+more expensive than default. 
+D1 – D4 Failure parameters; see Remark 2 . If D3 < 0.0, it will be converted 
+to its absolute value. 
+ *.   
+2-192 (MAT) LS-DYNA R13  
+ VARIABLE   DESCRIPTION  
+D5 Failure parameter; see Remark 2 .  
+C2/P/XNP Strain rate parameter. 
+Field  Var  Model 
+C2 |u1D436|twoCst Huh-Kang 
+P |u1D443 Cowper-Symonds 
+XNP  |u1D4JB|minuteCst Nonlinear Rate Coeﬃcient  
+See Remark 5  for a description of these models. 
+EROD Erosion ﬂag: 
+EQ.0.0: Element erosion allowed (default). 
+NE.0.0: Element does not erode; deviatoric stresses set to zero 
+when element fails. 
+EFMIN Lower bound for calculated strain at fracture  (see Remark 2 ) 
+NUMINT Number of through thickness integration points whic h must fail 
+before the shell element is deleted.  If zero, all integ ration points 
+must fail (the default).  Since nodal ﬁber rotation s limit strains at 
+active integration points, we do not recommend the default 
+because elements undergoing large strain are often not deleted 
+using this criterion.  Better results may be obtain ed when NU-
+MINT is set to 1 or a number less than one half of the number of 
+through thickness points.  For example, if four thr ough thickness 
+points are used, NU MINT should not exceed 2, even for fully 
+integrated shells which have 16 integration points.  
+ 
+This card is included for RATEOP = 5.0. 
+ Card 4c 1 2 3 4 5 6 7 8 
+Variable D5 D EROD EFMIN NUMINT K EPS1  
+Type F F F F I F F  
+Default 0.0 0.0 0.0 10 -6 0 0.0 none  
+ *.   
+2-194 (MAT) LS-DYNA R13 |u1D447∗= homologous temperature =|u1D447 − |u1D447room 
+|u1D447melt − |u1D447room  
+The quantity |u1D447 − |u1D447room  is stored as extra history variable 5.  In the cas e of a 
+mechanical-only analysis, this is the adiabatic tem perature increase calculated 
+as  
+|u1D447 − |u1D447room =internal energy 
+|parenleftCv2|u1D436|u1D4JDCst× |u1D7≠+ × |u1D449 /u1D45C|parenriµhtCv2  , 
+where 
+|u1D436|u1D4JDCst and |u1D7≠+ =  input constants 
+|u1D449 /u1D45C=  initial v olume 
+In a coupled thermal/mechanical analysis, |u1D447 − |u1D447room  includes heat- 
+ing/cooling from all sources, not just adiabatic he ating from the internal ener- 
+gy. 
+Constants for a variety of materials are provided i n Johnson and Cook [1983].  
+A fully viscoplastic formulation is optional (VP) w hich incorporates the rate 
+equations within the yield surface.  An additional cost is incurred, but the im- 
+provement in the results can be dramatic. 
+Due to nonlinearity in the dependence of ﬂow stress  on plastic strain, an accu- 
+rate value of the ﬂow stress requires iteration for  the increment in plastic 
+strain.  However, by using a Taylor series expansio n with linearization about 
+the current time, we can solve for |u1D7≠∆|u1D466Cst with suﬃcient accuracy to avoid iteration. 
+2.  Strain at Fracture.  The strain at fracture is given by 
+|u1D7≠≠/u1D45:.st= max|parenleftCv1|<racketleftCv1|u1D437|oneCst+ |u1D437|twoCstexp|u1D437|threeCst|u1D7≠∆∗|<racketriµhtCv1[1 + |u1D437|fourCstln|u1D7≠≠̇∗][1 + |u1D437|fiveCst|u1D447∗], EFMIN|parenriµhtCv1  , 
+where |u1D7≠∆∗ is the ratio of pressure divided by eﬀective stres s 
+|u1D7≠∆∗=|u1D4JD
+|u1D7≠∆eff    . 
+Fracture occurs when the damage parameter, 
+|u1D437 =∑∆|u1D7≠≠|u1D4JDCst
+|u1D7≠≠/u1D45:.st  , 
+reaches the value of 1.  |u1D437 is stored as extra history variable 4 in shell ele ments 
+and extra history variable 6 in solid elements. 
+3.  Spall Models.   A choice of three spall models is oﬀered to repre sent material 
+splitting, cracking, and failure under tensile load s:  
+a)  Pressure Limit Model.   The pressure limit model limits the minimum hy- 
+drostatic pressure to the speciﬁed value, |u1D4JD ≥ |u1D4JDmin .  If the calculated pres- 
+sure is more tensile than this limit, the pressure is reset to |u1D4JDmin .  This *.   
+2-196 (MAT) LS-DYNA R13 Four additional exponential forms are available, on e due to Allen, Rule & Jones 
+[1997]: 
+(|u1D7≠≠̇∗)/u1D4:6.st  , 
+the Cowper-Symonds-like [1958] form: 
+1 + |parenleftCv6|u1D7≠≠̇eff |u1D4JDCst
+|u1D436|parenriµhtCv6|oneCst
+|u1D443Cst
+  , 
+the nonlinear rate coeﬃcient: 
+1 + |u1D436|parenleftCv2|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2|u1D4JBCst/⋯inute.sts
+ln |u1D7≠≠̇∗. 
+and the Couque [2014] form, 
+1 + |u1D436 ln |u1D7≠≠̇∗+ |u1D437 |parenleftCv6|u1D7≠≠̇eff |u1D4JDCst
+EPS1|parenriµhtCv6|u1D4J8Cst
+. 
+See Huh and Kang [2002], Allen, Rule, and Jones [19 97], Cowper and Symonds 
+[1958], and Couque [2014]. 
+6.  History Variables.   The following extra history variables may be outp ut to the 
+d3plot ﬁle (see *DATABASE_EXTENT_BINARY). 
+ 
+History Variable # Description for Shell 
+Elements Description for Solid 
+Elements 
+1 Failure value  
+3 Current pressure cutoﬀ  
+4 Damage parameter, |u1D437  
+5 Temperature change,  
+|u1D447−|u1D447room  Temperature change,  
+|u1D447−|u1D447room  
+6 Failure strain Damage parameter, |u1D437 *

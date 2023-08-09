@@ -1,0 +1,43 @@
+ .................... ................................................... ......... 2-1448  
+*.  [2,3a] 
+ *.   *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+s Span between the ﬁbers 
+T Real ﬁber thickness 
+H Eﬀective ﬁber thickness 
+S Fiber cross-sectional area 
+EKA Elastic constant of element “a” 
+EUA Ultimate strain of element “a” 
+VMB Damping coeﬃcient of element “b” 
+C Coeﬃcient of friction between the ﬁbers 
+G23 Transverse shear modulus 
+EKB Elastic constant of element “b” 
+AOPT Material axes option (see .   *.   
+ (VMB) |u1D7≠7|u1D44FCst, the static ultimate strain (EU) |u1D7≠≠max , and the Hookian spring ultimate strain 
+(EUA) |u1D7≠≠|u1D44∆Cst/co⋯⋯a.stmax . The other parameters can be obtained as follows: 
+|u1D43∆|u1D44FCst=|u1D43∆|u1D44∆Cst|u1D438|oneCst
+|u1D43∆|u1D44∆Cst− |u1D438|oneCst
+|u1D7≠≠|u1D44FCst/co⋯⋯a.st|mCst|aCst|xCst =|u1D43∆|u1D44∆Cst− |u1D438|oneCst
+|u1D43∆|u1D44∆Cst|u1D7≠≠|mCst|aCst|xCst  
+ 
+The stress in the yarns for the ﬁll and warp is upd ated for the next time step as:  
+|u1D7≠∆/u1D45:.st(|u1D4JBCst+|oneCst)= |u1D7≠∆/u1D45:.st(|u1D4JBCst)+ ∆|u1D7≠∆/u1D45:.st(|u1D4JBCst), |u1D7≠∆|u1D464Cst(|u1D4JBCst+|oneCst)= |u1D7≠∆|u1D464Cst(|u1D4JBCst)+ ∆|u1D7≠∆|u1D464Cst(|u1D4JBCst) 
+where ∆|u1D7≠∆/u1D45:.st and ∆|u1D7≠∆|u1D464Cst are the stress increments in the yarns.  We can im agine that the 
+RVC is smeared to the parallelepiped in order to tr ansform the stress acting on the yarn 
+cross-section to the stress acting on the element w all.  The thickness of the membrane 
+shell element used should be equal to the eﬀective thickness, |u1D461|u1D4J2Cst, that can be found by 
+dividing the areal density of the fabric by its mas s density.  The in-plane stress 
+components acting on the RVC walls in the material direction of the yarns are 
+calculated as follows for the ﬁll and warp directio ns: 
+|u1D7≠∆/u1D45:.st|oneCst|oneCst (|u1D4JBCst+|oneCst)=2|u1D7≠∆/u1D45:.st(|u1D4JBCst+|oneCst)|u1D446
+|u1D46≠|u1D461|u1D4J2Cst
+|u1D7≠∆/u1D45:.st|twoCst|twoCst (|u1D4JBCst+|oneCst)= |u1D7≠∆/u1D45:.st|twoCst|twoCst (|u1D4JBCst)+ |u1D6F+|u1D438|twoCst∆|u1D7≠≠/u1D45:.st|twoCst|twoCst (|u1D4JBCst)
+|u1D7≠∆/u1D45:.st|oneCst|twoCst (|u1D4JBCst+|oneCst)= |u1D7≠∆/u1D45:.st|oneCst|twoCst (|u1D4JBCst)+ |u1D6F+|u1D43A|oneCst|twoCst ∆|u1D7≠≠/u1D45:.st|oneCst|twoCst (|u1D4JBCst)|u1D7≠∆|u1D464Cst|oneCst|oneCst (|u1D4JBCst+|oneCst)=2|u1D7≠∆|u1D464Cst(|u1D4JBCst+|oneCst)|u1D446
+|u1D46≠|u1D461|u1D4J2Cst
+|u1D7≠∆|u1D464Cst|twoCst|twoCst (|u1D4JBCst+|oneCst)= |u1D7≠∆|u1D464Cst|twoCst|twoCst (|u1D4JBCst)+ |u1D6F+|u1D438|twoCst∆|u1D7≠≠|u1D464Cst|twoCst|twoCst (|u1D4JBCst)
+|u1D7≠∆|u1D464Cst|oneCst|twoCst (|u1D4JBCst+|oneCst)= |u1D7≠∆|u1D464Cst|oneCst|twoCst (|u1D4JBCst)+ |u1D6F+|u1D43A|oneCst|twoCst ∆|u1D7≠≠|u1D464Cst|oneCst|twoCst (|u1D4JBCst) σ, ε σ, ε 
+σ , ε b b
+σ , ε a aKaµb
+Kb
+Figure M234-3.   Three-element visvoelasticity model *

@@ -1,0 +1,72 @@
+  *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label b e speciﬁed 
+(see *PART). 
+RO Density 
+EM Isotropic Young’s modulus, |u1D438|iCst|sCst /o.st  
+PR Poisson’s ratio, |u1D463 
+G Linear shear modulus, |u1D43A/f.st|iCst /˙.st  
+EZDEF Algorithmic parameter.  If set to 1, last row of de formation 
+gradient is not updated during the calculation. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable NFIB AOPT XP YP ZP A1 A2 A3 
+Type I F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+NFIB Number of ﬁber families to be considered (maxi mum of 3) 
+AOPT Material axes option (see .   *.   
+  Card 6 1 2 3 4 5 6 7 8 
+Variable IDF3 ALPH3 EF3 KAP3     
+Type I F F F     
+ 
+ VARIABLE   DESCRIPTION  
+IDF i ID for ith  ﬁber family for post-processing 
+ALPH i Orientation angle |u1D6F+|u1D4J6Cst for ith  ﬁber with respect to overall material 
+direction 
+EF i Young’s modulus |u1D438|u1D4J6Cst for ith  ﬁber family 
+KAP i Fiber volume ratio /u1D̅05|u1D4J6Cst of ith  ﬁber family 
+Stress Calculation: 
+In this model up to three distinct ﬁber families ar e considered.  We assume that there is 
+no interaction between the families.  Thus, the res ulting stress tensor is the sum of the 
+single ﬁber responses.  Each ﬁber response is the s um of an isotropic and a spatially 
+transversely isotropic neo-Hookean stress contribut ion, /u1D̅48|u1D4J6Cst|iCst|sCst /o.st  and /u1D̅48|u1D4J6Cst|tCst /r.st , respectively. The 
+implementation is based on the work of Bonet and Bu rton (1998), adapted by BMW for 
+simulation of unidirectional fabrics (see reference s below).  
+ 
+The isotropic stress tensor, /u1D̅48|u1D4J6Cstiso , depends on an isotropic shear modulus, |u1D7≠7, and an 
+isotropic bulk modulus, |u1D7≠6|u1D4J6Cst where:  
+|u1D7≠7 =|u1D438|iCst|sCst /o.st 
+2(1 +/u1D̅08) and |u1D7≠6|u1D4J6Cst=|u1D438|iCst|sCst /o.st (/u1D̅08+ |u1D4JB|u1D4J6Cst/u1D̅08|twoCst)
+2(1 +/u1D̅08). 
+Here, the variable |u1D4JB|u1D4J6Cst denotes the ratio between stiﬀness orthogonally to  the ﬁbers and in 
+ﬁber direction, that is, |u1D4JB|u1D4J6Cst= |u1D438|iCst|sCst /o.st /|u1D438|u1D4J6Cst.  |u1D438iso , /u1D̅08, and |u1D438|u1D4J6Cst are input parameters.  Using the left 
+Cauchy-Green tensor, /u1D41B, the isotropic neo-Hookean model reads: 
+/u1D̅48|u1D4J6Cst|iCst|sCst /o.st =|u1D7≠7
+/u1D4:D(/u1D41B−/u1D408) + |u1D7≠6|u1D4J6Cst(/u1D4:D− 1)/u1D408 . 
+ 
+Based on the orientation angel |u1D6F+|u1D4J6Cst of the ith  ﬁber family, an initial ﬁber direction /u1D426|u1D4J6Cst|zeroCst is 
+computed.  The deformation gradient, /u1D405, transforms the initial ﬁber conﬁguration to the 
+current ﬁber conﬁguration as /u1D426|u1D4J6Cst=/u1D405 /u1D426 |u1D4J6Cst|zeroCst. This vector contains all necessary information 
+on ﬁber elongation and reorientation.  
+ *.   
+ History Variable #  Description 
+15 Number of ﬁbers 
+16 Projected orthogonal ﬁber strain (1 st  ﬁber) 
+17 Projected parallel ﬁber strain (1 st  ﬁber) 
+18 Shear angle (1 st  ﬁber) in rad 
+19 Euler-Almansi strain (1 st  ﬁber) 
+20 Porosity (1 st  ﬁber) 
+21 Fiber volume ratio (1 st  ﬁber) 
+22 Projected orthogonal ﬁber strain (2 nd  ﬁber) 
+23 Projected parallel ﬁber strain (2 nd  ﬁber) 
+24 Shear angle (2 nd  ﬁber) in rad 
+25 Euler-Almansi strain (2 nd  ﬁber) 
+26 Porosity (2 nd  ﬁber) 
+27 Fiber volume ratio (2 nd  ﬁber) 
+28 Projected orthogonal ﬁber strain (3 rd  ﬁber) 
+29 Projected parallel ﬁber strain (3 rd  ﬁber) 
+30 Shear angle (3 rd  ﬁber) in rad 
+31 Euler-Almansi strain (3 rd  ﬁber) 
+32 Porosity (3 rd  ﬁber) 
+33 Fiber volume ratio (3 rd  ﬁber) *

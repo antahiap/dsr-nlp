@@ -1,0 +1,98 @@
+ ..... ............................................ 2-363  
+*.  *.   *.  _{OPTION}  
+This is  Material Type 37.  This model is for simulating she et forming processes with 
+anisotropic material.  Only transverse anisotropy c an be considered.  Optionally an 
+arbitrary dependency of stress and eﬀective plastic  strain can be deﬁned with a load 
+curve.  This plasticity model is fully iterative an d is available only for shell elements.   
+Available options include: 
+<BLANK> 
+ECHANGE 
+NLP_FAILURE 
+NLP2 
+The ECHANGE option allows the Young’s Modulus to ch ange during the simulation: 
+ 
+The NLP_FAILURE option estimates failure using the Formability Index (F.I.) which 
+accounts for the non-linear strain paths common in metal forming application (see 
+Remarks 5  and 7).  The option NLP is also available for *.   
+2-364 (MAT) LS-DYNA R13 Additional card for ECHANGE and/or NLP_FAILURE keyw ord options. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable IDSCALE EA COE ICFLD  STRAINLT    
+Type I F F F  F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Yield stress 
+ETAN Plastic hardening modulus.  When this value is nega tive, normal 
+stresses (either from contact or applied pressure) are considered 
+and *LOAD_SURFACE_ STRESS must be used to capture the 
+stresses.  This feature is applicable to both shell  element types 2 
+an d 16.  It is found in some cases this inclusion can  improve 
+accuracy. 
+The negative local /u1D46̅-stresses caused by the contact pressure can be 
+viewed from d3plot  ﬁles after Revision 97158.  Prior to Revision 
+97158, the negative local /u1D46̅-stresses are stored in history variable #5 .   
+R Anisotropic parameter |u1D4JF̅, also commonly called r- bar, in sheet 
+metal forming literature.  Its interpretation is gi ven in Remark 1 . 
+GT.0: standard formulation 
+LT.0: the anisotropic parameter is set to ||u1D44J|.  When |u1D44J is set to a 
+negative value the algorithm is modiﬁed for better stabil- 
+ity in sheet thickness or thinning for sheet metal forming 
+involving high strength steels or in cases when the  simu- 
+lation time is long.  This feature is available to both ele- 
+ment formulations 2 and 16.  See Remark 2  and Figure 
+M37-1 . *.   
+2-366 (MAT) LS-DYNA R13 2/u1D4:F=1
+|u1D7≠∆|u1D466Cst|twoCst|threeCst |twoCst
+2|u1D44≠ =1
+|u1D7≠∆|u1D466Cst|threeCst|oneCst |twoCst
+2/u1D441=1
+|u1D7≠∆|u1D466Cst|oneCst|twoCst |twoCst 
+The isotropic case of von Mises plasticity can be r ecovered by setting: 
+|u1D439 = |u1D43A =/u1D4:B=1
+2|u1D7≠∆|u1D466Cst|twoCst 
+and  
+/u1D4:F= |u1D44≠ =/u1D441=3
+2|u1D7≠∆|u1D466Cst|twoCst 
+For the particular case of transverse anisotropy, w here properties do not vary 
+in the |u1D46J|oneCst− |u1D46J|twoCst plane, the following relations hold: 
+2|u1D439 = 2|u1D43A =1
+|u1D7≠∆|u1D466Cst|threeCst|twoCst
+2/u1D4:B=2
+|u1D7≠∆|u1D466Cst|twoCst−1
+|u1D7≠∆|u1D466Cst|threeCst|twoCst
+/u1D441=2
+|u1D7≠∆|u1D466Cst|twoCst−1
+2|u1D7≠∆|u1D466Cst|threeCst|twoCst 
+where it has been assumed that |u1D7≠∆|u1D466Cst|oneCst= |u1D7≠∆|u1D466Cst|twoCst= |u1D7≠∆|u1D466Cst. 
+Letting |u1D43∆ = |u1D7≠∆|u1D466Cst|u1D7≠∆|u1D466Cst|threeCst⁄ , the yield criteria can be written as: 
+|u1D439(|u1D7≠∆) = |u1D7≠∆|u1D4J2Cst= |u1D7≠∆|u1D466Cst  , 
+where 
+|u1D439(|u1D7≠∆)≡|<racketleftCvJ|u1D7≠∆|oneCst|oneCst |twoCst+ |u1D7≠∆|twoCst|twoCst |twoCst+ |u1D43∆|twoCst|u1D7≠∆|threeCst|threeCst |twoCst− |u1D43∆|twoCst|u1D7≠∆|threeCst|threeCst (|u1D7≠∆|oneCst|oneCst + |u1D7≠∆|twoCst|twoCst ) − |parenleftCv22 − |u1D43∆|twoCst|parenriµhtCv2|u1D7≠∆|oneCst|oneCst |u1D7≠∆|twoCst|twoCst 
++ 2/u1D4:F|u1D7≠∆|u1D466Cst|twoCst|parenleftCv2|u1D7≠∆|twoCst|threeCst |twoCst+ |u1D7≠∆|threeCst|oneCst |twoCst|parenriµhtCv2 + 2 |parenleftCvJ2 −1
+2|u1D43∆|twoCst|parenriµhtCvJ |u1D7≠∆|oneCst|twoCst |twoCst|<racketriµhtCvJ|oneCst|twoCst/fraction.v2
+  . 
+The rate of plastic strain is assumed to be normal to the yield surface so |u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |u1D4JDCst is 
+found from: 
+|u1D7≠≠̇|u1D4J6Cst|u1D4J7Cst |u1D4JDCst= |u1D7≠6∂|u1D439
+∂|u1D7≠∆|u1D4J6Cst|u1D4J7Cst   . 
+Now consider the case of plane stress, where σ|threeCst|threeCst = 0.  Also, deﬁne the anisot- 
+ropy input parameter, |u1D44J, as the ratio of the in-plane plastic strain rate to the 
+out-of-plane plastic strain rate, *.   
+2-368 (MAT) LS-DYNA R13 isotropic model, diﬀerences in the results are expe cted, even though they are 
+usually insigniﬁcant. 
+4.  ECHANGE.   The Young’s modulus has been assumed to be consta nt.  
+However, some researchers have found that Young’s m odulus decreases with 
+respect to the increase of eﬀective plastic strain.   To accommodate this new 
+observation, a new option of ECHANGE is added.  The re are two methods 
+deﬁning the change of Young’s modulus change: 
+The ﬁrst method is to use a curve to deﬁne the scal e factor with respect to the 
+eﬀective plastic strain.  The value of this scale f actor should decrease from 1.0 
+to 0.0 with the increase of eﬀective plastic strain . 
+The second method is to use a function as proposed by Yoshida [2003]: 
+|u1D438 = |u1D438|zeroCst− |parenleftCv2|u1D438|zeroCst− |u1D438|u1D434Cst|parenriµhtCv2|<racketleftCv11 − exp(−/u1D̅01|u1D7≠≠)|<racketriµhtCv1. 
+An example of the option ECHANGE is provided in the  Remarks section of the 
+*.   *

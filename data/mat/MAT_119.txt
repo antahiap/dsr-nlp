@@ -1,0 +1,242 @@
+: *. : *.   
+*.   *.   
+ Card 10.   This card is read if IFLAG = 2.  It is optional. 
+LUM1R1S LUM1R2S LUM1R1T LUM1R2T LUM2R1S LUM2R1T   
+Card 11.   This card is read if IFLAG = 2.  It is optional. 
+KUM1R1S KUM1R2S KUM1R1T KUM1R2T KUM2R1S KUM2R1T KUM2R2S KUM2R2T 
+Card 12.   This card is read if IFLAG = 2.  It is optional. 
+E1TR E2TR E1RR E2RR E1RS E2RS E1RT E2RT 
+Card 13.   This card is read if IFLAG = 2.  It is optional. 
+E1M1R1S E2M1R1S E1M1R2S E2M1R2S E1M1R1T E2M1R1T E1M1R2T E2M1R2T 
+Card 14.   This card is read if IFLAG = 2.  It is optional. 
+E1M2R1S E2M2R1S E1M2R1T E2M2R1T     
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO KT KR IUNLD OFFSET DAMPF IFLAG 
+Type A F F F I F F I 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed. 
+RO Mass density; see also volume in *SECTION_BEAM d eﬁnition. 
+KT Translational stiﬀness for IUNLD = 2.0.  However , if IFLAG = 2, 
+then it is the translational stiﬀness for unloading  along the local |u1D4JF-
+axis.  If left blank, a value calculated by LS-DYNA  will be used.  
+KR Rotational stiﬀness for IUNLD = 2.0.  However, i f IFLAG = 2, then 
+KR is the rotational stiﬀness for unloading along t he local |u1D4JF-axis .  
+If left blank, a value calculated by LS-DYNA will b e used. *.   
+  VARIABLE   DESCRIPTION  
+LCIDTR Load curve ID deﬁning translational force re sultant along local |u1D4JF-
+axis as a function of relative translational displa cement.  If zero, 
+no stiﬀness related forces are generated for this d egree of 
+freedom.  The loading curves must be deﬁned from th e most 
+negative displacement to the most positive displace ment.  The 
+forc e does not need to increase monotonically.  The cur ves in this 
+input are linearly extrapolated when the displaceme nt range falls 
+outside the curve deﬁnition. 
+LCIDTS Load curve ID deﬁning translational force re sultant along local |u1D46≠-
+axis as a function of relative translational displa cement 
+(IFLAG = 0 or 1 only).   
+LCIDTT Load curve ID deﬁning translational force re sultant along local |u1D461-
+axis as a function of relative translational displa cement 
+(IFLAG = 0 or 1 only). 
+LCIDRR Load curve for rotational moment resultant a bout the local |u1D4JF-axis:  
+IFLAG.NE.2:  Load curve ID deﬁning rotational moment 
+resultant about local |u1D4JF-axis as a function of rela- 
+tive rotational displacement 
+IFLAG.EQ.2:  Load curve ID deﬁning rotational moment 
+resultant about local |u1D4JF-axis as a function of rela- 
+tive rotational displacement at node 2 
+LCIDRS Load curve for rotational moment resultant a bout local |u1D46≠-axis: 
+IFLAG.NE.2: Load curve ID deﬁning rotational moment 
+resultant about local |u1D46≠-axis as a function of rela- 
+tive rotational displacement 
+IFLAG.EQ.2: Load curve ID deﬁning rotational moment 
+resultant about local |u1D46≠-axis as a function of rela- 
+tive rotational displacement at node 2 
+LCIDRT Load curve for rotational moment resultant a bout local |u1D461-axis: 
+IFLAG.NE.2: Load curve ID deﬁning rotational moment 
+resultant about local |u1D461-axis as a function of relative 
+rotational displacement 
+IFLAG.EQ.2: Load curve ID deﬁning rotational moment 
+resultant about local |u1D461-axis as a function of relative 
+rotational displacement at node 2 
+ *.   
+  VARIABLE   DESCRIPTION  
+LCIDRUT Load curve ID deﬁning rotational moment res ultant about local |u1D461-
+axis:   
+IFLAG.NE.2: Load curve ID deﬁning rotational moment 
+resultant about local |u1D461-axis as a function of relative 
+rotational displacement during unloading.  If ze- 
+ro, no viscous forces are generated for this degree  
+of freedom 
+IFLAG.EQ.2: Load curve ID deﬁning rotational mom ent 
+resultant about local |u1D461-axis as a function of relative 
+rotational displacement during unloading at node 
+2 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable LCIDTDR LCIDTDS LCIDTDT LCIDRDR  LCIDRDS  LCIDRDT   
+Type I I I I I I   
+ 
+ VARIABLE   DESCRIPTION  
+LCIDTDR Load curve ID deﬁning translational damping force r esultant 
+along local |u1D4JF-axis as a function of relative translational veloc ity. 
+LCIDTDS Load curve ID deﬁning translational damping force r esultant 
+along local |u1D46≠-axis as a function relative translational velocity . 
+LCIDTDT Load curve ID deﬁning translational damping force r esultant 
+along local |u1D461-axis as a function of relative translational veloc ity. 
+LCIDRDR Load curve ID deﬁning rotational damping moment res ultant 
+about local |u1D4JF-axis as a function of relative rotational velocity . 
+LCIDRDS Load curve ID deﬁning rotational damping moment res ultant 
+about local |u1D46≠-axis as a function of relative rotational velocity . 
+LCIDRDT Load curve ID deﬁning rotational damping moment res ultant 
+about local |u1D461-axis as a function of relative rotational velocity . 
+ *.   
+  VARIABLE   DESCRIPTION  
+failure calculation. 
+UTFAILT Optional, translational displacement at failure in tension.  If zero, 
+the corresponding displacement, |u1D462|u1D461Cst, is not considered in the 
+failure calculation. 
+WTFAILR Optional, rotational displacement at failure in ten sion.  If zero, the 
+corresponding rotation, /u1D̅0:|u1D4JFCst, is not considered in the failure 
+calculation. 
+WTFAILS Optional, rotational displacement at failure in ten sion.  If zero, the 
+corresponding rotation, /u1D̅0:|u1D46≠Cst, is not considered in the failure 
+calculation. 
+WTFAILT Optional rotational displacement at f ailure in tension.  If zero, the 
+corresponding rotation, /u1D̅0:|u1D461Cst, is not considered in the failure 
+calculation. 
+FCRIT Failure criterion (see Remark 1 ): 
+EQ.0.0: Two separate criteria, one for negative displacement s 
+and rotations, another for positive displacements a nd 
+rotations  
+EQ.1.0: One criterion that considers both positive and negat ive 
+displacements and rotations  
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable UCFAILR UCFAILS UCFAILT WCFAILR  WCFAILS  WCFAILT   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+UCFAILR Optional, translational displacement at failure in compression.  If 
+zero, the corresponding displacement, |u1D462|u1D4JFCst, is not considered in the 
+failure calculation.  Deﬁne as a positive number. 
+UCFAILS Optional, translational displacement at fai lure in compress ion.  If 
+zero, the corresponding displacement, |u1D462|u1D46≠Cst, is not considered in the 
+failure calculation.  Deﬁne as a positive number. 
+UCFAILT Optional, translational displacement at failure in compression.  If *.   
+  
+ VARIABLE   DESCRIPTION  
+LM1R1S Load curve ID for loading deﬁning rotational  moment resultant at 
+node 1 about local |u1D46≠-axis as a function of relative rotational 
+displacement at node 1. 
+LM1R2S Load curve ID deﬁning rotational moment resu ltant at node 1 
+about local |u1D46≠-axis as a function of relative rotational displace ment 
+at node 2. 
+LM1R1T Load curve ID deﬁning rotational moment resu ltant at node 1 
+about local |u1D461-axis as a function of relative rotational displace ment 
+at node 1. 
+LM1R2T Load curve ID deﬁning rotational moment resu ltant at node 1 
+about local |u1D461-axis as a function of relative rotational displace ment 
+at node 2. 
+LM2R1S Load curve ID deﬁning rotational moment resu ltant at node 2 
+about local |u1D46≠-axis as a function of relative rotational displace ment 
+at node 1. 
+LM2R1T Load curve ID deﬁning rotational moment resu ltant at node 2 
+about local |u1D461-axis as a function of relative rotational displace ment 
+at node 1. 
+ 
+Unloading Rotational Moment Card.   This card is read if IFLAG = 2.  It is optional. 
+ Card 10 1 2 3 4 5 6 7 8 
+Variable LUM1R1S  LUM1R2S  LUM1R1T  LUM1R2T  LUM2R1S  LUM2R1T    
+Type I I I I I I   
+ 
+ VARIABLE   DESCRIPTION  
+LUM1R1S Load curve ID for unloading deﬁning rotational moment 
+resultant at node 1 about local |u1D46≠-axis as a function of relative 
+rotational displacement at node 1 
+LUM1R2S Load curve ID for unloading deﬁning rotational moment 
+resultant at node 1 about local |u1D46≠-axis as a funct ion of relative 
+rotational displacement at node 2 *.   
+  VARIABLE   DESCRIPTION  
+KUM2R1S Optional unload stiﬀness for bending moment  about local |u1D46≠-axis 
+at node 2 due to relative rotation at node 1. If le ft blank, LS-DY-
+NA will calculate this value.   
+KUM2R1T Optional unload stiﬀness for bending moment  about local |u1D461-axis 
+at node 2 due to relative rotation at node 1.  If l eft blank, LS-DY-
+NA will calculate this value.  . 
+KUM2R2S Optional unload stiﬀness for bending moment  about local |u1D46≠-axis 
+at node 2 due to relative rotation at node 2.  If l eft blank, LS-DY-
+NA will calculate this value.   
+KUM2R2T Optional unload stiﬀness for bending moment  about local |u1D461-axis 
+at node 2 due to relative rotation at node 2.  If l eft blank, LS-DY-
+NA will calculate this value.   
+ 
+Elastic limit of loading curves.   This card is read if IFLAG = 2.  It is optional.  If not 
+input, the values derived by LS-DYNA based on the r elated curves will be used. 
+ Card 12 1 2 3 4 5 6 7 8 
+Variable E1TR E2TR E1RR E2RR E1RS E2RS E1RT E2RT 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+E1TR  Negative, compressive, elastic limit of curve  LCIDTR 
+E2TR Positive, tensile, elastic limit of curve LCID TR 
+E1RR Negative elastic limit of curve LCIDRR 
+E2RR Positive elastic limit of curve LCIDRR 
+E1RR Negative elastic limit of curve LCIDRS 
+E2RR Positive elastic limit of curve LCIDRS 
+E1RT Negative elastic limit of curve LCIDRT 
+E2RT Positive elastic limit of curve LCIDRT 
+ *.   
+ Remarks: 
+1.  Failure Criterion.   When the catastrophic failure criterion is satisﬁ ed, the 
+discrete element is deleted.  Failure for this mate rial depends directly on the 
+displacement resultants.  The failure criterion dep ends on the value of FCRIT.  
+If FCRIT = 0.0, failure occurs if either of the fol lowing inequalities are satisﬁed: 
+|u1D434|u1D461Cst− 1 ≥ 0
+|u1D434|u1D4J≠Cst− 1 ≥ 0 
+where 
+|u1D434|u1D461Cst= |<racketleftCv6max(0, |u1D462|u1D4JFCst)
+|u1D462|u1D4JFCsttfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0, |u1D462|u1D46≠Cst)
+|u1D462|u1D46≠Csttfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0, |u1D462|u1D461Cst)
+|u1D462|u1D461Csttfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0,/u1D̅0:|u1D4JFCst)
+/u1D̅0:|u1D4JFCsttfail |<racketriµhtCv6|twoCst
+                                                                              + |<racketleftCv6max(0,/u1D̅0:|u1D46≠Cst)
+/u1D̅0:|u1D46≠Csttfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0,/u1D̅0:|u1D461Cst)
+/u1D̅0:|u1D461Csttfail |<racketriµhtCv6|twoCst
+|u1D434|u1D4J≠Cst= |<racketleftCv6max(0, |u1D462|u1D4JFCst)
+|u1D462|u1D4JFCstcfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0, |u1D462|u1D46≠Cst)
+|u1D462|u1D46≠Cstcfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0, |u1D462|u1D461Cst)
+|u1D462|u1D461Cstcfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0,/u1D̅0:|u1D4JFCst)
+/u1D̅0:|u1D4JFCstcfail |<racketriµhtCv6|twoCst
+                                                                              + |<racketleftCv6max(0,/u1D̅0:|u1D46≠Cst)
+/u1D̅0:|u1D46≠Cstcfail |<racketriµhtCv6|twoCst
++ |<racketleftCv6max(0,/u1D̅0:|u1D461Cst)
+/u1D̅0:|u1D461Cstcfail |<racketriµhtCv6|twoCst 
+Positive (tension) values of displacement and rotat ion are considered in the 
+ﬁrst criterion and negative (compression) values in  the second.  Either the ten- 
+sion failure or the compression failure or both may  be used.  If any of the input 
+failure displacements and rotations (UTFAILR etc) a re left as zero, the corre- 
+sponding terms will be omitted from the equations f or A t and A c above.   
+If FCRIT = 1.0, then a single criterion is used: 
+|u1D434|u1D461Cst+ |u1D434|u1D4J≠Cst− 1 ≥ 0 
+Thus, the combined eﬀect of all the displacements a nd rotations is considered, 
+be they positive or negative. 
+2.  Force.   There are two formulations for calculating the fo rce.  The ﬁrst is the 
+standard displacement formulation, where, for examp le, the force in a linear 
+spring is 
+|u1D439 = −|u1D43∆∆ ℓ 
+for a change in length of the beam of ∆ ℓ. The second formulation is based on 
+the linear strain, giving a force of 
+|u1D439 = −|u1D43∆∆ ℓ
+ℓ|zeroCst 
+for a beam with an initial length of ℓ|zeroCst. This option is useful when there are 
+springs of diﬀerent lengths but otherwise similar c onstruction since it automat- *

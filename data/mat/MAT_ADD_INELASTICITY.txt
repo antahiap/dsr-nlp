@@ -1,0 +1,207 @@
+ ............................. ................................................... ......................... 2-98  
+*.  2 
+ *.   
+2-98 (MAT) LS-DYNA R13 *.   *MAT  
+LS-DYNA R13 2-99 (MAT) Card 6d.   This card is required for LAW = 5 and MODEL = 3. 
+P1 P2 P3 P4 P5 P6 P7  
+Card 6e.   This card is required for LAW = 6 and MODEL = 1.   
+P1 P2 P3 P4 P5 P6 P7 P8 
+Data Card Deﬁnitions: 
+Main Card.   Only one instance of this card is needed.  NIELIN KS groups of Cards 4 
+through 6 should follow this card, possibly after i nput of anisotropy information in 
+Cards 2 and 3. 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID NIELINKS     AOPT MACF BETA 
+Type A I    F F F 
+Default none 1    0 0 0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation for which this inelasticity deﬁnition 
+applies.  A unique number or label must be speciﬁed  (see *PART).  
+NIELINKS Number of links/networks/phases speciﬁed by the use r.  An 
+additional link may be added internally if the weig hts bel ow do 
+not sum up to unity. 
+AOPT Material axes option (see *.   
+2-100 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+an angle 
+EQ.4.0: Loc ally orthotropic in cylindrical coordinate system 
+with the material axes determined by a vector and a n 
+originating point deﬁning the centerline axis 
+LT.0.0: The absolute value of AOPT is a coordinate system I D.  
+MACF Material axes change ﬂag for solid elements: 
+EQ.-4: Switch material axes |u1D44F and /u1D450 before BETA rotation 
+EQ.-3: Switch material axes |u1D44∆ and /u1D450 before BETA rotation 
+EQ.-2: Switch material axes |u1D44∆ and |u1D44F before BETA rotation  
+EQ.1: No change, default 
+EQ.2: Switch material axes |u1D44∆ and |u1D44F after BETA rotation 
+EQ.3: Switch material axes |u1D44∆ and /u1D450 after BETA rotation 
+EQ.4: Switch material axes |u1D44F and /u1D450 after BETA rotation 
+Figure M2-2  indicates when LS-DY NA applies MACF during the 
+process to obtain the ﬁnal material axes.  If BETA on *ELE-
+MENT_SOLID_ {OPTION} is deﬁned, then that BE TA is used for 
+the rotation for all AOPT options.  Otherwise, if A OPT = 3, the 
+BETA input on Card 3 rotates the axes.  For all other values of 
+AOPT, the material axes will be switched as speciﬁe d by MACF, 
+but no BETA rotation will be performed. 
+BETA Material angle in degrees for AOPT = 0 and AOP T = 3; see .   *MAT  
+LS-DYNA R13 2-101 (MAT)  Card 3 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+Default 0.0 0.0 0.0 0.0 0.0 0.0   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point, |u1D4JD, for AOPT = 1 and 4; see *.   
+2-102 (MAT) LS-DYNA R13 Inelasticity model cards. Include NIELAWS sets of Cards 5 and 6; the Card 6 
+determined by the law and model selected should fol low immediately after Card 5. 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable LAW MODEL       
+Type I I       
+Default none none       
+ 
+ VARIABLE   DESCRIPTION  
+LAW Inelasticity law.  One of the laws listed below  must be chosen: 
+EQ.3: Isotropic hardening plasticity 
+EQ.5: Creep 
+EQ.6: Viscoelasticity 
+MODEL Model deﬁnition with choice dependent on the speciﬁ ed law 
+above.  A valid combination of law and model must b e chosen. 
+For isotropic hardening plasticity (LAW = 3), choic es are 
+EQ.1: Linear hardening 
+EQ.2: Hardening from curve/table 
+For creep (LAW = 5), choices are 
+EQ.1: Norton incremental formulation 
+EQ.2: Norton total formulation 
+EQ.3: Norton-Bailey formulation 
+For viscoelasticity (LAW = 6), choices are 
+EQ.1: Bulk and shear decay, with optional temperature shi fts, 
+hypoelastic version 
+EQ.2: Bulk and shear decay, with optional temperature shi fts, 
+hyperelastic version #1 
+EQ.3: Bulk and shear decay, with optional temperature shifts, 
+hyperelastic version #2 
+ *.   
+2-104 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+P1 Norton creep parameter, |u1D434 
+P2 Norton creep parameter, |u1D4JA 
+P3 Norton creep parameter, |u1D4JB 
+ 
+Inelasticity Parameters.  This card is included for LAW = 5 and MODEL = 3.  
+ Card 6d 1 2 3 4 5 6 7 8 
+Variable P1 P2 P3 P4 P5 P6 P7  
+Type F F F F F F F  
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+P1 Norton-Bailey creep parameter, |u1D434 
+P2 Norton-Bailey creep parameter, |u1D7≠∆|zeroCst 
+P3 Norton-Bailey creep parameter, |u1D4JB 
+P4 Norton-Bailey creep parameter, |u1D447|zeroCst 
+P5 Norton-Bailey creep parameter, |u1D4JD 
+P6 Norton-Bailey creep parameter, |u1D4JA 
+P7 Norton-Bailey creep parameter, |u1D7≠≠|zeroCst 
+ 
+Inelasticity Parameters.  This card is included for LAW = 6 and MODEL = 1, 2,  or 3.  
+ Card 6e 1 2 3 4 5 6 7 8 
+Variable P1 P2 P3 P4 P5 P6 P7 P8 
+Type F F F F F F F F 
+Default 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 *.   
+2-106 (MAT) LS-DYNA R13 A single link/network/phase 
+ 
+Inﬁnitesimal description 
+ 
+The inelasticity feature assumes that the strain or  strain rate is somehow decomposed 
+into an elastic and inelastic part.  This decomposi tion is in general not trivial and 
+depends upon the underlying material model, but to make things simple we can begin 
+by restricting ourselves to a small deformation con text.  In this case the decomposition 
+is additive , so 
+/u1D̅:A=/u1D̅:A|u1D4J2Cst+/u1D̅:A|u1D4J6Cst  , 
+where /u1D̅:A is the total  (given) strain, /u1D̅:A|u1D4J2Cst is the elastic  strain, and /u1D̅:A|u1D4J6Cst is the inelastic  strain.  A 
+material model then amounts to determining the stre ss for the elastic strain, which can 
+be written as 
+/u1D̅48=/u1D̅48(/u1D̅:A|u1D4J2Cst) =/u1D̅48(/u1D̅:A−/u1D̅:A|u1D4J6Cst). 
+The material model used as a basis for this feature , that is, the model indicated by 
+parameter MID above, here acts as the function /u1D̅48(∗). If no inelasticity is added to the 
+model, /u1D̅:A|u1D4J6Cst=/u1D̅CE and the stress will be given by /u1D̅48(/u1D̅:A). It is simply a plain evaluation of the 
+material model in the absence of this keyword.  For  linear elasticity, for instance, the 
+function would be given by Hooke’s law 
+/u1D̅48(/u1D̅:A) =/u1D46A/u1D̅:A  , 
+where /u1D46A is the Hooke elasticity tensor.  Needless to say, the material model itself can 
+deal with inelasticities of various kinds, such as plasticity, creep, thermal expansion and 
+viscoelasticity, so the variable /u1D̅:A|u1D4J6Cst is restricted to the inelasticities speciﬁcally de ﬁned here ...
+1 2 3Elastoplastic
+contribution 
+Viscoelastic
+contribution NIELINKS An extra link is 
+added if the 
+weights do not 
+sum to unity. 
+ Figure 2-5.   Schematic view of how inelasticity is added to the model. *.   
+2-108 (MAT) LS-DYNA R13 Isotropic hardening (LAW = 3) 
+ 
+The current yield stress is deﬁned as 
+|u1D7≠∆/u1D44C.st=/˙raceleft.v6|u1D7≠∆|zeroCst+/u1D4:B|u1D7≠≠|u1D4JDCstMODEL = 1
+/u1D450(|u1D7≠≠|u1D4JDCst, |u1D7≠≠̇|u1D4JDCst) MODEL = 2  , 
+where the inelastic strain is represented by the pl astic strain, |u1D7≠≠|u1D4JDCst, and /u1D450 is the curve or 
+table used to evaluate the yield stress.  The evolu tion of plastic strain is given by the 
+KKT condition 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt− |u1D7≠∆/u1D44C.st≤ 0, |u1D7≠≠̇|u1D4JDCst≥ 0, (|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt− |u1D7≠∆/u1D44C.st)|u1D7≠≠̇|u1D4JDCst= 0  . 
+In other words, it is the classical von Mises plast icity available in many standard 
+plasticity models; see, for instance, *.  
+$      mid 
+         1 
+$  nielaws 
+         1 
+$      law     model 
+         3         2 
+$      cid 
+         1 
+*.   *MAT  
+LS-DYNA R13 2-109 (MAT) b)  Norton total formulation (MODEL = 2).  
+ |u1D7≠≠̇|u1D4J≠Cst=|u1D4J1
+|u1D4J1|u1D461 |parenleftCv1|u1D434|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4JACst|u1D461|u1D4JBCst|parenriµhtCv1  . 
+This is essentially the creep law available in *MAT _UNIFIED_CREEP 
+(*.   
+2-110 (MAT) LS-DYNA R13 /u1D45E/u1D4:C.st=/u1D45E− |u1D6FD|u1D4JDCst/integral.v:|u1D4J2−/u1D6FD.st|u1D4JDCsts(|u1D461Cst−|u1D46≠Cst)/u1D45E(|u1D46≠)|u1D4J1|u1D46≠ |u1D461Cst
+|zeroCst 
+ 
+The Kirchhoﬀ stress for link /u1D4:C is obtained as /u1D̅4∫/u1D4:C.st=/u1D4∫5/u1D4:C.st−/u1D45E/u1D4:C.st/u1D4̅0. Here we use /u1D46D̅|u1D46≠Cst→|u1D461Cst=/u1D4:D|u1D46≠Cst→|u1D461Cst−|oneCst/|threeCst/u1D46D|u1D46≠Cst→|u1D461Cst, 
+where /u1D4:D|u1D46≠Cst→|u1D461Cst= det /u1D46D|u1D46≠Cst→|u1D461Cst, and /u1D46D|u1D46≠Cst→|u1D461Cst is the deformation gradient between the conﬁgurati on at 
+time |u1D46≠ and time |u1D461. For law #1, /u1D46D̅|u1D46≠Cst→|u1D461Cst is used to push the stress forward from time |u1D46≠ to time 
+|u1D461, while for law #2, /u1D46D|u1D46≠Cst→|u1D461Cst is used to transform the stress from time |u1D46≠ to time |u1D461, both 
+essential to preserve frame invariance. 
+ 
+The decay coeﬃcients can be constants but can also dependent on the state of the 
+system (stress, internal variables, temperature, et c.). Note that if the decay coeﬃcients 
+are equal to zero ( |u1D6FD|u1D46≠Cst= |u1D6FD|u1D4JDCst= 0), this is equivalent to not having viscoelasticity .  
+Currently, we can specify temperature dependent dec ay coeﬃcients to aﬀect both the 
+deviatoric and volumetric stress, formalized in the  following. 
+ 
+Viscoelasticity (LAW = 6) 
+ 
+For viscoelasticity, the decay of stress is governe d by the decay coeﬃcients |u1D6FD|u1D46≠Cst and |u1D6FD|u1D4JDCst, 
+optionally incorporating shift functions depending on the temperature |u1D447. In this 
+implementation, the shear and bulk decay are given as 
+|u1D6FD|u1D46≠Cst= |u1D6FD/u1D4:A.st/u1D̅1∫/u1D4:A.st(|u1D447)
+|u1D6FD|u1D4JDCst= |u1D6FD/u1D4:E.st/u1D̅1∫/u1D4:E.st(|u1D447) 
+where /u1D̅1∫∗ (∗ being |u1D43A or |u1D43∆) are shift functions given by 
+/u1D̅1∫∗(|u1D447) =
+⎩|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex⎧
+|u1D4J2−|u1D434Cst∗|parenleftCvJ|oneCst
+|u1D447Cst−|oneCst
+|u1D447Cst∗|parenriµhtCvJif |u1D43J∗= 0 (Arrhenius)
+|u1D4J2−|u1D434Cst∗|parenleftCvJ|u1D447Cst−|u1D447Cst∗
+|u1D43JCst∗+|u1D447Cst−|u1D447Cst∗|parenriµhtCvJif |u1D43J∗≠ 0 (Williams − Landel − Ferry) 
+ 
+This is essentially the viscoelastic law available in *.   *MAT  
+LS-DYNA R13 2-111 (MAT) *.   
+2-112 (MAT) LS-DYNA R13 input deck will automatically move the total plasti c strain to the appropriate location in 
+the d3plot  database.  Its value will be 
+|u1D7≠≠|u1D4JDCst= |summationCv1 |u1D464/u1D4:C.st|u1D7≠≠|u1D4JDCst/u1D4:C.stNIELINKS 
+/u1D4:C.st=|oneCst. 
+ 
+The creep strain can also be retrieved similarly as  shown in the following table. 
+ 
+*DEFINE_MATERIAL_HISTORIES Properties  
+ Label Attributes Description  
+Eﬀective Creep Strain - - - - |u1D7≠≠|u1D4J≠Cst=|summationCv1 |u1D464/u1D4:C.st|u1D7≠≠|u1D4J≠Cst/u1D4:C.stNIELINKS 
+/u1D4:C.st=|oneCst *

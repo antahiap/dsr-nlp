@@ -1,0 +1,13 @@
+: *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+VC Viscous damping coeﬃcient (.05 < recommended val ue < .50) 
+DFLG Density ﬂag: 
+EQ.0.0:  Use initial density. 
+EQ.1.0:  Use current density (larger step size with less mas s 
+scaling). 
+Remarks: 
+The logarithmic volumetric strain is deﬁned in term s of the relative volume, |u1D449, as: 
+|u1D6F∆ = −ln(|u1D449) . 
+When deﬁning the curves, the stress and strain pair s should be positive values starting 
+with a volumetric strain value of zero. *

@@ -1,0 +1,87 @@
+: *.  
+*.   *.   
+ Card 5b.2.   This card is read if and only if the keyword opti on SPR3 is used and MOD-
+EL = 2, 12, or 22. It is optional. 
+MRN MRS       
+Data Card Deﬁnitions: 
+SPR2 cards.  This card is included if the SPR2 keyword option is  used.  
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO FN FT DN DT XIN XIT 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+FN  Rivet strength in tension (pull-out) 
+FT  Rivet strength in pure shear 
+DN  Failure displacement in normal direction 
+DT  Failure displacement in tangential direction 
+XIN  Fraction of failure displacement at maximum normal force 
+XIT  Fraction of failure displacement at maximum tangent ial force 
+ 
+SPR2 cards.  This card is included if the SPR2 keyword option is  used. 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable ALPHA1 ALPHA2 ALPHA3 EXPN EXPT    
+Type F F F F F    
+ *.   
+  
+SPR3 cards.  This card is included if the SPR3 keyword option is  used. 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable STIFF RN RS ALPHA1 BETA1 LCF LCUPF LCUPR 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+STIFF Elastic stiﬀness. Function ID if MODEL > 10 .  
+RN Tensile strength factor, |u1D44J|u1D4JBCst. Function ID if MODEL > 10. 
+RS Shear strength factor, |u1D44J|u1D46≠Cst. Function ID if MODEL > 10. 
+ALPHA1 Scaling factor |u1D6F+|oneCst. Function ID if MODEL > 10. 
+BETA1 Exponent for plastic potential |u1D6FD|oneCst. Function ID if MODEL > 10. 
+LCF Load curve or table ID. Load curve ID describing fo rce as a 
+function of plastic displacement, that is, |u1D439|zeroCst|parenleftCv2|u1D462̅pl |parenriµhtCv2. Table ID 
+describing force as a function of mode mixity (tabl e values) and 
+plastic displacement (curves), that is, |u1D439|zeroCst|parenleftCv2|u1D462̅pl ,/u1D̅05|parenriµhtCv2. 
+LCUPF Load curve ID describing plastic initiation displac ement as a 
+function of mode mixity, that is, |u1D462̅|zeroCstpl (/u1D̅05). Only for MODEL = 1, 11, 
+or 21. 
+LCUPR Load curve ID describing plastic rupture displaceme nt as a 
+function of mode mixity, that is, |u1D462̅/u1D45:.stpl (/u1D̅05).  Only for MODEL = 1, 11, 
+or 21. 
+ 
+SPR3 Optional Cards. This card is only read if the keyword option SPR3 i s used and 
+MODEL = 1, 11, or 21. 
+ Card 5a 1 2 3 4 5 6 7 8 
+Variable STIFF2 STIFF3 STIFF4 LCDEXP GAMMA SROPT   
+Type F F F F F F   
+ *.   
+ SPR3 Optional Cards. This card is only read if the keyword option SPR3 i s used and 
+MODEL = 2, 12, or 22. 
+Card 5b.2  1 2 3 4 5 6 7 8 
+Variable MRN MRS       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+MRN Proportionality factor for dependency, |u1D4JA|u1D44JCst/u1D45B.sts 
+MRS Proportionality factor for dependency, |u1D4JA|u1D44JCst/u1D460.sts 
+Sample Input: 
+With this material model it is possible to replace the following input example 
+*CONSTRAINED_SPR2 
+$      MID       SID      NSID     THICK         D        FN        FT        DN 
+         5         8       123       5.0       8.0      2.53       4.8       4.0 
+$       DT       XIN       XIT    ALPHA1    ALPHA2    ALPHA3      DENS      INTP 
+       7.5       0.6       0.5       0.2       0.7       1.9    7.8e-6         1 
+$     EXPN      EXPT     PIDVB 
+       8.0       8.0       999 
+$    XPID1     XPID2     XPID3     XPID4 
+        20 
+with this “split” one 
+*CONSTRAINED_SPR2 
+$      MID       SID      NSID     THICK         D        FN        FT        DN 
+         5         8       123       5.0       8.0      -555  
+$       DT       XIN       XIT    ALPHA1    ALPHA2    ALPHA3      DENS      INTP 
+                                                                               1 
+$     EXPN      EXPT     PIDVB 
+                           999 
+$    XPID1     XPID2     XPID3     XPID4 
+        20  
+*

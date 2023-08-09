@@ -1,0 +1,262 @@
+ ....................... ................................................... ............. 2-86  
+*.  2 [0,2]   
+ *.  or *.   
+*.   
+2-86 (MAT) LS-DYNA R13 *.   *MAT  
+LS-DYNA R13 2-87 (MAT) Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID IDAM DTYP REFSZ NUMFIP  PDDT NHIS 
+Type A I I F F  I I 
+Default none 0 0 0.0 1.0  0 1 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material ID for which this generalized damage d eﬁnition applies 
+IDAM Flag for damage model: 
+EQ.0: No damage model is used. 
+EQ.1: GISSMO damage model 
+DTYP Flag for damage behavior: 
+EQ.0: Damage is accumulated; no coupling to ﬂow stress, no 
+failure. 
+EQ.1: Damage is accumulated; element failure occurs for D  = 1.  
+REFSZ Reference element size, for which an additional out put of damage 
+will be generated.  This is necessary to ensure the  applicability of 
+resulting damage quantities when transferred to diﬀ erent mesh 
+sizes. 
+NUMFIP Number of failed integration points prior to  element deletion.  
+The default is unity. 
+LT.0: |N U MFIP|  is the percentage of layers which must fail 
+before the element fails. 
+PDDT Pre-deﬁned damage tensors.  If non- zero, damage tensor 
+coeﬃcients D11 to D66 on Cards 3 and 4 will be ignored.  See 
+Remark 2 . 
+EQ.0: No pre-deﬁned damage tensor is used. 
+EQ.1: Isotropic damage tensor 
+EQ.2: 2-parameter isotropic damage tensor for volumetric-*MAT  *.   *MAT  
+LS-DYNA R13 2-89 (MAT)  VARIABLE   DESCRIPTION  
+IFLG2 Damage strain coordinate system: 
+EQ.0: Local element system (shells) or global system (sol ids) 
+EQ.1: Material system, only applicable for non- isotropic 
+material models.  Supported models for shells: all mate- 
+rials with AOPT feature.  Supported models for soli ds: 
+22, 33, 41-50, 103, 122, 157, 233. 
+EQ.2: Principal strain system (rotating) 
+EQ.3: Principal strain system (ﬁxed when instability/coupl ing 
+starts) 
+IFLG3 Erosion criteria and damage coupling system: 
+EQ.0: Erosion occurs when one of the damage parameters 
+computed reaches unity; the damage tensor components 
+are based on the individual damage parameters d1 to  d3.  
+EQ.1: Erosion occurs when a single damage parameter |u1D437
+reaches unity; the damage tensor components are based 
+on this single damage parameter. 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable D11 D22 D33 D44 D55 D66   
+Type I I I I I I   
+ 
+Damage for Shell Elements Card.   This card is included for shell elements. 
+ Card 4a 1 2 3 4 5 6 7 8 
+Variable D12 D21 D24 D42 D14 D41   
+Type I I I I I I   
+ *MAT  *.   *MAT  
+LS-DYNA R13 2-91 (MAT)  VARIABLE   DESCRIPTION  
+FADEXP Exponent for damage-related stress fadeout. 
+LT.0.0: |FADEXP|  is load curve ID deﬁning element- size 
+dependent fading exponent 
+GT.0.0: Constant fading exponent 
+LCREG Load curve ID deﬁning element size dependent regula rization 
+factors for history value to failure 
+ 
+Damage Deﬁnition Cards for IDAM = 1 (GISSMO).  NHIS sets of Cards 5.1 and 5.2 
+(total of 2 × NHIS cards) must be deﬁned for each h istory variable (HIS n).    
+ Card 5.2 1 2 3 4 5 6 7 8 
+Variable LCSRS SHRF BIAXF LCDLIM MIDFAIL NFLOC   
+Type I F F I F F   
+Default 0 0.0 0.0 0 0.0 0.0   
+ 
+ VARIABLE   DESCRIPTION  
+LCSRS Load curve ID deﬁning failure history value scaling  factor for 
+LCS DG as a function of history value rate.  If the ﬁrs t rate value in 
+the curve is negative, it is assumed that all rate values are given 
+as natural logarithm of the history rate. 
+GT.0: Scale ECRIT as well. 
+LT.0: Do not scale ECRIT. 
+SHRF Reduction factors for regularization at triaxi ality = 0 (shear) 
+BIAXF Reduction factors for regularization at triax iality = 2/3 (biaxial) 
+LCDLIM Load curve ID deﬁning damage limit values as a func tion of 
+triaxiality.  Damage can be restricted to values le ss than 1.0 to 
+prevent further stress reduction and failure for ce rtain 
+triaxialities. 
+MIDFAIL Mid-plane failure option for shell elements .  If active, then critical 
+strain is only checked at the mid- plane integration point, meaning 
+an odd number for NIP should be used.  Damage is co mputed at *MAT  *.   *MAT  
+LS-DYNA R13 2-93 (MAT) 2.  Damage Tensor.   The relation between nominal (damaged) stresses |u1D7≠∆|u1D4J6Cst|u1D4J7Cst  and 
+eﬀective (undamaged) stresses |u1D7≠∆̃|u1D4J6Cst|u1D4J7Cst  is now expressed as 
+⎣⎢⎢⎢⎢⎢⎡|u1D7≠∆|oneCst|oneCst 
+|u1D7≠∆|twoCst|twoCst 
+|u1D7≠∆|threeCst|threeCst 
+|u1D7≠∆|oneCst|twoCst 
+|u1D7≠∆|twoCst|threeCst 
+|u1D7≠∆|threeCst|oneCst ⎦⎥⎥⎥⎥⎥⎤
+=
+⎣⎢⎢⎢⎢⎢⎢⎡|u1D437|oneCst|oneCst |u1D437|oneCst|twoCst |u1D437|oneCst|threeCst 0 0 0
+|u1D437|twoCst|oneCst |u1D437|twoCst|twoCst |u1D437|twoCst|threeCst 0 0 0
+|u1D437|threeCst|oneCst |u1D437|threeCst|twoCst |u1D437|threeCst|threeCst 0 0 0
+0 0 0 |u1D437|fourCst|fourCst 0 0
+0 0 0 0 |u1D437|fiveCst|fiveCst 0
+0 0 0 0 0 |u1D437|sixCst|sixCst ⎦⎥⎥⎥⎥⎥⎥⎤
+⎣⎢⎢⎢⎢⎢⎢⎡|u1D7≠∆̃|oneCst|oneCst 
+|u1D7≠∆̃|twoCst|twoCst 
+|u1D7≠∆̃|threeCst|threeCst 
+|u1D7≠∆̃|oneCst|twoCst 
+|u1D7≠∆̃|twoCst|threeCst 
+|u1D7≠∆̃|threeCst|oneCst ⎦⎥⎥⎥⎥⎥⎥⎤
+ 
+with damage tensor /u1D40:. Each damage tensor coeﬃcient |u1D437|u1D4J6Cst|u1D4J7Cst  can be deﬁned using 
+*DEFINE_FUNCTION as a function of damage parameters  |u1D4J1|oneCst to |u1D4J1|threeCst. For simple 
+isotropic damage driven by plastic strain (NHIS = 1 , HIS1 = 0, 
+IFLG1 = IFLG2 = IFLG3 = 0) that would be 
+⎣⎢⎢⎢⎢⎢⎡|u1D7≠∆|oneCst|oneCst 
+|u1D7≠∆|twoCst|twoCst 
+|u1D7≠∆|threeCst|threeCst 
+|u1D7≠∆|oneCst|twoCst 
+|u1D7≠∆|twoCst|threeCst 
+|u1D7≠∆|threeCst|oneCst ⎦⎥⎥⎥⎥⎥⎤
+= (1 − |u1D4J1|oneCst)
+⎣⎢⎢⎢⎢⎢⎡1 0 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 0
+0 0 0 0 0 1 ⎦⎥⎥⎥⎥⎥⎤
+⎣⎢⎢⎢⎢⎢⎢⎡|u1D7≠∆̃|oneCst|oneCst 
+|u1D7≠∆̃|twoCst|twoCst 
+|u1D7≠∆̃|threeCst|threeCst 
+|u1D7≠∆̃|oneCst|twoCst 
+|u1D7≠∆̃|twoCst|threeCst 
+|u1D7≠∆̃|threeCst|oneCst ⎦⎥⎥⎥⎥⎥⎥⎤
+ 
+That means the following function should be deﬁned for D11 to D66 (Card 3): 
+*DEFINE_FUNCTION 
+1,D11toD66 
+func1(d1,d2,d3)=(1.0-d1)  
+and all entries in Card 4 can be left empty or equa l to zero in that case.  
+If GISSMO (IDAM = 1) is used, the damage parameters  used in those functions 
+are internally replaced by 
+|u1D4J1|u1D4J6Cst    →      |parenleftCvJ|u1D4J1|u1D4J6Cst− DCRIT |u1D4J6Cst
+1 − DCRIT |u1D4J6Cst|parenriµhtCvJ/F.st/A.st/D.st/E.st/X.st/P.st |u1D4J6Csts
+ 
+In the case of plane stress (shell) elements, coupl ing between normal stresses 
+and shear stresses is implemented and the damage te nsor is deﬁned as below: 
+⎣⎢⎢⎢⎢⎢⎡|u1D7≠∆|oneCst|oneCst 
+|u1D7≠∆|twoCst|twoCst 
+0
+|u1D7≠∆|oneCst|twoCst 
+|u1D7≠∆|twoCst|threeCst 
+|u1D7≠∆|threeCst|oneCst ⎦⎥⎥⎥⎥⎥⎤
+=
+⎣⎢⎢⎢⎢⎢⎢⎡|u1D437|oneCst|oneCst |u1D437|oneCst|twoCst 0 |u1D437|oneCst|fourCst 0 0
+|u1D437|twoCst|oneCst |u1D437|twoCst|twoCst 0 |u1D437|twoCst|fourCst 0 0
+0 0 |u1D437|threeCst|threeCst 0 0 0
+|u1D437|fourCst|oneCst |u1D437|fourCst|twoCst 0 |u1D437|fourCst|fourCst 0 0
+0 0 0 0 |u1D437|fiveCst|fiveCst 0
+0 0 0 0 0 |u1D437|sixCst|sixCst ⎦⎥⎥⎥⎥⎥⎥⎤
+⎣⎢⎢⎢⎢⎢⎡|u1D7≠∆̃|oneCst|oneCst 
+|u1D7≠∆̃|twoCst|twoCst 
+0
+|u1D7≠∆̃|oneCst|twoCst 
+|u1D7≠∆̃|twoCst|threeCst 
+|u1D7≠∆̃|threeCst|oneCst ⎦⎥⎥⎥⎥⎥⎤
+ 
+Since the evaluation of *DEFINE_FUNCTION for variab les D11 to D66 is rela- 
+tively time consuming, pre-deﬁned damage tensors (P DDT) can be used.  Cur- 
+rently the following options are available for shel l elements: 
+ *MAT  *.   *MAT  
+LS-DYNA R13 2-95 (MAT) and the following ones for solid elements: 
+ 
+PDDT Damage Tensor 
+1 (1 − |u1D437|oneCst)
+⎣⎢⎢⎢⎢⎢⎡1 0 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 0
+000001⎦⎥⎥⎥⎥⎥⎤
+ 
+2 
+⎣⎢⎢⎢⎢⎢⎢⎢⎢⎡1 −|twoCst
+|threeCst|u1D437|oneCst−|oneCst
+|threeCst|u1D437|twoCst|oneCsts
+|threeCsts/u1D4:̅.st|oneCsts−|oneCsts
+|threeCsts/u1D4:̅.st|twoCsts|oneCsts
+|threeCsts/u1D4:̅.st|oneCsts−|oneCsts
+|threeCsts/u1D4:̅.st|twoCsts 0 0 0
+|oneCsts
+|threeCsts/u1D4:̅.st|oneCsts−|oneCsts
+|threeCsts/u1D4:̅.st|twoCsts 1 −|twoCst
+|threeCst|u1D437|oneCst−|oneCst
+|threeCst|u1D437|twoCst|oneCsts
+|threeCsts/u1D4:̅.st|oneCsts−|oneCsts
+|threeCsts/u1D4:̅.st|twoCsts 0 0 0
+|oneCsts
+|threeCsts/u1D4:̅.st|oneCsts−|oneCsts
+|threeCsts/u1D4:̅.st|twoCsts|oneCsts
+|threeCsts/u1D4:̅.st|oneCsts−|oneCsts
+|threeCsts/u1D4:̅.st|twoCsts 1 −|twoCst
+|threeCst|u1D437|oneCst−|oneCst
+|threeCst|u1D437|twoCst 0 0 0
+0 0 0 1 − |u1D437|oneCst 0 0
+0 0 0 0 1−|u1D437|oneCst 0
+0 0 0 0 0 1−|u1D437|oneCst⎦⎥⎥⎥⎥⎥⎥⎥⎥⎤
+ 
+3 
+⎣⎢⎢⎢⎢⎢⎢⎢⎢⎡1 − |u1D437|oneCst 0 0 0 0 0
+0 1 − |u1D437|twoCst 0 0 0 0
+0 0 1 − |u1D437|threeCst 0 0 0
+0 0 0 1 −|oneCst
+|twoCst(|u1D437|oneCst+ |u1D437|twoCst) 0 0
+0 0 0 0 1 −|oneCst
+|twoCst(|u1D437|twoCst+ |u1D437|threeCst) 0
+0 0 0 0 0 1−|oneCst
+|twoCst(|u1D437|threeCst+|u1D437|oneCst)⎦⎥⎥⎥⎥⎥⎥⎥⎥⎤
+ 
+3.  History Variables.   The increment of the damage parameter is computed i n 
+GISSMO based on a driving quantity that has the dim ension of a strain rate:  
+|u1D4J1̇= |u1D4JB|u1D4J1|oneCst−|oneCst/|u1D4JBCstH IS /u1D6A4̇
+epf  
+The history variables deﬁned by the user through HI S i should thus have the 
+dimension of a strain as the rate is computed inter nally by 
+.   
+2-96 (MAT) LS-DYNA R13 H IS ̇|oneCst= |u1D7≠≠̇|u1D46JCst|u1D46JCst |u1D4JDCst,      H IS ̇|twoCst= |u1D7≠≠̇|u1D466Cst|u1D466Cst |u1D4JDCst,      H IS ̇|threeCst= |u1D7≠≠̇|u1D46JCst|u1D466Cst |u1D4JDCst       for   IFLG2 = 0
+H IS ̇|oneCst= |u1D7≠≠̇|u1D44∆Cst|u1D44∆Cst |u1D4JDCst,H IS ̇|twoCst= |u1D7≠≠̇|u1D44FCst|u1D44FCst |u1D4JDCst,  H IS ̇|threeCst= |u1D7≠≠̇|u1D44∆Cst|u1D44FCst |u1D4JDCst  for   IFLG2 = 1
+H IS ̇|oneCst= |u1D7≠≠̇|oneCst|u1D4JDCst,H IS ̇|twoCst= |u1D7≠≠̇|twoCst|u1D4JDCst,  H IS ̇|threeCst= 0   for   IFLG2 = 2 
+or they can be provided via *DEFINE_FUNCTIONs by th e user (IFLG1 = 1 and 
+HIS i < 0): 
+H IS ̇|u1D4J6Cst= |u1D4J3|u1D4J6Cst|parenleftCv2|u1D7≠≠̇|u1D46JCst|u1D46JCst |u1D4JDCst, |u1D7≠≠̇|u1D466Cst|u1D466Cst |u1D4JDCst, |u1D7≠≠̇|u1D467Cst|u1D467Cst |u1D4JDCst, |u1D7≠≠̇|u1D46JCst|u1D466Cst |u1D4JDCst, |u1D7≠≠̇|u1D466Cst|u1D467Cst |u1D4JDCst, |u1D7≠≠̇|u1D467Cst|u1D46JCst |u1D4JDCst|parenriµhtCv2        for   IFLG2 = 0
+H IS ̇|u1D4J6Cst= |u1D4J3|u1D4J6Cst|parenleftCv2|u1D7≠≠̇|u1D44∆Cst|u1D44∆Cst |u1D4JDCst, |u1D7≠≠̇|u1D44FCst|u1D44FCst |u1D4JDCst, |u1D7≠≠̇|u1D467Cst|u1D467Cst |u1D4JDCst, |u1D7≠≠̇|u1D44∆Cst|u1D44FCst|u1D4JDCst, |u1D7≠≠̇|u1D44FCst|u1D467Cst |u1D4JDCst, |u1D7≠≠̇|u1D467Cst|u1D44∆Cst |u1D4JDCst|parenriµhtCv2         for   IFLG2 = 1
+H IS ̇|u1D4J6Cst= |u1D4J3|u1D4J6Cst|parenleftCv2|u1D7≠≠̇|oneCst|u1D4JDCst, |u1D7≠≠̇|twoCst|u1D4JDCst|parenriµhtCv2         for   IFLG2 = 2 
+The following example deﬁnes a history variable (HI S i = -1234) as function of 
+the transverse shear strains in material coordinate  system (|u1D44∆, |u1D44F,/u1D46̅) for shells: 
+*DEFINE_FUNCTION 
+      1234 
+fhis1(eaa,ebb,ezz,eab,ebz,eza)=1.1547*sqrt(ebz**2+e za**2)  
+The plastic strain rate tensor is not always availa ble in the material law and is 
+estimated as: 
+/u1D6C6̇|u1D4JDCst=|u1D7≠≠̇|u1D4J2Cst /u1D45:.st/u1D45:.st|u1D4JDCst
+|u1D7≠≠̇|u1D4J2Cst /u1D45:.st/u1D45:.st|<racketleftCvJ/u1D6C6̇−|u1D7≠≠̇/u1D4∫̅/u1D4∫0/u1D48D
+3/u1D6C5|<racketriµhtCvJ 
+This is a good approximation for isochoric material s with small elastic strains 
+(such as metals) and correct for J2 plasticity. 
+The following table gives an overview of the drivin g quantities used for incre- 
+menting the damage in function of the input paramet ers (strain superscript “p” 
+for “plastic” is omitted for convenience): 
+ 
+IFLG1 IFLG2 HISi > 0 HISi = 0 HISi < 0 
+0 0 H IS /u1D6A4˙ |u1D7≠≠˙ N/A 
+0 1 H IS /u1D6A4˙ N/A N/A 
+0 2 H IS /u1D6A4˙ N/A N/A 
+1 0 N/A |u1D7≠≠˙|u1D4J6Cst|u1D4J7Cst  |u1D4J3|parenleftCv2|u1D7≠≠˙|u1D4J6Cst|u1D4J7Cst |parenriµhtCv2 
+1 1 N/A |u1D7≠≠˙|u1D4J6Cst|u1D4J7Cst |u1D4JACst|u1D44∆Cst|u1D461Cst  |u1D4J3|parenleftCv2|u1D7≠≠˙|u1D4J6Cst|u1D4J7Cst |u1D4JACst|u1D44∆Cst|u1D461Cst |parenriµhtCv2 
+1 2 N/A |u1D7≠≠˙|u1D4J6Cst |u1D4J3(|u1D7≠≠˙|u1D4J6Cst) 
+2 0 N/A 
+2 1 Preprogrammed functions of plastic strain rate *

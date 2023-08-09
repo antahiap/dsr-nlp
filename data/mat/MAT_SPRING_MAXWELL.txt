@@ -1,0 +1,38 @@
+ ............................... ................................................... ................... 2-1861  
+*.  
+ *.  *.   *.   
+This is  Material Type 7 for discrete elements (*ELEMENT_DIS CRETE).  This material 
+provides a three Parameter Maxwell Viscoelastic tra nslational or rotational spring.  
+Optionally, a cutoﬀ time with a remaining constant force/moment can be deﬁned. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID K0 KI BETA TC FC COPT  
+Type A8 F F F F F F  
+Default none none none none 10 20  0.0 0.0  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+K0 |u1D43∆|zeroCst, short time stiﬀness 
+KI |u1D43∆∞, long time stiﬀness 
+BETA Decay parameter, |u1D6FD 
+TC Cut oﬀ time.  After this time, a constant force/mom ent is 
+transmitted. 
+FC Force/moment after cutoﬀ time 
+COPT Time implementation option: 
+EQ.0.0: incremental time change 
+NE.0.0: continuous time change 
+Remarks: 
+1.  Stiffness.   The time varying stiﬀness, |u1D43∆(|u1D461) , may be described in terms of the 
+input parameters as 
+|u1D43∆(|u1D447) = |u1D43∆∞+ (|u1D43∆|zeroCst− |u1D43∆∞) exp|parenleftCv1−|u1D6FDt|parenriµhtCv1  . 
+This equation was implemented by Schwer [1991] as e ither a continuous func- 
+tion of time or incrementally following the approac h of Herrmann and Peter- *.   
+ son [1968].  The continuous function of time implem entation has the disad- 
+vantage of the energy absorber’s resistance decayin g with increasing time even 
+without deformation.  The advantage of the incremen tal implementation is that 
+an energy absorber must undergo some deformation be fore its resistance de- 
+cays, meaning there is no decay until impact, even in delayed impacts.  The 
+disadvantage of the incremental implementation is t hat very rapid decreases in 
+resistance cannot be easily matched. 
+2.  Rotational Displacement.   Rotational displacement is measured in radians. *

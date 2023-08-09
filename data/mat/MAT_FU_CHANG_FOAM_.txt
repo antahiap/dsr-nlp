@@ -1,0 +1,22 @@
+ {OPTION}  
+This is Material Type 83. 
+ 
+Available options include: 
+DAMAGE_DECAY 
+LOG_LOG_INTERPOLATION 
+Rate eﬀects can be modeled in low and medium densit y foams; see Figure M83-1 .  
+Hysteretic unloading behavior in this model is a fu nction of the rate sensitivity with the 
+most rate sensitive foams providing the largest hys teresis and vice versa.  The uniﬁed 
+constitutive equations for foam materials by Chang [1995] provide the basis for this 
+model.  The mathematical description given below is  excerpted from the reference.  
+Further improvements have been incorporated based o n work by Hirth, Du Bois, and 
+Weimar [1998].  Their improvements permit: load cur ves generated from a drop tower 
+test to be directly input, a choice of principal or  volumetric strain rates, load curves to 
+be deﬁned in tension, and the volumetric behavior t o be speciﬁed by a load curve.  
+ 
+The unloading response was generalized by Kolling, Hirth, Erhart and Du Bois [2006] to 
+Nominal StrainNominal Stressε1ε2ε3
+Optional Tensile Behavior
+TFLAG = 1ε3ε2ε1 >> >ε0
+Figure M83-1.  Rate eﬀects in the nominal stress versus engineering strain 
+curves, which are used to model rate eﬀects in Fu Chang’s foam mode l. *

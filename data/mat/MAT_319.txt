@@ -1,0 +1,18 @@
+:  *.  
+*.   *.  keyword name cannot be used in the 
+input deck in R13. For R13, you must use *.  can be used in the input deck. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO MU GAMMA     
+Type A F F F     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation. A unique number or label must be 
+speciﬁed (see *PART).  
+RO Fluid density 
+MU Dynamic viscosity of the ﬂuid 
+GAMMA Surface tension coeﬃcient of the ﬂuid 
+References: 
+Pan, X., Wu, C.T., and Hu, W. “Incompressible Smoot hed Particle Galerkin (ISPG) 
+Method for an Efﬁcient Simulation of Surface Tensio n and Wall Adhesion Effects in the 
+3D Reﬂow Soldering Process,” 16 th International LS-DYNA Users Conference  (2020). *

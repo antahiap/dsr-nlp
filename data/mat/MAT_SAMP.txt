@@ -1,0 +1,258 @@
+-1 ....................................... ................................................... .............................. 2-1173  
+*. -1 [0,2,3a,3c] {38} 
+ *. _LIGHT [0,2,3a,3c] {7} 
+ *. -1 *. _LIGHT *. -1  *. -1  
+Purpose: This is Material Type 187 (Semi-Analytical  Model for Polymers).  This material 
+model uses an isotropic C-1 smooth yield surface fo r the description of non-reinforced 
+plastics.  Details of the implementation are given in [Kolling, Haufe, Feucht and Du Bois 
+2005]. 
+This material law has been developed at DaimlerChry sler, Sindelﬁngen, in collaboration 
+with Paul Du Bois and Dynamore, Stuttgart. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO BULK GMOD EMOD NUE RBCFAC NUMINT 
+Card 2.   This card is required. 
+LCID-T LCID-C LCID-S LCID-B NUEP LCID-P  INCDAM 
+Card 3.   This card is required. 
+LCID-D EPFAIL DEPRPT LCID_TRI LCID_LC    
+Card 4.   This card is required. 
+MITER MIPS  INCFAIL ICONV ASAF  NHSV 
+Card 5.   This card is optional. 
+LCEMOD BETA FILT      
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK GMOD EMOD NUE RBCFAC NUMINT 
+Type A F F F F F F I/F *. -1  
+  
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation. A unique number or label must be 
+speciﬁed (see *PART). 
+RO Mass density 
+BULK Optional bulk modulus used in the time step calcula tion for 
+solids only 
+GMOD Optional shear modulus used in the time step calcul ation for 
+solids only 
+EMOD Young’s modulus 
+NUE Poisson ratio 
+RBCFAC Ratio of yield in biaxial compression as a function  of yield in 
+uniaxial compression.  If RBC FAC is nonzero and all four curves 
+LCID-T, LCID-C, LCID-S, and LCID-B are deﬁned, a pi ecewise-
+linear yield surface as shown in Figure M187-1  is activated.  See 
+Remark 3 .  Default is 0. /u1D45E 
+|u1D4JD /u1D45E|u1D4J≠Cst /u1D45Eb c  
+RBCFAC =/u1D45Eb c 
+/u1D45E|u1D4J≠Cst RBCFAC > 1 
+RBCFAC = 1 
+RBCFAC < 1 
+RBCFAC = 0.5 
+(lower bound) 
+b t  biaxial tension 
+|u1D461 tension 
+|u1D46≠ shear 
+/u1D450 compression 
+b c  biaxial compression  /u1D45Eb t  /u1D45E|u1D461Cst /u1D45E|u1D46≠Cst 
+/u1D45E von Mises stress 
+|u1D4JD pressure  
+ required input data 
+ optional input data 
+ extrapolated data linear 
+extrapolation 
+ Figure M187-1.   von Mises stress as a function of pressure *. -1  
+  VARIABLE   DESCRIPTION  
+LCID-T Load curve or table ID giving the yield stress as a  function of 
+plastic strain.   These curves should be obtained f rom quasi- static 
+and (optionally) dynamic uniaxial tensile tests.  T his input is 
+mandatory, and the material model will not work unl ess at le ast 
+one tensile stress-strain curve is given.  If LCID- T is a table ID, the 
+table values are plastic strain rates, and a curve of yield stress 
+versus plastic strain must be given for each of tho se strain rates.  
+If the ﬁrst value in the table is negative, LS-DY NA assumes that 
+all the table values represent the natural logarith m of plastic 
+strain rate.  When the highest plastic strain rate is several orders 
+of magnitude greater than the lowest strain rate, i t is 
+recommended that the natural log of plastic strain rate be input in 
+the table.  See Remark 4 . 
+LCID-C Optional load curve ID giving the yield stress as a  function of 
+plastic strain.  This curve should be obtained from  a quasi- static 
+uniaxial compression test.   
+LCID-S Optional load curve ID giving the yield stress as a  function of 
+plastic strain.  This curve should be obtained from  a quasi- static 
+shear test.   
+LCID-B Optional load curve ID giving the yield stress as a  function of 
+plastic strain, this curve should be obtained from a quasi- static 
+biaxial tensile test. 
+NUEP Plastic Poisson’s ratio: an estimated ratio of tran sversal to 
+longitudinal plastic rate of deformation under unia xial loading 
+should be given. 
+LCID-P Load curve ID giving the plastic Poisson's ratio as a function of 
+plastic strain during uniaxial tensile and uniaxial  compressive 
+testing.  The plastic strain on the abscissa is neg ative for 
+compression and positive for tension.    It is impo rtant to cover 
+both tension and compression.  If LCID- P is given, NUEP is 
+ignored. 
+INCDAM Flag to control the damage evolution as a fu nction of triaxiality: 
+EQ.0: Damage evolution is independent of the triaxiality.  
+EQ.1: An incremental formulation is used to compute the 
+damage. 
+ *. -1  
+  VARIABLE   DESCRIPTION  
+EPFAIL This parameter is the equivalent plastic strain at failure under 
+uniaxial tensile loading (history variable #2).  If  EP FAIL is given 
+as a negative integer, a load curve is expected tha t deﬁnes EP-
+FAIL as a function of the plastic strain rate.  Def ault value is 10 5. 
+DEPRPT Increment of equivalent plastic strain under  uniaxia l tensile 
+loading (history variable #2) between failure point  and rupture 
+point.  Stresses will fade out to zero between EPFA IL and EP-
+FAIL + DEPRPT. If DE PRPT is given a negative value, a curve 
+deﬁnition is expected where DEPRPT is deﬁned as fun ctio n of the 
+triaxiality. 
+LCID_TRI Load curve that speciﬁes a factor that works multip licatively on 
+the value of EPFAIL depending on the triaxiality (t hat is, |u1D4JD/|u1D7≠∆v M ). 
+For a triaxiality of -1/3 a value of 1.0 should be speciﬁed. 
+LCID_LC Load curve that speciﬁes a factor that works multip licatively on 
+the value of EP FAIL depending on a characteristic element 
+length, deﬁned as the average length of spatial dia gonals 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable MITER MIPS  INCFAIL ICONV ASAF  NHSV 
+Type I I  I I F  I 
+ 
+ VARIABLE   DESCRIPTION  
+MITER Maximum number of iterations in the cutting plane a lgorithm.  
+The default is 400. 
+MIPS Maximum number of iterations in the secant iteratio n performed 
+to enforce plane stress (shell elements only).  The  default is 10. 
+INCFAIL Flag to control the failure evolution as a function of triaxiality: 
+EQ.0: Failure evolution is independent of the triaxiality . 
+EQ.1: Incremental formulation is used to compute the fail ure 
+value.  
+EQ.-1: The failure model is deactivated. *. -1 accepts four diﬀerent kinds o f yield curves, LCID-T, LCID-C, 
+LCID-S, and LCID-B where data from tension tests (L CID-T) is always required, but the *. -1  
+ others are optional.  If fewer than three curves ar e deﬁned, as indicated by setting the 
+missing load curve IDs to 0, the remaining curves a re generated internally. 
+1.  Fewer than 3 load curves.   In the case of fewer than 3 load curves, a linear  
+yield surface in the invariant space spanned by the  pressure and the von Mises 
+stress is generated using the available data.  See Figure M187-2 . 
+2.  Three or more load curves.   See Figure M187-3 . 
+Remarks: 
+1.  Damage.   If the LCID-D is given, then a damage curve as a function of 
+equivalent plastic strains acting on the stresses i s deﬁned as shown in Figure 
+M187-4 . 
+Since the damaging curve acts on the yield values, the inelastic results are 
+aﬀected by the damage curve.  As a means to circumv ent this, the load curve 
+LCID-D may be given a negative ID. This will lead t o an internal conversion of 
+from nominal to eﬀective stresses (ASSR).  While th is conversion is possible for 
+some combinations of yield curve deﬁnitions, plasti c Poisson’s ratio and dam- 
+age curves, the corresponding inverse problem canno t be solved for all combi- 
+nations.  An error message is provided in this case . Figure M187-4.   EPFAIL and DE PRPT deﬁned the failure and fading behavior 
+of a single element. |u1D7≠≠fail |u1D4JDCst                        |u1D7≠≠̅erode |u1D4JDCst
+|uni23DFClft|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCmd|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCex|uni23DFCrt 
+∆|u1D7≠≠rpt |u1D4JDCst |u1D7≠≠|u1D4JDCst |u1D4J1 
+1.0  
+|u1D4J1|u1D4J≠Cst *. -1  
+ # Interpretation 
+18 Biaxial plastic strain rate 
+28 Instability criterion (set NHSV = 28, see Remark 5 ) *. _LIGHT  
+Purpose: This is a slimmed-down form of Material Ty pe 187. In contrast to the original 
+SAMP-1 the options here are limited to rate indepen dent or rate dependent ﬂow in 
+tension and compression as well as constant or vari able plastic Poisson’s ratio.  Shear 
+and biaxial test data are not incorporated.  Damage  and failure are not available here.  
+*. -1, results should diﬀer only slightly.   The main diﬀerence is the 
+formulation for rate eﬀects: the viscoplastic formu lation (“VP = 1”) for *. _LIGHT. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO     EMOD NUE LCEMOD  BETA 
+Card 2.   This card is required. 
+LCID-T LCID-C CTFLG  RATEOP NUEP LCID-P RFILTF  
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO   EMOD NUE LCEMOD BETA 
+Type A F   F F I F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation. A unique number or label must be 
+speciﬁed (see*PART). 
+RO Mass density 
+EMOD Young’s modulus 
+NUE Poisson ratio *. _LIGHT  
+  VARIABLE   DESCRIPTION  
+LCEMOD Load curve ID deﬁning Young’s modulus as function o f eﬀective 
+strain rate.  LCEMOD ≠ 0 activates viscoelasticity (see Remark 3 ). 
+The parameters BETA and RFILTF must be deﬁned too. 
+BETA Decay constant in viscoelastic law (see Remark 3 ). BE TA has the 
+unit [1/time].  If LCEMOD > 0 is used, a nonzero va lue for BE TA 
+is mandatory. 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCID-T LCID-C CTFLG RATEOP NUEP LCID-P RFILTF  
+Type I I F I F I F  
+Default none 0 0 0 none 0 0.95  
+ 
+ VARIABLE   DESCRIPTION  
+LCID-T Load curve or table ID giving the yield stress as a  function of 
+plastic strain.   These curves should be obtained f rom quasi- static 
+and (optionally) dynamic uniaxial tensile tests.  T his input is 
+mandatory.  If LCID-T is a table ID, the table valu es are eﬀ ective 
+strain rates, and a curve of yield stress as a func tion of plastic 
+strain must be given for each of those strain rates .  If the ﬁrst 
+value in the table is negative, LS-DY NA assumes that all the table 
+values represent the natural logarithm of eﬀe ctive strain rate.  
+When the highest eﬀective strain rate is several or ders of 
+magnitude greater than the lowest strain rate, it i s recommended 
+that the natural log of strain rate be input in the  table.  See 
+Remark 1 . 
+LCID-C Optional load curve (or table) ID giving the yield stress as a 
+function of plastic strain (and strain rate).  This  curve (or table) 
+should be obtained from uniaxial compression tests.   If LCID- C is 
+deﬁned as a curve and LCID-T given as a table, then the rate 
+dependence from the tension table is adopted in com pression as 
+well.  See Remark 1 . 
+CTFLG Curve treatment ﬂag (for LCID-T, LCID-C, and LCID-P) 
+EQ.0: Rediscretized curves are used (default).  We recommend 
+using this option together with an appropriate valu e of *. _LIGHT  
+ based on the von Mises stress  |u1D7≠∆v M , the pressure |u1D4JD and the Drucker-Prager 
+slope parameter 
+/u1D̅0∫=|u1D7≠∆/u1D44C.st/co⋯⋯a.st/u1D4:6.st− |u1D7≠∆/u1D44C.st/co⋯⋯a.st|u1D447Cst
+2 × |u1D7≠∆/u1D44C.st/co⋯⋯a.st/u1D4:6.st 
+deﬁned by the tensile and compressive yield stresse s |u1D7≠∆/u1D44C.st/co⋯⋯a.st|u1D447Cst and |u1D7≠∆/u1D44C.st/co⋯⋯a.st/u1D4:6.st (input with 
+LCID-T and optionally LCID-C). The plastic potentia l 
+|u1D43A =/radical.v:|parenleftCv3|u1D7≠∆v M |twoCst+ |u1D6F+ × |u1D4JD|twoCst|parenriµhtCv3 
+with 
+|u1D6F+ =9
+2|parenleftCv61 − 2/u1D̅08|u1D4JDCst
+1 +/u1D̅08|u1D4JDCst|parenriµhtCv6   
+and the plastic Poisson’s ratio /u1D̅08|u1D4JDCst deﬁnes the direction of plastic ﬂow. /u1D̅08|u1D4JDCstcan be 
+input as a constant with NUEP or as a function of e quivalent plastic strain with 
+LCID-P.  The elasto-plastic equations are solved wi th a classical predictor-
+corrector algorithm for the plastic strain incremen t ∆|u1D7≠≠|u1D4JDCst and stress /u1D̅48|u1D4JBCst+|oneCst. 
+2.  Effective strain rate.  If tables are used for hardening, the rate depende nce is 
+deﬁned by using an eﬀective strain rate.  To reduce  the noise from the elastic 
+portion of that strain rate, an averaged value is u sed.  This is governed by the 
+ﬁltering parameter RFILTF as shown above. 
+3.  Nonlinear viscoelasticity . For LCEMOD ≠ 0, viscoelasticity is activated.  Wi th 
+this model, EMOD becomes the Young’s modulus for eq uilibrium stress ( |u1D438e q ). 
+LCEMOD speciﬁes the viscous Young’s modulus which i s a function of aver- 
+aged strain rate ( |u1D438|u1D463Cst(|u1D7≠≠̇a v g )). BETA gives a constant decay parameter specifying  
+the ratio |u1D438Cst/u1D463.sts(|u1D7≠≠Csṫa v g )
+/u1Dℜ02.st(|u1D7≠≠Csṫa v g ) where |u1D7≠2 is the viscosity.  The viscoelastic stress-strain law is 
+given by: 
+|u1D7≠∆̇|u1D463Cst= −BETA × |u1D7≠∆(|u1D461) + |u1D438|u1D463Cst(|u1D7≠≠̇a v g ) × |u1D7≠≠̇a v g  
+The one-dimensional viscoelastic behavior can be vi sualized by a generalized 
+Maxwell cell as rheological model as shown in Figure M187-1 . 
+We will be using the notation of the viscoelastic-p lastic stress update.  For sim- 
+plicity we will discuss the one-dimensional case.  Let ∆|u1D7≠≠v p  be the viscoplastic 
+strain increment and let |u1D7≠∆e q  and |u1D7≠∆|u1D463Cst be the equilibrium and viscous stress por- 
+tions.  The stress update is then: 
+|u1D7≠∆|u1D4JBCst+|oneCst= |u1D7≠∆e q |u1D4JBCst+|oneCst+ |u1D7≠∆|u1D463Cst|u1D4JBCst+|oneCst 
+or with stress increments: 
+|u1D7≠∆|u1D4JBCst+|oneCst= |u1D7≠∆|u1D4JBCst+ ∆|u1D7≠∆e q + ∆|u1D7≠∆|u1D463Cst. *. _LIGHT  
+ 4.  History Variables.   This material has the following extra history var iables: 
+ 
+History Variable # Description 
+1 Filtered deviatoric strain rate for 
+viscoelasticity (LCEMOD > 0) 
+2 Volumetric plastic strain 
+3 Number of iterations 
+4 Current yield stress 
+5 Filtered total strain rate 
+7 Deviatoric plastic strain *

@@ -1,0 +1,28 @@
+/DUBOIS_FOAM ........................... ................................................... .................. 2-512  
+*. /DUBOIS_FOAM [0,3c,5,8B] {8} 
+ *. /DUBOIS_FOAM  *. /DUBOIS_FOAM  
+ *. /DUBOIS_FOAM  *. /DUBOIS_FOAM  
+ The stress and strain pairs in load curve LCPY shou ld be positive values start- 
+ing with a volumetric strain value of zero. 
+2.  LCUYS.   The load curve LCUYS can optionally contain the r esults of the 
+tensile test (corresponding to negative values of t he volumetric strain); if it 
+does, then the load curve information will override  PC, VPC, TC and VTC. 
+This is the recommended approach, because the neces sary continuity between 
+tensile and compressive regime becomes obvious (see  Figure M75-1 ). 
+3.  Yield Surface.   The yield surface is deﬁned as an ellipse in the equivalent 
+pressure and von Mises stress plane.  This ellipse is characterized by three 
+points: 
+a)  the hydrostatic compression limit (LCPY), 
+b)  the uniaxial compression limit (LCUYS), and 
+c)  either the pressure cutoﬀ for hydrostatic stress ( PC,VPC), the tension cut- 
+oﬀ for uniaxial tension (TC,VTC), or the optional t ensile part of LCUYS. 
+4.  High Frequency Oscillations.  To prevent high frequency oscillations in the 
+strain rate from causing similar high frequency osc illations in the yield stress, a 
+modiﬁed volumetric strain rate is used to obtain th e scaled yield stress.  The 
+modiﬁed strain rate is obtained as follows.  If NYC LE is > 1, then the modiﬁed 
+strain rate is obtained by a time average of the ac tual strain rate over NCYCLE 
+solution cycles.  The averaged strain rate is store d in history variable #3. Volumetric Strain True Stress
+Pressure Yield (LCPY)Uniaxial Yield 
+Stress (LCUYS)
+compression tensionoptional
+ Figure M75-1.   Behavior of crushable foam.  Unloading is elastic. *

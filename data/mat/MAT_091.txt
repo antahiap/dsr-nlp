@@ -1,0 +1,63 @@
+: *.  
+*. -092  *. -092  
+  Card 4 1 2 3 4 5 6 7 8 
+Variable LA1 LA2 LA3 MACF     
+Type F F F I     
+ 
+Prony Series Card 1.   Additional card for VISCO keyword option.  
+ Card 5 1 2 3 4 5 6 7 8 
+Variable S1 S2 S3 S4 S5 S6   
+Type F F F F F F   
+ 
+Prony Series Card 2.   Additional card for VISCO keyword option. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable T1 T2 T3 T4 T5 T6   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+C1 - C5 Hyperelastic coeﬃcients (see equations belo w) 
+XK Bulk modulus 
+XLAM Stretch ratio at which ﬁbers are straightened 
+FANG Fiber angle in local shell coordinate system ( shells only) 
+XLAM0 Initial ﬁber stretch (optional) 
+FAILSF Stretch ratio for ligament ﬁbers at failure (applie s to shell 
+elements only).  If zero, failure is not considered . *. -092  
+  VARIABLE   DESCRIPTION  
+AOPT.EQ.2.0:  Components of vector /u1D41A (A1, A2, A3) 
+AOPT.GT.2.0: Components of vector /u1D42F (V1, V2, V3) 
+BX, BY, BZ Vector components that depend on the val ue of AOPT: 
+AOPT.LE.1.0:  Ignored 
+AOPT.EQ.2.0:  Components of vector /u1D41D (D1, D2, D3) 
+AOPT.EQ.3.0:  Ignored 
+AOPT.EQ.4.0:  Components of point |u1D4JD (XP, YP, ZP) 
+LAX, LAY, LAZ Local ﬁber orientation vector (bricks  only) 
+MACF Material axes change ﬂag for brick elements: 
+EQ.1: No change, default, 
+EQ.2: Switch material axes |u1D44∆ and |u1D44F, 
+EQ.3: Switch material axes |u1D44∆ and /u1D450, 
+EQ.4: Switch material axes |u1D44F and /u1D450. 
+S1 – S6 Factors in the Prony series 
+T1 - T6 Characteristic times for Prony series relax ation kernel 
+Material Formulation: 
+The overall strain energy, /u1D44A, is "uncoupled" and includes two isotropic deviato ric 
+matrix terms, a ﬁber term, |u1D439, and a bulk term: 
+/u1D44A= |u1D436|oneCst|parenleftCv2/u1D4:C̃|oneCst− 3|parenriµhtCv2 + |u1D436|twoCst|parenleftCv2/u1D4:C̃|twoCst− 3|parenriµhtCv2 + |u1D439(|u1D7≠6) +1
+2|u1D43∆[ln(/u1D4:D)]|twoCst 
+Here, /u1D4:C̃|oneCst and /u1D4:C̃|twoCst are the deviatoric invariants of the right Cauchy deformation tensor, |u1D7≠6 is 
+the deviatoric part of the stretch along the curren t ﬁber direction, and /u1D4:D= det /u1D405 is the 
+volume ratio.  The material coeﬃcients |u1D436|oneCst and |u1D436|twoCst are the Mooney-Rivlin coeﬃcients, 
+while |u1D43∆ is the eﬀective bulk modulus of the material (inpu t parameter XK). 
+ 
+The derivatives of the ﬁber term |u1D439 are deﬁned to capture the behavior of crimped 
+collagen.  The ﬁbers are assumed to be unable to re sist compressive loading - thus the 
+model is isotropic when |u1D7≠6 < 1.   An exponential function describes the straighteni ng of 
+the ﬁbers, while a linear function describes the be havior of the ﬁbers once they are 
+straightened past a critical ﬁber stretch level |u1D7≠6 ≥ |u1D7≠6∗ (input parameter XLAM): *. -092  
+ contacts and equilibrium is established.  For examp le, a ligament tissue "uncrimping 
+strain" of 3% can be represented with initial stret ch value of 1.03. 
+ 
+If the VISCO keyword option is includeed, at least one Prony series term (S1, T1) must 
+be deﬁned. *

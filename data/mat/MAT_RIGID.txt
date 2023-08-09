@@ -1,0 +1,128 @@
+ ........................................ ................................................... ................................... 2-213  
+*. _DISCRETE ............................... ................................................... ....................... 2-1396  
+*.  [0,1H,1B,1T,2,3a] {0} 
+ *. _DISCRETE [0,2] 
+ *.  *. _DISCRETE *.   *.   
+This is Material 20.  Parts made from this material  are considered to belong to a rigid 
+body (for each part ID).  The coupling of a rigid b ody with MADYMO and CAL3D can 
+also be deﬁned using this material.  Alternatively,  a VDA surface can be attached as 
+surface to model the geometry, such as for the tool ing in metal forming applications.  
+Optional global and local constraints on the mass c enter can be deﬁned.  A local 
+consideration for output and user-deﬁned airbag sen sors may also optionally be chosen. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR N COUPLE M ALIAS or 
+RE 
+Card 2a.   This card is included if CMO = 1.0. 
+CMO CON1 CON2      
+Card 2b.   This card is included if CMO = 0.0 
+CMO        
+Card 2c.   This card is included if CMO = -1.0. 
+CMO CON1 CON2      
+Card 3.   This card is must be included but may be left bla nk. 
+LCO or A1 A2 A3 V1 V2 V3   *.   
+2-214 (MAT) LS-DYNA R13 Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR N COUPLE M ALIAS or  
+RE 
+Type A F F F F F F C/F 
+Default none none none none 0 0 0 opt 
+none 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus.  Reasonable values must be chosen for contact 
+analysis (choice of penalty); see Remarks below. 
+PR Poisson’s ratio.  Reasonable values must be chosen for contact 
+analysis (choice of penalty); see Remarks below. 
+N MADYMO3D 5.4 coupling ﬂag, |u1D4JB: 
+EQ.0: use normal LS-DYNA rigid body updates. 
+GT.0: the rigid body is coupled to the MADY MO 5.4 ellipsoid 
+number |u1D4JB. 
+LT.0: the rigid body is coupled to MADY MO 5.4 plane 
+number, ||u1D4JB|. 
+COUPLE Coupling option if applicable: 
+EQ.-1: attach VDA surface in ALIAS (deﬁned in the eighth 
+ﬁeld) and automatically generate a mesh for viewing  
+the surface in LS-PREPOST. 
+MADYMO 5.4 / CAL3D coupling option: 
+EQ.0: the undeformed geometry input to LS-DY NA 
+corresponds to the local system for MADY MO 5.4 / 
+CAL3D.  The ﬁnite element mesh is input. 
+EQ.1: the undeformed geometry input to LS-DY NA *.   
+2-216 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+EQ.3:  constrained /u1D46̅ displacement 
+EQ.4: constrained |u1D46J and |u1D466 displacements 
+EQ.5: constrained |u1D466 and /u1D46̅ displacements 
+EQ.6: constrained /u1D46̅ and |u1D46J displacements 
+EQ.7: constrained |u1D46J, |u1D466, and /u1D46̅ displacements 
+CON2 Global rotational constraint: 
+EQ.0: no constraints 
+EQ.1: constrained |u1D46J rotation 
+EQ.2: constrained |u1D466 rotation 
+EQ.3: constrained /u1D46̅ rotation 
+EQ.4: constrained |u1D46J and |u1D466 rotations 
+EQ.5: constrained |u1D466 and /u1D46̅ rotations 
+EQ.6: constrained /u1D46̅ and |u1D46J rotations 
+EQ.7: constrained |u1D46J, |u1D466, and /u1D46̅ rotations 
+ 
+No Constraints Card.   This card is included when CMO = 0.0. 
+ Card 2b 1 2 3 4 5 6 7 8 
+Variable CMO        
+Type F        
+Default 0.0        
+ 
+ VARIABLE   DESCRIPTION  
+CMO Center of mass constraint option, CMO: 
+EQ.+1.0: constraints applied in global directions 
+EQ.0.0: no constraints 
+EQ.-1.0: constraints applied in local directions (SPC 
+constraint) 
+ *.   
+2-218 (MAT) LS-DYNA R13 Optional for output (Must be included but may be le ft blank).  
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LCO or A1  A2 A3 V1 V2 V3   
+Type F F F F F F   
+Default 0 0 0 0 0 0   
+ 
+ VARIABLE   DESCRIPTION  
+LCO Local coordinate system number for local output to rbdout .  LCO 
+also speciﬁes the coordinate system used for *BOUND ARY_PRE-
+SCRIBED_MOTION_RIGID_LO CAL.  Defaults to the principal 
+coordinate system of the rigid body. 
+A1 - V3 Alternative method for specifying local sys tem below: 
+Deﬁne two vectors /u1D41A and /u1D42F, ﬁxed to the rigid body which are 
+used for output and the user deﬁned airbag sensor s ubrou- 
+tines.  The output parameters are in the directions  /u1D41A, /u1D41B, and /u1D41C
+where  the latter are given by the cross products /u1D41C=/u1D41A×/u1D42F and 
+/u1D41B=/u1D41C×/u1D41A.  This input is optional. 
+Remarks: 
+1.  Rigid Material.  The rigid material type 20 provides a convenient w ay of 
+turning one or more parts comprised of beams, shell s, or solid elements into a 
+rigid body.  Approximating a deformable body as rig id is a preferred modeling 
+technique in many real world applications.  For exa mple, in sheet metal form- 
+ing problems the tooling can properly and accuratel y be treated as rigid.  In the 
+design of restraint systems the occupant can, for t he purposes of early design 
+studies, also be treated as rigid.  Elements which are rigid are bypassed in the 
+element processing and no storage is allocated for storing history variables; 
+consequently, the rigid material type is very cost eﬃcient. 
+2.  Parts.   Two unique rigid part IDs may not share common no des unless they 
+are merged together using the rigid body merge opti on.  A rigid body, howev- 
+er, may be made up of disjoint ﬁnite element meshes .  LS-DYNA assumes this 
+is the case since this is a common practice in sett ing up tooling meshes in form- 
+ing problems. *.   
+2-220 (MAT) LS-DYNA R13 ELLIPSOID/PLANE in the MADYMO input ﬁle and the cou pling option 
+(COUPLE) must be deﬁned. 
+Both basic and extended coupling are available for coupling with MADYMO 
+6.0.1: 
+a)  Basic Coupling.   The external reference number (RE) must match the  exter- 
+nal reference number in the MADYMO XML input ﬁle.  The coupling op- 
+tion (COUPLE) must be deﬁned. 
+b)  Extended Coupling.   Under this option MADYMO will handle the contact 
+between the MADYMO and LS-DYNA models.  The externa l reference 
+number (RE) and the coupling option (COUPLE) are no t needed.  All cou- 
+pling surfaces that interface with the MADYMO model s need to be de- 
+ﬁned in *CONTACT_COUPLING. *. _DISCRETE  
+ *

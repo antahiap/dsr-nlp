@@ -1,0 +1,73 @@
+: *. : *.  
+*.   *.   
+  VARIABLE   DESCRIPTION  
+K |u1D43∆, damping constant 
+LT.0.0 :|K| is the load curve number ID (see *DEFINE_ CURVE) 
+deﬁning the damping coeﬃcient as a function of the 
+absolute value of the relative velocity. 
+C |u1D436, discharge coeﬃcient 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable C3 STF RHOF C1 C2 LCIDF LCIDD S0 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+C3 Coeﬃcient for ﬂuid inertia term 
+STF /u1D458, stiﬀness coeﬃcient if piston bottoms out 
+RHOF |u1D7≠+fluid , ﬂuid density 
+C1 |u1D436|oneCst, coeﬃcient for linear velocity term 
+C2 |u1D436|twoCst, coeﬃcient for quadratic velocity term 
+LCIDF Load curve number ID deﬁning force as a function of  piston 
+displacement, |u1D46≠, that is, term |u1D4J3 (|u1D46≠ + |u1D46≠|zeroCst). Compressive behavior is 
+deﬁned in the positive quadrant of the force displa cement curve.  
+Displacements falling outside of the deﬁned force d isplacement 
+curve are extrapolated.  Care must be taken to ensu re that 
+extrapolated values are reasonable. 
+LCIDD Load curve number ID deﬁning damping coeﬃcient as a  function 
+of piston displacement, |u1D46≠, that is, |u1D4J4(|u1D46≠ + |u1D46≠|zeroCst).  Displacements falling 
+outside the deﬁned curve are extrapolated.  Care mu st be taken to 
+ensure that extrapolated values are reasonable. 
+S0 Initial displacement, |u1D46≠|zeroCst; typically set to zero.  A positive 
+displacement corresponds to compressive behavior. 
+ *.   
+ Remarks: 
+As the damper moves, the ﬂuid ﬂows through the open  oriﬁces to provide the 
+necessary damping resistance.  While moving as show n in Figure M69-1 , the piston 
+gradually blocks oﬀ and eﬀectively closes the oriﬁc es.  The number of oriﬁces and the 
+size of their opening control the damper resistance  and performance.  The damping 
+force is computed from, 
+|u1D439 = SF ×
+⎩|<raceleftCex⎨|<raceleftCex⎧
+|u1D43∆|u1D434|u1D4JDCst|u1D449|u1D4JDCst
+⎩|<raceleftCex⎨|<raceleftCex⎧|u1D436|oneCst
+|u1D434|zeroCst|u1D461Cst+ |u1D436|twoCst|dividesCv2|u1D449|u1D4JDCst|dividesCv2|u1D7≠+fluid 
+⎣⎢⎡|parenleftCv6|u1D434|u1D4JDCst
+|u1D436|u1D434|zeroCst|u1D461Cst|parenriµhtCv6|twoCst
+− 1
+⎦⎥⎤
+⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+− |u1D4J3 (|u1D46≠ + |u1D46≠|zeroCst) + |u1D449|u1D4JDCst|u1D4J4(|u1D46≠ + |u1D46≠|zeroCst)
+⎭|<raceriµhtCex⎬|<raceriµhtCex⎫
+  , 
+where |u1D43∆ is a user deﬁned constant or a tabulated function of the absolute value of the 
+relative velocity, |u1D449|u1D4JDCst is the piston velocity, |u1D436 is the discharge coeﬃcient, |u1D434|u1D4JDCst is the piston 
+area, |u1D434|zeroCst|u1D461Cst is the total open areas of oriﬁces at time |u1D461, |u1D7≠+fluid  is the ﬂuid density, |u1D436|oneCst is the 
+coeﬃcient for the linear term, and |u1D436|twoCst is the coeﬃcient for the quadratic term. 
+ 
+In the implementation, the oriﬁces are assumed to b e circular with partial covering by 
+the oriﬁce controller.  As the piston closes, the c losure of the oriﬁce is gradual.  This 
+gradual closure is properly taken into account to i nsure a smooth response.  If the 
+piston stroke is exceeded, the stiﬀness value, /u1D458, limits further movement, meaning if the 
+damper bottoms out in tension or compression the da mper forces are calculated by 
+replacing the damper by a bottoming out spring and damper, /u1D458 and /u1D450, respectively.  The 
+piston stroke must exceed the initial length of the  beam element.  The time step 
+calculation is based in part on the stiﬀness value of the bottoming out spring.  A typical DISPLACEMENTF
+O
+R
+C
+E
+Force increases as ori ﬁce
+is gradually covered.Last o riﬁce
+closes.
+Figure M69-2.   Force as a function of displacement as oriﬁces are cove red at a 
+constant relative velocity.  Only the linear velocity term is ac tive. *

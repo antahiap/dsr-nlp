@@ -1,0 +1,90 @@
+ ................. ................................................... ....... 2-687  
+*.  [0,2,3 a,3c,5] {20} 
+ *.   *.   *.   
+This is  Material Type 106.  This is an elastic viscoplastic  material with thermal eﬀects. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY ALPHA LCSS FAIL 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable QR1 CR1 QR2 CR2 QX1 CX1 QX2 CX2 
+Type F F F F F F F F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable C P LCE LCPR LCSIGY LCR LCX LCALPH 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable LCC LCP TREF LCFAIL NUSHIS T1PHAS T2PHAS  
+Type F F F F     
+ 
+User History Card.   Additional card only for NUHIS.gt.0. 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable FUSHI1 FUSHI 2 FUSHI 3 FUSHI 4 FUSHI 5 FUSHI 6 FUSHI 7 FUSHI 8 
+Type I I I I I I I I 
+ *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Initial yield stress 
+LCSS Load curve ID or Table ID. The load curve ID deﬁnes  eﬀective 
+stress as a function of eﬀective plastic strain.  T he table ID deﬁnes 
+for each temperature value a load curve ID giving t he stress as a 
+function of eﬀective plastic strain for that temper ature (*DE-
+FINE_TA BLE) or it deﬁnes for each temperature value a tabl e ID 
+which deﬁnes for each strain rate a load curve ID g iving the stress 
+as a function of eﬀective plastic strain (*DEFINE_T ABLE_ 3D).  
+The stress as a function of eﬀective plastic strain curve for the 
+lowest value of temperature or strain rate is used if the 
+temperature or strain rate falls below the minimum value.  
+Likewise, maximum values cannot be exceeded.  Card 2 is 
+ignored with this option.   
+FAIL Eﬀective plastic failure strain for erosion 
+ALPHA Coeﬃcient of thermal expansion 
+QR1 Isotropic hardening parameter, |u1D444|u1D4JFCst|oneCst 
+CR1 Isotropic hardening parameter, |u1D436|u1D4JFCst|oneCst 
+QR2 Isotropic hardening parameter, |u1D444|u1D4JFCst|twoCst 
+CR2 Isotropic hardening parameter, |u1D436|u1D4JFCst|twoCst 
+QX1 Kinematic hardening parameter, |u1D444/u1D̅12.st|oneCst 
+CX1 Kinematic hardening parameter, |u1D436/u1D̅12.st|oneCst 
+QX2 Kinematic hardening parameter, |u1D444/u1D̅12.st|twoCst 
+CX2 Kinematic hardening parameter, |u1D436/u1D̅12.st|twoCst 
+C Viscous material parameter, |u1D436 *.   
+  VARIABLE   DESCRIPTION  
+T1PHAS Lower temperature limit for cooling rate evaluation .  Cooling rate 
+can be used as input for user deﬁned variables. 
+T2PHAS Upper temperature limit for cooling rate evaluation .  Cooling rate 
+can be used as input for user deﬁned variables. 
+FUSH i Function ID for user deﬁned history variables.  Se e Remarks 2
+and 3. 
+Remarks: 
+1.  Viscous Effects.   If LCSS is not given any value the uniaxial stres s-strain 
+curve has the form: 
+|u1D7≠∆|parenleftCv2|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2 = |u1D7≠∆|zeroCst+ |u1D444|u1D4JFCst|oneCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4JFCst|oneCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2+ |u1D444|u1D4JFCst|twoCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436|u1D4JFCst|twoCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2
++ |u1D444/u1D̅12.st|oneCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436/u1D̅12.st|oneCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2+ |u1D444/u1D̅12.st|twoCst/˙racketleft.v21 − exp|parenleftCv2−|u1D436/u1D̅12.st|twoCst|u1D7≠≠eff |u1D4JDCst|parenriµhtCv2/˙racketright.v2  . 
+Viscous eﬀects are accounted for using the Cowper a nd Symonds model, 
+which scales the yield stress with the factor: 
+ 1 + |parenleftCv6|u1D7≠≠̇eff |u1D4JDCst
+|u1D436|parenriµhtCv6|oneCst|u1D4JDCst/fraction.v2
+. 
+2.  User-deﬁned history data.   The user can deﬁne up to eight additional history  
+variables that are added to the list of history var iables (see table in Remark 3 ). 
+These values can for example be used to evaluate th e hardness of the material. 
+The additional variables are to be given by respect ive *DEFINE_FUNCTION 
+keywords as functions of the cooling rate between T 2PHASE and T1PHASE, 
+temperature, time, user-deﬁned histories themselves , equivalent plastic strain, 
+rate of the equivalent plastic strain, and the ﬁrst  six history variables (see table 
+in Remark 3 ). A function declaration should, thus, look as fol lows: 
+*DEFINE_FUNCTION 
+1,user defined history 1 
+uhist(trate,temp,time,usrhst1,usrhst2,…,usrhstn,eps pl, 
+epsplrate,hist2,hist3,…,hist6)= ...  
+3.  History Values.  The most important history variables of this mater ial model 
+are listed in the following table.  To be able to p ost-process that data, parame- 
+ters NEIPS (shells) or NEIPH (solids) must be deﬁne d on *DATABASE_EX-
+TENT_BINARY. 
+ *

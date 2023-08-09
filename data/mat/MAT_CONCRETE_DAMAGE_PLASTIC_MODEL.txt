@@ -1,0 +1,134 @@
+ ................ .................................................. 2-1737  
+*.  [0] 
+ *.  *.   *.   
+*.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable HP AH BH CH DH AS DF FC0 
+Type F F F F F F F F 
+Default 0.5 0.08 0.003 2.0 1.0E-6 15.0 0.85 AUTO 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable TYPE BS WF WF1 FT1 STRFLG FAILFLG EFC 
+Type F F F F F F F F 
+Default 0.0 1.0 none 0.15*WF  0.3*FT 0.0 0.0 1.0E-4 
+ 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density. 
+E Young’s modulus.  The sign determines if an anisotr opic (E 
+positive, referred to as ISOFLAG = 0 in the remarks) or an 
+isotropic (E negative, referred to as ISOFLAG = 1 in the remarks) 
+damage formulation is used.  The Young’s modulus is  taken as 
+the absolute value of this parameter. 
+PR Poissons ratio 
+ECC Eccentricity parameter. 
+EQ.0.0: ECC is calculated from Jirásek and Bazant (2002) as  
+ECC =1 +/u1D̅16
+2−/u1D̅16,/u1D̅16=|u1D4J3|u1D461Cst|parenleftCv2|u1D4J3|u1D44FCst|u1D4J≠Cst |twoCst− |u1D4J3|u1D4J≠Cst|twoCst|parenriµhtCv2
+|u1D4J3|u1D44FCst|u1D4J≠Cst |parenleftCv1|u1D4J3|u1D4J≠Cst|twoCst−|u1D4J3|u1D461Cst|twoCst|parenriµhtCv1, |u1D4J3|u1D44FCst|u1D4J≠Cst =1.16 |u1D4J3|u1D4J≠Cst 
+QH0 Initial hardening deﬁned as FC 0/FC where FC 0 is the compressive 
+stress at which the initial yield surface is reache d.  Default = 0.3 *.   
+ FT1 Tensile strength threshold value for bi- linear damage 
+formulation. 
+Default = 0.3 × FT 
+STRFLG Strain rate ﬂag. 
+EQ.1.0: Strain rate dependent 
+EQ.0.0: No strain rate dependency. 
+FAILFLG Failure ﬂag. 
+EQ.0.0: Not active ⇒ No erosion. 
+GT.0.0: Active and element will erode if wt and wc is equal  to 
+1 in FAIFLG percent of the integration points.  If FAIL-
+FLG = 0.60, 60% of all integration points must fail  be- 
+fore erosion.  
+EFC Parameter controlling compressive damage softening branch in 
+the exponential compressive damage formulation. 
+Default = 1.0E-4 
+Remarks: 
+The stress for the anisotropic damage plasticity mo del (E positive, ISOFLAG = 0) is 
+deﬁned as 
+/u1D̅48= (1 − |u1D714|u1D461Cst)/u1D̅48|u1D461Cst+ (1 − |u1D714|u1D4J≠Cst)/u1D̅48|u1D4J≠Cst 
+where /u1D̅48|u1D461 and /u1D̅48/u1D450 are the positive and negative part of the eﬀective  stress /u1D̅48eff  determined 
+in the principal stress space.  The scalar function s |u1D714|u1D461 and |u1D714/u1D450 are damage parameters.  
+ 
+The stress for the isotropic damage plasticity mode l (E negative, ISOFLAG = 1) is 
+deﬁned as  
+    /u1D̅48= (1 − |u1D714|u1D461Cst)/u1D̅48|eCst /f.st/f.st *.   
+ |u1D434|u1D4J4=3|u1D4J3|u1D461/u1D45E2(/u1D̅05)
+|u1D4J3/u1D450+|u1D4JA0
+2, |u1D43J |u1D4J4=/u1D45E2(/u1D̅05)
+31 + |u1D4J3|u1D461/|u1D4J3/u1D450
+ln |u1D434|u1D4J4
+3/u1D45E2+|u1D4JA0
+2 + ln |parenleftCv6|u1D437|u1D4J3+ 1
+2|u1D437|u1D4J3− 1|parenriµhtCv6 
+The hardening laws /u1D45E1 and /u1D45E2 control the shape of the yield surface and the pla stic 
+potential, and they are deﬁned as 
+/u1D45E1(/u1D̅05)=/u1D45Eℎ0+|parenleftCv21 −/u1D45Eℎ0|parenriµhtCv2|parenleftCv2/u1D̅053− 3/u1D̅052+ 3/u1D̅05|parenriµhtCv2−/u1D4:B|u1D4JD|parenleftCv2/u1D̅053− 3/u1D̅052+ 2/u1D̅05|parenriµhtCv2,/u1D̅05< 1 
+/u1D45E1(/u1D̅05)= 1,                                                                                                              /u1D̅05≥ 1 
+/u1D45E2(/u1D̅05)= 1,                                                                                                              /u1D̅05< 1 
+/u1D45E2(/u1D̅05)= 1 +/u1D4:B|u1D4JD|parenleftCv1/u1D̅05− 1|parenriµhtCv1,                                                                                     /u1D̅05≥ 1 
+The evolution for the hardening variable is given b y 
+/u1D̅05̇=4|u1D7≠6̇cos 2/u1D̅0:
+|u1D46Jℎ(|u1D7≠∆|u1D463)/p∙r∙llel.β6|u1D4J1|u1D4J4 
+|u1D4J1|u1D7≠∆ /p∙r∙llel.β6 
+It sets the rate of the hardening variable to the n orm of the plastic strain rate scaled by a 
+ductility measure which is deﬁned below as 
+|u1D46Jℎ(|u1D7≠∆|u1D463)= |u1D434ℎ−|parenleftCv1|u1D434ℎ− |u1D43Jℎ|parenriµhtCv1|u1D4J2−|u1D44Jℎ
+|u1D436ℎ,      |u1D44Jℎ≥ 0 
+|u1D46Jℎ(|u1D7≠∆|u1D463)= |u1D438ℎ|u1D4J2|u1D44Jℎ
+|u1D439ℎ+ |u1D437ℎ,                      |u1D44Jℎ< 0   
+And ﬁnally 
+|u1D438ℎ= |u1D43Jℎ− |u1D437ℎ, |u1D439ℎ=|parenleftCv1|u1D43Jℎ− |u1D437ℎ|parenriµhtCv1|u1D436ℎ
+|u1D434ℎ− |u1D43Jℎ 
+Damage: 
+Damage is initialized when the equivalent strain |u1D7≠≠̃ reaches the threshold value |u1D7≠≠0= |u1D4J3|u1D461|u1D438⁄ 
+where the equivalent strain is deﬁned as 
+|u1D7≠≠̃=|u1D7≠≠|zeroCst|u1D4JA|zeroCst
+2⎣⎢⎡|u1D7≠+
+/radical.v16|u1D4J3|u1D4J≠Cst|u1D4JF(/u1D450/u1D45C|u1D46≠ /u1D̅0:) +|u1D7≠∆|u1D449Cst
+|u1D4J3|u1D4J≠Cst⎦⎥⎤+
+⎷/radical.ex/radical.ex/radical.tp
+|u1D7≠≠|zeroCst|twoCst|u1D4JA|zeroCst|twoCst
+4⎝⎜⎛|u1D7≠+
+/radical.v16|u1D4J3|u1D4J≠Cst|u1D4JF(/u1D450/u1D45C|u1D46≠ /u1D̅0:) +|u1D7≠∆|u1D449Cst
+|u1D4J3|u1D4J≠Cst⎠⎟⎞|twoCst
++3|u1D7≠≠|zeroCst|twoCst|u1D7≠+|twoCst
+2|u1D4J3|u1D4J≠Cst|twoCst 
+Tensile damage is described by a stress-inelastic d isplacement law.  For linear and 
+exponential damage type the stress value |u1D4J3|u1D461Cst and the displacement value |u1D464/u1D45:.st must be 
+deﬁned.  For the bi-linear type two additional para meters |u1D4J3|u1D461Cst|oneCst and |u1D464/u1D45:.st|oneCst must be deﬁned, 
+see ﬁgure below how the stress softening is control led by the input parameters.  *.   
+ Strain rate: 
+Concrete is strongly rate dependent.  If the loadin g rate is increased, the tensile and 
+compressive strength increase and are more prominen t in tension then in compression.  
+The dependency is taken into account by an addition al variable |u1D6F+|u1D4JF≥ 1. The rate 
+dependency is included by scaling both the equivale nt strain rate and the inelastic 
+strain.  The rate parameter is deﬁned by 
+|u1D6F+|u1D4JF= (1 −/u1D44Bcompression ) |u1D6F+|u1D4JF|u1D461 +/u1D44Bcompression |u1D6F+|u1D4JF /u1D450 
+Where /u1D44Bcompression  is continuous compression measure (= 1 means only compression, = 0 
+means only tension) and for tension we have 
+|u1D6F+|u1D4JF|u1D461 =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎧ 1 |u1D7≠≠̇max < 30 × 10 −6|u1D46≠−1 
+|parenleftCvJ|u1D7≠≠̇max 
+|u1D7≠≠̇|u1D4610|parenriµhtCvJ|u1D6FF|u1D461
+30 × 10 −6< |u1D7≠≠̇max < 1 |u1D46≠−1
+|u1D6FD|u1D461|parenleftCvJ|u1D7≠≠̇max 
+|u1D7≠≠̇|u1D4610|parenriµhtCvJ1
+3 |u1D7≠≠̇max > 1 |u1D46≠−1 
+ 
+where |u1D6FF|u1D461=1
+1+8|u1D4J3/u1D450/|u1D4J3/u1D4500 , |u1D6FD|u1D461= |u1D4J26|u1D6FF|u1D461−2 and |u1D7≠≠̇|u1D4610= 1 × 10 −6|u1D46≠−1. For compression the corresponding 
+rate factor is given by 
+|u1D6F+|u1D4JF /u1D450=
+⎩|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex|<raceleftCex⎧1 ||u1D7≠≠̇min |< 30 × 10 −6|u1D46≠−1
+|<racketleftCvJ|u1D446||u1D7≠≠̇min |
+|u1D7≠≠̇/u1D4500|<racketriµhtCvJ1.026|u1D6FF/u1D450
+30 × 10 −6< ||u1D7≠≠̇min | < 1|u1D46≠−1
+|u1D6FD/u1D450|<racketleftCvJ||u1D7≠≠̇min |
+|u1D7≠≠̇/u1D4500|<racketriµhtCvJ1
+3| |u1D7≠≠̇min | > 30|u1D46≠−1 
+where |u1D6FF/u1D450=1
+5+9|u1D4J3/u1D450/|u1D4J3/u1D4500, |u1D6FD/u1D450= |u1D4J26.156|u1D6FF/u1D450−2 and |u1D7≠≠̇/u1D4500= 30 × 10 −6|u1D46≠−1. The parameter |u1D4J3/u1D4500 is an input 
+parameter.  A recommended value is 10MPa. *

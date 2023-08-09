@@ -1,0 +1,33 @@
+ ...................... ................................................... .............. 3-36  
+*.  
+ *.  *.  
+*.   
+3-36 (.   
+This is Thermal Material Type 10.  With this model,  isotropic thermal properties that are 
+dependent on temperature (and/or mechanical history  variables) can be speciﬁed with 
+load curves.  The properties must be deﬁned for the  temperature (and/or history 
+variable) range that the material will see in the a nalysis. 
+Card Summary: 
+Card 1a.   This card is included if TGHSV = 0. 
+TMID TRO TGRLC TGMULT TLAT HLAT   
+Card 1b.   This card is included if TGHSV ≠ 0. 
+TMID TRO TGRLC TGMULT TLAT HLAT   
+Card 2.   This card is required. 
+HCLC TCLC HCHSV TCHSV TGHSV    
+Data Card Deﬁnitions: 
+This card is included if TGHSV = 0 (see Card 2). 
+ Card 1a 1 2 3 4 5 6 7 8 
+Variable TMID TRO TGRLC TGMULT TLAT HLAT   
+Type A F I F F F   
+ 
+ VARIABLE   DESCRIPTION  
+TMID Thermal material identiﬁcation.  A unique number or  label must 
+be speciﬁed (see *PART). 
+TRO Thermal density. 
+EQ.0.0: Default to structural density 
+TGRLC Thermal generation rate curve ID (see *DEFINE _CURVE): 
+GT.0: Function of time 
+EQ.0: Use constant multiplier value, TGMULT. *.   
+3-38 (.   *.   
+3-40 (.   *.   
+3-42 (.   *

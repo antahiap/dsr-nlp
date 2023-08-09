@@ -1,0 +1,347 @@
+: *.  
+*.   *.   
+ Card 8.   This card is included if HEAT = 1. 
+AUST FERR PEAR BAIN MART GRK GRQR TAU1 
+Card 9.   This card is included if HEAT = 1. 
+GRA GRB EXPA EXPB GRCC GRCM HEATN TAU2 
+Card 10.   This card is included if REACT = 1. 
+FS PS BS MS MSIG LCEPS23 LCEPS4 LCEPS5 
+Card 11.   This card is included if TEMPER = 1. 
+LCH4 LCH5 DTCRIT TSAMP     
+Card 12.   This card is included if CWM = 1. 
+TASTART TAEND TLSTART TLEND EGHOST PGHOST AGHOST  
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR TUNIT CRSH PHASE HEAT 
+Type A F F F F I I I 
+Defaults none none none none 3600 0 0 0 
+ 
+VARIABLE DESCRIPTION  BASELINE VALUE 
+MID Material identiﬁcation.  A unique number or 
+label must be speciﬁed (see *PART).  
+RO Material density 7830 Kg/m 3 
+E Young’s modulus: 
+GT.0.0: Constant value 
+LT.0.0: Temperature dependent Young’s 
+modulus given by load curve or ta- 
+ble ID = -E. See Remark 9  for more 100 GPa [ 1] *.   
+ VARIABLE DESCRIPTION  BASELINE VALUE 
+HEAT Switch to activate the heating algorithms (see 
+Remarks 7  and 8): 
+EQ.0: Heating is not activated which means 
+that no transformation to austenite is 
+possible. 
+EQ.1: Heating is activated which means 
+that only transformation to austenite 
+is possible. 
+EQ.2: Automatic switching between cooling 
+and heating.  LS-DYNA checks the 
+temperature gradient and calls the 
+appropriate algorithms.  For example, 
+this can be used to simulate the heat 
+aﬀected zone during welding. 
+LT.0: The switch between cooling and 
+heating is deﬁned by a time depend- 
+ent load curve with ID = |H EAT| . The 
+ordinate should be 1.0 when heating 
+is applied and 0.0 if cooling is prefer- 
+able.  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCY1 LCY2 LCY3 LCY4 LCY5 KFER KPER B 
+Type I I I I I F F F 
+Defaults none none none none none 0.0 0.0 0.0 
+ 
+VARIABLE DESCRIPTION  BASELINE VALUE 
+LCY1 Load curve or table ID for austenite 
+hardening.   
+Load Curve.   When LCY1 is a load curve 
+ID, it defines input yield stress as a 
+function of effective plastic strain. 
+Tabular Data (LCY1 > 0).   When LCY1 is  *.   
+ VARIABLE DESCRIPTION  BASELINE VALUE 
+Co Cobolt [weight %] 0.0 [ 2] 
+Mo Molybdenum [weight %] 0.0 [ 2] 
+Cr Chromium [weight %] 0.21 [ 2] 
+Ni Nickel [weight %] 0.0 [ 2] 
+Mn Manganese [weight %] 1.25 [ 2] 
+Si Silicon [weight %] 0.29 [ 2] 
+V Vanadium [weight %] 0.0 [ 2] 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable W Cu P Al As Ti CWM LCTRE 
+Type F F F F F F I I 
+Defaults 0.0 0.0 0.0 0.0 0.0 0.0 0 none 
+ 
+VARIABLE DESCRIPTION  BASELINE VALUE 
+W Tungsten [weight %] 0.0 [ 2] 
+Cu Copper [weight %] 0.0 [ 2] 
+P Phosphorous [weight %] 0.013 [ 2] 
+Al Aluminum [weight %] 0.0 [ 2] 
+As Arsenic [weight %] 0.0 [ 2] 
+Ti Titanium [weight %] 0.0 [ 2] 
+CWM Flag for computational welding mechanics 
+input.  One additional input card is read.  
+EQ.1.0: Active  
+EQ.0.0: Inactive  *.   
+ VARIABLE DESCRIPTION  BASELINE VALUE 
+Remark 10  for more information. 
+LAT5 Latent heat for the decomposition of austenite 
+into martensite. 
+GT.0.0: Constant value 
+LT.0.0: Load curve ID giving latent heat as 
+a function of temperature 
+Note that LAT5 is ignored if a table ID is used 
+in LAT1. 640 ×10 |sixCst J/m 3 [2] 
+TABTH Table ID for thermal expansion coeﬃcient.  
+With this option active THEXP1, THEXP2, 
+LCTH1 and LCTH5 are ignored.  See 
+Remark 11 . 
+GT.0: A table for instantaneous thermal 
+expansion (TREF is ignored). 
+LT.0: A table with thermal expansion with 
+reference to TREF.  
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable QR2 QR3 QR4 ALPHA GRAIN TOFFE TOFPE TOFBA 
+Type F F F F F F F F 
+Defaults 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ 
+VARIABLE DESCRIPTION  BASELINE VALUE 
+QR2 Activation energy divided by the universal 
+gas constant for the diﬀusion reaction of the 
+austenite-ferrite reaction: Q2 |u1D44J ⁄ . |u1D44J = 8.314472 
+[J/mol K].  10324 K [ 3] = 
+(23000 cal/mole) × 
+(4.184 J/cal) / 
+(8.314 J/mole/K)  
+QR3 Activation energy divided by the universal 
+gas constant for the diﬀusion reaction for the 
+austenite-pearlite reaction: Q3/|u1D44J . |u1D44J = 8.314472 
+[J/mol K]. 13432. K [ 3] *.   
+ VARIABLE DESCRIPTION  BASELINE VALUE 
+PLMEM3 Same as PLMEM2 but between austenite and 
+pearlite 0.0  
+PLMEM4 Same as PLMEM2 but between austenite and 
+bainite 0.0 
+PLMEM5 Same as PLMEM3 but between austenite and 
+martensite 0.0  
+STRC Eﬀective strain rate parameter |u1D436. 
+LT.0.0: load curve ID = -STRC  
+GT.0.0: constant value 
+EQ.0.0: strain rate NOT active 0.0 
+STRP Eﬀective strain rate parameter |u1D443. 
+LT.0.0: load curve ID = -STRP 
+GT.0.0: constant value 
+EQ.0.0: strain rate NOT active 0.0 
+REACT Flag for advanced reaction kinetics input.  One 
+additional input card is read.  
+EQ.1.0: active  
+EQ.0.0: inactive 0.0 
+TEMPER Flag for tempering input.  One additional 
+input card is read.  
+EQ.1.0: active  
+EQ.0.0: inactive 0.0  
+ *.   
+ Heat Card 2.   Additional Card for HEAT =1. 
+ Card 9 1 2 3 4 5 6 7 8 
+Variable GRA GRB EXPA EXPB GRCC GRCM HEATN TAU2 
+Type F F F F F F F F 
+Default 3.11 7520. 1.0 1.0 none none 1.0 4.806 
+ 
+VARIABLE DESCRIPTION  BASELINE VALUE 
+GRA Grain growth parameter |u1D434 [9] 
+GRB Grain growth parameter |u1D43J. A table of 
+recommended values of GRA and GRB is 
+included in Remark 8 . [9] 
+EXPA Grain growth parameter |u1D44∆ 1.0 [ 9] 
+EXPB Grain growth parameter |u1D44F 1.0 [ 9] 
+GRCC Grain growth parameter with the 
+concentration of non-metals in the blank, 
+weight% of C or N  [9] 
+GRCM Grain growth parameter with the 
+concentration of metals in the blank, lowest 
+weight% of Cr, V, Nb, Ti, Al [9] 
+HEATN Grain growth parameter |u1D4JB for the austenite 
+formation 1.0 [ 9] 
+TAU2 Empirical grain growth parameter /u1D450|twoCst 
+describing the function /u1D̅0F(|u1D447) 4.806 [ 9] 
+ *.   
+ VARIABLE DESCRIPTION  BASELINE VALUE 
+LCEPS4 Load Curve ID dependent on plastic strain 
+that scales the activation energy QR4. 
+QR 4=|u1D4444×LCEPS4 |parenleftCv2|u1D7≠≠pl |parenriµhtCv2|u1D44J⁄  
+LCEPS5 Load curve ID which describe the increase of 
+the martensite start temperature for cooling as 
+a function of plastic strain. 
+MS ∗=MS +MSIG ×|u1D7≠∆eff +LCEPS5 |parenleftCv2|u1D7≠≠pl |parenriµhtCv2  
+ 
+Tempering Card.   Additional card for TEMPR = 1. 
+ Card 11 1 2 3 4 5 6 7 8 
+Variable LCH4 LCH5 DTCRIT TSAMP     
+Type I I F F     
+Default 0 0 0.0 0.0     
+ 
+VARIABLE DESCRIPTION  BASELINE VALUE 
+LCH4 Load curve ID of Vicker hardness as a 
+function of temperature for Bainite hardness 
+calculation  
+LCH5 Load curve ID of Vicker hardness as a 
+function of temperature for Martensite 
+hardness calculation  
+DTCRIT Critical cooling rate to detect holding phase  
+TSAMP Sampling interval for temperature rate 
+monitoring to detect the holding phase  
+ *.   
+ The start temperatures are automatically calculated  based on the composition: 
+1.  Ferrite, 
+ FS = 11 85 − 203 ×/radical.v1C− 15.2 × Ni + 44.7× Si + 104 ×V+ 31.5 × Mo + 13.1 × W
+− 30 × Mn − 11 × Cr − 20 × Cu + 700 × P + 400 × Al + 120 × As 
++ 400 × Ti 
+2.  Pearlite, 
+PS =996 − 10.7× Mn − 16.9× Ni + 2 9× Si + 16.9× Cr + 2 90 × As + 6.4 × W 
+3.  Bainite, 
+BS =910 − 5 8× C − 35 × Mn − 15 × Ni − 34 × Cr − 41 × Mo 
+4.  Martensite, 
+MS =812 − 423 × C  − 30.4 × Mn − 1 7.7× Ni − 12.1 × Cr − 7.5 × Mo + 10 × Co 
+−7.5 × Si 
+where the element weight values are input on Cards 2 through 4. 
+ 
+The automatic start temperatures are printed to the  messag  ﬁle and if they are not 
+accurate enough you can manually set them in the in put deck (must be set in absolute 
+temperature, Kelvin).  If HEAT > 0, the temperature  FSnc (ferrite without C) is also 
+echoed.  If the specimen exceeds that temperature, all remaining ferrite is instantane- 
+ously transformed to austenite. 
+Remarks: 
+1.  History Variables.   History variables 1 through 8 include the diﬀeren t phases, 
+the Vickers hardness, the yield stress and the ASTM  grain size number.  Set 
+NEIPS = 8 (shells) or NEIPH = 8 (solids) on *DATABA SE_EXTENT_BINARY. 
+History 
+Variable Description 
+1 Amount austenite 
+2 Amount ferrite 
+3 Amount pearlite 
+4 Amount bainite 
+5 Amount martensite 
+6 Vickers hardness 
+7 Yield stress *.   
+ 8.  HEAT, Grain Growth, and Re-austenization.   When HEAT is activated the 
+re-austenitization and grain growth algorithms are also activated.  The grain 
+growth is activated when the temperature exceeds a threshold value that is 
+given by  
+|u1D447 =|u1D43J
+|u1D434 − log |oneCst|zeroCst |<racketleftCv1(GRCM)|u1D44∆Cst(GRCC)|u1D44FCst|<racketriµhtCv1  , 
+and the rate equation for the grain growth is, 
+|u1D4J4̇=/u1D458
+2|u1D4J4|u1D4J2−|u1D444Cst
+|u1D44JCst|u1D447Cst   . 
+The rate equation for the phase re-austenitization is given in Oddy (1996) and 
+is here mirrored 
+|u1D46J̇|u1D44∆Cst= |u1D4JB|<racketleftCvJln |parenleftCvJ|u1D46J|u1D4J2Cst|u1D462Cst 
+|u1D46J|u1D4J2Cst|u1D462Cst − |u1D46J|u1D44∆Cst|parenriµhtCvJ|<racketriµhtCvJ|u1D4JBCst−|oneCst
+|u1D4JBCst|<racketleftCvJ|u1D46J|u1D4J2Cst|u1D462Cst − |u1D46J|u1D44∆Cst
+/u1D̅0F(|u1D447)|<racketriµhtCvJ  , 
+where |u1D4JB is the parameter HEATN.  The temperature dependent  function /u1D̅0F(|u1D447) 
+is given from Oddy as /u1D̅0F(|u1D447) =/u1D450|oneCst(|u1D447 − |u1D447|u1D46≠Cst)|u1D4J≠Cst|twoCsts. The empirical parameters /u1D450|oneCst and /u1D450|twoCst 
+are calibrated in Oddy to 2.06 × 10 /eight.st and 4.806 respectively.  Note that /u1D̅0F above 
+given in seconds . 
+Recommended values for GRA and GRB are given in the  following table. 
+ 
+Compound Metal Non-metal GRA GRB 
+Cr 23 C6 Cr C 5.90 7375 
+V4C3 V C 0.75 5.36 8000 
+TiC Ti C 2.75 7000 
+NbC Nb C 0.7 3.11 7520 
+Mo 2C Mo C 5.0 7375 
+Nb(CN) Nb (CN) 2.26 6770 
+VN V N 3.46 + 0.12%Mn  8330 
+AlN Al N 1.03 6770 
+NbN Nb N 4.04 10230 
+TiN Ti N 0.32 8000 
+9.  Using the Table Capability for Temperature Dependen ce of Young’s 
+Modulus.   Use *DEFINE_TABLE_2D and set the abscissa value e qual to 1 for 
+the austenite YM-curve, equal to 2 for the ferrite YM-curve, equal to 3 for the 
+pearlite YM curve, equal to 4 for the bainite YM-cu rve and ﬁnally equal to 5 for *.   
+ HV |fourCst|u1D4JBCst+|oneCst=|u1D46J|fourCst|u1D4JBCst
+|u1D46J|fourCst|u1D4JBCst+|oneCstHV |fourCst|u1D4JBCst+∆|u1D46J|fourCst
+|u1D46J|fourCst|u1D4JBCst+|oneCstℎ|fourCst(|u1D447),∆|u1D46J|fourCst= |u1D46J|fourCst|u1D4JBCst+|oneCst− |u1D46J|fourCst|u1D4JBCst
+HV |fiveCst|u1D4JBCst+|oneCst=|u1D46J|fiveCst|u1D4JBCst
+|u1D46J|fiveCst|u1D4JBCst+|oneCstHV |fiveCst|u1D4JBCst+∆|u1D46J|fiveCst
+|u1D46J|fiveCst|u1D4JBCst+|oneCstℎ|fiveCst(|u1D447),∆|u1D46J|fiveCst= |u1D46J|fiveCst|u1D4JBCst+|oneCst− |u1D46J|fiveCst|u1D4JBCst 
+We detect the holding phase for Bainite and Martens ite when the temperature 
+is in the appropriate range and if average temperat ure rate is below DTCRIT. 
+The average temperature rate is calculated as |u1D447tresh |u1D461tresh ⁄ , where |u1D447tresh |u1D4JB+1= |u1D447tresh |u1D4JB+
+|dividesCv2|u1D447̇|dividesCv2∆|u1D461 and |u1D461tresh |u1D4JB+1= |u1D461tresh |u1D4JB+∆|u1D461.  The average temperature and time are updated 
+until |u1D461tresh ≥ |u1D461 samp . 
+13.  CWM (Welding).   When computational welding mechanics is activated  with 
+CWM = 1, the material can be deﬁned to be initially  in a quiet state.  In this 
+state the material (often referred to as ghost mate rial) has thermo-mechanical 
+properties deﬁned by an additional card.  The mater ial is activated when the 
+temperature reaches the birth temperature.  See MAT _CWM (.   *. . They are pro- 
+vided to give reasonable starting results.  These 
+values may not reproduce the results from the 
+papers by Hippchen. 
+Card Summary: 
+Card 1.  This card is required. 
+MID RO E PR TUNIT TRIP PHASE HEAT 
+Card 2.   This card is required. 
+LCY1 LCY2 LCY3 LCY4 LCY5 C_F C_P C_B 
+Card 3.   This card is required. 
+C Co Mo Cr Ni Mn Si V *. : 
+EQ.0:  Heating is not activated. 
+EQ.1:  Heating is activated. 
+EQ.2:  Automatic switching between cooling 
+and heating 
+LT.0:  Switch between cooling and heating 
+is deﬁned by a time dependent load 
+curve with ID |H EAT |.  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCY1 LCY2 LCY3 LCY4 LCY5 C_F C_P C_B 
+Type I I I I I F F F 
+Defaults none none none none none 0.0 0.0 0.0 
+ 
+VARIABLE DESCRIPTION BASELINE VALUE 
+LCY1 Load curve or table ID for austenite 
+hardening.   
+Load Curve.   When LCY1 is a load curve 
+ID, it defines input yield stress as a 
+function of effective plastic strain. 
+Tabular Data (LCY1 > 0).   When LCY1 is  *. . [9] 
+EXPA Grain growth parameter |u1D44∆ 1.0 [ 9] 
+EXPB Grain growth parameter |u1D44F 1.0 [ 9] 
+GRCC Grain growth parameter with the 
+concentration of nonmetals in the blank, 
+weight% of C or N  [9] 
+GRCM Grain growth parameter with the 
+concentration of metals in the blank, lowest 
+weight% of Cr, V, Nb, Ti, Al [9] 
+HEATN Grain growth parameter |u1D4JB for the austenite 
+formation 1.0 [ 9] 
+TAU2 Empirical grain growth parameter /u1D450|twoCst 
+describing the function /u1D̅0F(|u1D447) 4.806 [ 9] 
+ *.  for details. 
+10.  Phase Indexed Tables.   When using a table ID to describe the Young’s 
+modulus as dependent on the temperature, use *DEFIN E_TABLE_2D.  Set the 
+abscissa value equal to 1 for the austenite YM-curv e, equal to 2 for the ferrite 
+YM-curve, equal to 3 for the pearlite YM curve, equ al to 4 for the bainite YM-
+curve and ﬁnally equal to 5 for the martensite YM-c urve.  When using the 
+PHASE option only the curves for the included phase s are required, but all ﬁve 
+phases may be included.  The total YM is calculated  by a linear mixture law:  
+Y M =Y M1 × P H ASE1 +⋯+Y M5 × P H ASE5 
+For example: 
+*DEFINE_TABLE_2D 
+$ The number before curve id:s define which phase t he curve 
+$ will be applied to.  1 = Austenite, 2 = Ferrite, 3 = Pearlite, 
+$ 4 = Bainite and 5 = Martensite.  
+      1000       0.0       0.0 
+                 1.0                 100 
+                 2.0                 200 *. , the tran sformation for cool- 
+ing phases can be computed by the evolution equatio n:  
+|u1D4J1/u1D44B|u1D44FCst
+|u1D4J1|u1D461 = 2|zeroCst/period.st|fiveCst(/u1D4:A.st−|oneCst)|u1D4J3 (|u1D436)(|u1D447start − |u1D447)|u1D4JBCst/u1D44̅.sts|u1D437(|u1D447)/u1D44B|u1D44FCst|u1D4JBCst|oneCsts|parenleftCv1|oneCst/period.st|zeroCst−/u1D44B.st|u1D44FCsts|parenriµhtCv1(1.0 −/u1D44B|u1D44FCst)|u1D4JBCst|twoCsts/u1D44B.st|u1D44FCsts
+Y(/u1D44B|u1D44FCst)  , 
+formulated in the normalized phase concentration  
+/u1D44B|u1D44FCst=|u1D46J|u1D44FCst
+|u1D46Je q (|u1D447)  . 
+In contrast to *

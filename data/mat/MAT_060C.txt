@@ -1,0 +1,19 @@
+: *.  
+*.   
+ *.   *.   
+ |u1D44∆ =|parenleftCv4|u1D43∆ −2
+3|u1D43A|parenriµhtCv4
+|parenleftCv4|u1D43∆ +4
+3|u1D43A|parenriµhtCv4 
+|u1D44F =|u1D43A|u1D4J1|u1D461 
+|u1D71≠|parenleftCv4|u1D43∆ +4
+3|u1D43A|parenriµhtCv4 
+in which |u1D4JD is the pressure deﬁned as the negative of the hydr ostatic stress. 
+ 
+The variation of viscosity with temperature can be deﬁned in any one of the 3 ways: 
+i)  Constant, |u1D449 = |u1D449|zeroCst. Do not deﬁne constants, A, B, and C, or the curve , V_LC. 
+ii)  |u1D449 = |u1D449|zeroCst× 10 (/u1D4:4.sts
+/u1D44̅.sts−/u1D4:5.sts+/u1D4:6.st)  
+iii)  Piecewise curve: deﬁne the variation of viscosity with temperature. 
+NOTE: Viscosity is inactive during dynamic re- 
+laxation. *

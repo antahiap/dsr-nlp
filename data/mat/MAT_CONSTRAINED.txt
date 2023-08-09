@@ -1,0 +1,67 @@
+ .................................. ................................................... ....................... 2-1686  
+*.  [10] 
+ *.  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+ALPHA1 Dimensionless parameter scaling the eﬀective  displacement 
+ALPHA2 Dimensionless parameter scaling the eﬀective  displacement 
+ALPHA3 Dimensionless parameter scaling the eﬀective displa cement.  The 
+sign of AL PHA3 can be used to choose the normal update 
+procedure: 
+GT.0:  incremental update (default) 
+LT.0:  total update (recommended) 
+EXPN Exponent value for load function in normal dir ection. 
+EXPT Exponent value for load function in tangential  direction. 
+ 
+SPR3 cards.  This card is included if the SPR3 keyword option is  used. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable MID RO MODEL      
+Type A F F      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+MODEL  Material behavior and damage model (see Remarks of *CON-
+STRAINED_INTERPOLATION_SPOTWELD).  
+EQ.1: SPR3 (default) 
+EQ.2: SPR4 
+EQ.11: same as 1 with selected material parameters as 
+functions  
+EQ.12: same as 2 with selected material parameters as 
+functions  
+EQ.21: same as 11 with slight modiﬁcation  
+EQ.22: same as 12 with slight modiﬁcation  *.   
+  VARIABLE   DESCRIPTION  
+STIFF2 Elastic shear stiﬀness 
+STIFF3 Elastic bending stiﬀness 
+STIFF4 Elastic torsional stiﬀness 
+LCDEXP Load curve for damage exponent as a function  of mode mixity 
+GAMMA Scaling factor, |u1D6F∆|oneCst 
+SROPT Shear rotation option that deﬁnes local kinem atics system:  
+EQ.0: pure shear does not create normal component (defaul t).  
+EQ.1: pure shear creates normal component. 
+ 
+SPR3 Optional Cards. This card is only read if the keyword option SPR3 i s used and 
+MODEL = 2, 12, or 22.  
+Card 5b.1  1 2 3 4 5 6 7 8 
+Variable UPFN UPFS ALPHA2 BETA2 UPRN UPRS ALPHA3 BETA3 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+UPFN Plastic initiation displacement in normal direction , |u1D462̅|zeroCst/co⋯⋯a.stref pl /co⋯⋯a.st|u1D4JBCst 
+UPFS Plastic initiation displacement in shear direction,  |u1D462̅|zeroCst/co⋯⋯a.stref pl /co⋯⋯a.st|u1D46≠Cst 
+ALPHA2 Plastic initiation displacement scaling fact or, |u1D6F+|twoCst 
+BETA2 Exponent for plastic initiation displacement,  |u1D6FD|twoCst 
+UPRN Plastic rupture displacement in normal direction, |u1D462̅/u1D45:.st/co⋯⋯a.stref pl /co⋯⋯a.st|u1D4JBCst 
+UPRS Plastic rupture displacement in shear direction, |u1D462̅/u1D45:.st/co⋯⋯a.stref pl /co⋯⋯a.st|u1D46≠Cst 
+ALPHA3 Plastic rupture displacement scaling factor,  |u1D6F+|threeCst 
+BETA3 Exponent for plastic rupture displacement, |u1D6FD|threeCst 
+ *. _SPR2 
+$      MID        RO        FN        FT        DN        DT       XIN       XIT 
+       555     7.8e-6      2.53       4.8       4.0       7.5       0.6       0.5 
+$   ALPHA1    ALPHA2    ALPHA3      EXPN      EXPT  
+       0.2       0.7       1.9       8.0       8.0 
+and still get the same result.  One can see that on ly the non-material data (MID, SID, 
+NSID, THICK, D, INTP, PIDVB, XPID i) remains with the *CONSTRAINED keyword.  
+Variables in grey are optional. *

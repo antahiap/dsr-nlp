@@ -1,0 +1,80 @@
+ _{OPTION}  .................................................. .... 2-1413  
+*.  [0] {17} 
+ *.  *.   *.  _{OPTION}  
+This is  Material Type 224_GYS. This is an isotropic elastic  plastic material law with a J3 
+dependent yield surface.  This material considers t ensile/compressive asymmetry in the 
+material response, which is important for HCP metal s like Titanium.  The model is 
+available for solid elements. 
+Available options include: 
+<BLANK> 
+LOG_INTERPOLATION 
+With LOG_INTERPOLATION, the strain rate eﬀect in ta ble LCK1 (Card 2) is 
+interpolated with logarithmic interpolation. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR CP TR BETA NUMINT 
+Type A F F F F F F F 
+Default none none none none none 0.0 1.0 1.0 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCK1 LCKT LCF LCG LCH LCI   
+Type I I I I I I   
+Default 0 0 0 0 0 0   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LCCR LCCT LCSR LCST IFLAG SFIEPM NITER  
+Type I I I I I F I  
+Default 0 0 0 0 0 1 100  *.   
+  
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus: 
+GT.0.0: Constant value is used. 
+LT.0.0: Temperature dependent Young’s modulus given by 
+load curve ID = -E 
+PR Poisson’s ratio 
+CP Speciﬁc heat 
+TR Room temperature 
+BETA Fraction of plastic work converted into heat (super seded by 
+FWORK in *CONTROL_THERMAL_ SOLVER if a coupled 
+thermal/structural analysis): 
+GT.0.0: Constant value is used. 
+LT.0.0: - BETA gives a load curve ID for strain rate depend- 
+ence, a table ID for strain rate and temperature de - 
+pendence, a 3- dimensional table ID for temperature 
+(TABLE_3D), strain rate (TABLE) and plastic strain 
+(CURVE) dependence, or a 4- dimensional table ID for 
+triaxiality (TABLE_4D), temperature (TABLE_ 3D), 
+strain rate (TABLE) and plastic strain (CURVE) de- 
+pendence. 
+NUMINT Number of integration points which must fail before  the element 
+is deleted. 
+EQ.-200: Turns oﬀ erosion for solids.  Not recommended 
+unless used in conjunction with *CONSTRAINED_-
+TIED_NODES_FAILURE. 
+LCK1 Table ID deﬁning for each plastic strain rate value  a load curve ID 
+giving the (isothermal) eﬀective stress as a fu nction of eﬀective 
+plastic strain for that rate. 
+LCKT Table ID deﬁning for each temperature value a load curve ID 
+giving the (qu asi- static) eﬀective stress as a function of eﬀective *.   
+  VARIABLE   DESCRIPTION  
+IFLAG Flag to specify abscissa for LCCR, LCCT, LCSR , LCST: 
+EQ.0: Compressive and shear yields are given as functions  of 
+plastic strain as deﬁned in Remark 1  (default). 
+EQ.1: Compressive and shear yield s are given as functions of 
+eﬀective plastic strain. 
+SFIEPM Scale factor on the initial estimate of the plastic multiplier 
+NITER Number of secant iterations to be performed 
+Remarks: 
+1.  IFLAG. If IFLAG = 0, the compressive and shear curves are deﬁned as follows: 
+σ|u1D4J≠Cst|parenleftCv2|u1D7≠≠|u1D4JDCst|u1D4J≠Cst , |u1D7≠≠̇|u1D4JDCst|u1D4J≠Cst |parenriµhtCv2,     |u1D7≠≠|u1D4JDCst|u1D4J≠Cst = |u1D7≠≠|u1D4J≠Cst−|u1D7≠∆|u1D4J≠Cst
+|u1D438,     |u1D7≠≠̇|u1D4JDCst|u1D4J≠Cst =  |u1D71J|u1D7≠≠|u1D4JDCst|u1D4J≠Cst 
+|u1D71J|u1D461  
+σ|u1D46≠Cst|parenleftCv2|u1D6F∆|u1D4JDCst|u1D46≠Cst , |u1D6F∆̇|u1D4JDCst|u1D46≠Cst |parenriµhtCv2,     |u1D6F∆|u1D4JDCst|u1D46≠Cst = |u1D6F∆|u1D46≠Cst−|u1D7≠∆|u1D46≠Cst
+|u1D43A,     |u1D6F∆̇|u1D4JDCst|u1D46≠Cst =  |u1D71J|u1D6F∆|u1D4JDCst|u1D46≠Cst 
+|u1D71J|u1D461  
+Two history variables (#16 plastic strain in compre ssion and #17 plastic strain 
+in shear) are stored in addition to those history v ariables already stored for 
+*.   *

@@ -1,0 +1,106 @@
+: *. _O: *.  
+*. _O 
+*. ), with some slight modiﬁcations. 
+c)  Norton-Bailey formulation (MODEL = 3).  
+|u1D7≠≠̇|u1D4J≠Cst= |parenleftCv6|u1D434 |parenleftCvJ|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt
+|u1D7≠∆|zeroCst|parenriµhtCvJ|u1D4JBCst
+|parenleftCvJ|u1D447
+|u1D447|zeroCst|parenriµhtCvJ|u1D4JDCst
+|parenleftCv2(|u1D4JA + 1)(|u1D7≠≠|zeroCst+ |u1D7≠≠|u1D4J≠Cst)|parenriµhtCv2|u1D4JACst|parenriµhtCv6|oneCst
+|u1D4JACst+|oneCst
+  . 
+Here |u1D447 is the current temperature. 
+ 
+Viscoelasticity 
+ 
+In the absence of viscoelasticity, we are now done with the description of the stress 
+update, and we simply set 
+/u1D4∫4/u1D4:C.st=/u1D4∫4
+|u1D4JD/u1D4:C.st= |u1D4JD 
+where we use /u1D4∫4/u1D4:C.st and |u1D4JD/u1D4:C.st to denote the ﬁnal deviatoric stress and pressure in link /u1D4:C that is 
+used in the weighted sum at the beginning of this s ection.  The /u1D4∫4 and |u1D4JD are to be 
+understood as the deviatoric stress and pressure re sulting from treatment of creep and 
+plasticity that we just covered, so /u1D̅48=/u1D4∫4− |u1D4JD/u1D4̅0. For viscoelasticity the stress in link /u1D4:C will 
+be subject to stress decay (relaxation and creep), in that it evolves according to the 
+speciﬁed viscoelastic law.  For deviatoric and volu metric decay coeﬃcients |u1D6FD|u1D46≠Cst and |u1D6FD|u1D4JDCst, 
+we have for the hypoelastic law (MODEL = 1) 
+/u1D4∫4/u1D4:C.st/na˙la.st=/u1D4∫4/na˙la.st− |u1D6FD|u1D46≠Cst/u1D4∫4/u1D4:C.st
+|u1D4JḊ/u1D4:C.st= |u1D4JḊ− |u1D6FD|u1D4JDCst|u1D4JD/u1D4:C.st 
+The hyperelastic laws are formulated directly in te rms of the Kirchhoﬀ stress /u1D̅4∫=/u1D4:D/u1D̅48, 
+where /u1D4:D= det /u1D46D. More speciﬁcally, using the notation /u1D45E= −|oneCst
+|threeCst/u1D̅4∫:/u1D4̅0 and /u1D4∫5=/u1D̅4∫+/u1D45E/u1D4̅0, we 
+have for hyperelastic law #1 (MODEL = 2) 
+/u1D4∫5/u1D4:C.st=/u1D4∫5− de v 
+⎣⎢⎡|u1D6FD|u1D46≠Cst/integral.v:|u1D4J2−/u1D6FD.st/u1D460.sts(|u1D461Cst−|u1D46≠Cst)/u1D46D̅|u1D46≠Cst→|u1D461Cst/u1D4∫5(|u1D46≠)/u1D46D̅|u1D46≠Cst→|u1D461Cst|u1D447Cst|u1D4J1|u1D46≠ |u1D461Cst
+|zeroCst ⎦⎥⎤
+/u1D45E/u1D4:C.st=/u1D45E− |u1D6FD|u1D4JDCst/integral.v:|u1D4J2−/u1D6FD.st|u1D4JDCsts(|u1D461Cst−|u1D46≠Cst)/u1D45E(|u1D46≠)|u1D4J1|u1D46≠ |u1D461Cst
+|zeroCst 
+and for hyperelastic law #2 (MODEL = 3) 
+/u1D4∫5/u1D4:C.st=/u1D4∫5− sym 
+⎣⎢⎡|u1D6FD|u1D46≠Cst/integral.v:|u1D4J2−/u1D6FD.st/u1D460.sts(|u1D461Cst−|u1D46≠Cst)/u1D46D|u1D46≠Cst→|u1D461Cst/u1D4∫5(|u1D46≠)/u1D46D|u1D46≠Cst→|u1D461Cst−|oneCst|u1D4J1|u1D46≠ |u1D461Cst
+|zeroCst ⎦⎥⎤ *MAT  *.   *.   
+ primary creep ( |u1D4JA < 1 ), secondary creep ( |u1D4JA = 1 ), and tertiary creep ( |u1D4JA > 1 ) can be 
+modeled.  This model is described by Whirley and He nshall [1992]. *. _O  
+  Card 4 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+Default none none none none none none   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+Ei Young’s moduli 
+PR ij Elastic Poisson’s ratios 
+Gij Elastic shear moduli 
+A Stress coeﬃcient 
+N Stress exponent 
+M Time exponent 
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined by  
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES 
+EQ.1.0: Locally orthotropic with material axes determined by  a 
+point in space and the global location of the eleme nt 
+center; this is the |u1D44∆-direction.  This option is for solid 
+elements only. 
+EQ.2.0: Globally orthotropic with material axes determined b y 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BE TA, from a line in the plane of the element *. _O  
+ /u1D4∫4=/u1D̅48−1
+3tr(/u1D̅48)/u1D408  . 
+and |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt the eﬀective stress 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt=/radical.v53
+2/u1D4∫4:/u1D4∫4  . 
+The effecti v e creep strain is gi v en b y  
+|u1D7≠≠̅|u1D4J≠Csṫ= |u1D434|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D441Cst|u1D461/u1D440.st, 
+where |u1D434, /u1D441, and |u1D44≠ are constants. 
+ 
+The stress increment is given by 
+∆/u1D̅48=/u1D402∆/u1D6C6|u1D4J2Cst=/u1D402(∆/u1D6C6−∆/u1D6C6|u1D4J≠Cst), 
+where the constitutive matrix /u1D402 is taken as orthotropic and can be represented in Voigt 
+notation by its inverse as 
+/u1D402−|oneCst=
+⎣⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎡1
+|u1D438|oneCst−|u1D71≠|twoCst|oneCst 
+|u1D438|twoCst−|u1D71≠|threeCst|oneCst 
+|u1D438|threeCst
+−|u1D71≠|oneCst|twoCst 
+|u1D438|oneCst 1
+|u1D438|twoCst−|u1D71≠|threeCst|twoCst 
+|u1D438|threeCst
+−|u1D71≠|oneCst|threeCst 
+|u1D438|oneCst−|u1D71≠|twoCst|threeCst 
+|u1D438|twoCst1
+|u1D438|threeCst
+1
+|u1D43A|oneCst|twoCst 
+1
+|u1D43A|twoCst|threeCst 
+1
+|u1D43A|oneCst|threeCst ⎦⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎥⎤
+  .*

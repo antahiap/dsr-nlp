@@ -1,0 +1,67 @@
+AL ............................. ................................................... ................. 2-1168  
+*. AL [7] {6} 
+ *. AL  *. -
+AL restricted to linear softening.  It includes a b ilinear traction-separation law with a 
+quadratic mixed mode delamination criterion and a d amage formulation.  This material 
+model can be used only with cohesive element formul ations; see the variable ELFORM 
+in *SECTION_SOLID and *SECTION_SHELL. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO ROFLG INTFAIL EN ET GIC GIIC 
+Type A F I F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable XMU T S UND UTD GAMMA   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see*PART). 
+RO Mass density 
+ROFLG Flag stating whether density is speciﬁed per unit area or volume:  
+EQ.0:  Speciﬁed density is per unit volume (default). 
+EQ.1:  Speciﬁed density is per unit area for controlling t he mass 
+of cohesive elements with an initial volume of zero . 
+INTFAIL The number of integration points required for the c ohesive 
+element to be deleted.  If it is zero, the element will not be deleted 
+even if it satisﬁes the failure criterion.  The val ue of INT FAIL may 
+range from 1 to 4, with 1 as the recommended value.  
+EN The stiﬀness (units of stress / length) normal to the plane of the 
+cohesive element *. AL  
+ *. AL  *. AL  
+  VARIABLE   DESCRIPTION  
+S Peak traction in tangential direction (mode II) 
+STFSF Penetration stiﬀness multiplier for compressi on. Factor =(1.0+
+STFSF)  is used to scale the compressive stiﬀness, i.e. no scaling is 
+done with STFSF = 0.0 (recommended). 
+TSLC2 Normalized traction-separation load curve ID for Mode II. The 
+curve must be normalized in both coordinates and mu st contain 
+at least three points: (0.0, 0.0) , (|u1D7≠6|zeroCst, 1.0) , and (1.0, 0.0) , which 
+represents the origin, the peak and the complete fa ilure, 
+respectively (see Figure M186-1 ). If not speciﬁed, TSLC is used for 
+Mode II behavior as well. 
+Remarks: 
+All three formulations have in common that the trac tion-separation behavior of this 
+model is mainly given by |u1D43A/u1D4:C.st|u1D4J≠Cst and T for normal mode I, |u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst and S for tangential mode II 
+and an arbitrary normalized traction-separation loa d curve for both modes (see Figure 
+M186-1 ). The maximum (or failure) separations are then gi ven by: 
+|u1D6FF/u1D4:C.st|u1D439Cst=|u1D43A/u1D4:C.st|u1D4J≠Cst
+|u1D434TSLC × T  ,    |u1D6FF/u1D4:C.st/u1D4:C.st|u1D439Cst=|u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst
+|u1D434TSLC × S 
+where |u1D434|u1D447Cst /u1D446.st |u1D43FCst /u1D4:6.st  is the area under the normalized traction-separati on curve given with 
+TSLC. 
+If TSLC2 is deﬁned 
+|u1D6FF/u1D4:C.st|u1D439Cst=|u1D43A/u1D4:C.st|u1D4J≠Cst
+|u1D434TSLC ×T  ,    |u1D6FF/u1D4:C.st/u1D4:C.st|u1D439Cst=|u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst
+|u1D434TSLC 2×S 
+Where |u1D434|u1D447Cst /u1D446.st |u1D43FCst /u1D4:6.st |twoCst is the area under the normalized traction-separati on curve given with 
+TSLC2. *. AL  
+ If TSLC2 is defined this changes to : 
+|u1D6FF|u1D439Cst=1 + |u1D6FD|twoCst
+|u1D434TSLC × T + |u1D434TSLC2 × S × |u1D6FD|twoCst⎣⎢⎡|u1D43A/u1D4:C.st|u1D4J≠Cst+ |parenleftCv1|u1D43A/u1D4:C.st/u1D4:C.st|u1D4J≠Cst− |u1D43A/u1D4:C.st|u1D4J≠Cst|parenriµhtCv1 |parenleftCv6|u1D434TSLC2 × S × |u1D6FD|twoCst
+|u1D434TSLC × |u1D447 + |u1D434TSLC2 × S × |u1D6FD|twoCst|parenriµhtCv6XM U 
+⎦⎥⎤ 
+where |u1D6FD = |u1D6FF/u1D4:C.st/u1D4:C.st/|u1D6FF/u1D4:C.st is the “mode mixity”.  The larger the exponent XMU  is chosen, the 
+larger the fracture toughness in mixed-mode situati ons will be.  In this model, damage 
+of the interface is considered, i.e. irreversible c onditions are enforced with load- 
+ing/unloading paths coming from/pointing to the ori gin.  This formulation is similar to 

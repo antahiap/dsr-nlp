@@ -1,0 +1,125 @@
+ .................................. ................................................... .......................... 2-961  
+*.  [0,8A] {14} 
+ *.   *.   *.   
+This is Material Type 148.  This model is for the s imulation of thermally equilibrated 
+ideal gas mixtures.  This model only works with the  multi-material ALE formulation 
+(ELFORM = 11 in *SECTION_SOLID).  This keyword must  be used together with *INI-
+TIAL_GAS_MIXTURE for the initialization of gas dens ities and temperatures.  When 
+applied in the context of ALE airbag modeling, the injection of inﬂator gas is done with 
+a *SECTION_POINT_SOURCE_MIXTURE command which contr ols the injection 
+process.  *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID IADIAB RUNIV      
+Type A I F      
+Default none 0 0.0      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+IADIAB This ﬂag is used to turn ON/OFF adiabatic compressi on logics 
+for an ideal gas.  See Remark 5 . 
+EQ.0: Oﬀ (default) 
+EQ.1: On 
+RUNIV Universal gas constant in per-mole unit (8.31 447 J/(mole × K)).  
+See Remark 1 . 
+ 
+Card 2 for Per Mass Calculation.   Method (A) RUNIV = blank or 0.0. 
+Card 2a.1  1 2 3 4 5 6 7 8 
+Variable CVmass1  CVmass2  CVmass3  CVmass4  CVmass5  CVmass6  CVmass7  CVmass8  
+Type F F F F F F F F 
+ 
+Card 3 for Per Mass Calculation.   Method (A) RUNIV = blank or 0.0. 
+Card 2a.2  1 2 3 4 5 6 7 8 
+Variable CPmass1  CPmass2  CPmass3  CPmass4  CPmass5  CPmass6  CPmass7  CPmass8  
+Type F F F F F F F F 
+ *.   
+  VARIABLE   DESCRIPTION  
+MOLWT1 -
+MOLWT8 Molecular weight of each ideal gas in the mixture ( mass-
+unit/mole).  See Remark 2 . 
+CPmole1 - 
+CPmole8 Heat capacity at constant pressure for up to eight diﬀerent gases 
+in per-mole unit.  These ar e nominal heat capacity values 
+typically at STP.  These are denoted by the variabl e |u1D434 in the 
+equation in Remark 2 . 
+B1 - B8 First order coeﬃcient for a temperature dependent h eat capacity 
+at co nstant pressure for up to eight diﬀerent gases.  Th ese are 
+denoted by the variable |u1D43J in the equation in Remark 2 . 
+C1 - C8 Second order coeﬃcient for a temperature dependent heat 
+capacity at constant pressure for up to eight diﬀer ent gases.  
+These are denoted by the variable |u1D436 in the equation in Remark 2 . 
+Remarks: 
+1.  Methods for Deﬁning Gas Properties.   There are 2 methods of deﬁning the 
+gas properties for the mixture.  If RUNIV is BLANK or ZERO, Method (A) is 
+used to deﬁne constant heat capacities where per-ma ss unit values of |u1D436|u1D463Cst and 
+|u1D436|u1D4JDCst are input.  Only Cards 2a.1 and 2a.2 are required for this method.  Method 
+(B) is used to deﬁne constant or temperature depend ent heat capacities where 
+per-mole unit values of |u1D436|u1D4JDCst are input.  Cards 2b.1 through 2b.4 are required f or 
+this method. 
+2.  Temperature Dependent Heat Capacity.   The per-mass-unit, temperature-
+dependent, constant-pressure heat capacity is 
+|u1D436|u1D4JDCst(|u1D447) =[CPmole + |u1D43J × |u1D447 + |u1D436 × |u1D447|twoCst]
+MOLWT  
+See Table M148-1 . 
+3.  Initial Temperature and Density.   The initial temperature and the density of 
+the gas species present in a mesh or part at time z ero is speciﬁed by the key- 
+|u1D436|u1D4JDCst(|u1D447) CPmole  |u1D43J |u1D436 
+J
+kg  K J
+mole  K J
+mole  K|twoCst J
+mole  K|threeCst 
+ 
+ Table M148-1.   Standard SI units *.  the dissipated kine tic energy is automat- 
+ically converted into heat (internal energy).  Thus , in eﬀect the total energy is 
+conserved instead of conserving just the internal e nergy.  This numerical 
+scheme has been shown to improve accuracy in some c ases.  However, the user 
+should always be vigilant and check the physics of the problem closely. 
+5.  IADIAB.   As an example, consider an airbag surrounded by a mbient air.  As 
+the inﬂator gas ﬂows into the bag, the ALE elements  cut by the airbag fabric 
+shell elements will contain some inﬂator gas inside  and some ambient air out- 
+side.  The multi-material element treatment is not perfect.  Consequently the 
+temperature of the outside air may be made artiﬁcia lly high after the multi-
+material element treatment.  To prevent the outside  ambient air from getting 
+artiﬁcially high |u1D447, set IADIAB = 1 for the ambient air outside.  A si mple adia- 
+batic compression equation is then assumed for the outside air.  The use of this 
+ﬂag may be needed, but only when that air is modele d by the *.   
+  
+The *INITIAL_GAS_MIXTURE keyword input is also show n below.  It basically 
+speciﬁes that “AMMGID 2 may be present in part or m esh H4 at |u1D461 = 0 , and the initial 
+density of this gas is deﬁned in the rho1 position which corresponds to the 1 st  material 
+in the mixture (or H5, the resident gas).” 
+Example Conﬁguration: 
+ 
+Sample Input: 
+$-------------------------------------------------- ----------------------------- 
+*PART 
+H5 = initial gas inside the tank 
+$      PID     SECID       MID     EOSID      HGID      GRAV    ADPOPT      TMID 
+         5         5         5         0         5         0         0 
+*SECTION_SOLID 
+         5        11         0 
+$-------------------------------------------------- ----------------------------- 
+$ Example 1:  Constant heat capacities using per-ma ss unit. 
+$*.  
+$      MID    IADIAB    R_univ 
+         5         0  8.314470 
+$      MW1       MW2       MW3       MW4       MW5       MW6       MW7       MW8 
+ 0.0288479   0.02256 
+$  Cp1_mol   Cp2_mol   Cp3_mol   Cp4_mol   Cp5_mol   Cp6_mol   Cp7_mol   Cp8_mol 
+ 29.049852  36.23388 
+$       B1        B2        B3        B4        B5        B6        B7        B8 
+  7.056E-3  0.132E-1 
+$       C1        C2        C3        C4        C5        C6        C7        C8 
+ -1.225E-6 -0.190E-5 
+S1 = tank  
+H4 = AMMG1 = background 
+outside air (initially deﬁned 
+ALE mesh) 
+H5 = AMMG2 = initial gas 
+inside the tank (this has no 
+initial mesh)  
+H6 = AMMG2 = inﬂator gas(es) 
+injected in (this has no initial 
+mesh)  Cut-oﬀ view *.  or *

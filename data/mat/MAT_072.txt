@@ -1,0 +1,141 @@
+: *. R3: *.  
+*. R3 
+*. R3.  For .   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PR      
+Type A F F      
+Default none none none      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+PR Poisson’s ratio 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SIGF A0 A1 A2     
+Type F F F F     
+Default 0.0 0.0 0.0 0.0     
+ 
+ VARIABLE   DESCRIPTION  
+SIGF Maximum principal stress for failure 
+A0 Cohesion 
+A1 Pressure hardening coeﬃcient 
+A2 Pressure hardening coeﬃcient  
+ *.   
+  VARIABLE   DESCRIPTION  
+SIGY Initial yield stress 
+ETAN Tangent modulus/plastic hardening modulus 
+LCP Load curve ID giving rate sensitivity for principal  material; see 
+*DEFINE_CURVE. 
+LCR Load curve ID giving rate sensitivity for reinf orcement; see *DE-
+FINE_CURVE. 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable λ1 λ2 λ3 λ4 λ5 λ6 λ7 λ8 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable λ9 λ10 λ11 λ12 λ13    
+Type F F F F F    
+Default none none none none none    
+ 
+ VARIABLE   DESCRIPTION  
+λ1 - λ13 Tabulated damage function 
+ *. R3  
+ *. R3  *. R3  
+  Card 6 1 2 3 4 5 6 7 8 
+Variable η01 η02 η03 η04 η05 η06 η07 η08 
+Type F F F F F F F F 
+Default none none none none none none none none 
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable η09 η10 η11 η12 η13 B2 A2F A2Y 
+Type F F F F F F F F 
+Default none none none none none 0.0 0.0 0.0 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+PR Poisson’s ratio, /u1D̅08 
+FT Uniaxial tensile strength, |u1D4J3|u1D461Cst 
+A0 Maximum shear failure surface parameter, |u1D44∆|zeroCst, or  −|u1D4J3|u1D4J≠Cst|minuteCst for 
+parameter generation  (recommended) 
+A1 Maximum shear failure surface parameter, |u1D44∆|oneCst 
+A2 Maximum shear failure surface parameter, |u1D44∆|twoCst 
+B1 Compressive damage scaling parameter, |u1D44F|oneCst 
+OMEGA Fractional dilatancy, |u1D714 
+A1F Residual failure surface coeﬃcient, |u1D44∆|oneCst/u1D45:.st 
+Sλ λ stretch factor, s *. R3  
+  VARIABLE   DESCRIPTION  
+λ12 12 th  value of damage function, 
+λ13 13 th  value of damage function. 
+B3 Damage scaling coeﬃcient for triaxial tension, |u1D44F|threeCst. 
+A0Y Initial yield surface cohesion, |u1D44∆|zeroCst|u1D466Cst. 
+A1Y Initial yield surface coeﬃcient, |u1D44∆|oneCst|u1D466Cst. 
+η01 1st  value of scale factor, 
+η02 2nd  value of scale factor, 
+η03 3rd  value of scale factor, 
+η04 4th  value of scale factor, 
+η05 5th  value of scale factor, 
+η06 6th  value of scale factor, 
+η07 7th  value of scale factor, 
+η08 8th  value of scale factor, 
+η09 9th  value of scale factor, 
+η10 10 th  value of scale factor, 
+η11 11 th  value of scale factor, 
+η12 12 th  value of scale factor, 
+η13 13 th  value of scale factor. 
+B2 Tensile damage scaling exponent, |u1D44F|twoCst. 
+A2F Residual failure surface coeﬃcient, |u1D44∆|twoCst/u1D45:.st. 
+A2Y Initial yield surface coeﬃcient, |u1D44∆|twoCst|u1D466Cst. 
+λ, sometimes referred to as “modiﬁed” eﬀective plast ic strain, is computed internally as 
+a function of eﬀective plastic strain, strain rate enhancement factor, and pressure.  η is a 
+function of λ as speciﬁed by the η as a function of λ curve.  The η value, which is always 
+between 0 and 1, is used to interpolate between the  yield failure surface and the 
+maximum failure surface or between the maximum fail ure surface and the residual *. R3 
+Sample Input for Concrete: 
+As an example of the K&C Concrete Model material pa rameter generation, the 
+following sample input for a 45.4 MPa (6,580 psi) u nconﬁned compression strength 
+concrete is provided.  The basic units for the prov ided parameters are length in *. R3  
+ millimeters (mm), time in milliseconds (msec), and mass in grams (g).  This base unit set 
+yields units of force in Newtons (N) and pressure i n Mega-Pascals (MPa). 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO PR      
+Value 72 2.3E-3       
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable FT A0 A1 A2 B1 OMEGA A1F  
+Value  -45.4       
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable Sλ NOUT EDROP RSIZE UCF LCRATE LOCWID NPTS 
+Value    3.94E-2  145.0 723   
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable λ01 λ02 λ03 λ04 λ05 λ06 λ07 λ08 
+Value         
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable λ09 λ10 λ11 λ12 λ13 B3 A0Y A1Y 
+Value         
+ *. R3  
+ Strain-Rate (1/ms) Enhancement 
+1.0E-06 1.08 
+1.0E-05 1.14 
+1.0E-04 1.20 
+1.0E-03 1.26 
+3.0E-03 1.29 
+1.0E-02 1.33 
+3.0E-02 1.36 
+1.0E-01 2.04 
+3.0E-01 2.94 
+3.0E+01 2.94 
+Table M72-3.   Enhancement as a function of eﬀective strain rate f or 45.4 
+MPa concrete (sample).  When deﬁning curve LCRATE, input negative 
+(tensile) values of eﬀective strain rate ﬁrst.  The  enhancement should be 
+positive and should be 1.0 at a strain rate of zero . *

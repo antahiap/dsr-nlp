@@ -1,0 +1,142 @@
+ [0,2 ] 
+ *.  *.   *.   
+  Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT        
+Type I        
+Default none        
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+Default none none none none none none   
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+Default none none none none none none   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density. 
+E Young’s Modulus 
+PR Poisson’s ratio *.   
+  VARIABLE   DESCRIPTION  
+SCALE This variable can be used to speed up the simulatio n while 
+equalizing the strain rate eﬀect, useful especially  in cases where 
+the pulling speed or punch speed is slow.  For exam ple, if the 
+pulling speed is at 15 mm/s but running the simulat ion at this 
+speed will take a long time, the pulling speed can be increased to 
+500 mm/s while SCALE can be set to 0.03, giving the same results 
+as those from 15 mm/s, but with the beneﬁt of great ly reduced 
+computational time, see Figures M260A-3  and M260A-4 .  Note the 
+increased absolute value (within a reasonable range ) of mass 
+scaling −1.0 × |u1D4J1|u1D4612|u1D4JA|u1D46≠  frequently used in forming simulation does 
+not aﬀect the strain rates, as shown in the Figure M260A-5 . 
+EF0, PLIM, 
+Q, GAMA, 
+M, BETA Material parameters for the option XUE.  The parame ter /u1D458 in the 
+original paper is assumed to be 1.0.  Note the defa ult BE TA value 
+of 0.0 means no progressive weakening damage.  For details, refer 
+to Xue, L., Wierzbicki, T.’s 2009 paper “ Numerical simulation of 
+fracture mode transition in ductile plates ” in the International Journal 
+of Solids and Structures .  *.   
+ The Stoughton Non-associated Flow Rule: 
+In a non-associated ﬂow rule, material yield functi on does not equal to the plastic ﬂow 
+potential.  According to Thomas B. Stoughton’s pape r titled “ A non-associated ﬂow rule 
+for sheet metal forming ” in 2002 International Journal of Plasticity 18, 6 87-714, and “ A 
+pressure-sensitive yield criterion under a non-asso ciated ﬂow rule for sheet metal forming ” in 
+2004 International Journal of Plasticity 20, 705-73 1, plastic potential is deﬁned by: 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4JDCst=/radical.v2|u1D7≠∆|oneCst|oneCst |twoCst+ |u1D7≠6|u1D4JDCst|u1D7≠∆|twoCst|twoCst |twoCst− 2/u1D̅08|u1D4JDCst|u1D7≠∆|oneCst|oneCst |u1D7≠∆|twoCst|twoCst + 2|u1D7≠+|u1D4JDCst|u1D7≠∆|oneCst|twoCst |twoCst |twoCsts 
+where |u1D7≠∆|u1D4J6Cst|u1D4J7Cst  is the stress tensor component; where also, 
+|u1D7≠6|u1D4JDCst =1 +1
+|u1D4JF/nine.st |zeroCst 
+1 +1
+|u1D4JF|zeroCst, 
+/u1D̅08|u1D4JDCst =|u1D4JF|zeroCst
+1 + |u1D4JF|zeroCst, 
+|u1D7≠+|u1D4JDCst =1
+|u1D4JF|zeroCst+1
+|u1D4JF/nine.st |zeroCst 
+1 +1
+|u1D4JF|zeroCst|parenleftCvJ1
+2+ |u1D4JF|fourCst|fiveCst |parenriµhtCvJ. 
+where |u1D4JF|zeroCst, |u1D4JF|fourCst|fiveCst ,  |u1D4JF/nine.st |zeroCst  are Lankford parameters in the rolling (0 °), the diagonal (45 °) and the 
+transverse (90 °) directions, respectively. 
+ 
+Yield function is deﬁned by: 
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D466Cst=/radical.v2|u1D7≠∆|oneCst|oneCst |twoCst+ |u1D7≠6|u1D466Cst|u1D7≠∆|twoCst|twoCst |twoCst− 2/u1D̅08|u1D466Cst|u1D7≠∆|oneCst|oneCst |u1D7≠∆|twoCst|twoCst + 2|u1D7≠+|u1D466Cst|u1D7≠∆|oneCst|twoCst |twoCst |twoCsts 
+where, 
+|u1D7≠6|u1D466Cst = |parenleftCvJ|u1D7≠∆|zeroCst
+|u1D7≠∆/nine.st |zeroCst |parenriµhtCvJ|twoCst
+, 
+/u1D̅08|u1D466Cst =1
+2|<racketleftCv61 + |u1D7≠6|u1D466Cst− |parenleftCvJ|u1D7≠∆|zeroCst
+|u1D7≠∆|u1D44FCst|parenriµhtCvJ|twoCst
+|<racketriµhtCv6 , 
+|u1D7≠+|u1D466Cst =1
+2|<racketleftCv6|parenleftCvJ2|u1D7≠∆|zeroCst
+|u1D7≠∆|fourCst|fiveCst |parenriµhtCvJ|twoCst
+− |parenleftCvJ|u1D7≠∆|zeroCst
+|u1D7≠∆|u1D44FCst|parenriµhtCvJ|twoCst
+|<racketriµhtCv6. 
+where |u1D7≠∆|zeroCst, |u1D7≠∆|fourCst|fiveCst , |u1D7≠∆/nine.st |zeroCst  are the initial yield stresses from uniaxial tensi on tests in the rolling 
+(0°), diagonal (45 °) and trans v erse ( 90 °) directions, respectively.  |u1D7≠∆|u1D44FCst is the initial yield 
+stress from an equi-biaxial stretching test. 
+ *.   
+ $   ENDTIM    ENDCYC     DTMIN    ENDNEG    ENDMAS 
+&endtime 
+*.   *.   
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Unstrained shellFy0=Fy0=
+Uni-axial stressX YZ
+ Figure M260A-1.   Uniaxial tension tests on a single shell element.  Stress scale factor
+Strain rate (x103)0.5 1.0 1.51.2
+1.15
+1.1
+1.05
+1.0
+0.0 2.0LCIDV
+ Figure M260A-2.   Input LCIDV. *.   
+  
+History variable #6 - Strain rate scale factor
+Time (sec)0.1 0.2 0.31.12
+1.1
+1.08
+1.06
+1.04
+0.0 0.41.02CD0.03 0.06 0.09 0.012
+1.16
+1.11
+1.08
+1.05
+1.03E
+Pull speed: 15 mm/s,
+LCIDV, SCALE=1.0C
+Pull speed: 500 mm/s,
+LCIDV, SCALE=1.0D
+Pull speed: 500 mm/s,
+LCIDV, SCALE=0.03E1.13
+1.00 1.00
+Figure M260A-4.   Recovered strain rate scale factors under various condit ions 
+shown.  Stress (MPa)
+Strain0.2 0.4 0.6 0.81000
+800
+600
+400
+200
+0.0 1.0InputA
+Pull speed: 500 mm/s,
+LCIDV, SCALE=0.03, DT2MS=0.0
+Pull speed: 500 mm/s,
+LCIDV, SCALE=0.03, DT2MS=-4E-6EEF
+A
+F
+ Figure M260A-5.   Eﬀect of mass scaling (-1.0*dt2ms). *

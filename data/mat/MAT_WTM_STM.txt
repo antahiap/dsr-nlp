@@ -1,0 +1,252 @@
+ ...................................... ................................................... ............................. 2-869  
+*.  [2,3a,3c] {30} 
+ *. _PLC [2,3a] {30} 
+ *.  *. _PLC *.   *.   
+This is Material Type 135.  This anisotropic-viscop lastic material model adopts two 
+yield criteria for metals with orthotropic anisotro py proposed by Barlat and Lian [1989] 
+(Weak Texture Model) and Aretz [2004] (Strong Textu re Model). 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO E PR NUMFI EPSC WC TAUC 
+Card 2.   This card is required. 
+SIGMA0 QR1 CR1 QR2 CR2 K LC FLG 
+Card 3a.   This card is included if and only if FLG = 0. 
+A1 A2 A3 A4 A5 A6 A7 A8 
+Card 3b.   This card is included if and only if FLG = 1. 
+S00 S45 S90 SBB R00 R45 R90 RBB 
+Card 3c.   This card is included if and only if FLG = 2. 
+A C H P     
+Card 4.   This card is required. 
+QX1 CX1 QX2 CX2 EDOT M EMIN S100 
+Card 5.   This card is required. 
+AOPT BETA       
+Card 6.   This card is required. 
+   A1 A2 A3   
+Card 7.   This card is required. 
+V1 V2 V3 D1 D2 D3   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR NUMFI EPSC WC TAUC 
+Type A F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+NUMFI Number of through thickness integration points that  must fail 
+before the element is deleted (remember to change this number if 
+switching between full and reduced integration type  of elements).  
+EPSC Critical value |u1D7≠≠|u1D461Cst /u1D4:6.st  of the plastic thickness strain (used in the CTS 
+fracture criterion).   
+WC Critical value /u1D44A|u1D4J≠Cst for the Cockcroft-Latham fracture criterion 
+TAUC Critical value /u1D̅0F|u1D4J≠Cst for the Bressan-Williams shear fracture criterion 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SIGMA0 QR1 CR1 QR2 CR2 K LC FLG 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+SIGMA0 Initial mean value of yield stress |u1D7≠∆|zeroCst:  
+GT.0.0: Constant value 
+LT.0.0: Load curve ID = -SIG MA0 which deﬁnes yield stress as 
+a function of plastic strain.  Hardening parameters  *.   
+  VARIABLE   DESCRIPTION  
+A7 YLD2003 parameter |u1D44∆|sevenCst 
+A8 YLD2003 parameter |u1D44∆/eight.st 
+ 
+Yield Surface Card.   This card 3 format is used when FLG = 1. 
+ Card 3b 1 2 3 4 5 6 7 8 
+Variable S00 S45 S90 SBB R00 R45 R90 RBB 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+S00 Yield stress in 0° direction 
+S45 Yield stress in 45° direction 
+S90 Yield stress in 90° direction 
+SBB Balanced biaxial ﬂow stress 
+R00 R-ratio in 0° direction 
+R45 R-ratio in 45° direction 
+R90 R-ratio in 90° direction 
+RBB Balance biaxial ﬂow ratio 
+ 
+YLD89 Card.   This card 3 format used when FLG = 2. 
+ Card 3c 1 2 3 4 5 6 7 8 
+Variable A C H P     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+A YLD89 parameter |u1D44∆ *.   
+  
+ Card 5 1 2 3 4 5 6 7 8 
+Variable AOPT BETA       
+Type F F       
+ 
+ VARIABLE   DESCRIPTION  
+AOPT Material axes option (see MAT _OPTION TROPIC_ELASTIC for a 
+more complete description): 
+EQ.0.0: Locally orthotropic with material axes determined b y 
+element nodes 1, 2, and 4, as with *DEFINE_COORDI-
+NATE_NODES, and then rotated about the shell ele- 
+ment normal by an angle BETA 
+EQ.2.0: Globa lly orthotropic with material axes determined by 
+vectors deﬁned below, as with *DEFINE_COORDI-
+NATE_VECTOR 
+EQ.3.0: Locally orthotropic material axes determined by 
+rotating the material axes about the element normal  by 
+an angle, BETA, from a line in the plane of the element 
+deﬁned by the cross product of the vector v with th e 
+element normal 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VEC TOR).  Available in R3 version of 971 
+and later. 
+BETA Material angle in degrees for AOPT = 0 or 3.  It may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA. 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ *.   
+ where 
+σ±|minuteCst=|u1D44∆/eight.st|u1D7≠∆|u1D46JCst+ |u1D44∆|oneCst|u1D7≠∆|u1D466Cst
+2±/radical.v5|parenleftCvJ|u1D44∆|twoCst|u1D7≠∆|u1D46JCst− |u1D44∆|threeCst|u1D7≠∆|u1D466Cst
+2|parenriµhtCvJ|twoCst
++ |u1D44∆|fourCst|twoCst|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst
+σ±|minuteCst|minuteCst =|u1D7≠∆|u1D46JCst+ |u1D7≠∆|u1D466Cst
+2±/radical.v5|parenleftCvJ|u1D44∆|fiveCst|u1D7≠∆|u1D46JCst− |u1D44∆|sixCst|u1D7≠∆|u1D466Cst
+2|parenriµhtCvJ|twoCst
++ |u1D44∆|sevenCst|twoCst  |u1D7≠∆|u1D46JCst|u1D466Cst  
+Kinematic hardening can be included by  
+α=|summationCv1α|u1D44JCst|twoCst
+|u1D44JCst=|oneCst  , 
+where each of the kinematic hardening variables |u1D6F+|u1D44JCst is independent and obeys 
+a nonlinear evolutionary equation in the form 
+α̇|u1D44JCst= |u1D436/u1D6FC.st |u1D4J6Cst |parenleftCv4|u1D444/u1D6FC.st |u1D4J6Cst τ
+|u1D7≠∆−α|u1D44JCst|parenriµhtCv4 |u1D7≠≠̇|u1D4JDCst  . 
+The eﬀective stress |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt is deﬁned as  
+|u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt= |u1D7≠∆eff (τ)  , 
+where 
+τ=σ−α  . 
+Critical thickness strain failure in a layer is ass umed to occur when 
+|u1D7≠≠|u1D461Cst≤ |u1D7≠≠|u1D461Cst|u1D4J≠Cst   , 
+where |u1D7≠≠|u1D461Cst|u1D4J≠Cst  is a material parameter.  It should be noted that |u1D7≠≠|u1D461Cst|u1D4J≠Cst  is a negative 
+number (meaning failure is assumed to occur only in  the case of thinning). 
+Cockcraft and Latham fracture is assumed to occur w hen  
+/u1D44A=/integral.v:max(|u1D7≠∆|oneCst, 0)|u1D4J1|u1D7≠≠|u1D4JDCst≥/u1D44A/u1D4:6.st  , 
+where |u1D7≠∆|oneCst is the maximum principal stress and /u1D44A/u1D4:6.st is a material parameter. 
+2.  Yield Surface Parameters.  If FLG = 1, that is, if the yield surface parameter s 
+|u1D44∆|oneCst through |u1D44∆/eight.st are identiﬁed on the basis of prescribed material data internally 
+in the material routine, ﬁles with point data for p lotting of the identiﬁed yield 
+surface, along with the predicted directional varia tion of the yield stress and 
+plastic ﬂow are generated in the directory where th e LS-DYNA analysis is run.  
+Four diﬀerent ﬁles are generated for each speciﬁed material. 
+These ﬁles are named according to the scheme: 
+a)  Contour_1 # 
+b)  Contour_2 # 
+c)  Contour_3 # *.   
+ History 
+Variable # Description 
+13 Not deﬁned, for internal use in the material model 
+14 Nonlocal value |u1D7≠+=/Delt∙.st|u1D7≠≠Cst|threeCsts
+/Delt∙.st|u1D7≠≠Cst|threeCsts/Ome∧∙.sts 
+Table M135-1. 
+ *.   
+ 0 30 60 90
+α[deg]0.90.9511.051.1
+σα
+σ0
+00.40.81.21.62
+Rα
+Figure M135-3.   Predicted directional variation of the yield stress an d plastic 
+ﬂow generated from the ﬁle R_and_S <#>. *. _PLC  
+This is Material Type 135.  This anisotropic materi al adopts the yield criteria proposed 
+by Aretz [2004].  The material strength is deﬁned b y McCormick’s constitutive relation 
+for materials exhibiting negative steady-state Stra in Rate Sensitivity (SRS).  McCormick 
+[1998] and Zhang, McCormick and Estrin [2001]. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR NUMFI EPSC WC TAUC 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SIGMA0 QR1 CR1 QR2 CR2 K   
+Type F F F F F F   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable A1 A2 A3 A4 A5 A6 A7 A8 
+Type F F F F F F F F 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable S H OMEGA TD ALPHA EPS0   
+Type F F F F F F   
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable AOPT BETA       
+Type F F       *. _PLC  
+  
+ Card 6 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ Card 7 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3   
+Type F F F F F F   
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio  
+NUMFI Number of through thickness integration points that  must fail 
+before the element is deleted (remember to chang e this number if 
+switching between full and reduced integration type  of elements)  
+EPSC Critical value, |u1D7≠≠|u1D461Cst /u1D4:6.st , of the plastic thickness strain 
+WC Critical value, /u1D44A|u1D4J≠Cst, for the Cockcroft-Latham fracture criterion. 
+TAUC Critical value, /u1D̅0F|u1D4J≠Cst, for the shear fracture criterion. 
+SIGMA0 Initial yield stress, |u1D7≠∆|zeroCst 
+QR1 Isotropic hardening parameter, |u1D444|u1D44JCst|oneCst 
+CR1 Isotropic hardening parameter, |u1D436|u1D44JCst|oneCst 
+QR2 Isotropic hardening parameter, |u1D444|u1D44JCst|twoCst 
+CR2 Isotropic hardening parameter, |u1D436|u1D44JCst|twoCst *. _PLC  
+  VARIABLE   DESCRIPTION  
+tor /u1D42F with the normal to the plane of the element. 
+LT.0.0: The absolute value of AOPT is a coordinate system I D 
+number (CID on *DEFINE_COORDINATE_ NODES, 
+*DEFINE_COORDINATE_SYSTEM or *DEFINE_CO-
+ORDINATE_VECTOR).   
+BETA Material angle in degrees for AOPT = 0 and 3. BE TA may be 
+overwritten on the element card; see *ELEMENT_SHELL _BETA.   
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2 
+Remarks: 
+The yield function is deﬁned as 
+|u1D4J3 = |u1D7≠∆e q (σ) −/˙racketleft.v2|u1D7≠∆/u1D44C.st(|u1D461|u1D44∆Cst) + |u1D44J|parenleftCv2|u1D7≠≠|u1D4JDCst|parenriµhtCv2 + |u1D7≠∆|u1D463Cst|parenleftCv1|u1D7≠≠̇|u1D4JDCst|parenriµhtCv1/˙racketright.v2  , 
+where the equivalent stress |u1D7≠∆e q  is deﬁned as by an anisotropic yield criterion 
+|u1D7≠∆e q =|<racketleftCvJ1
+2|parenleftCv1|dividesCv1|u1D7≠∆′|oneCst|dividesCv1|u1D4JACst+ |dividesCv1|u1D7≠∆′|twoCst|dividesCv1|u1D4JACst+ |dividesCv1|u1D7≠∆′′|oneCst− |u1D7≠∆′′|twoCst|dividesCv1|parenriµhtCv1|<racketriµhtCvJ|oneCst
+|u1D4JACst
+  . 
+Here 
+|<raceleftCvJ|u1D7≠∆′|oneCst
+|u1D7≠∆′|twoCst|<raceriµhtCvJ =|u1D44∆/eight.st|u1D7≠∆|u1D46JCst|u1D46JCst + |u1D44∆|oneCst|u1D7≠∆|u1D466Cst|u1D466Cst 
+2±/radical.v5|parenleftCvJ|u1D44∆|twoCst|u1D7≠∆|u1D46JCst|u1D46JCst − |u1D44∆|threeCst|u1D7≠∆|u1D466Cst|u1D466Cst 
+2|parenriµhtCvJ|twoCst
++ |u1D44∆|fourCst|twoCst|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst 
+and 
+|<raceleftCvJ|u1D7≠∆′′|oneCst
+|u1D7≠∆′′|twoCst|<raceriµhtCvJ =|u1D7≠∆|u1D46JCst|u1D46JCst + |u1D7≠∆|u1D466Cst|u1D466Cst 
+2±/radical.v5|parenleftCvJ|u1D44∆|fiveCst|u1D7≠∆|u1D46JCst|u1D46JCst − |u1D44∆|sixCst|u1D7≠∆|u1D466Cst|u1D466Cst 
+2|parenriµhtCvJ|twoCst
++ |u1D44∆|sevenCst|twoCst|u1D7≠∆|u1D46JCst|u1D466Cst |twoCst  . 
+The strain hardening function, |u1D44J, is deﬁned by the extended Voce law 
+|u1D44J|parenleftCv1|u1D7≠≠|u1D4JDCst|parenriµhtCv1 = |summationCv1 |u1D444|u1D44JCst|u1D4J6Cst |parenleftCv21 − exp|parenleftCv1−|u1D436|u1D44JCst|u1D4J6Cst |u1D7≠≠|u1D4JDCst|parenriµhtCv1|parenriµhtCv2|twoCst
+|u1D4J6Cst=|oneCst  , 
+where |u1D7≠≠|u1D4JDCst is the eﬀective (or accumulated) plastic strain, a nd |u1D444|u1D44JCst|u1D4J6Cst and |u1D436|u1D44JCst|u1D4J6Cst  are strain 
+hardening parameters. 
+ 
+Viscous stress, |u1D7≠∆|u1D463Cst, is given by *

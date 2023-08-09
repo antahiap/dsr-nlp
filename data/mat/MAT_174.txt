@@ -1,0 +1,35 @@
+: *.  
+*.   
+ *.   *.   
+ Creating sections for reinforced concrete beams: 
+This material model can be used to represent unrein forced concrete (FRACR = 0), steel 
+(FRACR = 1), or reinforced concrete with evenly dis tributed reinforcement 
+(0 < FRACR < 1). 
+Alternatively, use *INTEGRATION_BEAM to deﬁne the s ection, with the PID ﬁeld for 
+each integration point being used to identify the M aterial to be used at that integration 
+point.  Create one Part for concrete, and another f or steel.  These Parts should reference 
+Materials, both of type *.   *.   
+  
+ 
+ 
+Monotonic loading of the reinforcement results in t he stress-strain curve shown, which 
+is parabolic between εsh  and εult . The same curve acts as an envelope on the hystere tic 
+behavior, when the x-axis is cumulative plastic str ain.  
+ 
+Unloading from the yielded condition is elastic unt il the load reverses.  Thereafter, the 
+Bauschinger Eﬀect (reduction in stiﬀness at stresse s less than yield during cyclic 
+deformation) is represented by following a Ramberg- Osgood relationship until the 
+yield stress is reached:  
+|u1D7≠≠ − |u1D7≠≠|u1D46≠Cst=|parenleftCv4|u1D7≠∆
+|u1D438|parenriµhtCv4/˙raceleft.v61 + |parenleftCvJ|u1D7≠∆
+|u1D7≠∆/u1D4:6.st |u1D43BCst |parenriµhtCvJ|u1D4JFCst−|oneCst
+/˙raceright.v6 
+σy σult 
+εult εsh 
+ Figure M174-2  
+Figure M174-3  
+1 2 3,5 
+4 6,8 
+7 9,11 
+10 12,14 15 
+13 .   *

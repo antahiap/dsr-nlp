@@ -1,0 +1,72 @@
+-PARAMETER_BARLAT ....................... ................................................... ........... 2-1198  
+*. -PARAMETER_BARLAT [2,3a] {36} 
+ *. -PARAMETER_BARLAT  *. -PARAMETER_BARLA T is a version of this 
+material model that includes a ﬂow limit diagram fa ilure option.  
+Available options include:  
+<BLANK> 
+NLP 
+The NLP option estimates failure using the Formabil ity Index (F.I.), which accounts for 
+the non-linear strain paths seen in metal forming a pplications (see the Remarks ).  The 
+NLP ﬁeld in Card 4b must  be deﬁned when using this option.  The NLP option is also 
+available for *. -PARAMETER_BARLAT  
+ *. -PARAMETER_BARLAT  *. -PARAMETER_BARLAT  
+  VARIABLE   DESCRIPTION  
+P2 Material parameter: 
+HR.EQ.1.0: Yield stress 
+HR.EQ.2.0: |u1D4JB, exponent for Swift exponential hardening 
+HR.EQ.4.0: /u1D450, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: |u1D4JB, exponent for Gosh exponential hardening 
+HR.EQ.6.0: /u1D450, coeﬃcient for Hocket- Sherby exponential 
+hardening 
+ITER Iteration ﬂag for speed: 
+ITER.EQ.0.0: fully iterative 
+ITER.EQ.1.0: ﬁxed at three iterations 
+Generally, ITER = 0 is recommended.  However, ITER = 1 is 
+somewhat faster and may give acceptable results in most 
+problems. 
+M m, exponent in Barlat’s yield surface 
+R00 |u1D44J|zeroCst|zeroCst , Lankford parameter determined from experiments 
+R45 |u1D44J|fourCst|fiveCst , Lankford parameter determined from experiments 
+R90 |u1D44J/nine.st |zeroCst , Lankford parameter determined from experiments 
+LCID load curve ID for the load curve hardening rule 
+E0 Material parameter 
+HR.EQ.2.0: |u1D7≠≠|zeroCst for determining initial yield stress for Swift 
+exponential hardening.  (Default = 0.0) 
+HR.EQ.4.0: |u1D44F, coeﬃcient for Voce exponential hardening 
+HR.EQ.5.0: |u1D7≠≠|zeroCst for determining initial yield stress for Gosh 
+exponential hardening.  (Default = 0.0) 
+HR.EQ.6.0: |u1D44F, coeﬃcient for Hocket-Sherby e xponential 
+hardening *. -PARAMETER_BARLAT  
+  VARIABLE   DESCRIPTION  
+FLDCID Load curve ID deﬁning the Forming Limit Diagram.  M inor 
+engineering strains in percent are deﬁned as abscis sa values and 
+Major engineering strains in percent are deﬁn ed as ordinate 
+values.  The forming limit diagram is shown in Figure M39-1 .  In 
+deﬁning the curve list pairs of minor and major str ains starting 
+with the left most point and ending with the right most point, see 
+*DEFINE_CURVE. 
+RN Hardening exponent equivalent to the n- value in a power law 
+hardening law.  If the parameter FLD CID is not deﬁned, this 
+value in combination with the value RT can be used to calculate a 
+forming limit curve to allow for failure. 
+RT Sheet thickness used for calculating a forming limi t curve.  This 
+value does not override the sheet thickness in any way.  It is only 
+used in conjunction with the parameter RN to calcul ate a forming 
+limit curve if the parameter FLDCID is not deﬁned.   
+FLDSAFE A safety oﬀset of the forming limit curve.  This va lue should be 
+input as a percentage (ex.  10 not 0.10).  This saf ety margin will be 
+applied to the forming limit curve deﬁned by FLD CID or the 
+curve calculated by RN and RT. 
+FLDNIPF Numerical integration points failure treatment. 
+GT.0.0: The number of element integration points that must fail 
+before  the element is deleted.  By default, if one  inte- 
+gration point has strains above the forming limit c urve, 
+the element is ﬂagged for deletion. 
+LT.0.0: The element is deleted when all integration points 
+within a relative distance of – FLDNIPF from the mid 
+surface have failed (value between -1.0 and 0.0).  
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2. 
+V1, V2, V3 Components of vector /u1D42F for AOPT = 3. 
+D1, D2, D3 Components of vector /u1D41D for AOPT = 2. 
+BETA Material angle in degrees for AOPT = 0 and 3, may be overridden 
+on the element card, see *ELEMENT_SHELL_BETA. *

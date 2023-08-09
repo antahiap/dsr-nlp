@@ -1,0 +1,217 @@
+/FOAM ....................... ................................................... ............ 2-1151   TABLE OF CONTENTS 
+LS-DYNA R13 0-7 (TABLE OF CONTENTS) *. /FOAM_{OPTION} [0, 2,3c] {39} 
+ *. _WITH_DAMAGE [0,2, 3c] {44} 
+ *. /FOAM_{OPTION} *. _WITH_DAMAGE *. ): 
+LE.0.0: ignore failure criterion 
+GT.0.0: use actual K value for failure criterions 
+EH Damage parameter (see *.  /FOAM. 
+Card Summary:  
+Card 1.   This card is required. 
+MID RO E LCID1 LCID2 HU BETA DAMP 
+Card 2.   This card is required. 
+SHAPE FAIL BVFLAG ED BETA1 KCON REF TC 
+Card 3.   This card is included if LCID < 0. 
+RFLAG DTRT       
+Card 4.   This card is included if and only if the IF_FAILU RE keyword option is used. 
+K GAMA1 GAMA2 EH     *. /FOAM  *. /FOAM _{OPTION}  
+This is Material Type 181.  This material model pro vides a rubber and foam model 
+deﬁned by a single uniaxial load curve or by a fami ly of uniaxial curves at discrete 
+strain rates.  The deﬁnition of hysteretic unloadin g is optional and can be realized via a 
+single uniaxial unloading curve or a two-parameter formulation (starting with 971 
+release R5).  The foam formulation is triggered by deﬁning a Poisson’s ratio.  This 
+material may be used with both shell and solid elem ents. 
+Available options include: 
+<BLANK> 
+WITH_FAILURE 
+LOG_LOG_INTERPOLATION 
+When the WITH_FAILURE keyword option is active, a s train based failure surface is 
+deﬁned suitable for incompressible polymers modelin g failure in both tension and 
+compression. 
+This material law has been developed at DaimlerChry sler, Sindelﬁngen, in collaboration 
+with Paul Du Bois, LSTC, and Prof.  Dave J. Benson,  UCSD. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO KM MU G SIGF REF PRTEN 
+Type A8 F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SGL SW ST LC /TBID TENSION RTYPE AVGOPT PR/BETA 
+Type F F F F F F F F 
+ *. /FOAM  
+ Additional card required for WITH_FAILURE option.  Otherwise skip this card. 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable K GAMA1 GAMA2 EH     
+Type F F F F     
+ 
+Optional Parameter Card. 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable LCUNLD HU SHAPE STOL VISCO HISOUT   
+Type F F F F F F   
+ 
+Optional Viscoelastic Constants Cards.   Up to 12 card in format 5 may be input.  A 
+keyword card (with a “*” in column 1) terminates th is input if less than 12 cards are 
+used. 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable Gi BETAi VFLAG      
+Type F F I      
+Default   0      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+KM Linear bulk modulus. 
+MU Damping coeﬃcient (0.05 < recommended value < 0.50; default is 
+0.10). *. /FOAM  
+  VARIABLE   DESCRIPTION  
+RTYPE Strain rate type if a table is deﬁned: 
+EQ.0.0: true strain rate, 
+EQ.1.0: engineering strain rate 
+AVGOPT Averaging option determine strain rate to reduce nu merical 
+noise. 
+LT.0.0: |AVGOPT| is a time window/interval over which the 
+strain rates are averaged. 
+EQ.0.0: simple average of twelve time steps, 
+EQ.1.0: running average of last 12 averages. 
+PR/BETA Poisson ratio or viscosity coeﬃcient 
+LE.0.0: An incompressible rubber material is assumed, using  
+the Ogden strain- energy functional.  PR is set to 0.495 
+internally for computing the time- step only and is not 
+used otherwise.  Compressibility is deﬁned using KM . 
+For PR < 0 in solid elements, an incrementally- updated 
+mean viscous stress develops according to the equa-
+tion, with |u1D6FD = | BETA | the absolute value of the given 
+number, and |u1D43∆|u1D4JACst= KM : 
+|u1D4JD|u1D4JBCst+|oneCst= |u1D4JD|u1D4JBCst|u1D4J2−/u1D6FD.st /u1D6E⃡.st |u1D461Cst + |u1D43∆|u1D4JACst|u1D7≠≠̇|u1D4J8Cst|u1D4J8Cst |parenleftCv61 − |u1D4J2−/u1D6FD.st /u1D6E⃡.st |u1D461Cst 
+|u1D6FD|parenriµhtCv6,  
+GT. 0.0 .AND. LT.0.49: A foam material is assumed, usin g the 
+Hill strain- energy functional, with Poisson ratio given 
+by PR. KM is ignored, and selective-reduced integra - 
+tion is not used for fully-integrated elements.  
+GE. 0.49 .AND. LT.0.5: An incompressible rubber materia l is 
+assumed, using the Ogden strain- energy functional.  
+PR is used for computing the time- step only and not 
+otherwise.  Compressibility is deﬁned using KM. Sel ec- 
+tive-reduced integration is not used for fully- integrated 
+elements.  
+K Material failure parameter that controls the volume  enclosed by 
+the failure surface. 
+LE.0.0: ignore failure criterion; 
+GT.0.0: use actual K value for failure criterions. *. /FOAM  
+  VARIABLE   DESCRIPTION  
+VFLAG Type of viscoelasticity formulation.  This appears only on the ﬁrst 
+line deﬁning G i, BETA i, and VFLAG. If VFLAG = 0, the standard 
+viscoelasticity formulation is used (the default), and if 
+VFLAG = 1, the viscoelasticity formulation using the 
+instantaneous elastic stress is used. 
+Remarks: 
+The frequency independent damping is obtained by th e having a spring and slider in 
+series as shown in the following sketch: 
+ 
+The general failure criterion for polymers is propo sed by Feng and Hallquist as  
+|u1D4J3 (/u1D4:C|oneCst,/u1D4:C|twoCst,/u1D4:C|threeCst) = (/u1D4:C|oneCst− 3) + Γ|oneCst(/u1D4:C|oneCst− 3)|twoCst+ Γ|twoCst(/u1D4:C|twoCst− 3) = |u1D43∆ 
+where |u1D43∆ is a material parameter which controls the size en closed by the failure surface, 
+and /u1D4:C|oneCst, /u1D4:C|twoCst and /u1D4:C|threeCst are the three invariants of right Cauchy-Green def ormation tensor ( /u1D402) 
+/u1D4:C|oneCst= C|u1D4J6Cst|u1D4J6Cst = |u1D7≠6|oneCst|twoCst+ |u1D7≠6|twoCst|twoCst+ |u1D7≠6|threeCst|twoCst 
+/u1D4:C|twoCst=1
+2(C|u1D4J6Cst|u1D4J6Cst C|u1D4J7Cst|u1D4J7Cst − C|u1D4J6Cst|u1D4J7Cst C|u1D4J6Cst|u1D4J7Cst ) = |u1D7≠6|oneCst|twoCst |u1D7≠6|twoCst|twoCst+ |u1D7≠6|oneCst|twoCst |u1D7≠6|threeCst|twoCst+ |u1D7≠6|twoCst|twoCst |u1D7≠6|threeCst|twoCst G
+σfriction0123456
+0 1 2 3 4 5 6K=30K=20
+K=10K= 1λ1=λ2
+λ1λ2λ1λ2= 1
+ Figure M181-1.   Failure surface for polymer for Γ|oneCst=0 and Γ|twoCst=0.02 . *. /FOAM  
+ For solid elements, rate eﬀects may also be taken i nto account through linear 
+viscoelasticity by setting VISCO = 1.0.   For VFLAG  = 0, this is done through a 
+convolution integral of the form: 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst =/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F)|u1D461Cst
+|zeroCst∂|u1D7≠≠|u1D4J8Cst|u1D4J9Cst 
+∂/u1D̅0F|u1D4J1 /u1D̅0F  
+or in terms of the second Piola-Kirchhoﬀ stress, {|u1D446|zeroCst }, and Green's strain tensor, {|u1D446RT }, 
+|u1D446|u1D4J6Cst|u1D4J7Cst =/integral.v:|u1D43A|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F)∂|u1D438|u1D4J8Cst|u1D4J9Cst 
+∂/u1D̅0F|u1D4J1 /u1D̅0F |u1D461Cst
+|zeroCst 
+where |u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F) and |u1D43A|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F) are the relaxation functions for the diﬀerent stre ss 
+measures.  This stress is added to the stress tenso r determined from the strain energy 
+functional. 
+ 
+The relaxation function is represented by six terms  from the Prony series: 
+|u1D4J4(|u1D461) = |u1D6F+|zeroCst+ |summationCv1 |u1D6F+|u1D4JACst|u1D4J2−/u1D6FD.st |u1D461Cst |u1D441Cst
+|u1D4JACst=|oneCst 
+given by, 
+|u1D4J4(|u1D461) = |summationCv1 |u1D43A|u1D4J6Cst|u1D4J2−/u1D6FD.st|u1D4J6Csts|u1D461Cst|u1D4JBCst
+|u1D4J6Cst=|oneCst 
+This model is eﬀectively a Maxwell ﬂuid which consi sts of a dampers and springs in 
+series.  We characterize this in the input by shear  moduli, |u1D43A|u1D4J6, and decay constants, |u1D6FD|u1D4J6  
+An arbitrary number of terms may be used. 
+ 
+For VFLAG = 1, the viscoelastic term is 
+|u1D7≠∆|u1D4J6Cst|u1D4J7Cst =/integral.v:|u1D4J4|u1D4J6Cst|u1D4J7Cst|u1D4J8Cst|u1D4J9Cst (|u1D461 −/u1D̅0F)|u1D461Cst
+|zeroCst∂|u1D7≠∆|u1D4J8Cst|u1D4J9Cst |u1D438Cst
+∂/u1D̅0F|u1D4J1 /u1D̅0F  
+where |u1D7≠∆/u1D458/u1D45∫|u1D438 is the instantaneous stress evaluated from the int ernal energy functional.  The 
+coeﬃcients in the Prony series therefore correspond  to normalized relaxation moduli 
+instead of elastic moduli. 
+ 
+The Mooney-Rivlin rubber model (model 27) is obtain ed by specifying n = 1.  In spite of 
+the diﬀerences in formulations with model 27, we ﬁn d that the results obtained with 
+this model are nearly identical with those of mater ial 27 as long as large values of 
+Poisson’s ratio are used. *. _WITH_DAMAGE  
+An available options includes: 
+LOG_LOG_INTERPOLATION 
+This is Material Type 183. This material model prov ides an incompressible rubber 
+model deﬁned by a single uniaxial load curve for lo ading (or a table if rate eﬀects are 
+considered) and a single uniaxial load curve for un loading.  This model is similar to 
+*. /FOAM.  This materia l may be used with 
+both shell and solid elements. 
+ 
+This material law has been developed at DaimlerChry sler, Sindelﬁngen, in collaboration 
+with Paul Du Bois, LSTC, and Prof.  Dave J. Benson,  UCSD. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO K MU G SIGF   
+Type A8 F F F F F   
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SGL SW ST LC / TBID  TENSION RTYPE AVGOPT  
+Type F F F F F F F  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable LCUNLD REF STOL      
+Type F F F      
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density *. _WITH_DAMAGE  
+  VARIABLE   DESCRIPTION  
+K Linear bulk modulus. 
+MU Damping coeﬃcient. 
+G Shear modulus for frequency independent damping.  F requency 
+independent damping is based of a spring and slider  in series.  
+The critical stress for the slider mechanism is SIG F deﬁned below.  
+For the best results, the value of G should be 250- 1000 times 
+greater than SIGF. 
+SIGF Limit stress for frequency independent, fricti onal, damping. 
+SGL Specimen gauge length 
+SW Specimen width 
+ST Specimen thickness 
+LC/TBID Load curve ID or table ID, see *DEFINE_TA BLE, deﬁning the 
+force versus actual change in t he gauge length.  If SGL, SW, and 
+ST are set to unity (1.0), then curve LC is also en gineering stress 
+versus engineering strain.  If the table deﬁnition is used, a family 
+of curves is deﬁned for discrete strain rates.  The curves should 
+cover the complet e range of expected response, including both 
+compressive (negative values) and tensile (positive  values) 
+regimes. 
+TENSION Parameter that controls how the rate eﬀects are tre ated.  
+Applicable to the table deﬁnition. 
+EQ.-1.0:  rate eﬀects are considered during tension and 
+compression loading, but not during unloading, 
+EQ.0.0:  rate eﬀects are considered for compressive loading 
+only, 
+EQ.1.0:  rate eﬀects are treated identically in tension and 
+compression. 
+RTYPE Strain rate type if a table is deﬁned: 
+EQ.0.0:  true strain rate, 
+EQ.1.0:  engineering strain rate *. _WITH_DAMAGE  
+ where /u1D4:B(|u1D7≠6) is a function with /u1D4:B(1) = 0  and /u1D4:B′(|u1D7≠6) > 0 .*

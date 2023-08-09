@@ -1,0 +1,69 @@
+: *.  
+*.   *.   
+  Card 2 1 2 3 4 5 6 7 8 
+Variable EFAIL       NF 
+Type F       F 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable RS ASFF  TRUE_T CON_ID RFILTF JTOL  
+Type F I  F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus.   
+LT.0.0:  |E| is the Young’s modulus.  E < 0 invokes uniaxial 
+stress for solid spot welds with the transverse str esses 
+assumed to be zero.  See Remark 1 . This is for when the 
+keyword option is unset (<BLANK>) only. 
+PR Poisson’s ratio 
+DT Time step size for mass scaling, ∆|u1D461 
+TFAIL Failure time if nonzero.  If zero, this optio n is ignored. 
+EFAIL Eﬀective plastic strain in weld material at f ailure.  See Remark 2 . 
+NF Number of failure function evaluations stored for ﬁ ltering by time 
+averaging.  The default value is set to zero which is generally 
+recommended unless oscillatory resultant forces are  observed in 
+the time history databases.  Even though these weld s should not 
+oscillate signiﬁcantly, this option was added for c onsistency with 
+the other spot weld options.  NF aﬀects the storage  since it is 
+necessary to store the failure terms.  When NF is n onzero, the 
+resultants in the output databases are ﬁltered.  NF cannot exceed 
+30. *.   
+ constrained to the mid-plane of shell elements, suc h contraction is only possi- 
+ble to the degree that the shell element contracts.   In other words, the uniaxial 
+stress state cannot be represented by the weld.  Fo r plastic strain-based dam- 
+age, this eﬀect can be particularly apparent as it causes tensile stress to contin- 
+ue to grow very large as the stress state becomes v ery nearly triaxial tension.  
+In this stress state, plastic strain grows very slo wly so it appears that damage 
+calculation is failing to knock down the stress.  B y simply assuming that the 
+transverse stresses are zero, the plastic strain gr ows as expected and damage is 
+much more eﬀective 
+2.  Connection Properties.  This weld material is modeled with isotropic 
+hardening plasticity.  The yield stress and constan t hardening modulus are 
+assumed to be those of the welded shell elements as  deﬁned in a *DEFINE_-
+CONNECTION_PROPERTIES table.  *DEFINE_CONNECTION_PR OPERTIES 
+data also deﬁne a failure function and the damage t ype.  The interpretation of 
+EFAIL and RS is determined by the choice of damage type.  This is discussed in 
+Remark 4 on *DEFINE_CONNECTION_PROPERTIES. 
+3.  Solid Weld Element Thickness.  Solid weld elements are tied to the mid-plane 
+of shell materials and so typically have a thicknes s that is half the sum of the 
+thicknesses of the welded shell sections.  As a res ult, a weld under shear load- 
+ing can be subject to an artiﬁcially large moment w hich will be balanced by 
+normal forces transferred through the tied contact.   These normal forces will 
+cause the normal term in the failure calculation to  be artiﬁcially high.  Input- 
+ting a TRUE_T that is smaller than the modeled thic kness, for example, 10%-
+30% of true thickness will scale down the normal fo rce that results from the 
+balancing moment and provide more realistic failure  calculations.  TRUE_T 
+eﬀects only the failure calculation, not the weld e lement behavior.  If TRUE_-
+T = 0 or data is omitted, the modeled weld element thickness is used. 
+4.  Weld Assembly Failure.  For weld elements in an assembly (see RPBHX on 
+*CONTROL_SPOTWELD_BEAM or *DEFINE_HEX_SPOTWELD_ASSE M-
+BLY), the failure criterion is evaluated using the assembly cross section.  If 
+damage is not active, all elements will be deleted when the failure criterion is 
+met.  If damage is active, then damage is calculate d independently in each 
+element of the assembly.  By default, elements of t he assembly are deleted as 
+damage in each element is complete.  If ASFF = 1, t hen failure and deletion of 
+all elements in the assembly will occur simultaneou sly when damage is com- 
+plete in any one of the elements. 
+5.  Output.  Solid element force resultants for *.   *

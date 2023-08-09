@@ -1,0 +1,68 @@
+........................... ................................................... .................. 2-865  
+*.  [9] 
+ *.  *.   *.   
+This is Material Type 134.  The viscoelastic fabric  model is a variation on the general 
+viscoelastic model of material 76.  This model is v alid for 3 and 4 node membrane 
+elements only and is strongly recommended for model ing isotropic viscoelastic fabrics 
+where wrinkling may be a problem.  For thin fabrics , buckling can result in an inability 
+to support compressive stresses; thus, a ﬂag is inc luded for this option.  If bending 
+stresses are important use a shell formulation with  model 76. 
+Card Summary: 
+Card 1.   This card is required. 
+MID RO BULK    CSE  
+Card 2.   If ﬁtting is done from a relaxation curve, specify ﬁtting parameters on this 
+card, otherwise if constants are set on Card 3, LEA VE THIS CARD BLANK. 
+LCID NT BSTART TRAMP LCIDK NTK BSTARTK TRAMPK 
+Card 3.   This card is not needed if Card 2 is deﬁned (not blank).  Up to 6 of this card 
+may be input.  If fewer than 6 cards are used, then  the next keyword (“*”) card 
+terminates this input.  
+GI BETAI KI BETAKI     
+Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO BULK    CSE  
+Type I F F    F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number must b e speciﬁed. 
+RO Mass density. 
+BULK Elastic constant bulk modulus.  If the bulk behavio r is 
+viscoelastic, then this modulus is used in determin ing the contact 
+interface stiﬀness only. *.   
+  VARIABLE   DESCRIPTION  
+CSE Compressive stress ﬂag (default = 0.0): 
+EQ.0.0: Don’t eliminate compressive stresses. 
+EQ.1.0: Eliminate compressive stresses. 
+ 
+Relaxation Curve Card.   If ﬁtting is done from a relaxation curve, specify ﬁtting 
+parameters on card 2, otherwise  if constants are set on Visc oelastic Constant Cards 
+LEAVE THIS CARD BLANK . 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable LCID NT BSTART TRAMP LCIDK NTK BSTARTK  TRAMPK 
+Type F I F F F I F F 
+ 
+ VARIABLE   DESCRIPTION  
+LCID Load curve ID if constants, |u1D43A|u1D4J6Cst, and |u1D6FD|u1D4J6Cst are determined using a least 
+squares ﬁt.  See Figure M134-1 . 
+NT Number of terms in shear ﬁt.  If zero, the default is 6. Currently, 
+the maximum number is set to 6. 
+BSTART In the ﬁt, |u1D6FD|oneCst is set to zero, |u1D6FD|twoCst is set to BSTART, |u1D6FD|threeCst is 10 times |u1D6FD|twoCst, 
+|u1D6FD|fourCst is 10 times |u1D6FD|threeCst, and so on.  If zero, BSTART = 0.01. 
+TRAMP Optional ramp time for loading. 
+LCIDK Load curve ID for bulk behavior if constants,  |u1D43∆|u1D4J6Cst and |u1D6FD/u1Dℜ0⃡.st|u1D4J6Csts are 
+determined using a least squares ﬁt.  See Figure M134-1 . 
+NTK Number of terms desired in bulk ﬁt.  If zero, the d efault is 6.  
+Currently, the maximum number is set to 6. 
+BSTARTK In the ﬁt, |u1D6FD/u1Dℜ0⃡.st|oneCsts is set to zero, |u1D6FD/u1Dℜ0⃡.st|twoCsts is set to BSTARTK, |u1D6FD/u1Dℜ0⃡.st|threeCsts is 10 times 
+|u1D6FD/u1Dℜ0⃡.st|twoCsts, |u1D6FD/u1Dℜ0⃡.st/four.sts is 10 times |u1D6FD/u1Dℜ0⃡.st|threeCsts, and so on.  If zero, BSTARTK = 0.01. 
+TRAMPK Optional ramp time for bulk loading 
+ *.   
+ For an example of a stress relaxation curve see Figure M134-1 . This curve deﬁnes stress 
+as a function of time where time is deﬁned on a log arithmic scale.  For best results, the 
+points deﬁned in the load curve should be equally s paced on the logarithmic scale.  
+Furthermore, the load curve should be smooth and de ﬁned in the positive quadrant.  If 
+nonphysical values are determined by least squares ﬁt, LS-DYNA will terminate with 
+an error message after the initialization phase is completed.  If the ramp time for 
+loading is included, then the relaxation which occu rs during the loading phase is taken 
+into account.  This eﬀect may or may not be importa nt. 10n10n+110n+210n+3σ∕ε0
+optional ramp time for loadingTRAMP time
+ Figure M134-1.  Stress Relaxation Curve *

@@ -1,0 +1,56 @@
+ ............................ ................................................... ..................... 2-149  
+*.  [0,1H,1I,1T,2,3a, 3c,5,8A] {5} 
+ *.  *.   *.   
+This is  Material Type 3.  This model is suited for modellin g isotropic and kinematic 
+hardening plasticity with the option of including r ate eﬀects.  It is a very cost-eﬀective 
+model and is available for beam (Hughes-Liu and Tru ss), shell, and solid elements. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR SIGY ETAN BETA  
+Type A F F F F F F  
+Default none none none none none 0.0 0.0  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable SRC SRP FS VP     
+Type F F F F     
+Default 0.0 0.0 10 20  0.0     
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+E Young’s modulus 
+PR Poisson’s ratio 
+SIGY Yield stress 
+ETAN Tangent modulus; see Figure M3-1 . 
+BETA Hardening parameter, 0<|u1D6FD′<1. See Remark 2 . 
+SRC Strain rate parameter, |u1D436, for the Cowper Symonds strain rate 
+model; see Remark 1 .  If zero, rate eﬀects are not considered. *.   
+2-150 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+SRP Strain rate parameter, |u1D4JD, for Cowper Symonds strain rate model; 
+see Remark 1 .  If zero, rate eﬀects are not considered. 
+FS Eﬀective plastic strain for eroding elements 
+VP Formulation for rate eﬀects: 
+EQ.0.0:  scale yield stress (default) 
+EQ.1.0:  viscoplastic formulation (recommended) 
+Remarks: 
+1.  Cowper Symonds Strain Rate Model.   Strain rate is accounted for using the 
+Cowper and Symonds model which scales the yield str ess with the factor 
+1 + |parenleftCvJ|u1D7≠≠̇
+|u1D436|parenriµhtCvJ|oneCst|u1D4JDCst/fraction.v2
+ 
+where |u1D7≠≠̇ is the strain rate.  A fully viscoplastic formulat ion is optional which 
+incorporates the Cowper and Symonds formulation wit hin the yield surface.  
+To ignore strain rate eﬀects set both SRC and SRP t o zero. 
+2.  Hardening Parameter.   Kinematic, isotropic, or a combination of kinemat ic 
+and isotropic hardening may be speciﬁed by varying |u1D6FD′ between 0 and 1.  For β=1, isotropic hardeningβ=0, kinematic hardeninglnl
+l0⎛
+⎜
+⎝⎛
+⎜
+⎝Et
+EYield
+Stress
+Figure M3-1.   Elastic- plastic behavior with kinematic and isotropic hardening 
+where /u1D45∫|zeroCst and /u1D45∫ are undeformed and deformed lengths of uniaxial tension  
+specimen.  |u1D438|u1D461Cst is the slope of the bilinear stress strain curve. *

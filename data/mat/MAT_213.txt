@@ -1,0 +1,485 @@
+: *.  
+*.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+EA |u1D438|u1D44∆Cst, Young’s modulus in the |u1D44∆-direction 
+EB |u1D438|u1D44FCst, Young’s modulus in the |u1D44F-direction 
+EC |u1D438|u1D4J≠Cst, Young’s modulus in the /u1D450-direction 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , (elastic) Poisson’s ratio, |u1D44F|u1D44∆  (see Remark 9 ) 
+PRCA /u1D̅08|u1D4J≠Cst|u1D44∆Cst , (elastic) Poisson’s ratio, /u1D450|u1D44∆  (see Remark 9 ) 
+PRCB /u1D̅08|u1D4J≠Cst|u1D44FCst , (elastic) Poisson’s ratio, /u1D450|u1D44F  (see Remark 9 ) 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable GAB GBC GCA PTOL AOPT MACF FILT VEVP 
+Type F F F F F I F I 
+Default none none none 10 -6 0.0 0 0.0 0 
+ 
+ VARIABLE   DESCRIPTION  
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus |u1D44∆|u1D44F -plane 
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus |u1D44F /u1D450-plane 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus /u1D450|u1D44∆ -plane 
+PTOL Yield function tolerance used during plastic multip lier 
+calculations 
+AOPT Material axes option (see .   *.   
+  VARIABLE   DESCRIPTION  
+EQ.4:  Switch material axes |u1D44F and /u1D450 after BETA rotation 
+Figure M2-2  indicates when LS-DY NA applies MACF during the 
+process to obtain the ﬁnal material axes.  If BETA on *ELE-
+MENT_SOLID_ {OPTION} is deﬁned, then that BE TA is used for 
+the rotation for all AOPT options.  Otherwise, if A OPT = 3, the 
+BETA input on Card 3 rotates the axes.  For all other values of 
+AOPT, the material axes will be switched as speciﬁe d by MACF, 
+but no BETA rotation will be performed. 
+FILT Factor for strain rate ﬁltering (optional):  
+|u1D7≠≠̇|u1D4J6Cst+|oneCsta v g = (1 − FILT) × |u1D7≠≠̇|u1D4J6Cst+|oneCstcur + FILT × |u1D7≠≠̇|u1D4J6Csta v g  
+where |u1D4J6 is the previous time step.  The value of FILT is between 0 
+and 1 
+VEVP Flag to control viscoelastic, viscoplastic beh avior: 
+EQ.0: Viscoplastic only with no rate eﬀects in elastic re gion 
+(default) 
+EQ.1:  Viscoelastic, viscoplastic (see Cards 9 and 10) 
+EQ.2: Viscoelastic only (see Cards 9 and 10) 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3   
+Type F F F F F F   
+Default 0.0 0.0 0.0 0.0 0.0 0.0   
+ 
+ VARIABLE   DESCRIPTION  
+XP, YP, ZP Coordinates of point |u1D443 for AOPT = 1 and 4 
+A1, A2, A3 Components of vector /u1D41A for AOPT = 2 
+ *.   
+  Card 5 1 2 3 4 5 6 7 8 
+Variable H11 H22 H33 H12 H23 H13 H44 H55 
+Type F F F F F F F F 
+Default none none none none none none 3.0 3.0 
+ 
+ VARIABLE   DESCRIPTION  
+Hij  Plastic ﬂow rule coeﬃcients.  See Remark 1 . 
+ 
+ Card 6 1 2 3 4 5 6 7 8 
+Variable H66 LT1 LT2 LT3 LT4 LT5 LT6 LT7 
+Type F I I I I I I I 
+Default 3.0 none none none none none none none 
+ 
+ VARIABLE   DESCRIPTION  
+Hij  Plastic ﬂow rule coeﬃcients.  See Remark 1 . 
+LT1 Table ID for a three-dimensional table (see *DE FINE_TABLE_ 3D) 
+containing temperature and stress-strain input curv es for the |u1D44∆-
+direction tension test.  See Remarks 2 , 8 and 9. 
+LT2 Table ID for a three-dimensional table (see *DE FINE_TABLE_ 3D) 
+containing temperature and stress-strain input curv es for the |u1D44F-
+direction tension test.  See Remarks 2 , 8 and 9. 
+LT3 Table ID for a three-dimensional table (see *DE FINE_TABLE_ 3D) 
+containing temperature and stress-strain input curv es for the /u1D450-
+direction tension test.  See Remarks 2 , 8 and 9. Not required if 
+used with shell elements. 
+LT4 Table ID for a three-dimensional table (see *DE FINE_TABLE_ 3D) 
+containing temperature and stress-strain input curv es for the |u1D44∆-
+direction compression test.  See Remarks 2 , 8 and 9. *.   
+  VARIABLE   DESCRIPTION  
+and 9. Not required if used with shell elements. 
+LT12 Table ID for a three-dimensional table (see *D EFINE_TABLE_ 3D) 
+containing temperature and stress-strain input curv es for the 45°
+oﬀ axis |u1D44∆ /u1D450-plane tension or compression test.  See Remarks 2 , 8
+and 9. Not required if used with shell elements. 
+YSC Load curve ID containing the stress- strain curve IDs and 
+associated initial yield strain values.  See Remark 3 . 
+DFLAG Damage formulation ﬂag (see Remark 12 ): 
+EQ.0: Based on eﬀective stress (default) 
+EQ.1: Based on corrected plastic strain 
+DC Curve ID that speciﬁes which components of the dama ge model 
+are active.  It contains the damage parameter ID an d the 
+corresponding damage as a function of total strain curve ID. Set 
+this value to zero if damage should not be included  in the 
+analysis.  See Remark 4 .  
+ 
+No Failure Card.   The following two cards are included if FTYPE = 0. Card 8a.2 must 
+be included as a blank line 
+Card 8a.1  1 2 3 4 5 6 7 8 
+Variable FTYPE        
+Type I        
+ 
+Card 8a.2  1 2 3 4 5 6 7 8 
+Variable         
+Type         
+ 
+ VARIABLE   DESCRIPTION  
+FTYPE Failure criterion type (see Remarks 5  and 6):  
+EQ.0: No failure considered (default) *.   
+  VARIABLE   DESCRIPTION  
+FV4 Post-peak residual damage in the |u1D44F and /u1D450-directions for 
+compression.  Value must be a real number between 0  and 1. 
+FV5 Post- peak residual damage in shear.  Value must be a rea l 
+number between 0 and 1. 
+FV6 magniﬁcation factor, |u1D4JA/u1D45:.st 
+FV7 Slope parameter, |u1D4JD|u1D44FCst|u1D44∆Cst |u1D461Cst 
+FV8 Slope parameter, |u1D4JD|u1D44FCst|u1D44∆Cst |u1D4J≠Cst 
+FV9 Slope parameter, |u1D4JD|u1D44FCst|u1D44FCst |u1D461Cst 
+FV10  Slope parameter, |u1D4JD|u1D44FCst|u1D44FCst |u1D4J≠Cst 
+FV11 Fiber Poisson’s ratio, /u1D̅08|u1D44∆Cst|u1D44FCst /u1D45:.st 
+FV12 Fiber Young’s modulus, |u1D438|u1D44∆Cst/u1D45:.st 
+FV13 Inter-ﬁber mode I fracture energy, Γ|oneCst 
+FV14 Inter-ﬁber mode II fracture energy, Γ|twoCst 
+ 
+TWFC Card.   The following two cards are included if FTYPE = 2 . 
+Card 8c.1  1 2 3 4 5 6 7 8 
+Variable FTYPE  FV1 FV2 FV3 FV4 FV5 FV6 
+Type I  F F F F F F 
+ 
+Card 8c.2  1 2 3 4 5 6 7 8 
+Variable FV7 FV8 FV9 FV10 FV11 FV12   
+Type F F F F F F   
+ *.   
+  
+Card 8d.2  1 2 3 4 5 6 7 8 
+Variable         
+Type         
+ 
+ VARIABLE   DESCRIPTION  
+FTYPE Failure criterion type (see Remarks 5  and 6):  
+EQ.0: No failure considered (default) 
+EQ.1: Puck Failure Criterion (PFC) (solid elements only) 
+EQ.2: Tsai-Wu Failure Criterion (TWFC) (solid elements on ly) 
+EQ.3: Generalized Tabulated Failure Criterion (GTFC) 
+FV1 In-plane and out-of-plane interaction term, |u1D4JB, used to compute |u1D4J1: 
+|u1D4J1 =/˙raceleft.v6max(|u1D4J1|oneCst, |u1D4J1|twoCst)      if  |u1D4JB = 0.0
+|parenleftCv1|u1D4J1|oneCst|u1D4JBCst+ |u1D4J1|twoCst|u1D4JBCst|parenriµhtCv1|oneCst|u1D4JBCst/fraction.v1 otherwise  
+where, |u1D4J1|u1D4J6Cst= |u1D7≠≠e q  |u1D7≠≠fail ⁄ , |u1D4J6 = 1, 2 . |u1D4J6 = 1  corresponds to the in- plane 
+mode, while  |u1D4J6 = 2  corresponds to the out-of-plane mode.  Here, 
+|u1D7≠≠e q =
+⎩|<raceleftCex⎨|<raceleftCex⎧/radical.v2|u1D7≠≠|oneCst|oneCst |twoCst+ |u1D7≠≠|twoCst|twoCst |twoCst+ 2|u1D7≠≠|oneCst|twoCst |twoCst    for in-plane 
+/radical.v2|u1D7≠≠|threeCst|threeCst |twoCst+ 2|u1D7≠≠|oneCst|threeCst |twoCst+ 2|u1D7≠≠|twoCst|threeCst |twoCst     for out-of-plane  
+An element is eroded if |u1D4J1 reaches a value of 1.0 for s olid elements.  
+For shell elements, an element is eroded if |u1D4J1|oneCst reaches a value of 
+1.0 since only the in-plane mode of failure is cons idered [ 9]. |u1D4JB is 
+not required for shell elements.  
+FV2 Table ID for the table containing in-plane (/u1D̅0:,|u1D7≠≠fail ) values with 
+respect to the speciﬁed |u1D44∆-direction stress. 
+FV3 Table ID for the table containing out-of-plane (/u1D̅0:,|u1D7≠≠fail ) values with 
+respect to the speciﬁed normal /u1D450-direction stress 
+ *.   
+ Viscoelasticity Card.   BETA values only need to be speciﬁed when VEVP = 1 or 2. 
+ Card 10 1 2 3 4 5 6 7 8 
+Variable BETA13 CP TQC TEMP PMACC    
+Type F F F F F    
+ 
+ VARIABLE   DESCRIPTION  
+BETA13 Decay constant for the relaxation matrix of the vis coelastic law 13-
+coupling (default = (BETA11 +BETA33 )2⁄). This ﬁeld is not 
+required for shell elements.  It must be greater th an or equal to 
+zero. 
+CP Speciﬁc heat capacity (per unit mass) 
+TQC Taylor-Quinney Coeﬃcient  
+TEMP This is the reference (or initial) temperature used  to obtain the 
+corresponding stress-strain curves. 
+PMACC Plastic multiplier computational accuracy (se e Remark 10 ): 
+EQ.0:  Use up to a maximum of 1000 increments (default) 
+EQ.N:  Specify a positive value, N, greater than 1 as the 
+maximum number of increments.  An error message is 
+issued if a converged solution cannot be found. 
+Remarks: 
+1.  Flow Rule Coefﬁcients.   Flow rule coeﬃcients (FRC) are determined using 
+the plastic Poisson’s ratios [ 1, 2, 3]. Details on how to compute FRCs can be 
+found in [ 8]. 
+2.  Temperature-Strain Rate Test Result Tables.   A minimum of two sets of 
+(strain rate-temperature) curves are needed.  If th e material is not temperature 
+and rate sensitive, make the two sets of table data  identical.  If the material is 
+rate and temperature sensitive, the curve correspon ding to the smallest total 
+strain rate for the given reference temperature (TE MP in Card 10) is assumed 
+to be the quasi-static, room temperature (QS-RT) cu rve and inﬂuences the vis- 
+coelastic-plastic computations. 
+An example TABLE_3D (LT i) structure for 3 total strain rates and 3 tempera-
+tures for tension in the |u1D44∆-direction test is shown below.  The total strain r ates *.  cards used in a speciﬁc model.  For instan ce, if the LT10-LT11-
+LT12 combination is tension-compression-compression  for one set 
+*.   
+ 3.  YSC.  Curve of initial yield strain values (YSC) must lis t curves in ascending 
+order as abscissa values with the corresponding yie ld strains given as the ordi- 
+nate values.  An example YSC data is shown below fo r a case with two sets of 
+(temperature, strain rate) data. 
+ 
+Load Curve Yield Strain Curves 
+LC1 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst Curve 1 (10°C, 10 -3/s) 
+LC2 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |twoCst Curve 2 (10°C, 10 -3/s) 
+LC3 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |threeCst Curve 3 (10°C, 10 -3/s) 
+LC4 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |fourCst Curve 4 (10°C, 10 -3/s) 
+LC5 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |fiveCst Curve 5 (10°C, 10 -3/s) 
+LC6 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |sixCst Curve 6 (10°C, 10 -3/s) 
+LC7 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |sevenCst Curve 7 (10°C, 10 -3/s) 
+LC8 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st /eight.st Curve 8 (10°C, 10 -3/s) 
+LC9 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st /nine.st Curve 9 (10°C, 10 -3/s) 
+LC10 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|zeroCst  Curve 10 (10°C, 10 -3/s) 
+LC11 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|oneCst  Curve 11 (10°C, 10 -3/s) 
+LC12 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|twoCst  Curve 12 (10°C, 10 -3/s) 
+LC13 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|threeCst  Curve 1 (20°C, 10 -3/s) 
+LC14 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|fourCst  Curve 2 (20°C, 10 -3/s) 
+LC15 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|fiveCst  Curve 3 (20°C, 10 -3/s) 
+LC16 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|sixCst  Curve 4 (20°C, 10 -3/s) 
+LC17 |u1D7≠≠|u1D466Cst|zeroCsts|u1D43FCst /u1D4:6.st |oneCst|sevenCst  Curve 5 (20°C, 10 -3/s) *.   
+ Damage 
+Parameter 
+ID  Damage 
+Parameter  Damage 
+Parameter 
+ID  Damage 
+Parameter  Damage 
+Parameter 
+ID  Damage 
+Parameter  
+8 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44FCst|u1D4J≠Cst (|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 36 |u1D4J1|u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts|u1D44∆Cst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts|parenriµhtCv2 64 |u1D4J1|u1D44∆Cst|u1D44FCst |u1D44∆Cst|u1D44∆Cst /u1D436.sts(|u1D7≠≠|u1D44∆Cst|u1D44FCst ) 
+9 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D44∆Cst|u1D4J≠Cst (|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) 37 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 65 |u1D4J1|u1D44∆Cst|u1D44FCst |u1D44FCst|u1D44FCst /u1D436.sts(|u1D7≠≠|u1D44∆Cst|u1D44FCst ) 
+10 |u1D4J1/u1D45C.st|u1D44∆Cst|u1D44FCst /u1D45C.st|u1D44∆Cst|u1D44FCst (|u1D7≠≠/u1D45C.st|u1D44∆Cst|u1D44FCst ) 38 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D44FCst|u1D44FCst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 66 |u1D4J1|u1D44∆Cst|u1D44FCst |u1D4J≠Cst|u1D4J≠Cst /u1D436.sts(|u1D7≠≠|u1D44∆Cst|u1D44FCst ) 
+11 |u1D4J1/u1D45C.st|u1D44FCst|u1D4J≠Cst /u1D45C.st|u1D44FCst|u1D4J≠Cst (|u1D7≠≠/u1D45C.st|u1D44FCst|u1D4J≠Cst ) 39 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 67 |u1D4J1|u1D44∆Cst|u1D44FCst |u1D44FCst|u1D4J≠Cst (|u1D7≠≠|u1D44∆Cst|u1D44FCst ) 
+12 |u1D4J1/u1D45C.st|u1D44∆Cst|u1D4J≠Cst /u1D45C.st|u1D44∆Cst|u1D4J≠Cst (|u1D7≠≠/u1D45C.st|u1D44∆Cst|u1D4J≠Cst ) 40 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D44FCst|u1D44FCst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 68 |u1D4J1|u1D44∆Cst|u1D44FCst |u1D44∆Cst|u1D4J≠Cst (|u1D7≠≠|u1D44∆Cst|u1D44FCst ) 
+13 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D44FCst|u1D44FCst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 41 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 69 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44∆Cst|u1D44∆Cst /u1D44̅.sts(|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+14 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 42 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D44∆Cst|u1D44FCst |parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 70 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44FCst|u1D44FCst /u1D44̅.sts(|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+15 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 43 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D44FCst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 71 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts(|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+16 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D44FCst|u1D44FCst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 44 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D436.sts|u1D44∆Cst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenriµhtCv2 72 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44∆Cst|u1D44∆Cst /u1D4⃡0.sts(|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+17 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 45 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 73 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44FCst|u1D44FCst /u1D4⃡0.sts(|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+18 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D44∆Cst|u1D44FCst |parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 46 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D44FCst|u1D44FCst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 74 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D4J≠Cst|u1D4J≠Cst /u1D4⃡0.sts(|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+19 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D44FCst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 47 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 75 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44∆Cst|u1D44FCst (|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+20 |u1D4J1|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|u1D44∆Cst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenriµhtCv2 48 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 76 |u1D4J1|u1D44FCst|u1D4J≠Cst |u1D44∆Cst|u1D4J≠Cst (|u1D7≠≠|u1D44FCst|u1D4J≠Cst ) 
+21 |u1D4J1|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.sts|parenriµhtCv2 49 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 77 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D44∆Cst|u1D44∆Cst /u1D44̅.sts(|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) 
+22 |u1D4J1|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.sts|parenriµhtCv2 50 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D44∆Cst|u1D44FCst |parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 78 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D44FCst|u1D44FCst /u1D44̅.sts(|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) 
+23 |u1D4J1|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D44∆Cst|u1D44∆Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.sts|parenriµhtCv2 51 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D44FCst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 79 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D4J≠Cst|u1D4J≠Cst /u1D44̅.sts(|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) 
+24 |u1D4J1|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D44FCst|u1D44FCst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.sts|parenriµhtCv2 52 |u1D4J1|u1D44FCst|u1D44FCst /u1D436.sts|u1D44∆Cst|u1D4J≠Cst |parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.sts|parenriµhtCv2 80 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D44∆Cst|u1D44∆Cst /u1D436.sts(|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) 
+25 |u1D4J1|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.sts|parenriµhtCv2 53 |u1D4J1|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|u1D44∆Cst|u1D44∆Cst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|parenriµhtCv2 81 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D44FCst|u1D44FCst /u1D436.sts(|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) 
+26 |u1D4J1|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D44∆Cst|u1D44FCst |parenleftCv2|u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.sts|parenriµhtCv2 54 |u1D4J1|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|u1D44FCst|u1D44FCst /u1D44̅.sts|parenleftCv2|u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst /u1D436.sts|parenriµhtCv2 82 |u1D4J1|u1D44∆Cst|u1D4J≠Cst |u1D4J≠Cst|u1D4J≠Cst /u1D436.sts(|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst ) *.   
+ 5.  Failure Criterion.   Use Cards 8 n.1 and 8 n.2 for the failure criterion to be included 
+in the failure model.  The failure criterion and as sociated values are given as (see 
+[5] for details) 
+a)  Puck Failure Criterion (PFC).  For this criterion, FTYPE = 1 and FV0, …, 
+FV14 are the magnitudes of fracture energy, damage,  magniﬁcation factor, 
+slope parameters, and material parameters for the ﬁ ber. 
+b)  Tsai-Wu Failure Criterion (TWFC) .  For this criterion, FTYPE = 2 and FV1, 
+..., FV12 are the magnitudes of the failure stresse s |u1D7≠∆̂|u1D44∆Cst|u1D44∆Cst |u1D447Cst , |u1D7≠∆̂|u1D44∆Cst|u1D44∆Cst /u1D4:6.st, |u1D7≠∆̂|u1D44FCst|u1D44FCst |u1D447Cst, |u1D7≠∆̂|u1D44FCst|u1D44FCst /u1D4:6.st, |u1D7≠∆̂|u1D4J≠Cst|u1D4J≠Cst |u1D447Cst, 
+|u1D7≠∆̂|u1D4J≠Cst|u1D4J≠Cst /u1D4:6.st, |u1D7≠∆̂|u1D44∆Cst|u1D44FCst , |u1D7≠∆̂|u1D44FCst|u1D4J≠Cst , |u1D7≠∆̂|u1D44∆Cst|u1D4J≠Cst ,  |u1D7≠∆̂|u1D44∆Cst|u1D44FCst |fourCst|fiveCst , |u1D7≠∆̂|u1D44FCst|u1D4J≠Cst |fourCst|fiveCst , and |u1D7≠∆̂|u1D44∆Cst|u1D4J≠Cst |fourCst|fiveCst .  
+c)  Generalized Tabulated Failure Criterion (GTFC) . For solid elements with 
+FTYPE = 3, FV1 is |u1D4JB, the in-plane and out-of-plane interaction term.  FV2 
+and FV3 are the Table IDs of the two tables for the  in-plane and the out-of-
+plane (/u1D̅0:, |u1D7≠≠/u1D45:.st|u1D44∆Cst|u1D4J6Cst|u1D4J9Cst ) values that deﬁne the in-plane and out-of-plane fa ilure sur- 
+faces, respectively.  For the in-plane failure surf ace, the table contains the 
+|u1D44∆-direction stress (S11) value-curve ID pairs.  For the out-of-plane failure 
+surface, the table contains the normal /u1D450-direction stress (S33) value-curve 
+ID pairs.  For shell elements, only FV2 is used wit h the preceding deﬁni- 
+tion and the element fails when the damage is 1. Th ere is no data in card 
+8d.2. 
+A partial example is shown below for solid elements . 
+ 
+$# Card 8d.1 
+$#   FTYPE       FV0       FV1       FV2       FV3 
+         3                 2.0      9013      9014 
+$# Card 8d.2 
+$# 
+   
+. . .  
+   
+$$ theta – equivalent failure strain (efs) 
+*DEFINE_TABLE 
+$#    tbid       sfa      offa 
+      9013         0     0.000   
+$#             value            curveid 
+                 0.0              90131 
+            366000.0              90132 
+*DEFINE_CURVE 
+$$ theta – equivalent failure strain for S11 = 0.0 
+$#    lcid      sidr       sfa       sfo      offa      
+offo    dattyp 
+     90131         0     0.000     0.000     0.000     
+0.000         0 
+$#                a1                  o1 *.   
+ 9.  Poisson’s Ratios.   If necessary, the input Poisson’s ratios are adju sted 
+internally in LS-DYNA to satisfy the criteria descr ibed in [ 6]. 
+10.  Plastic Multiplier. The plastic multiplier computations involve ﬁnding the root 
+of the yield function.  The root is computed numeri cally, not analytically.  The 
+ﬁrst step is to ﬁnd the interval bounding the root.   The value of N set in ﬁeld 
+PMACC on Card 10 controls the discretization of the  interval to ﬁnd the 
+bound.  The larger the value of N, the more accurat e the bound.  However, the 
+computational time is likely to increase with large r values of N. 
+11.  Stochastic Variation.   A stochastic variation can be added using keyword  
+*DEFINE_STOCHASTIC_VARIATION_PROPERTIES. There are six quantities 
+(see table below) which can be varied, so Card 2 in  *DEFINE_STOCHASTIC_-
+VARIATION_PROPERTIES must be deﬁned six times and a ssumes that the 
+quantities being varied are in the order speciﬁed. 
+ 
+Material Properties to be 
+Varied in Predeﬁned Order 
+|u1D438|u1D44∆Cst 
+|u1D43A|u1D44∆Cst|u1D44FCst  
+|u1D43A|u1D44FCst|u1D4J≠Cst  
+|u1D43A|u1D4J≠Cst|u1D44∆Cst  
+In-plane failure radius 
+Out-of-plane failure radius 
+12.  Damage Formulation.  By default, the damage calculations are carried ou t 
+using eﬀective stress as the internal state variabl e for tracking growth of dam- 
+age parameters |u1D4J1|u1D4J≠Cst /u1D451.st |u1D44∆Cst|u1D44FCst . An alternate formulation is available where the d amage 
+parameters are taken as functions of directional pl astic strains to track damage 
+growth.  Details of both the formulations are avail able in [ 10 ]. 
+External Files Generated by . -
+__input_curve__stress-strain__curve_id_ i.plt ” Here, i is the ith  load curve input into 
+*.   *. __input_curve__stress-strain__curve_id_1.plt  LC1 
+. __input_curve__stress-strain__curve_id_3.plt  LC3 
+. __input_curve__stress-strain__curve_id_5.plt  LC5 
+. __input_curve__stress-strain__curve_id_7.plt  LC7 
+. __input_curve__stress-strain__curve_id_9.plt  LC9 
+. __input_curve__stress-strain__curve_id_11.pl t LC11 
+. __input_curve__stress-strain__curve_id_13.pl t LC13 
+. __input_curve__stress-strain__curve_id_15.pl t LC15 
+. __input_curve__stress-strain__curve_id_17.pl t LC17 
+. __input_curve__stress-strain__curve_id_19.pl t LC19 
+. __input_curve__stress-strain__curve_id_21.pl t LC21 
+. __input_curve__stress-strain__curve_id_23.pl t LC23 *.   
+ File Name Load Curve 
+. __modiﬁed_curve__-
+stress-pl_strain__curve_id_ i.plt ”. As above, i is the ith  load curve input into *. __modiﬁed_curve__stress-pl_strain__curve_id_ 1.plt LC1 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 3.plt LC3 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 5.plt LC5 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 7.plt LC7 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 9.plt LC9 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 11.plt LC11 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 13.plt LC13 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 15.plt LC15 
+.   *. __modiﬁed_curve__stress-pl_strain__curve_id_ 17.plt LC17 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 19.plt LC19 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 21.plt LC21 
+. __modiﬁed_curve__stress-pl_strain__curve_id_ 23.plt LC23 
+. __modiﬁed_curve__stress-pl_strain__curve_-
+id_ i.plt ” ﬁles have similar headings 
+Curveplot 
+MAT213 mod crv i (EPSR =       xxxx.xxx) 
+effective plastic strain 
+stress 
+stress curve 
+stress #pts=     “LCINT” 
+List of History Variables for Solid Elements (LS-Pr ePost): 
+History 
+Variable 
+# Symbols  Description 
+15 /u1D450|oneCst/u1D451.st Damage in |u1D44∆-direction, tension 
+16 /u1D450|twoCst/u1D451.st Damage in |u1D44F-direction, tension 
+17 /u1D450|threeCst/u1D451.st Damage in /u1D450-direction, tension 
+18 /u1D450|fourCst/u1D451.st Damage in |u1D44∆-direction, compression 
+19 /u1D450|fiveCst/u1D451.st Damage in |u1D44F-direction, compression 
+20 /u1D450|sixCst/u1D451.st Damage in /u1D450-direction, compression *.   
+ History 
+Variable 
+# Symbols  Description 
+21 /u1D450|sevenCst/u1D451.st Damage in |u1D44∆-|u1D44F plane, shear 
+22 /u1D450/eight.st/u1D451.st Damage in |u1D44F-/u1D450 plane, shear 
+23 /u1D450/nine.st/u1D451.st Damage in |u1D44∆-/u1D450 plane, shear 
+24 |u1D4J1 Failure term (FTYPE = 3) 
+25 |u1D4J1|oneCst Equivalent strain/ Equivalent failure strain for in -plane 
+mode (FTYPE = 3) 
+26 |u1D4J1|twoCst Equivalent strain/ Equivalent failure strain for ou t-of-
+plane mode (FTYPE = 3) 
+27 |u1D4JFIP /u1D45:.st Equivalent failure strain for in-plane mode (FTYPE = 3) 
+28 |u1D4JFIP  Equivalent strain for in-plane mode (FTYPE = 3) 
+29 /u1D̅0:IP  Failure angle for in-plane mode (FTYPE = 3) 
+30 |u1D4JFOOP /u1D45:.st Equivalent failure strain for out-of-plane mode 
+(FTYPE = 3) 
+31 |u1D4JFOOP  Equivalent strain for out-of-plane mode (FTYPE = 3)  
+32 /u1D̅0:OOP  Failure angle for out-of-plane mode (FTYPE = 3) 
+24 |u1D7≠≠|u1D44∆Cst|u1D44∆Cst |zeroCst Strain at failure onset in |u1D44∆-direction (FTYPE = 1) 
+25 |u1D7≠≠|u1D44∆Cst|u1D44∆Cst /u1D45:.st Strain for erosion in |u1D44∆-direction (FTYPE = 1) 
+26 |u1D7≠≠|u1D44FCst|u1D44FCst |zeroCst Strain at failure onset in |u1D44F-direction (FTYPE = 1) 
+27 |u1D7≠≠|u1D44FCst|u1D44FCst /u1D45:.st Strain for erosion in |u1D44F-direction (FTYPE = 1) 
+28 |u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst |zeroCst Strain at failure onset in /u1D450-direction (FTYPE = 1) 
+29 |u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst /u1D45:.st Strain for erosion in /u1D450-direction (FTYPE = 1) 
+30 |u1D7≠≠|u1D44∆Cst|u1D44FCst |zeroCst Tensorial shear strain at failure onset in |u1D44∆-|u1D44F plane 
+(FTYPE = 1) *.   
+ History 
+Variable 
+# Symbols  Description 
+49 |u1D7≠∆|u1D44FCst|u1D44FCst/u1D44̅.stseff  or 
+|u1D7≠≠|u1D44FCst|u1D44FCst/u1D44̅.stscp  DFLAG.EQ.0:  Eﬀective tensile stress in the |u1D44F-direction 
+DFLAG.EQ.1:  Corrected tensile plastic strain the |u1D44F-
+direction 
+50 |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst/u1D44̅.stseff  or 
+|u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst/u1D44̅.stscp  DFLAG.EQ.0:  Eﬀective tensile stress in the /u1D450-direction 
+DFLAG.EQ.1:  Corrected tensile plastic strain the /u1D450-
+direction 
+51 |u1D7≠∆|u1D44∆Cst|u1D44∆Cst /u1D436.stseff  or 
+|u1D7≠≠|u1D44∆Cst|u1D44∆Cst/u1D436.stscp  DFLAG.EQ.0:  Eﬀective compressive stress in the |u1D44∆-
+direction 
+DFLAG.EQ.1:  Corrected compressive plastic strain the |u1D44∆-
+direction 
+52 |u1D7≠∆|u1D44FCst|u1D44FCst/u1D436.stseff  or 
+|u1D7≠≠|u1D44FCst|u1D44FCst/u1D436.stscp  DFLAG.EQ.0:  Eﬀective compressive stress in the |u1D44F-
+direction 
+DFLAG.EQ.1:  Corrected compressive plastic strain the |u1D44F-
+direction 
+53 |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst/u1D436.stseff  or 
+|u1D7≠≠|u1D4J≠Cst|u1D4J≠Cst/u1D436.stscp  DFLAG.EQ.0:  Eﬀective compressive stress in the /u1D450-
+direction 
+DFLAG.EQ.1:  Corrected compressive plastic strain the /u1D450-
+direction 
+54 |u1D7≠∆|u1D44∆Cst|u1D44FCst eff  or 
+|u1D7≠≠|u1D44∆Cst|u1D44FCst cp  DFLAG.EQ.0:  Eﬀective shear stress in the |u1D44∆-|u1D44F plane 
+DFLAG.EQ.1:  Corrected plastic tensorial strain the |u1D44∆-|u1D44F 
+plane 
+55 |u1D7≠∆|u1D44FCst|u1D4J≠Cst eff  or 
+|u1D7≠≠|u1D44FCst|u1D4J≠Cst cp  DFLAG.EQ.0:  Eﬀective shear stress in the |u1D44F-/u1D450 plane 
+DFLAG.EQ.1:  Corrected plastic tensorial strain the |u1D44F-/u1D450 
+plane 
+56 |u1D7≠∆|u1D44∆Cst|u1D4J≠Cst eff  or 
+|u1D7≠≠|u1D44∆Cst|u1D4J≠Cst cp  DFLAG.EQ.0:  Eﬀective shear stress in the |u1D44∆-/u1D450 plane 
+DFLAG.EQ.1:  Corrected plastic tensorial strain the |u1D44∆-/u1D450 
+plane 
+57 |u1D7≠6 Eﬀective plastic strain 
+58 |u1D7≠≠|u1D44∆Cst|u1D44∆Cst  Strain in |u1D44∆-direction *.   
+ History 
+Variable 
+# Symbols  Description 
+80 |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D463Cst Viscous stress in |u1D44∆-direction 
+81 |u1D7≠∆|u1D44FCst|u1D44FCst |u1D463Cst Viscous stress in |u1D44F-direction 
+82 |u1D7≠∆|u1D4J≠Cst|u1D4J≠Cst |u1D463Cst Viscous stress in /u1D450-direction 
+83 |u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D463Cst Viscous shear stress in |u1D44∆-|u1D44F plane 
+90 |u1D7≠∆|u1D44FCst|u1D4J≠Cst |u1D463Cst Viscous shear stress in |u1D44F-/u1D450 plane 
+91 |u1D7≠∆|u1D44∆Cst|u1D4J≠Cst |u1D463Cst Viscous shear stress in a-c plane 
+List of History Variables for Shell Elements (LS-Pr ePost): 
+History 
+Variable 
+Shells #  Symbols  Description 
+13 |u1D4J1max  Maximum damage parameter 
+14 /u1D450|oneCst/u1D451.st Damage in |u1D44∆-direction, tension 
+15 /u1D450|twoCst/u1D451.st Damage in |u1D44F-direction, tension 
+16 /u1D450|fourCst/u1D451.st Damage in |u1D44∆-direction, compression 
+17 /u1D450|fiveCst/u1D451.st Damage in |u1D44F-direction, compression 
+18 /u1D450|sevenCst/u1D451.st Damage in |u1D44∆-|u1D44F plane, shear 
+19 |u1D4J1 Failure term (FTYPE = 3) 
+20 |u1D4JFIP  Equivalent strain for in-plane mode 
+21 /u1D̅0:IP  Failure angle for in-plane mode 
+22 F Flag for failure of integration point.  “1” if  |u1D4J1 ≥ 1 
+23 |u1D447 Temperature 
+24 |u1D7≠6̇ Eﬀective plastic strain *.   
+ History 
+Variable 
+Shells #  Symbols  Description 
+46 |u1D7≠∆|u1D44∆Cst|u1D44FCst  Shear stress in |u1D44∆-|u1D44F plane 
+47 |u1D7≠∆|u1D44FCst|u1D4J≠Cst  Shear stress in |u1D44F-/u1D450 plane 
+48 |u1D7≠∆|u1D44∆Cst|u1D4J≠Cst  Shear stress in |u1D44∆-/u1D450 plane 
+49 |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D4J2Cst Equilibrium stress in |u1D44∆-direction 
+50 |u1D7≠∆|u1D44FCst|u1D44FCst |u1D4J2Cst Equilibrium stress in |u1D44F-direction 
+51 |u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D4J2Cst Equilibrium shear stress in |u1D44∆-|u1D44F plane 
+52 |u1D7≠∆|u1D44∆Cst|u1D44∆Cst |u1D463Cst Viscous stress in |u1D44∆-direction 
+53 |u1D7≠∆|u1D44FCst|u1D44FCst |u1D463Cst Viscous stress in |u1D44F-direction 
+54 |u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D463Cst Viscous shear stress in |u1D44∆-|u1D44F plane 
+55 |u1D7≠≠|u1D44∆Cst|u1D44∆Cst/u1D44̅.stscp  Corrected plastic strain in |u1D44∆-direction, tension 
+56 |u1D7≠≠|u1D44FCst|u1D44FCst /u1D44̅.stscp  Corrected plastic strain in |u1D44F-direction, tension 
+57 |u1D7≠≠|u1D44∆Cst|u1D44∆Cst/u1D436.stscp  Corrected plastic strain in |u1D44∆-direction, compression 
+58 |u1D7≠≠|u1D44FCst|u1D44FCst /u1D436.stscp  Corrected plastic strain in |u1D44F-direction, compression 
+59 |u1D7≠∆|u1D44∆Cst|u1D44∆Cst/u1D44̅.sts|u1D466Cst Yield stress in tension |u1D44∆-direction 
+60 |u1D7≠∆|u1D44FCst|u1D44FCst /u1D44̅.sts|u1D466Cst Yield stress in tension |u1D44F-direction 
+61 |u1D7≠∆|u1D44∆Cst|u1D44∆Cst/u1D436.sts|u1D466Cst Yield stress in compression |u1D44∆-direction 
+62 |u1D7≠∆|u1D44FCst|u1D44FCst /u1D436.sts|u1D466Cst Yield stress in compression |u1D44F-direction 
+63 |u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D466Cst Yield stress in shear |u1D44∆-|u1D44F plane 
+64 |u1D7≠∆|u1D44∆Cst|u1D44FCst |u1D466Cst/co⋯⋯a.st|fourCst|fiveCst  Yield stress in 45° oﬀ-axis |u1D44∆-|u1D44F plane 
+65 |u1D438|u1D4JDCst Dissipated plastic energy *.  User Guide”, April, 2020. 
+ [9]  T. Achstetter, “Development of a composite ma terial shell-element model for impact applications” , 
+PhD Dissertation, George Mason University, 2019. 
+ [10]  B. Khaled, “Experimental Characterization an d Finite Element Modeling of Composites to Support 
+a Generalized Orthotropic Elasto-Plastic Damage Mat erial Model for Impact Analysis”, PhD 
+Dissertation, Arizona State University, 2019. *

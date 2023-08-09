@@ -1,0 +1,55 @@
+: *.  
+*.   *.   
+ Data Card Deﬁnitions: 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO SIGA SIGI SIGS SIG0 BULK  
+Type A F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density 
+SIGA |u1D7≠∆̂|u1D44∆Cst, dislocation interactions with long-range barriers  (force/area) 
+SIGI |u1D7≠∆̂|u1D4J6Cst, dislocation interactions with interstitial atoms (force/area)  
+SIGS |u1D7≠∆̂|u1D46≠Cst, dislocation interactions with solute atoms (force /area)  
+SIG0 |u1D7≠∆̂|zeroCst, initial value of |u1D7≠∆̂ at zero plastic strain (force/area) NOT USED.  
+BULK Bulk modulus deﬁned for shell elements only.  Do no t input for 
+solid elements.  
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable HF0 HF1 HF2 SIGS0 EDOTS0 BURG CAPA BOLTZ 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+HF0 |u1D44∆|zeroCst, dislocation generation material constant (force/a rea)  
+HF1 |u1D44∆|oneCst, dislocation generation material constant (force/a rea)  
+HF2 |u1D44∆|twoCst, dislocation generation material constant (force/a rea)  
+SIGS0 |u1D7≠∆̂εso , saturation threshold stress at 0 o K (force/area)  
+EDOTS0 |u1D7≠≠̇εso , reference strain-rate (time -1).  *.   
+  VARIABLE   DESCRIPTION  
+PINVI 1|u1D4JD|u1D4J6Cst⁄, material constant  
+QINVI 1/u1D45E|u1D4J6Cst⁄, material constant 
+EDOTS |u1D7≠≠̇/u1D45C.st/co⋯⋯a.st|u1D46≠Cst, reference strain-rate (time -1) 
+G0S |u1D4J4|zeroCst/co⋯⋯a.st|u1D46≠Cst, normalized activation energy for a dislocation/solu te 
+interaction  
+PINVS 1|u1D4JD|u1D46≠Cst⁄, material constant  
+QINVS 1/u1D45E|u1D46≠Cst⁄, material constant 
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable RHOCPR TEMPRF ALPHA EPS0     
+Type F F F F     
+ 
+ VARIABLE   DESCRIPTION  
+RHOCPR |u1D7≠+/u1D450|u1D4JDCst, product of density and speciﬁc heat 
+TEMPRF |u1D447ref , initial element temperature in degrees K  
+ALPHA |u1D6F+, material constant (typical value is between 0 and  2)  
+EPS0 |u1D7≠≠/u1D45C.st, factor to normalize strain rate in the calculatio n of Θ/u1D45C.st (time -1) 
+Remarks: 
+The ﬂow stress |u1D7≠∆ is given by: 
+|u1D7≠∆ = |u1D7≠∆̂|u1D44∆Cst+|u1D43A
+|u1D43A|zeroCst|<racketleftCv1|u1D46≠th |u1D7≠∆̂+ |u1D46≠th /co⋯⋯a.st|u1D4J6Cst|u1D7≠∆̂|u1D4J6Cst+ |u1D46≠th /co⋯⋯a.st|u1D46≠Cst|u1D7≠∆̂|u1D46≠Cst|<racketriµhtCv1  . 
+The ﬁrst product in the equation for |u1D7≠∆ contains  a micro-structure evolution variable, |u1D7≠∆̂. 
+which is multiplied by a constant-structure deforma tion variable sth :sth .  |u1D7≠∆̂ is the 
+Mechanical Threshold Stress (MTS) and is a function of absolute temperature, |u1D447, and the 
+plastic strain-rates, |u1D7≠≠̇/p.st.  The evolution equation for |u1D7≠∆̂ is a diﬀerential hardening law 
+representing dislocation-dislocation interactions: *

@@ -1,0 +1,51 @@
+ ............................ ................................................... .................... 2-789  
+*.  [2,3a] {8} 
+ *.  *.   *.   
+This is  Material Type 122.  This is Hill’s 1948 planar anis otropic material model with 3 R 
+values and yield curves deﬁned in 3 directions as w ell as biaxial or shear yield.  It is 
+implemented for shell elements. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO E PR HR    
+Type A8 F F F F    
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable R00 R45 R90 LC00 ICONV LC90 LC45 LCEX 
+Type F F F I I I I I 
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable AOPT        
+Type F        
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable    A1 A2 A3   
+Type    F F F   
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA  
+Type F F F F F F F  
+ *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label n ot exceeding 8 
+characters must be speciﬁed. 
+RO Mass density 
+E Young’s modulus, |u1D438 
+PR Poisson’s ratio, /u1D̅08 
+HR Hardening rule: 
+EQ.1.0: not applicable 
+EQ.2.0: not applicable 
+EQ.3.0: load curve 
+R00 |u1D44J|zeroCst|zeroCst , Lankford parameter determined from experiments 
+R45 |u1D44J|fourCst|fiveCst , Lankford parameter determined from experiments 
+R90 |u1D44J/nine.st |zeroCst , Lankford parameter determined from experiments 
+LC00 Load curve ID for the yield curve in the 0° directi on 
+ICONV Convexity option: 
+EQ.0.0: convexity of the yield surface is not enforced. 
+EQ.1.0: convexity of the yield surface is enforced.  
+LC90 Load curve ID for the yield curve in the 90° d irection 
+LC45 Load curve ID for the yield curve in the 45° d irection 
+LCEX Absolute value is load curve ID for the yield curve  in shear or 
+biaxial: 
+GT.0.0: shear yield is provided 
+LT.0.0: biaxial yield is provided 
+AOPT Material axes option (see .   *

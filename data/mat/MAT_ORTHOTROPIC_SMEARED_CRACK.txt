@@ -1,0 +1,88 @@
+ .................... ................................................... ..... 2-845  
+*.  [0] {61} 
+ *.  *.   *.   
+This is  Material Type 132.  This material is a smeared crac k model for orthotropic 
+materials. 
+ 
+ Card 1 1 2 3 4 5 6 7 8 
+Variable MID RO EA EB EC PRBA PRCA PRCB 
+Type A F F F F F F F 
+ 
+ Card 2 1 2 3 4 5 6 7 8 
+Variable UINS UISS CERRMI CERRMII IND ISD   
+Type F F F F I I   
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable GAB GBC GCA AOPT     
+Type F F F F     
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable XP YP ZP A1 A2 A3 MACF  
+Type F F F F F F I  
+ 
+ Card 5 1 2 3 4 5 6 7 8 
+Variable V1 V2 V3 D1 D2 D3 BETA REF 
+Type F F F F F F F F 
+ *.   
+  VARIABLE   DESCRIPTION  
+MID Material identiﬁcation.  A unique number or label m ust be 
+speciﬁed (see *PART). 
+RO Mass density. 
+EA Young’s modulus in |u1D44∆-direction, |u1D438|u1D44∆Cst 
+EB Young’s modulus in |u1D44F-direction, |u1D438|u1D44FCst 
+EC Young’s modulus in /u1D450-direction, |u1D438|u1D4J≠Cst 
+PRBA Poisson’s ratio |u1D44F|u1D44∆ , /u1D̅08|u1D44FCst|u1D44∆Cst  
+PRCA Poisson’s ratio /u1D450|u1D44∆ , /u1D̅08|u1D4J≠Cst|u1D44∆Cst  
+PRCB Poisson’s ratio /u1D450|u1D44F , /u1D̅08|u1D4J≠Cst|u1D44FCst  
+UINS Ultimate interlaminar normal stress  
+UISS Ultimate interlaminar shear stress 
+CERRMI Critical energy release rate mode I 
+CERRMII Critical energy release rate mode II 
+IND Interlaminar normal direction: 
+EQ.1.0: Along local |u1D44∆-axis 
+EQ.2.0: Along local |u1D44F-axis 
+EQ.3.0: Along local /u1D450-axis 
+ISD Interlaminar shear direction : 
+EQ.4.0: Along local |u1D44∆|u1D44F -axis 
+EQ.5.0: Along local |u1D44F /u1D450-axis 
+EQ.6.0: Along local /u1D450|u1D44∆ -axis 
+GAB Shear modulus |u1D44∆|u1D44F , |u1D43A|u1D44∆Cst|u1D44FCst  
+GBC Shear modulus |u1D44F /u1D450, |u1D43A|u1D44FCst|u1D4J≠Cst  
+GCA Shear modulus /u1D450|u1D44∆ , |u1D43A|u1D4J≠Cst|u1D44∆Cst  
+AOPT Material axes option (see Figure M2-1 ): 
+EQ.0.0: L ocally orthotropic with material axes determined by  *.   
+  VARIABLE   DESCRIPTION  
+D1 D2 D3 Deﬁne components of vector /u1D41D for AOPT = 2: 
+BETA Material angle in degrees for AOPT = 3.  It may be overridden on 
+the element card; see *ELEMENT_SOLID_ORTHO. 
+REF Use reference geometry to initialize the stress ten sor.  The 
+reference geometry is deﬁned by the keyword *INITIA L_FOAM_-
+REFERENCE_GEOMETRY. 
+EQ.0.0: Oﬀ 
+EQ.1.0: On 
+Remarks: 
+This is an orthotropic material with optional delam ination failure for brittle composites.  
+The elastic formulation is identical to the DYNA3D model that uses total strain 
+formulation.  The constitutive matrix C that relates to global components of stress to the  
+global components of strain is deﬁned as: 
+C = T|u1D447CstC|u1D43FCstT 
+where T is the transformation matrix between the local mat erial coordinate system and 
+the global system and C|u1D43FCstis the constitutive matrix deﬁned in terms of the m aterial 
+constants of the local orthogonal material axes |u1D44∆, |u1D44F, and /u1D450 (see DYNA3D use manual). 
+ 
+Failure is described using linear softening stress strain curves for the interlaminar 
+normal and interlaminar shear directions.  The curr ent implementation for failure is 
+essentially two-dimensional.  Damage can occur in t he interlaminar normal direction 
+and a single interlaminar shear direction.  The ori entation of these directions with 
+respect to the principal material directions must b e speciﬁed by the user. 
+ 
+Based on speciﬁed values for the ultimate stress an d the critical energy release rate 
+bounding surfaces are deﬁned as 
+|u1D4J3|u1D4JBCst= |u1D7≠∆|u1D4JBCst− |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D4JBCst(|u1D7≠≠|u1D4JBCst) 
+|u1D4J3|u1D46≠Cst= |u1D7≠∆|u1D46≠Cst− |u1D7≠∆/overlinec⋯˙.lft/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.ex/overlinec⋯˙.rt|u1D46≠Cst(|u1D7≠≠|u1D46≠Cst) 
+where the subscripts |u1D4JB and |u1D46≠ refer to the normal and shear component.  If stres ses 
+exceed the bounding surfaces, inelastic straining o ccurs.  The ultimate strain is obtained 
+by relating the crack growth energy and the dissipa ted energy.  For solid elements with 
+a single integration point it can be derived to obt ain 
+|u1D7≠≠|u1D4J6Cst/co⋯⋯a.stult =2|u1D43A|u1D4J6Cst|u1D434
+|u1D449|u1D7≠∆|u1D4J6Cst/co⋯⋯a.stult  *

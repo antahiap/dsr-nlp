@@ -1,0 +1,47 @@
+: *.  
+*.   
+ *.   *.   
+ GAMMA Constant deﬁning the damage evolution 
+THICK Element thickness if using shell formulation 16 
+Remarks: 
+The yield function is deﬁned on the form 
+|u1D4J3 =/u1Dℜ11(/u1D̅48) − (|u1D7≠∆|zeroCst+ |u1D44J) 
+where |u1D7≠∆|u1D4J2Cst /u1D45E.st≡/u1Dℜ11(/u1D̅48) is the equivalent stress, |u1D7≠∆|zeroCst is the initial yield stress, and |u1D44J is the 
+isotropic hardening variable, which is a function o f the equivalent plastic strain |u1D4JD. The 
+equivalent stress is deﬁned as 
+/u1Dℜ11(/u1D̅48) =|<racketleftCvJ1
+2{||u1D7≠∆|oneCst− |u1D7≠∆|twoCst||u1D44∆Cst+ |dividesCv1|u1D7≠∆|twoCst− |u1D7≠∆|threeCst|dividesCv1|u1D44∆Cst+ |dividesCv1|u1D7≠∆|threeCst− |u1D7≠∆|oneCst|dividesCv1|u1D44∆Cst}|<racketriµhtCvJ|oneCst
+|u1D44∆Cst
+ 
+where |u1D7≠∆|oneCst≥ |u1D7≠∆|twoCst≥ |u1D7≠∆|threeCst are the ordered principal stresses.  The isotropic  hardening variable 
+is expressed as 
+|u1D44J(|u1D4JD) = |summationCv1 |u1D44J|u1D4J6Cst|threeCst
+|u1D4J6Cst=|oneCst(|u1D4JD) = |summationCv1 |u1D444|u1D4J6Cst
+⎝⎜⎛1 − exp |parenleftCvJ−/u1D̅0:|u1D4J6Cst
+|u1D444|u1D4J6Cst|u1D4JD|parenriµhtCvJ
+⎠⎟⎞|threeCst
+|u1D4J6Cst=|oneCst 
+where |u1D444|u1D4J6Cst and /u1D̅0:|u1D4J6Cst are in turn the saturation value and initial harde ning modulus of the 
+hardening variable |u1D44J|u1D4J6Cst.  As |u1D4JD→∞ , |u1D44J attains its saturation value |u1D44J|u1D46≠Cst|u1D44∆Cst|u1D461Cst , given by 
+|u1D44J|u1D46≠Cst|u1D44∆Cst|u1D461Cst = |summationCv1 |u1D444|u1D4J6Cst|threeCst
+|u1D4J6Cst=|oneCst  . 
+ 
+Rate-dependent plasticity is described by a fully v iscoplastic formulation.  If rate 
+dependence is invoked, the equivalent stress |u1D7≠∆|u1D4J2Cst /u1D45E.st is constrained by the viscoplastic 
+relation 
+|u1D7≠∆|u1D4J2Cst /u1D45E.st= |parenleftCv1|u1D7≠∆|zeroCst+ |u1D44J(|u1D4JD)|parenriµhtCv1 |parenleftCvJ1 +|u1D4JḊ
+|u1D4JḊ|u1D7≠∆Cst|parenriµhtCvJ/u1D4:6.st/u1Dℜ0E.sts
+ for |u1D4J3 > 0 
+in the plastic domain.  The parameters |u1D436|u1D7≠∆Cst and |u1D4JḊ|u1D7≠∆Cst govern the rate dependence of the 
+material, where |u1D4JḊ|u1D7≠∆Cst is a reference strain rate.  
+ 
+The uncoupled version of the Extended Cockcroft-Lat ham (ECL) criterion is applied 
+here to deﬁne damage evolution 
+|u1D437̇=/u1Dℜ11(/u1D̅48)
+/u1D44A|u1D4J≠Cst/uni2ℜE8.β4/u1D̅1∫|u1D7≠∆|oneCst
+/u1Dℜ11(/u1D̅48)+ |parenleftCv11 −/u1D̅1∫|parenriµhtCv1|u1D7≠∆|oneCst− |u1D7≠∆|threeCst
+/u1Dℜ11(/u1D̅48)/uni2ℜE9.β4/u1D6FE.st
+|u1D4JḊ 
+where |u1D437 is the damage variable and /u1D44A|u1D4J≠Cst, /u1D̅1∫, and |u1D6F∆ are parameters governing the damage 
+evolution and its dependence of the stress triaxial ity and the Lode parameter.  By 
+setting /u1D̅1∫= |u1D6F∆ = 1 , we get the Cockcroft-Latham criterion: *

@@ -1,0 +1,72 @@
+ .......................................... ................................................... ................................... 2-590  
+*.  [0,2,3a,3c,5,8B] {5} 
+ *.  *.   
+ *.   *.   
+  VARIABLE   DESCRIPTION  
+BURG Magnitude of Burgers vector (interatomic slip distance)  
+CAPA Material constant, |u1D434 
+BOLTZ Boltzmann’s constant, /u1D458 (energy/degree).  
+ 
+ Card 3 1 2 3 4 5 6 7 8 
+Variable SM0 SM1 SM2 EDOT0 GO PINV QINV EDOTI 
+Type F F F F F F F F 
+ 
+ VARIABLE   DESCRIPTION  
+SM0 |u1D43A|zeroCst, shear modulus at zero degrees Kelvin (force/area)  
+SM1 |u1D44F|oneCst, shear modulus constant (force/area)  
+SM2 |u1D44F|twoCst, shear modulus constant (degree)  
+EDOT0 |u1D7≠≠̇/u1D45C.st, reference strain-rate (time -1) 
+G0 |u1D4J4|zeroCst, normalized activation energy for a dislocation/dislocation 
+interaction  
+PINV 1|u1D4JD⁄, material constant  
+QINV 1/u1D45E⁄, material constant 
+EDOTI |u1D7≠≠̇/u1D45C.st/co⋯⋯a.st|u1D4J6Cst, reference strain-rate (time -1) 
+ 
+ Card 4 1 2 3 4 5 6 7 8 
+Variable G0I PINVI QINVI EDOTS G0S PINVS QINVS  
+Type F F F F F F F  
+ 
+ VARIABLE   DESCRIPTION  
+G0I |u1D4J4|zeroCst/co⋯⋯a.st|u1D4J6Cst, normalized activation energy for a dislocation/in terstitial 
+interaction  *.   
+ ∂
+∂|u1D7≠≠|u1D4JDCst≡Θ/u1D45C.st
+⎣⎢⎢⎢⎡
+1 −tanh |parenleftCvJ|u1D6F+|u1D7≠∆̂
+|u1D7≠∆̂εs|parenriµhtCvJ
+tanh(|u1D6F+)
+⎦⎥⎥⎥⎤
+  . 
+The term |partialdiffCst|u1D7≠∆Cst/circum⨂lexcmb.h1
+|partialdiffCst|u1D7≠≠Cst|u1D4JDCsts represents the hardening due to dislocation genera tion while the stress 
+ratio, |u1D7≠∆Cst/circum⨂lexcmb.h1
+|u1D7≠∆Cst/circum⨂lexcmb.h1εs, represents softening due to dislocation recovery.   The threshold stress at zero 
+strain-hardening, |u1D7≠∆̂εs, is called the saturation threshold stress.  Θ/u1D45C.st is given as: 
+Θ/u1D45C.st= |u1D44∆/u1D45C.st+ |u1D44∆|oneCstln |parenleftCv6|u1D7≠≠̇|u1D4JDCst
+|u1D7≠≠|zeroCst|parenriµhtCv6 + |u1D44∆|twoCst/radical.v5|u1D7≠≠̇|u1D4JDCst
+|u1D7≠≠|zeroCst 
+which contains the material constants, |u1D44∆/u1D45C.st, |u1D44∆|oneCst, and |u1D44∆|twoCst.  The constant, |u1D7≠∆̂εs, is given as: 
+|u1D7≠∆̂εs= |u1D7≠∆̂εso |parenleftCv6|u1D7≠≠̇|u1D4JDCst
+|u1D7≠≠̇εso |parenriµhtCv6|u1D4J8Cst|u1D447Cst//u1D4:A.st|u1D44FCst|threeCsts|u1D434Cst
+ 
+which contains the input constants: |u1D7≠∆̂εso , |u1D7≠≠̇εso , |u1D44F, |u1D434, and /u1D458.  The shear modulus, |u1D43A, 
+appearing in these equations is assumed to be a fun ction of temperature and is given by 
+the correlation. 
+|u1D43A = |u1D43A|zeroCst− |u1D44F|oneCst|parenleftCv2|u1D4J2|u1D44FCst|twoCsts|u1D447Cst ⁄− 1|parenriµhtCv2/fraction.v1  
+which contains the constants: |u1D43A|zeroCst, |u1D44F|oneCst, and |u1D44F|twoCst.  For thermal-activation controlled 
+deformation |u1D46≠th  is evaluated using an Arrhenius rate equation of t he form: 
+|u1D46≠th =
+⎩|<raceleftCex|<raceleftCex|<raceleftCex⎨|<raceleftCex|<raceleftCex|<raceleftCex⎧
+1 −
+⎣⎢⎢⎢⎡/u1D458|u1D447ln |parenleftCvJ|u1D7≠≠̇|zeroCst
+|u1D7≠≠̇|u1D4JDCst|parenriµhtCvJ
+|u1D43A|u1D44F|threeCst|u1D4J4|zeroCst
+⎦⎥⎥⎥⎤|oneCst
+/u1D45E.st
+⎭|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex⎬|<raceriµhtCex|<raceriµhtCex|<raceriµhtCex⎫|oneCst
+|u1D4JDCst
+  . 
+The absolute temperature is given as: 
+|u1D447 = |u1D447ref +|u1D438
+|u1D7≠+/u1D450|u1D4JDCst  , 
+where |u1D438 is the internal energy density per unit initial vo lume. *

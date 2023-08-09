@@ -1,0 +1,53 @@
+ ........................ ................................................... ............ 2-374  
+*.  [0,2,3c] {17}  
+ *.  *.   
+2-374 (MAT) LS-DYNA R13 *.   *.   
+2-376 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+EA |u1D438|u1D44∆Cst, Young’s modulus in |u1D44∆-direction. 
+EB |u1D438|u1D44FCst, Young’s modulus in |u1D44F-direction. 
+EC |u1D438|u1D4J≠Cst, Young’s modulus in /u1D450-direction. 
+PRBA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio |u1D44F|u1D44∆ . 
+PRCA /u1D̅08|u1D44FCst|u1D44∆Cst , Poisson’s ratio /u1D450|u1D44∆ . 
+PRCB /u1D̅08|u1D4J≠Cst|u1D44FCst , Poisson’s ratio /u1D450|u1D44F . 
+GAB |u1D43A|u1D44∆Cst|u1D44FCst , shear modulus |u1D44∆|u1D44F . 
+GBC |u1D43A|u1D44FCst|u1D4J≠Cst , shear modulus |u1D44F /u1D450. 
+GCA |u1D43A|u1D4J≠Cst|u1D44∆Cst , shear modulus /u1D450|u1D44∆ . 
+DT Temperature increment for isotropic stress initiali zation.  This 
+option can be used during dynamic relaxation. 
+TRAMP Time to ramp up to the ﬁnal temperature. 
+ALPHA Thermal expansion coeﬃcient. 
+LCIDA Optional load curve ID deﬁning the nominal  s tress versus strain 
+along |u1D44∆-axis.  Strain is deﬁned as |u1D7≠6|u1D44∆Cst− 1 where |u1D7≠6|u1D44∆Cst is the stretch 
+ratio along the |u1D44∆-axis. 
+LCIDB Optional load curve ID deﬁning the nominal  stress versus strain 
+along |u1D44F-axis.  Strain is deﬁned as |u1D7≠6|u1D44FCst− 1 where |u1D7≠6|u1D44FCst is the stretch 
+ratio along the |u1D44F-axis. 
+EFAIL Failure strain, |u1D7≠6−1. 
+DTFAIL Time step for automatic element erosion 
+CDAMP Damping coeﬃcient. 
+AOPT Material axes option (see .   *.   
+2-378 (MAT) LS-DYNA R13  VARIABLE   DESCRIPTION  
+V1, V2, V3 (|u1D463|oneCst,|u1D463|twoCst,|u1D463|threeCst) deﬁne components of vector /u1D42F for AOPT = 3 and 4. 
+BETA Material angle in degrees for AOPT = 0 (shells only) and 
+AOPT = 3.   BE TA may be overridden on the element card, see 
+*ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO. 
+LCIDC Load curve ID deﬁning the nominal stress vers us strain along /u1D450-
+axis.  Strain is deﬁned as |u1D7≠6|u1D4J≠Cst− 1 where |u1D7≠6|u1D4J≠Cst is the stretch ratio along 
+the /u1D450-axis. 
+LCIDAB Load curve ID deﬁning the nominal |u1D44∆|u1D44F  shear stress versus |u1D44∆|u1D44F -
+strain in the |u1D44∆|u1D44F -plane.  Strain is deﬁned as the sin(|u1D6F∆|u1D44∆Cst|u1D44FCst ) where |u1D6F∆|u1D44∆Cst|u1D44FCst 
+is the shear angle. 
+LCIDBC Load curve ID deﬁning the nominal |u1D44F /u1D450 shear stress versus |u1D44F /u1D450-
+strain in the |u1D44F /u1D450-plane.  Strain is deﬁned as the sin(|u1D6F∆|u1D44FCst|u1D4J≠Cst )where |u1D6F∆|u1D44FCst|u1D4J≠Cst  is 
+the shear angle. 
+LCIDCA Load curve ID deﬁning the nominal /u1D450|u1D44∆  shear stress versus /u1D450|u1D44∆ -
+strain in the /u1D450|u1D44∆ -plane.  Strain is deﬁned as the sin(|u1D6F∆|u1D4J≠Cst|u1D44∆Cst ) where |u1D6F∆|u1D4J≠Cst|u1D44∆Cst  is 
+the shear angle. 
+Remarks: 
+1.  The ATRACK Field.  The initial material directions are set using AOPT  and the 
+related data.  By default, the material directions in shell elements are updated 
+each cycle based on the rotation of the 1-2 edge, o r else the rotation of all edges 
+if the invariant node numbering option is set on *C ONTROL_ACCURACY.  
+When ATRACK=1, an optional scheme is used in which the |u1D44∆-direction of the 
+material tracks element deformation as well as rota tion.  For more information, 
+see Remark 2 of *
