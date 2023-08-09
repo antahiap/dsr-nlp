@@ -31,3 +31,40 @@
 <img src="img\03.jpg" style="width:400px;"/>
 
 <img src="img\04.jpg" style="width:400px;"/>
+<img src="img\05.png" style="width:400px;"/>
+
+
+# Natural Language Prossesing
+
+
+## Use cases
+- Text Generation, Auto Regressor
+- Sentiment analysis, e.g. review classification
+- Machine Translation
+- Intent, keyword extraction
+- NER, named entity recognition
+- part of speech tagging, still text
+- Summary
+- conversational Agent-chat bot
+- language modeling, text to vector/tensor (embedding)
+
+
+# Architecture
+## Transformer 
+### Classes
+- T5 transformer, sequence to sequence (SEQ2SEQ), encoder-decoder
+- GPT like, decoder only
+- BERT like, encoder only
+
+## other
+- LSTM
+- RWVK*
+- Embedding 
+
+### LANG CHAIN
+- LLM
+- VECTOR database
+- not searching with elastic search
+
+
+
