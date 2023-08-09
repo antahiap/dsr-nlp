@@ -1,5 +1,11 @@
 # dsr-nlp
 
+## Dependencies
+```
+python 3.8.6
+python -m venv ./envs
+```
+
 ## Overview
 
 - Regression:
