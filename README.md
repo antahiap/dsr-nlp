@@ -57,6 +57,7 @@ python -m venv ./envs
 
 # Architecture
 ## Transformer 
+- autosuppervise, the sequence of text 
 ### Classes
 - T5 transformer, sequence to sequence (SEQ2SEQ), encoder-decoder
 - GPT like, decoder only
