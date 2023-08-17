@@ -74,4 +74,10 @@ python -m venv ./envs
 - not searching with elastic search
 
 
+### Good links
+- LSTM effective, [link](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
+- [gpt-engineer](https://github.com/AntonOsika/gpt-engineer/tree/main)
+- [haging phase](https://huggingface.co/spaces/JammyMachina/the-jam-machine-app)
+
+
 
