@@ -81,3 +81,12 @@ python -m venv ./envs
 
 
 
+### Transformer
+
+
+<img src="img/transformer.jpg" style="width:400px;"/>
+<img src="img/transformer_02.jpg" style="width:400px;"/>
+<img src="img/transformer_03.jpg" style="width:400px;"/>
+
+### Bert
+<img src="img/bert.png" style="width:400px;"/>
