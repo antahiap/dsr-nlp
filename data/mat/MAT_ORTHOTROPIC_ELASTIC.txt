@@ -1,6 +1,0 @@
- or . .  The ﬁber direction is 
-oriented in the local system using input parameters  LAX, LAY, and LAZ.  By default, 
-(LAX,LA Y ,LA Z ) = (1,0,0)  and the ﬁber is aligned with the local |u1D46J-direction. 
- 
-An optional initial ﬁber stretch can be speciﬁed us ing XLAM0.  The initial stretch is 
-applied during the ﬁrst time step.  This creates pr eload in the model as soft tissue *. _PHASE_CHANGE or 

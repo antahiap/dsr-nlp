@@ -1,7 +1,0 @@
-: *.  
-*. .  Instead of the  usual six stress components, three 
-traction stresses are written into those databases.   The in-plane shear traction along the 
-1-2 edge replaces the |u1D46J component of stress, the orthogonal in-plane shear  traction 
-replaces the |u1D466 component of stress, and the traction in the norma l direction replaces the 
-/u1D46̅ component of stress. *.   
- *

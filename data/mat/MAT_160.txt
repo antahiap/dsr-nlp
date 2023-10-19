@@ -1,4 +1,0 @@
-: *.  
-*.   *.   
-  VARIABLE   DESCRIPTION  
-EQ. -7:  Solves Poisson’s equation for the pressure incremen t. *. . *

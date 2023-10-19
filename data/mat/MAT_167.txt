@@ -1,5 +1,0 @@
-: *.  
-*.   
- *.   *.   
- The strain hardening function |u1D44J is deﬁned by the extended Voce Law 
-|u1D44J|parenleftCv1|u1D7≠≠|u1D4JDCst|parenriµhtCv1 = |u1D444|oneCst|<racketleftCv11 − exp|parenleftCv1−|u1D436|oneCst|u1D7≠≠|u1D4JDCst|parenriµhtCv1|<racketriµhtCv1 + |u1D444|twoCst|<racketleftCv11 − exp|parenleftCv1−|u1D436|twoCst|u1D7≠≠|u1D4JDCst|parenriµhtCv1|<racketriµhtCv1  .*

@@ -90,3 +90,8 @@ python -m venv ./envs
 
 ### Bert
 <img src="img/bert.png" style="width:400px;"/>
+
+
+### VAE
+
+<img src="img/VAE.png" style="width:400px;"/>

@@ -1,6 +1,0 @@
-: *.  
-*.   
-LS-DYNA R13 2-149 (MAT) *.   *.   
-LS-DYNA R13 2-151 (MAT) |u1D6FD′ equal to 0 and 1, respectively, kinematic and isot ropic hardening are ob- 
-tained as shown in Figure M3-1 .  For isotropic hardening, |u1D6FD′ = 1, Material 
-Model 12, *

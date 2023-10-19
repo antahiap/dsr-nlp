@@ -1,8 +1,0 @@
- 
-$      MID        RO        FN        FT        DN        DT       XIN       XIT 
-       555     7.8e-6      2.53       4.8       4.0       7.5       0.6       0.5 
-$   ALPHA1    ALPHA2    ALPHA3      EXPN      EXPT  
-       0.2       0.7       1.9       8.0       8.0 
-and still get the same result.  One can see that on ly the non-material data (MID, SID, 
-NSID, THICK, D, INTP, PIDVB, XPID i) remains with the *CONSTRAINED keyword.  
-Variables in grey are optional. *

@@ -1,6 +1,0 @@
-: *.  
-*.   *.   
-  VARIABLE   DESCRIPTION  
-N Intact strength parameter (pressure exponent) 
-EPS0 Quasi-static threshold strain rate.  See *.   *.   
- These are calculated automatically by LS-DYNA if |u1D4JDhel  is zero on input. *

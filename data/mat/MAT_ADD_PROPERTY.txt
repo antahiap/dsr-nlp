@@ -1,8 +1,0 @@
-_DEPENDENCE ...................... ................................................... ........ 2-117  
-*. _DEPENDENCE 2 
- *. _DEPENDENCE  *MAT  
-LS-DYNA R13 2-117 (MAT) *.  _DEPENDENCE_-
-FREQ can be used in direct SSD analysis (*FREQUENCY _DOMAIN_SSD_DI-
-RECT_FREQUENCY_DEPENDENT). 
-2.  Properties without Frequency/Time Dependence.   Some properties of a 
-material model have no frequency or time dependence .  A warning message *MAT  *

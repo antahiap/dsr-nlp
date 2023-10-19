@@ -1,4 +1,0 @@
- IMLER-
-CHRYSLER are written to the spot weld force ﬁle, swforc , and the ﬁle for ele- 
-ment stresses and resultants for designated element s, ELOUT .  Also, spot weld 
-failure data is written to the ﬁle, dcfail . *

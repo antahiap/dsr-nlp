@@ -1,7 +1,0 @@
-: *. : *.  
-*.   *.   
-  VARIABLE   DESCRIPTION  
-RPIDT Rotational motion about the local |u1D461-axis is governed by part ID 
-RPIDT .  If zero, no moment is computed about this axis. 
-Remarks: 
-Rotational displacement is measured in radians. *

@@ -1,7 +1,0 @@
-O 
-*.  (5 cards follow) 
-Card Summary:  
-Card 1a.1.   This card is required for the ORTHO keyword optio n.   
-MID RO EA EB EC PRBA PRCA PRCB 
-Card 1a.2.   This card is required for the ORTHO keyword optio n.   
-GAB GBC GCA AOPT G SIGF   *
